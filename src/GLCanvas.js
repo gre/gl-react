@@ -178,10 +178,13 @@ class GLCanvas extends Component {
         invariant(texture, "Uniform '%s' described by GL.Target is not a texture.", uniformName);
         const textureUnit = this._textureUnits[uniformName];
         const target = getDrawingTarget(uniformName);
-        invariant(target && target.width && target.height, "GL.Target only support one child among: <canvas>, <img> or <video>.");
-        texture.shape = [ target.width, target.height ];
-        texture.setPixels(target);
-        shader.uniforms[uniformName] = texture.bind(textureUnit);
+        invariant(target && "width" in target && "height" in target, "GL.Target only support one child among: <canvas>, <img> or <video>.");
+        if (target.width && target.height) {
+          // the resource might not be loaded
+          texture.shape = [ target.width, target.height ];
+          texture.setPixels(target);
+          shader.uniforms[uniformName] = texture.bind(textureUnit);
+        }
       });
     }
 
