@@ -78,10 +78,12 @@ class GLCanvas extends Component {
 
     if (props.shader !== this.props.shader)
       this.syncShader(props);
-    else if (!sameUniforms(props.uniforms, this.props.uniforms)) // syncShader will call syncUniforms so we don't need 2 calls
-      this.syncUniforms(props);
-    else if (props.children)
-      this.requestDraw(); // in worse case and if there are children, we need a re-render
+    else { // syncShader will call other syncs so we can save some calls
+      if (props.targetUniforms)
+        this.syncTargetUniforms(props);
+      if (!sameUniforms(props.uniforms, this.props.uniforms))
+        this.syncUniforms(props);
+    }
   }
   syncBlendMode (props) {
     const gl = this.gl;
@@ -129,6 +131,7 @@ class GLCanvas extends Component {
     this._textureUnits = textureUnits;
     this._textures = textures;
 
+    this.syncTargetUniforms(props);
     this.syncUniforms(props);
     this.requestDraw();
   }
@@ -173,21 +176,9 @@ class GLCanvas extends Component {
     this.requestDraw();
   }
 
-  requestDraw () {
-    this._needsDraw = true;
-    requestAnimationFrame(this.handleDraw);
-  }
-
-  handleDraw () {
-    if (!this._needsDraw) return;
-    this._needsDraw = false;
-    this.draw();
-  }
-
-  syncTargetUniforms () {
+  syncTargetUniforms ({ targetUniforms, getDrawingTarget }) {
     const shader = this.shader;
     if (!shader) return;
-    const { targetUniforms, getDrawingTarget } = this.props;
     if (targetUniforms) {
       targetUniforms.forEach(uniformName => {
         const texture = this._textures[uniformName];
@@ -201,20 +192,30 @@ class GLCanvas extends Component {
           shader.uniforms[uniformName] = textureUnit;
         }
       });
+      this.requestDraw();
     }
+  }
+
+  requestDraw () {
+    this._needsDraw = true;
+    requestAnimationFrame(this.handleDraw);
+  }
+
+  handleDraw () {
+    if (!this._needsDraw) return;
+    this._needsDraw = false;
+    this.draw();
   }
 
   draw () {
     const gl = this.gl;
     const shader = this.shader;
     if (!shader) return;
-
-    this.syncTargetUniforms();
-
+    // Bind the textures
     for (const uniformName in this._textures) {
       this._textures[uniformName].bind(this._textureUnits[uniformName]);
     }
-
+    // Render
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 }
