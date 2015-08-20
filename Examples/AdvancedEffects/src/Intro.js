@@ -21,12 +21,13 @@ vec2 lookup (vec2 offset) {
 }
 
 void main() {
+  vec3 col = vec3(
+  texture2D(texture, lookup(vec2(colorSeparation))).r,
+  texture2D(texture, lookup(vec2(-colorSeparation))).g,
+  texture2D(texture, lookup(vec2(0.0))).b);
   gl_FragColor = vec4(
-    vec3(
-    texture2D(texture, lookup(vec2(colorSeparation))).r,
-    texture2D(texture, lookup(vec2(-colorSeparation))).g,
-    texture2D(texture, lookup(vec2(0.0))).b),
-    1.0);
+    col,
+    col.x + col.y + col.z);
 }
 `
   }
