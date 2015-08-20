@@ -14,12 +14,14 @@ function sameUniforms (uniforms, prev) {
 }
 
 class GLCanvas extends Component {
+
   constructor (props) {
     super(props);
     this.handleDraw = this.handleDraw.bind(this);
 
     this._images = {};
   }
+
   render () {
     const { width, height, style } = this.props;
     const devicePixelRatio = window.devicePixelRatio;
@@ -36,6 +38,7 @@ class GLCanvas extends Component {
       height={height * devicePixelRatio}
     />;
   }
+
   componentDidMount () {
     const canvas = React.findDOMNode(this.refs.render);
     const opts = {};
@@ -64,6 +67,7 @@ class GLCanvas extends Component {
     this.syncBlendMode(this.props);
     this.syncShader(this.props);
   }
+
   componentWillUnmount () {
     if (this.shader) this.shader.dispose();
     if (this.gl) {
@@ -72,6 +76,7 @@ class GLCanvas extends Component {
     this.shader = null;
     this.gl = null;
   }
+
   componentWillReceiveProps (props) {
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
@@ -85,6 +90,7 @@ class GLCanvas extends Component {
         this.syncUniforms(props);
     }
   }
+
   syncBlendMode (props) {
     const gl = this.gl;
     if (!gl) return;
@@ -96,6 +102,7 @@ class GLCanvas extends Component {
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     }
   }
+
   syncShader (props) {
     const gl = this.gl;
     if (!gl) return;
@@ -135,6 +142,20 @@ class GLCanvas extends Component {
     this.syncUniforms(props);
     this.requestDraw();
   }
+
+  syncTextureImage (texture, image) {
+    if (texture._glImage !== image.image) {
+      texture._glImage = image.image;
+      if (image.image) {
+        texture.shape = [ image.image.width, image.image.height ];
+        texture.setPixels(image.image);
+      }
+      else {
+        texture.shape = [ 2, 2 ];
+      }
+    }
+  }
+
   syncUniforms ({ uniforms }) {
     const shader = this.shader;
     if (!shader) return;
@@ -154,13 +175,7 @@ class GLCanvas extends Component {
         }
         image.src = src;
         currentResources.push(src);
-        if (image.image) {
-          texture.shape = [ image.image.width, image.image.height ];
-          texture.setPixels(image.image);
-        }
-        else {
-          texture.shape = [ 2, 2 ];
-        }
+        this.syncTextureImage(texture, image);
         shader.uniforms[uniformName] = textureUnit;
       }
       else {
@@ -190,6 +205,9 @@ class GLCanvas extends Component {
           texture.shape = [ target.width, target.height ];
           texture.setPixels(target);
           shader.uniforms[uniformName] = textureUnit;
+        }
+        else {
+          texture.shape = [ 2, 2 ];
         }
       });
       this.requestDraw();
