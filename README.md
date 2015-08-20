@@ -5,8 +5,8 @@ WebGL bindings for react to implement complex effects over images, in VDOM descr
 ### HelloGL Gist
 
 ```js
-const React = require("react-native");
-const GL = require("gl-react-native");
+const React = require("react");
+const GL = require("gl-react");
 
 const shaders = GL.Shaders.create({
   helloGL: {
