@@ -194,7 +194,7 @@ class GLCanvas extends Component {
         let image = this._images[src];
         if (!image) {
           image = new GLImage(() => {
-            this.requestDraw();
+            this.syncUniforms(this.props);
           });
           this._images[src] = image;
         }
