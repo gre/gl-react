@@ -1,4 +1,3 @@
-const invariant = require("invariant");
 
 function loadImage (src, success, failure) {
   var img = new window.Image();
@@ -50,10 +49,6 @@ GLImage.prototype = {
 };
 Object.defineProperty(GLImage.prototype, "src", {
   set: function (src) {
-    if (src && typeof src === "object") {
-      invariant("uri" in src, "GLImage: when using an object, it must have an 'uri' field");
-      src = src.uri;
-    }
     if (src === this._src) return;
     this._src = src;
     this.reloadImage();

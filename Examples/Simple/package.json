@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "gl-react-example-video",
+  "name": "gl-react-example-simple",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "gl-react": "file:../..",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-canvas": "0.0.1"
   }
 }
