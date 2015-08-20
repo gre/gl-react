@@ -27,7 +27,7 @@ void main() {
   texture2D(texture, lookup(vec2(0.0))).b);
   gl_FragColor = vec4(
     col,
-    col.x + col.y + col.z);
+    pow((col.x + col.y + col.z) / 3.0, 0.05));
 }
 `
   }
