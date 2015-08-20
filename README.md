@@ -1,6 +1,6 @@
 # gl-react
 
-WebGL bindings for react to implement complex effects over images, in VDOM descriptive paradigm.
+WebGL bindings for react to implement complex graphics and image effects, in VDOM descriptive paradigm.
 
 ### HelloGL Gist
 
