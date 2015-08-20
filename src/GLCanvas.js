@@ -9,6 +9,14 @@ const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
 
+function imageSrc (src) {
+  if (src && typeof src === "object") {
+    invariant("uri" in src, "GLImage: when using an object, it must have an 'uri' field");
+    src = src.uri;
+  }
+  return src;
+}
+
 function sameUniforms (uniforms, prev) {
   return uniforms === prev; // this is enough for now, we can improve if need
 }
@@ -181,7 +189,7 @@ class GLCanvas extends Component {
       const texture = this._textures[uniformName];
       const value = uniforms[uniformName];
       if (texture) {
-        const src = value;
+        const src = imageSrc(value);
         const textureUnit = this._textureUnits[uniformName];
         let image = this._images[src];
         if (!image) {
