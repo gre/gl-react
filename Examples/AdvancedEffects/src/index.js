@@ -8,7 +8,7 @@ const styles = {
   root: {
     position: "relative",
     display: "block",
-    margin: "20px auto",
+    margin: "0px auto",
     backgroundColor: "#111"
   }
 };

@@ -12,13 +12,13 @@ void main( void ) {
 	color += sin( uv.x * cos( time / 15.0 ) * 80.0 ) + cos( uv.y * cos( time / 15.0 ) * 10.0 );
 	color += sin( uv.y * sin( time / 10.0 ) * 40.0 ) + cos( uv.x * sin( time / 25.0 ) * 40.0 );
 	color += sin( uv.x * sin( time / 5.0 ) * 10.0 ) + sin( uv.y * sin( time / 35.0 ) * 80.0 );
-	color *= sin( time / 10.0 ) * 0.5;
+	color *= sin( time / 10.0 );
 	gl_FragColor = vec4(
-    smoothstep(0.0, 1.5, color),
-    smoothstep(0.0, 0.5, color),
-    smoothstep(1.0, 0.6, color) - smoothstep(0.1, 0.0, color),
+    smoothstep(0.8, 1.6, color),
+    smoothstep(0.1, 0.3, color),
+    smoothstep(1.0, 0.2, color) - smoothstep(0.1, 0.0, color),
     color
-  ) * (pow(uv.y, 2.0));
+  ) * (pow(uv.y, 0.8));
 }
 `
   }
