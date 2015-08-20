@@ -2,6 +2,8 @@
 
 WebGL bindings for react to implement complex graphics and image effects, in VDOM descriptive paradigm.
 
+See also: [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native).
+
 ### HelloGL Gist
 
 ```js
