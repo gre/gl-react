@@ -177,21 +177,17 @@ class GLCanvas extends Component {
     this._needsDraw = true;
     requestAnimationFrame(this.handleDraw);
   }
+
   handleDraw () {
     if (!this._needsDraw) return;
     this._needsDraw = false;
     this.draw();
   }
-  draw () {
-    const gl = this.gl;
+
+  syncTargetUniforms () {
     const shader = this.shader;
     if (!shader) return;
     const { targetUniforms, getDrawingTarget } = this.props;
-
-    for (const uniformName in this._textures) {
-      this._textures[uniformName].bind(this._textureUnits[uniformName]);
-    }
-
     if (targetUniforms) {
       targetUniforms.forEach(uniformName => {
         const texture = this._textures[uniformName];
@@ -202,9 +198,21 @@ class GLCanvas extends Component {
         if (target.width && target.height) { // ensure the resource is loaded
           texture.shape = [ target.width, target.height ];
           texture.setPixels(target);
-          shader.uniforms[uniformName] = texture.bind(textureUnit);
+          shader.uniforms[uniformName] = textureUnit;
         }
       });
+    }
+  }
+
+  draw () {
+    const gl = this.gl;
+    const shader = this.shader;
+    if (!shader) return;
+
+    this.syncTargetUniforms();
+
+    for (const uniformName in this._textures) {
+      this._textures[uniformName].bind(this._textureUnits[uniformName]);
     }
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
