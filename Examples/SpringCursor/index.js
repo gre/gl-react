@@ -64,4 +64,4 @@ class Demo extends React.Component {
   }
 }
 
-React.render(<Demo />, document.body);
+React.render(<Demo />, document.getElementById("container"));
