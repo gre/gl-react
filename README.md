@@ -56,6 +56,7 @@ Instead of adopting React Native `{uri: "http://..."}` format, you can simply se
 
 Only one child is supported per `GL.Target` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
 
+You might want to take a look at [`react-canvas`](https://github.com/Flipboard/react-canvas) for drawing content.
 
 ## Advanced Effects demo
 
