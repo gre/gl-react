@@ -9,6 +9,10 @@ const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
 
+function sameUniforms (uniforms, prev) {
+  return uniforms === prev; // this is enough for now, we can improve if need
+}
+
 class GLCanvas extends Component {
   constructor (props) {
     super(props);
@@ -69,12 +73,15 @@ class GLCanvas extends Component {
     this.gl = null;
   }
   componentWillReceiveProps (props) {
-    if (props.shader !== this.props.shader)
-      this.syncShader(props);
-    if (props.uniforms !== this.props.uniforms)
-      this.syncUniforms(props);
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
+
+    if (props.shader !== this.props.shader)
+      this.syncShader(props);
+    else if (!sameUniforms(props.uniforms, this.props.uniforms)) // syncShader will call syncUniforms so we don't need 2 calls
+      this.syncUniforms(props);
+    else if (props.children)
+      this.requestDraw(); // in worse case and if there are children, we need a re-render
   }
   syncBlendMode (props) {
     const gl = this.gl;
