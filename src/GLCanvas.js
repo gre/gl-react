@@ -172,6 +172,10 @@ class GLCanvas extends Component {
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
     shader.attributes.position.pointer();
 
+    for (const uniformName in this._textures) {
+      this._textures[uniformName].bind(this._textureUnits[uniformName]);
+    }
+
     if (targetUniforms) {
       targetUniforms.forEach(uniformName => {
         const texture = this._textures[uniformName];
