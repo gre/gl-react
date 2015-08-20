@@ -135,7 +135,7 @@ class GLCanvas extends Component {
     }
     shader.bind();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-    shader.attributes.position.pointer();
+    shader.attributes._p.pointer();
 
     for (const t in this._textures) {
       this._textures[t].dispose();
