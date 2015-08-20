@@ -43,8 +43,7 @@ class GLCanvas extends Component {
     if (!gl) return;
     this.gl = gl;
 
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
     const buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -58,6 +57,7 @@ class GLCanvas extends Component {
     ]), gl.STATIC_DRAW);
     this.buffer = buffer;
 
+    this.syncBlendMode(this.props);
     this.syncShader(this.props);
   }
   componentWillUnmount () {
@@ -73,6 +73,19 @@ class GLCanvas extends Component {
       this.syncShader(props);
     if (props.uniforms !== this.props.uniforms)
       this.syncUniforms(props);
+    if (props.opaque !== this.props.opaque)
+      this.syncBlendMode(props);
+  }
+  syncBlendMode (props) {
+    const gl = this.gl;
+    if (!gl) return;
+    if (props.opaque) {
+      gl.disable(gl.BLEND);
+    }
+    else {
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    }
   }
   syncShader (props) {
     const gl = this.gl;
@@ -87,12 +100,13 @@ class GLCanvas extends Component {
     else {
       shader.update(vertShader, shaderObj.frag);
     }
-    let unit = 0;
+    shader.bind();
     for (const t in this._textures) {
       this._textures[t].dispose();
     }
     const textureUnits = {};
     const textures = {};
+    let unit = 0;
     for (const uniformName in shader.types.uniforms) {
       const type = shader.types.uniforms[uniformName];
       if (type === "sampler2D" || type === "samplerCube") {
@@ -109,13 +123,9 @@ class GLCanvas extends Component {
     this.requestDraw();
   }
   syncUniforms ({ uniforms }) {
-    const gl = this.gl;
     const shader = this.shader;
     if (!shader) return;
-    shader.bind();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
     const currentResources = [];
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     for (const uniformName in uniforms) {
       const texture = this._textures[uniformName];
       const value = uniforms[uniformName];
@@ -136,9 +146,8 @@ class GLCanvas extends Component {
           texture.setPixels(image.image);
         }
         else {
-          //texture.shape = [ 2, 2 ];
+          texture.shape = [ 2, 2 ];
         }
-
         shader.uniforms[uniformName] = texture.bind(textureUnit);
       }
       else {
@@ -168,7 +177,6 @@ class GLCanvas extends Component {
     const shader = this.shader;
     if (!shader) return;
     const { targetUniforms, getDrawingTarget } = this.props;
-    shader.bind();
     gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
     shader.attributes.position.pointer();
 
@@ -183,17 +191,13 @@ class GLCanvas extends Component {
         const textureUnit = this._textureUnits[uniformName];
         const target = getDrawingTarget(uniformName);
         invariant(target && "width" in target && "height" in target, "GL.Target only support one child among: <canvas>, <img> or <video>.");
-        if (target.width && target.height) {
-          // the resource might not be loaded
+        if (target.width && target.height) { // ensure the resource is loaded
           texture.shape = [ target.width, target.height ];
           texture.setPixels(target);
           shader.uniforms[uniformName] = texture.bind(textureUnit);
         }
       });
     }
-
-    gl.clearColor(0, 0, 0, 0);
-    gl.clear(gl.COLOR_BUFFER_BIT);
 
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
