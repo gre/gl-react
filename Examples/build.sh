@@ -1,1 +1,1 @@
-for d in *; do cd npm-debug.log; npm i; npm run build; cd ..; done
+for d in */; do cd $d; npm i; npm run build; cd ..; done
