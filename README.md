@@ -41,8 +41,8 @@ npm i --save gl-react
 
 ## Docs and difference with `gl-react-native`
 
-`gl-react` adopts the same API of `gl-react-native`, therefore you can read
-[gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).
+**`gl-react` adopts the same API of `gl-react-native`, therefore you can read
+[gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).**
 
 However, here are the few differences:
 
