@@ -101,6 +101,9 @@ class GLCanvas extends Component {
       shader.update(vertShader, shaderObj.frag);
     }
     shader.bind();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+    shader.attributes.position.pointer();
+
     for (const t in this._textures) {
       this._textures[t].dispose();
     }
@@ -177,8 +180,6 @@ class GLCanvas extends Component {
     const shader = this.shader;
     if (!shader) return;
     const { targetUniforms, getDrawingTarget } = this.props;
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-    shader.attributes.position.pointer();
 
     for (const uniformName in this._textures) {
       this._textures[uniformName].bind(this._textureUnits[uniformName]);
