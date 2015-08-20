@@ -17,6 +17,9 @@ class GLCanvas extends Component {
 
   constructor (props) {
     super(props);
+    this.state = {
+      scale: window.devicePixelRatio
+    };
     this.handleDraw = this.handleDraw.bind(this);
 
     this._images = {};
@@ -24,7 +27,7 @@ class GLCanvas extends Component {
 
   render () {
     const { width, height, style } = this.props;
-    const devicePixelRatio = window.devicePixelRatio;
+    const { devicePixelRatio } = this.state;
     const styles = {
       width: width+"px",
       height: height+"px",
@@ -78,6 +81,10 @@ class GLCanvas extends Component {
   }
 
   componentWillReceiveProps (props) {
+    const devicePixelRatio = window.devicePixelRatio;
+    if (this.state.devicePixelRatio !== devicePixelRatio) {
+      this.setState({ devicePixelRatio });
+    }
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
 
@@ -88,6 +95,16 @@ class GLCanvas extends Component {
         this.syncTargetUniforms(props);
       if (!sameUniforms(props.uniforms, this.props.uniforms))
         this.syncUniforms(props);
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    const gl = this.gl;
+    if (!gl) return;
+    const { width, height } = this.props;
+    const { devicePixelRatio } = this.state;
+    if (prevProps.width !== width || prevProps.height !== height || prevState.devicePixelRatio !== devicePixelRatio) {
+      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
   }
 
