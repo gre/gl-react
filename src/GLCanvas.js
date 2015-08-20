@@ -151,7 +151,7 @@ class GLCanvas extends Component {
         else {
           texture.shape = [ 2, 2 ];
         }
-        shader.uniforms[uniformName] = texture.bind(textureUnit);
+        shader.uniforms[uniformName] = textureUnit;
       }
       else {
         shader.uniforms[uniformName] = value;
