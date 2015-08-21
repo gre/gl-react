@@ -8,8 +8,11 @@ See also: [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-na
 
 Open [Examples page](http://projectseptemberinc.github.io/gl-react/) and [read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
 
-- [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
+- [Simple](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/Simple) contains minimal examples, perfect to learn how to use the library. See also the [Related Documentation](http://projectseptemberinc.gitbooks.io/gl-react-native/content/).
+- [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor/index.js) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
 - [AdvancedEffects' Intro](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Intro.js) shows usage with [`react-canvas`](https://github.com/Flipboard/react-canvas).
+- [Video](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/Video/index.js) shows usage with the `<video/>` tag.
+- [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).
 
 ### HelloGL Gist
 
