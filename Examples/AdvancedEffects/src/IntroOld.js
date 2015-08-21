@@ -1,6 +1,5 @@
 const React = require("react");
 const GL = require("gl-react");
-const {Surface,Layer,Text,Group} = require("react-canvas");
 
 const shaders = GL.Shaders.create({
   drunkEffect: {
@@ -35,9 +34,15 @@ void main() {
 });
 
 class Intro extends React.Component {
+  componentDidMount () {
+    this.ctx = React.findDOMNode(this.refs.c).getContext("2d");
+    this.draw();
+  }
+  componentDidUpdate () {
+    this.draw();
+  }
   render () {
-    const { time, fps, width, height } = this.props;
-    const w = (width-20)/3;
+    const { time, width, height } = this.props;
     return <GL.View
       shader={shaders.drunkEffect}
       width={width}
@@ -51,30 +56,11 @@ class Intro extends React.Component {
         moving: 1
       }}>
       <GL.Target uniform="texture">
-        <Surface width={width} height={height} left={0} top={0} enableCSSLayout={true}>
-          <Group style={{ width: width, height: height, flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <Text style={{ width: width, height: height/2, color: "#00BDF3", fontSize: 32, letterSpacing: -1.0 }}>
-              GL REACT
-            </Text>
-            <Group style={{ width: width, height: height/2, flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-              <Layer style={{ backgroundColor: "#00FF66", marginRight: 8, width: 14, height: 14, borderRadius: 7, opacity: time%1 < 0.6 ? 1 : 0 }} />
-              <Text style={{ width: w, height: 20, color: "#00FF66", fontSize: 14 }}>
-                {time.toFixed(2)}s
-              </Text>
-              <Text style={{ width: w, height: 20, color: "#fff", fontSize: 14 }}>
-                {(fps).toFixed(0)} fps
-              </Text>
-              <Text style={{ width: w, height: 20, color: "#999", fontSize: 14 }}>
-                {"<Text />"}
-              </Text>
-            </Group>
-          </Group>
-        </Surface>
+        <canvas ref="c" width={2*width} height={2*height} />
       </GL.Target>
     </GL.View>;
   }
   draw () {
-    /*
     const {time, fps} = this.props;
     const ctx = this.ctx;
     const { width, height } = ctx.canvas;
@@ -119,7 +105,8 @@ class Intro extends React.Component {
 
     ctx.fillStyle = "#999";
     ctx.fillText("text drawn with <canvas/>", x, y);
-    */
+
+
   }
 }
 
