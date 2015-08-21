@@ -4,6 +4,13 @@ WebGL bindings for react to implement complex graphics and image effects, in VDO
 
 See also: [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native).
 
+## Examples
+
+Open [Examples page](http://projectseptemberinc.github.io/gl-react/) and [read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
+
+- [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
+- [AdvancedEffects' Intro](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Intro.js) shows usage with [`react-canvas`](https://github.com/Flipboard/react-canvas).
+
 ### HelloGL Gist
 
 ```js
@@ -35,6 +42,7 @@ class HelloGL extends React.Component {
 
 ![](https://cloud.githubusercontent.com/assets/211411/9386550/432492c6-475c-11e5-9328-f3d5187298c1.jpg)
 
+
 ## Installation
 
 ```
@@ -59,7 +67,3 @@ Instead of adopting React Native `{uri: "http://..."}` format, you can simply se
 Only one child is supported per `GL.Target` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
 
 You might want to take a look at [`react-canvas`](https://github.com/Flipboard/react-canvas) for drawing content.
-
-## Advanced Effects demo
-
-[![](https://cloud.githubusercontent.com/assets/211411/9387055/de7a4732-475e-11e5-8bc3-e86e48814097.png)](http://projectseptemberinc.github.io/gl-react)

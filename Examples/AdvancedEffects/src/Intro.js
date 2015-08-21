@@ -73,54 +73,6 @@ class Intro extends React.Component {
       </GL.Target>
     </GL.View>;
   }
-  draw () {
-    /*
-    const {time, fps} = this.props;
-    const ctx = this.ctx;
-    const { width, height } = ctx.canvas;
-    ctx.clearRect(0, 0, width, height);
-
-    let x, y;
-
-    x = width / 2;
-    y = height / 2 - 20;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-
-    ctx.font = "normal 80px Verdana";
-    ctx.fillStyle = "#00BDF3";
-    ctx.fillText("GL REACT", x, y);
-
-    x = 20;
-    y = height - 40;
-
-    ctx.font = "normal 28px Verdana";
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
-
-    if (time%1 < 0.6) {
-      ctx.fillStyle = "#00FF66";
-      ctx.beginPath();
-      ctx.arc(x, y, 12, 0, 2*Math.PI);
-      ctx.fill();
-    }
-
-    x += 26;
-
-    ctx.fillStyle = "#00FF66";
-    ctx.fillText(time.toFixed(2)+"s", x, y);
-
-    x += width/5;
-
-    ctx.fillStyle = "#fff";
-    ctx.fillText(fps.toFixed(0)+" fps", x, y);
-
-    x += width/5;
-
-    ctx.fillStyle = "#999";
-    ctx.fillText("text drawn with <canvas/>", x, y);
-    */
-  }
 }
 
 module.exports = Intro;
