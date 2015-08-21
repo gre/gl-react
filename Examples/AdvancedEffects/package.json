@@ -23,6 +23,7 @@
   "dependencies": {
     "gl-react": "file:../..",
     "glsl-transitions": "^2015.8.19",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-canvas": "0.0.1"
   }
 }
