@@ -13,7 +13,7 @@ uniform float progress;
 uniform vec2 dim;
 
 const vec2 center = vec2(0.5);
-const float PI = acos(-1.0);
+const float PI = 3.14159;
 
 void main () {
   vec2 norm = dim / min(dim.x, dim.y);
