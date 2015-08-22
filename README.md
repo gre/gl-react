@@ -12,7 +12,7 @@ Open [Examples page](http://projectseptemberinc.github.io/gl-react/) and [read t
 - [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor/index.js) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
 - [AdvancedEffects' Intro](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Intro.js) shows usage with [`react-canvas`](https://github.com/Flipboard/react-canvas).
 - [Video](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/Video/index.js) shows usage with the `<video/>` tag.
-- [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).
+- [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).atom
 
 ### HelloGL Gist
 
@@ -57,16 +57,21 @@ npm i --save gl-react
 **`gl-react` adopts the same API of `gl-react-native`, therefore you can read
 [gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).**
 
-However, here are the few differences:
-
-### Texture format
-
-Instead of adopting React Native `{uri: "http://..."}` format, you can simply set a `"http:..."` as a texture uniform, the `{uri}` format is still supported for compatibility purpose.
-
-### GL.Target support
+### GL.Target limited support
 
 `GL.Target` have a more limited support because the web does not allow to draw DOM element in Canvas.
 
 Only one child is supported per `GL.Target` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
 
 You might want to take a look at [`react-canvas`](https://github.com/Flipboard/react-canvas) for drawing content.
+
+
+## Influence / Credits
+
+- [stack.gl](http://stack.gl/) approach
+- [GLSL.io](http://glsl.io/) and [Diaporama](https://github.com/gre/diaporama)
+- Source code of [React Native](https://github.com/facebook/react-native)
+
+## Documentation
+
+![Index](./docs)
