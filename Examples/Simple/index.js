@@ -3,20 +3,20 @@ const React = require("react");
 const Slider = require("./Slider");
 const HelloGL = require("./HelloGL");
 const Saturation = require("./Saturation");
-//const HueRotate = require("./HueRotate");
+const HueRotate = require("./HueRotate");
 const PieProgress = require("./PieProgress");
 const OneFingerResponse = require("./OneFingerResponse");
 const AnimatedHelloGL = require("./AnimatedHelloGL");
-//const ReactCanvasContentExample = require("./ReactCanvasContentExample");
+const ReactCanvasContentExample = require("./ReactCanvasContentExample");
 
 class Simple extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       saturationFactor: 1,
-      //hue: 0,
-      progress: 0.2
-      //text: "and I will return leading the pack"
+      hue: 0,
+      progress: 0.2,
+      text: "leading the pack"
     };
   }
 
@@ -24,8 +24,8 @@ class Simple extends React.Component {
 
     const {
       saturationFactor,
-      //hue,
-      //text,
+      hue,
+      text,
       progress
     } = this.state;
 
@@ -54,7 +54,6 @@ class Simple extends React.Component {
         />
         </div>
 
-        {/*
         <h2 style={styles.demoTitle}>3. Hue Rotate on a Canvas</h2>
         <div style={styles.demo}>
           <HueRotate
@@ -72,7 +71,6 @@ class Simple extends React.Component {
             value={text}
           />
         </div>
-        */}
 
         <span style={styles.demoTitle}>4. Progress Indicator</span>
         <div style={styles.demo}>

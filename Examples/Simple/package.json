@@ -23,6 +23,6 @@
   "dependencies": {
     "gl-react": "file:../..",
     "react": "^0.13.3",
-    "react-canvas": "0.0.1"
+    "react-canvas": "git://github.com/gre/react-canvas.git#crossorigin"
   }
 }
