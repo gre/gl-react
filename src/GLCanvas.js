@@ -99,8 +99,6 @@ class GLCanvas extends Component {
     if (props.shader !== this.props.shader)
       this.syncShader(props);
     else { // syncShader will call other syncs so we can save some calls
-      if (props.targetUniforms)
-        this.syncTargetUniforms(props);
       if (!sameUniforms(props.uniforms, this.props.uniforms))
         this.syncUniforms(props);
     }
@@ -255,6 +253,11 @@ class GLCanvas extends Component {
     const gl = this.gl;
     const shader = this.shader;
     if (!shader) return;
+    const props = this.props;
+
+    if (props.targetUniforms)
+      this.syncTargetUniforms(props);
+
     // Bind the textures
     for (const uniformName in this._textures) {
       this._textures[uniformName].bind(this._textureUnits[uniformName]);
