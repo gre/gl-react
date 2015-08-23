@@ -52,7 +52,7 @@ class HelloGL extends React.Component {
 npm i --save gl-react
 ```
 
-## Docs and difference with `gl-react-native`
+## Documentation and difference with `gl-react-native`
 
 **`gl-react` adopts the same API of `gl-react-native`, therefore you can read
 [gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).**
@@ -72,6 +72,3 @@ You might want to take a look at [`react-canvas`](https://github.com/Flipboard/r
 - [GLSL.io](http://glsl.io/) and [Diaporama](https://github.com/gre/diaporama)
 - Source code of [React Native](https://github.com/facebook/react-native)
 
-## Documentation
-
-![Index](./docs)
