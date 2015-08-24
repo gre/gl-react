@@ -254,6 +254,7 @@ class GLCanvas extends Component {
   }
 
   requestDraw () {
+    if (this._needsDraw) return;
     this._needsDraw = true;
     requestAnimationFrame(this.handleDraw);
   }
