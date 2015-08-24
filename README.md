@@ -1,8 +1,10 @@
 # gl-react
 
-WebGL bindings for react to implement complex graphics and image effects, in VDOM descriptive paradigm.
+OpenGL bindings for react-native to implement complex effects over images and components, in VDOM descriptive paradigm.
 
-See also: [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native).
+More technically, gl-react-native allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over any UI content... anything you can imagine!
+
+There's also a [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native) version gl-react with the same API.
 
 ## Examples
 
