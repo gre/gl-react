@@ -23,8 +23,11 @@ module.exports = function (React, Shaders, Target, renderVcontainer, renderVtarg
   class GLView extends Component {
     render() {
       const props = this.props;
-      const { width, height, children, shader, uniforms: uniformsOriginal } = props;
+      const { style, width, height, children, shader, uniforms: uniformsOriginal } = props;
       const cleanedProps = { ...props };
+      delete cleanedProps.style;
+      delete cleanedProps.width;
+      delete cleanedProps.height;
       delete cleanedProps.shader;
       delete cleanedProps.uniforms;
       delete cleanedProps.children;
@@ -40,10 +43,11 @@ module.exports = function (React, Shaders, Target, renderVcontainer, renderVtarg
         uniforms[key] = value;
       }
 
-      const passes = [
-        { shader, uniforms: uniforms },
-        [] // children passes
-      ];
+      const data = {
+        shader,
+        uniforms,
+        children: []
+      };
 
       let targetId = 0;
       let targets = [];
@@ -65,9 +69,15 @@ module.exports = function (React, Shaders, Target, renderVcontainer, renderVtarg
       });
 
       return renderVcontainer(
-        cleanedProps,
+        style,
+        width,
+        height,
         targets,
-        renderVGL(cleanedProps, passes)
+        renderVGL(
+          cleanedProps,
+          width,
+          height,
+          data)
       );
     }
   }

@@ -29,12 +29,11 @@ class GLCanvas extends Component {
   }
 
   render () {
-    const { width, height, style } = this.props;
+    const { width, height } = this.props;
     const { devicePixelRatio } = this.state;
     const styles = {
       width: width+"px",
-      height: height+"px",
-      ...style
+      height: height+"px"
     };
     return <canvas
       {...this.props}
@@ -71,7 +70,7 @@ class GLCanvas extends Component {
     this.buffer = buffer;
 
     this.syncBlendMode(this.props);
-    this.syncShader(this.props.passes[0]);
+    this.syncShader(this.props.data);
   }
 
   componentWillUnmount () {
@@ -91,11 +90,11 @@ class GLCanvas extends Component {
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
 
-    if (props.passes[0].shader !== this.props.passes[0].shader)
-      this.syncShader(props.passes[0]);
+    if (props.data.shader !== this.props.data.shader)
+      this.syncShader(props.data);
     else { // syncShader will call other syncs so we can save some calls
-      if (!sameUniforms(props.passes[0].uniforms, this.props.passes[0].uniforms))
-        this.syncUniforms(props.passes[0]);
+      if (!sameUniforms(props.data.uniforms, this.props.data.uniforms))
+        this.syncUniforms(props.data);
     }
   }
 
@@ -197,7 +196,7 @@ class GLCanvas extends Component {
           let image = this._images[src];
           if (!image) {
             image = new GLImage(() => {
-              this.syncUniforms(this.props.passes[0]);
+              this.syncUniforms(this.props.data);
             });
             this._images[src] = image;
           }
@@ -271,7 +270,7 @@ class GLCanvas extends Component {
     if (!shader) return;
     const props = this.props;
 
-    this.syncTargetUniforms(props.passes[0]);
+    this.syncTargetUniforms(props.data);
 
     // Bind the textures
     for (const uniformName in this._textures) {
@@ -285,7 +284,7 @@ class GLCanvas extends Component {
 GLCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  passes: PropTypes.array.isRequired
+  data: PropTypes.object.isRequired
 };
 
 module.exports = GLCanvas;

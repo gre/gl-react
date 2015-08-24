@@ -17,15 +17,16 @@ const renderVtarget = function (style, width, height, id, target) {
   return <div key={"target-"+id} style={{ ...childrenStyle, ...style }}>{target}</div>;
 };
 
-const renderVGL = function (props, passes) {
+const renderVGL = function (props, width, height, data) {
   return <GLCanvas
     {...props}
-    passes={passes}
+    width={width}
+    height={height}
+    data={data}
   />;
 };
 
-const renderVcontainer = function (props, targets, renderer) {
-  const { style, width, height } = props;
+const renderVcontainer = function (style, width, height, targets, renderer) {
   if (targets) {
     const parentStyle = {
       ...style,
