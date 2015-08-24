@@ -8,7 +8,7 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class Blur1D extends React.Component {
+class Blur1D extends GL.Component {
   render () {
     const { width, height, direction, children } = this.props;
     return <GL.View

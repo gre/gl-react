@@ -67,7 +67,13 @@ module.exports = function (React, Shaders, Target, GLComponent, renderVcontainer
               childGLView = c;
               break;
             }
+            if (typeof c.type !== "function") {
+              break;
+            }
             const instance = new c.type();
+            if (!(instance instanceof GLComponent)) {
+              break;
+            }
             instance.props = c.props;
             c = reactFirstChildOnly(instance.render());
             if (c.type === GLView) {
@@ -75,7 +81,7 @@ module.exports = function (React, Shaders, Target, GLComponent, renderVcontainer
               break;
             }
           }
-          while(c && typeof c.type === "function" && c.type.prototype instanceof GLComponent);
+          while(c);
 
           if (childGLView) {
             const id = data.children.length;
