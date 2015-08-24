@@ -1,4 +1,4 @@
-const invariant = require("invariant");
+const createShaders = require("./core/createShaders");
 
 let checkCompiles = () => {};
 
@@ -19,39 +19,26 @@ if (process.env.NODE_ENV !== "production") {
   };
 }
 
-let _uid = 1;
+// In gl-react case, shaders are stored client side too. a get(id) function is exposed.
 const _shaders = {};
 
-const Shaders = {
-  create: function (obj) {
-    invariant(typeof obj === "object", "config must be an object");
-    const result = {};
-    for (let key in obj) {
-      const shader = obj[key];
-      invariant(typeof shader === "object" && typeof shader.frag === "string",
-      "invalid shader given to Shaders.create(). A valid shader is a { frag: String }");
-      const id = _uid ++;
-      try {
-        checkCompiles(shader);
-      }
-      catch (e) {
-        const err = new Error("Shader '"+key+"': "+e.message);
-        err.stack = e.stack;
-        err.name = e.name;
-        err.original = e;
-        throw err;
-      }
-      _shaders[id] = shader;
-      result[key] = id;
-    }
-    return result;
-  },
+const base = createShaders(function (id, name, shader) {
+  try {
+    checkCompiles(shader);
+  }
+  catch (e) {
+    const err = new Error("Shader '"+name+"': "+e.message);
+    err.stack = e.stack;
+    err.name = e.name;
+    err.original = e;
+    throw err;
+  }
+  _shaders[id] = shader;
+});
+
+module.exports = {
+  ...base,
   get: function (id) {
     return _shaders[id];
-  },
-  exists: function (id) {
-    return typeof id === "number" && id >= 1 && id < _uid;
   }
 };
-
-module.exports = Shaders;

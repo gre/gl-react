@@ -1,7 +1,8 @@
 const invariant = require("invariant");
 const React = require("react");
 const {
-  Component
+  Component,
+  PropTypes
 } = React;
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
@@ -9,17 +10,11 @@ const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
 
-function imageSrc (src) {
-  if (src && typeof src === "object") {
-    invariant("uri" in src, "GLImage: when using an object, it must have an 'uri' field");
-    src = src.uri;
-  }
-  return src;
-}
-
 function sameUniforms (uniforms, prev) {
   return uniforms === prev; // this is enough for now, we can improve if need
 }
+
+// TODO: this does not yet implement multi-pass
 
 class GLCanvas extends Component {
 
@@ -76,7 +71,7 @@ class GLCanvas extends Component {
     this.buffer = buffer;
 
     this.syncBlendMode(this.props);
-    this.syncShader(this.props);
+    this.syncShader(this.props.passes[0]);
   }
 
   componentWillUnmount () {
@@ -96,11 +91,11 @@ class GLCanvas extends Component {
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
 
-    if (props.shader !== this.props.shader)
-      this.syncShader(props);
+    if (props.passes[0].shader !== this.props.passes[0].shader)
+      this.syncShader(props.passes[0]);
     else { // syncShader will call other syncs so we can save some calls
-      if (!sameUniforms(props.uniforms, this.props.uniforms))
-        this.syncUniforms(props);
+      if (!sameUniforms(props.passes[0].uniforms, this.props.passes[0].uniforms))
+        this.syncUniforms(props.passes[0]);
     }
   }
 
@@ -112,6 +107,10 @@ class GLCanvas extends Component {
     if (prevProps.width !== width || prevProps.height !== height || prevState.devicePixelRatio !== devicePixelRatio) {
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     }
+  }
+
+  getDrawingTarget (i) {
+    return React.findDOMNode(this.refs.render).parentNode.children[i].firstChild;
   }
 
   syncBlendMode (props) {
@@ -131,6 +130,7 @@ class GLCanvas extends Component {
     if (!gl) return;
     const { shader: shaderId } = props;
     const shaderObj = Shaders.get(shaderId);
+    invariant(shaderObj, "Shader #%s does not exists", shaderId);
     let shader = this.shader;
     if (!shader) {
       shader = createShader(gl, vertShader, shaderObj.frag);
@@ -187,19 +187,27 @@ class GLCanvas extends Component {
       const texture = this._textures[uniformName];
       const value = uniforms[uniformName];
       if (texture) {
-        const src = imageSrc(value);
-        const textureUnit = this._textureUnits[uniformName];
-        let image = this._images[src];
-        if (!image) {
-          image = new GLImage(() => {
-            this.syncUniforms(this.props);
-          });
-          this._images[src] = image;
+        switch (value.type) {
+
+        case "image":
+          const val = value.value;
+          const src = val.uri;
+          invariant(src && typeof src === "string", "An image src is defined for uniform '%s'", uniformName);
+          const textureUnit = this._textureUnits[uniformName];
+          let image = this._images[src];
+          if (!image) {
+            image = new GLImage(() => {
+              this.syncUniforms(this.props.passes[0]);
+            });
+            this._images[src] = image;
+          }
+          image.src = src;
+          currentResources.push(src);
+          this.syncTextureImage(texture, image);
+          shader.uniforms[uniformName] = textureUnit;
+          break;
+
         }
-        image.src = src;
-        currentResources.push(src);
-        this.syncTextureImage(texture, image);
-        shader.uniforms[uniformName] = textureUnit;
       }
       else {
         shader.uniforms[uniformName] = value;
@@ -214,28 +222,35 @@ class GLCanvas extends Component {
     this.requestDraw();
   }
 
-  syncTargetUniforms ({ targetUniforms, getDrawingTarget }) {
+  syncTargetUniforms ({ uniforms }) {
     const shader = this.shader;
     if (!shader) return;
-    if (targetUniforms) {
-      targetUniforms.forEach(uniformName => {
-        const texture = this._textures[uniformName];
-        invariant(texture, "Uniform '%s' described by GL.Target is not a texture.", uniformName);
-        const textureUnit = this._textureUnits[uniformName];
-        const target = getDrawingTarget(uniformName);
-        const width = target.width || target.videoWidth;
-        const height = target.height || target.videoHeight;
-        if (width && height) { // ensure the resource is loaded
-          texture.shape = [ width, height ];
-          texture.setPixels(target);
-          shader.uniforms[uniformName] = textureUnit;
+
+    let needRedraw = false;
+    for (const uniformName in uniforms) {
+      const texture = this._textures[uniformName];
+      const value = uniforms[uniformName];
+      if (texture) {
+        switch (value.type) {
+        case "target":
+          needRedraw = true;
+          const textureUnit = this._textureUnits[uniformName];
+          const target = this.getDrawingTarget(value.id);
+          const width = target.width || target.videoWidth;
+          const height = target.height || target.videoHeight;
+          if (width && height) { // ensure the resource is loaded
+            texture.shape = [ width, height ];
+            texture.setPixels(target);
+            shader.uniforms[uniformName] = textureUnit;
+          }
+          else {
+            texture.shape = [ 2, 2 ];
+          }
+          break;
         }
-        else {
-          texture.shape = [ 2, 2 ];
-        }
-      });
-      this.requestDraw();
+      }
     }
+    if (needRedraw) this.requestDraw();
   }
 
   requestDraw () {
@@ -255,8 +270,7 @@ class GLCanvas extends Component {
     if (!shader) return;
     const props = this.props;
 
-    if (props.targetUniforms)
-      this.syncTargetUniforms(props);
+    this.syncTargetUniforms(props.passes[0]);
 
     // Bind the textures
     for (const uniformName in this._textures) {
@@ -266,5 +280,11 @@ class GLCanvas extends Component {
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 }
+
+GLCanvas.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  passes: PropTypes.array.isRequired
+};
 
 module.exports = GLCanvas;
