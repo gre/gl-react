@@ -195,7 +195,7 @@ class GLCanvas extends Component {
       // Handle shader sync
       let shader;
       if (prevShaders[s]) {
-        shader = shaders[s] = prevShaders[s];
+        shader = prevShaders[s];
       }
       else {
         const shaderObj = Shaders.get(s);
@@ -203,8 +203,8 @@ class GLCanvas extends Component {
         shader = createShader(gl, vertShader, shaderObj.frag);
         shader.bind();
         shader.attributes._p.pointer();
-        shaders[s] = shader;
       }
+      shaders[s] = shader;
 
       // Handle uniforms sync
       let uniforms = {};
@@ -259,9 +259,7 @@ class GLCanvas extends Component {
         }
       }
 
-      const children = dataChildren.map(function (child) {
-        return traverseTree(child);
-      });
+      const children = dataChildren.map(traverseTree);
 
       return { shader, uniforms, textures, children, width, height };
     }
