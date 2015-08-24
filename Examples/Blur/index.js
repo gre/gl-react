@@ -9,11 +9,13 @@ class Demo extends React.Component {
     };
   }
   componentDidMount () {
+    /*
     const loop = time => {
       requestAnimationFrame(loop);
       this.setState({ time: time / 1000 });
     };
     requestAnimationFrame(loop);
+    */
   }
   render () {
     const { width, height } = this.props;

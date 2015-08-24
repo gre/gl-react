@@ -33,6 +33,7 @@
     "react": ">=0.13"
   },
   "dependencies": {
+    "gl-fbo": "^2.0.5",
     "gl-shader": "^4.0.5",
     "gl-texture2d": "^2.0.9",
     "invariant": "^2.1.0"

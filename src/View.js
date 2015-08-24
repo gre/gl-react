@@ -4,8 +4,8 @@ const Target = require("./Target");
 const GLCanvas = require("./GLCanvas");
 const createView = require("./core/createView");
 
-
-const renderVtarget = function (style, width, height, id, target) {
+const renderVtarget = function (style, width, height, id, children) {
+  const target = React.Children.only(children);
   const childrenStyle = {
     position: "absolute",
     top: 0,
@@ -17,12 +17,13 @@ const renderVtarget = function (style, width, height, id, target) {
   return <div key={"target-"+id} style={{ ...childrenStyle, ...style }}>{target}</div>;
 };
 
-const renderVGL = function (props, width, height, data) {
+const renderVGL = function (props, width, height, data, nbTargets) {
   return <GLCanvas
     {...props}
     width={width}
     height={height}
     data={data}
+    nbTargets={nbTargets}
   />;
 };
 
