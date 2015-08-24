@@ -1,6 +1,6 @@
 const React = require("react");
 
-/*
+
 const Blur1D = require("./Blur1D");
 
 class Blur extends React.Component {
@@ -13,7 +13,7 @@ class Blur extends React.Component {
     </Blur1D>;
   }
 }
-*/
+/*
 
 const GL = require("gl-react");
 const glslify = require("glslify");
@@ -52,5 +52,6 @@ class Blur extends React.Component {
     </GL.View>;
   }
 }
+*/
 
 module.exports = Blur;

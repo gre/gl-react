@@ -1,6 +1,7 @@
 const React = require("react");
 const Shaders = require("./Shaders");
 const Target = require("./Target");
+const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
 const createView = require("./core/createView");
 
@@ -46,4 +47,4 @@ const renderVcontainer = function (style, width, height, targets, renderer) {
   }
 };
 
-module.exports = createView(React, Shaders, Target, renderVcontainer, renderVtarget, renderVGL);
+module.exports = createView(React, Shaders, Target, Component, renderVcontainer, renderVtarget, renderVGL);

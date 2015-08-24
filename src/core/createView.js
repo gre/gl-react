@@ -14,7 +14,7 @@ function textureFromFramebuffer (fbId) {
   return { type: "framebuffer", id: fbId };
 }
 
-module.exports = function (React, Shaders, Target, renderVcontainer, renderVtarget, renderVGL) {
+module.exports = function (React, Shaders, Target, GLComponent, renderVcontainer, renderVtarget, renderVGL) {
   const {
     Component,
     PropTypes
@@ -58,16 +58,28 @@ module.exports = function (React, Shaders, Target, renderVcontainer, renderVtarg
           return;
         }
         else {
-          let c;
-          if (onlyChild.type === GLView) {
-            c = onlyChild;
-          }
-          // FIXME... ideally I would like to recursively resolve the sub render()-s
-          // if they are user components (if not a native component like <div> e.g;)
+          let childGLView;
 
-          if (c) {
+          // Recursively unfold the children while there are GLComponent and not a GLView
+          let c = onlyChild;
+          do {
+            if (c.type === GLView) {
+              childGLView = c;
+              break;
+            }
+            const instance = new c.type();
+            instance.props = c.props;
+            c = reactFirstChildOnly(instance.render());
+            if (c.type === GLView) {
+              childGLView = c;
+              break;
+            }
+          }
+          while(c && typeof c.type === "function" && c.type.prototype instanceof GLComponent);
+
+          if (childGLView) {
             const id = data.children.length;
-            const { shader, uniforms, children } = c.props;
+            const { shader, uniforms, children } = childGLView.props;
             const dataChild = buildData(shader, uniforms, width, height, children, targets);
             data.children.push(dataChild);
             data.uniforms[uniform] = textureFromFramebuffer(id);
