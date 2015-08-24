@@ -19,6 +19,12 @@ function diffDispose (newMap, oldMap) {
   }
 }
 
+function syncShape (obj, shape) {
+  if (obj.shape[0] !== shape[0] || obj.shape[1] !== shape[1]) {
+    obj.shape = shape;
+  }
+}
+
 class GLCanvas extends Component {
 
   constructor (props) {
@@ -37,7 +43,7 @@ class GLCanvas extends Component {
 
   render () {
     const { width, height } = this.props;
-    const { devicePixelRatio } = this.state;
+    const { scale } = this.state;
     const styles = {
       width: width+"px",
       height: height+"px"
@@ -46,8 +52,8 @@ class GLCanvas extends Component {
       {...this.props}
       ref="render"
       style={styles}
-      width={width * devicePixelRatio}
-      height={height * devicePixelRatio}
+      width={width * scale}
+      height={height * scale}
     />;
   }
 
@@ -83,13 +89,17 @@ class GLCanvas extends Component {
 
   componentWillUnmount () {
     this.targetTextures.map(t => t.dispose());
-    for (const src in this._images) {
-      this._images[src].dispose();
-    }
-    if (this.shader) this.shader.dispose();
-    if (this.gl) {
-      this.gl.deleteBuffer(this._buffer);
-    }
+    [
+      this._shaders,
+      this._images,
+      this._fbos
+    ].forEach(coll => {
+      for (const k in coll) {
+        coll[k].dispose();
+        delete coll[k];
+      }
+    });
+    if (this.gl) this.gl.deleteBuffer(this._buffer);
     this.shader = null;
     this.gl = null;
   }
@@ -112,13 +122,63 @@ class GLCanvas extends Component {
     this.syncData(data);
   }
 
-  onImageLoad () {
-    this.syncData(this.props.data);
+  draw () {
+    const gl = this.gl;
+    const renderData = this._renderData;
+    if (!gl || !renderData) return;
+    const {scale} = this.state;
+    const fbos = this._fbos;
+    const buffer = this._buffer;
+
+    function recDraw (renderData, rootFrame) {
+      const { shader, uniforms, textures, children, width, height } = renderData;
+
+      let fboId = 0;
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        if (fboId === rootFrame) fboId ++;
+        const fbo = fbos[fboId];
+        syncShape(fbo, [ child.width * scale, child.height * scale ]);
+        fbo.bind();
+        recDraw(child);
+        fboId ++;
+      }
+
+      if (rootFrame === -1) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      }
+
+      gl.viewport(0, 0, width * scale, height * scale);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+
+      shader.bind();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+
+      // Bind the textures
+      for (const uniformName in textures) {
+        textures[uniformName].bind(uniforms[uniformName]);
+      }
+
+      // Set the uniforms
+      for (const uniformName in uniforms) {
+        shader.uniforms[uniformName] = uniforms[uniformName];
+      }
+
+      // Render
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+
+    this.syncTargetTextures();
+
+    recDraw(renderData, -1);
   }
 
   syncData (data) {
     const gl = this.gl;
     if (!gl) return;
+    const { scale } = this.state;
+
     const onImageLoad = this.onImageLoad;
     const targetTextures = this._targetTextures;
     const prevShaders = this._shaders;
@@ -128,8 +188,6 @@ class GLCanvas extends Component {
     const shaders = {};
     const images = {};
     const fbos = {};
-
-    this.syncTargetTextures();
 
     function traverseTree (data) {
       const { shader: s, uniforms: dataUniforms, children: dataChildren, width, height } = data;
@@ -166,11 +224,13 @@ class GLCanvas extends Component {
             const id = value.id;
             let fbo;
             if (prevFbos[id]) {
-              fbo = fbos[id] = prevFbos[id];
+              fbo = prevFbos[id];
+              syncShape(fbo, [ width * scale, height * scale ]);
             }
             else {
-              fbo = createFBO(gl, [ width, height ]);
+              fbo = createFBO(gl, [ scale * width, scale * height ]);
             }
+            fbos[id] = fbo;
             textures[uniformName] = fbo.color[0];
             break;
 
@@ -180,15 +240,18 @@ class GLCanvas extends Component {
             invariant(src && typeof src === "string", "An image src is defined for uniform '%s'", uniformName);
             let image;
             if (prevImages[src]) {
-              image = images[src] = prevImages[src];
+              image = prevImages[src];
             }
             else {
               image = new GLImage(gl, onImageLoad);
-              images[src] = image;
             }
+            images[src] = image;
             image.src = src;
             textures[uniformName] = image.getTexture();
             break;
+
+          default:
+            invariant(false, "invalid uniform value of type '%s'", value.type);
           }
         }
         else {
@@ -200,7 +263,7 @@ class GLCanvas extends Component {
         return traverseTree(child);
       });
 
-      return { shader, uniforms, textures, children };
+      return { shader, uniforms, textures, children, width, height };
     }
 
     this._renderData = traverseTree(data);
@@ -216,7 +279,12 @@ class GLCanvas extends Component {
     this.requestDraw();
   }
 
-  resizeTargetTextures (n) {
+  onImageLoad () {
+    this.syncData(this.props.data);
+  }
+
+  resizeTargetTextures (size) {
+    const n = size + 1;
     const gl = this.gl;
     const targetTextures = this._targetTextures;
     const length = targetTextures.length;
@@ -235,6 +303,7 @@ class GLCanvas extends Component {
       }
     }
   }
+
   syncTargetTextures () {
     const targets = this.getDrawingTargets();
     const targetTextures = this._targetTextures;
@@ -243,11 +312,12 @@ class GLCanvas extends Component {
       this.syncTargetTexture(targetTextures[i], target);
     }
   }
+
   syncTargetTexture (texture, target) {
     const width = target.width || target.videoWidth;
     const height = target.height || target.videoHeight;
     if (width && height) { // ensure the resource is loaded
-      texture.shape = [ width, height ];
+      syncShape(texture, [ width, height ]);
       texture.setPixels(target);
     }
     else {
@@ -288,50 +358,6 @@ class GLCanvas extends Component {
     if (!this._needsDraw) return;
     this._needsDraw = false;
     this.draw();
-  }
-
-  draw () {
-    const gl = this.gl;
-    const renderData = this._renderData;
-    if (!gl || !renderData) return;
-    const {devicePixelRatio} = this.props;
-    const fbos = this._fbos;
-    const buffer = this._buffer;
-
-    function recDraw (renderData, root) {
-      const { shader, uniforms, textures, children, width, height } = renderData;
-
-      for (var i = 0; i < children.length; i++) {
-        fbos[i].bind();
-        recDraw(children[i]);
-      }
-
-      if (root) {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      }
-
-      gl.viewport(0, 0, width * devicePixelRatio, height * devicePixelRatio);
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-
-      shader.bind();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-
-      // Bind the textures
-      for (const uniformName in textures) {
-        textures[uniformName].bind(uniforms[uniformName]);
-      }
-
-      // Set the uniforms
-      for (const uniformName in uniforms) {
-        shader.uniforms[uniformName] = uniforms[uniformName];
-      }
-
-      // Render
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-    }
-
-    recDraw(renderData);
   }
 }
 

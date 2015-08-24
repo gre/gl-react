@@ -9,18 +9,16 @@ class Demo extends React.Component {
     };
   }
   componentDidMount () {
-    /*
     const loop = time => {
       requestAnimationFrame(loop);
       this.setState({ time: time / 1000 });
     };
     requestAnimationFrame(loop);
-    */
   }
   render () {
     const { width, height } = this.props;
     const { time } = this.state;
-    const factor = 0.5 * (1+Math.cos(3 * time));
+    const factor = 1 * (1+Math.cos(8 * time));
     return <Blur width={width} height={height} factor={factor}>
       http://i.imgur.com/3On9QEu.jpg
     </Blur>;
