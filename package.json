@@ -15,7 +15,8 @@
   "keywords": [
     "react",
     "gl",
-    "webgl"
+    "webgl",
+    "stackgl"
   ],
   "author": "Project September <tech@projectseptember.com>",
   "license": "MIT",
