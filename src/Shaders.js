@@ -1,4 +1,4 @@
-const createShaders = require("./core/createShaders");
+const {createShaders} = require("gl-react-core");
 
 let checkCompiles = () => {};
 

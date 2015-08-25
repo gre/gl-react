@@ -3,7 +3,7 @@ const Shaders = require("./Shaders");
 const Target = require("./Target");
 const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
-const createView = require("./core/createView");
+const {createView} = require("gl-react-core");
 
 const renderVtarget = function (style, width, height, id, children) {
   const target = React.Children.only(children);
