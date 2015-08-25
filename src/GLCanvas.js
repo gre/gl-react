@@ -144,6 +144,9 @@ class GLCanvas extends Component {
       if (frameIndex === -1) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       }
+      else {
+        fbos[frameIndex].bind();
+      }
 
       gl.viewport(0, 0, width * scale, height * scale);
       gl.clearColor(0, 0, 0, 0);
@@ -221,7 +224,7 @@ class GLCanvas extends Component {
       for (const uniformName in dataUniforms) {
         const value = dataUniforms[uniformName];
         const type = shader.types.uniforms[uniformName];
-        if (type === "sampler2D" || type === "samplerCube") {
+        if (value && (type === "sampler2D" || type === "samplerCube")) {
           uniforms[uniformName] = units ++;
           switch (value.type) {
           case "target":
