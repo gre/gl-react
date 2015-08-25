@@ -8,7 +8,7 @@ class Demo extends React.Component {
       blurMapSelected: 0,
       maxBlur: 2,
       blurMaps:
-      "SzbbUvX,wh0On3P,U1EsATW,r5MOwkI"
+      "SzbbUvX,0PkQEk1,z2CQHpg,k9Eview,wh0On3P"
       .split(",").map(id => `http://i.imgur.com/${id}.png`)
     };
   }
