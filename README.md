@@ -1,8 +1,21 @@
 # gl-react
 
-WebGL bindings for react to implement complex graphics and image effects, in VDOM descriptive paradigm.
+OpenGL bindings for react-native to implement complex effects over images and components, in the descriptive VDOM paradigm.
 
-See also: [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native).
+More technically, gl-react-native allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over any UI content... anything you can imagine!
+
+There's also a [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native) version gl-react with the same API.
+
+## Examples
+
+Open [Examples page](http://projectseptemberinc.github.io/gl-react/) and [read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
+
+- [Simple](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/Simple) contains minimal examples, perfect to learn how to use the library. See also the [Related Documentation](http://projectseptemberinc.gitbooks.io/gl-react-native/content/).
+- [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor/index.js) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
+- [AdvancedEffects' Intro](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Intro.js) shows usage with [`react-canvas`](https://github.com/Flipboard/react-canvas).
+- [Video](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/Video/index.js) shows usage with the `<video/>` tag.
+- [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).
+- [Blur](https://github.com/ProjectSeptemberInc/gl-react/blob/master/Examples/Blur/) shows an advanced example of multi-pass pipeline and also shows usage of [glslify](https://github.com/stackgl/glslify).
 
 ### HelloGL Gist
 
@@ -35,24 +48,19 @@ class HelloGL extends React.Component {
 
 ![](https://cloud.githubusercontent.com/assets/211411/9386550/432492c6-475c-11e5-9328-f3d5187298c1.jpg)
 
+
 ## Installation
 
 ```
 npm i --save gl-react
 ```
 
-## Docs and difference with `gl-react-native`
+## Documentation and difference with `gl-react-native`
 
 **`gl-react` adopts the same API of `gl-react-native`, therefore you can read
 [gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).**
 
-However, here are the few differences:
-
-### Texture format
-
-Instead of adopting React Native `{uri: "http://..."}` format, you can simply set a `"http:..."` as a texture uniform, the `{uri}` format is still supported for compatibility purpose.
-
-### GL.Target support
+### GL.Target limited support
 
 `GL.Target` have a more limited support because the web does not allow to draw DOM element in Canvas.
 
@@ -60,6 +68,10 @@ Only one child is supported per `GL.Target` and it MUST be either: an `<img />`,
 
 You might want to take a look at [`react-canvas`](https://github.com/Flipboard/react-canvas) for drawing content.
 
-## Advanced Effects demo
 
-[![](https://cloud.githubusercontent.com/assets/211411/9387055/de7a4732-475e-11e5-8bc3-e86e48814097.png)](http://projectseptemberinc.github.io/gl-react)
+## Influence / Credits
+
+- [stack.gl](http://stack.gl/) approach
+- [GLSL.io](http://glsl.io/) and [Diaporama](https://github.com/gre/diaporama)
+- Source code of [React Native](https://github.com/facebook/react-native)
+

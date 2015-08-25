@@ -1,3 +1,4 @@
+const createTexture = require("gl-texture2d");
 
 function loadImage (src, success, failure) {
   var img = new window.Image();
@@ -16,13 +17,20 @@ function loadImage (src, success, failure) {
   };
 }
 
-function GLImage (onload) {
+function GLImage (gl, onload) {
+  this.gl = gl;
   this.image = null;
   this._onload = onload;
+
+  this.texture = createTexture(gl, [ 2, 2 ]);
+  this.texture.minFilter = this.texture.magFilter = gl.LINEAR;
+  this._textureImg = null;
 }
 GLImage.prototype = {
   dispose: function () {
     if (this._loading) this._loading();
+    this.texture.dispose();
+    this.texture = null;
   },
   reloadImage: function () {
     const src = this._src;
@@ -42,6 +50,21 @@ GLImage.prototype = {
         this.clearImage();
       });
     }
+  },
+  getTexture: function () {
+    const image = this.image;
+    const texture = this.texture;
+    if (image !== this._textureImg) {
+      this._textureImg = image;
+      if (image) {
+        texture.shape = [ image.width, image.height ];
+        texture.setPixels(image);
+      }
+      else {
+        texture.shape = [ 2, 2 ];
+      }
+    }
+    return texture;
   },
   clearImage: function () {
     this.image = null;

@@ -1,12 +1,13 @@
 {
   "private": true,
-  "name": "gl-react-example-simple",
+  "name": "gl-react-example-blur",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "browserify": {
     "transform": [
-      "babelify"
+      "babelify",
+      "glslify"
     ]
   },
   "scripts": {
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "babelify": "^6.1.3",
+    "glslify": "^2.2.1",
     "browserify": "^11.0.1",
     "budo": "^4.1.0",
     "garnish": "^2.2.2",
@@ -22,7 +24,7 @@
   },
   "dependencies": {
     "gl-react": "file:../..",
-    "react": "^0.13.3",
-    "react-canvas": "git://github.com/gre/react-canvas.git#crossorigin"
+    "glsl-fast-gaussian-blur": "^1.0.2",
+    "react": "^0.13.3"
   }
 }
