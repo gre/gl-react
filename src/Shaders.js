@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
 // In gl-react case, shaders are stored client side too. a get(id) function is exposed.
 const _shaders = {};
 
-const base = createShaders(function (id, name, shader) {
+const base = createShaders(function (id, shader) {
   try {
     checkCompiles(shader);
   }

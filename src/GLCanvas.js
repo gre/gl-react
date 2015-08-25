@@ -33,6 +33,7 @@ class GLCanvas extends Component {
       scale: window.devicePixelRatio
     };
     this.handleDraw = this.handleDraw.bind(this);
+    this.handleSyncData = this.handleSyncData.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
 
     this._images = {};
@@ -88,7 +89,7 @@ class GLCanvas extends Component {
   }
 
   componentWillUnmount () {
-    this.targetTextures.map(t => t.dispose());
+    this._targetTextures.forEach(t => t.dispose());
     [
       this._shaders,
       this._images,
@@ -175,6 +176,7 @@ class GLCanvas extends Component {
   }
 
   syncData (data) {
+    this._needsSyncData = false;
     const gl = this.gl;
     if (!gl) return;
     const { scale } = this.state;
@@ -212,6 +214,7 @@ class GLCanvas extends Component {
         const shaderObj = Shaders.get(s);
         invariant(shaderObj, "Shader #%s does not exists", s);
         shader = createShader(gl, vertShader, shaderObj.frag);
+        shader.name = shaderObj.name;
         shader.bind();
         shader.attributes._p.pointer();
       }
@@ -224,6 +227,7 @@ class GLCanvas extends Component {
       for (const uniformName in dataUniforms) {
         const value = dataUniforms[uniformName];
         const type = shader.types.uniforms[uniformName];
+        invariant(type, "Shader '%s': Uniform '%s' is not defined/used", shader.name, uniformName);
         if (value && (type === "sampler2D" || type === "samplerCube")) {
           uniforms[uniformName] = units ++;
           switch (value.type) {
@@ -248,7 +252,7 @@ class GLCanvas extends Component {
           case "image":
             const val = value.value;
             const src = val.uri;
-            invariant(src && typeof src === "string", "An image src is defined for uniform '%s'", uniformName);
+            invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
             let image;
             if (prevImages[src]) {
               image = prevImages[src];
@@ -262,13 +266,16 @@ class GLCanvas extends Component {
             break;
 
           default:
-            invariant(false, "invalid uniform value of type '%s'", value.type);
+            invariant(false, "Shader '%s': invalid uniform value of type '%s'", shader.name, value.type);
           }
         }
         else {
           uniforms[uniformName] = value;
         }
       }
+
+      const notProvided = Object.keys(shader.uniforms).filter(u => !(u in uniforms));
+      invariant(notProvided.length===0, "Shader '%s': All defined uniforms must be provided. Missing: '"+notProvided.join("', '")+"'", shader.name);
 
       return { shader, uniforms, textures, children, width, height, frameIndex };
     }
@@ -287,7 +294,7 @@ class GLCanvas extends Component {
   }
 
   onImageLoad () {
-    this.syncData(this.props.data);
+    this.requestSyncData();
   }
 
   resizeTargetTextures (size) {
@@ -353,6 +360,17 @@ class GLCanvas extends Component {
       all[i] = children[i].firstChild;
     }
     return all;
+  }
+
+  requestSyncData () {
+    if (this._needsSyncData) return;
+    this._needsSyncData = true;
+    requestAnimationFrame(this.handleSyncData);
+  }
+
+  handleSyncData () {
+    if (!this._needsSyncData) return;
+    this.syncData(this.props.data);
   }
 
   requestDraw () {

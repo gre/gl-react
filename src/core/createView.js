@@ -33,7 +33,7 @@ module.exports = function (React, Shaders, Target, GLComponent, renderVcontainer
     for (const key in uniformsOriginal) {
       let value = uniformsOriginal[key];
       // filter out the texture types...
-      if (typeof value === "string" || typeof value === "object" && !(value instanceof Array))
+      if (value && (typeof value === "string" || typeof value === "object" && !(value instanceof Array)))
         value = textureFromImage(value);
       uniforms[key] = value;
     }

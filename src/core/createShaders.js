@@ -12,7 +12,8 @@ module.exports = function (recordShader) {
         invariant(typeof shader === "object" && typeof shader.frag === "string",
         "invalid shader given to Shaders.create(). A valid shader is a { frag: String }");
         const id = _uid ++;
-        recordShader(id, key, shader);
+        if (!shader.name) shader.name = key;
+        recordShader(id, shader);
         result[key] = id;
       }
       return result;
