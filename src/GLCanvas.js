@@ -244,6 +244,7 @@ class GLCanvas extends Component {
             }
             else {
               fbo = createFBO(gl, [ scale * width, scale * height ]);
+              fbo.minFilter = fbo.magFilter = gl.LINEAR;
             }
             fbos[id] = fbo;
             textures[uniformName] = fbo.color[0];
