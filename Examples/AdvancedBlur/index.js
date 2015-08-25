@@ -2,22 +2,67 @@ const React = require("react");
 const Blur = require("./Blur");
 const Mix = require("./Mix");
 
+function imgurify (slugs) {
+  return slugs.split(",").map(id => `http://i.imgur.com/${id}.png`);
+}
+
+const styles = {
+  toolbar: {
+    flexDirection: "row",
+    display: "flex"
+  },
+  tool: {
+    flex: 1
+  }
+};
+
+class Tool extends React.Component {
+  render () {
+    const { min, max, value, onValueChange, list, selected, onSelect } = this.props;
+    return <div style={styles.tool}>
+      <div>
+        <input type="range"
+          style={{ width: "80%", height: "50px" }}
+          min={min}
+          max={max}
+          step={0.01}
+          value={value}
+          onChange={e => onValueChange(parseFloat(e.target.value))}
+        />
+      </div>
+      <div>
+      {list.map((src, i) => {
+        return <img key={i}
+          src={src}
+          onClick={() => onSelect(i)}
+          style={{
+            height: "80px",
+            border: "2px solid",
+            borderColor: i===selected ? "#f00" : "transparent"
+          }}
+        />;
+      })}
+      </div>
+    </div>;
+  }
+}
+
 class Demo extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      blurMapSelected: 0,
       maxBlur: 2,
       mix: 0.2,
-      mixMap: "http://i.imgur.com/T7SeRKx.png",
-      blurMaps:
-      "SzbbUvX,0PkQEk1,z2CQHpg,k9Eview,wh0On3P"
-      .split(",").map(id => `http://i.imgur.com/${id}.png`)
+      mixSelected: 0,
+      blurMapSelected: 0,
+      mixMaps: imgurify("T7SeRKx,zwvtoYH,qppttqA"),
+      blurMaps: imgurify("SzbbUvX,0PkQEk1,z2CQHpg,k9Eview,wh0On3P")
     };
   }
   render () {
-    const { maxBlur, blurMaps, blurMapSelected, mix, mixMap } = this.state;
+    const { maxBlur, blurMaps, blurMapSelected, mixSelected, mix, mixMaps } = this.state;
     const blurMap = blurMaps[blurMapSelected];
+    const mixMap = mixMaps[mixSelected];
 
     const w = 1024, h = 483;
 
@@ -34,41 +79,28 @@ class Demo extends React.Component {
         </Blur>
       </Mix>
 
-      <div>
-        <input type="range"
-          style={{ width: "420px", height: "50px" }}
+      <div style={styles.toolbar}>
+
+        <Tool
           min={0}
-          max={4}
-          step={0.01}
+          max={3}
           value={maxBlur}
-          onChange={e => this.setState({ maxBlur: parseFloat(e.target.value) })}
+          onValueChange={maxBlur => this.setState({ maxBlur })}
+          list={blurMaps}
+          selected={blurMapSelected}
+          onSelect={blurMapSelected => this.setState({ blurMapSelected })}
         />
-      </div>
-      <div>
-      {blurMaps.map((src, i) => {
-        return <img key={i}
-          src={src}
-          onClick={() => this.setState({ blurMapSelected: i })}
-          style={{
-            width: "100px",
-            border: "3px solid",
-            borderColor: i===blurMapSelected ? "#f00" : "transparent"
-          }}
-        />;
-      })}
-      </div>
-      <div>
-        <input type="range"
-          style={{ width: "420px", height: "50px" }}
+
+        <Tool
           min={0}
           max={1}
-          step={0.01}
           value={mix}
-          onChange={e => this.setState({ mix: parseFloat(e.target.value) })}
+          onValueChange={mix => this.setState({ mix })}
+          list={mixMaps}
+          selected={mixSelected}
+          onSelect={mixSelected => this.setState({ mixSelected })}
         />
-      </div>
-      <div>
-        <img src={mixMap} style={{ height: "100px", border: "1px solid #f00" }} />
+
       </div>
     </div>;
   }
