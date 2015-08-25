@@ -130,21 +130,18 @@ class GLCanvas extends Component {
     const fbos = this._fbos;
     const buffer = this._buffer;
 
-    function recDraw (renderData, rootFrame) {
-      const { shader, uniforms, textures, children, width, height } = renderData;
+    function recDraw (renderData) {
+      const { shader, uniforms, textures, children, width, height, frameIndex } = renderData;
 
-      let fboId = 0;
       for (let i = 0; i < children.length; i++) {
         const child = children[i];
-        if (fboId === rootFrame) fboId ++;
-        const fbo = fbos[fboId];
+        const fbo = fbos[child.frameIndex];
         syncShape(fbo, [ child.width * scale, child.height * scale ]);
         fbo.bind();
         recDraw(child);
-        fboId ++;
       }
 
-      if (rootFrame === -1) {
+      if (frameIndex === -1) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
       }
 
@@ -171,7 +168,7 @@ class GLCanvas extends Component {
 
     this.syncTargetTextures();
 
-    recDraw(renderData, -1);
+    recDraw(renderData);
   }
 
   syncData (data) {
@@ -189,8 +186,19 @@ class GLCanvas extends Component {
     const images = {};
     const fbos = {};
 
-    function traverseTree (data) {
+    function traverseTree (data, frameIndex) {
       const { shader: s, uniforms: dataUniforms, children: dataChildren, width, height } = data;
+
+      const children = [];
+      const fbosMapping = {};
+      let fboId = 0;
+      for (let i = 0; i < dataChildren.length; i++) {
+        const child = dataChildren[i];
+        if (fboId === frameIndex) fboId ++;
+        fbosMapping[i] = fboId;
+        children.push(traverseTree(child, fboId));
+        fboId ++;
+      }
 
       // Handle shader sync
       let shader;
@@ -221,7 +229,7 @@ class GLCanvas extends Component {
             break;
 
           case "framebuffer":
-            const id = value.id;
+            const id = fbosMapping[value.id];
             let fbo;
             if (prevFbos[id]) {
               fbo = prevFbos[id];
@@ -259,12 +267,10 @@ class GLCanvas extends Component {
         }
       }
 
-      const children = dataChildren.map(traverseTree);
-
-      return { shader, uniforms, textures, children, width, height };
+      return { shader, uniforms, textures, children, width, height, frameIndex };
     }
 
-    this._renderData = traverseTree(data);
+    this._renderData = traverseTree(data, -1);
 
     diffDispose(shaders, prevShaders);
     diffDispose(fbos, prevFbos);
