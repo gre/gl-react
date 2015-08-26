@@ -29,22 +29,17 @@ const renderVGL = function (props, width, height, data, nbTargets) {
 };
 
 const renderVcontainer = function (style, width, height, targets, renderer) {
-  if (targets) {
-    const parentStyle = {
-      ...style,
-      position: "relative",
-      width: width+"px",
-      height: height+"px",
-      overflow: "hidden"
-    };
-    return <div style={parentStyle}>
-      {targets}
-      {renderer}
-    </div>;
-  }
-  else {
-    return renderer;
-  }
+  const parentStyle = {
+    ...style,
+    position: "relative",
+    width: width+"px",
+    height: height+"px",
+    overflow: "hidden"
+  };
+  return <div style={parentStyle}>
+    {targets}
+    {renderer}
+  </div>;
 };
 
 module.exports = createView(React, Shaders, Target, Component, renderVcontainer, renderVtarget, renderVGL);

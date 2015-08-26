@@ -45,14 +45,16 @@ class GLCanvas extends Component {
   }
 
   render () {
-    const { width, height } = this.props;
+    const { width, height, style } = this.props;
     const { scale } = this.state;
     const styles = {
+      ...style,
       width: width+"px",
       height: height+"px"
     };
     return <canvas
       {...this.props}
+      data={undefined}
       ref="render"
       style={styles}
       width={width * scale}
