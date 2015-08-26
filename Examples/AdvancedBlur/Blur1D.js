@@ -10,7 +10,7 @@ const shaders = GL.Shaders.create({
 
 class Blur1D extends GL.Component {
   render () {
-    const { width, height, direction, minBlur, maxBlur, blurMap, children } = this.props;
+    const { width, height, direction, minBlur, maxBlur, blurMap, offset, children } = this.props;
     return <GL.View
       shader={shaders.blur1D}
       width={width}
@@ -20,6 +20,7 @@ class Blur1D extends GL.Component {
         minBlur,
         maxBlur,
         blurMap,
+        offset,
         resolution: [ width, height ]
       }}>
       <GL.Target uniform="t">{children}</GL.Target>

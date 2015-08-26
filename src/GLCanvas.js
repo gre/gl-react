@@ -45,14 +45,16 @@ class GLCanvas extends Component {
   }
 
   render () {
-    const { width, height } = this.props;
+    const { width, height, style } = this.props;
     const { scale } = this.state;
     const styles = {
+      ...style,
       width: width+"px",
       height: height+"px"
     };
     return <canvas
       {...this.props}
+      data={undefined}
       ref="render"
       style={styles}
       width={width * scale}
@@ -237,7 +239,7 @@ class GLCanvas extends Component {
             break;
 
           default:
-            invariant(false, "Shader '%s': invalid uniform value of type '%s'", shader.name, value.type);
+            invariant(false, "Shader '%s': invalid uniform '%s' value of type '%s'", shader.name, uniformName, value.type);
           }
         }
         else {
@@ -286,6 +288,7 @@ class GLCanvas extends Component {
       if (frameIndex === -1) {
         // special case for root FBO
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.viewport(0, 0, w, h);
       }
       else {
         // Use the framebuffer of the node (determined by syncData)
@@ -295,7 +298,6 @@ class GLCanvas extends Component {
       }
 
       // Prepare the viewport
-      gl.viewport(0, 0, w, h);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
