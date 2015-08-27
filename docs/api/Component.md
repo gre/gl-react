@@ -52,3 +52,12 @@ and use it:
   http://i.imgur.com/qM9BHCy.jpg
 </BlurNegative>
 ```
+
+## Implementation notes
+
+Effects composition are made efficient using OpenGL Framebuffers:
+the rendering is made in the same pipeline.
+
+[`gl-react-core`](https://github.com/ProjectSeptemberInc/gl-react-core)
+contains the core logic (shared across both `gl-react` and `gl-react-native`)
+that convert the Virtual DOM Tree into `data`, an object tree that represent the rendering pipeline.
