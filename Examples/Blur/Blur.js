@@ -4,12 +4,19 @@ const Blur1D = require("./Blur1D");
 
 class Blur extends GL.Component {
   render () {
-    const { width, height, factor, children } = this.props;
-    return <Blur1D width={width} height={height} direction={[ factor, 0 ]}>
-      <Blur1D width={width} height={height} direction={[ 0, factor ]}>
-        {children}
+    const { width, height, children, minBlur, maxBlur, blurMap, offset } = this.props;
+    const sharedProps = { width, height, minBlur, maxBlur, blurMap, offset };
+    return (
+      <Blur1D {...sharedProps} direction={[ 1, 0 ]}>
+        <Blur1D {...sharedProps} direction={[ 0, 1 ]}>
+          <Blur1D {...sharedProps} direction={[ -1/Math.sqrt(2), 1/Math.sqrt(2) ]}>
+            <Blur1D {...sharedProps} direction={[ 1/Math.sqrt(2), 1/Math.sqrt(2) ]}>
+              {children}
+            </Blur1D>
+          </Blur1D>
+        </Blur1D>
       </Blur1D>
-    </Blur1D>;
+    );
   }
 }
 
