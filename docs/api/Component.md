@@ -61,3 +61,6 @@ the rendering is made in the same pipeline.
 [`gl-react-core`](https://github.com/ProjectSeptemberInc/gl-react-core)
 contains the core logic (shared across both `gl-react` and `gl-react-native`)
 that convert the Virtual DOM Tree into `data`, an object tree that represent the rendering pipeline.
+
+Respective implementation will then uses that `data` tree and
+render it in OpenGL (for gl-react-native) or in WebGL (for gl-react, using [stack.gl](http://stack.gl) libs).
