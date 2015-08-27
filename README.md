@@ -6,6 +6,8 @@ More technically, gl-react allows you to write a fragment shader that covers a c
 
 **There's also [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native), a React Native version implementing the same API.**
 
+[![](docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react/Examples/Blur/)
+
 ## Examples
 
 [Open Examples page](http://projectseptemberinc.github.io/gl-react/) / [Read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
