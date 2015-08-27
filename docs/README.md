@@ -12,5 +12,6 @@
   * [Progress Indicator](examples/4.md)
   * [Touch Responsive](examples/5.md)
   * [Animation](examples/6.md)
+  * [Blur (2-Pass)](examples/7.md)
 * [Advanced Effects Examples](examples/advancedeffects.md)
 * [Sharing code across gl-react and gl-react-native](universal.md)
