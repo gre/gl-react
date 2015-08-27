@@ -1,14 +1,14 @@
 # gl-react
 
-OpenGL bindings for react-native to implement complex effects over images and components, in the descriptive VDOM paradigm.
+WebGL bindings for react to implement complex effects over images and content, in the descriptive VDOM paradigm.
 
-More technically, gl-react-native allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over any UI content... anything you can imagine!
+More technically, gl-react allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over content (video, canvas)... anything you can imagine!
 
-There's also a [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native) version gl-react with the same API.
+**There's also [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native), a React Native version implementing the same API.**
 
 ## Examples
 
-Open [Examples page](http://projectseptemberinc.github.io/gl-react/) and [read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
+[Open Examples page](http://projectseptemberinc.github.io/gl-react/) / [Read the code](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples).
 
 - [Simple](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/Simple) contains minimal examples, perfect to learn how to use the library. See also the [Related Documentation](http://projectseptemberinc.gitbooks.io/gl-react-native/content/).
 - [SpringCursor](https://github.com/ProjectSeptemberInc/gl-react/tree/master/Examples/SpringCursor/index.js) shows usage with [`react-motion`](https://github.com/chenglou/react-motion).
@@ -34,7 +34,7 @@ void main () {
   }
 });
 
-class HelloGL extends React.Component {
+class HelloGL extends GL.Component {
   render () {
     const { width, height } = this.props;
     return <GL.View
@@ -48,6 +48,15 @@ class HelloGL extends React.Component {
 
 ![](https://cloud.githubusercontent.com/assets/211411/9386550/432492c6-475c-11e5-9328-f3d5187298c1.jpg)
 
+## Focus
+
+- **Virtual DOM and immutable** paradigm: OpenGL is a low level imperative and mutable API. This library takes the best of it and exposes it in an immutable, descriptive way.
+- **Performance**
+- **Developer experience**: the application doesn't crash on bugs - it uses React Native error message to display GLSL errors, with Live Reload support to make experimenting with effects easy.
+- **Uniform bindings**: bindings from JavaScript objects to OpenGL GLSL language types (bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4, sampler2D...)
+- **Support for images** as a texture uniform.
+- **Support for <canvas>, <video>** as a texture uniform.
+
 
 ## Installation
 
@@ -55,23 +64,13 @@ class HelloGL extends React.Component {
 npm i --save gl-react
 ```
 
-## Documentation and difference with `gl-react-native`
-
-**`gl-react` adopts the same API of `gl-react-native`, therefore you can read
-[gl-react-native documentation](https://github.com/ProjectSeptemberInc/gl-react-native/tree/master/docs).**
-
-### GL.Target limited support
-
-`GL.Target` have a more limited support because the web does not allow to draw DOM element in Canvas.
-
-Only one child is supported per `GL.Target` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
-
-You might want to take a look at [`react-canvas`](https://github.com/Flipboard/react-canvas) for drawing content.
-
-
 ## Influence / Credits
 
-- [stack.gl](http://stack.gl/) approach
+- [stack.gl](http://stack.gl/) approach (`gl-shader`, `gl-texture2d`, `gl-fbo` are library directly used by `gl-react`)
 - [GLSL.io](http://glsl.io/) and [Diaporama](https://github.com/gre/diaporama)
 - Source code of [React Native](https://github.com/facebook/react-native)
 
+
+## Documentation
+
+[**Gitbook**](http://projectseptemberinc.gitbooks.io/gl-react/content/)

@@ -1,7 +1,7 @@
 {
   "name": "gl-react",
   "version": "0.0.1",
-  "description": "WebGL bindings for react to implement complex graphics and image effects, in VDOM descriptive paradigm",
+  "description": "WebGL bindings for react to implement complex effects over images and content, in the descriptive VDOM paradigm",
   "main": "src/index.js",
   "browserify": {
     "transform": [
