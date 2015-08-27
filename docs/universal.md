@@ -57,12 +57,12 @@ module.exports = require(".")(require("react-native"), require("gl-react-native"
 Then on the usage part, let's say you have published your module as `gl-react-myeffect`,
 you can use:
 
-```
+```js
 const MyEffect = require("gl-react-myeffect/react");
 ```
 
 or
 
-```
+```js
 const MyEffect = require("gl-react-myeffect/react-native");
 ```

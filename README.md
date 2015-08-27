@@ -1,8 +1,8 @@
 # gl-react
 
-WebGL bindings for react to implement complex effects over images and content, in the descriptive VDOM paradigm.
+WebGL bindings for React to implement complex effects over images and content, in the descriptive VDOM paradigm.
 
-More technically, gl-react allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over content (video, canvas)... anything you can imagine!
+More technically, `gl-react` allows you to write a fragment shader that covers a component. The shader can render: generated graphics/demos, effects on top of images, effects over content (video, canvas)... anything you can imagine!
 
 **There's also [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native), a React Native version implementing the same API.**
 
@@ -57,7 +57,7 @@ class HelloGL extends GL.Component {
 - **Developer experience**: the application doesn't crash on bugs - it uses React Native error message to display GLSL errors, with Live Reload support to make experimenting with effects easy.
 - **Uniform bindings**: bindings from JavaScript objects to OpenGL GLSL language types (bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4, sampler2D...)
 - **Support for images** as a texture uniform.
-- **Support for <canvas>, <video>** as a texture uniform.
+- **Support for \<canvas>, \<video>** as a texture uniform.
 
 
 ## Installation
@@ -73,6 +73,4 @@ npm i --save gl-react
 - Source code of [React Native](https://github.com/facebook/react-native)
 
 
-## Documentation
-
-[**Gitbook**](http://projectseptemberinc.gitbooks.io/gl-react/content/)
+## [Documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/)
