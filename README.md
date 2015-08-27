@@ -73,6 +73,4 @@ npm i --save gl-react
 - Source code of [React Native](https://github.com/facebook/react-native)
 
 
-## Documentation
-
-[**Gitbook**](http://projectseptemberinc.gitbooks.io/gl-react/content/)
+## [Documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/)
