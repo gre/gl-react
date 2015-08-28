@@ -1,4 +1,4 @@
-**[Gitbook documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/) / [Github](https://github.com/ProjectSeptemberInc/gl-react/) / [live demos](http://projectseptemberinc.github.io/gl-react/) / [gl-react-native](https://github.com/ProjectSeptemberInc/gl-react-native/)**
+**[Gitbook documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/) / [Github](https://github.com/ProjectSeptemberInc/gl-react/) / [live demos](http://projectseptemberinc.github.io/gl-react/) / [gl-react-native](https://github.com/ProjectSeptemberInc/gl-react-native/)** / [#gl-react on reactiflux](https://reactiflux.slack.com/messages/gl-react/)
 
 # gl-react
 
