@@ -21,9 +21,22 @@ this is generally a good idea because you always want to make a component "compo
 Effects component can be implemented as follow:
 
 ```js
-// Assuming we have defined a shaders.myEffect, where the frag have:
-// a `tex` sampler2D uniform
-// a `someParam` uniform
+const shaders = GL.Shaders.create({
+  myEffect: {
+    frag: `
+precision highp float;
+varying vec2 uv;
+uniform sampler2D tex;
+uniform float someParam;
+
+void main() {
+  vec4 textureColor = texture(tex, uv);
+  vec4 c = ... // do something with textureColor and someParam
+  gl_FragColor = c;
+}
+    `
+  }
+});
 class MyEffect extends GL.Component {
   render () {
     const { width, height, children, someParam } = this.props;
