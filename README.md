@@ -1,5 +1,5 @@
 
-> **[Gitbook](http://projectseptemberinc.gitbooks.io/gl-react/content/) - [gl-react Github](https://github.com/ProjectSeptemberInc/gl-react/) - [gl-react-native Github](https://github.com/ProjectSeptemberInc/gl-react-native/)**
+> **[Gitbook documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/) - [gl-react](https://github.com/ProjectSeptemberInc/gl-react/) - [gl-react-native](https://github.com/ProjectSeptemberInc/gl-react-native/)**
 
 # gl-react
 
