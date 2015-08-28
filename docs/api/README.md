@@ -1,6 +1,8 @@
 # The API
 
 ```js
+var GL = require("gl-react");
+// OR
 var GL = require("gl-react-native");
 ```
 
