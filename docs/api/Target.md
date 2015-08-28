@@ -23,16 +23,16 @@
 
 - **`uniform`** *(string)* **(required)**: The name of the shader texture uniform to use for rendering the content.
 - **`children`** *(any)* **(required)**: The content to use as a uniform texture. It can be:
-  - an image URL (this is like giving it as an uniform).
+  - an image URL (this is like giving it in `GL.View`'s `uniforms` object).
   - a `GL.Component` or `GL.View` (this allows to stack effects).
-  - any content to rasterize (this feature is advanced, see below for support detail).
+  - any content to rasterize *(this feature is advanced, see below for support detail)*.
 
 
-## difference between `gl-react` and `gl-react-native` rasterization support
+## Content rasterization support
 
-> **N.B.** The content rasterization remains experimental. It current does not support children content refreshing (like load events,...).
+> **N.B.** The content rasterization remains experimental. The complexity to implement it is to know when content get refreshed (for instance when an image loads,...). When content to rasterize is provided, the current implementation will ALWAYS re-draw the GLView after each Virtual DOM `render()`, so if you can observe a specific content event (e.g: load) you may want to `forceUpdate` or use a `state`.
 
-### gl-react-native
+### Using `gl-react-native`
 
 In `gl-react-native`, `GL.Target` can contain any content!
 The resulting UIView will be rasterized and rendered into the GL View.
@@ -61,7 +61,7 @@ The resulting UIView will be rasterized and rendered into the GL View.
 ```
 
 
-### gl-react
+### Using `gl-react`
 
 `GL.Target` have a limited support in `gl-react` because the web does not allow to rasterize any DOM element.
 
