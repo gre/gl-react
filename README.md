@@ -72,7 +72,5 @@ npm i --save gl-react
 
 - [stack.gl](http://stack.gl/) approach (`gl-shader`, `gl-texture2d`, `gl-fbo` are library directly used by `gl-react`)
 - [GLSL.io](http://glsl.io/) and [Diaporama](https://github.com/gre/diaporama)
-- Source code of [React Native](https://github.com/facebook/react-native)
-
 
 ## [Read Full Documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/)
