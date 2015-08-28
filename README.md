@@ -1,3 +1,6 @@
+
+> **[Gitbook](http://projectseptemberinc.gitbooks.io/gl-react/content/) - [gl-react Github](https://github.com/ProjectSeptemberInc/gl-react/) - [gl-react-native Github](https://github.com/ProjectSeptemberInc/gl-react-native/)**
+
 # gl-react
 
 WebGL bindings for React to implement complex effects over images and content, in the descriptive VDOM paradigm.
