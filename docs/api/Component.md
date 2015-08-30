@@ -13,12 +13,41 @@ class MyEffect extends GL.Component {
 `GL.Component` allows to **compose** effects:
 it tells the `gl-react-core` algorithm to "unfold" the `render()` looking for a `GL.View` to merge with.
 
-> Technically, this is not required to extend `GL.Component` (you can still use `React.Component`),
-but this is generally a good idea (you always want to make a component "composable").
+> Although it is technically not required to extend `GL.Component` (you can still use `React.Component`),
+this is generally a good idea because you always want to make a component "composable".
 
 ## Composing effects
 
-Once you have defined your component that inject children, you can then compose it with another.
+Effects component can be implemented as follow:
+
+```js
+const shaders = GL.Shaders.create({
+  myEffect: {
+    frag: `
+precision highp float;
+varying vec2 uv;
+uniform sampler2D tex;
+uniform float someParam;
+
+void main() {
+  vec4 textureColor = texture(tex, uv);
+  vec4 c = ... // do something with textureColor and someParam
+  gl_FragColor = c;
+}
+    `
+  }
+});
+class MyEffect extends GL.Component {
+  render () {
+    const { width, height, children, someParam } = this.props;
+    return <GL.View shader={shaders.myEffect} width={width} height={height} uniforms={{ someParam }}>
+      <GL.Target uniform="tex">{children}</GL.Target>
+    </GL.View>;
+  }
+}
+```
+
+Once you have defined effect components that inject `children` (let's say `Blur` and `Negative`), you can compose them together.
 
 **Example:**
 
@@ -30,7 +59,7 @@ Once you have defined your component that inject children, you can then compose 
 </Blur>
 ```
 
-and you can make generic component out of it:
+and define another generic component out of it:
 
 ```js
 class BlurNegative extends GL.Component {
