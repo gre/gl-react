@@ -59,7 +59,7 @@ class HelloGL extends GL.Component {
 - **Developer experience**: the application doesn't crash on bugs - Live Reload support make experimenting with effects easy (also `gl-react-native`'s version uses React Native error message to display GLSL errors).
 - **Uniform bindings**: bindings from JavaScript objects to OpenGL GLSL language types (bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4, sampler2D...)
 - **Support for images** as a texture uniform.
-- **Support for \<canvas>, \<video>** as a texture uniform.
+- **Support for `<canvas>`, `<video>`** as a texture uniform.
 
 
 ## Installation
