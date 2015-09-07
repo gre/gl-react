@@ -163,7 +163,9 @@ class GLCanvas extends Component {
     // traverseTree compute renderData from the data.
     // frameIndex is the framebuffer index of a node. (root is -1)
     function traverseTree (data) {
-      const { shader: s, uniforms: dataUniforms, children: dataChildren, width, height, fboId } = data;
+      const { shader: s, uniforms: dataUniforms, children: dataChildren, contextChildren: dataContextChildren, width, height, fboId } = data;
+
+      const contextChildren = dataContextChildren.map(traverseTree);
 
       // Traverse children and compute children renderData.
       // We build a framebuffer mapping (from child index to fbo index)
@@ -242,7 +244,7 @@ class GLCanvas extends Component {
       const notProvided = Object.keys(shader.uniforms).filter(u => !(u in uniforms));
       invariant(notProvided.length===0, "Shader '%s': All defined uniforms must be provided. Missing: '"+notProvided.join("', '")+"'", shader.name);
 
-      return { shader, uniforms, textures, children, width, height, fboId };
+      return { shader, uniforms, textures, children, contextChildren, width, height, fboId };
     }
 
     this._renderData = traverseTree(data);
@@ -267,9 +269,12 @@ class GLCanvas extends Component {
     const buffer = this._buffer;
 
     function recDraw (renderData) {
-      const { shader, uniforms, textures, children, width, height, fboId } = renderData;
+      const { shader, uniforms, textures, children, contextChildren, width, height, fboId } = renderData;
 
       const w = width * scale, h = height * scale;
+
+      // contextChildren are rendered BEFORE children and parent because are contextual to them
+      contextChildren.forEach(recDraw);
 
       // children are rendered BEFORE the parent
       children.forEach(recDraw);
