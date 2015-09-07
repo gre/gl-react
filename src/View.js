@@ -5,7 +5,7 @@ const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
 const {createView} = require("gl-react-core");
 
-const renderVcontent = function (style, width, height, id, children) {
+const renderVcontent = function (width, height, id, children) {
   const content = React.Children.only(children);
   const childrenStyle = {
     position: "absolute",
@@ -15,7 +15,7 @@ const renderVcontent = function (style, width, height, id, children) {
     height: height+"px",
     visibility: "hidden"
   };
-  return <div key={"content-"+id} style={{ ...childrenStyle, ...style }}>{content}</div>;
+  return <div key={"content-"+id} style={childrenStyle}>{content}</div>;
 };
 
 const renderVGL = function (props, width, height, data, nbUniforms) {
