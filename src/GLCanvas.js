@@ -37,6 +37,7 @@ class GLCanvas extends Component {
     this.handleDraw = this.handleDraw.bind(this);
     this.handleSyncData = this.handleSyncData.bind(this);
     this.onImageLoad = this.onImageLoad.bind(this);
+    this.getFBO = this.getFBO.bind(this);
 
     this._images = {};
     this._shaders = {};
@@ -129,6 +130,19 @@ class GLCanvas extends Component {
     this.syncData(data);
   }
 
+  getFBO (id) {
+    const fbos = this._fbos; // pool of FBOs
+    invariant(id>=0, "fbo id must be a positive integer");
+    if (id in fbos) {
+      return fbos[id]; // re-use existing FBO from pool
+    }
+    else {
+      const fbo = createFBO(this.gl, [ 2, 2 ]);
+      fbos[id] = fbo;
+      return fbo;
+    }
+  }
+
   syncData (data) {
     // Synchronize the data props that contains every data needed for render
     const gl = this.gl;
@@ -136,34 +150,24 @@ class GLCanvas extends Component {
 
     const onImageLoad = this.onImageLoad;
     const contentTextures = this._contentTextures;
+    const getFBO = this.getFBO;
 
     // old values
     const prevShaders = this._shaders;
     const prevImages = this._images;
-    const prevFbos = this._fbos; // FBO is short for "framebuffer object"
 
     // new values (mutated from traverseTree)
     const shaders = {}; // shaders cache (per Shader ID)
     const images = {}; // images cache (per src)
-    const fbos = {}; // pool of FBOs (the size is determined by the pass children max length)
 
     // traverseTree compute renderData from the data.
     // frameIndex is the framebuffer index of a node. (root is -1)
-    function traverseTree (data, frameIndex) {
-      const { shader: s, uniforms: dataUniforms, children: dataChildren, width, height } = data;
+    function traverseTree (data) {
+      const { shader: s, uniforms: dataUniforms, children: dataChildren, width, height, fboId } = data;
 
       // Traverse children and compute children renderData.
       // We build a framebuffer mapping (from child index to fbo index)
-      const children = [];
-      const fbosMapping = {};
-      let fboId = 0;
-      for (let i = 0; i < dataChildren.length; i++) {
-        const child = dataChildren[i];
-        if (fboId === frameIndex) fboId ++; // ensures a child DO NOT use the same framebuffer of its parent. (skip if same)
-        fbosMapping[i] = fboId;
-        children.push(traverseTree(child, fboId));
-        fboId ++;
-      }
+      const children = dataChildren.map(traverseTree);
 
       // Sync shader
       let shader;
@@ -202,20 +206,7 @@ class GLCanvas extends Component {
             break;
 
           case "framebuffer": // framebuffers are a children rendering
-            const id = fbosMapping[value.id]; // value.id is child index, we obtain the fbo index (via fbosMapping)
-            let fbo;
-            if (id in fbos) {
-              fbo = fbos[id]; // re-use existing FBO from pool
-            }
-            else if (id in prevFbos) {
-              fbo = fbos[id] = prevFbos[id]; // re-use old FBO
-            }
-            else {
-              // need one more FBO
-              fbo = createFBO(gl, [ 2, 2 ]);
-              fbo.minFilter = fbo.magFilter = gl.LINEAR;
-              fbos[id] = fbo;
-            }
+            const fbo = getFBO(value.id);
             textures[uniformName] = fbo.color[0];
             break;
 
@@ -251,18 +242,16 @@ class GLCanvas extends Component {
       const notProvided = Object.keys(shader.uniforms).filter(u => !(u in uniforms));
       invariant(notProvided.length===0, "Shader '%s': All defined uniforms must be provided. Missing: '"+notProvided.join("', '")+"'", shader.name);
 
-      return { shader, uniforms, textures, children, width, height, frameIndex };
+      return { shader, uniforms, textures, children, width, height, fboId };
     }
 
-    this._renderData = traverseTree(data, -1);
+    this._renderData = traverseTree(data);
 
     // Destroy previous states that have disappeared
     diffDispose(shaders, prevShaders);
-    diffDispose(fbos, prevFbos);
     diffDispose(images, prevImages);
 
     this._shaders = shaders;
-    this._fbos = fbos;
     this._images = images;
 
     this._needsSyncData = false;
@@ -274,25 +263,25 @@ class GLCanvas extends Component {
     const renderData = this._renderData;
     if (!gl || !renderData) return;
     const {scale} = this.state;
-    const fbos = this._fbos;
+    const getFBO = this.getFBO;
     const buffer = this._buffer;
 
     function recDraw (renderData) {
-      const { shader, uniforms, textures, children, width, height, frameIndex } = renderData;
+      const { shader, uniforms, textures, children, width, height, fboId } = renderData;
 
       const w = width * scale, h = height * scale;
 
       // children are rendered BEFORE the parent
       children.forEach(recDraw);
 
-      if (frameIndex === -1) {
+      if (fboId === -1) {
         // special case for root FBO
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
         gl.viewport(0, 0, w, h);
       }
       else {
-        // Use the framebuffer of the node (determined by syncData)
-        const fbo = fbos[frameIndex];
+        // Use the framebuffer of the node
+        const fbo = getFBO(fboId);
         syncShape(fbo, [ w, h ]);
         fbo.bind();
       }
