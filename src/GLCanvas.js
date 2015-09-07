@@ -41,7 +41,7 @@ class GLCanvas extends Component {
     this._images = {};
     this._shaders = {};
     this._fbos = {};
-    this._targetTextures = [];
+    this._contentTextures = [];
   }
 
   render () {
@@ -88,14 +88,14 @@ class GLCanvas extends Component {
     ]), gl.STATIC_DRAW);
     this._buffer = buffer;
 
-    this.resizeTargetTextures(this.props.nbTargets);
+    this.resizeUniformContentTextures(this.props.nbUniforms);
     this.syncBlendMode(this.props);
     this.syncData(this.props.data);
   }
 
   componentWillUnmount () {
     // Destroy everything to avoid leaks.
-    this._targetTextures.forEach(t => t.dispose());
+    this._contentTextures.forEach(t => t.dispose());
     [
       this._shaders,
       this._images,
@@ -119,8 +119,8 @@ class GLCanvas extends Component {
     }
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
-    if (props.nbTargets !== this.props.nbTargets)
-      this.resizeTargetTextures(props.nbTargets);
+    if (props.nbUniforms !== this.props.nbUniforms)
+      this.resizeUniformContentTextures(props.nbUniforms);
   }
 
   componentDidUpdate () {
@@ -135,7 +135,7 @@ class GLCanvas extends Component {
     if (!gl) return;
 
     const onImageLoad = this.onImageLoad;
-    const targetTextures = this._targetTextures;
+    const contentTextures = this._contentTextures;
 
     // old values
     const prevShaders = this._shaders;
@@ -197,8 +197,8 @@ class GLCanvas extends Component {
           // This is a texture (with a value)
           uniforms[uniformName] = units ++; // affect a texture unit
           switch (value.type) {
-          case "target": // targets are DOM elements that can be rendered as texture (<canvas>, <img>, <video>)
-            textures[uniformName] = targetTextures[value.id];
+          case "content": // contents are DOM elements that can be rendered as texture (<canvas>, <img>, <video>)
+            textures[uniformName] = contentTextures[value.id];
             break;
 
           case "framebuffer": // framebuffers are a children rendering
@@ -319,8 +319,8 @@ class GLCanvas extends Component {
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
 
-    // Draw the target to targetTextures (assuming they ALWAYS change and need a re-draw)
-    this.syncTargetTextures();
+    // Draw the content to contentTextures (assuming they ALWAYS change and need a re-draw)
+    this.syncUniformContentTextures();
 
     // Draw everything
     recDraw(renderData);
@@ -331,43 +331,43 @@ class GLCanvas extends Component {
     this.requestSyncData();
   }
 
-  // Resize the pool of textures for the targetTextures
-  resizeTargetTextures (n) {
+  // Resize the pool of textures for the contentTextures
+  resizeUniformContentTextures (n) {
     const gl = this.gl;
-    const targetTextures = this._targetTextures;
-    const length = targetTextures.length;
+    const contentTextures = this._contentTextures;
+    const length = contentTextures.length;
     if (length === n) return;
     if (n < length) {
       for (let i = n; i < length; i++) {
-        targetTextures[i].dispose();
+        contentTextures[i].dispose();
       }
-      targetTextures.length = n;
+      contentTextures.length = n;
     }
     else {
-      for (let i = targetTextures.length; i < n; i++) {
+      for (let i = contentTextures.length; i < n; i++) {
         const texture = createTexture(gl, [ 2, 2 ]);
         texture.minFilter = texture.magFilter = gl.LINEAR;
-        targetTextures.push(texture);
+        contentTextures.push(texture);
       }
     }
   }
 
-  // Draw the targetTextures
-  syncTargetTextures () {
-    const targets = this.getDrawingTargets();
-    const targetTextures = this._targetTextures;
-    for (let i = 0; i < targets.length; i++) {
-      const target = targets[i];
-      this.syncTargetTexture(targetTextures[i], target);
+  // Draw the contentTextures
+  syncUniformContentTextures () {
+    const contents = this.getDrawingUniforms();
+    const contentTextures = this._contentTextures;
+    for (let i = 0; i < contents.length; i++) {
+      const content = contents[i];
+      this.syncUniformTexture(contentTextures[i], content);
     }
   }
 
-  syncTargetTexture (texture, target) {
-    const width = target.width || target.videoWidth;
-    const height = target.height || target.videoHeight;
+  syncUniformTexture (texture, content) {
+    const width = content.width || content.videoWidth;
+    const height = content.height || content.videoHeight;
     if (width && height) { // ensure the resource is loaded
       syncShape(texture, [ width, height ]);
-      texture.setPixels(target);
+      texture.setPixels(content);
     }
     else {
       texture.shape = [ 2, 2 ];
@@ -386,12 +386,12 @@ class GLCanvas extends Component {
     }
   }
 
-  getDrawingTargets () {
-    const {nbTargets} = this.props;
-    if (nbTargets === 0) return [];
+  getDrawingUniforms () {
+    const {nbUniforms} = this.props;
+    if (nbUniforms === 0) return [];
     const children = React.findDOMNode(this.refs.render).parentNode.children;
     const all = [];
-    for (var i = 0; i < nbTargets; i++) {
+    for (var i = 0; i < nbUniforms; i++) {
       all[i] = children[i].firstChild;
     }
     return all;
@@ -425,7 +425,7 @@ GLCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   data: PropTypes.object.isRequired,
-  nbTargets: PropTypes.number.isRequired
+  nbUniforms: PropTypes.number.isRequired
 };
 
 module.exports = GLCanvas;

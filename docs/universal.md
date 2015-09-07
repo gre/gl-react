@@ -34,7 +34,7 @@ void main () {
         width={width}
         height={height}
         uniforms={{ value }}>
-        <GL.Target uniform="tex">{children}</GL.Target>
+        <GL.Uniform name="tex">{children}</GL.Uniform>
       </GL.View>;
     }
   }

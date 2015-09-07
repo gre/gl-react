@@ -1,12 +1,12 @@
 const React = require("react");
 const Shaders = require("./Shaders");
-const Target = require("./Target");
+const Uniform = require("./Uniform");
 const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
 const {createView} = require("gl-react-core");
 
-const renderVtarget = function (style, width, height, id, children) {
-  const target = React.Children.only(children);
+const renderVcontent = function (style, width, height, id, children) {
+  const content = React.Children.only(children);
   const childrenStyle = {
     position: "absolute",
     top: 0,
@@ -15,20 +15,20 @@ const renderVtarget = function (style, width, height, id, children) {
     height: height+"px",
     visibility: "hidden"
   };
-  return <div key={"target-"+id} style={{ ...childrenStyle, ...style }}>{target}</div>;
+  return <div key={"content-"+id} style={{ ...childrenStyle, ...style }}>{content}</div>;
 };
 
-const renderVGL = function (props, width, height, data, nbTargets) {
+const renderVGL = function (props, width, height, data, nbUniforms) {
   return <GLCanvas
     {...props}
     width={width}
     height={height}
     data={data}
-    nbTargets={nbTargets}
+    nbUniforms={nbUniforms}
   />;
 };
 
-const renderVcontainer = function (style, width, height, targets, renderer) {
+const renderVcontainer = function (style, width, height, contents, renderer) {
   const parentStyle = {
     ...style,
     position: "relative",
@@ -37,9 +37,9 @@ const renderVcontainer = function (style, width, height, targets, renderer) {
     overflow: "hidden"
   };
   return <div style={parentStyle}>
-    {targets}
+    {contents}
     {renderer}
   </div>;
 };
 
-module.exports = createView(React, Shaders, Target, Component, renderVcontainer, renderVtarget, renderVGL);
+module.exports = createView(React, Shaders, Uniform, Component, renderVcontainer, renderVcontent, renderVGL);

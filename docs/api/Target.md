@@ -1,6 +1,6 @@
-# GL.Target
+# GL.Uniform
 
-`GL.Target` allows to render a shader with any content. It can be an image, a video, a complex content (including texts and images...) or even another `GL.Component` (which allows to **compose and stack effects**).
+`GL.Uniform` allows to render a shader with any content. It can be an image, a video, a complex content (including texts and images...) or even another `GL.Component` (which allows to **compose and stack effects**).
 
 **Example:**
 
@@ -10,11 +10,11 @@
     width={200}
     height={100}>
 
-  <GL.Target uniform="textureName">
+  <GL.Uniform name="textureName">
 
     ...children
 
-  </GL.Target>
+  </GL.Uniform>
 
 </GL.View>
 ```
@@ -34,7 +34,7 @@
 
 ### Using `gl-react-native`
 
-In `gl-react-native`, `GL.Target` can contain any content!
+In `gl-react-native`, `GL.Uniform` can contain any content!
 The resulting UIView will be rasterized and rendered into the GL View.
 
 **Example (adapted from Simple/):**
@@ -56,16 +56,16 @@ The resulting UIView will be rasterized and rendered into the GL View.
   width={width}
   height={height}
   uniforms={{ hue }}>
-  <GL.Target uniform="tex">{children}</GL.Target>
+  <GL.Uniform name="tex">{children}</GL.Uniform>
 </GL.View>
 ```
 
 
 ### Using `gl-react`
 
-`GL.Target` have a limited support in `gl-react` because the web does not allow to rasterize any DOM element.
+`GL.Uniform` have a limited support in `gl-react` because the web does not allow to rasterize any DOM element.
 
-Only one child is supported per `GL.Target` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
+Only one child is supported per `GL.Uniform` and it MUST be either: an `<img />`, a `<video />` or a `<canvas />`.
 
 If you want to implement effect over complex content, we highly recommend you to use  [`react-canvas`](https://github.com/Flipboard/react-canvas).
 

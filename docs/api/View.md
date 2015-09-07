@@ -75,4 +75,4 @@ Complex struct types and uniform array **are not** currently supported.
 
 ## Note on textures
 
-Images given to uniforms props are always loaded as they are. If you want resize/crop features, you can use an `React.Image` inside a `GL.Target`.
+Images given to uniforms props are always loaded as they are. If you want resize/crop features, you can use an `React.Image` inside a `GL.Uniform`.
