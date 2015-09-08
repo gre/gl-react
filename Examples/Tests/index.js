@@ -54,7 +54,7 @@ class Demo extends React.Component {
         {txt}
       </Layer>;
 
-    return <Display2 width={600} height={600} vertical>
+    return <Display2 width={600} height={600} vertical preload>
         <Display2 width={600} height={300}>
         <Add width={300} height={300}>
           {txt}

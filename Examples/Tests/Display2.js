@@ -10,11 +10,12 @@ const shaders = GL.Shaders.create({
 
 class Display2 extends GL.Component {
   render () {
-    const { width, height, children, vertical } = this.props;
+    const { width, height, children, vertical, ...rest } = this.props;
     if (!children || children.length !== 2) throw new Error("You must provide 2 children to Display2");
     let [t1, t2] = children;
     if (vertical) [t1,t2]=[t2,t1]; // just because webgl y's is reversed
     return <GL.View
+      {...rest}
       shader={shaders.display2}
       width={width}
       height={height}

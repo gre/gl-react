@@ -18,14 +18,8 @@ const renderVcontent = function (width, height, id, children) {
   return <div key={"content-"+id} style={childrenStyle}>{content}</div>;
 };
 
-const renderVGL = function (props, width, height, data, nbUniforms) {
-  return <GLCanvas
-    {...props}
-    width={width}
-    height={height}
-    data={data}
-    nbUniforms={nbUniforms}
-  />;
+const renderVGL = function (props) {
+  return <GLCanvas {...props} />;
 };
 
 const renderVcontainer = function (style, width, height, contents, renderer) {

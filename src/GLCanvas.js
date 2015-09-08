@@ -27,6 +27,18 @@ function syncShape (obj, shape) {
   }
 }
 
+function imageObjectToId (image) {
+  return image.uri;
+}
+
+function allPreloaded (loaded, toLoad) {
+  for (let i=0; i<toLoad.length; i++) {
+    if (loaded.indexOf(imageObjectToId(toLoad[i]))===-1)
+      return false;
+  }
+  return true;
+}
+
 class GLCanvas extends Component {
 
   constructor (props) {
@@ -43,19 +55,17 @@ class GLCanvas extends Component {
     this._shaders = {};
     this._fbos = {};
     this._contentTextures = [];
+    this._preloading = props.imagesToPreload.length > 0 ? [] : null;
   }
 
   render () {
-    const { width, height, style } = this.props;
+    const { width, height } = this.props;
     const { scale } = this.state;
     const styles = {
-      ...style,
       width: width+"px",
       height: height+"px"
     };
     return <canvas
-      {...this.props}
-      data={undefined}
       ref="render"
       style={styles}
       width={width * scale}
@@ -89,7 +99,7 @@ class GLCanvas extends Component {
     ]), gl.STATIC_DRAW);
     this._buffer = buffer;
 
-    this.resizeUniformContentTextures(this.props.nbUniforms);
+    this.resizeUniformContentTextures(this.props.nbContentTextures);
     this.syncBlendMode(this.props);
     this.syncData(this.props.data);
   }
@@ -120,8 +130,8 @@ class GLCanvas extends Component {
     }
     if (props.opaque !== this.props.opaque)
       this.syncBlendMode(props);
-    if (props.nbUniforms !== this.props.nbUniforms)
-      this.resizeUniformContentTextures(props.nbUniforms);
+    if (props.nbContentTextures !== this.props.nbContentTextures)
+      this.resizeUniformContentTextures(props.nbContentTextures);
   }
 
   componentDidUpdate () {
@@ -320,9 +330,18 @@ class GLCanvas extends Component {
     recDraw(renderData);
   }
 
-  onImageLoad () {
-    // Any texture image load will trigger a future re-sync of data
-    this.requestSyncData();
+  onImageLoad (loaded) {
+    if (this._preloading) {
+      this._preloading.push(loaded);
+      if (allPreloaded(this._preloading, this.props.imagesToPreload)) {
+        this._preloading = null;
+        this.requestSyncData();
+      }
+    }
+    else {
+      // Any texture image load will trigger a future re-sync of data (if no preloaded)
+      this.requestSyncData();
+    }
   }
 
   // Resize the pool of textures for the contentTextures
@@ -381,11 +400,11 @@ class GLCanvas extends Component {
   }
 
   getDrawingUniforms () {
-    const {nbUniforms} = this.props;
-    if (nbUniforms === 0) return [];
+    const {nbContentTextures} = this.props;
+    if (nbContentTextures === 0) return [];
     const children = React.findDOMNode(this.refs.render).parentNode.children;
     const all = [];
-    for (var i = 0; i < nbUniforms; i++) {
+    for (var i = 0; i < nbContentTextures; i++) {
       all[i] = children[i].firstChild;
     }
     return all;
@@ -411,6 +430,7 @@ class GLCanvas extends Component {
   handleDraw () {
     if (!this._needsDraw) return;
     this._needsDraw = false;
+    if (this._preloading) return;
     this.draw();
   }
 }
@@ -419,7 +439,7 @@ GLCanvas.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   data: PropTypes.object.isRequired,
-  nbUniforms: PropTypes.number.isRequired
+  nbContentTextures: PropTypes.number.isRequired
 };
 
 module.exports = GLCanvas;
