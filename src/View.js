@@ -22,9 +22,8 @@ const renderVGL = function (props) {
   return <GLCanvas {...props} />;
 };
 
-const renderVcontainer = function (style, width, height, contents, renderer) {
+const renderVcontainer = function (width, height, contents, renderer) {
   const parentStyle = {
-    ...style,
     position: "relative",
     width: width+"px",
     height: height+"px",
