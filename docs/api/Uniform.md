@@ -1,6 +1,10 @@
 # GL.Uniform
 
-`GL.Uniform` allows to render a shader with any content. It can be an image, a video, a complex content (including texts and images...) or even another `GL.Component` (which allows to **compose and stack effects**).
+`GL.Uniform` is an helper for describing content uniform.
+
+GL.View allows uniform VDOM content: It can be an image, a video, a complex content (including texts and images...) or even another `GL.Component` (which allows to **compose and stack effects**).
+
+> `<GL.Uniform name="foo">{value}</GL.Uniform>` is an alternative syntax to passing `{ foo: value }` in parent `GL.View` uniforms props. It is just more convenient for VDOM uniform value.
 
 **Example:**
 
