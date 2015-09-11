@@ -22,9 +22,9 @@ class Demo extends React.Component {
   }
   render () {
     const { width, height } = this.props;
-    const { time, blur, hue, blurPasses } = this.state;
+    const { blur, hue, blurPasses } = this.state;
     return <div style={{ width: width+"px" }}>
-        <Blur debug width={width} height={height} passes={blurPasses} factor={blur}>
+        <Blur width={width} height={height} passes={blurPasses} factor={blur}>
         <HueRotate hue={hue}>
           <video autoPlay loop>
             <source type="video/mp4" src="video.mp4" />
