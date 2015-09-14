@@ -44,7 +44,7 @@ class Blur1D extends GL.Component {
         direction,
         resolution: [ width, height ]
       }}>
-      <GL.Target uniform="t">{children}</GL.Target>
+      <GL.Uniform name="t">{children}</GL.Uniform>
     </GL.View>;
   }
 }

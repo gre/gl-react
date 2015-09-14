@@ -44,7 +44,7 @@ GLImage.prototype = {
         this.clearImage();
         this._loading = null;
         this.image = img;
-        if (this._onload) this._onload();
+        if (this._onload) this._onload(src);
       }, () => {
         this._loading = null;
         this.clearImage();

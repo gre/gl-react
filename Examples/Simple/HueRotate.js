@@ -32,7 +32,7 @@ class HueRotate extends React.Component {
       width={width}
       height={height}
       uniforms={{ hue }}>
-      <GL.Target uniform="tex">{children}</GL.Target>
+      <GL.Uniform name="tex">{children}</GL.Uniform>
     </GL.View>;
   }
 }

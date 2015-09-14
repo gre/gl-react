@@ -41,7 +41,7 @@ class MyEffect extends GL.Component {
   render () {
     const { width, height, children, someParam } = this.props;
     return <GL.View shader={shaders.myEffect} width={width} height={height} uniforms={{ someParam }}>
-      <GL.Target uniform="tex">{children}</GL.Target>
+      <GL.Uniform name="tex">{children}</GL.Uniform>
     </GL.View>;
   }
 }

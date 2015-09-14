@@ -3,7 +3,7 @@
 * [The API](/docs/api/README.md)
   * [GL.Shaders.create](/docs/api/Shaders.create.md)
   * [GL.View](/docs/api/View.md)
-  * [GL.Target](/docs/api/Target.md)
+  * [GL.Uniform](/docs/api/Uniform.md)
   * [GL.Component](/docs/api/Component.md)
 * [Simple Examples](/docs/examples/simple.md)
   * [Hello GL](/docs/examples/1.md)
