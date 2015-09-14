@@ -55,9 +55,9 @@ class Intro extends React.Component {
         colorSeparation: 0.02,
         moving: 1
       }}>
-      <GL.Target uniform="texture">
+      <GL.Uniform name="texture">
         <canvas ref="c" width={2*width} height={2*height} />
-      </GL.Target>
+      </GL.Uniform>
     </GL.View>;
   }
   draw () {

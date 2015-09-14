@@ -27,7 +27,7 @@ const base = createShaders(function (id, shader) {
     checkCompiles(shader);
   }
   catch (e) {
-    const err = new Error("Shader '"+name+"': "+e.message);
+    const err = new Error("Shader '"+shader.name+"': "+e.message);
     err.stack = e.stack;
     err.name = e.name;
     err.original = e;

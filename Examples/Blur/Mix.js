@@ -20,7 +20,7 @@ class Mix extends GL.Component {
         map,
         factor
       }}>
-      <GL.Target uniform="t">{children}</GL.Target>
+      <GL.Uniform name="t">{children}</GL.Uniform>
     </GL.View>;
   }
 }

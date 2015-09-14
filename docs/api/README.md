@@ -14,9 +14,9 @@ var GL = require("gl-react-native");
 
 `GL.View` is a React Component that renders a given shader with uniforms (parameters to send to the shader).
 
-## [GL.Target](Target.md)
+## [GL.Uniform](Uniform.md)
 
-*(advanced)* `GL.Target` allows to render a shader with any content (any React Native component rasterized as a uniform texture).
+*(advanced)* `GL.Uniform` allows to render a shader with any content (any React Native component rasterized as a uniform texture).
 
 ## [GL.Component](Component.md)
 

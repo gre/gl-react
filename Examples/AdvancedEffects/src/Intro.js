@@ -50,7 +50,7 @@ class Intro extends React.Component {
         colorSeparation: 0.02,
         moving: 1
       }}>
-      <GL.Target uniform="texture">
+      <GL.Uniform name="texture">
         <Surface width={width} height={height} left={0} top={0} enableCSSLayout={true}>
           <Group style={{ width: width, height: height, flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <Text style={{ width: width, height: height/2, color: "#00BDF3", fontSize: 32, letterSpacing: -1.0 }}>
@@ -70,7 +70,7 @@ class Intro extends React.Component {
             </Group>
           </Group>
         </Surface>
-      </GL.Target>
+      </GL.Uniform>
     </GL.View>;
   }
 }
