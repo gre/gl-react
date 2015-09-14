@@ -341,13 +341,18 @@ class GLCanvas extends Component {
     recDraw(renderData);
   }
 
-  onImageLoad (loaded) {
+  onImageLoad (loadedObj) {
     if (this._preloading) {
-      this._preloading.push(loaded);
+      this._preloading.push(loadedObj);
       const {imagesToPreload, onLoad, onProgress} = this.props;
-      const count = countPreloaded(this._preloading, imagesToPreload);
-      if (onProgress) onProgress(count / imagesToPreload.length);
-      if (count === imagesToPreload.length) {
+      const loaded = countPreloaded(this._preloading, imagesToPreload);
+      const total = imagesToPreload.length;
+      if (onProgress) onProgress({
+        progress: loaded / total,
+        loaded,
+        total
+      });
+      if (loaded == total) {
         this._preloading = null;
         this.requestSyncData();
         if (onLoad) onLoad();
