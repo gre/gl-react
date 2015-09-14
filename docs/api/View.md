@@ -61,6 +61,8 @@ render () {
 - **`uniforms`** *(object)*: an object that contains all uniform parameters to send to the shader. The key is the uniform name and the value is whatever value that makes sense for the uniform's type (see below).
 - **`opaque`** *(bool)*: specify if the view should be opaque. By default, it is true, meaning that the GL View won't support texture opacity and alpha channel.
 - **`preload`** *(bool)*: specify if the view should initially not render until all images are loaded. `false` by default, this behavior should be explicitly enabled.
+- **`onLoad`** *(function)*: callback called when the view is ready (has loaded all images in case of preload).
+- **`onProgress`** *(function)*: callback to track the progress of a loading (in case of preload). it receives `{progress,loaded,total}` (in React Native, this object is in `{nativeEvent}`).
 - **...any other props** get directly passed to the underlying view. *(this feature is deprecated and will eventually be removed. Prefer using a container on top for things like events and styles)*
 
 ## Uniform types
