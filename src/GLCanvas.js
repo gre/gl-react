@@ -31,12 +31,13 @@ function imageObjectToId (image) {
   return image.uri;
 }
 
-function allPreloaded (loaded, toLoad) {
+function countPreloaded (loaded, toLoad) {
+  let nb = 0;
   for (let i=0; i<toLoad.length; i++) {
-    if (loaded.indexOf(imageObjectToId(toLoad[i]))===-1)
-      return false;
+    if (loaded.indexOf(imageObjectToId(toLoad[i]))!==-1)
+      nb ++;
   }
-  return true;
+  return nb;
 }
 
 class GLCanvas extends Component {
@@ -55,12 +56,18 @@ class GLCanvas extends Component {
     this._shaders = {};
     this._fbos = {};
     this._contentTextures = [];
-    this._preloading = props.imagesToPreload.length > 0 ? [] : null;
+    if (props.imagesToPreload.length > 0) {
+      this._preloading = [];
+    }
+    else {
+      this._preloading = null;
+      if (this.props.onLoad) this.props.onLoad();
+    }
   }
 
   render () {
     const { width, height,
-      data, nbContentTextures, imagesToPreload, renderId, opaque, // eslint-disable-line
+      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, // eslint-disable-line
       ...rest
     } = this.props;
     const { scale } = this.state;
@@ -69,7 +76,7 @@ class GLCanvas extends Component {
       height: height+"px"
     };
     return <canvas
-      {...rest}
+      {...rest} // eslint-disable-line
       ref="render"
       style={styles}
       width={width * scale}
@@ -337,9 +344,13 @@ class GLCanvas extends Component {
   onImageLoad (loaded) {
     if (this._preloading) {
       this._preloading.push(loaded);
-      if (allPreloaded(this._preloading, this.props.imagesToPreload)) {
+      const {imagesToPreload, onLoad, onProgress} = this.props;
+      const count = countPreloaded(this._preloading, imagesToPreload);
+      if (onProgress) onProgress(count / imagesToPreload.length);
+      if (count === imagesToPreload.length) {
         this._preloading = null;
         this.requestSyncData();
+        if (onLoad) onLoad();
       }
     }
     else {

@@ -20,6 +20,14 @@ class Demo extends React.Component {
       this.forceUpdate();
       console.log("update");
     });
+    this.onLoad = this.onLoad.bind(this);
+    this.onProgress = this.onProgress.bind(this);
+  }
+  onLoad (e) {
+    console.log("LOADED");
+  }
+  onProgress (p) {
+    console.log("PROGRESS", p);
   }
   render() {
     const helloGL =
@@ -54,7 +62,7 @@ class Demo extends React.Component {
         {txt}
       </Layer>;
 
-    return <Display2 width={600} height={600} vertical preload>
+    return <Display2 width={600} height={600} vertical preload onLoad={this.onLoad} onProgress={this.onProgress}>
         <Display2 width={600} height={300}>
         <Add width={300} height={300}>
           {txt}
