@@ -4,6 +4,8 @@ const {
   Component,
   PropTypes
 } = React;
+const raf = require("raf");
+const vendorPrefix = require("vendor-prefix");
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
@@ -40,6 +42,8 @@ function countPreloaded (loaded, toLoad) {
   return nb;
 }
 
+const pointerEventsProperty = vendorPrefix("pointer-events");
+
 class GLCanvas extends Component {
 
   constructor (props) {
@@ -63,17 +67,20 @@ class GLCanvas extends Component {
       this._preloading = null;
       if (this.props.onLoad) this.props.onLoad();
     }
+    this._autoredraw = this.props.autoRedraw;
   }
 
   render () {
     const { width, height,
-      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, // eslint-disable-line
+      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, autoRedraw, eventsThrough, // eslint-disable-line
       ...rest
     } = this.props;
     const { scale } = this.state;
     const styles = {
       width: width+"px",
-      height: height+"px"
+      height: height+"px",
+      [pointerEventsProperty]: eventsThrough ? "none" : "auto",
+      position: "relative"
     };
     return <canvas
       {...rest} // eslint-disable-line
@@ -113,6 +120,8 @@ class GLCanvas extends Component {
     this.resizeUniformContentTextures(this.props.nbContentTextures);
     this.syncBlendMode(this.props);
     this.syncData(this.props.data);
+
+    this.checkAutoRedraw();
   }
 
   componentWillUnmount () {
@@ -131,6 +140,7 @@ class GLCanvas extends Component {
     if (this.gl) this.gl.deleteBuffer(this._buffer);
     this.shader = null;
     this.gl = null;
+    if (this._raf) raf.cancel(this._raf);
   }
 
   componentWillReceiveProps (props) {
@@ -143,12 +153,28 @@ class GLCanvas extends Component {
       this.syncBlendMode(props);
     if (props.nbContentTextures !== this.props.nbContentTextures)
       this.resizeUniformContentTextures(props.nbContentTextures);
+
+    this._autoredraw = props.autoRedraw;
+    this.checkAutoRedraw();
   }
 
   componentDidUpdate () {
     // Synchronize the rendering (after render is done)
     const { data } = this.props;
     this.syncData(data);
+  }
+
+  checkAutoRedraw () {
+    if (!this._autoredraw || this._raf) return;
+    const loop = () => {
+      if (!this._autoredraw) {
+        delete this._raf;
+        return;
+      }
+      this._raf = raf(loop);
+      this.draw();
+    };
+    this._raf = raf(loop);
   }
 
   getFBO (id) {
@@ -282,6 +308,7 @@ class GLCanvas extends Component {
   }
 
   draw () {
+    this._needsDraw = false;
     const gl = this.gl;
     const renderData = this._renderData;
     if (!gl || !renderData) return;
@@ -433,7 +460,7 @@ class GLCanvas extends Component {
   requestSyncData () {
     if (this._needsSyncData) return;
     this._needsSyncData = true;
-    requestAnimationFrame(this.handleSyncData);
+    raf(this.handleSyncData);
   }
 
   handleSyncData () {
@@ -444,12 +471,11 @@ class GLCanvas extends Component {
   requestDraw () {
     if (this._needsDraw) return;
     this._needsDraw = true;
-    requestAnimationFrame(this.handleDraw);
+    raf(this.handleDraw);
   }
 
   handleDraw () {
     if (!this._needsDraw) return;
-    this._needsDraw = false;
     if (this._preloading) return;
     this.draw();
   }

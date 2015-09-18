@@ -12,8 +12,7 @@ const renderVcontent = function (width, height, id, children) {
     top: 0,
     left: 0,
     width: width+"px",
-    height: height+"px",
-    visibility: "hidden"
+    height: height+"px"
   };
   return <div key={"content-"+id} style={childrenStyle}>{content}</div>;
 };

@@ -40,6 +40,8 @@
     "gl-react-core": "1.0.0",
     "gl-shader": "^4.0.5",
     "gl-texture2d": "^2.0.9",
-    "invariant": "^2.1.0"
+    "invariant": "^2.1.0",
+    "raf": "^3.1.0",
+    "vendor-prefix": "^0.1.0"
   }
 }
