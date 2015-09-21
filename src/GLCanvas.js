@@ -60,6 +60,7 @@ class GLCanvas extends Component {
     this._shaders = {};
     this._fbos = {};
     this._contentTextures = [];
+    this._standaloneTextures = [];
     if (props.imagesToPreload.length > 0) {
       this._preloading = [];
     }
@@ -128,6 +129,7 @@ class GLCanvas extends Component {
   componentWillUnmount () {
     // Destroy everything to avoid leaks.
     this._contentTextures.forEach(t => t.dispose());
+    this._standaloneTextures.forEach(t => t.dispose());
     [
       this._shaders,
       this._images,
@@ -203,10 +205,12 @@ class GLCanvas extends Component {
     // old values
     const prevShaders = this._shaders;
     const prevImages = this._images;
+    const prevStandaloneTextures = this._standaloneTextures;
 
     // new values (mutated from traverseTree)
     const shaders = {}; // shaders cache (per Shader ID)
     const images = {}; // images cache (per src)
+    const standaloneTextures = [];
 
     // traverseTree compute renderData from the data.
     // frameIndex is the framebuffer index of a node. (root is -1)
@@ -262,21 +266,35 @@ class GLCanvas extends Component {
 
           case "image":
             const val = value.value;
-            const src = val.uri;
-            invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
-            let image;
-            if (src in images) {
-              image = images[src];
+            if (!val) {
+              const emptyTexture = createTexture(gl, [ 2, 2 ]); // empty texture
+              textures[uniformName] = emptyTexture;
+              standaloneTextures.push(emptyTexture);
             }
-            else if (src in prevImages) {
-              image = images[src] = prevImages[src];
+            else if ("uri" in val) {
+              const src = val.uri;
+              invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
+              let image;
+              if (src in images) {
+                image = images[src];
+              }
+              else if (src in prevImages) {
+                image = images[src] = prevImages[src];
+              }
+              else {
+                image = new GLImage(gl, onImageLoad);
+                images[src] = image;
+              }
+              image.src = src; // Always set the image src. GLImage internally won't do anything if it doesn't change
+              textures[uniformName] = image.getTexture(); // GLImage will compute and cache a gl-texture2d instance
             }
             else {
-              image = new GLImage(gl, onImageLoad);
-              images[src] = image;
+              const tex = createTexture(gl, val.array ? val.array : val);
+              if (!val.disableLinearInterpolation)
+                tex.minFilter = tex.magFilter = gl.LINEAR;
+              textures[uniformName] = tex;
+              standaloneTextures.push(tex);
             }
-            image.src = src; // Always set the image src. GLImage internally won't do anything if it doesn't change
-            textures[uniformName] = image.getTexture(); // GLImage will compute and cache a gl-texture2d instance
             break;
 
           default:
@@ -300,9 +318,11 @@ class GLCanvas extends Component {
     // Destroy previous states that have disappeared
     diffDispose(shaders, prevShaders);
     diffDispose(images, prevImages);
+    prevStandaloneTextures.forEach(t => t.dispose());
 
     this._shaders = shaders;
     this._images = images;
+    this._standaloneTextures = standaloneTextures;
 
     this._needsSyncData = false;
     this.requestDraw();

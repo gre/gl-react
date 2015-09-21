@@ -7,6 +7,9 @@ const HelloGL = require("./HelloGL");
 const Display2 = require("./Display2");
 const { Surface, Text } = require("react-canvas");
 const GL = require("gl-react");
+const ndarray = require("ndarray");
+
+/* eslint-disable no-console */
 
 GL.Shaders.list().map(id => {
   console.log(`Shader '${GL.Shaders.getName(id)}' -> ${id}`);
@@ -23,7 +26,7 @@ class Demo extends React.Component {
     this.onLoad = this.onLoad.bind(this);
     this.onProgress = this.onProgress.bind(this);
   }
-  onLoad (e) {
+  onLoad () {
     console.log("LOADED");
   }
   onProgress (p) {
@@ -62,7 +65,8 @@ class Demo extends React.Component {
         {txt}
       </Layer>;
 
-    return <Display2 width={600} height={600} vertical preload onLoad={this.onLoad} onProgress={this.onProgress}>
+    return <div>
+      <Display2 width={600} height={600} vertical preload onLoad={this.onLoad} onProgress={this.onProgress}>
         <Display2 width={600} height={300}>
         <Add width={300} height={300}>
           {txt}
@@ -79,9 +83,26 @@ class Demo extends React.Component {
         </Display2>
       </Display2>
       {txt}
-    </Display2>;
-
-
+    </Display2>
+    <Display2 width={100} height={200} vertical>
+      <Display2 width={100} height={100} vertical>
+      {ndarray(new Float64Array([
+        1, 0, 0, 1,
+        0, 1, 0, 1,
+        0, 0, 1, 1
+      ]), [3, 1, 4])}
+      {{
+        disableLinearInterpolation: true,
+        array: ndarray(new Float64Array([
+          1, 0, 0, 1,
+          0, 1, 0, 1,
+          0, 0, 1, 1
+        ]), [3, 1, 4])
+      }}
+    </Display2>
+      {require("baboon-image")}
+    </Display2>
+    </div>;
   }
 }
 
