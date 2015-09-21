@@ -80,7 +80,8 @@ class GLCanvas extends Component {
       width: width+"px",
       height: height+"px",
       [pointerEventsProperty]: eventsThrough ? "none" : "auto",
-      position: "relative"
+      position: "relative",
+      background: opaque ? "#000" : "transparent"
     };
     return <canvas
       {...rest} // eslint-disable-line
