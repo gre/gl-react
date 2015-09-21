@@ -477,6 +477,7 @@ class GLCanvas extends Component {
 
   handleDraw () {
     if (!this._needsDraw) return;
+    this._needsDraw = false;
     if (this._preloading) return;
     this.draw();
   }
