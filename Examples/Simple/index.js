@@ -1,5 +1,4 @@
 const React = require("react");
-
 const Slider = require("./Slider");
 const HelloGL = require("./HelloGL");
 const Saturation = require("./Saturation");
@@ -7,8 +6,10 @@ const HueRotate = require("./HueRotate");
 const PieProgress = require("./PieProgress");
 const OneFingerResponse = require("./OneFingerResponse");
 const AnimatedHelloGL = require("./AnimatedHelloGL");
+const Colorify = require("./Colorify");
 const Blur = require("./Blur");
 const ReactCanvasContentExample = require("./ReactCanvasContentExample");
+const colorScales = require("./colorScales");
 
 class Simple extends React.Component {
   constructor (props) {
@@ -16,9 +17,10 @@ class Simple extends React.Component {
     this.state = {
       saturationFactor: 1,
       hue: 0,
-      progress: 0,
-      factor: 0,
-      text: "leading the pack"
+      progress: 0.5,
+      factor: 1,
+      text: "leading the pack",
+      colorScale: "Spectral"
     };
   }
 
@@ -29,22 +31,23 @@ class Simple extends React.Component {
       hue,
       text,
       progress,
-      factor
+      factor,
+      colorScale
     } = this.state;
 
     return <div style={styles.container}>
       <h1 style={styles.title}>
-        Welcome to GL React!
+        gl-react Simple demos
       </h1>
       <div style={styles.demos}>
 
-        <h2 style={styles.demoTitle}>1. Hello GL</h2>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>1. Hello GL</h2>
           <HelloGL width={256} height={171} />
         </div>
 
-        <h2 style={styles.demoTitle}>2. Saturate an Image</h2>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>2. Saturate an Image</h2>
           <Saturation
             width={256}
             height={171}
@@ -53,13 +56,15 @@ class Simple extends React.Component {
           />
         <Slider
           maximumValue={8}
+          value={saturationFactor}
           onValueChange={saturationFactor => this.setState({ saturationFactor })}
         />
         </div>
 
-        <h2 style={styles.demoTitle}>3. Hue Rotate on a Canvas</h2>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>3. Hue Rotate on a Canvas</h2>
           <HueRotate
+            autoRedraw
             width={256}
             height={180}
             hue={hue}>
@@ -67,6 +72,7 @@ class Simple extends React.Component {
           </HueRotate>
           <Slider
             maximumValue={2 * Math.PI}
+            value={hue}
             onValueChange={hue => this.setState({ hue })}
           />
         <input
@@ -75,42 +81,59 @@ class Simple extends React.Component {
           />
         </div>
 
-        <span style={styles.demoTitle}>4. Progress Indicator</span>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>4. Progress Indicator</h2>
           <PieProgress
             width={256}
             height={180}
             progress={progress}
           />
           <Slider
+            value={progress}
             onValueChange={progress => this.setState({ progress })}
           />
         </div>
 
-        <span style={styles.demoTitle}>5. Mouse Responsive</span>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>5. Mouse Responsive</h2>
           <OneFingerResponse
             width={256}
             height={180}
           />
         </div>
 
-        <span style={styles.demoTitle}>6. Animation</span>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>6. Animation</h2>
           <AnimatedHelloGL
             width={256}
             height={180}
           />
         </div>
 
-        <span style={styles.demoTitle}>7. Blur (2-pass)</span>
         <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>7. Blur (2-pass)</h2>
           <Blur width={256} height={180} factor={factor}>
             http://i.imgur.com/3On9QEu.jpg
           </Blur>
           <Slider
             maximumValue={2}
+            value={factor}
             onValueChange={factor => this.setState({ factor })} />
+        </div>
+
+        <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>8. Blur (2-pass) over UI</h2>
+          This example is not available because not possible to do with WebGL.
+        </div>
+
+        <div style={styles.demo}>
+          <h2 style={styles.demoTitle}>9. Texture from array</h2>
+          <Colorify width={256} height={190} colorScale={colorScales[colorScale]}>
+            http://i.imgur.com/iPKTONG.jpg
+          </Colorify>
+          <select style={styles.select} value={colorScale} onChange={({target:{value:colorScale}}) => this.setState({ colorScale })}>
+            {Object.keys(colorScales).map(cs => <option value={cs}>{cs}</option>)}
+          </select>
         </div>
 
       </div>
@@ -120,20 +143,26 @@ class Simple extends React.Component {
 
 const styles = {
   container: {
-    width: "400px",
-    backgroundColor: "#F9F9F9"
+    padding: "20px",
+    background: "#f9f9f9 url(http://i.imgur.com/RE6MGrd.png) repeat",
+    backgroundSize: "20px 20px"
   },
   title: {
     fontSize: "20px",
     textAlign: "center",
-    margin: "5px",
+    margin: "0px",
     marginBottom: "20px",
     fontWeight: "bold"
   },
   demos: {
-    marginLeft: "40px",
-    width: "276px",
-    marginBottom: "20px"
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around"
+  },
+  demo: {
+    width: "256px",
+    margin: "10px 20px"
   },
   demoTitle: {
     marginBottom: "16px",
@@ -141,9 +170,9 @@ const styles = {
     fontWeight: 300,
     fontSize: "20px"
   },
-  demo: {
-    marginBottom: "20px",
-    marginLeft: "20px"
+  select: {
+    marginTop: "4px",
+    width: "100%"
   }
 };
 

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "gl-react": "file:../..",
+    "ndarray": "^1.0.18",
     "react": "^0.13.3",
     "react-canvas": "git://github.com/gre/react-canvas.git#crossorigin"
   }
