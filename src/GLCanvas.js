@@ -251,50 +251,49 @@ class GLCanvas extends Component {
 
         invariant(type, "Shader '%s': Uniform '%s' is not defined/used", shader.name, uniformName);
 
-        if (value && (type === "sampler2D" || type === "samplerCube")) {
-          // This is a texture (with a value)
+        if (type === "sampler2D" || type === "samplerCube") {
+          // This is a texture
           uniforms[uniformName] = units ++; // affect a texture unit
-          switch (value.type) {
+          if (!value) {
+            const emptyTexture = createTexture(gl, [ 2, 2 ]); // empty texture
+            textures[uniformName] = emptyTexture;
+            standaloneTextures.push(emptyTexture);
+          }
+          else switch (value.type) {
           case "content": // contents are DOM elements that can be rendered as texture (<canvas>, <img>, <video>)
             textures[uniformName] = contentTextures[value.id];
             break;
 
-          case "framebuffer": // framebuffers are a children rendering
+          case "fbo": // framebuffers are a children rendering
             const fbo = getFBO(value.id);
             textures[uniformName] = fbo.color[0];
             break;
 
-          case "image":
-            const val = value.value;
-            if (!val) {
-              const emptyTexture = createTexture(gl, [ 2, 2 ]); // empty texture
-              textures[uniformName] = emptyTexture;
-              standaloneTextures.push(emptyTexture);
+          case "uri":
+            const src = value.uri;
+            invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
+            let image;
+            if (src in images) {
+              image = images[src];
             }
-            else if ("uri" in val) {
-              const src = val.uri;
-              invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
-              let image;
-              if (src in images) {
-                image = images[src];
-              }
-              else if (src in prevImages) {
-                image = images[src] = prevImages[src];
-              }
-              else {
-                image = new GLImage(gl, onImageLoad);
-                images[src] = image;
-              }
-              image.src = src; // Always set the image src. GLImage internally won't do anything if it doesn't change
-              textures[uniformName] = image.getTexture(); // GLImage will compute and cache a gl-texture2d instance
+            else if (src in prevImages) {
+              image = images[src] = prevImages[src];
             }
             else {
-              const tex = createTexture(gl, val.array ? val.array : val);
-              if (!val.disableLinearInterpolation)
-                tex.minFilter = tex.magFilter = gl.LINEAR;
-              textures[uniformName] = tex;
-              standaloneTextures.push(tex);
+              image = new GLImage(gl, onImageLoad);
+              images[src] = image;
             }
+            image.src = src; // Always set the image src. GLImage internally won't do anything if it doesn't change
+            textures[uniformName] = image.getTexture(); // GLImage will compute and cache a gl-texture2d instance
+            break;
+
+          case "ndarray":
+            const tex = createTexture(gl, value.ndarray);
+            const opts = value.opts || {}; // TODO: in next releases we will generalize opts to more types.
+            if (!opts.disableLinearInterpolation)
+              tex.minFilter = tex.magFilter = gl.LINEAR;
+            textures[uniformName] = tex;
+            standaloneTextures.push(tex);
             break;
 
           default:

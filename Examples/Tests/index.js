@@ -92,8 +92,10 @@ class Demo extends React.Component {
         0, 0, 1, 1
       ]), [3, 1, 4])}
       {{
-        disableLinearInterpolation: true,
-        array: ndarray(new Float64Array([
+        opts: {
+          disableLinearInterpolation: true
+        },
+        value: ndarray(new Float64Array([
           1, 0, 0, 1,
           0, 1, 0, 1,
           0, 0, 1, 1
