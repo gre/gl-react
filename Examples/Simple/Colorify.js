@@ -27,14 +27,18 @@ void main () {
 
 class Colorify extends React.Component {
   render () {
-    const { width, height, children: image, colorScale, legend } = this.props;
+    const { width, height, children: image, colorScale, legend, disableLinearInterpolation } = this.props;
     return <GL.View
       shader={shaders.colorify}
       width={width}
       height={height}
-      uniforms={{ image, colorScale, legend }}
+      uniforms={{ image, legend }}
       opaque={false}
-    />;
+    >
+      <GL.Uniform name="colorScale" disableLinearInterpolation={disableLinearInterpolation}>
+        {colorScale}
+      </GL.Uniform>
+    </GL.View>;
   }
 }
 

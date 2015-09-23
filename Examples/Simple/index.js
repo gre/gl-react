@@ -20,7 +20,8 @@ class Simple extends React.Component {
       progress: 0.5,
       factor: 1,
       text: "leading the pack",
-      colorScale: "Spectral"
+      colorScale: "Spectral",
+      disableLinearInterpolation: false
     };
   }
 
@@ -32,7 +33,8 @@ class Simple extends React.Component {
       text,
       progress,
       factor,
-      colorScale
+      colorScale,
+      disableLinearInterpolation
     } = this.state;
 
     return <div style={styles.container}>
@@ -76,6 +78,7 @@ class Simple extends React.Component {
             onValueChange={hue => this.setState({ hue })}
           />
         <input
+            type="text"
             onChange={e => this.setState({ text: e.target.value })}
             value={text}
           />
@@ -128,12 +131,16 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>9. Texture from array</h2>
-          <Colorify width={256} height={190} colorScale={colorScales[colorScale]}>
+          <Colorify width={256} height={190} colorScale={colorScales[colorScale]} disableLinearInterpolation={disableLinearInterpolation}>
             http://i.imgur.com/iPKTONG.jpg
           </Colorify>
           <select style={styles.select} value={colorScale} onChange={({target:{value:colorScale}}) => this.setState({ colorScale })}>
             {Object.keys(colorScales).map(cs => <option value={cs}>{cs}</option>)}
           </select>
+          <label>
+            <input type="checkbox" onChange={({target:{checked:disableLinearInterpolation}}) => this.setState({ disableLinearInterpolation })} />
+            Disable Linear Interpolation
+          </label>
         </div>
 
       </div>
@@ -171,7 +178,7 @@ const styles = {
     fontSize: "20px"
   },
   select: {
-    marginTop: "4px",
+    margin: "4px 0",
     width: "100%"
   }
 };
