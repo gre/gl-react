@@ -16,7 +16,7 @@ class Demo extends React.Component {
     const { width, height } = this.props;
     const { blur, hue, blurPasses } = this.state;
     return <div style={{ width: width+"px" }}>
-        <Blur eventsThrough autoRedraw width={width} height={height} passes={blurPasses} factor={blur}>
+        <Blur eventsThrough visibleContent autoRedraw width={width} height={height} passes={blurPasses} factor={blur}>
         <HueRotate hue={hue}>
           <video autoPlay loop>
             <source type="video/mp4" src="video.mp4" />
