@@ -4,8 +4,9 @@ const Uniform = require("./Uniform");
 const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
 const {createView} = require("gl-react-core");
+const pointerEventsProperty = require("./pointerEventsProperty");
 
-const renderVcontent = function (width, height, id, children, visibleContent) {
+const renderVcontent = function (width, height, id, children, { visibleContent }) {
   const content = React.Children.only(children);
   const childrenStyle = {
     position: "absolute",
@@ -22,13 +23,14 @@ const renderVGL = function (props) {
   return <GLCanvas {...props} />;
 };
 
-const renderVcontainer = function (width, height, contents, renderer, style) {
+const renderVcontainer = function ({ style, visibleContent, eventsThrough, width, height }, contents, renderer) {
   const parentStyle = {
     position: "relative",
     ...style,
     width: width+"px",
     height: height+"px",
-    overflow: "hidden"
+    overflow: "hidden",
+    [pointerEventsProperty]: !visibleContent && eventsThrough ? "none" : "auto"
   };
   return <div style={parentStyle}>
     {contents}

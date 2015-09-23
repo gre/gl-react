@@ -5,13 +5,13 @@ const {
   PropTypes
 } = React;
 const raf = require("raf");
-const vendorPrefix = require("vendor-prefix");
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
 const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
+const pointerEventsProperty = require("./pointerEventsProperty");
 
 // .dispose() all objects that have disappeared from oldMap to newMap
 function diffDispose (newMap, oldMap) {
@@ -42,8 +42,6 @@ function countPreloaded (loaded, toLoad) {
   return nb;
 }
 
-const pointerEventsProperty = vendorPrefix("pointer-events");
-
 class GLCanvas extends Component {
 
   constructor (props) {
@@ -73,7 +71,7 @@ class GLCanvas extends Component {
 
   render () {
     const { width, height,
-      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, autoRedraw, eventsThrough, // eslint-disable-line
+      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, autoRedraw, eventsThrough, visibleContent, // eslint-disable-line
       ...rest
     } = this.props;
     const { scale } = this.state;
