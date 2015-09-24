@@ -3,8 +3,10 @@ const Blur = require("./Blur");
 const Add = require("./Add");
 const Multiply = require("./Multiply");
 const Layer = require("./Layer");
+const NativeLayer = require("./NativeLayer");
 const HelloGL = require("./HelloGL");
 const Display2 = require("./Display2");
+const Copy = require("./Copy");
 const { Surface, Text } = require("react-canvas");
 const GL = require("gl-react");
 const ndarray = require("ndarray");
@@ -33,6 +35,8 @@ class Demo extends React.Component {
     console.log("PROGRESS", p);
   }
   render() {
+    const debugSize = 200;
+
     const helloGL =
       <HelloGL width={64} height={64} />;
 
@@ -66,23 +70,20 @@ class Demo extends React.Component {
       </Layer>;
 
     return <div>
-      <Display2 width={600} height={600} vertical preload onLoad={this.onLoad} onProgress={this.onProgress}>
-        <Display2 width={600} height={300}>
-        <Add width={300} height={300}>
-          {txt}
-          {helloGL}
-        </Add>
-        <Display2 width={300} height={300} vertical>
-          <Blur factor={1} passes={4} width={300} height={150}>
-            <Multiply>
-              {blurredImageOverText}
-              {helloGL}
-            </Multiply>
-          </Blur>
-          {blurredImage}
-        </Display2>
+      <Display2 width={600} height={600} preload onLoad={this.onLoad} onProgress={this.onProgress}>
+      <Add width={300} height={300}>
+        {txt}
+        {helloGL}
+      </Add>
+      <Display2 width={300} height={300} vertical>
+        <Blur factor={1} passes={4} width={300} height={150}>
+          <Multiply>
+            {blurredImageOverText}
+            {helloGL}
+          </Multiply>
+        </Blur>
+        {blurredImage}
       </Display2>
-      {txt}
     </Display2>
     <Display2 width={100} height={200} vertical>
       <Display2 width={100} height={100} vertical>
@@ -104,6 +105,43 @@ class Demo extends React.Component {
     </Display2>
       {require("baboon-image")}
     </Display2>
+
+
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <Copy width={debugSize} height={debugSize}>
+            http://i.imgur.com/S22HNaU.png
+          </Copy>
+          <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Copy width={debugSize} height={debugSize} opaque={false}>
+            http://i.imgur.com/mp79p5T.png
+          </Copy>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <Copy width={debugSize} height={debugSize}>
+            http://i.imgur.com/S22HNaU.png
+          </Copy>
+          <Copy width={debugSize} height={debugSize} opaque={false}>
+            http://i.imgur.com/mp79p5T.png
+          </Copy>
+        </NativeLayer>
+
+        <Layer width={debugSize} height={debugSize}>
+          {"http://i.imgur.com/S22HNaU.png"}
+          {"http://i.imgur.com/mp79p5T.png"}
+        </Layer>
+      </div>
     </div>;
   }
 }
