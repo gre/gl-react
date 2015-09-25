@@ -7,6 +7,7 @@ const NativeLayer = require("./NativeLayer");
 const HelloGL = require("./HelloGL");
 const Display2 = require("./Display2");
 const Copy = require("./Copy");
+const TransparentNonPremultiplied = require("./TransparentNonPremultiplied");
 const { Surface, Text } = require("react-canvas");
 const GL = require("gl-react");
 const ndarray = require("ndarray");
@@ -115,13 +116,6 @@ class Demo extends React.Component {
         </NativeLayer>
 
         <NativeLayer width={debugSize} height={debugSize}>
-          <Copy width={debugSize} height={debugSize}>
-            http://i.imgur.com/S22HNaU.png
-          </Copy>
-          <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
-        </NativeLayer>
-
-        <NativeLayer width={debugSize} height={debugSize}>
           <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
           <Copy width={debugSize} height={debugSize} opaque={false}>
             http://i.imgur.com/mp79p5T.png
@@ -129,18 +123,117 @@ class Demo extends React.Component {
         </NativeLayer>
 
         <NativeLayer width={debugSize} height={debugSize}>
-          <Copy width={debugSize} height={debugSize}>
-            http://i.imgur.com/S22HNaU.png
-          </Copy>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
           <Copy width={debugSize} height={debugSize} opaque={false}>
-            http://i.imgur.com/mp79p5T.png
+            <Copy>
+              http://i.imgur.com/mp79p5T.png
+            </Copy>
           </Copy>
         </NativeLayer>
 
-        <Layer width={debugSize} height={debugSize}>
-          {"http://i.imgur.com/S22HNaU.png"}
-          {"http://i.imgur.com/mp79p5T.png"}
-        </Layer>
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Copy width={debugSize} height={debugSize} opaque={false}>
+            <Copy>
+              <Copy>
+                http://i.imgur.com/mp79p5T.png
+              </Copy>
+            </Copy>
+          </Copy>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Copy width={debugSize} height={debugSize} opaque={false}>
+            <Copy>
+              <Copy>
+                <Copy>
+                  http://i.imgur.com/mp79p5T.png
+                </Copy>
+              </Copy>
+            </Copy>
+          </Copy>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Copy width={debugSize} height={debugSize} opaque={false}>
+            <Copy>
+              <Copy>
+                <Copy>
+                  <Copy>
+                    http://i.imgur.com/mp79p5T.png
+                  </Copy>
+                </Copy>
+              </Copy>
+            </Copy>
+          </Copy>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <NativeLayer>
+            <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
+            <TransparentNonPremultiplied width={debugSize} height={debugSize}>
+              <HelloGL />
+            </TransparentNonPremultiplied>
+          </NativeLayer>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <NativeLayer>
+            <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
+            <TransparentNonPremultiplied width={debugSize} height={debugSize}>
+              <TransparentNonPremultiplied>
+                <HelloGL />
+              </TransparentNonPremultiplied>
+            </TransparentNonPremultiplied>
+          </NativeLayer>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <NativeLayer>
+            <img src="http://i.imgur.com/mp79p5T.png" width={debugSize} height={debugSize} />
+            <TransparentNonPremultiplied width={debugSize} height={debugSize}>
+              <Copy>
+                <TransparentNonPremultiplied>
+                  <Copy>
+                    http://i.imgur.com/S22HNaU.png
+                  </Copy>
+                </TransparentNonPremultiplied>
+              </Copy>
+            </TransparentNonPremultiplied>
+          </NativeLayer>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Layer width={debugSize} height={debugSize} opaque={false}>
+            http://i.imgur.com/mp79p5T.png
+            <TransparentNonPremultiplied>
+              <HelloGL />
+            </TransparentNonPremultiplied>
+          </Layer>
+        </NativeLayer>
+
+        <NativeLayer width={debugSize} height={debugSize}>
+          <img src="http://i.imgur.com/S22HNaU.png" width={debugSize} height={debugSize} />
+          <Layer width={debugSize} height={debugSize} opaque={false}>
+            http://i.imgur.com/mp79p5T.png
+            <TransparentNonPremultiplied>
+              <Copy>
+                <TransparentNonPremultiplied>
+                  <Copy>
+                    http://i.imgur.com/S22HNaU.png
+                  </Copy>
+                </TransparentNonPremultiplied>
+              </Copy>
+            </TransparentNonPremultiplied>
+          </Layer>
+        </NativeLayer>
+
       </div>
     </div>;
   }
