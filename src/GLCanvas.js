@@ -94,7 +94,7 @@ class GLCanvas extends Component {
   componentDidMount () {
     // Create the WebGL Context and init the rendering
     const canvas = React.findDOMNode(this.refs.render);
-    const opts = { premultipliedAlpha: false };
+    const opts = {};
     const gl = (
       canvas.getContext("webgl", opts) ||
       canvas.getContext("webgl-experimental", opts) ||
@@ -210,7 +210,7 @@ class GLCanvas extends Component {
     // traverseTree compute renderData from the data.
     // frameIndex is the framebuffer index of a node. (root is -1)
     function traverseTree (data) {
-      const { shader: s, uniforms: dataUniforms, children: dataChildren, contextChildren: dataContextChildren, width, height, fboId, premultipliedAlpha } = data;
+      const { shader: s, uniforms: dataUniforms, children: dataChildren, contextChildren: dataContextChildren, width, height, fboId } = data;
 
       const contextChildren = dataContextChildren.map(traverseTree);
 
@@ -304,7 +304,7 @@ class GLCanvas extends Component {
       const notProvided = Object.keys(shader.uniforms).filter(u => !(u in uniforms));
       invariant(notProvided.length===0, "Shader '%s': All defined uniforms must be provided. Missing: '"+notProvided.join("', '")+"'", shader.name);
 
-      return { shader, uniforms, textures, children, contextChildren, width, height, fboId, premultipliedAlpha };
+      return { shader, uniforms, textures, children, contextChildren, width, height, fboId };
     }
 
     this._renderData = traverseTree(data);
@@ -332,7 +332,7 @@ class GLCanvas extends Component {
     const buffer = this._buffer;
 
     function recDraw (renderData) {
-      const { shader, uniforms, textures, children, contextChildren, width, height, fboId, premultipliedAlpha } = renderData;
+      const { shader, uniforms, textures, children, contextChildren, width, height, fboId } = renderData;
 
       const w = width * scale, h = height * scale;
 
@@ -369,13 +369,9 @@ class GLCanvas extends Component {
       }
 
       // Render
-      gl.blendFuncSeparate(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       gl.clearColor(0.0, 0.0, 0.0, 0.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      if (premultipliedAlpha)
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      else
-        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
 
@@ -386,6 +382,7 @@ class GLCanvas extends Component {
 
     gl.enable(gl.BLEND);
     recDraw(renderData);
+
     gl.disable(gl.BLEND);
   }
 
