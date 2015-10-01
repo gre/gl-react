@@ -13,5 +13,7 @@
   * [Touch Responsive](/docs/examples/5.md)
   * [Animation](/docs/examples/6.md)
   * [Blur (2-Pass)](/docs/examples/7.md)
+  * [Blur+Hue over UI](/docs/examples/8.md)
+  * [Texture from array](/docs/examples/9.md)
 * [Advanced Effects Examples](/docs/examples/advancedeffects.md)
 * [Sharing code across gl-react and gl-react-native](/docs/universal.md)

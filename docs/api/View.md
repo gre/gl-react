@@ -86,7 +86,7 @@ A texture uniform value can be one of these formats:
 -  an image URL (String).
 - an Object with an `uri` image URL. This is React Native format (same format as the `source` prop of `React.Image`). `require("image!localImage")` is also supported.
 - Virtual DOM of any content to be rasterized, see [GL.Uniform][Uniform.md] for more information.
-- **(only in gl-react)**: a `ndarray` image data value. This allows to gives computed value as a texture.
+- **(only in gl-react)**: a `ndarray` image data value. This allows to gives computed value as a texture. *For more information on accepted `ndarray` formats, checkout [gl-texture2d documentation](https://github.com/stackgl/gl-texture2d#var-tex--createtexturegl-array)*.
 
 ---
 
