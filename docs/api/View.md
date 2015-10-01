@@ -64,8 +64,8 @@ render () {
 - **`onLoad`** *(function)*: callback called when the view is ready (has loaded all images in case of preload).
 - **`onProgress`** *(function)*: callback to track the progress of a loading (in case of preload). it receives `{progress,loaded,total}` (in React Native, this object is in `{nativeEvent}`).
 - **`autoRedraw`** *(bool)*: enable the continuous rendering for dynamic content (like a `<canvas/>`, `<video/>` or any dynamic UI (e.g: a UI component in React Native context)). default is false. This is more performant that doing yourself a `render()` loop but don't abuse its usage: you should use it when content always changes or if you can't observe changes.
+- **`eventsThrough`** *(bool)*: Enable that all interaction events (mouse, touch) are not intercepted by the GL view but by what's under. If `visibleContent` is true, the content will intercept these events. default is false.
 - **`visibleContent`** *(bool)*: Enable the visibility of the rasterized content under the GL view. Main use-case is to allow to make that content to catch events (combined with `eventsThrough`), it is also possible to make your canvas transparent to see the underlying content. N.B: This feature only works with **a single content**. default is false.
-- **`eventsThrough`** *(bool)*: Enable that all interaction events (mouse, touch) are not intercepted by the GL view but by what's under. If `visibleContent` is true, the content will intercept them. default is false.
 - **...any other props** get directly passed to the underlying view.
 
 ## Uniform types
