@@ -23,6 +23,8 @@
     "uglify-js": "^2.4.24"
   },
   "dependencies": {
+    "baboon-image": "^2.0.0",
+    "ndarray": "^1.0.18",
     "gl-react": "file:../..",
     "glsl-fast-gaussian-blur": "^1.0.2",
     "react": "^0.13.3",

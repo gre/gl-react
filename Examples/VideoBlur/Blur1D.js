@@ -14,8 +14,9 @@ const shaders = GL.Shaders.create({
 
 class Blur1D extends GL.Component {
   render () {
-    const { width, height, direction, children: t } = this.props;
+    const { width, height, direction, children: t, ...rest } = this.props;
     return <GL.View
+      {...rest}
       shader={shaders.blur1D}
       width={width}
       height={height}

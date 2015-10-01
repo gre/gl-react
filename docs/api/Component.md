@@ -11,7 +11,7 @@ class MyEffect extends GL.Component {
 ```
 
 `GL.Component` allows to **compose** effects:
-it tells the `gl-react-core` algorithm to "unfold" the `render()` looking for a `GL.View` to merge with.
+it tells the `gl-react-core` algorithm to "unfold" the `render()` looking for a `GL.View` to merge with. If your component is not a `GL.Component`, it will be treated as a content to rasterized and the effect composition won't work.
 
 > Although it is technically not required to extend `GL.Component` (you can still use `React.Component`),
 this is generally a good idea because you always want to make a component "composable".
@@ -81,6 +81,41 @@ and use it:
   http://i.imgur.com/qM9BHCy.jpg
 </BlurNegative>
 ```
+
+## More generic implementation
+
+Here is a more recommended way to make your effects components even more generic and reusable (also more concise in code):
+
+
+```js
+class MyEffect extends GL.Component {
+  render () {
+    const { children: tex, someParam, ...rest } = this.props;
+    return <GL.View
+      {...rest}
+      shader={shaders.myEffect}
+      uniforms={{ someParam, tex }}
+    />;
+  }
+}
+```
+
+Notice that, whatever we give to `MyEffect`, it will be intercepted in `rest` and directly passed to the `GL.View`.
+This delegation allows `MyEffect` to be generic by benefiting everything `GL.View` does, and allows to use the component in ways you have not initially thought of.
+
+For instance, you might not need to pass `width` and `height` if you are in a sub-GL.View and you just want to use the same dimension:
+
+```html
+<MyOtherEffect width={w} height={h}>
+  <MyEffect someParam={42}> // here, width and height will be inherited
+    {content}
+  </MyEffect>
+</MyOtherEffect>
+```
+
+> By transferring unused props to `GL.View`, you allow your component to be used in any way.
+Also remember that `{content}` can be anything: an image URL, another stack of effects, a content (like a View, a Text,...).
+**That way you don't have to worry about your component capabilities.**
 
 ## Implementation notes
 

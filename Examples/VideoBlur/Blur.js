@@ -28,10 +28,10 @@ function directionForPass (p, factor, total) {
  */
 class Blur extends GL.Component {
   render () {
-    const { width, height, factor, children, passes } = this.props;
+    const { width, height, factor, children, passes, ...rest } = this.props;
 
     const rec = p => p <= 0 ? children :
-      <Blur1D width={width} height={height} direction={directionForPass(p, factor, passes)}>
+      <Blur1D {...rest} width={width} height={height} direction={directionForPass(p, factor, passes)}>
         {rec(p-1)}
       </Blur1D>;
 

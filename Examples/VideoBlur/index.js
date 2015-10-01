@@ -7,24 +7,16 @@ class Demo extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      time: 0,
       blur: 0,
       blurPasses: 2,
       hue: 0
     };
   }
-  componentDidMount () {
-    const loop = time => {
-      requestAnimationFrame(loop);
-      this.setState({ time: time / 1000 });
-    };
-    requestAnimationFrame(loop);
-  }
   render () {
     const { width, height } = this.props;
     const { blur, hue, blurPasses } = this.state;
     return <div style={{ width: width+"px" }}>
-        <Blur width={width} height={height} passes={blurPasses} factor={blur}>
+        <Blur eventsThrough visibleContent autoRedraw width={width} height={height} passes={blurPasses} factor={blur}>
         <HueRotate hue={hue}>
           <video autoPlay loop>
             <source type="video/mp4" src="video.mp4" />

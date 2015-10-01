@@ -8,7 +8,7 @@ class Slider extends React.Component {
       min={minimumValue}
       max={maximumValue}
       step={(maximumValue-minimumValue)/1000}
-      defautValue={value}
+      value={value}
       onChange={e => onValueChange(parseFloat(e.target.value))}
     />;
   }

@@ -4,7 +4,6 @@ Both `gl-react` and `gl-react-native` have the same API (technically they are bo
 
 Here is the pattern to write an *universal* component that targets both platforms.
 
-
 **index.js**
 
 ```js
@@ -28,14 +27,12 @@ void main () {
 
   class MyEffect extends GL.Component {
     render () {
-      const { width, height, value, children } = this.props;
+      const { value, children: tex, ...rest } = this.props;
       return <GL.View
+        {...rest}
         shader={shaders.myEffect}
-        width={width}
-        height={height}
-        uniforms={{ value }}>
-        <GL.Uniform name="tex">{children}</GL.Uniform>
-      </GL.View>;
+        uniforms={{ value, tex }}
+      />;
     }
   }
 

@@ -4,12 +4,14 @@ const {
   Component,
   PropTypes
 } = React;
+const raf = require("raf");
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
 const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
+const pointerEventsProperty = require("./pointerEventsProperty");
 
 // .dispose() all objects that have disappeared from oldMap to newMap
 function diffDispose (newMap, oldMap) {
@@ -56,6 +58,7 @@ class GLCanvas extends Component {
     this._shaders = {};
     this._fbos = {};
     this._contentTextures = [];
+    this._standaloneTextures = [];
     if (props.imagesToPreload.length > 0) {
       this._preloading = [];
     }
@@ -63,17 +66,28 @@ class GLCanvas extends Component {
       this._preloading = null;
       if (this.props.onLoad) this.props.onLoad();
     }
+    this._autoredraw = this.props.autoRedraw;
+
+    this._captureListeners = [];
+  }
+
+  captureFrame (cb) {
+    this._captureListeners.push(cb);
+    this.requestDraw();
   }
 
   render () {
     const { width, height,
-      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, // eslint-disable-line
+      data, nbContentTextures, imagesToPreload, renderId, opaque, onLoad, onProgress, autoRedraw, eventsThrough, visibleContent, // eslint-disable-line
       ...rest
     } = this.props;
     const { scale } = this.state;
     const styles = {
       width: width+"px",
-      height: height+"px"
+      height: height+"px",
+      [pointerEventsProperty]: eventsThrough ? "none" : "auto",
+      position: "relative",
+      background: opaque ? "#000" : "transparent"
     };
     return <canvas
       {...rest} // eslint-disable-line
@@ -87,6 +101,7 @@ class GLCanvas extends Component {
   componentDidMount () {
     // Create the WebGL Context and init the rendering
     const canvas = React.findDOMNode(this.refs.render);
+    this.canvas = canvas;
     const opts = {};
     const gl = (
       canvas.getContext("webgl", opts) ||
@@ -111,13 +126,15 @@ class GLCanvas extends Component {
     this._buffer = buffer;
 
     this.resizeUniformContentTextures(this.props.nbContentTextures);
-    this.syncBlendMode(this.props);
     this.syncData(this.props.data);
+
+    this.checkAutoRedraw();
   }
 
   componentWillUnmount () {
     // Destroy everything to avoid leaks.
     this._contentTextures.forEach(t => t.dispose());
+    this._standaloneTextures.forEach(t => t.dispose());
     [
       this._shaders,
       this._images,
@@ -131,6 +148,7 @@ class GLCanvas extends Component {
     if (this.gl) this.gl.deleteBuffer(this._buffer);
     this.shader = null;
     this.gl = null;
+    if (this._raf) raf.cancel(this._raf);
   }
 
   componentWillReceiveProps (props) {
@@ -139,16 +157,30 @@ class GLCanvas extends Component {
     if (this.state.devicePixelRatio !== devicePixelRatio) {
       this.setState({ devicePixelRatio });
     }
-    if (props.opaque !== this.props.opaque)
-      this.syncBlendMode(props);
     if (props.nbContentTextures !== this.props.nbContentTextures)
       this.resizeUniformContentTextures(props.nbContentTextures);
+
+    this._autoredraw = props.autoRedraw;
+    this.checkAutoRedraw();
   }
 
   componentDidUpdate () {
     // Synchronize the rendering (after render is done)
     const { data } = this.props;
     this.syncData(data);
+  }
+
+  checkAutoRedraw () {
+    if (!this._autoredraw || this._raf) return;
+    const loop = () => {
+      if (!this._autoredraw) {
+        delete this._raf;
+        return;
+      }
+      this._raf = raf(loop);
+      this.draw();
+    };
+    this._raf = raf(loop);
   }
 
   getFBO (id) {
@@ -176,10 +208,12 @@ class GLCanvas extends Component {
     // old values
     const prevShaders = this._shaders;
     const prevImages = this._images;
+    const prevStandaloneTextures = this._standaloneTextures;
 
     // new values (mutated from traverseTree)
     const shaders = {}; // shaders cache (per Shader ID)
     const images = {}; // images cache (per src)
+    const standaloneTextures = [];
 
     // traverseTree compute renderData from the data.
     // frameIndex is the framebuffer index of a node. (root is -1)
@@ -220,22 +254,26 @@ class GLCanvas extends Component {
 
         invariant(type, "Shader '%s': Uniform '%s' is not defined/used", shader.name, uniformName);
 
-        if (value && (type === "sampler2D" || type === "samplerCube")) {
-          // This is a texture (with a value)
+        if (type === "sampler2D" || type === "samplerCube") {
+          // This is a texture
           uniforms[uniformName] = units ++; // affect a texture unit
-          switch (value.type) {
+          if (!value) {
+            const emptyTexture = createTexture(gl, [ 2, 2 ]); // empty texture
+            textures[uniformName] = emptyTexture;
+            standaloneTextures.push(emptyTexture);
+          }
+          else switch (value.type) {
           case "content": // contents are DOM elements that can be rendered as texture (<canvas>, <img>, <video>)
             textures[uniformName] = contentTextures[value.id];
             break;
 
-          case "framebuffer": // framebuffers are a children rendering
+          case "fbo": // framebuffers are a children rendering
             const fbo = getFBO(value.id);
             textures[uniformName] = fbo.color[0];
             break;
 
-          case "image":
-            const val = value.value;
-            const src = val.uri;
+          case "uri":
+            const src = value.uri;
             invariant(src && typeof src === "string", "Shader '%s': An image src is defined for uniform '%s'", shader.name, uniformName);
             let image;
             if (src in images) {
@@ -250,6 +288,15 @@ class GLCanvas extends Component {
             }
             image.src = src; // Always set the image src. GLImage internally won't do anything if it doesn't change
             textures[uniformName] = image.getTexture(); // GLImage will compute and cache a gl-texture2d instance
+            break;
+
+          case "ndarray":
+            const tex = createTexture(gl, value.ndarray);
+            const opts = value.opts || {}; // TODO: in next releases we will generalize opts to more types.
+            if (!opts.disableLinearInterpolation)
+              tex.minFilter = tex.magFilter = gl.LINEAR;
+            textures[uniformName] = tex;
+            standaloneTextures.push(tex);
             break;
 
           default:
@@ -273,15 +320,18 @@ class GLCanvas extends Component {
     // Destroy previous states that have disappeared
     diffDispose(shaders, prevShaders);
     diffDispose(images, prevImages);
+    prevStandaloneTextures.forEach(t => t.dispose());
 
     this._shaders = shaders;
     this._images = images;
+    this._standaloneTextures = standaloneTextures;
 
     this._needsSyncData = false;
     this.requestDraw();
   }
 
   draw () {
+    this._needsDraw = false;
     const gl = this.gl;
     const renderData = this._renderData;
     if (!gl || !renderData) return;
@@ -312,10 +362,6 @@ class GLCanvas extends Component {
         fbo.bind();
       }
 
-      // Prepare the viewport
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-
       // Prepare the shader/buffer
       shader.bind();
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
@@ -331,6 +377,9 @@ class GLCanvas extends Component {
       }
 
       // Render
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.clearColor(0.0, 0.0, 0.0, 0.0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
 
@@ -338,7 +387,17 @@ class GLCanvas extends Component {
     this.syncUniformContentTextures();
 
     // Draw everything
+
+    gl.enable(gl.BLEND);
     recDraw(renderData);
+
+    gl.disable(gl.BLEND);
+
+    if (this._captureListeners.length > 0) {
+      const frame = this.canvas.toDataURL();
+      this._captureListeners.forEach(listener => listener(frame));
+      this._captureListeners = [];
+    }
   }
 
   onImageLoad (loadedObj) {
@@ -407,18 +466,6 @@ class GLCanvas extends Component {
     }
   }
 
-  syncBlendMode (props) {
-    const gl = this.gl;
-    if (!gl) return;
-    if (props.opaque) {
-      gl.disable(gl.BLEND);
-    }
-    else {
-      gl.enable(gl.BLEND);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    }
-  }
-
   getDrawingUniforms () {
     const {nbContentTextures} = this.props;
     if (nbContentTextures === 0) return [];
@@ -433,7 +480,7 @@ class GLCanvas extends Component {
   requestSyncData () {
     if (this._needsSyncData) return;
     this._needsSyncData = true;
-    requestAnimationFrame(this.handleSyncData);
+    raf(this.handleSyncData);
   }
 
   handleSyncData () {
@@ -444,7 +491,7 @@ class GLCanvas extends Component {
   requestDraw () {
     if (this._needsDraw) return;
     this._needsDraw = true;
-    requestAnimationFrame(this.handleDraw);
+    raf(this.handleDraw);
   }
 
   handleDraw () {
