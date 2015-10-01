@@ -20,7 +20,7 @@ const renderVcontent = function (width, height, id, children, { visibleContent }
 };
 
 const renderVGL = function (props) {
-  return <GLCanvas {...props} />;
+  return <GLCanvas ref="canvas" {...props} />;
 };
 
 const renderVcontainer = function ({ style, visibleContent, eventsThrough, width, height }, contents, renderer) {

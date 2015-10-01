@@ -67,6 +67,13 @@ class GLCanvas extends Component {
       if (this.props.onLoad) this.props.onLoad();
     }
     this._autoredraw = this.props.autoRedraw;
+
+    this._captureListeners = [];
+  }
+
+  captureFrame (cb) {
+    this._captureListeners.push(cb);
+    this.requestDraw();
   }
 
   render () {
@@ -94,6 +101,7 @@ class GLCanvas extends Component {
   componentDidMount () {
     // Create the WebGL Context and init the rendering
     const canvas = React.findDOMNode(this.refs.render);
+    this.canvas = canvas;
     const opts = {};
     const gl = (
       canvas.getContext("webgl", opts) ||
@@ -384,6 +392,12 @@ class GLCanvas extends Component {
     recDraw(renderData);
 
     gl.disable(gl.BLEND);
+
+    if (this._captureListeners.length > 0) {
+      const frame = this.canvas.toDataURL();
+      this._captureListeners.forEach(listener => listener(frame));
+      this._captureListeners = [];
+    }
   }
 
   onImageLoad (loadedObj) {

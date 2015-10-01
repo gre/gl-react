@@ -23,6 +23,13 @@ class Simple extends React.Component {
       colorScale: "Spectral",
       disableLinearInterpolation: false
     };
+    this.onCapture1 = this.onCapture1.bind(this);
+  }
+
+  onCapture1 () {
+    this.refs.helloGL.captureFrame(data64 => {
+      location.href = data64;
+    });
   }
 
   render () {
@@ -45,7 +52,10 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>1. Hello GL</h2>
-          <HelloGL width={256} height={171} />
+          <HelloGL width={256} height={171} ref="helloGL" />
+          <p>
+            <button onClick={this.onCapture1}>captureFrame()</button>
+          </p>
         </div>
 
         <div style={styles.demo}>
