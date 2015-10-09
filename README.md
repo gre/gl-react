@@ -34,23 +34,28 @@ const shaders = GL.Shaders.create({
     frag: `
 precision highp float;
 varying vec2 uv;
+uniform float blue;
 void main () {
-  gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
+  gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
 }`
   }
 });
 
-class HelloGL extends GL.Component {
-  render () {
-    const { width, height } = this.props;
-    return <GL.View
-      shader={shaders.helloGL}
-      width={width}
-      height={height}
-    />;
-  }
-}
+module.exports = GL.createComponent(
+  ({ blue, ...rest }) =>
+  <GL.View
+    {...rest}
+    shader={shaders.helloGL}
+    uniforms={{ blue }}
+  />,
+  { displayName: "HelloGL" });
 ```
+
+```html
+<HelloGL width={511} height={341} blue={0.5} />
+```
+
+renders
 
 ![](https://cloud.githubusercontent.com/assets/211411/9386550/432492c6-475c-11e5-9328-f3d5187298c1.jpg)
 

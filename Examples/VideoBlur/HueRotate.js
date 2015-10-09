@@ -8,16 +8,12 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class HueRotate extends GL.Component {
-  render () {
-    const { width, height, hue, children: tex } = this.props;
-    return <GL.View
-      shader={shaders.hueRotate}
-      width={width}
-      height={height}
-      uniforms={{ hue, tex }}
-    />;
-  }
-}
-
-module.exports = HueRotate;
+module.exports = GL.createComponent(
+  ({ width, height, hue, children: tex }) =>
+  <GL.View
+    shader={shaders.hueRotate}
+    width={width}
+    height={height}
+    uniforms={{ hue, tex }}
+  />,
+  { displayName: "HueRotate"});

@@ -25,10 +25,9 @@ void main () {
   }
 });
 
-class Colorify extends React.Component {
-  render () {
-    const { width, height, children: image, colorScale, legend, disableLinearInterpolation } = this.props;
-    return <GL.View
+module.exports = GL.createComponent(
+  ({ width, height, children: image, colorScale, legend, disableLinearInterpolation }) =>
+    <GL.View
       shader={shaders.colorify}
       width={width}
       height={height}
@@ -38,12 +37,11 @@ class Colorify extends React.Component {
       <GL.Uniform name="colorScale" disableLinearInterpolation={disableLinearInterpolation}>
         {colorScale}
       </GL.Uniform>
-    </GL.View>;
+    </GL.View>
+  , {
+    displayName: "Colorify",
+    defaultProps: {
+      legend: 0.06
+    }
   }
-}
-
-Colorify.defaultProps = {
-  legend: 0.06
-};
-
-module.exports = Colorify;
+);

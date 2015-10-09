@@ -21,17 +21,14 @@ void main () {
   }
 });
 
-class Copy extends GL.Component {
-  render () {
-    const { width, height, children: t, last, ...rest } = this.props;
-    return <GL.View
-      {...rest}
-      shader={shaders.Copy}
-      width={width}
-      height={height}
-      uniforms={{ t, preventAlphaMult: !last }}
-    />;
-  }
-}
-
-module.exports = Copy;
+module.exports = GL.createComponent(
+  ({ width, height, children: t, last, ...rest }) =>
+  <GL.View
+    {...rest}
+    shader={shaders.Copy}
+    width={width}
+    height={height}
+    uniforms={{ t, preventAlphaMult: !last }}
+  />,
+  { displayName: "Copy" }
+);

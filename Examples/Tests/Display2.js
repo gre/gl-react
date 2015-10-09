@@ -8,9 +8,8 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class Display2 extends GL.Component {
-  render () {
-    const { width, height, children, vertical, ...rest } = this.props;
+module.exports = GL.createComponent(
+  ({ width, height, children, vertical, ...rest }) => {
     if (!children || children.length !== 2) throw new Error("You must provide 2 children to Display2");
     let [t1, t2] = children;
     if (vertical) [t1,t2]=[t2,t1]; // just because webgl y's is reversed
@@ -22,7 +21,8 @@ class Display2 extends GL.Component {
       uniforms={{ t1, t2, vertical }}
       debug={true}
     />;
+  },
+  {
+    displayName: "Display2"
   }
-}
-
-module.exports = Display2;
+);

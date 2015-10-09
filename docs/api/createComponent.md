@@ -1,20 +1,41 @@
-# Component
+# createComponent
 
-**`GL.Component` is the class to extend to implement a GL Component.**
+> `GL.Component` used to be a class that you inherit like `React.Component`.
+This was limited and verbose, also didn't allow some features to be implemented.
+`GL.Component` is deprecated in favor of `GL.createComponent`.
+
+
+**`GL.createComponent` is a function used to create a GL Component.**
+
+We called **GL Component** a React Component that always either renders a `GL.View` or another **GL Component**.
+
+`GL.createComponent(props => glView)` takes a render function *(takes props object in parameter and returns a GL.View or GL Component)*.
 
 ```js
-class MyEffect extends GL.Component {
-  render () {
-    return <GL.View ...>...</GL.View>;
-  }
-}
+const MyEffect = GL.createComponent(
+  (props) => <GL.View .../>
+);
 ```
 
-`GL.Component` allows to **compose** effects:
-it tells the `gl-react-core` algorithm to "unfold" the `render()` looking for a `GL.View` to merge with. If your component is not a `GL.Component`, it will be treated as a content to rasterized and the effect composition won't work.
+`GL.createComponent` enable effects **composition**:
+The fact that a component is a **GL component** tells the `gl-react-core` algorithm to "unfold" the `render()` looking for a `GL.View` to merge with. If your component is not a `GL Component`, it will be treated as a content to rasterized and the effect composition won't work.
 
-> Although it is technically not required to extend `GL.Component` (you can still use `React.Component`),
-this is generally a good idea because you always want to make a component "composable".
+> Although it is technically not required to use `GL.createComponent` to getting things done with `GL.View`,
+this is generally a good idea because you always want to make our components "composable" (composable in term of GL stack).
+
+## staticFields
+
+```js
+GL.createComponent(props=>glView, staticFields)
+```
+
+To facilitate the usage of `GL.createComponent` there is also an optional second parameter which is the React Component static fields.
+We recommend you to always provide displayName for future debug purpose.
+
+```
+module.exports = GL.createComponent(renderGLViewFunction, { displayName: "MyEffect" });
+```
+
 
 ## Composing effects
 
@@ -37,14 +58,13 @@ void main() {
     `
   }
 });
-class MyEffect extends GL.Component {
-  render () {
-    const { width, height, children, someParam } = this.props;
-    return <GL.View shader={shaders.myEffect} width={width} height={height} uniforms={{ someParam }}>
-      <GL.Uniform name="tex">{children}</GL.Uniform>
-    </GL.View>;
-  }
-}
+
+const MyEffect = GL.createComponent(
+  ({ width, height, children, someParam }) =>
+  <GL.View shader={shaders.myEffect} width={width} height={height} uniforms={{ someParam }}>
+    <GL.Uniform name="tex">{children}</GL.Uniform>
+  </GL.View>
+);
 ```
 
 Once you have defined effect components that inject `children` (let's say `Blur` and `Negative`), you can compose them together.
@@ -62,16 +82,14 @@ Once you have defined effect components that inject `children` (let's say `Blur`
 and define another generic component out of it:
 
 ```js
-class BlurNegative extends GL.Component {
-  render () {
-    const { width, height, blur, children } = this.props;
-    return <Blur factor={blur} width={width} height={height}>
+const BlurNegative = GL.createComponent(
+  ({ width, height, blur, children }) =>
+    <Blur factor={blur} width={width} height={height}>
       <Negative width={width} height={height}>
         {children}
       </Negative>
-    </Blur>;
-  }
-}
+    </Blur>
+);
 ```
 
 and use it:
@@ -88,16 +106,14 @@ Here is a more recommended way to make your effects components even more generic
 
 
 ```js
-class MyEffect extends GL.Component {
-  render () {
-    const { children: tex, someParam, ...rest } = this.props;
-    return <GL.View
+const MyEffect = GL.createComponent(
+  ({ children: tex, someParam, ...rest }) =>
+    <GL.View
       {...rest}
       shader={shaders.myEffect}
       uniforms={{ someParam, tex }}
-    />;
-  }
-}
+    />
+);
 ```
 
 Notice that, whatever we give to `MyEffect`, it will be intercepted in `rest` and directly passed to the `GL.View`.

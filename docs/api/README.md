@@ -18,6 +18,6 @@ var GL = require("gl-react-native");
 
 *(advanced)* `GL.Uniform` allows to render a shader with any content (any React Native component rasterized as a uniform texture).
 
-## [GL.Component](Component.md)
+## [GL.createComponent](createComponent.md)
 
-`GL.Component` is the class to extends to implement a GL component.
+`GL.createComponent` is the class to extends to implement a GL component.

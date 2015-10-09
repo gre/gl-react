@@ -8,21 +8,20 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class Mix extends GL.Component {
-  render () {
-    const { width, height, color, map, factor, children } = this.props;
-    return <GL.View
-      shader={shaders.mix}
-      width={width}
-      height={height}
-      uniforms={{
-        color,
-        map,
-        factor
-      }}>
-      <GL.Uniform name="t">{children}</GL.Uniform>
-    </GL.View>;
+module.exports = GL.createComponent(
+  ({ width, height, color, map, factor, children }) =>
+  <GL.View
+    shader={shaders.mix}
+    width={width}
+    height={height}
+    uniforms={{
+      color,
+      map,
+      factor
+    }}>
+    <GL.Uniform name="t">{children}</GL.Uniform>
+  </GL.View>,
+  {
+    displayName: "Mix"
   }
-}
-
-module.exports = Mix;
+);

@@ -32,35 +32,33 @@ void main () {
   }
 });
 
-class PieProgress extends React.Component {
-  render () {
-    const {
-      width,
-      height,
+module.exports = GL.createComponent(
+  ({
+    width,
+    height,
+    progress,
+    colorInside,
+    colorOutside,
+    radius
+  }) =>
+  <GL.View
+    width={width}
+    height={height}
+    shader={shaders.pieProgress}
+    opaque={false}
+    uniforms={{
+      dim: [ width, height ],
       progress,
       colorInside,
       colorOutside,
       radius
-    } = this.props;
-    return <GL.View
-      width={width}
-      height={height}
-      shader={shaders.pieProgress}
-      opaque={false}
-      uniforms={{
-        dim: [ width, height ],
-        progress,
-        colorInside,
-        colorOutside,
-        radius
-      }}
-    />;
-  }
-}
-PieProgress.defaultProps = {
-  colorInside: [0, 0, 0, 0],
-  colorOutside: [0, 0, 0, 0.5],
-  radius: 0.4
-};
-
-module.exports = PieProgress;
+    }}
+  />,
+  {
+    displayName: "PieProgress",
+    defaultProps: {
+      colorInside: [0, 0, 0, 0],
+      colorOutside: [0, 0, 0, 0.5],
+      radius: 0.4
+    }
+  });
