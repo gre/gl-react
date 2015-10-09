@@ -7,7 +7,7 @@ This was limited and verbose, also didn't allow some features to be implemented.
 
 **`GL.createComponent` is a function used to create a GL Component.**
 
-We called **GL Component** a React Component that always either renders a `GL.View` or another **GL Component**.
+We call **GL Component** a React Component that always either renders a `GL.View` or another **GL Component**.
 
 `GL.createComponent(props => glView)` takes a render function *(takes props object in parameter and returns a GL.View or GL Component)*.
 
