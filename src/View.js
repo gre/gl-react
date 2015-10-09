@@ -1,7 +1,6 @@
 const React = require("react");
 const Shaders = require("./Shaders");
 const Uniform = require("./Uniform");
-const Component = require("./Component");
 const GLCanvas = require("./GLCanvas");
 const {createView} = require("gl-react-core");
 const pointerEventsProperty = require("./pointerEventsProperty");
@@ -38,4 +37,4 @@ const renderVcontainer = function ({ style, visibleContent, eventsThrough, width
   </div>;
 };
 
-module.exports = createView(React, Shaders, Uniform, Component, renderVcontainer, renderVcontent, renderVGL);
+module.exports = createView(React, Shaders, Uniform, renderVcontainer, renderVcontent, renderVGL);

@@ -7,50 +7,45 @@
 Renders a "standalone" shader:
 
 ```js
-render () {
-  return <GL.View
-    shader={shaders.myEffect}
-    width={200}
-    height={100} />;
-}
+<GL.View
+  shader={shaders.myEffect}
+  width={200}
+  height={100}
+/>
 ```
 
 Renders a shader with uniform parameters:
 
 ```js
-render () {
-  return <GL.View
-    shader={shaders.myEffect2}
-    width={200}
-    height={100}
-    uniforms={{
-      floatValue: 0.5,
-      vec3Value: [ 1, 0.5, 0.5 ]
-    }} />;
-    /*
-    // in myEffect2:
-    uniform float floatValue;
-    uniform vec3 vec3Value;
-    */
-}
+<GL.View
+  shader={shaders.myEffect2}
+  width={200}
+  height={100}
+  uniforms={{
+    floatValue: 0.5,
+    vec3Value: [ 1, 0.5, 0.5 ]
+  }} />
+  /*
+  // in myEffect2:
+  uniform float floatValue;
+  uniform vec3 vec3Value;
+  */
 ```
 
 Renders a shader with an image (texture):
 
 ```js
-render () {
-  return <GL.View
-    shader={shaders.myEffect3}
-    width={200}
-    height={100}
-    uniforms={{
-      textureName: {{ uri: "...url" }} // RN convention
-    }} />;
-    /*
-    // in myEffect3:
-    uniform sampler2D textureName;
-    */
-}
+<GL.View
+  shader={shaders.myEffect3}
+  width={200}
+  height={100}
+  uniforms={{
+    textureName: {{ uri: "...url" }} // RN convention
+  }} />
+  /*
+  // in myEffect3:
+  uniform sampler2D textureName;
+  */
 ```
 
 

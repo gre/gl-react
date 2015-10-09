@@ -26,29 +26,25 @@ function directionForPass (p, factor, total) {
  - Powerful blur:
  <Blur factor={20} passes={6} width={w} height={h}>{url}</Blur>
  */
-class Blur extends GL.Component {
-  render () {
-    const { width, height, factor, children, passes, ...rest } = this.props;
 
+module.exports = GL.createComponent(
+  ({ width, height, factor, children, passes, ...rest }) => {
     const rec = p => p <= 0 ? children :
-      <Blur1D {...rest} width={width} height={height} direction={directionForPass(p, factor, passes)}>
-        {rec(p-1)}
-      </Blur1D>;
-
+    <Blur1D {...rest} width={width} height={height} direction={directionForPass(p, factor, passes)}>
+      {rec(p-1)}
+    </Blur1D>;
     return rec(passes);
-  }
-}
-
-Blur.defaultProps = {
-  passes: 2
-};
-
-Blur.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  factor: PropTypes.number.isRequired,
-  children: PropTypes.any.isRequired,
-  passes: PropTypes.number
-};
-
-module.exports = Blur;
+  },
+  {
+    displayName: "Blur",
+    defaultProps: {
+      passes: 2
+    },
+    propTypes: {
+      width: PropTypes.number,
+      height: PropTypes.number,
+      factor: PropTypes.number.isRequired,
+      children: PropTypes.any.isRequired,
+      passes: PropTypes.number
+    }
+  });

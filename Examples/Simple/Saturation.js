@@ -19,16 +19,11 @@ void main () {
   }
 });
 
-class Saturation extends React.Component {
-  render () {
-    const { width, height, factor, image } = this.props;
-    return <GL.View
-      shader={shaders.saturation}
-      width={width}
-      height={height}
-      uniforms={{ factor, image }}
-    />;
-  }
-}
-
-module.exports = Saturation;
+module.exports = GL.createComponent(
+  ({ factor, image, ...rest }) =>
+  <GL.View
+    {...rest}
+    shader={shaders.saturation}
+    uniforms={{ factor, image }}
+  />,
+{ displayName: "Saturation" });

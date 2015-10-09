@@ -12,28 +12,25 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class Blur1D extends GL.Component {
-  render () {
-    const { width, height, direction, children: t, ...rest } = this.props;
-    return <GL.View
-      {...rest}
-      shader={shaders.blur1D}
-      width={width}
-      height={height}
-      uniforms={{
-        direction,
-        resolution: [ width, height ],
-        t
-      }}
-    />;
+module.exports = GL.createComponent(
+  ({ width, height, direction, children: t, ...rest }) =>
+  <GL.View
+    {...rest}
+    shader={shaders.blur1D}
+    width={width}
+    height={height}
+    uniforms={{
+      direction,
+      resolution: [ width, height ],
+      t
+    }}
+  />,
+{
+  displayName: "Blur1D",
+  propTypes: {
+    width: PropTypes.number,
+    height: PropTypes.number,
+    direction: PropTypes.array.isRequired,
+    children: PropTypes.any.isRequired
   }
-}
-
-Blur1D.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
-  direction: PropTypes.array.isRequired,
-  children: PropTypes.any.isRequired
-};
-
-module.exports = Blur1D;
+});

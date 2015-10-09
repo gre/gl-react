@@ -25,18 +25,14 @@ void main () {
     }
   });
 
-  class MyEffect extends GL.Component {
-    render () {
-      const { value, children: tex, ...rest } = this.props;
-      return <GL.View
-        {...rest}
-        shader={shaders.myEffect}
-        uniforms={{ value, tex }}
-      />;
-    }
-  }
-
-  return MyEffect;
+  return GL.createComponent(
+    ({ value, children: tex, ...rest }) =>
+    <GL.View
+      {...rest}
+      shader={shaders.myEffect}
+      uniforms={{ value, tex }}
+    />,
+    { displayName: "???" });
 }
 ```
 
@@ -63,3 +59,5 @@ or
 ```js
 const MyEffect = require("gl-react-myeffect/react-native");
 ```
+
+> As you can see, this is not perfect but we might improve it when both react-dom and react-native will depends on react.

@@ -8,24 +8,20 @@ const shaders = GL.Shaders.create({
   }
 });
 
-class Blur1D extends GL.Component {
-  render () {
-    const { width, height, direction, minBlur, maxBlur, blurMap, offset, children } = this.props;
-    return <GL.View
-      shader={shaders.blur1D}
-      width={width}
-      height={height}
-      uniforms={{
-        direction,
-        minBlur,
-        maxBlur,
-        blurMap,
-        offset,
-        resolution: [ width, height ]
-      }}>
-      <GL.Uniform name="t">{children}</GL.Uniform>
-    </GL.View>;
-  }
-}
-
-module.exports = Blur1D;
+module.exports = GL.createComponent(
+  ({ width, height, direction, minBlur, maxBlur, blurMap, offset, children }) =>
+  <GL.View
+    shader={shaders.blur1D}
+    width={width}
+    height={height}
+    uniforms={{
+      direction,
+      minBlur,
+      maxBlur,
+      blurMap,
+      offset,
+      resolution: [ width, height ]
+    }}>
+    <GL.Uniform name="t">{children}</GL.Uniform>
+  </GL.View>,
+  { displayName: "Blur1D" });

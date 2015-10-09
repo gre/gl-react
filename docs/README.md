@@ -4,7 +4,7 @@
   * [GL.Shaders.create](/docs/api/Shaders.create.md)
   * [GL.View](/docs/api/View.md)
   * [GL.Uniform](/docs/api/Uniform.md)
-  * [GL.Component](/docs/api/Component.md)
+  * [GL.createComponent](/docs/api/createComponent.md)
 * [Simple Examples](/docs/examples/simple.md)
   * [Hello GL](/docs/examples/1.md)
   * [Saturate an Image](/docs/examples/2.md)

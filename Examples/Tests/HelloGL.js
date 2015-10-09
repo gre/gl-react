@@ -14,15 +14,12 @@ void main () { // This function is called FOR EACH PIXEL
   }
 });
 
-class HelloGL extends GL.Component {
-  render () {
-    const { width, height } = this.props;
-    return <GL.View
-      shader={shaders.helloGL}
-      width={width}
-      height={height}
-    />;
-  }
-}
-
-module.exports = HelloGL;
+module.exports = GL.createComponent(
+  ({ width, height }) =>
+  <GL.View
+    shader={shaders.helloGL}
+    width={width}
+    height={height}
+  />,
+  { displayName: "HelloGL" }
+);

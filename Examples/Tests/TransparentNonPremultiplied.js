@@ -16,16 +16,12 @@ void main () {
   }
 });
 
-class TransparentNonPremultiplied extends GL.Component {
-  render () {
-    const { children: t, ...rest } = this.props;
-    return <GL.View
-      {...rest}
-      opaque={false}
-      shader={shaders.TransparentNonPremultiplied}
-      uniforms={{ t }}
-    />;
-  }
-}
-
-module.exports = TransparentNonPremultiplied;
+module.exports = GL.createComponent(
+  ({ children: t, ...rest }) =>
+  <GL.View
+    {...rest}
+    opaque={false}
+    shader={shaders.TransparentNonPremultiplied}
+    uniforms={{ t }}
+  />,
+{ displayName: "TransparentNonPremultiplied" });
