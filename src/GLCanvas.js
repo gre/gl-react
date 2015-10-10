@@ -35,11 +35,16 @@ function imageObjectToId (image) {
 
 function countPreloaded (loaded, toLoad) {
   let nb = 0;
-  for (let i=0; i<toLoad.length; i++) {
+  for (let i=0; i < toLoad.length; i++) {
     if (loaded.indexOf(imageObjectToId(toLoad[i]))!==-1)
       nb ++;
   }
   return nb;
+}
+
+function extractShaderDebug (shader) {
+  const { types: { uniforms } } = shader;
+  return { types: { uniforms } };
 }
 
 class GLCanvas extends Component {
@@ -74,6 +79,27 @@ class GLCanvas extends Component {
   captureFrame (cb) {
     this._captureListeners.push(cb);
     this.requestDraw();
+  }
+
+  setDebugProbe (params) {
+    // Free old
+    if (this._debugProbe) {
+      this._debugProbe = null;
+    }
+    if (params) {
+      invariant(typeof params.onDraw === "function", "onDraw is required in setDebugProbe({ onDraw })");
+      params = {
+        capture: true,
+        captureRate: 0, // in ms. This can be use to throttle the capture. Careful however, you might not get the latest capture in cases where autoRedraw is not used. '0' default value means no throttle.
+        // extends defaults with argument
+        ...params
+      };
+      this._debugProbe = {
+        ...params,
+        lastCapture: 0
+      };
+      this.requestDraw();
+    }
   }
 
   render () {
@@ -145,6 +171,7 @@ class GLCanvas extends Component {
         delete coll[k];
       }
     });
+    this.setDebugProbe(null);
     if (this.gl) this.gl.deleteBuffer(this._buffer);
     this.shader = null;
     this.gl = null;
@@ -312,7 +339,7 @@ class GLCanvas extends Component {
       const notProvided = Object.keys(shader.uniforms).filter(u => !(u in uniforms));
       invariant(notProvided.length===0, "Shader '%s': All defined uniforms must be provided. Missing: '"+notProvided.join("', '")+"'", shader.name);
 
-      return { shader, uniforms, textures, children, contextChildren, width, height, fboId };
+      return { shader, uniforms, textures, children, contextChildren, width, height, fboId, data };
     }
 
     this._renderData = traverseTree(data);
@@ -339,17 +366,44 @@ class GLCanvas extends Component {
     const getFBO = this.getFBO;
     const buffer = this._buffer;
 
+    const debugProbe = this._debugProbe;
+    let debugContents;
+    let shouldDebugCapture = false;
+    if (debugProbe) {
+      if (debugProbe.capture) {
+        const now = Date.now();
+        if (now - debugProbe.lastCapture > debugProbe.captureRate) {
+          debugProbe.lastCapture = now;
+          shouldDebugCapture = true;
+        }
+      }
+
+      debugContents = this.getDrawingUniforms().map(node => {
+        let capture;
+        if (shouldDebugCapture) {
+          capture = node; // gl-texture2d can reconciliate dom node rendering
+        }
+        return {
+          code: node.parentNode.innerHTML,
+          capture
+        };
+      });
+    }
+
     function recDraw (renderData) {
-      const { shader, uniforms, textures, children, contextChildren, width, height, fboId } = renderData;
+      const { shader, uniforms, textures, children, contextChildren, width, height, fboId, data } = renderData;
+
+      const debugNode = debugProbe ? { ...data, shaderInfos: extractShaderDebug(shader) } : {};
 
       const w = width * scale, h = height * scale;
 
       // contextChildren are rendered BEFORE children and parent because are contextual to them
-      contextChildren.forEach(recDraw);
+      debugNode.contextChildren = contextChildren.map(recDraw);
 
       // children are rendered BEFORE the parent
-      children.forEach(recDraw);
+      debugNode.children = children.map(recDraw);
 
+      let fbo;
       if (fboId === -1) {
         // special case for root FBO
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -357,7 +411,7 @@ class GLCanvas extends Component {
       }
       else {
         // Use the framebuffer of the node
-        const fbo = getFBO(fboId);
+        fbo = getFBO(fboId);
         syncShape(fbo, [ w, h ]);
         fbo.bind();
       }
@@ -381,6 +435,14 @@ class GLCanvas extends Component {
       gl.clearColor(0.0, 0.0, 0.0, 0.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      if (shouldDebugCapture) {
+        var pixels = new Uint8Array(w * h * 4);
+        gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+        debugNode.capture = { pixels, width: w, height: h };
+      }
+
+      return debugNode;
     }
 
     // Draw the content to contentTextures (assuming they ALWAYS change and need a re-draw)
@@ -389,9 +451,16 @@ class GLCanvas extends Component {
     // Draw everything
 
     gl.enable(gl.BLEND);
-    recDraw(renderData);
-
+    const debugTree = recDraw(renderData);
     gl.disable(gl.BLEND);
+
+    if (debugProbe) {
+      debugProbe.onDraw({
+        tree: debugTree,
+        contents: debugContents,
+        Shaders
+      });
+    }
 
     if (this._captureListeners.length > 0) {
       const frame = this.canvas.toDataURL();
