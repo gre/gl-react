@@ -172,6 +172,9 @@ class GLCanvas extends Component {
         delete coll[k];
       }
     });
+    if (this.allocatedFromPool) {
+      this.allocatedFromPool.forEach(pool.freeUint8);
+    }
     this.setDebugProbe(null);
     if (this.gl) this.gl.deleteBuffer(this._buffer);
     this.shader = null;
@@ -458,12 +461,15 @@ class GLCanvas extends Component {
     gl.disable(gl.BLEND);
 
     if (debugProbe) {
+      if (this.allocatedFromPool) {
+        this.allocatedFromPool.forEach(pool.freeUint8);
+      }
+      this.allocatedFromPool = allocatedFromPool;
       debugProbe.onDraw({
         tree: debugTree,
         contents: debugContents,
         Shaders
       });
-      allocatedFromPool.forEach(allocated => pool.free(allocated));
     }
 
     if (this._captureListeners.length > 0) {
