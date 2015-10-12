@@ -8,6 +8,7 @@ const raf = require("raf");
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
+const pool = require("typedarray-pool");
 const Shaders = require("./Shaders");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
@@ -366,6 +367,7 @@ class GLCanvas extends Component {
     const getFBO = this.getFBO;
     const buffer = this._buffer;
 
+    const allocatedFromPool = [];
     const debugProbe = this._debugProbe;
     let debugContents;
     let shouldDebugCapture = false;
@@ -437,7 +439,8 @@ class GLCanvas extends Component {
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
       if (shouldDebugCapture) {
-        var pixels = new Uint8Array(w * h * 4);
+        var pixels = pool.mallocUint8(w * h * 4);
+        allocatedFromPool.push(pixels);
         gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
         debugNode.capture = { pixels, width: w, height: h };
       }
@@ -460,6 +463,7 @@ class GLCanvas extends Component {
         contents: debugContents,
         Shaders
       });
+      allocatedFromPool.forEach(allocated => pool.free(allocated));
     }
 
     if (this._captureListeners.length > 0) {

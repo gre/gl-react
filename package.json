@@ -34,14 +34,15 @@
     "react": ">=0.13"
   },
   "dependencies": {
-    "envify": "^3.4.0",
     "babelify": "^6.1.3",
+    "envify": "^3.4.0",
     "gl-fbo": "^2.0.5",
     "gl-react-core": "1.2.x",
     "gl-shader": "^4.0.5",
     "gl-texture2d": "^2.0.9",
     "invariant": "^2.1.0",
     "raf": "^3.1.0",
+    "typedarray-pool": "^1.1.0",
     "vendor-prefix": "^0.1.0"
   }
 }
