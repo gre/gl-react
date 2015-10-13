@@ -5,6 +5,7 @@ const {
   PropTypes
 } = React;
 const raf = require("raf");
+const now = require("performance-now");
 const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
@@ -90,6 +91,7 @@ class GLCanvas extends Component {
     if (params) {
       invariant(typeof params.onDraw === "function", "onDraw is required in setDebugProbe({ onDraw })");
       params = {
+        profile: true,
         capture: true,
         captureRate: 0, // in ms. This can be use to throttle the capture. Careful however, you might not get the latest capture in cases where autoRedraw is not used. '0' default value means no throttle.
         // extends defaults with argument
@@ -372,33 +374,23 @@ class GLCanvas extends Component {
 
     const allocatedFromPool = [];
     const debugProbe = this._debugProbe;
-    let debugContents;
-    let shouldDebugCapture = false;
+    let shouldDebugCapture = false, shouldProfile = false;
     if (debugProbe) {
       if (debugProbe.capture) {
-        const now = Date.now();
-        if (now - debugProbe.lastCapture > debugProbe.captureRate) {
-          debugProbe.lastCapture = now;
+        const t = now();
+        if (t - debugProbe.lastCapture > debugProbe.captureRate) {
+          debugProbe.lastCapture = t;
           shouldDebugCapture = true;
         }
+        shouldProfile = debugProbe.profile;
       }
-
-      debugContents = this.getDrawingUniforms().map(node => {
-        let capture;
-        if (shouldDebugCapture) {
-          capture = node; // gl-texture2d can reconciliate dom node rendering
-        }
-        return {
-          code: node.parentNode.innerHTML,
-          capture
-        };
-      });
     }
 
     function recDraw (renderData) {
       const { shader, uniforms, textures, children, contextChildren, width, height, fboId, data } = renderData;
 
       const debugNode = debugProbe ? { ...data, shaderInfos: extractShaderDebug(shader) } : {};
+      let profileExclusive;
 
       const w = width * scale, h = height * scale;
 
@@ -407,6 +399,10 @@ class GLCanvas extends Component {
 
       // children are rendered BEFORE the parent
       debugNode.children = children.map(recDraw);
+
+      if (shouldProfile) {
+        profileExclusive = now();
+      }
 
       let fbo;
       if (fboId === -1) {
@@ -441,6 +437,20 @@ class GLCanvas extends Component {
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
 
+
+      if (shouldProfile) {
+        profileExclusive = now() - profileExclusive;
+        let profileInclusiveSum = 0;
+        debugNode.contextChildren.forEach(({ profileInclusive }) => {
+          profileInclusiveSum += profileInclusive;
+        });
+        debugNode.children.forEach(({ profileInclusive }) => {
+          profileInclusiveSum += profileInclusive;
+        });
+        debugNode.profileExclusive = profileExclusive;
+        debugNode.profileInclusive = profileInclusiveSum + profileExclusive;
+      }
+
       if (shouldDebugCapture) {
         var pixels = pool.mallocUint8(w * h * 4);
         allocatedFromPool.push(pixels);
@@ -452,7 +462,30 @@ class GLCanvas extends Component {
     }
 
     // Draw the content to contentTextures (assuming they ALWAYS change and need a re-draw)
-    this.syncUniformContentTextures();
+    const contents = this.getDrawingUniforms();
+    const contentTextures = this._contentTextures;
+    const debugContents = contents.map((content, i) => {
+      let profile;
+      if (shouldProfile) {
+        profile = now();
+      }
+      this.syncUniformTexture(contentTextures[i], content);
+      if (shouldProfile) {
+        profile = now() - profile;
+      }
+      if (debugProbe) {
+        let capture;
+        if (shouldDebugCapture) {
+          capture = content; // gl-texture2d can reconciliate dom node rendering
+        }
+        return {
+          code: content.parentNode.innerHTML,
+          capture,
+          profileExclusive: profile,
+          profileInclusive: profile
+        };
+      }
+    });
 
     // Draw everything
 
@@ -520,16 +553,6 @@ class GLCanvas extends Component {
         texture.minFilter = texture.magFilter = gl.LINEAR;
         contentTextures.push(texture);
       }
-    }
-  }
-
-  // Draw the contentTextures
-  syncUniformContentTextures () {
-    const contents = this.getDrawingUniforms();
-    const contentTextures = this._contentTextures;
-    for (let i = 0; i < contents.length; i++) {
-      const content = contents[i];
-      this.syncUniformTexture(contentTextures[i], content);
     }
   }
 
