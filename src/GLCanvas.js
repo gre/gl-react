@@ -382,8 +382,8 @@ class GLCanvas extends Component {
           debugProbe.lastCapture = t;
           shouldDebugCapture = true;
         }
-        shouldProfile = debugProbe.profile;
       }
+      shouldProfile = debugProbe.profile;
     }
 
     function recDraw (renderData) {
