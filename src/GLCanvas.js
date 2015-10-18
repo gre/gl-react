@@ -447,6 +447,11 @@ class GLCanvas extends Component {
         debugNode.children.forEach(({ profileInclusive }) => {
           profileInclusiveSum += profileInclusive;
         });
+        Object.keys(data.uniforms).forEach(key => {
+          const value = data.uniforms[key];
+          if (typeof value === "object" && value.type === "content")
+            profileInclusiveSum += debugContents[value.id].profileExclusive;
+        });
         debugNode.profileExclusive = profileExclusive;
         debugNode.profileInclusive = profileInclusiveSum + profileExclusive;
       }
