@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 const glslify = require("glslify");
 
 const shaders = GL.Shaders.create({
@@ -10,7 +10,7 @@ const shaders = GL.Shaders.create({
 
 module.exports = GL.createComponent(
   ({ width, height, color, map, factor, children }) =>
-  <GL.View
+  <GL.Node
     shader={shaders.mix}
     width={width}
     height={height}
@@ -20,7 +20,7 @@ module.exports = GL.createComponent(
       factor
     }}>
     <GL.Uniform name="t">{children}</GL.Uniform>
-  </GL.View>,
+  </GL.Node>,
   {
     displayName: "Mix"
   }

@@ -1,5 +1,6 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
+const { Surface } = require("gl-react");
 
 const shaders = GL.Shaders.create({
   banner: {
@@ -27,13 +28,12 @@ void main( void ) {
 class Banner extends React.Component {
   render () {
     const { width, height, time } = this.props;
-    return <GL.View
-      shader={shaders.banner}
-      width={width}
-      height={height}
-      uniforms={{ time: time }}
-      opaque={false}
-    />;
+    return <Surface width={width} height={height} opaque={false}>
+      <GL.Node
+        shader={shaders.banner}
+        uniforms={{ time: time }}
+      />
+    </Surface>;
   }
 }
 

@@ -23,8 +23,10 @@
   },
   "dependencies": {
     "gl-react": "file:../..",
+    "gl-react-core": "file:../../../gl-react-core",
     "glsl-fast-gaussian-blur": "^1.0.2",
     "glslify": "^2.3.1",
-    "react": "^0.13.3"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   }
 }

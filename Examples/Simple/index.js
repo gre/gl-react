@@ -1,4 +1,6 @@
 const React = require("react");
+const ReactDOM = require("react-dom");
+const { Surface } = require("gl-react");
 const Slider = require("./Slider");
 const HelloGL = require("./HelloGL");
 const Saturation = require("./Saturation");
@@ -52,7 +54,9 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>1. Hello GL</h2>
-          <HelloGL width={256} height={171} ref="helloGL" />
+          <Surface width={256} height={171} ref="helloGL">
+            <HelloGL />
+          </Surface>
           <p>
             <button onClick={this.onCapture1}>captureFrame()</button>
           </p>
@@ -60,28 +64,26 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>2. Saturate an Image</h2>
-          <Saturation
-            width={256}
-            height={171}
-            factor={saturationFactor}
-            image={{ uri: "http://i.imgur.com/iPKTONG.jpg" }}
+          <Surface width={256} height={171}>
+            <Saturation
+              factor={saturationFactor}
+              image={{ uri: "http://i.imgur.com/iPKTONG.jpg" }}
+            />
+          </Surface>
+          <Slider
+            maximumValue={8}
+            value={saturationFactor}
+            onValueChange={saturationFactor => this.setState({ saturationFactor })}
           />
-        <Slider
-          maximumValue={8}
-          value={saturationFactor}
-          onValueChange={saturationFactor => this.setState({ saturationFactor })}
-        />
         </div>
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>3. Hue Rotate on a Canvas</h2>
-          <HueRotate
-            autoRedraw
-            width={256}
-            height={180}
-            hue={hue}>
-            <ReactCanvasContentExample width={256} height={180} text={text} />
-          </HueRotate>
+          <Surface width={256} height={180} autoRedraw>
+            <HueRotate hue={hue}>
+              <ReactCanvasContentExample width={256} height={180} text={text} />
+            </HueRotate>
+          </Surface>
           <Slider
             maximumValue={2 * Math.PI}
             value={hue}
@@ -96,11 +98,9 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>4. Progress Indicator</h2>
-          <PieProgress
-            width={256}
-            height={180}
-            progress={progress}
-          />
+          <Surface width={256} height={180} opaque={false}>
+            <PieProgress progress={progress} width={256} height={180} />
+          </Surface>
           <Slider
             value={progress}
             onValueChange={progress => this.setState({ progress })}
@@ -125,9 +125,11 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>7. Blur (2-pass)</h2>
-          <Blur width={256} height={180} factor={factor}>
-            http://i.imgur.com/3On9QEu.jpg
-          </Blur>
+          <Surface width={256} height={180}>
+            <Blur width={256} height={180} factor={factor}>
+              http://i.imgur.com/3On9QEu.jpg
+            </Blur>
+          </Surface>
           <Slider
             maximumValue={2}
             value={factor}
@@ -141,9 +143,13 @@ class Simple extends React.Component {
 
         <div style={styles.demo}>
           <h2 style={styles.demoTitle}>9. Texture from array</h2>
-          <Colorify width={256} height={190} colorScale={colorScales[colorScale]} disableLinearInterpolation={disableLinearInterpolation}>
-            http://i.imgur.com/iPKTONG.jpg
-          </Colorify>
+          <Surface width={256} height={190} opaque={false}>
+            <Colorify
+              colorScale={colorScales[colorScale]}
+              disableLinearInterpolation={disableLinearInterpolation}>
+              http://i.imgur.com/iPKTONG.jpg
+            </Colorify>
+          </Surface>
           <select style={styles.select} value={colorScale} onChange={({target:{value:colorScale}}) => this.setState({ colorScale })}>
             {Object.keys(colorScales).map(cs => <option value={cs}>{cs}</option>)}
           </select>
@@ -193,4 +199,4 @@ const styles = {
   }
 };
 
-React.render(<Simple />, document.getElementById("container"));
+ReactDOM.render(<Simple />, document.getElementById("container"));

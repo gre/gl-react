@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   saturation: {
@@ -21,7 +21,7 @@ void main () {
 
 module.exports = GL.createComponent(
   ({ factor, image, ...rest }) =>
-  <GL.View
+  <GL.Node
     {...rest}
     shader={shaders.saturation}
     uniforms={{ factor, image }}

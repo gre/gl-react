@@ -1,4 +1,6 @@
 const React = require("react");
+const ReactDOM = require("react-dom");
+const { Surface } = require("gl-react");
 const Blur = require("./Blur");
 const Mix = require("./Mix");
 
@@ -122,22 +124,22 @@ class Demo extends React.Component {
         onMouseUp={this.onMouseUp}
         onMouseLeave={this.onMouseLeave}>
         { offset[0]===0 && offset[1]===0 && <span style={styles.dragHelp}>Try to drag this area</span>}
-        <Mix
-          width={w}
-          height={h}
-          factor={mix}
-          map={mixMap}
-          color={[ 0, 0, 0 ]}>
-          <Blur
-            width={w}
-            height={h}
-            minBlur={0}
-            offset={offset}
-            maxBlur={maxBlur}
-            blurMap={blurMap}>
-            http://i.imgur.com/NjbLHx2.jpg
-          </Blur>
-        </Mix>
+        <Surface width={w} height={h}>
+          <Mix
+            factor={mix}
+            map={mixMap}
+            color={[ 0, 0, 0 ]}>
+            <Blur
+              width={w}
+              height={h}
+              minBlur={0}
+              offset={offset}
+              maxBlur={maxBlur}
+              blurMap={blurMap}>
+              http://i.imgur.com/NjbLHx2.jpg
+            </Blur>
+          </Mix>
+        </Surface>
       </div>
 
       <div style={styles.toolbar}>
@@ -167,4 +169,4 @@ class Demo extends React.Component {
   }
 }
 
-React.render(<Demo />, document.getElementById("container"));
+ReactDOM.render(<Demo />, document.getElementById("container"));

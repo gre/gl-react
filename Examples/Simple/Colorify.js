@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   colorify: {
@@ -27,17 +27,16 @@ void main () {
 
 module.exports = GL.createComponent(
   ({ width, height, children: image, colorScale, legend, disableLinearInterpolation }) =>
-    <GL.View
+    <GL.Node
       shader={shaders.colorify}
       width={width}
       height={height}
       uniforms={{ image, legend }}
-      opaque={false}
     >
       <GL.Uniform name="colorScale" disableLinearInterpolation={disableLinearInterpolation}>
         {colorScale}
       </GL.Uniform>
-    </GL.View>
+    </GL.Node>
   , {
     displayName: "Colorify",
     defaultProps: {

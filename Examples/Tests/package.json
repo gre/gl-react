@@ -26,8 +26,10 @@
     "baboon-image": "^2.0.0",
     "ndarray": "^1.0.18",
     "gl-react": "file:../..",
+    "gl-react-core": "file:../../../gl-react-core",
     "glsl-fast-gaussian-blur": "^1.0.2",
-    "react": "^0.13.3",
-    "react-canvas": "0.0.1"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-canvas": "gre/react-canvas#react-0.14"
   }
 }

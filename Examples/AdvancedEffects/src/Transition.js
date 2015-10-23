@@ -1,23 +1,23 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
+const { Surface } = require("gl-react");
 
 class Transition extends React.Component {
   render () {
     const { width, height, shader, progress, from, to, uniforms } = this.props;
     const scale = window.devicePixelRatio;
-    return <GL.View
-      shader={shader}
-      width={width}
-      height={height}
-      opaque={false}
-      uniforms={{
-        progress,
-        from,
-        to,
-        ...uniforms,
-        resolution: [ width * scale, height * scale ]
-      }}
-    />;
+    return <Surface width={width} height={height} opaque={false}>
+      <GL.Node
+        shader={shader}
+        uniforms={{
+          progress,
+          from,
+          to,
+          ...uniforms,
+          resolution: [ width * scale, height * scale ]
+        }}
+      />
+    </Surface>;
   }
 }
 

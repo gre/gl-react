@@ -1,4 +1,6 @@
 const React = require("react");
+const ReactDOM = require("react-dom");
+const {Surface} = require("gl-react");
 const HueRotate = require("./HueRotate");
 
 class Demo extends React.Component {
@@ -18,12 +20,14 @@ class Demo extends React.Component {
   render () {
     const { width, height } = this.props;
     const { time } = this.state;
-    return <HueRotate width={width} height={height} hue={Math.PI * Math.cos(3 * time)}>
-      <video autoPlay loop>
-        <source type="video/mp4" src="video.mp4" />
-      </video>
-    </HueRotate>;
+    return <Surface width={width} height={height}>
+      <HueRotate hue={Math.PI * Math.cos(3 * time)}>
+        <video autoPlay loop>
+          <source type="video/mp4" src="video.mp4" />
+        </video>
+      </HueRotate>
+    </Surface>;
   }
 }
 
-React.render(<Demo width={640} height={480} />, document.getElementById("container"));
+ReactDOM.render(<Demo width={640} height={480} />, document.getElementById("container"));

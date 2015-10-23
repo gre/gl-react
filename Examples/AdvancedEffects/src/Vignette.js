@@ -1,5 +1,7 @@
 const React = require("react");
-const GL = require("gl-react");
+const ReactDOM = require("react-dom");
+const GL = require("gl-react-core");
+const { Surface } = require("gl-react");
 
 const shaders = GL.Shaders.create({
   imageVignette: {
@@ -49,7 +51,7 @@ class Vignette extends React.Component {
   onMouseMove (evt) {
     const { width, height } = this.props;
     const { clientX, clientY } = evt;
-    const { left, top } = React.findDOMNode(this.refs.view).getBoundingClientRect();
+    const { left, top } = ReactDOM.findDOMNode(this.refs.view).getBoundingClientRect();
     const [x, y] = [
       clientX - left,
       clientY - top
@@ -60,22 +62,19 @@ class Vignette extends React.Component {
   render () {
     const { width, height, time, source } = this.props;
     const { finger } = this.state;
-    return <GL.View
-      ref="view"
-      onMouseMove={this.onMouseMove}
-      shader={shaders.imageVignette}
-      width={width}
-      height={height}
-      opaque={false}
-      uniforms={{
-        time: time,
-        freq: 10 + 2 * Math.sin(0.7*time),
-        texture: source,
-        amp: 0.05 + Math.max(0, 0.03*Math.cos(time)),
-        moving: 0,
-        finger: finger
-      }}
-    />;
+    return <Surface ref="view" width={width} height={height} opaque={false} onMouseMove={this.onMouseMove}>
+      <GL.Node
+        shader={shaders.imageVignette}
+        uniforms={{
+          time: time,
+          freq: 10 + 2 * Math.sin(0.7*time),
+          texture: source,
+          amp: 0.05 + Math.max(0, 0.03*Math.cos(time)),
+          moving: 0,
+          finger: finger
+        }}
+      />
+    </Surface>;
   }
 }
 

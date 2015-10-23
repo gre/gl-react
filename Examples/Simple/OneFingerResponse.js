@@ -1,5 +1,7 @@
 const React = require("react");
-const GL = require("gl-react");
+const ReactDOM = require("react-dom");
+const GL = require("gl-react-core");
+const { Surface } = require("gl-react");
 
 const shaders = GL.Shaders.create({
   oneFingerResponse: {
@@ -40,7 +42,7 @@ class OneFingerResponse extends React.Component {
   onMouseMove (evt) {
     const { width, height } = this.props;
     const { clientX, clientY } = evt;
-    const { left, top } = React.findDOMNode(this.refs.view).getBoundingClientRect();
+    const { left, top } = ReactDOM.findDOMNode(this.refs.view).getBoundingClientRect();
     const [x, y] = [
       clientX - left,
       clientY - top
@@ -55,16 +57,18 @@ class OneFingerResponse extends React.Component {
   render () {
     const { width, height } = this.props;
     const { pressed, position } = this.state;
-    return <GL.View
+    return <Surface
       ref="view"
-      onMouseDown={this.onMouseDown}
-      onMouseMove={this.onMouseMove}
-      onMouseUp={this.onMouseUp}
       width={width}
       height={height}
-      shader={shaders.oneFingerResponse}
-      uniforms={{ pressed, position }}
-    />;
+      onMouseDown={this.onMouseDown}
+      onMouseMove={this.onMouseMove}
+      onMouseUp={this.onMouseUp}>
+      <GL.Node
+        shader={shaders.oneFingerResponse}
+        uniforms={{ pressed, position }}
+      />
+    </Surface>;
   }
 }
 

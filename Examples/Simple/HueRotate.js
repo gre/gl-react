@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   hueRotate: {
@@ -26,10 +26,10 @@ void main() {
 
 module.exports = GL.createComponent(
   ({ hue, children, ...rest }) =>
-  <GL.View
+  <GL.Node
     {...rest}
     shader={shaders.hueRotate}
     uniforms={{ hue }}>
     <GL.Uniform name="tex">{children}</GL.Uniform>
-  </GL.View>
+  </GL.Node>
 , { displayName: "HueRotate" });

@@ -1,6 +1,8 @@
 const React = require("react");
-const GL = require("gl-react");
-const { Spring } = require("react-motion");
+const ReactDOM = require("react-dom");
+const GL = require("gl-react-core");
+const { Surface } = require("gl-react");
+const { Motion, spring } = require("react-motion");
 
 const shaders = GL.Shaders.create({
   demo: {
@@ -36,7 +38,8 @@ class Demo extends React.Component {
   }
   componentDidMount () {
     window.addEventListener("resize", () => {
-      this.setState({ width: window.innerWidth, height: window.innerHeight });
+      const { innerWidth: width, innerHeight: height } = window;
+      this.setState({ width, height });
     });
   }
 
@@ -48,20 +51,13 @@ class Demo extends React.Component {
 
   render () {
     const { width, height, mouse } = this.state;
-    return <Spring defaultValue={{ val: mouse }} endValue={{ val: mouse, config: [140, 12] }}>
-      { ({ val: { x, y } }) =>
-      <GL.View
-        onMouseMove={this.onMouseMove}
-        shader={shaders.demo}
-        width={width}
-        height={height}
-        uniforms={{
-          mouse: [ x/width, 1-y/height ]
-        }}
-      />
-      }
-    </Spring>;
+    return <Motion defaultStyle={mouse} style={{ x: spring(mouse.x), y: spring(mouse.y) }}>{
+      ({ x, y }) =>
+      <Surface width={width} height={height} onMouseMove={this.onMouseMove}>
+        <GL.Node shader={shaders.demo} uniforms={{ mouse: [ x/width, 1-y/height ] }} />
+      </Surface>
+    }</Motion>;
   }
 }
 
-React.render(<Demo />, document.getElementById("container"));
+ReactDOM.render(<Demo />, document.getElementById("container"));

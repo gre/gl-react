@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   blur1D: {
@@ -35,7 +35,7 @@ void main () {
 
 module.exports = GL.createComponent(
   ({ width, height, direction, children }) =>
-    <GL.View
+    <GL.Node
       shader={shaders.blur1D}
       width={width}
       height={height}
@@ -44,7 +44,7 @@ module.exports = GL.createComponent(
         resolution: [ width, height ]
       }}>
       <GL.Uniform name="t">{children}</GL.Uniform>
-    </GL.View>
+    </GL.Node>
 , {
   displayName: "Blur1D"
 });

@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 const TransitionGenerator = require("./TransitionGenerator");
 const Transition = require("./Transition");
 

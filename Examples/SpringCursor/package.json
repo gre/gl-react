@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "gl-react": "file:../..",
-    "react": "^0.13.3",
-    "react-motion": "^0.2.7"
+    "gl-react-core": "file:../../../gl-react-core",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-motion": "^0.3.1"
   }
 }

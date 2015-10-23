@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   Copy: {
@@ -23,7 +23,7 @@ void main () {
 
 module.exports = GL.createComponent(
   ({ width, height, children: t, last, ...rest }) =>
-  <GL.View
+  <GL.Node
     {...rest}
     shader={shaders.Copy}
     width={width}

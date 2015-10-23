@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 const glslify = require("glslify");
 
 const shaders = GL.Shaders.create({
@@ -10,7 +10,7 @@ const shaders = GL.Shaders.create({
 
 module.exports = GL.createComponent(
   ({ width, height, hue, children: tex }) =>
-  <GL.View
+  <GL.Node
     shader={shaders.hueRotate}
     width={width}
     height={height}

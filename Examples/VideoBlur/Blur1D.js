@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 const glslify = require("glslify");
 
 const {
@@ -14,7 +14,7 @@ const shaders = GL.Shaders.create({
 
 module.exports = GL.createComponent(
   ({ width, height, direction, children: t, ...rest }) =>
-  <GL.View
+  <GL.Node
     {...rest}
     shader={shaders.blur1D}
     width={width}

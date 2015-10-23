@@ -1,5 +1,5 @@
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   helloGL: {
@@ -15,11 +15,9 @@ void main () { // This function is called FOR EACH PIXEL
 });
 
 module.exports = GL.createComponent(
-  ({ width, height }) =>
-  <GL.View
+  () =>
+  <GL.Node
     shader={shaders.helloGL}
-    width={width}
-    height={height}
   />,
   { displayName: "HelloGL" }
 );
