@@ -576,7 +576,7 @@ class GLCanvas extends Component {
   getDrawingUniforms () {
     const {nbContentTextures} = this.props;
     if (nbContentTextures === 0) return [];
-    const children = React.findDOMNode(this.refs.render).parentNode.children;
+    const children = this.refs.render.parentNode.children;
     const all = [];
     for (var i = 0; i < nbContentTextures; i++) {
       all[i] = children[i].firstChild;
