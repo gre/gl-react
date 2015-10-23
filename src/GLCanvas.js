@@ -10,7 +10,7 @@ const createShader = require("gl-shader");
 const createTexture = require("gl-texture2d");
 const createFBO = require("gl-fbo");
 const pool = require("typedarray-pool");
-const Shaders = require("./Shaders");
+const { Shaders } = require("gl-react-core");
 const GLImage = require("./GLImage");
 const vertShader = require("./static.vert");
 const pointerEventsProperty = require("./pointerEventsProperty");
@@ -129,7 +129,7 @@ class GLCanvas extends Component {
 
   componentDidMount () {
     // Create the WebGL Context and init the rendering
-    const canvas = React.findDOMNode(this.refs.render);
+    const canvas = this.refs.render;
     this.canvas = canvas;
     const opts = {};
     const gl = (

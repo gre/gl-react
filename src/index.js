@@ -1,13 +1,10 @@
-const Shaders = require("./Shaders");
-const View = require("./View");
-const Uniform = require("./Uniform");
-const Component = require("./ComponentDeprecated");
-const createComponent = require("./createComponent");
+
+if (process.env.NODE_ENV !== "production") {
+  require("./debugShaders");
+}
+
+const Surface = require("./Surface");
 
 module.exports = {
-  Shaders,
-  View,
-  Uniform,
-  Component,
-  createComponent
+  Surface
 };

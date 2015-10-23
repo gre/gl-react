@@ -1,11 +1,9 @@
 const React = require("react");
-const Shaders = require("./Shaders");
-const Uniform = require("./Uniform");
 const GLCanvas = require("./GLCanvas");
-const {createView} = require("gl-react-core");
+const {createSurface} = require("gl-react-core");
 const pointerEventsProperty = require("./pointerEventsProperty");
 
-const renderVcontent = function (width, height, id, children, { visibleContent }) {
+function renderVcontent (width, height, id, children, { visibleContent }) {
   const content = React.Children.only(children);
   const childrenStyle = {
     position: "absolute",
@@ -16,13 +14,13 @@ const renderVcontent = function (width, height, id, children, { visibleContent }
     visibility: visibleContent ? "visible" : "hidden"
   };
   return <div key={"content-"+id} style={childrenStyle}>{content}</div>;
-};
+}
 
-const renderVGL = function (props) {
+function renderVGL (props) {
   return <GLCanvas ref="canvas" {...props} />;
-};
+}
 
-const renderVcontainer = function ({ style, visibleContent, eventsThrough, width, height }, contents, renderer) {
+function renderVcontainer ({ style, visibleContent, eventsThrough, width, height }, contents, renderer) {
   const parentStyle = {
     position: "relative",
     ...style,
@@ -35,6 +33,6 @@ const renderVcontainer = function ({ style, visibleContent, eventsThrough, width
     {contents}
     {renderer}
   </div>;
-};
+}
 
-module.exports = createView(React, Shaders, Uniform, renderVcontainer, renderVcontent, renderVGL);
+module.exports = createSurface(renderVcontainer, renderVcontent, renderVGL);
