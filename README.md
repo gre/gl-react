@@ -27,7 +27,7 @@ More technically, `gl-react` allows you to write a fragment shader that covers a
 
 ```js
 const React = require("react");
-const GL = require("gl-react");
+const GL = require("gl-react-core");
 
 const shaders = GL.Shaders.create({
   helloGL: {
@@ -43,7 +43,7 @@ void main () {
 
 module.exports = GL.createComponent(
   ({ blue, ...rest }) =>
-  <GL.View
+  <GL.Node
     {...rest}
     shader={shaders.helloGL}
     uniforms={{ blue }}
@@ -51,8 +51,15 @@ module.exports = GL.createComponent(
   { displayName: "HelloGL" });
 ```
 
+
+```js
+const { Surface } = require("gl-react");
+```
+
 ```html
-<HelloGL width={511} height={341} blue={0.5} />
+<Surface width={511} height={341}>
+  <HelloGL blue={0.5} />
+</Surface>
 ```
 
 renders
