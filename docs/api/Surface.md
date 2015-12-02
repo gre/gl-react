@@ -2,7 +2,7 @@
 
 `Surface` is a React Component that renders a `GL.Node` tree with OpenGL (or WebGL depending on the implementation).
 
-It takes in children one single `GL.Node` OR a [GL Component](createComponent.md). You also must give `width` and `height` in props.
+It takes in children one single `GL.Node` OR a **GL Component**. You also must give `width` and `height` in props.
 
 > N.B.: `Surface` is currently the only object exposed by implementers (`gl-react-native` and `gl-react-dom`) as being the only component that concretely renders something to a platform target. All the rest of the API is in `gl-react` which is platform independent.
 
