@@ -1,3 +1,4 @@
+require("gl-react-core/react");
 const React = require("react");
 const ReactDOM = require("react-dom");
 const GL = require("gl-react-core");

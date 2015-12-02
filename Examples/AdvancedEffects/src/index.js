@@ -20,7 +20,7 @@ class AdvancedEffects extends React.Component {
     this.state = {
       time: 0.02,
       frames: 1,
-      embeddedImage: "http://i.imgur.com/MQtLWbD.jpg",
+      embeddedImage: "http://i.imgur.com/2VP5osy.jpg",
       images:
        //"MQtLWbD,N8a9CkZ,adCmISK,AedZQ4N,y9qRJR3,brzKTYZ,NSyk07l,EaZiWfn,I1KZdnl,DoQBdzT,slIt2Ww,DA12puU,IYLdRFW,oqmO4Po,T6NaLyI,6XAPrAY,thYzbif,4qmqo3o,8xT2J96,ZCa2pWq,loQfDN2,oabfA68,uOXqDRY,MyyS4vK,fhNYTX4"
         "wxqlQkh,G2Whuq3,0bUSEBX,giP58XN,iKdXwVm,IvpoR40,zJIxPEo,CKlmtPs,fnMylHI,vGXYiYy,MnOB9Le,YqsZKgc,0BJobQo,Otbz312"

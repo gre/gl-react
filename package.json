@@ -32,7 +32,6 @@
   },
   "peerDependencies": {
     "react": "^0.14.0",
-    "react-dom": "^0.14.0",
     "gl-react-core": "*"
   },
   "dependencies": {
