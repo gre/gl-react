@@ -2,7 +2,8 @@
 
 * [The API](/docs/api/README.md)
   * [GL.Shaders.create](/docs/api/Shaders.create.md)
-  * [GL.View](/docs/api/View.md)
+  * [GL.Node](/docs/api/Node.md)
+  * [Surface](/docs/api/Surface.md)
   * [GL.Uniform](/docs/api/Uniform.md)
   * [GL.createComponent](/docs/api/createComponent.md)
 * [Simple Examples](/docs/examples/simple.md)
@@ -16,4 +17,4 @@
   * [Blur+Hue over UI](/docs/examples/8.md)
   * [Texture from array](/docs/examples/9.md)
 * [Advanced Effects Examples](/docs/examples/advancedeffects.md)
-* [Sharing code across gl-react and gl-react-native](/docs/universal.md)
+* [gl-react: Universal API](/docs/universal.md)
