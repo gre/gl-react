@@ -18,12 +18,6 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 [![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react/Examples/Blur/)
 
-## Goal
-
-`gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders (that runs with static vertex) and exposes these features in a simple API applying React paradigm. This already unlock a lot of capabilities shown in the examples.
-
-3D graphics implies more work on vertex shader and vertex data. We might eventually implement this. In the meantime, if this is a use-case for you, feel free to [comment on this issue](https://github.com/ProjectSeptemberInc/gl-react/issues/6).
-
 ## Examples
 
 [Open Examples page](http://projectseptemberinc.github.io/gl-react-dom/) / [Read the code](https://github.com/ProjectSeptemberInc/gl-react-dom/tree/master/Examples).
@@ -87,6 +81,11 @@ renders
 - **Uniform bindings**: bindings from JavaScript objects to OpenGL GLSL language types (bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4, sampler2D...)
 - **Support for images** as a texture uniform.
 - **Support for `<canvas>`, `<video>`** as a texture uniform.
+
+
+`gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders (that runs with static vertex) and exposes these features in a simple API applying React paradigm. This already unlock a lot of capabilities shown in the examples.
+
+3D graphics implies more work on vertex shader and vertex data. We might eventually implement this. In the meantime, if this is a use-case for you, feel free to [comment on this issue](https://github.com/ProjectSeptemberInc/gl-react/issues/6).
 
 
 ## Installation
