@@ -41,7 +41,7 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 ```js
 const GL = require("gl-react");
-const React = GL.React; // Don't use require("react") yet... we need to wait React Native to depends on React
+const React = GL.React;
 
 const shaders = GL.Shaders.create({
   helloGL: {
@@ -56,9 +56,8 @@ void main () {
 });
 
 module.exports = GL.createComponent(
-  ({ blue, ...rest }) =>
+  ({ blue }) =>
   <GL.Node
-    {...rest}
     shader={shaders.helloGL}
     uniforms={{ blue }}
   />,
