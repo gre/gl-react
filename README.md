@@ -1,3 +1,6 @@
+**IMPORTANT: v2.0.0 is currently instable. Please use [v1.2.5](https://github.com/ProjectSeptemberInc/gl-react/tree/v1.2.5)**
+
+
 **[Gitbook documentation](http://projectseptemberinc.gitbooks.io/gl-react/content/) / [Github](https://github.com/ProjectSeptemberInc/gl-react/) / [live demos](http://projectseptemberinc.github.io/gl-react-dom/) / [gl-react-dom](https://github.com/ProjectSeptemberInc/gl-react-dom/) / [gl-react-native](https://github.com/ProjectSeptemberInc/gl-react-native/)** / [#gl-react on reactiflux](https://discordapp.com/channels/102860784329052160/106102146109325312)
 
 # <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react
