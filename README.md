@@ -20,7 +20,7 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 ## Disclaimer
 
-`gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders that runs with a static vertex shader and 2 triangles that covers the whole GL Surface. This already unlock a lot of capabilities shown in the examples.
+`gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders (that runs with static vertex) and exposes these features in a simple API applying React paradigm. This already unlock a lot of capabilities shown in the examples.
 
 3D graphics implies more work on vertex shader and vertex data. We might eventually implement this. In the meantime, if this is a use-case for you, feel free to [comment on this issue](https://github.com/ProjectSeptemberInc/gl-react/issues/6).
 
