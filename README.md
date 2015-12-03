@@ -18,7 +18,7 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 [![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react/Examples/Blur/)
 
-## Disclaimer
+## Goal
 
 `gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders (that runs with static vertex) and exposes these features in a simple API applying React paradigm. This already unlock a lot of capabilities shown in the examples.
 
