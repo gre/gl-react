@@ -18,6 +18,12 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 [![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react/Examples/Blur/)
 
+## Disclaimer
+
+`gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders that runs with a static vertex shader and 2 triangles that covers the whole GL Surface. This already unlock a lot of capabilities shown in the examples.
+
+3D graphics implies more work on vertex shader and vertex data. We might eventually implement this. In the meantime, if this is a use-case for you, feel free to [comment on this issue](https://github.com/ProjectSeptemberInc/gl-react/issues/6).
+
 ## Examples
 
 [Open Examples page](http://projectseptemberinc.github.io/gl-react-dom/) / [Read the code](https://github.com/ProjectSeptemberInc/gl-react-dom/tree/master/Examples).
