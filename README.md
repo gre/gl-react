@@ -85,6 +85,11 @@ renders
 - **Support for images** as a texture uniform.
 - **Support for `<canvas>`, `<video>`** as a texture uniform.
 
+## Requirements
+
+- Babel 6+
+- for React DOM, react-dom 0.14+ and react 0.14+
+- for React Native, react-native 0.16.0-rc+
 
 `gl-react` primary goal is not to do 3D. The library currently focus on stacking fragment shaders (that runs with static vertex) and exposes these features in a simple API applying React paradigm. This already unlock a lot of capabilities shown in the examples.
 

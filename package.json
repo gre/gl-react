@@ -3,12 +3,6 @@
   "version": "2.0.1",
   "description": "gl-react share code across gl-react-dom and gl-react-native. You can implement complex effects over images and components, in the descriptive VDOM paradigm",
   "main": "src/index.js",
-  "browserify": {
-    "transform": [
-      "babelify",
-      "envify"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProjectSeptemberInc/gl-react.git"
@@ -25,13 +19,17 @@
     "url": "https://github.com/ProjectSeptemberInc/gl-react/issues"
   },
   "homepage": "https://github.com/ProjectSeptemberInc/gl-react#readme",
+  "browserify": {
+    "transform": ["babelify"]
+  },
   "dependencies": {
-    "babelify": "^6.3.0",
-    "envify": "^3.4.0",
     "invariant": "^2.2.0",
     "events": "1.1.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-1": "^6.1.18",
     "eslint": "^1.6.0",
     "eslint-plugin-react": "^3.5.1"
   }
