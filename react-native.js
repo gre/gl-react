@@ -1,1 +1,1 @@
-require("./src/react-runtime-mutate").set(require("react-native"));
+require("./lib/react-native");

@@ -6,7 +6,7 @@ const TextureObjects = require("./TextureObjects");
 const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
 
-//// build: converts the VDOM gl-react-dom DSL into an internal data tree.
+//// build: converts the gl-react VDOM DSL into an internal data tree.
 
 module.exports = function build (GLNode, parentWidth, parentHeight, parentPreload, via) {
   const props = GLNode.props;

@@ -1,3 +1,6 @@
+.babelrc
+.eslintrc
+book.json
 docs/
 
 # OSX
