@@ -2,7 +2,6 @@
 .eslintrc
 book.json
 docs/
-src/
 
 # OSX
 #
