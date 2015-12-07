@@ -31,6 +31,14 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 - [VideoBlur](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/VideoBlur/) shows multi-pass Blur over Hue over a `<video>`! It demonstrates the "shared computation" of the rendering tree [introduced by 1.0.0](https://github.com/ProjectSeptemberInc/gl-react-dom/releases/tag/v1.0.0).
 - [Image Effects](https://github.com/gre/gl-react-image-effects) implements an Image Effects app for Web and Native with a same codebase.
 
+### Some universal GL effects (published on NPM)
+
+- [gl-react-blur](https://github.com/gre/gl-react-blur)
+- [gl-react-contrast-saturation-brightness](https://github.com/gre/gl-react-contrast-saturation-brightness)
+- [gl-react-negative](https://github.com/gre/gl-react-negative)
+- [gl-react-hue-rotate](https://github.com/gre/gl-react-hue-rotate)
+- [gl-react-color-matrix](https://github.com/gre/gl-react-color-matrix)
+
 ### HelloGL Gist
 
 ```js
