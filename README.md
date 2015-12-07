@@ -29,7 +29,7 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 - [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).
 - [Blur](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/Blur/) shows an advanced example of multi-pass pipeline and also shows usage of [glslify](https://github.com/stackgl/glslify).
 - [VideoBlur](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/VideoBlur/) shows multi-pass Blur over Hue over a `<video>`! It demonstrates the "shared computation" of the rendering tree [introduced by 1.0.0](https://github.com/ProjectSeptemberInc/gl-react-dom/releases/tag/v1.0.0).
-
+- [Image Effects](https://github.com/gre/gl-react-image-effects) implements an Image Effects app for Web and Native with a same codebase.
 
 ### HelloGL Gist
 
