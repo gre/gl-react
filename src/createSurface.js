@@ -25,11 +25,10 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
     getGLCanvas () {
       return this.refs.canvas;
     }
-    captureFrame (callback) {
+    captureFrame () {
       const c = this.getGLCanvas();
       invariant(c && c.captureFrame, "captureFrame() should be implemented by GLCanvas");
-      invariant(typeof callback === "function", "captureFrame(cb) should have a callback function in first parameter");
-      return c.captureFrame.call(c, callback);
+      return c.captureFrame.apply(c, arguments);
     }
     render() {
       const renderId = this._renderId ++;
