@@ -8,12 +8,17 @@ const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildr
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
-module.exports = function build (GLNode, parentWidth, parentHeight, parentPreload, via) {
+module.exports = function build (GLNode, context, parentPreload, via) {
   const props = GLNode.props;
   const shader = props.shader;
   const GLNodeUniforms = props.uniforms;
-  const width = props.width || parentWidth;
-  const height = props.height || parentHeight;
+  const width = props.width || context.parentWidth;
+  const height = props.height || context.parentHeight;
+  const newContext = {
+    ...context,
+    parentWidth: width,
+    parentHeight: height
+  };
   const GLNodeChildren = props.children;
   const preload = "preload" in props ? props.preload : preload;
 
@@ -67,7 +72,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
     }
     else if(typ === "object" && (value instanceof Array ? React.isValidElement(value[0]) : React.isValidElement(value))) {
       // value is a VDOM or array of VDOM
-      const res = findGLNodeInGLComponentChildren(value);
+      const res = findGLNodeInGLComponentChildren(value, newContext);
       if (res) {
         const { childGLNode, via } = res;
         // We have found a GL.Node children, we integrate it in the tree and recursively do the same
@@ -75,7 +80,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
         children.push({
           vdom: value,
           uniform: name,
-          data: build(childGLNode, width, height, preload, via)
+          data: build(childGLNode, newContext, preload, via)
         });
       }
       else {

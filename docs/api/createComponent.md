@@ -28,6 +28,22 @@ We recommend you to always provide displayName for gl-react debug purpose.
 module.exports = GL.createComponent(renderGLViewFunction, { displayName: "MyEffect" });
 ```
 
+## `context` second parameter
+
+the render function also takes a second parameter, context, an object that contains contextual information.
+
+```js
+const MyEffect = GL.createComponent(
+  (props, context) => <GL.Node .../>
+);
+```
+
+context contains following fields:
+
+- `parentWidth` **(number)**: the width defined by the parent (can come from GL.Node, GLComponent or GL Surface).
+- `parentHeight` **(number)**: the height defined by the parent.
+- `pixelRatio` **(number)**: the pixel ratio (or scale) used by the Surface.
+
 
 ## Composing effects
 

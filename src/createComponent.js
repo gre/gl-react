@@ -8,7 +8,7 @@ module.exports = function createComponent (renderGLNode, staticFields) {
 
   class GLComponent extends React.Component {
     render () {
-      const glNode = renderGLNode(this.props);
+      const glNode = renderGLNode(this.props, this.context);
 
       invariant(glNode && glNode.type && (glNode.type.isGLNode || glNode.type.isGLComponent),
       "%s: The GL.createComponent function parameter must return a GL.Node or "+

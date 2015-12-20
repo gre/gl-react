@@ -15,7 +15,7 @@ function logResult (data, contentsVDOM) {
   }
 }
 
-module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
+module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixelRatio) {
 
   class GLSurface extends Component {
     constructor (props, context) {
@@ -47,8 +47,14 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
         ...restProps
       } = props;
 
+      const pixelRatio = getPixelRatio(props);
+      const context = {
+        parentWidth: width,
+        parentHeight: height,
+        pixelRatio
+      };
       const { via, childGLNode } =
-        findGLNodeInGLComponentChildren(children);
+        findGLNodeInGLComponentChildren(children, context);
 
       invariant(childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
 
@@ -57,8 +63,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
           fill(
             build(
               childGLNode,
-              width,
-              height,
+              context,
               preload,
               via)));
 
@@ -72,6 +77,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
           ...restProps, // eslint-disable-line no-undef
           width,
           height,
+          pixelRatio,
           data,
           nbContentTextures: contentsVDOM.length,
           imagesToPreload,
@@ -89,6 +95,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
   GLSurface.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    pixelRatio: PropTypes.number,
     children: PropTypes.element.isRequired,
     opaque: PropTypes.bool,
     preload: PropTypes.bool,

@@ -40,6 +40,7 @@ Renders some more complex stack of effects:
 ## Props of `Surface`
 
 - **`width`** and **`height`** *(Number)* **(required)**: the size of the view.
+- **`pixelRatio`** *(Number)*: the pixel ratio to use for the rendering. By default the screen pixel scale will be used.
 - **`opaque`** *(bool)*: specify if the view should be opaque. By default, it is true, meaning that the GL View won't support texture opacity and alpha channel.
 - **`preload`** *(bool)*: specify if the view should initially not render until all images are loaded. `false` by default, this behavior should be explicitly enabled.
 - **`onLoad`** *(function)*: callback called when the view is ready (has loaded all images in case of preload).
