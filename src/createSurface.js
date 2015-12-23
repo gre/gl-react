@@ -46,10 +46,11 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL) {
         ...restProps
       } = props;
 
-      const { via, childGLNode } =
-        findGLNodeInGLComponentChildren(children);
+      const glNode = findGLNodeInGLComponentChildren(children);
 
-      invariant(childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
+      invariant(glNode && glNode.childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
+
+      const { via, childGLNode } = glNode;
 
       const { data, contentsVDOM, imagesToPreload } =
         resolve(
