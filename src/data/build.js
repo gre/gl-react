@@ -15,7 +15,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
   const width = props.width || parentWidth;
   const height = props.height || parentHeight;
   const GLNodeChildren = props.children;
-  const preload = "preload" in props ? props.preload : preload;
+  const preload = "preload" in props ? props.preload : parentPreload;
 
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
 
