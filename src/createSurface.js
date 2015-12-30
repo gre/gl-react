@@ -37,6 +37,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         style,
         width,
         height,
+        pixelRatio: pixelRatioProps,
         children,
         debug,
         preload,
@@ -46,10 +47,10 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         ...restProps
       } = props;
 
-      const pixelRatio = getPixelRatio(props);
+      const pixelRatio = pixelRatioProps || getPixelRatio(props);
       const context = {
-        parentWidth: width,
-        parentHeight: height,
+        width,
+        height,
         pixelRatio
       };
       const glNode = findGLNodeInGLComponentChildren(children, context);

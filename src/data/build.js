@@ -5,6 +5,7 @@ const Shaders = require("../Shaders");
 const TextureObjects = require("./TextureObjects");
 const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
+const unifyPropsWithContext = require("./unifyPropsWithContext");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
@@ -12,12 +13,15 @@ module.exports = function build (GLNode, context, parentPreload, via) {
   const props = GLNode.props;
   const shader = props.shader;
   const GLNodeUniforms = props.uniforms;
-  const width = props.width || context.parentWidth;
-  const height = props.height || context.parentHeight;
+  const {
+    width,
+    height,
+    pixelRatio
+  } = unifyPropsWithContext(props, context);
   const newContext = {
-    ...context,
-    parentWidth: width,
-    parentHeight: height
+    width,
+    height,
+    pixelRatio
   };
   const GLNodeChildren = props.children;
   const preload = "preload" in props ? props.preload : parentPreload;
@@ -105,6 +109,7 @@ module.exports = function build (GLNode, context, parentPreload, via) {
     uniforms,
     width,
     height,
+    pixelRatio,
     children,
     contents,
     preload,
