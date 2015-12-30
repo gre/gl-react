@@ -6,6 +6,7 @@ const TextureObjects = require("./TextureObjects");
 const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
 const unifyPropsWithContext = require("./unifyPropsWithContext");
+const invariantStrictPositive = require("./invariantStrictPositive");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
@@ -29,6 +30,9 @@ module.exports = function build (GLNode, context, parentPreload, via) {
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
 
   const shaderName = Shaders.getName(shader);
+  invariantStrictPositive(width, "GL Component ("+shaderName+"). width prop");
+  invariantStrictPositive(height, "GL Component ("+shaderName+"). height prop");
+  invariantStrictPositive(pixelRatio, "GL Component ("+shaderName+"). pixelRatio prop");
 
   const uniforms = { ...GLNodeUniforms };
   const children = [];
@@ -45,7 +49,15 @@ module.exports = function build (GLNode, context, parentPreload, via) {
 
   Object.keys(uniforms).forEach(name => {
     let value = uniforms[name];
-    if (isNonSamplerUniformValue(value)) return;
+    let nonSamplerUniformTyp = isNonSamplerUniformValue(value);
+    if (nonSamplerUniformTyp) {
+      if (process.env.NODE_ENV!=="production" && nonSamplerUniformTyp === "number[]") {
+        let i = value.length;
+        while (i-- > 0 && !isNaN(value[i]));
+        invariant(i < 0, "Shader '%s': uniform '%s' must be an array of numbers. Found '%s' at index %s", shaderName, name, value[i], i);
+      }
+      return;
+    }
 
     let opts, typ = typeof value;
 

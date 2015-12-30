@@ -6,6 +6,7 @@ const {
 const invariant = require("invariant");
 const { fill, resolve, build } = require("./data");
 const findGLNodeInGLComponentChildren = require("./data/findGLNodeInGLComponentChildren");
+const invariantStrictPositive = require("./data/invariantStrictPositive");
 
 function logResult (data, contentsVDOM) {
   if (typeof console !== "undefined" &&
@@ -48,6 +49,11 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
       } = props;
 
       const pixelRatio = pixelRatioProps || getPixelRatio(props);
+
+      invariantStrictPositive(pixelRatio, "GL.Surface: pixelRatio prop");
+      invariantStrictPositive(width, "GL.Surface: width prop");
+      invariantStrictPositive(height, "GL.Surface: height prop");
+
       const context = {
         width,
         height,
