@@ -29,13 +29,22 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 - [AdvancedEffects's Transition](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/AdvancedEffects/src/Transition.js) shows a minimal interoperability with [GLSL Transitions](http://transitions.glsl.io/).
 - [Blur](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/Blur/) shows an advanced example of multi-pass pipeline and also shows usage of [glslify](https://github.com/stackgl/glslify).
 - [VideoBlur](https://github.com/ProjectSeptemberInc/gl-react-dom/blob/master/Examples/VideoBlur/) shows multi-pass Blur over Hue over a `<video>`! It demonstrates the "shared computation" of the rendering tree [introduced by 1.0.0](https://github.com/ProjectSeptemberInc/gl-react-dom/releases/tag/v1.0.0).
+- [Image Effects](https://github.com/gre/gl-react-image-effects) implements an Image Effects app for Web and Native with a same codebase.
 
+### Some universal GL effects (published on NPM)
+
+- [gl-react-blur](https://github.com/gre/gl-react-blur)
+- [gl-react-contrast-saturation-brightness](https://github.com/gre/gl-react-contrast-saturation-brightness)
+- [gl-react-negative](https://github.com/gre/gl-react-negative)
+- [gl-react-hue-rotate](https://github.com/gre/gl-react-hue-rotate)
+- [gl-react-color-matrix](https://github.com/gre/gl-react-color-matrix)
 
 ### HelloGL Gist
 
 ```js
 const GL = require("gl-react");
 const React = GL.React;
+// ^ for all effects you want to share between iOS/Android/Web, please extract React from GL and this until react-native depends on react.
 
 const shaders = GL.Shaders.create({
   helloGL: {

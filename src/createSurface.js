@@ -25,11 +25,10 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
     getGLCanvas () {
       return this.refs.canvas;
     }
-    captureFrame (callback) {
+    captureFrame () {
       const c = this.getGLCanvas();
       invariant(c && c.captureFrame, "captureFrame() should be implemented by GLCanvas");
-      invariant(typeof callback === "function", "captureFrame(cb) should have a callback function in first parameter");
-      return c.captureFrame.call(c, callback);
+      return c.captureFrame.apply(c, arguments);
     }
     render() {
       const renderId = this._renderId ++;
@@ -53,10 +52,11 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         parentHeight: height,
         pixelRatio
       };
-      const { via, childGLNode } =
-        findGLNodeInGLComponentChildren(children, context);
+      const glNode = findGLNodeInGLComponentChildren(children, context);
 
-      invariant(childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
+      invariant(glNode && glNode.childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
+
+      const { via, childGLNode } = glNode;
 
       const { data, contentsVDOM, imagesToPreload } =
         resolve(

@@ -4,7 +4,7 @@
 
 It takes in children one single `GL.Node` OR a **GL Component**. You also must give `width` and `height` in props.
 
-> N.B.: `Surface` is currently the only object exposed by implementers (`gl-react-native` and `gl-react-dom`) as being the only component that concretely renders something to a platform target. All the rest of the API is in `gl-react` which is platform independent.
+> N.B.: `Surface` is currently the only object exposed by implementations (`gl-react-native` and `gl-react-dom`) as being the only component that concretely renders the graphics to a platform target. All the rest of the API is in `gl-react` which is platform independent.
 
 **Quick Examples:**
 
@@ -48,3 +48,7 @@ Renders some more complex stack of effects:
 - **`autoRedraw`** *(bool)*: enable the continuous rendering for dynamic content (like a `<canvas/>`, `<video/>` or any dynamic UI (e.g: a UI component in React Native context)). default is false. This is more performant that doing yourself a `render()` loop but don't abuse its usage: you should use it when content always changes or if you can't observe changes.
 - **`eventsThrough`** *(bool)*: Enable that all interaction events (mouse, touch) are not intercepted by the GL view but by what's under. If `visibleContent` is true, the content will intercept these events. default is false.
 - **`visibleContent`** *(bool)*: Enable the visibility of the rasterized content under the GL view. Main use-case is to allow to make that content to catch events (combined with `eventsThrough`), it is also possible to make your canvas transparent to see the underlying content. N.B: This feature only works with **a single content**. default is false.
+
+## Methods of `Surface`
+
+- **`captureFrame()`**: returns a Promise of base64 URI of a snapshot of the Surface.
