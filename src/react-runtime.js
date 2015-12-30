@@ -1,7 +1,7 @@
 const runtime = require("./react-runtime-mutate").get();
 if (!runtime) {
   const reqSyntax = name => `requ${"i"}re("${name}")`;
-  const importSyntax = name => `${"i"}mport __ from "${name}"`;
+  const importSyntax = name => `${"i"}mport "${name}"`;
   // ^^^ have to do this crap because of RN packager
   console.warn( // eslint-disable-line no-console
 `Please prepend in your JavaScript entry file one of following imports:
