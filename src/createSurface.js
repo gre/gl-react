@@ -5,8 +5,11 @@ const {
 } = React;
 const invariant = require("invariant");
 const { fill, resolve, build } = require("./data");
+const Shaders = require("./Shaders");
 const findGLNodeInGLComponentChildren = require("./data/findGLNodeInGLComponentChildren");
 const invariantStrictPositive = require("./data/invariantStrictPositive");
+
+let _glSurfaceId = 1;
 
 function logResult (data, contentsVDOM) {
   if (typeof console !== "undefined" &&
@@ -22,6 +25,13 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
     constructor (props, context) {
       super(props, context);
       this._renderId = 1;
+      this._id = _glSurfaceId ++;
+    }
+    componentWillMount () {
+      Shaders._onSurfaceWillMount(this._id);
+    }
+    componentWillUnmount () {
+      Shaders._onSurfaceWillUnmount(this._id);
     }
     getGLCanvas () {
       return this.refs.canvas;
@@ -32,6 +42,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
       return c.captureFrame.apply(c, arguments);
     }
     render() {
+      const id = this._id;
       const renderId = this._renderId ++;
       const props = this.props;
       const {
@@ -65,14 +76,27 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
 
       const { via, childGLNode } = glNode;
 
-      const { data, contentsVDOM, imagesToPreload } =
-        resolve(
-          fill(
-            build(
-              childGLNode,
-              context,
-              preload,
-              via)));
+      let resolved;
+      try {
+        Shaders._beforeSurfaceBuild(id);
+        resolved =
+          resolve(
+            fill(
+              build(
+                childGLNode,
+                context,
+                preload,
+                via,
+                id)));
+      }
+      catch (e) {
+        throw e;
+      }
+      finally {
+        Shaders._afterSurfaceBuild(id);
+      }
+
+      const { data, contentsVDOM, imagesToPreload } = resolved;
 
       if (debug) logResult(data, contentsVDOM);
 

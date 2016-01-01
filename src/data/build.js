@@ -10,9 +10,9 @@ const invariantStrictPositive = require("./invariantStrictPositive");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
-module.exports = function build (GLNode, context, parentPreload, via) {
+module.exports = function build (GLNode, context, parentPreload, via, surfaceId) {
   const props = GLNode.props;
-  const shader = props.shader;
+  const shader = Shaders._resolve(props.shader, surfaceId, props.onShaderCompile);
   const GLNodeUniforms = props.uniforms;
   const {
     width,
@@ -96,7 +96,7 @@ module.exports = function build (GLNode, context, parentPreload, via) {
         children.push({
           vdom: value,
           uniform: name,
-          data: build(childGLNode, newContext, preload, via)
+          data: build(childGLNode, newContext, preload, via, surfaceId)
         });
       }
       else {
