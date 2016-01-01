@@ -51,4 +51,15 @@ Renders some more complex stack of effects:
 
 ## Methods of `Surface`
 
-- **`captureFrame()`**: returns a Promise of base64 URI of a snapshot of the Surface.
+### `captureFrame(config)`
+
+returns a Promise of snapshot of the Surface.
+
+config is an optional object with:
+- `type`: the file type default value is **"png"**, **"jpg"** is also supported. Refer to implementations to see more supported values.
+- `quality`: a value from 0 to 1 to describe the quality of the snapshot. 0 means 0% (most compressed) and 1 means 100% (best quality).
+- `format`: default is **"base64"**.
+
+Implementation have other specific options:
+- in **gl-react-native**, `format: "file"` allows to save to a file. You also need to provide a `filePath` String (you should use `react-native-fs` to knows directory paths). The promise result will be a `file://...` url that you can use in `<Image source={{uri}} />`.
+- in **gl-react-dom**, `format: "blob"` allows to get a Blob object in the resulting promise. It is recommended to use instead of `base64` because it doesn't block the JavaScript thread (it uses `canvas.toBlob(cb)` async method). **However, it is only supported by Firefox at the moment.** See [gl-react-dom-static-container](https://github.com/gre/gl-react-dom-static-container/blob/e3f6276871a89474c91b0aa19455eca62cf5264f/src/GLStaticContainer.js#L138-L170) usage if you are interested.
