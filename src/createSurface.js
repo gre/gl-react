@@ -1,4 +1,4 @@
-const React = require("./react-runtime");
+const React = require("react");
 const {
   Component,
   PropTypes
@@ -24,13 +24,14 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
   class GLSurface extends Component {
     constructor (props, context) {
       super(props, context);
-      this._renderId = 1;
+      this._renderId = 0;
       this._id = _glSurfaceId ++;
     }
     componentWillMount () {
       Shaders._onSurfaceWillMount(this._id);
     }
     componentWillUnmount () {
+      this._renderId = 0;
       Shaders._onSurfaceWillUnmount(this._id);
     }
     getGLCanvas () {
@@ -43,7 +44,7 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
     }
     render() {
       const id = this._id;
-      const renderId = this._renderId ++;
+      const renderId = ++this._renderId;
       const props = this.props;
       const {
         style,
@@ -58,6 +59,12 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         eventsThrough,
         ...restProps
       } = props;
+
+      const decorateOnShaderCompile = onShaderCompile =>
+      onShaderCompile && // only decorated if onShaderCompile is defined
+      ((error, result) =>
+        renderId === this._renderId && // it's outdated. skip the callback call
+        onShaderCompile(error, result)); // it's current. propagate the call
 
       const pixelRatio = pixelRatioProps || getPixelRatio(props);
 
@@ -87,7 +94,9 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
                 context,
                 preload,
                 via,
-                id)));
+                id,
+                decorateOnShaderCompile
+              )));
       }
       catch (e) {
         throw e;

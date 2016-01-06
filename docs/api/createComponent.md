@@ -30,7 +30,8 @@ module.exports = GL.createComponent(renderGLViewFunction, { displayName: "MyEffe
 
 ## `width`, `height` and `pixelRatio` props
 
-These props are special by convention. They are always available in the props object as an opportunity to pass them in shader as an uniform (for instance you want to apply a effect that depends on the buffer size).
+The `props` function parameter is the union of the inherited `{width, height, pixelRatio}` with user defined props.
+That way, width, height and pixelRatio are always available in the props object as an opportunity to pass them in shader as an uniform (for instance you want to apply a effect that depends on the buffer size).
 
 If you define a component `MyEffect`, an user can either define its value with props (e.g. `<MyEffect width={42} height={42} pixelRatio={1}>`) or just don't define them, in this second case, they will be inherited from parent component (or Surface).
 

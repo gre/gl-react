@@ -1,4 +1,4 @@
-const React = require("./react-runtime");
+const React = require("react");
 const invariant = require("invariant");
 const unifyPropsWithContext = require("./data/unifyPropsWithContext");
 

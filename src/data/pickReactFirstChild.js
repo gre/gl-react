@@ -1,4 +1,4 @@
-const React = require("../react-runtime");
+const React = require("react");
 
 module.exports = function pickReactFirstChild (children) {
   return React.Children.count(children) === 1 ?
