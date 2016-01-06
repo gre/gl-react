@@ -1,25 +1,38 @@
-const React = require("../react-runtime");
+const React = require("react");
 const invariant = require("invariant");
 const Uniform = require("../Uniform");
 const Shaders = require("../Shaders");
 const TextureObjects = require("./TextureObjects");
 const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
+const unifyPropsWithContext = require("./unifyPropsWithContext");
+const invariantStrictPositive = require("./invariantStrictPositive");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
-module.exports = function build (GLNode, parentWidth, parentHeight, parentPreload, via) {
+module.exports = function build (GLNode, context, parentPreload, via, surfaceId, decorateOnShaderCompile) {
   const props = GLNode.props;
-  const shader = props.shader;
+  const shader = Shaders._resolve(props.shader, surfaceId, decorateOnShaderCompile(props.onShaderCompile));
   const GLNodeUniforms = props.uniforms;
-  const width = props.width || parentWidth;
-  const height = props.height || parentHeight;
+  const {
+    width,
+    height,
+    pixelRatio
+  } = unifyPropsWithContext(props, context);
+  const newContext = {
+    width,
+    height,
+    pixelRatio
+  };
   const GLNodeChildren = props.children;
   const preload = "preload" in props ? props.preload : parentPreload;
 
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
 
   const shaderName = Shaders.getName(shader);
+  invariantStrictPositive(width, "GL Component ("+shaderName+"). width prop");
+  invariantStrictPositive(height, "GL Component ("+shaderName+"). height prop");
+  invariantStrictPositive(pixelRatio, "GL Component ("+shaderName+"). pixelRatio prop");
 
   const uniforms = { ...GLNodeUniforms };
   const children = [];
@@ -36,7 +49,15 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
 
   Object.keys(uniforms).forEach(name => {
     let value = uniforms[name];
-    if (isNonSamplerUniformValue(value)) return;
+    let nonSamplerUniformTyp = isNonSamplerUniformValue(value);
+    if (nonSamplerUniformTyp) {
+      if (process.env.NODE_ENV!=="production" && nonSamplerUniformTyp === "number[]") {
+        let i = value.length;
+        while (i-- > 0 && !isNaN(value[i]));
+        invariant(i < 0, "Shader '%s': uniform '%s' must be an array of numbers. Found '%s' at index %s", shaderName, name, value[i], i);
+      }
+      return;
+    }
 
     let opts, typ = typeof value;
 
@@ -67,7 +88,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
     }
     else if(typ === "object" && (value instanceof Array ? React.isValidElement(value[0]) : React.isValidElement(value))) {
       // value is a VDOM or array of VDOM
-      const res = findGLNodeInGLComponentChildren(value);
+      const res = findGLNodeInGLComponentChildren(value, newContext);
       if (res) {
         const { childGLNode, via } = res;
         // We have found a GL.Node children, we integrate it in the tree and recursively do the same
@@ -75,7 +96,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
         children.push({
           vdom: value,
           uniform: name,
-          data: build(childGLNode, width, height, preload, via)
+          data: build(childGLNode, newContext, preload, via, surfaceId, decorateOnShaderCompile)
         });
       }
       else {
@@ -100,6 +121,7 @@ module.exports = function build (GLNode, parentWidth, parentHeight, parentPreloa
     uniforms,
     width,
     height,
+    pixelRatio,
     children,
     contents,
     preload,

@@ -1,4 +1,4 @@
-const React = require("./react-runtime");
+const React = require("react");
 const { Component, PropTypes } = React;
 const invariant = require("invariant");
 
@@ -16,7 +16,7 @@ Node.isGLNode = true;
 Node.displayName = "GL.Node";
 
 Node.propTypes = {
-  shader: PropTypes.number.isRequired,
+  shader: PropTypes.any.isRequired,
   uniforms: PropTypes.object,
   children: PropTypes.node,
   width: PropTypes.number,

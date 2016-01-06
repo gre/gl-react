@@ -41,13 +41,29 @@ Renders a shader with an image (texture):
   */
 ```
 
-
 ## Props
 
-- **`shader`** *(id created by GL.Shaders.create)* **(required)**: The shader to use for rendering the `GL.Node`.
+- **`shader`** *(id created by GL.Shaders.create)* or *(inline object)* **(required)**: The shader to use for rendering the `GL.Node`.
 - **`width`** and **`height`** *(Number)* **(optional)**: the resolution in which the shader will be rendered. By default the resolution is inherited from parent GL.Node or parent Surface. You can have a tree of effects which uses different resolution quality (for instance it can make sense for Blur to reduce the framebuffer size).
+- **`pixelRatio`** *(Number)*: the pixel ratio to use for this GL.Node and sub-tree. By default it is inherited from parent.
 - **`uniforms`** *(object)*: an object that contains all uniform parameters to send to the shader. The key is the uniform name and the value is whatever value that makes sense for the uniform's type (see below).
 - **`preload`** *(bool)*: specify if all images used in uniforms in current GL.Node and all children should be waited before rendering the effect. `false` by default, this behavior should be explicitly enabled. (not that this can also be set at the Surface level)
+- **`onShaderCompile`** *(function)*: a function called **after each `render()`** allowing to track the compilation state. It is called with 2 parameters: error (node callback style) and result. result is an object giving shader types information, for instance: `{ uniforms: { value: "float" } }`. The default implementation is to `console.error` if there is an error, providing onShaderCompile will overrides this.
+
+## Inline shader support
+
+```js
+<GL.Node
+  shader={{
+    frag: "..."
+  }}
+  ...
+/>
+```
+
+This allows to define a shader inline. The difference with a shader created with `GL.Shaders.create` is that the shader will be destroyed when the Node disappears.
+
+`gl-react` factorizes duplicated shaders so you don't have to worry about performance issues for inline shaders. It also counts shaders reference and garbage collects them when not anymore used (in a debounced way).
 
 ## Uniform types
 

@@ -25,6 +25,18 @@ void main () {
 
 The value of each Shader is an object with a `frag` field: the fragment GLSL code.
 
+## Shaders compilation callback
+
+`GL.Shaders.create(spec, `**`onAllCompiled`**`)`
+
+By default, `GL.Shaders.create` will `console.error` each shader that fails.
+If you want to override this and hook to shader compilation status, you can provide a second parameter to `create` that will be called once with 2 parameters: errors and results. errors is null if all shaders are successful or an object describing the errors per shader. results is an object containing the shader types information per shader.
+
+## Shaders factorization and garbage collection
+
+gl-react factorizes duplicated shaders: when you define a shader, if it already exists the existed one is used to improve performance and memory.
+It also counts shaders reference and garbage collects them when not anymore used (in a debounced way). This only occurs when you use inline shaders, it is not possible to destroy shaders created with `Shaders.create`.
+
 ## About Shaders
 
 There are two kinds of OpenGL Shaders: vertex and fragment shaders.
