@@ -43,8 +43,7 @@ Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the 
 
 ```js
 const GL = require("gl-react");
-const React = GL.React;
-// ^ for all effects you want to share between iOS/Android/Web, please extract React from GL and this until react-native depends on react.
+const React = require("react");
 
 const shaders = GL.Shaders.create({
   helloGL: {

@@ -8,7 +8,7 @@ This is therefore the way to publish [**universal**](https://medium.com/@mjackso
 
 ```js
 const GL = require("gl-react");
-const React = GL.React;
+const React = require("react");
 
 const shaders = GL.Shaders.create({
   myEffect: {
@@ -41,7 +41,7 @@ you can then use it like this:
 
 ```js
 const GL = require("gl-react");
-const React = GL.React;
+const React = require("react");
 const MyEffect = require("gl-react-dom-myeffect");
 const {Surface} = require(/* "gl-react-native" or "gl-react-dom" */);
 
