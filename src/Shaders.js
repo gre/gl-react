@@ -1,15 +1,6 @@
 const {EventEmitter} = require("events");
 const invariant = require("invariant");
-
-function defer () {
-  const deferred = {};
-  const promise = new Promise((resolve, reject) => {
-    deferred.resolve = resolve;
-    deferred.reject  = reject;
-  });
-  deferred.promise = promise;
-  return deferred;
-}
+const defer = require("promise-defer");
 
 const INLINE_NAME = "<inline>";
 
