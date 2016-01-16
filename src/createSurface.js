@@ -8,6 +8,7 @@ const { fill, resolve, build } = require("./data");
 const Shaders = require("./Shaders");
 const findGLNodeInGLComponentChildren = require("./data/findGLNodeInGLComponentChildren");
 const invariantStrictPositive = require("./data/invariantStrictPositive");
+const AnimatedData = require("./AnimatedData");
 
 let _glSurfaceId = 1;
 
@@ -27,37 +28,34 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
       this._renderId = 0;
       this._id = _glSurfaceId ++;
     }
+
     componentWillMount () {
       Shaders._onSurfaceWillMount(this._id);
+      this._build(this.props);
+      this._attach();
     }
+
     componentWillUnmount () {
       this._renderId = 0;
       Shaders._onSurfaceWillUnmount(this._id);
+      this._dataAnimated && this._dataAnimated.__detach();
     }
-    getGLCanvas () {
-      return this.refs.canvas;
+
+    componentWillReceiveProps (nextProps) {
+      this._build(nextProps);
+      this._attach();
     }
-    captureFrame () {
-      const c = this.getGLCanvas();
-      invariant(c && c.captureFrame, "captureFrame() should be implemented by GLCanvas");
-      return c.captureFrame.apply(c, arguments);
-    }
-    render() {
+
+    _build (props) {
       const id = this._id;
       const renderId = ++this._renderId;
-      const props = this.props;
       const {
-        style,
         width,
         height,
         pixelRatio: pixelRatioProps,
         children,
         debug,
-        preload,
-        opaque,
-        visibleContent,
-        eventsThrough,
-        ...restProps
+        preload
       } = props;
 
       const decorateOnShaderCompile = onShaderCompile =>
@@ -105,9 +103,61 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         Shaders._afterSurfaceBuild(id);
       }
 
-      const { data, contentsVDOM, imagesToPreload } = resolved;
+      this._resolved = resolved;
+      this._pixelRatio = pixelRatio;
 
-      if (debug) logResult(data, contentsVDOM);
+      if (debug) logResult(resolved.data, resolved.contentsVDOM);
+    }
+
+    _attach () {
+      const oldDataAnimated = this._dataAnimated;
+      const callback = () => {
+        const canvas = this.getGLCanvas();
+        if (!canvas) return;
+        if (canvas.setNativeProps) {
+          const data = this._dataAnimated.__getValue();
+          canvas.setNativeProps({ data });
+        }
+        else {
+          this.forceUpdate();
+        }
+      };
+      this._dataAnimated = new AnimatedData(
+        this._resolved.data,
+        callback);
+
+      oldDataAnimated && oldDataAnimated.__detach();
+    }
+
+    getGLCanvas () {
+      return this.refs.canvas;
+    }
+
+    captureFrame () {
+      const c = this.getGLCanvas();
+      invariant(c, "c is '%s'. Is the component unmounted?", c);
+      invariant(c.captureFrame, "captureFrame() should be implemented by GLCanvas");
+      return c.captureFrame.apply(c, arguments);
+    }
+
+    render() {
+      const renderId = this._renderId;
+      const { contentsVDOM, imagesToPreload } = this._resolved;
+      const data = this._dataAnimated.__getValue();
+      const pixelRatio = this._pixelRatio;
+      const props = this.props;
+      const {
+        style,
+        width,
+        height,
+        children,
+        debug,
+        preload,
+        opaque,
+        visibleContent,
+        eventsThrough,
+        ...restProps
+      } = props;
 
       return renderVcontainer(
         { width, height, style, visibleContent, eventsThrough },

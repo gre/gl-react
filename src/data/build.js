@@ -7,6 +7,7 @@ const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
 const unifyPropsWithContext = require("./unifyPropsWithContext");
 const invariantStrictPositive = require("./invariantStrictPositive");
+const isAnimated = require("../isAnimated");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
@@ -49,11 +50,14 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
 
   Object.keys(uniforms).forEach(name => {
     let value = uniforms[name];
+
+    // Following part is a bit tricky: duck-typing to support many formats
+
     let nonSamplerUniformTyp = isNonSamplerUniformValue(value);
     if (nonSamplerUniformTyp) {
       if (process.env.NODE_ENV!=="production" && nonSamplerUniformTyp === "number[]") {
         let i = value.length;
-        while (i-- > 0 && !isNaN(value[i]));
+        while (i-- > 0 && (isAnimated(value[i]) || !isNaN(value[i])));
         invariant(i < 0, "Shader '%s': uniform '%s' must be an array of numbers. Found '%s' at index %s", shaderName, name, value[i], i);
       }
       return;
@@ -85,6 +89,11 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
     else if (typ === "object" && value.data && value.shape && value.stride) {
       // ndarray kind of texture
       uniforms[name] = TextureObjects.withOpts(TextureObjects.NDArray(value), opts);
+    }
+    else if (isAnimated(value) ||
+      (value && value instanceof Array && value.length > 0 && (typeof value[0] === "number" || isAnimated(value[0])))) {
+      // animated cases
+      uniforms[name] = value;
     }
     else if(typ === "object" && (value instanceof Array ? React.isValidElement(value[0]) : React.isValidElement(value))) {
       // value is a VDOM or array of VDOM
