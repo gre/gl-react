@@ -3,11 +3,10 @@ const invariant = require("invariant");
 const Uniform = require("../Uniform");
 const Shaders = require("../Shaders");
 const TextureObjects = require("./TextureObjects");
-const isNonSamplerUniformValue = require("./isNonSamplerUniformValue");
+const duckTypeUniformValue = require("./duckTypeUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
 const unifyPropsWithContext = require("./unifyPropsWithContext");
 const invariantStrictPositive = require("./invariantStrictPositive");
-const isAnimated = require("../isAnimated");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
@@ -49,79 +48,63 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
   });
 
   Object.keys(uniforms).forEach(name => {
-    let value = uniforms[name];
-
-    // Following part is a bit tricky: duck-typing to support many formats
-
-    let nonSamplerUniformTyp = isNonSamplerUniformValue(value);
-    if (nonSamplerUniformTyp) {
-      if (process.env.NODE_ENV!=="production" && nonSamplerUniformTyp === "number[]") {
-        let i = value.length;
-        while (i-- > 0 && (isAnimated(value[i]) || !isNaN(value[i])));
-        invariant(i < 0, "Shader '%s': uniform '%s' must be an array of numbers. Found '%s' at index %s", shaderName, name, value[i], i);
-      }
-      return;
-    }
-
-    let opts, typ = typeof value;
-
-    if (value && typ === "object" && !value.prototype && "value" in value) {
+    let value = uniforms[name], opts;
+    if (value && typeof value === "object" && !value.prototype && "value" in value) {
       // if value has a value field, we tread this field as the value, but keep opts in memory if provided
       if (typeof value.opts === "object") {
         opts = value.opts;
       }
       value = value.value;
-      typ = typeof value;
     }
 
-    if (!value) {
-      // falsy value are accepted to indicate blank texture
-      uniforms[name] = value;
-    }
-    else if (typ === "string") {
-      // uri specified as a string
-      uniforms[name] = TextureObjects.withOpts(TextureObjects.URI({ uri: value }), opts);
-    }
-    else if (typ === "object" && typeof value.uri === "string") {
-      // uri specified in an object, we keep all other fields for RN "local" image use-case
-      uniforms[name] = TextureObjects.withOpts(TextureObjects.URI(value), opts);
-    }
-    else if (typ === "object" && value.data && value.shape && value.stride) {
-      // ndarray kind of texture
-      uniforms[name] = TextureObjects.withOpts(TextureObjects.NDArray(value), opts);
-    }
-    else if (isAnimated(value) ||
-      (value && value instanceof Array && value.length > 0 && (typeof value[0] === "number" || isAnimated(value[0])))) {
-      // animated cases
-      uniforms[name] = value;
-    }
-    else if(typ === "object" && (value instanceof Array ? React.isValidElement(value[0]) : React.isValidElement(value))) {
-      // value is a VDOM or array of VDOM
-      const res = findGLNodeInGLComponentChildren(value, newContext);
-      if (res) {
-        const { childGLNode, via } = res;
-        // We have found a GL.Node children, we integrate it in the tree and recursively do the same
+    try {
+      switch (duckTypeUniformValue(value)) {
 
-        children.push({
-          vdom: value,
-          uniform: name,
-          data: build(childGLNode, newContext, preload, via, surfaceId, decorateOnShaderCompile)
-        });
-      }
-      else {
-        // in other cases VDOM, we will use child as a content
-        contents.push({
-          vdom: value,
-          uniform: name,
-          opts
-        });
+      case "string": // uri specified as a string
+        uniforms[name] = TextureObjects.withOpts(TextureObjects.URI({ uri: value }), opts);
+        break;
+
+      case "{uri}": // uri specified in an object, we keep all other fields for RN "local" image use-case
+        uniforms[name] = TextureObjects.withOpts(TextureObjects.URI(value), opts);
+        break;
+
+      case "ndarray":
+        uniforms[name] = TextureObjects.withOpts(TextureObjects.NDArray(value), opts);
+        break;
+
+      case "vdom[]":
+      case "vdom":
+        const res = findGLNodeInGLComponentChildren(value, newContext);
+        if (res) {
+          const { childGLNode, via } = res;
+          // We have found a GL.Node children, we integrate it in the tree and recursively do the same
+          children.push({
+            vdom: value,
+            uniform: name,
+            data: build(childGLNode, newContext, preload, via, surfaceId, decorateOnShaderCompile)
+          });
+        }
+        else {
+          // in other cases VDOM, we will use child as a content
+          contents.push({
+            vdom: value,
+            uniform: name,
+            opts
+          });
+        }
+        break;
+
+      default:
+        // Remaining cases will just set the value without further transformation
+        uniforms[name] = value;
       }
     }
-    else {
-      // in any other case, it is an unrecognized invalid format
+    catch (e) {
       delete uniforms[name];
-      if (typeof console !== "undefined" && console.error) console.error("invalid uniform '"+name+"' value:", value); // eslint-disable-line no-console
-      invariant(false, "Shader '%s': Unrecognized format for uniform '%s'", shaderName, name);
+      const message = "Shader '"+shaderName+"': uniform '"+name+"' "+e.message;
+      if (process.env.NODE_ENV !== "production")
+        console.error(message, value); // eslint-disable-line no-console
+      throw new Error(message);
     }
   });
 
