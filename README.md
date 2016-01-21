@@ -8,7 +8,7 @@ WebGL/OpenGL bindings for React to implement complex effects over images and con
 
 `gl-react` is the universal library that have 2 implementations:
 
-- [`gl-react-dom`](https://github.com/ProjectSeptemberInc/gl-react-native) for React DOM (web using WebGL).
+- [`gl-react-dom`](https://github.com/ProjectSeptemberInc/gl-react-dom) for React DOM (web using WebGL).
 - [`gl-react-native`](https://github.com/ProjectSeptemberInc/gl-react-native) for React Native (iOS and Android using OpenGL).
 
 
