@@ -179,4 +179,4 @@ const Shaders = {
 
 EventEmitter.call(Shaders);
 
-module.exports = Object.freeze(Shaders);
+module.exports = Shaders;
