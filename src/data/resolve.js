@@ -79,7 +79,7 @@ function resolve (dataTree) {
     toRecord.forEach(({ data, fboId, addToCollection }) => {
       if (recorded.indexOf(fboId) === -1) {
         recorded.push(fboId);
-        if (addToCollection) addToCollection.push(resolveRec(data, fboId, context, allFbos));
+        if (addToCollection) addToCollection.unshift(resolveRec(data, fboId, context, allFbos));
       }
     });
 
