@@ -29,7 +29,7 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
 
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
 
-  const shaderName = Shaders.getName(shader);
+  const shaderName = Shaders.get(shader).name;
   invariantStrictPositive(width, "GL Component ("+shaderName+"). width prop");
   invariantStrictPositive(height, "GL Component ("+shaderName+"). height prop");
   invariantStrictPositive(pixelRatio, "GL Component ("+shaderName+"). pixelRatio prop");

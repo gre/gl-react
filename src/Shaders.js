@@ -77,9 +77,9 @@ const findShaderId = (shaders, shader) => {
   return null;
 };
 
-const logError = name => error =>
+const logError = shader => error =>
   console.error( //eslint-disable-line no-console
-    "Shader '" + name + "' failed to compile:\n" + error
+    "Shader '" + shader.name + "' failed to compile:\n" + error
   );
 
 const Shaders = {
@@ -112,7 +112,7 @@ const Shaders = {
         error => compileHandler(error));
     }
     else {
-      promise.catch(logError(Shaders.getName(id)));
+      promise.catch(logError(Shaders.get(id)));
     }
     const inlines = surfaceInlines[surfaceId];
     inlines.push(id);
@@ -155,7 +155,7 @@ const Shaders = {
       }
       else {
         Object.keys(compileErrors).forEach(key =>
-          logError(Shaders.getName(result[key]))(compileErrors[key]));
+          logError(Shaders.get(result[key]))(compileErrors[key]));
       }
     });
     return result;
