@@ -181,6 +181,7 @@ const Shaders = {
 
   // Get the name of a shader. Deprecated, just use get(id).name
   getName (id) {
+    console.warn("GL.Shaders.getName(id): Please use `Shaders.get(id).name` instead");
     return names[id];
   },
 
