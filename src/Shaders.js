@@ -8,6 +8,7 @@ let _uid = 1;
 const names = {}; // keep names
 const shaders = {}; // keep shader objects
 const shadersCompileResponses = {}; // keep promise of compile responses
+const shadersCompileResults = {}; // keep only the successful result
 const shadersReferenceCounters = {}; // reference count the shaders created with Shaders.create()/used inline so we don't delete them if one of 2 dups is still used
 
 const surfaceInlines = {};
@@ -24,10 +25,13 @@ const add = shader => {
     shadersReferenceCounters[id] = 0;
     shadersCompileResponses[id] = promise = d.promise;
     Shaders.emit("add", id, shader, (error, result) => {
-      if (error)
+      if (error) {
         d.reject(error);
-      else
+      }
+      else {
+        shadersCompileResults[id] = result;
         d.resolve(result);
+      }
     });
   }
   else {
@@ -124,8 +128,9 @@ const Shaders = {
     scheduleGC();
   },
 
-  // Exposed methods
+  //~~~ Exposed methods ~~~ //
 
+  // Create shaders statically
   create (obj, onAllCompile) {
     invariant(typeof obj === "object", "config must be an object");
     const result = {};
@@ -156,18 +161,35 @@ const Shaders = {
     return result;
   },
 
+  // Get the shader object by id.
   get (id) {
     return Object.freeze(shaders[id]);
   },
 
+  // Synchronously retrieve the successful compilation response.
+  // returns or ShaderResult object or null if there were a failure or not ready
+  getCompilationResult (id) {
+    return shadersCompileResults[id] || null;
+  },
+
+  // Get the promise of the compilation state. Allows you to wait for compilation
+  // and also map on errors.
+  // Returns null only if you never have created this shader.
+  getCompilationPromise (id) {
+    return shadersCompileResponses[id] || null;
+  },
+
+  // Get the name of a shader. Deprecated, just use get(id).name
   getName (id) {
     return names[id];
   },
 
+  // List all shader ids that exists at the moment.
   list () {
     return Object.keys(shaders);
   },
 
+  // Check if a shader exists
   exists (id) {
     return id in shaders;
   },
