@@ -70,16 +70,15 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
       invariantStrictPositive(width, "GL.Surface: width prop");
       invariantStrictPositive(height, "GL.Surface: height prop");
 
-      const context = {
+      const glNode = findGLNodeInGLComponentChildren(children, {
         width,
         height,
         pixelRatio
-      };
-      const glNode = findGLNodeInGLComponentChildren(children, context);
+      });
 
       invariant(glNode && glNode.childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
 
-      const { via, childGLNode } = glNode;
+      const { via, childGLNode, context } = glNode;
 
       let resolved;
       try {

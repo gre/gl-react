@@ -5,7 +5,6 @@ const Shaders = require("../Shaders");
 const TextureObjects = require("./TextureObjects");
 const duckTypeUniformValue = require("./duckTypeUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
-const unifyPropsWithContext = require("./unifyPropsWithContext");
 const invariantStrictPositive = require("./invariantStrictPositive");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
@@ -18,7 +17,7 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
     width,
     height,
     pixelRatio
-  } = unifyPropsWithContext(props, context);
+  } = { ...context, ...props };
   const newContext = {
     width,
     height,
@@ -76,12 +75,12 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
       case "vdom":
         const res = findGLNodeInGLComponentChildren(value, newContext);
         if (res) {
-          const { childGLNode, via } = res;
+          const { childGLNode, via, context } = res;
           // We have found a GL.Node children, we integrate it in the tree and recursively do the same
           children.push({
             vdom: value,
             uniform: name,
-            data: build(childGLNode, newContext, preload, via, surfaceId, decorateOnShaderCompile)
+            data: build(childGLNode, context, preload, via, surfaceId, decorateOnShaderCompile)
           });
         }
         else {

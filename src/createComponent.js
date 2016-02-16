@@ -1,6 +1,5 @@
 const React = require("react");
 const invariant = require("invariant");
-const unifyPropsWithContext = require("./data/unifyPropsWithContext");
 
 module.exports = function createComponent (renderGLNode, staticFields) {
 
@@ -9,7 +8,7 @@ module.exports = function createComponent (renderGLNode, staticFields) {
 
   class GLComponent extends React.Component {
     render () {
-      const glNode = renderGLNode(unifyPropsWithContext(this.props, this.context));
+      const glNode = renderGLNode({ ...this.context, ...this.props });
 
       invariant(glNode && glNode.type && (glNode.type.isGLNode || glNode.type.isGLComponent),
       "%s: The GL.createComponent function parameter must return a GL.Node or "+
