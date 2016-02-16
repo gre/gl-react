@@ -9,10 +9,17 @@ const invariantStrictPositive = require("./invariantStrictPositive");
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
-module.exports = function build (GLNode, context, parentPreload, via, surfaceId, decorateOnShaderCompile) {
-  const props = GLNode.props;
+module.exports = function build (
+  glNode,
+  context,
+  parentPreload,
+  via,
+  surfaceId,
+  decorateOnShaderCompile
+) {
+  const props = glNode.props;
   const shader = Shaders._resolve(props.shader, surfaceId, decorateOnShaderCompile(props.onShaderCompile));
-  const GLNodeUniforms = props.uniforms;
+  const glNodeUniforms = props.uniforms;
   const {
     width,
     height,
@@ -23,7 +30,7 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
     height,
     pixelRatio
   };
-  const GLNodeChildren = props.children;
+  const glNodeChildren = props.children;
   const preload = "preload" in props ? props.preload : parentPreload;
 
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
@@ -33,15 +40,15 @@ module.exports = function build (GLNode, context, parentPreload, via, surfaceId,
   invariantStrictPositive(height, "GL Component ("+shaderName+"). height prop");
   invariantStrictPositive(pixelRatio, "GL Component ("+shaderName+"). pixelRatio prop");
 
-  const uniforms = { ...GLNodeUniforms };
+  const uniforms = { ...glNodeUniforms };
   const children = [];
   const contents = [];
 
-  React.Children.forEach(GLNodeChildren, child => {
+  React.Children.forEach(glNodeChildren, child => {
     invariant(child.type === Uniform, "(Shader '%s') GL.Node can only contains children of type GL.Uniform. Got '%s'", shaderName, child.type && child.type.displayName || child);
     const { name, children, ...opts } = child.props;
     invariant(typeof name === "string" && name, "(Shader '%s') GL.Uniform must define an name String", shaderName);
-    invariant(!GLNodeUniforms || !(name in GLNodeUniforms), "(Shader '%s') The uniform '%s' set by GL.Uniform must not be in {uniforms} props", shaderName);
+    invariant(!glNodeUniforms || !(name in glNodeUniforms), "(Shader '%s') The uniform '%s' set by GL.Uniform must not be in {uniforms} props", shaderName);
     invariant(!(name in uniforms), "(Shader '%s') The uniform '%s' set by GL.Uniform must not be defined in another GL.Uniform", shaderName);
     uniforms[name] = !children || children.value ? children : { value: children, opts }; // eslint-disable-line no-undef
   });

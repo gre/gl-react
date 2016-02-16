@@ -1,4 +1,3 @@
-const {EventEmitter} = require("events");
 const invariant = require("invariant");
 const defer = require("promise-defer");
 
@@ -14,25 +13,21 @@ const shadersReferenceCounters = {}; // reference count the shaders created with
 const surfaceInlines = {};
 const previousSurfaceInlines = {};
 
+let implDefer = defer();
+const implementation = implDefer.promise;
+
 const add = shader => {
   const existingId = findShaderId(shaders, shader);
   const id = existingId || _uid ++;
   let promise;
   if (!existingId) {
-    const d = defer();
     names[id] = shader.name;
     shaders[id] = shader;
     shadersReferenceCounters[id] = 0;
-    shadersCompileResponses[id] = promise = d.promise;
-    Shaders.emit("add", id, shader, (error, result) => {
-      if (error) {
-        d.reject(error);
-      }
-      else {
-        shadersCompileResults[id] = result;
-        d.resolve(result);
-      }
-    });
+    shadersCompileResponses[id] = promise =
+    implementation
+      .then(impl => impl.add(id, shader))
+      .then(result => shadersCompileResults[id] = result);
   }
   else {
     promise = shadersCompileResponses[id];
@@ -45,7 +40,7 @@ const remove = id => {
   delete names[id];
   delete shadersReferenceCounters[id];
   delete shadersCompileResponses[id];
-  Shaders.emit("remove", id);
+  implementation.then(impl => impl.remove(id));
 };
 
 const getShadersToRemove = () =>
@@ -179,12 +174,6 @@ const Shaders = {
     return shadersCompileResponses[id] || null;
   },
 
-  // Get the name of a shader. Deprecated, just use get(id).name
-  getName (id) {
-    console.warn("GL.Shaders.getName(id): Please use `Shaders.get(id).name` instead");
-    return names[id];
-  },
-
   // List all shader ids that exists at the moment.
   list () {
     return Object.keys(shaders);
@@ -197,9 +186,13 @@ const Shaders = {
 
   gcNow,
 
-  ...EventEmitter.prototype
+  setImplementation: impl => {
+    invariant(implDefer, "Shaders.setImplementation can be called only once");
+    implDefer.resolve(impl);
+    implDefer = null;
+  },
+
+  implementation
 };
 
-EventEmitter.call(Shaders);
-
-module.exports = Shaders;
+module.exports = Object.freeze(Shaders);

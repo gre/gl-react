@@ -6,6 +6,8 @@ const {
 const invariant = require("invariant");
 const { fill, resolve, build } = require("./data");
 const Shaders = require("./Shaders");
+const Node = require("./Node");
+const postShader = require("./postShader");
 const findGLNodeInGLComponentChildren = require("./data/findGLNodeInGLComponentChildren");
 const invariantStrictPositive = require("./data/invariantStrictPositive");
 const AnimatedData = require("./AnimatedData");
@@ -20,7 +22,12 @@ function logResult (data, contentsVDOM) {
   }
 }
 
-module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixelRatio) {
+module.exports = (
+  renderVcontainer,
+  renderVcontent,
+  renderVGL,
+  getPixelRatio
+) => {
 
   class GLSurface extends Component {
     constructor (props, context) {
@@ -58,6 +65,8 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
         preload
       } = props;
 
+      invariant(children, "GL.Surface must have in children a GL.Node or a GL Component");
+
       const decorateOnShaderCompile = onShaderCompile =>
       onShaderCompile && // only decorated if onShaderCompile is defined
       ((error, result) =>
@@ -70,11 +79,19 @@ module.exports = function (renderVcontainer, renderVcontent, renderVGL, getPixel
       invariantStrictPositive(width, "GL.Surface: width prop");
       invariantStrictPositive(height, "GL.Surface: height prop");
 
-      const glNode = findGLNodeInGLComponentChildren(children, {
+      const surfaceContext = {
         width,
         height,
         pixelRatio
-      });
+      };
+
+      const glNode = findGLNodeInGLComponentChildren(
+        <Node
+          shader={postShader}
+          {...surfaceContext}
+          uniforms={{ t: children }}
+        />,
+        surfaceContext);
 
       invariant(glNode && glNode.childGLNode, "GL.Surface must have in children a GL.Node or a GL Component");
 

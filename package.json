@@ -11,7 +11,6 @@
     "react": "^0.14.5"
   },
   "dependencies": {
-    "events": "1.1.0",
     "invariant": "2.2.0",
     "promise-defer": "1.0.0"
   },
