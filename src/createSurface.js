@@ -166,10 +166,10 @@ module.exports = (
         style,
         width,
         height,
+        backgroundColor,
         children,
         debug,
         preload,
-        opaque,
         visibleContent,
         eventsThrough,
         ...restProps
@@ -181,6 +181,7 @@ module.exports = (
           renderVcontent(data.width, data.height, i, vdom, { visibleContent })),
         renderVGL({
           ...restProps, // eslint-disable-line no-undef
+          style: { backgroundColor },
           width,
           height,
           pixelRatio,
@@ -188,7 +189,6 @@ module.exports = (
           nbContentTextures: contentsVDOM.length,
           imagesToPreload,
           renderId,
-          opaque,
           visibleContent,
           eventsThrough
         })
@@ -201,9 +201,9 @@ module.exports = (
   GLSurface.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    backgroundColor: PropTypes.string,
     pixelRatio: PropTypes.number,
     children: PropTypes.element.isRequired,
-    opaque: PropTypes.bool,
     preload: PropTypes.bool,
     autoRedraw: PropTypes.bool,
     eventsThrough: PropTypes.bool,
@@ -213,11 +213,11 @@ module.exports = (
   };
 
   GLSurface.defaultProps = {
-    opaque: true,
     preload: false,
     autoRedraw: false,
     eventsThrough: false,
-    visibleContent: false
+    visibleContent: false,
+    backgroundColor: "#000"
   };
 
   return GLSurface;

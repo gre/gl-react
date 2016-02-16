@@ -41,7 +41,7 @@ Renders some more complex stack of effects:
 
 - **`width`** and **`height`** *(Number)* **(required)**: the size of the view.
 - **`pixelRatio`** *(Number)*: the pixel ratio to use for the rendering. By default the screen pixel scale will be used.
-- **`opaque`** *(bool)*: specify if the view should be opaque. By default, it is true, meaning that the GL View won't support texture opacity and alpha channel.
+- **`backgroundColor`** *(object)*: By default is set to black (opaque). Use `"transparent"` when you need opacity.
 - **`preload`** *(bool)*: specify if the view should initially not render until all images are loaded. `false` by default, this behavior should be explicitly enabled.
 - **`onLoad`** *(function)*: callback called when the view is ready (has loaded all images in case of preload).
 - **`onProgress`** *(function)*: callback to track the progress of a loading (in case of preload). it receives `{progress,loaded,total}` (in React Native, this object is in `{nativeEvent}`).
