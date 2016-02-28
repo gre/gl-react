@@ -16,7 +16,7 @@ The library `gl-react` share most of the common code and exposes `{ Node, Unifor
 
 Both `gl-react-dom` and `gl-react-native` depends on `gl-react` and exposes the `{ Surface }` implementation.
 
-[![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react/Examples/Blur/)
+[![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](http://projectseptemberinc.github.io/gl-react-dom/Examples/Blur/)
 
 ## Examples
 
