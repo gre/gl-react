@@ -8,7 +8,7 @@
     "prepublish": "npm run compile"
   },
   "peerDependencies": {
-    "react": "^0.14.5"
+    "react": "^0.14.5 || ^15.0.0"
   },
   "dependencies": {
     "invariant": "2.2.0",
