@@ -76,8 +76,6 @@ module.exports = (
       const pixelRatio = pixelRatioProps || getPixelRatio(props);
 
       invariantStrictPositive(pixelRatio, "GL.Surface: pixelRatio prop");
-      invariantStrictPositive(width, "GL.Surface: width prop");
-      invariantStrictPositive(height, "GL.Surface: height prop");
 
       const surfaceContext = {
         width,
@@ -199,8 +197,8 @@ module.exports = (
   GLSurface.displayName = "GL.Surface";
 
   GLSurface.propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    width: PropTypes.any.isRequired,
+    height: PropTypes.any.isRequired,
     backgroundColor: PropTypes.string,
     pixelRatio: PropTypes.number,
     children: PropTypes.element.isRequired,

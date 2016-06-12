@@ -122,7 +122,9 @@ class AnimatedData extends AnimatedWithChildren {
   }
 
   __getValue() {
-    const { ...data, contextChildren, children, uniforms } = this._data;
+    const { ...data, contextChildren, width, height, children, uniforms } = this._data;
+    data.width = isAnimated(width) ? width.__getValue() : width;
+    data.height = isAnimated(height) ? height.__getValue() : height;
     data.contextChildren = contextChildren.map(c => c.__getValue());
     data.children = children.map(c => c.__getValue());
     data.uniforms = uniforms.__getValue();
@@ -130,14 +132,18 @@ class AnimatedData extends AnimatedWithChildren {
   }
 
   __attach() {
-    const { contextChildren, children, uniforms } = this._data;
+    const { contextChildren, children, uniforms, width, height } = this._data;
+    if (isAnimated(width)) width.__addChild(this);
+    if (isAnimated(height)) height.__addChild(this);
     contextChildren.forEach(c => c.__addChild(this));
     children.forEach(c => c.__addChild(this));
     uniforms.__addChild(this);
   }
 
   __detach() {
-    const { contextChildren, children, uniforms } = this._data;
+    const { contextChildren, children, uniforms, width, height } = this._data;
+    if (isAnimated(width)) width.__removeChild(this);
+    if (isAnimated(height)) height.__removeChild(this);
     contextChildren.forEach(c => c.__removeChild(this));
     children.forEach(c => c.__removeChild(this));
     uniforms.__removeChild(this);

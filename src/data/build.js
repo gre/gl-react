@@ -36,8 +36,6 @@ module.exports = function build (
   invariant(Shaders.exists(shader), "Shader #%s does not exists", shader);
 
   const shaderName = Shaders.get(shader).name;
-  invariantStrictPositive(width, "GL Component ("+shaderName+"). width prop");
-  invariantStrictPositive(height, "GL Component ("+shaderName+"). height prop");
   invariantStrictPositive(pixelRatio, "GL Component ("+shaderName+"). pixelRatio prop");
 
   const uniforms = { ...glNodeUniforms };

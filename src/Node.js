@@ -19,8 +19,8 @@ Node.propTypes = {
   shader: PropTypes.any.isRequired,
   uniforms: PropTypes.object,
   children: PropTypes.node,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.any,
+  height: PropTypes.any,
   preload: PropTypes.bool
 };
 
