@@ -3,7 +3,7 @@ const isAnimated = require("../isAnimated");
 
 // infer the uniform value type and validate it (throw error if invalid)
 
-module.exports = function (obj) {
+function duckTypeUniformValue (obj) {
   let typ = typeof obj;
 
   if (typ==="number") {
@@ -53,6 +53,8 @@ module.exports = function (obj) {
             foundAnimated = true;
           else if (val && React.isValidElement(val))
             foundVDOM = true;
+          else if (val instanceof Array)
+            return duckTypeUniformValue(val);
           else
             throw new Error("at index "+i+", Unrecognized object: '"+val+"'");
           break;
@@ -101,4 +103,6 @@ module.exports = function (obj) {
   }
 
   throw new Error("Unrecognized object: "+obj);
-};
+}
+
+module.exports = duckTypeUniformValue;
