@@ -36,6 +36,8 @@ It can be an image, a video, a complex content (including texts and images...) o
 In `gl-react-native`, **uniforms can contain any content**!
 The resulting UIView will be rasterized and rendered into the GL pipeline as a texture.
 
+> **NB: Support of this is still experimental and CPU consuming.**
+
 **Example (adapted from Simple/):**
 
 ```html
@@ -65,6 +67,14 @@ which can also be written as:
   }}
 />
 ```
+
+### Images and React Native
+
+if you use local images that you `require("./image.png")` you will have to wrap it in `resolveAssetSource(...)` because otherwise it's a number and `gl-react` won't understand it.
+
+You can `import {resolveAssetSource} from "gl-react-native"`.
+
+Also, if you just want to gets an image in a uniform, we recommend you not to use the React Native `Image` but instead to use the URL format or to use a library like `gl-react-image`.
 
 
 ### Using `gl-react-dom`
