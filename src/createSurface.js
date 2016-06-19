@@ -11,6 +11,7 @@ const postShader = require("./postShader");
 const findGLNodeInGLComponentChildren = require("./data/findGLNodeInGLComponentChildren");
 const invariantStrictPositive = require("./data/invariantStrictPositive");
 const AnimatedData = require("./AnimatedData");
+const runtime = require("./runtime");
 
 let _glSurfaceId = 1;
 
@@ -161,13 +162,11 @@ module.exports = (
       const pixelRatio = this._pixelRatio;
       const props = this.props;
       const {
+        children, debug, preload, // eslint-disable-line no-unused-vars
         style,
         width,
         height,
         backgroundColor,
-        children,
-        debug,
-        preload,
         visibleContent,
         eventsThrough,
         ...restProps
@@ -176,7 +175,7 @@ module.exports = (
       return renderVcontainer(
         { width, height, style, visibleContent, eventsThrough },
         contentsVDOM.map((vdom, i) =>
-          renderVcontent(data.width, data.height, i, vdom, { visibleContent })),
+          renderVcontent(data.width, data.height, i, runtime.decorateVDOMContent(vdom), { visibleContent })),
         renderVGL({
           ...restProps, // eslint-disable-line no-undef
           style: { backgroundColor },

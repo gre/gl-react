@@ -3,6 +3,7 @@ const createSurface = require("./createSurface");
 const Node = require("./Node");
 const Shaders = require("./Shaders");
 const Uniform = require("./Uniform");
+const runtime = require("./runtime");
 
 module.exports = {
   createComponent,
@@ -10,4 +11,5 @@ module.exports = {
   Node,
   Shaders,
   Uniform,
+  runtime,
 };

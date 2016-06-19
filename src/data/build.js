@@ -6,6 +6,7 @@ const TextureObjects = require("./TextureObjects");
 const duckTypeUniformValue = require("./duckTypeUniformValue");
 const findGLNodeInGLComponentChildren = require("./findGLNodeInGLComponentChildren");
 const invariantStrictPositive = require("./invariantStrictPositive");
+import runtime from "../runtime";
 
 //// build: converts the gl-react VDOM DSL into an internal data tree.
 
@@ -61,6 +62,8 @@ module.exports = function build (
       value = value.value;
     }
 
+    value = runtime.decorateUniformValue(value);
+
     try {
       switch (duckTypeUniformValue(value)) {
 
@@ -77,7 +80,7 @@ module.exports = function build (
         break;
 
       case "vdom[]":
-      case "vdom":
+      case "vdom": {
         const res = findGLNodeInGLComponentChildren(value, newContext);
         if (res) {
           const { childGLNode, via, context } = res;
@@ -97,6 +100,7 @@ module.exports = function build (
           });
         }
         break;
+      }
 
       default:
         // Remaining cases will just set the value without further transformation
