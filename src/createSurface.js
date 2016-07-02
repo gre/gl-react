@@ -27,7 +27,8 @@ module.exports = (
   renderVcontainer,
   renderVcontent,
   renderVGL,
-  getPixelRatio
+  getPixelRatio,
+  getGLCanvas = glSurface => glSurface.refs.canvas,
 ) => {
 
   class GLSurface extends Component {
@@ -145,7 +146,7 @@ module.exports = (
     }
 
     getGLCanvas () {
-      return this.refs.canvas;
+      return getGLCanvas(this);
     }
 
     captureFrame () {
