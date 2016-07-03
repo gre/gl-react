@@ -173,10 +173,21 @@ module.exports = (
         ...restProps
       } = props;
 
+      if (process.env.NODE_ENV !== "production") {
+        const withoutKeys = contentsVDOM.filter(c => !c.key);
+        if (withoutKeys.length > 0) {
+          console.warn(
+`gl-react: To avoid potential remounting, please define a \`key\` prop on your contents:
+
+${withoutKeys.map(c => "<"+(c.type.name || c.type.displayName || "unknown")+" key=??? ... />").join("\n")}
+`);
+        }
+      }
+
       return renderVcontainer(
         { width, height, style, visibleContent, eventsThrough },
         contentsVDOM.map((vdom, i) =>
-          renderVcontent(data.width, data.height, i, runtime.decorateVDOMContent(vdom), { visibleContent })),
+          renderVcontent(data.width, data.height, vdom.key || i, runtime.decorateVDOMContent(vdom), { visibleContent })),
         renderVGL({
           ...restProps, // eslint-disable-line no-undef
           style: { backgroundColor },
