@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "gl-react-dom",
+  "version": "3.0.0-alpha",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "DOM implementation of gl-react, an universal React library to write and compose WebGL shaders",
+  "keywords": [
+    "gl-react",
+    "gl",
+    "opengl",
+    "react",
+    "react-dom",
+    "react-component"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib",
+    ".flowconfig",
+    "README.md",
+    "LICENSE",
+    "gl-react-dom.js"
+  ],
+  "browserify-shim": {
+    "gl-react": "global:GL",
+    "react": "global:React"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "gl-react": "3.0.x"
+  },
+  "dependencies": {
+    "gl-texture2d": "^2.0.11",
+    "invariant": "^2.2.1"
+  }
+}

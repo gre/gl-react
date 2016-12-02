@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "name": "gl-react",
+  "version": "3.0.0-alpha",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
+  "keywords": [
+    "gl-react",
+    "gl",
+    "opengl",
+    "react",
+    "react-component"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib",
+    "flow",
+    ".flowconfig",
+    "README.md",
+    "LICENSE",
+    "gl-react.js"
+  ],
+  "browserify-shim": {
+    "react": "global:React"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "dependencies": {
+    "gl-fbo": "^2.0.5",
+    "gl-shader": "^4.2.1",
+    "gl-texture2d": "^2.0.12",
+    "invariant": "^2.2.1",
+    "ndarray": "^1.0.18",
+    "raf": "^3.3.0",
+    "typedarray-pool": "^1.1.0"
+  }
+}

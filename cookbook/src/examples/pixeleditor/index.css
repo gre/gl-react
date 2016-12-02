@@ -1,0 +1,39 @@
+#pixeleditor {}
+#pixeleditor canvas {
+  background: #ccc url(https://i.imgur.com/RE6MGrd.png) repeat;
+  background-size: 16px 16px;
+  border-bottom: 2px solid #000;
+}
+
+#pixeleditor .toolbox {
+  align-items: center;
+}
+#pixeleditor .tools {
+  display: flex;
+  flex-direction: row;
+}
+#pixeleditor .tools > div {
+  border: 2px solid;
+  margin: 0 10px;
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+}
+#pixeleditor .tools > div.selected {
+  border-color: #f00;
+}
+#pixeleditor .tools .brush-1 {
+  background-image: url(./brush-1.png);
+}
+#pixeleditor .tools .brush-2 {
+  background-image: url(./brush-2.png);
+}
+#pixeleditor .tools .brush-4 {
+  background-image: url(./brush-4.png);
+}
+#pixeleditor .tools .rubber {
+  background-image: url(./rubber.png);
+}
+#pixeleditor .tools .color-picker {
+  background-image: url(./color-picker.png);
+}

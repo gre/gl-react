@@ -1,0 +1,13 @@
+pre.cookbook-code a {
+  color: inherit;
+}
+pre.cookbook-code .js-template-string-glsl {
+  background: rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  display: block;
+  max-height: 65vh;
+  overflow-y: scroll;
+}
+pre.cookbook-code {
+  margin: 0;
+}

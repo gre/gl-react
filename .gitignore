@@ -1,0 +1,11 @@
+node_modules
+coverage
+build
+.DS_Store
+.env
+npm-debug.log
+*.tmp
+packages/*/lib
+packages/gl-react/gl-react.js
+packages/gl-react-dom/gl-react-dom.js
+tests/node_modules_to_test/

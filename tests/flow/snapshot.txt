@@ -1,0 +1,310 @@
+incorrect.js:21
+ 21: <Node />;
+     ^^^^^^^^ React element `Node`
+169: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:169
+ 21: <Node />;
+     ^^^^^^^^ props of React element `Node`
+
+incorrect.js:22
+ 22: <Surface />;
+     ^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 22: <Surface />;
+     ^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:22
+ 22: <Surface />;
+     ^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 22: <Surface />;
+     ^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:27
+ 27: <Node nope />;
+     ^^^^^^^^^^^^^ React element `Node`
+ 27: <Node nope />;
+     ^^^^^^^^^^^^^ property `nope`. Property not found in
+169: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:169
+
+incorrect.js:27
+ 27: <Node nope />;
+     ^^^^^^^^^^^^^ React element `Node`
+169: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:169
+ 27: <Node nope />;
+     ^^^^^^^^^^^^^ props of React element `Node`
+
+incorrect.js:28
+ 28: <Surface nope />;
+     ^^^^^^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 28: <Surface nope />;
+     ^^^^^^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:28
+ 28: <Surface nope />;
+     ^^^^^^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 28: <Surface nope />;
+     ^^^^^^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:29
+ 29: <LinearCopy nope />;
+     ^^^^^^^^^^^^^^^^^^^ React element `LinearCopy`
+ 29: <LinearCopy nope />;
+     ^^^^^^^^^^^^^^^^^^^ property `nope`. Property not found in
+  6: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/LinearCopy.js.flow:6
+
+incorrect.js:30
+ 30: <NearestCopy nope />;
+     ^^^^^^^^^^^^^^^^^^^^ React element `NearestCopy`
+ 30: <NearestCopy nope />;
+     ^^^^^^^^^^^^^^^^^^^^ property `nope`. Property not found in
+  6: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/NearestCopy.js.flow:6
+
+incorrect.js:31
+ 31: <Bus nope />;
+     ^^^^^^^^^^^^ React element `Bus`
+ 31: <Bus nope />;
+     ^^^^^^^^^^^^ property `nope`. Property not found in
+ 11: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Bus.js.flow:11
+
+incorrect.js:33
+ 33: const shaders = Shaders.create({
+                     ^ call of method `create`
+ 37:   a: null,
+          ^^^^ null. Inexact type is incompatible with exact type
+ 45:   [key:string]: ShaderDefinition
+                     ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
+
+incorrect.js:33
+ 33: const shaders = Shaders.create({
+                     ^ call of method `create`
+ 39:   c: { frag: true },
+                  ^^^^ boolean. This type is incompatible with
+ 16:   frag: GLSLCode
+             ^^^^^^^^ string. See: ../node_modules/gl-react/lib/Shaders.js.flow:16
+
+incorrect.js:33
+ 33: const shaders = Shaders.create({
+                     ^ call of method `create`
+ 15: type ShaderDefinition = {|
+                             ^ property `frag`. Property not found in. See: ../node_modules/gl-react/lib/Shaders.js.flow:15
+ 38:   b: {},
+          ^^ object literal
+
+incorrect.js:48
+ 48:       surface.nope();
+                   ^^^^ property `nope`. Property not found in
+ 48:       surface.nope();
+           ^^^^^^^ ISurface
+
+incorrect.js:49
+ 49:       node.nope();
+                ^^^^ property `nope`. Property not found in
+ 49:       node.nope();
+           ^^^^ Node
+
+incorrect.js:54
+ 54:     <Surface ref={ref => this.surface=ref} notexists>
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 54:     <Surface ref={ref => this.surface=ref} notexists>
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:54
+ 54:     <Surface ref={ref => this.surface=ref} notexists>
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
+ 38: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 54:     <Surface ref={ref => this.surface=ref} notexists>
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
+
+incorrect.js:55
+ 55:       <Bus ref="o" notexists>
+           ^^^^^^^^^^^^^^^^^^^^^^^ React element `Bus`
+ 55:       <Bus ref="o" notexists>
+           ^^^^^^^^^^^^^^^^^^^^^^^ property `notexists`. Property not found in
+ 11: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Bus.js.flow:11
+
+incorrect.js:56
+ 56:         <Node />
+             ^^^^^^^^ React element `Node`
+169: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:169
+ 56:         <Node />
+             ^^^^^^^^ props of React element `Node`
+
+incorrect.js:58
+ 58:       <LinearCopy notexists>
+           ^^^^^^^^^^^^^^^^^^^^^^ React element `LinearCopy`
+ 58:       <LinearCopy notexists>
+           ^^^^^^^^^^^^^^^^^^^^^^ property `notexists`. Property not found in
+  6: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/LinearCopy.js.flow:6
+
+incorrect.js:59
+ 59:         <Node
+             ^ React element `Node`
+ 59:         <Node
+             ^ property `notexists`. Property not found in
+169: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:169
+
+incorrect.js:59
+ 59:         <Node
+             ^ React element `Node`
+ 59:         <Node
+             ^ property `shaders`. Property not found in
+169: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:169
+
+incorrect.js:59
+ 59:         <Node
+             ^ React element `Node`
+169: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:169
+ 59:         <Node
+             ^ props of React element `Node`
+
+incorrect.js:69
+ 69: connectSize();
+     ^^^^^^^^^^^^^ function call
+ 69: connectSize();
+     ^^^^^^^^^^^^^ undefined (too few arguments, expected default/rest parameters). This type is incompatible with
+ 18: const connectSize = (GLComponent: ReactClass<*>|(props:any)=>React.Element<*>) => class extends Component {
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: type application of identifier `ReactClass` | function type. See: ../node_modules/gl-react/lib/connectSize.js.flow:18
+  Member 1:
+   18: const connectSize = (GLComponent: ReactClass<*>|(props:any)=>React.Element<*>) => class extends Component {
+                                         ^^^^^^^^^^^^^ type application of identifier `ReactClass`. See: ../node_modules/gl-react/lib/connectSize.js.flow:18
+  Error:
+   69: connectSize();
+       ^^^^^^^^^^^^^ undefined (too few arguments, expected default/rest parameters). This type is incompatible with
+   18: const connectSize = (GLComponent: ReactClass<*>|(props:any)=>React.Element<*>) => class extends Component {
+                                         ^^^^^^^^^^^^^ class type: existential. See: ../node_modules/gl-react/lib/connectSize.js.flow:18
+  Member 2:
+   18: const connectSize = (GLComponent: ReactClass<*>|(props:any)=>React.Element<*>) => class extends Component {
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function type. See: ../node_modules/gl-react/lib/connectSize.js.flow:18
+  Error:
+   69: connectSize();
+       ^^^^^^^^^^^^^ undefined (too few arguments, expected default/rest parameters). This type is incompatible with
+   18: const connectSize = (GLComponent: ReactClass<*>|(props:any)=>React.Element<*>) => class extends Component {
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function type. See: ../node_modules/gl-react/lib/connectSize.js.flow:18
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 73: <Node
+     ^ property `preload`. Property not found in
+169: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:169
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 73: <Node
+     ^ property `visitor`. Property not found in
+169: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:169
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 74:   sync={1}
+             ^ number. This type is incompatible with
+173:   sync?: bool,
+              ^^^^ boolean. See: ../node_modules/gl-react/lib/Node.js.flow:173
+
+incorrect.js:73
+ 73: <Node
+     ^ props of React element `Node`
+ 75:   clear={42}
+              ^^ number. Inexact type is incompatible with exact type
+187:   clear: ?Clear,
+               ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:187
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 76:   width={false}
+              ^^^^^ boolean. This type is incompatible with
+174:   width?: number,
+               ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:174
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 77:   height={false}
+               ^^^^^ boolean. This type is incompatible with
+175:   height?: number,
+                ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:175
+
+incorrect.js:73
+ 73: <Node
+     ^ props of React element `Node`
+ 78:   blendFunc={{
+                  ^ property `interpolation`. Property not found in
+ 98: type BlendFuncSrcDst = {|
+                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:98
+
+incorrect.js:73
+ 73: <Node
+     ^ props of React element `Node`
+ 78:   blendFunc={{
+                  ^ property `wrap`. Property not found in
+ 98: type BlendFuncSrcDst = {|
+                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:98
+
+incorrect.js:73
+ 73: <Node
+     ^ props of React element `Node`
+ 79:     src: "nope",
+              ^^^^^^ property `nope`. Property not found in
+ 99:   src: BlendFunc,
+            ^^^^^^^^^ object literal. See: ../node_modules/gl-react/lib/Node.js.flow:99
+
+incorrect.js:73
+ 73: <Node
+     ^ React element `Node`
+ 85:   shader={false}
+               ^^^^^ boolean. This type is incompatible with
+170:   shader: ShaderIdentifier | ShaderDefinition,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: ShaderIdentifier | ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:170
+  Member 1:
+  170:   shader: ShaderIdentifier | ShaderDefinition,
+                 ^^^^^^^^^^^^^^^^ ShaderIdentifier. See: ../node_modules/gl-react/lib/Node.js.flow:170
+  Error:
+   85:   shader={false}
+                 ^^^^^ boolean. This type is incompatible with
+  170:   shader: ShaderIdentifier | ShaderDefinition,
+                 ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+  Member 2:
+  170:   shader: ShaderIdentifier | ShaderDefinition,
+                                    ^^^^^^^^^^^^^^^^ ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:170
+  Error:
+   85:   shader={false}
+                 ^^^^^ boolean. Inexact type is incompatible with exact type
+  170:   shader: ShaderIdentifier | ShaderDefinition,
+                                    ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+
+incorrect.js:73
+ 73: <Node
+     ^ props of React element `Node`
+ 98: type BlendFuncSrcDst = {|
+                            ^ property `dst`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:98
+ 78:   blendFunc={{
+                  ^ object literal
+
+
+Found 35 errors

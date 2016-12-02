@@ -1,0 +1,55 @@
+{
+  "private": true,
+  "name": "gre-js13k-2014",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rm -rf build/; mkdir -p build target",
+    "compileglsl": "./scripts/compileglslfiles.sh src/shaders build",
+    "concat": "./scripts/concat.sh > build/build.js",
+    "minify": "uglifyjs build/build.js -c --screw-ie8 -m -o build/build.min.js",
+    "nominify": "cp build/build.js build/build.min.js",
+    "gen": "cp src/target.html target/index.html && cp build/build.min.js target/b.js",
+    "build": "export NODE_ENV=production; npm run clean && npm run compileglsl && npm run concat && npm run minify && npm run gen && npm run zip",
+    "build-nominify": "npm run clean && npm run compileglsl && npm run concat && npm run nominify && npm run gen",
+    "watch": "npm run build-nominify; wr 'npm run build-nominify' src/ scripts/",
+    "liveserver": "mkdir -p target; cd target; live-server --no-browser",
+    "zip": "cd target; zip -r ../target.zip .; cd ..; wc -c target.zip",
+    "start": "budo index.js:bundle.js | garnish"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "glslify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gre/js13k-2014.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gre/js13k-2014/issues"
+  },
+  "homepage": "https://github.com/gre/js13k-2014",
+  "devDependencies": {
+    "babelify": "^6.4.0",
+    "browserify": "^11.0.1",
+    "budo": "^5.1.5",
+    "eslint": "^1.3.0",
+    "garnish": "^3.2.1",
+    "glslify": "^2.3.1",
+    "glslmin": "0.0.0",
+    "live-server": "^0.8.1",
+    "uglify-js": "^2.4.24",
+    "uglifycss": "^0.0.17",
+    "wr": "^1.3.1"
+  },
+  "dependencies": {
+    "gl-react": "^1.2.5",
+    "gl-react-inspector": "0.0.2",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
+}

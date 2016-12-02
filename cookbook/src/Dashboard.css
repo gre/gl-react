@@ -1,0 +1,63 @@
+.dashboard {
+  color: #eee;
+  margin: 10px auto;
+  width: 650px;
+}
+
+.dashboard h2 {
+  font-weight: normal;
+  margin: 0.6em 0 1.2em 0;
+}
+
+.dashboard nav {
+  margin: 2em 0;
+  font-size: 1.4em;
+  letter-spacing: 0.08em;
+}
+.dashboard nav a {
+  display: block;
+  padding: 0.2em 0;
+  text-decoration: none;
+  opacity: 0.6;
+}
+.dashboard nav a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.dashboard .ex {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.dashboard .showcode, .dashboard .showunderthehood {
+  opacity: 0.5;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 10px;
+}
+.dashboard .showcode:hover, .dashboard .showunderthehood:hover {
+  opacity: 1;
+}
+.dashboard .showcode {
+  text-align: center;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: top left;
+  width: 200px;
+  position: absolute;
+  left: 200px;
+}
+.dashboard .showunderthehood {
+  text-align: center;
+}
+.dashboard .ex > header {
+  display: flex;
+  flex-direction: row;
+}
+.dashboard .ex pre {
+  flex: 1;
+}
+.dashboard .gl-react-inspector {
+  background: #fff;
+  height: 400px;
+}

@@ -1,0 +1,334 @@
+.gl-react-inspector {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 12px;
+  background: #fff;
+  color: #000;
+}
+.gl-react-inspector h2 {
+  font-weight: normal;
+}
+.gl-react-inspector .no-surface {
+  padding: 20px;
+}
+.gl-react-inspector .no-surface ul {
+  font-size: 16px;
+}
+.gl-react-inspector .no-surface li span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.gl-react-inspector > header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4px;
+  background: #fff;
+}
+
+.gl-react-inspector > header label {
+  margin-right: 5px;
+}
+
+.gl-react-inspector .btn {
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: none;
+  display: inline-block;
+  text-align: right;
+}
+
+.gl-react-inspector .body {
+  flex: 1;
+  background: #f3f3f3;
+  overflow: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+.gl-react-inspector .body .nodes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AscDA0JcudXmQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABIElEQVR42u3cMQqAQAxE0YkK3v/Ago3gEULIe43lwvLZzqn0Ob/v4/wWd5IcYTUBCAABIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIABmqfx/qbLL5QUg1Xi2fYDe8+0DIAABuAIBIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIACmsQ+wl30A7ANsPt8+AAIQgCsQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJgGvsAe9kHwD7A5vPtAyAAAbgCASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAApql8f4niBWChF2e+DTF+hz42AAAAAElFTkSuQmCC');
+  background-size: 64px 64px;
+}
+
+.gl-react-inspector .body .hook-drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  user-select: none;
+}
+
+.gl-react-inspector .box {
+  position: absolute;;
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0);
+  border: 1px solid #eee;
+  background: #fff;
+  transition: 0.2s border-color;
+}
+.gl-react-inspector .box.recent-draw {
+  border-color: #999;
+  transition: 0.1s border-color;
+}
+
+/*
+.gl-react-inspector .box.node header .name {
+  color: #C30;
+}
+.gl-react-inspector .box.bus header .name {
+  color: #093;
+}
+*/
+
+.gl-react-inspector .box header {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  padding: 0px 4px;
+  margin-bottom: 4px;
+  line-height: 24px;
+  cursor: move;
+  border-bottom: 1px solid #eee;
+}
+
+.gl-react-inspector .box header .name {
+  flex: 1;
+  font-weight: bold;
+  word-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gl-react-inspector .box header .redraw {
+  padding-left: 10px;
+  padding: 0px 6px;
+  min-width: 30px;
+  line-height: 24px;
+  opacity: 0.5;
+  cursor: pointer;
+  text-align: right;
+}
+.gl-react-inspector .box header .redraw:hover {
+  opacity: 1;
+}
+.gl-react-inspector .box header .drawCount {
+  font-size: 10px;
+  min-width: 20px;
+  text-align: right;
+}
+
+.gl-react-inspector .box .content-html {
+  max-height: 80px;
+  overflow: auto;
+  color: #aaa;
+  padding: 2px 8px;
+  font-size: 9px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.gl-react-inspector .box.minimized {
+  width: 80px;
+}
+.gl-react-inspector .box.minimized header {
+  border-bottom: none;
+  margin-bottom: -2px;
+}
+.gl-react-inspector .box.minimized footer {
+  border-top: none;
+  margin-top: 0;
+}
+.gl-react-inspector .box.minimized .redraw,
+.gl-react-inspector .box.minimized .content-html {
+  display: none;
+}
+.gl-react-inspector .box.minimized .uniform {
+  line-height: 12px;
+}
+.gl-react-inspector .box.minimized .uniform .anchor-hook {
+  height: 12px;
+}
+.gl-react-inspector .box.minimized .uniform:not(.type-sampler2D):not(.type-array-sampler2D) {
+  display: none;
+}
+
+.gl-react-inspector .box footer {
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 2px 4px;
+  margin-top: 4px;
+  border-top: 1px solid #eee;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.gl-react-inspector .box footer .minimize {
+  opacity: 0;
+  position: absolute;
+  left: -12px;
+  padding: 1px 4px;
+}
+.gl-react-inspector .box:hover footer .minimize {
+  opacity: 0.2;
+}
+.gl-react-inspector .box footer:hover .minimize {
+  opacity: 1;
+}
+.gl-react-inspector .box footer .dim {
+  color: #888;
+  font-size: 8px;
+}
+.gl-react-inspector .box footer .mode {
+  padding-left: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.gl-react-inspector .box .anchor-hook {
+  position: absolute;
+  left: -2px;
+  height: 16px;
+}
+
+.gl-react-inspector .box .hook {
+  position: absolute;
+  right: 0px;
+  height: 20px;
+}
+
+.gl-react-inspector .uniforms {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gl-react-inspector .uniforms .uniform {
+  line-height: 18px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.gl-react-inspector .uniforms .name {
+  color: #000;
+  display: inline-block;
+  padding: 0 4px;
+}
+.gl-react-inspector .uniforms .value-container {
+  /*white-space: nowrap;*/
+  word-break: break-all;
+  padding-right: 6px;
+  overflow: hidden;
+}
+.gl-react-inspector .uniforms .val {
+  color: #850;
+  background: #ffc;
+  padding: 1px 3px;
+  border: 1px solid #ed9;
+}
+.gl-react-inspector .uniforms .value.type-sampler2D {
+  text-align: right;
+}
+.gl-react-inspector .uniforms .value.type-sampler2D .val {
+  display: none;
+}
+
+.gl-react-inspector .uniforms .value-array .value-array,
+.gl-react-inspector .uniforms .value.type-sampler2D {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gl-react-inspector .uniforms .value-array > :first-child:before {
+  content: "[";
+  color: #aaa;
+}
+.gl-react-inspector .uniforms .value-array > :after {
+  content: ",";
+  color: #aaa;
+}
+.gl-react-inspector .uniforms .value-array > :last-child:after {
+  content: "]";
+  color: #aaa;
+}
+
+.gl-react-inspector .uniforms .meta-info {
+  color: #ec6;
+  padding: 0 2px;
+}
+
+.gl-react-inspector .preview {
+}
+
+.gl-react-inspector .preview {
+  background: #fff;
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.gl-react-inspector .connection circle {
+  fill: #666;
+  r: 1;
+}
+
+.gl-react-inspector circle.hook,
+.gl-react-inspector circle.anchor {
+  r: 2;
+  fill: #666;
+}
+.gl-react-inspector circle.standalone-output {
+  r: 2;
+  fill: #000;
+  opacity: 1;
+}
+
+.gl-react-inspector path.connection-line {
+  opacity: 0.1;
+  stroke: #000;
+  fill: none;
+  stroke-width: 1;
+}
+
+.gl-react-inspector .box.grabbed {
+  border-color: #000;
+  transition: none;
+}
+.gl-react-inspector .anchor-group.grabbed circle.hook,
+.gl-react-inspector .anchor-group.grabbed circle.anchor {
+  fill: #000;
+}
+.gl-react-inspector .anchor-group.grabbed path.connection-line {
+  stroke: #000;
+  opacity: 0.3;
+}
+
+.gl-react-inspector .preview canvas {
+  background: #f3f3f3 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAARklEQVRYw+3XwQkAIAwEwYvYf8uxBcE8fMwWEAbuleruDDd6cOXzAAEBAQEBAQEBAQFf2tM/RJIyMSAgICAgICAgICDgZQeYxgVOKu5KXQAAAABJRU5ErkJggg==) repeat;
+  background-size: 20px 20px;
+  border: 1px solid #666;
+  max-width: 100%;
+  min-height: 64px;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+}

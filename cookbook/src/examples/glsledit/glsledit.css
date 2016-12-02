@@ -1,0 +1,25 @@
+#glsledit .toolbox {
+  padding: 0;
+}
+#glsledit .toolbox .field {
+  padding: 0;
+}
+
+#glsledit .compile {
+  width: 500px;
+  padding: 6px;
+  background: #000;
+  color: #c22;
+  font-size: 10px;
+  line-height: 18px;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#glsledit .compile.error {
+  color: #c22;
+}
+#glsledit .compile.success {
+  color: #2c2;
+}

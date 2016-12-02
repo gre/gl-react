@@ -1,0 +1,157 @@
+.documentation {
+  width: 100%;
+  min-width: 600px;
+  max-width: 900px;
+  color: #555;
+  line-height: 1.3em;
+}
+
+.documentation a[href]:hover {
+  text-decoration: underline;
+}
+
+.documentation-toc ul {
+  padding: 20px 5px;
+  overflow: visible;
+  list-style: none;
+}
+.documentation-toc li {
+  padding: 0;
+  overflow: visible;
+
+}
+.documentation-toc li a {
+  padding: 4px 20px;
+  position: relative;
+  display: block;
+
+}
+.documentation-toc li.react-component a {
+  color: #f56;
+}
+.documentation-toc li.react-component a:before {
+  content: "<";
+}
+.documentation-toc li.react-component a:after {
+  content: " />";
+}
+
+.documentation-toc li.kind-typedef a {
+  color: #69c;
+}
+.documentation-toc li.kind-typedef a:before {
+  left: 0px;
+  color: #69c;
+  font-size: 10px;
+  content: "type";
+  margin-right: 4px;
+  margin-left: -20px;
+  vertical-align: middle;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.documentation strong {
+  color: #333;
+}
+
+.documentation .intro {
+  padding: 20px 40px;
+  background: #fff;
+}
+
+.documentation .section {
+  padding: 20px 40px;
+  background: #fff;
+  margin: 40px 0;
+}
+
+.documentation .section.nested {
+  margin: 0;
+  padding: 0;
+}
+
+.documentation .section h3 {
+  color: #000;
+  font-size: 1.8em;
+  margin: 0.4em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.documentation .section h3 .augments {
+  font-weight: normal;
+  font-size: 0.6em;
+  margin-left: 4px;
+}
+.documentation .section h3 .github-link {
+  text-align: right;
+  font-size: 12px;
+  flex: 1;
+  font-weight: normal;
+}
+
+.documentation .section h4 {
+  margin: 0;
+  margin-left: -0.8em;
+  margin-top: 1em;
+  margin-bottom: 0.8em;
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+.documentation .type {
+  opacity: 0.7;
+}
+
+.documentation .props {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.documentation .props li {
+  padding: 0.4em 0;
+}
+
+.documentation .member {
+  padding: 20px 0;
+}
+
+.documentation .member .member-title {
+  color: #000;
+  font-weight: bold;
+  margin-left: -20px;
+  padding: 1em 0;
+}
+
+.documentation .member > .section {
+  padding-left: 40px;
+}
+
+.documentation .md {
+
+}
+
+.documentation .md blockquote {
+  opacity: 0.5;
+  margin: 0.2em 0;
+  padding: 0 0 0 20px;
+  border-left: 3px solid #666;
+}
+
+.documentation .md h1 {
+  font-size: 1.6em;
+}
+.documentation .md h2 {
+  font-size: 1.4em;
+}
+.documentation .md h3 {
+  font-size: 1.2em;
+}
+.documentation .md h4,
+.documentation .md h5,
+.documentation .md h6 {
+  font-size: 1em;
+}

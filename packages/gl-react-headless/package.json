@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "gl-react-headless",
+  "version": "3.0.0-alpha",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "headless-gl implementation of gl-react, an universal React library to write and compose WebGL shaders",
+  "main": "lib/index.js",
+  "files": [
+    "src",
+    "lib",
+    ".flowconfig",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "gl-react": "3.0.x"
+  },
+  "dependencies": {
+    "gl": "^4.0.2",
+    "invariant": "^2.2.1"
+  }
+}

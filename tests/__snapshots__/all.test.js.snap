@@ -1,0 +1,117 @@
+exports[`test can be extended with addTextureLoaderClass 1`] = `
+undefined {
+  "canLoad": 1,
+  "constructor": 1,
+  "createTexture": 0,
+  "dispose": 0,
+  "get": 1,
+  "load": 1,
+  "textureDispose": 0,
+}
+`;
+
+exports[`test can be extended with addTextureLoaderClass 2`] = `
+undefined {
+  "canLoad": 2,
+  "constructor": 1,
+  "createTexture": 1,
+  "dispose": 0,
+  "get": 2,
+  "load": 1,
+  "textureDispose": 0,
+}
+`;
+
+exports[`test can be extended with addTextureLoaderClass 3`] = `
+undefined {
+  "canLoad": 2,
+  "constructor": 1,
+  "createTexture": 1,
+  "dispose": 1,
+  "get": 2,
+  "load": 1,
+  "textureDispose": 0,
+}
+`;
+
+exports[`test renders HelloGL 1`] = `
+View3duint8 {
+  "data": Uint8Array [
+    32,
+    32,
+    128,
+    255,
+    96,
+    32,
+    128,
+    255,
+    159,
+    32,
+    128,
+    255,
+    223,
+    32,
+    128,
+    255,
+    32,
+    96,
+    128,
+    255,
+    96,
+    96,
+    128,
+    255,
+    159,
+    96,
+    128,
+    255,
+    223,
+    96,
+    128,
+    255,
+    32,
+    159,
+    128,
+    255,
+    96,
+    159,
+    128,
+    255,
+    159,
+    159,
+    128,
+    255,
+    223,
+    159,
+    128,
+    255,
+    32,
+    223,
+    128,
+    255,
+    96,
+    223,
+    128,
+    255,
+    159,
+    223,
+    128,
+    255,
+    223,
+    223,
+    128,
+    255,
+  ],
+  "offset": 48,
+  "shape": Array [
+    4,
+    4,
+    4,
+  ],
+  "stride": Array [
+    4,
+    -16,
+    1,
+  ],
+}
+`;

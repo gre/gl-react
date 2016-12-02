@@ -1,0 +1,15 @@
+{
+  "name": "glrn-ex",
+  "version": "0.0.0",
+  "description": "Hello Exponent!",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "exponent": "^11.0.3-rc.1",
+    "gl-react": "file:../packages/gl-react",
+    "gl-react-native": "file:../packages/gl-react-native",
+    "react": "~15.3.2",
+    "react-native": "github:exponentjs/react-native#sdk-11.0.2"
+  }
+}
