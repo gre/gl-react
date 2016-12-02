@@ -6,6 +6,8 @@ We keep both repository at same time because (1) this work is not yet finished a
 
 ## v3 alpha: development in progress
 
+[![Join the chat at https://gitter.im/gl-react/Lobby](https://badges.gitter.im/gl-react/Lobby.svg)](https://gitter.im/gl-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 - [x] gl-react, universal implementation
 - [x] gl-react-dom, DOM implementation
 - [x] gl-react-headless, Node.js implementation
