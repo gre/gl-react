@@ -35,8 +35,7 @@
   cursor: pointer;
   text-decoration: underline;
   user-select: none;
-  display: inline-block;
-  text-align: right;
+  padding: 0 0.4em;
 }
 
 .gl-react-inspector .body {

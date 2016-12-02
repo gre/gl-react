@@ -32,7 +32,7 @@ Surface have a main loop that runs at 60 fps and call `flush()`. This is very ef
 
 [gl-react used to automatically factorize the duplicates elements of your tree](http://greweb.me/2016/06/glreactconf/), **it has been decided to remove this feature**
 in order to make you fully in control.
-*This was actually a pain to implement it right, a premature optimization that can have some slower performance.*
 
-The new gl-react embraces more the React paradigm.
-There is a new equivalent way to express a Graph (and share computation): **using a `<Bus>`**.
+The new gl-react embraces more the React paradigm. If you duplicate a Node or an Element at multiple places in your GL tree, you might use `<Bus>` to express a GL graph instead (and share computation) so it doesn't compute X times the same thing.
+
+> This was actually a pain to implement the de-duplication feature, and it doesn't work great with React reconciliation. It was probably a premature optimization.

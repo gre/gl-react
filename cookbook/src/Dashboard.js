@@ -8,21 +8,21 @@ import "./Dashboard.css";
 import Inspector from "./Inspector";
 
 const shaders = Shaders.create({
-  Persistence: {
+  MotionBlur: {
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
-uniform sampler2D t, back;
+uniform sampler2D children, backbuffer;
 uniform float persistence;
 void main () {
   gl_FragColor = vec4(mix(
-    texture2D(t, uv),
-    texture2D(back, uv),
+    texture2D(children, uv),
+    texture2D(backbuffer, uv),
     persistence
   ).rgb, 1.0);
 }`
   },
-  hello: {
+  HelloGL: {
  // uniforms are variables from JS. We pipe blue uniform into blue output color
     frag: GLSL`
 precision highp float;
@@ -31,7 +31,7 @@ uniform float red;
 void main() {
   gl_FragColor = vec4(red, uv.x, uv.y, 1.0);
 }` },
-  Rotating: {
+  Rotate: {
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
@@ -47,11 +47,11 @@ void main() {
 }` }
 });
 
-const MotionBlur = ({ children: t, persistence }) =>
+const MotionBlur = ({ children, persistence }) =>
   <Node
-    shader={shaders.Persistence}
+    shader={shaders.MotionBlur}
     backbuffering
-    uniforms={{ t, back: Backbuffer, persistence }}
+    uniforms={{ children, backbuffer: Backbuffer, persistence }}
   />;
 
 // We can make a <HelloBlue blue={0.5} /> that will render the concrete <Node/>
@@ -61,7 +61,7 @@ class HelloGL extends Component {
   };
   render() {
     const { red } = this.props;
-    return <Node shader={shaders.hello} uniforms={{ red }} />;
+    return <Node shader={shaders.HelloGL} uniforms={{ red }} />;
   }
 }
 
@@ -73,7 +73,7 @@ class Rotate extends Component {
   };
   render() {
     const { angle, scale, children } = this.props;
-    return <Node shader={shaders.Rotating} uniforms={{ scale, angle, children }} />;
+    return <Node shader={shaders.Rotate} uniforms={{ scale, angle, children }} />;
   }
 }
 
@@ -148,8 +148,8 @@ export default class Dashboard extends Component {
         <a href="http://github.com/gre/gl-react">
           Explore source code on Github
         </a>
-        <a href="https://discordapp.com/channels/102860784329052160/106102146109325312">
-          Chat with us, #gl-react on reactiflux
+        <a href="https://gitter.im/gl-react">
+          Chat with us
         </a>
       </nav>
     </div>;

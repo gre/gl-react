@@ -4,6 +4,8 @@
 It plans to be the gl-react v3.
 We keep both repository at same time because (1) this work is not yet finished and (2) this repository is now a "multi libraries" repository (it's just easier to maintain that way).
 
+See also this article: http://greweb.me/2016/12/gl-react-v3/ .
+
 ## v3 alpha: development in progress
 
 - [x] gl-react, universal implementation
@@ -26,6 +28,8 @@ Here is the parts we would like to focus on solving in that implementation:
 **Other remaining topics:**
 - Flow type support: we are waiting the next flow version that should bring WebGL type support: https://github.com/facebook/flow/pull/2764 .
 
+---
+
 <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react
 ========
 
@@ -41,7 +45,7 @@ This universal library must be coupled with one of the concrete implementations:
 ## Links
 
 - [Cookbook, examples, API](https://gl-react-cookbook.surge.sh)
-- Chat [#gl-react on reactiflux](https://discordapp.com/channels/102860784329052160/106102146109325312)
+- [![Join the chat at https://gitter.im/gl-react/Lobby](https://badges.gitter.im/gl-react/Lobby.svg)](https://gitter.im/gl-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 ## Gist
@@ -95,7 +99,7 @@ and this code...
 ## Features
 
 - **React, VDOM and immutable paradigm**: OpenGL is a low level imperative and mutable API. This library takes the best of it and exposes it in an immutable, descriptive way with React.
-- **React lifecycle** allows partial GL re-rendering. Only a React Component update will trigger a redraw. Each Node holds a framebuffer state that get redrawn when component updates, then scheduling a Surface reflow.
+- **React lifecycle** allows partial GL re-rendering. Only a React Component update will trigger a redraw. Each Node holds a framebuffer state that get redrawn when component updates and schedule a Surface reflow.
 - **Developer experience**
   - React DevTools works like on DOM and allows you to inspect and debug your stack of effects.
 - **Uniform bindings**: bindings from JavaScript objects to OpenGL GLSL language types (bool, int, float, vec2, vec3, vec4, mat2, mat3, mat4, sampler2D...)

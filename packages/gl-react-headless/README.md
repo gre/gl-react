@@ -10,4 +10,4 @@ It is currently used to run the tests, but can also be used for server side rend
 
 - [Github](https://github.com/gre/gl-react)
 - [Cookbook, examples, API](https://gl-react-cookbook.surge.sh)
-- Chat [#gl-react on reactiflux](https://discordapp.com/channels/102860784329052160/106102146109325312)
+- [![Join the chat at https://gitter.im/gl-react/Lobby](https://badges.gitter.im/gl-react/Lobby.svg)](https://gitter.im/gl-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

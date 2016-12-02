@@ -187,7 +187,6 @@ class Btn extends Component {
     const {onClick,children} = this.props;
     return <span className="btn" onClick={onClick} style={{
       opacity: onClick?1:0.5,
-      width: 100,
     }}>{children}</span>;
   }
 }
@@ -966,7 +965,7 @@ export default class Inspector extends Component {
     this.boxesById.set(id, box);
     const i = this.boxPos.size;
     const pos = [ // FIXME TMP
-      50 + 240 * ((i+1) % 2),
+      60 + 240 * ((i+1) % 2),
       40 + 200 * Math.floor(i / 2),
     ];
     this.boxPos.set(id, pos);
@@ -1362,8 +1361,8 @@ export default class Inspector extends Component {
         }
 
         const lost = !surface.gl || this.loseContextLatestExtension;
-        headerBody =
-          <div>
+        headerBody = [
+          <div key="opts">
             <label>
               <input
                 type="checkbox"
@@ -1396,16 +1395,17 @@ export default class Inspector extends Component {
               />
               physics*
             </label>
-          { lost
-            ?
-            <Btn onClick={this.restoreContext}>
-              restore GL context
-            </Btn>
-            :
-            <Btn onClick={this.loseContext}>
-              lose GL context
-            </Btn> }
-          </div>;
+          </div>,
+          lost
+          ?
+          <Btn key="ctx" onClick={this.restoreContext}>
+            restore GL context
+          </Btn>
+          :
+          <Btn key="ctx" onClick={this.loseContext}>
+            lose GL context
+          </Btn>
+        ];
         body =
         <div ref="body" className="body">
           <div ref="nodes" className="nodes">
@@ -1448,7 +1448,7 @@ export default class Inspector extends Component {
         onMouseUp={this.onMouseUp}
         onMouseLeave={this.onMouseLeave}
         onMouseMove={this.onMouseMove}
-        className="gl-react-inspector">
+        className={"gl-react-inspector"}>
         <header>
           <div>
             <select value={surface ? surface.id : ""} onChange={this.onSelectChange}>
