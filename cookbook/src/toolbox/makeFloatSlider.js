@@ -9,7 +9,7 @@ export default (min:number=0, max:number=1, step?:number) => class FloatSlider e
   onChange = (e: any) => this.props.onChange(parseFloat(e.target.value));
   render() {
     return <input
-      style={{ flex: 1 }}
+      style={{ flex: 1, width: "100%" }}
       type="range"
       min={min}
       max={max}
