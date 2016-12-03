@@ -145,6 +145,9 @@ export default class Dashboard extends Component {
         <Link to="/hellogl">
           Checkout more examples
         </Link>
+        <a href="http://greweb.me/2016/12/gl-react-v3/">
+          gl-react-v3 release article
+        </a>
         <a href="http://github.com/gre/gl-react">
           Explore source code on Github
         </a>
