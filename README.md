@@ -27,6 +27,11 @@ Here is the parts we would like to focus on solving in that implementation:
 
 **Other remaining topics:**
 - Flow type support: we are waiting the next flow version that should bring WebGL type support: https://github.com/facebook/flow/pull/2764 .
+- make inspector a Chrome plugin.
+- the Game of Life example, when inspected AND enabling snapshot capture, seems to memleak.
+- Node should expose a more generic escape hatch to use `gl` and do any WebGL stuff. The main problem is most WebGL libs are intrusive and alter the gl state (e.g. they don't expect to just draw in the current bounded framebuffer).
+- more than ~12 simultaneous canvas won't work in web, because WebGL don't allow that. an idea to workaround that is to implement a `<SurfaceContainer>`, a super surface, that discover the underlying Surface, and will position an absolute canvas that render all surface in one... we can use "gl scissor" for that. inspiration: `multi-regl`.
+- re-using fbo in the tree, is a complex idea which might be premature optim', but it might make sense in some cases. We can introduce a new prop in Node that says it should not hold its own Framebuffer copy (which make it non-cachable).
 
 ---
 
