@@ -1,6 +1,6 @@
 {
   "name": "gl-react-cookbook",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0-alpha1",
   "private": true,
   "devDependencies": {
     "babel-preset-react-app": "^1.0.0",

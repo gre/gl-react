@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gl-react-dom",
-  "version": "3.0.0-alpha",
+  "version": "3.0.0-alpha1",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "DOM implementation of gl-react, an universal React library to write and compose WebGL shaders",
