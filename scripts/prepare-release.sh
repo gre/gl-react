@@ -29,4 +29,4 @@ echo "If you are happy with these changes, commit 'Prepare $v' and run:"
 echo
 echo "npm version $v && git push && git push --tags"
 echo
-echo "after that, run relese.sh"
+echo "after that, run release.sh"
