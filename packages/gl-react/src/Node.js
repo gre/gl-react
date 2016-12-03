@@ -701,10 +701,8 @@ export default class Node extends Component {
         dependency: ?(Node | Bus),
         result: ?{directTexture?: ?Texture, glNode?: Node};
 
-      // NB this is an escape hatch for more advanced use-cases.
       if (typeof obj === "function") {
         // texture uniform can be a function that resolves the object at draw time.
-        // NB This is an escape hatch for more advanced use-cases. For instance when using refs.
         obj = (obj: AsyncMixed)(this.redraw);
       }
 
