@@ -1,1 +1,3 @@
-export default (i => () => ++i)(0);
+//@flow
+const genId: () => number = (i => () => ++i)(0);
+export default genId;

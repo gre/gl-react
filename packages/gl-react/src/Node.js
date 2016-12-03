@@ -925,12 +925,9 @@ export default class Node extends Component {
     shader.bind();
     this._bind();
     preparedUniforms.forEach(obj => {
-      let {key, value} = obj;
-      if (obj.prepare) {
-        value = obj.prepare();
-      }
+      const value = obj.prepare ? obj.prepare() : obj.value;
       if (value !== undefined) {
-        shader.uniforms[key] = value;
+        shader.uniforms[obj.key] = value;
       }
     });
 
