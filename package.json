@@ -25,5 +25,6 @@
     "eslint-plugin-flowtype": "^2.28.2",
     "eslint-plugin-react": "^6.7.1",
     "flow-copy-source": "^1.1.0"
-  }
+  },
+  "version": "3.0.0-alpha1"
 }
