@@ -20,7 +20,7 @@ void main() {
   float r = length(p);
   float h = abs(a);
   float d = (13.0*h - 22.0*h*h + 10.0*h*h*h - 0.3 * (1.0-over))/(6.0-5.0*h);
-  float f = step(r,d) * pow(1.0-r/d,0.25);
+  float f = step(r,d) * pow(max(1.0-r/d, 0.0),0.25);
   vec3 t = texture2D(image, uv).rgb;
   vec3 c = mix(color * (1.0 + 0.6 * t), t, min(0.8 * over + toggle, 1.0));
   gl_FragColor = vec4(mix(vec3(1.0), c, f), 1.0);
