@@ -27,7 +27,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "gl-react": "3.0.x"
+    "gl-react": "*"
   },
   "dependencies": {
     "gl-texture2d": "^2.0.11",
