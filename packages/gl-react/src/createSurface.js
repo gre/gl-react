@@ -53,6 +53,7 @@ interface ISurface extends Component<void, SurfaceProps, any> {
   +redraw: () => void;
   +flush: () => void;
   +getEmptyTexture: () => Texture;
+  +glIsAvailable: () => boolean;
 
   +rebootForDebug: () => void;
   +_addGLNodeChild: (node: Node) => void;

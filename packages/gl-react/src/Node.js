@@ -498,19 +498,25 @@ export default class Node extends Component {
   };
 
   _destroyGLObjects(): void {
-    const { framebuffer, backbuffer, _shader } = this;
-    if (_shader) {
-      _shader.dispose();
-      delete this._shader;
+    const {glSurface} = this.context;
+    if (glSurface.glIsAvailable()) {
+      // We should only dispose() if gl is still here.
+      // otherwise, GL should already have free resources.
+      // (also workaround for https://github.com/stackgl/headless-gl/issues/90)
+      const { framebuffer, backbuffer, _shader } = this;
+      if (_shader) {
+        _shader.dispose();
+      }
+      if (framebuffer) {
+        framebuffer.dispose();
+      }
+      if (backbuffer) {
+        backbuffer.dispose();
+      }
     }
-    if (framebuffer) {
-      framebuffer.dispose();
-      delete this.framebuffer;
-    }
-    if (backbuffer) {
-      backbuffer.dispose();
-      delete this.backbuffer;
-    }
+    delete this._shader;
+    delete this.framebuffer;
+    delete this.backbuffer;
   }
 
   _prepareGLObjects(gl: WebGLRenderingContext): void {
