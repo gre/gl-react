@@ -23,8 +23,8 @@ const lenseSidebar = ({ location: {query: {menu, inspector}} }) =>
 class MenuContext extends PureComponent {
   props: {
     examples: Array<*>,
-    menu: bool,
-    inspector: bool,
+    menu: boolean,
+    inspector: boolean,
     currentExample: ?Object,
   };
   render() {
@@ -32,7 +32,7 @@ class MenuContext extends PureComponent {
     return <div>
       <h3>{examples.length} Examples</h3>
       <ul>
-      {examples.map((ex, i) =>
+      {examples.map(ex =>
         <li key={ex.path}>
           <Link
             to={{ pathname: ex.path, query: { menu, inspector } }}
@@ -49,6 +49,11 @@ class MenuContext extends PureComponent {
 }
 
 class Header extends Component {
+  props: {
+    currentExample: ?Object,
+    toToggleMenu: Object,
+    toToggleInspector: Object,
+  }
   render() {
     const {
       currentExample,
@@ -92,6 +97,12 @@ class Header extends Component {
 }
 
 class App extends Component {
+  props: {
+    children: any,
+    location: Object,
+    routes: Array<*>,
+    route: Object,
+  };
   static contextTypes = {
     router: PropTypes.object.isRequired,
   };
@@ -113,13 +124,13 @@ class App extends Component {
   };
 
   render() {
-    const { children, location, routes } = this.props;
+    const { children, location, route, routes } = this.props;
     const { menu, inspector } = lenseSidebar(this.props);
     const currentExample = routes[1].isExample ? routes[1] : null;
     const {LeftSidebar} = routes[1];
     const menuOpened = (LeftSidebar && !currentExample) || !!menu;
     const inspectorOpened = !!currentExample && !!inspector;
-    const examples = this.props.route.childRoutes;
+    const examples = route.childRoutes;
     const index = examples.indexOf(currentExample);
     let prev = examples[index - 1];
     if (prev && !prev.isExample) prev = null;

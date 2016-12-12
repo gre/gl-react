@@ -52,15 +52,15 @@ const classType = type => {
   return "type-"+type;
 };
 
-const inferSize = obj => {
+const inferSize = (obj: any): [number, number] => {
   if (obj) {
     if (obj.shape) {
       return obj.shape;
     }
-    if ("videoWidth" in obj) {
+    if (obj.videoWidth && obj.videoHeight) {
       return [obj.videoWidth, obj.videoHeight];
     }
-    if ("width" in obj) {
+    if (obj.width && obj.height) {
       return [obj.width, obj.height];
     }
   }
@@ -292,6 +292,7 @@ class MetaInfo extends Component {
     id: string,
     node: Object,
     info: {
+      obj: ?Object,
       initialObj: ?Object,
       dependency: ?Object,
       textureOptions: ?Object,
@@ -859,7 +860,7 @@ export default class Inspector extends Component {
     Visitors.remove(this);
   }
 
-  setSurface (surface) {
+  setSurface (surface: ?Surface) {
     if (surface === this.surface) return;
     this.preparedUniformsMap = new WeakMap();
     this.surface = surface;
@@ -915,7 +916,7 @@ export default class Inspector extends Component {
 
   }
 
-  onNodeDraw(node: Node, preparedUniforms: Array<*>) {
+  onNodeDraw(node: Node, preparedUniforms: Object) {
     this.preparedUniformsMap.set(node, preparedUniforms);
   }
 
@@ -1033,7 +1034,7 @@ export default class Inspector extends Component {
     return hasChanged;
   }
 
-  applyForce(id, force) {
+  applyForce(id: */* FIXME number|string !?*/, force: [number, number]) {
     const {boxAcc} = this;
     const mass = 1;
     const acc = boxAcc.get(id) || [0,0];
@@ -1056,11 +1057,13 @@ export default class Inspector extends Component {
     anchorsById.forEach((anchor, anchorId) => {
       const hooks = anchorHooksByAnchorId.get(anchorId) || [];
       const anchorPos = anchorPositions.get(anchorId);
+      if (!anchorPos) return;
       hooks.forEach(hook => {
         const hookId = hook.getId();
         const hookNodeId = hook.getNodeId();
         if (anchorId !== hookNodeId) {
           const hookPos = anchorHookPositions.get(hook);
+          if (!hookPos) return;
           const dx = anchorPos[0] - hookPos[0];
           const dy = anchorPos[1] - hookPos[1];
           const magn = Math.sqrt(dx * dx + dy * dy);
@@ -1103,7 +1106,7 @@ export default class Inspector extends Component {
         const box2id = boxIds[j];
         const box2pos = boxPos.get(box2id);
         const box2size = boxSizes.get(box2id);
-        if (!box2size) continue;
+        if (!box2size || !box2pos || !box1pos) continue;
         const dx = box1pos[0] + box1size[0]/2 - (box2pos[0] + box2size[0]);
         const dy = box1pos[1] + box1size[1]/2 - (box2pos[1] + box2size[1]);
         const magn = Math.sqrt(dx * dx + dy * dy);
@@ -1122,7 +1125,7 @@ export default class Inspector extends Component {
     }
   }
 
-  updateVelocityPosition (timestep) {
+  updateVelocityPosition (timestep: number) {
     const {grabbing, boxPos, boxVel, boxAcc, bounds, boxSizes} = this;
     const damping = 0.5;
     const grabId = grabbing && grabbing.id;
@@ -1152,7 +1155,7 @@ export default class Inspector extends Component {
     });
   }
 
-  physicsStep (timestep) {
+  physicsStep (timestep: number) {
     this.spring();
     this.updateVelocityPosition(timestep);
     var energy = 0.0;
@@ -1164,7 +1167,7 @@ export default class Inspector extends Component {
     }
   }
 
-  onGrabStart = (id, e) => {
+  onGrabStart = (id: number, e: MouseEvent) => {
     const boxPos = this.boxPos.get(id) || [0, 0];
     this.grabbing = {
       id,
@@ -1174,7 +1177,7 @@ export default class Inspector extends Component {
     this.forceUpdate();
   };
 
-  onMouseMove = e => {
+  onMouseMove = (e: MouseEvent) => {
     if (this.grabbing) {
       const { id, initialPos, initialEventPos } = this.grabbing;
       const dx = e.clientX - initialEventPos[0];
@@ -1190,32 +1193,32 @@ export default class Inspector extends Component {
 
   onMouseLeave = () => {
     if (this.grabbing) {
-      this.grabbing = 0;
+      this.grabbing = null;
       this.forceUpdate();
     }
   };
 
   onMouseUp = () => {
     if (this.grabbing) {
-      this.grabbing = 0;
+      this.grabbing = null;
       this.forceUpdate();
     }
   };
 
-  onMinimizeChange = (id, minimized) => {
+  onMinimizeChange = (id: number, minimized: boolean) => {
     this.boxMinimized.set(id, minimized);
     this.forceUpdate();
   };
 
-  onCaptureChange = e => {
+  onCaptureChange = (e: *) => {
     this.setState({ capture: e.target.checked });
   };
 
-  onAnimatedChange = e => {
+  onAnimatedChange = (e: *) => {
     this.setState({ animated: e.target.checked });
   };
 
-  onMinimizeAllChange = e => {
+  onMinimizeAllChange = (e: *) => {
     const minimizeAll = e.target.checked;
     this.setState({ minimizeAll });
     const {boxPos, boxMinimized} = this;
@@ -1224,11 +1227,11 @@ export default class Inspector extends Component {
     });
   };
 
-  onPhysicsChange = e => {
+  onPhysicsChange = (e: *) => {
     this.setState({ physics: e.target.checked });
   };
 
-  onSelectChange = e => {
+  onSelectChange = (e: *) => {
     const {selectedIndex} = e.target;
     this.setSurface(
       selectedIndex===0
@@ -1264,7 +1267,7 @@ export default class Inspector extends Component {
     this.forceUpdate();
   };
 
-  onVisitorLoggerChange = (e) => {
+  onVisitorLoggerChange = (e: *) => {
     Visitors.remove(inspectorVisitorLogger);
     if (e.target.checked) {
       Visitors.add(inspectorVisitorLogger);
