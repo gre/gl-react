@@ -196,7 +196,7 @@ class App extends Component {
           ?
           <div className="source">
             <Code>{currentExample.source}</Code>
-            <a className="viewsource" href={pkg.cookbook.githubprefix+"examples/"+currentExample.path}>
+            <a className="viewsource" href={pkg.cookbook.githubprefix+"src/examples/"+currentExample.path}>
               view source
             </a>
           </div>
