@@ -26,5 +26,8 @@
     "eslint-plugin-react": "^6.7.1",
     "flow-copy-source": "^1.1.0"
   },
-  "version": "3.0.0-alpha1"
+  "version": "3.0.0-alpha1",
+  "devDependencies": {
+    "flow-bin": "^0.37.4"
+  }
 }

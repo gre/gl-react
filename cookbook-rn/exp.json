@@ -1,8 +1,8 @@
 {
-  "name": "glrn-ex",
-  "description": "An empty new project",
-  "slug": "glrn-ex",
-  "sdkVersion": "11.0.3",
+  "name": "glrn-cookbook",
+  "description": "GL React Native Cookbook",
+  "slug": "glrn-cookbook",
+  "sdkVersion": "12.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",

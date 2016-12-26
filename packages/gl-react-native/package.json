@@ -23,10 +23,10 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
+    "exponent": "*",
     "gl-react": "*"
   },
   "dependencies": {
-    "exponent": "^11.0.0-rc1",
     "invariant": "^2.2.1"
   }
 }

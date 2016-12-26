@@ -42,9 +42,9 @@ export default (
         {...this.state}
       />;
     }
-  };
+  }
 
   hoistNonReactStatics(TL, C);
 
   return TL;
-}
+};

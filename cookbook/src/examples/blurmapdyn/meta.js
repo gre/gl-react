@@ -1,6 +1,6 @@
 import markdown from "../../markdown";
 import makeFloatSlider from "../../toolbox/makeFloatSlider";
-export const title = "Blur with intensity map & multi-pass";
+export const title = "Blur with dynamic shader mapping";
 export const desc = markdown`
 Any arbitrary shader can be used as a blur map!
 `;

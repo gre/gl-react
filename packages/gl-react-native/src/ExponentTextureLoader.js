@@ -26,7 +26,7 @@ export default class ExponentTextureLoader extends TextureLoader<number> {
     let ignored = false;
     const asset = Exponent.Asset.fromModule(module);
     const promise =
-      Exponent.Asset.fromModule(module)
+      asset
       .downloadAsync()
       .then(o => {
         if (ignored) return;
@@ -34,8 +34,8 @@ export default class ExponentTextureLoader extends TextureLoader<number> {
         const { width, height } = asset;
         const texture = createTexture(gl, [ width, height ]);
         console.log("texture...", texture.shape.slice(0))
-        texture.setPixels({ raw: asset, width, height });
         console.log("raw", asset)
+        texture.setPixels({ raw: asset, width, height });
         this.textures.set(module, texture);
         this.loads.delete(module);
         return texture;

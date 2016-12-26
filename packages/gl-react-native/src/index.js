@@ -1,4 +1,3 @@
-
 //@flow
 import {View} from "react-native";
 import {createSurface, TextureLoaders} from "gl-react";
