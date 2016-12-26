@@ -1,6 +1,6 @@
 import makeFloatSlider from "../../toolbox/makeFloatSlider";
 
-export const title = "Doom Shadertoy + CRT effect + snapshot()";
+export const title = "Desert Shadertoy + CRT effect + snapshot()";
 
 export const toolbox = [
   { prop: "distortion",

@@ -18,7 +18,7 @@ const tmpPatch = cb => gl => {
     bindTexture,
     getParameter,
   } = gl;
-  //gl.enableLogging = true;
+  gl.enableLogging = true;
   gl.texSubImage2D = function (...args) {
     if (args.length === 9 && args[2] === 0 && args[3] === 0) {
       const [target, level, , , width, height, format, type, pixels] = args;
@@ -39,7 +39,12 @@ const tmpPatch = cb => gl => {
   let currentRenderbufferBinding = null;
   gl.bindRenderbuffer = (target, renderbuffer) => {
     currentRenderbufferBinding = renderbuffer;
-    bindRenderbuffer.call(gl, target, renderbuffer);
+    try {
+      bindRenderbuffer.call(gl, target, renderbuffer);
+    }
+    catch (e) { // FIXME current not impl by Exponent
+      console.warn(e);
+    }
   };
   let currentTextureBinding = null;
   gl.bindTexture = (target, texture) => {
