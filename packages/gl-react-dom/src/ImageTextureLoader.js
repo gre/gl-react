@@ -2,8 +2,6 @@
 import {TextureLoader} from "gl-react";
 import {disposeObjectMap} from "gl-react/lib/helpers/disposable";
 import type {DisposablePromise} from "gl-react/lib/helpers/disposable";
-import createTexture from "gl-texture2d";
-import type {Texture} from "gl-texture2d";
 
 function loadImage (src: string, success: (img: Image)=>void, failure: (e: Error)=>void) {
   let img = new window.Image();
@@ -31,10 +29,14 @@ function loadImage (src: string, success: (img: Image)=>void, failure: (e: Error
 
 export default class ImageTextureLoader extends TextureLoader<string> {
   loads: { [key: string]: DisposablePromise<*> } = {};
-  textures: { [key: string]: Texture } = {};
+  textures: { [key: string]: WebGLTexture } = {};
   dispose() {
     disposeObjectMap(this.loads);
-    disposeObjectMap(this.textures);
+    const {gl} = this;
+    for (let k in this.textures) {
+      gl.deleteTexture(this.textures[k]);
+      delete this.textures[k];
+    }
   }
   canLoad (input: any) {
     return typeof input === "string";
@@ -49,8 +51,9 @@ export default class ImageTextureLoader extends TextureLoader<string> {
       dispose = loadImage(src, success, failure))
       .then(img => {
         const { gl } = this;
-        const texture = createTexture(gl, [ img.width, img.height ]);
-        texture.setPixels(img);
+        const texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
         this.textures[src] = texture;
         delete this.loads[src];
         return texture;

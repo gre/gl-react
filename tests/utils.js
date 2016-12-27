@@ -1,9 +1,8 @@
 //@flow
 import React from "react";
-import {Visitor, TextureLoader, TextureLoaders, Texture2DLoader} from "gl-react";
+import {Visitor, TextureLoader, TextureLoaderRawObject, TextureLoaders} from "gl-react";
 import invariant from "invariant";
 import type {Surface, Node} from "gl-react";
-import createTexture from "gl-texture2d";
 import type {Texture} from "gl-texture2d";
 import renderer from "react-test-renderer";
 import ndarray from "ndarray";
@@ -160,7 +159,7 @@ export const yellow3x3 = ndarray(new Uint8Array([
     255, 255, 0, 255,
   ]), [ 3, 3, 4 ]);
 
-export function createOneTextureLoader (makeTexture: (gl:any)=>Texture) {
+export function createOneTextureLoader (makeTexture: (gl:any)=>WebGLTexture) {
   const textureId = Symbol("one-texture");
   const counters = {
     constructor: 0,
@@ -222,15 +221,20 @@ export function createOneTextureLoader (makeTexture: (gl:any)=>Texture) {
   };
 }
 
-class FakeTextureLoader extends Texture2DLoader<FakeTexture> {
+import drawNDArrayTexture from "gl-react/lib/helpers/drawNDArrayTexture";
+export function createNDArrayTexture (gl, ndarray) {
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  drawNDArrayTexture(gl, texture, ndarray);
+  return texture;
+}
+
+class FakeTextureLoader extends TextureLoaderRawObject<FakeTexture> {
   canLoad (input: any) {
     return input instanceof FakeTexture;
   }
-  mapTexture (ft: FakeTexture) {
+  mapInput (ft: FakeTexture) {
     return ft.getPixels();
-  }
-  inferShape (ft: FakeTexture) {
-    return [ ft.width, ft.height ];
   }
 }
 

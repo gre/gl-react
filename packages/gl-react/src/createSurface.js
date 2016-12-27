@@ -3,8 +3,6 @@ import invariant from "invariant";
 import raf from "raf";
 import React, {PropTypes, Component} from "react";
 import createShader from "gl-shader";
-import createTexture from "gl-texture2d";
-import ndarray from "ndarray";
 import {disposeArray, disposeObjectMap} from "./helpers/disposable";
 import Bus from "./Bus";
 import Shaders from "./Shaders";
@@ -13,7 +11,6 @@ import Visitors from "./Visitors";
 import type {DisposablePromise} from "./helpers/disposable";
 import type {NDArray} from "ndarray";
 import type {ShaderIdentifier, ShaderInfo} from "./Shaders";
-import type {Texture} from "gl-texture2d";
 import type {Shader} from "gl-shader";
 import type {VisitorLike} from "./Visitor";
 import type TextureLoader from "./TextureLoader";
@@ -52,7 +49,7 @@ interface ISurface extends Component<void, SurfaceProps, any> {
   +capture: (x?: number, y?: number, w?: number, h?: number) => NDArray;
   +redraw: () => void;
   +flush: () => void;
-  +getEmptyTexture: () => Texture;
+  +getEmptyTexture: () => WebGLTexture;
   +glIsAvailable: () => boolean;
 
   +rebootForDebug: () => void;
@@ -334,17 +331,19 @@ class Surface extends Component {
     return !!this.gl;
   }
 
-  _emptyTexture: ?Texture;
-  getEmptyTexture (): Texture {
+  _emptyTexture: ?WebGLTexture;
+  getEmptyTexture (): WebGLTexture {
     let {gl, _emptyTexture} = this;
     invariant(gl, "getEmptyTexture called while gl was not defined");
     if (!_emptyTexture) {
-      this._emptyTexture = _emptyTexture = createTexture(gl, ndarray(new Uint8Array([
+      this._emptyTexture = _emptyTexture = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, _emptyTexture);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2, 2, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([
         0,0,0,0,
         0,0,0,0,
         0,0,0,0,
         0,0,0,0,
-      ]), [ 2, 2, 4 ]));
+      ]));
     }
     return _emptyTexture;
   }
@@ -353,7 +352,14 @@ class Surface extends Component {
     const onSuccess = () => {
       this.setState({
         ready: true,
-      }, this._handleLoad);
+      }, () => {
+        try {
+          this._handleLoad();
+        }
+        catch (e) {
+          this._handleError(e);
+        }
+      });
     };
     this._prepareGL(gl, onSuccess, this._handleError);
   };
@@ -379,7 +385,7 @@ class Surface extends Component {
     if (gl) {
       this.gl = null;
       if (this._emptyTexture) {
-        this._emptyTexture.dispose();
+        gl.deleteTexture(this._emptyTexture);
         this._emptyTexture = null;
       }
       if (this.loaders) disposeArray(this.loaders);
@@ -459,6 +465,7 @@ class Surface extends Component {
   _handleError = (e: Error): void => {
     const { onLoadError } = this.props;
     if (onLoadError) onLoadError(e);
+    else console.error(e); // eslint-disable-line no-console
   };
 
   _handleRestoredFailure = (): void => {

@@ -1,6 +1,5 @@
 //@flow
 import type {DisposablePromise} from "./helpers/disposable";
-import type {Texture} from "gl-texture2d";
 
 const noop = () => {};
 
@@ -34,14 +33,14 @@ export default class TextureLoader<T> {
   /**
    * try to get in sync the texture for a given output. otherwise null.
    */
-  +get: (input: T)=>?Texture;
+  +get: (input: T)=>?WebGLTexture;
 
   /**
    * load() called if get() was null. it returns a promise and a dispose function.
    * It is your responsability to cache the disposable per input.
    * If load() is called twice, same value should be returned. but you can drop it when it's loaded.
    */
-  load (input: T): DisposablePromise<Texture> { // eslint-disable-line no-unused-vars
+  load (input: T): DisposablePromise<WebGLTexture> { // eslint-disable-line no-unused-vars
     // noop default implementation
     return {
       promise: new Promise(noop),

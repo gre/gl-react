@@ -644,28 +644,28 @@
     ],
     "loc": {
       "start": {
-        "line": 110,
+        "line": 107,
         "column": 0
       },
       "end": {
-        "line": 160,
+        "line": 157,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 161,
+          "line": 158,
           "column": 0
         },
         "end": {
-          "line": 550,
+          "line": 557,
           "column": 1
         }
       },
       "file": "packages/gl-react/src/createSurface.js",
       "path": "packages/gl-react/src/createSurface.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L161-L550"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L158-L557"
     },
     "kind": "class",
     "name": "Surface",
@@ -1916,28 +1916,28 @@
           ],
           "loc": {
             "start": {
-              "line": 279,
+              "line": 276,
               "column": 2
             },
             "end": {
-              "line": 285,
+              "line": 282,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 286,
+                "line": 283,
                 "column": 2
               },
               "end": {
-                "line": 289,
+                "line": 286,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L286-L289"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L283-L286"
           },
           "params": [
             {
@@ -2063,7 +2063,7 @@
             {
               "title": "param",
               "name": "args",
-              "lineNumber": 286,
+              "lineNumber": 283,
               "type": {
                 "type": "RestType",
                 "expression": {
@@ -2225,28 +2225,28 @@
           ],
           "loc": {
             "start": {
-              "line": 291,
+              "line": 288,
               "column": 2
             },
             "end": {
-              "line": 297,
+              "line": 294,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 298,
+                "line": 295,
                 "column": 2
               },
               "end": {
-                "line": 301,
+                "line": 298,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L298-L301"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L295-L298"
           },
           "params": [
             {
@@ -2372,7 +2372,7 @@
             {
               "title": "param",
               "name": "args",
-              "lineNumber": 298,
+              "lineNumber": 295,
               "type": {
                 "type": "RestType",
                 "expression": {
@@ -2554,28 +2554,28 @@
           ],
           "loc": {
             "start": {
-              "line": 303,
+              "line": 300,
               "column": 2
             },
             "end": {
-              "line": 307,
+              "line": 304,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 308,
+                "line": 305,
                 "column": 2
               },
               "end": {
-                "line": 311,
+                "line": 308,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L308-L311"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L305-L308"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -2585,7 +2585,7 @@
             {
               "title": "param",
               "name": "x",
-              "lineNumber": 308,
+              "lineNumber": 305,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2594,7 +2594,7 @@
             {
               "title": "param",
               "name": "y",
-              "lineNumber": 308,
+              "lineNumber": 305,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2603,7 +2603,7 @@
             {
               "title": "param",
               "name": "w",
-              "lineNumber": 308,
+              "lineNumber": 305,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2612,7 +2612,7 @@
             {
               "title": "param",
               "name": "h",
-              "lineNumber": 308,
+              "lineNumber": 305,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2717,28 +2717,28 @@
           ],
           "loc": {
             "start": {
-              "line": 313,
+              "line": 310,
               "column": 2
             },
             "end": {
-              "line": 318,
+              "line": 315,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 319,
+                "line": 316,
                 "column": 2
               },
               "end": {
-                "line": 321,
+                "line": 318,
                 "column": 4
               }
             },
             "file": "packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L319-L321"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L316-L318"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -2834,28 +2834,28 @@
           ],
           "loc": {
             "start": {
-              "line": 323,
+              "line": 320,
               "column": 2
             },
             "end": {
-              "line": 328,
+              "line": 325,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 329,
+                "line": 326,
                 "column": 2
               },
               "end": {
-                "line": 331,
+                "line": 328,
                 "column": 4
               }
             },
             "file": "packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/createSurface.js#L329-L331"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/createSurface.js#L326-L328"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -3134,28 +3134,28 @@
     ],
     "loc": {
       "start": {
-        "line": 278,
+        "line": 328,
         "column": 0
       },
       "end": {
-        "line": 294,
+        "line": 344,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 295,
+          "line": 345,
           "column": 0
         },
         "end": {
-          "line": 955,
+          "line": 1002,
           "column": 1
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L295-L955"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L345-L1002"
     },
     "properties": [
       {
@@ -3914,28 +3914,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 454,
+              "line": 501,
               "column": 2
             },
             "end": {
-              "line": 458,
+              "line": 505,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 459,
+                "line": 506,
                 "column": 2
               },
               "end": {
-                "line": 477,
+                "line": 524,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L459-L477"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L506-L524"
           },
           "name": "capture",
           "kind": "function",
@@ -3943,7 +3943,7 @@
             {
               "title": "param",
               "name": "x",
-              "lineNumber": 459,
+              "lineNumber": 506,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -3952,7 +3952,7 @@
             {
               "title": "param",
               "name": "y",
-              "lineNumber": 459,
+              "lineNumber": 506,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -3961,7 +3961,7 @@
             {
               "title": "param",
               "name": "w",
-              "lineNumber": 459,
+              "lineNumber": 506,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -3970,7 +3970,7 @@
             {
               "title": "param",
               "name": "h",
-              "lineNumber": 459,
+              "lineNumber": 506,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -4067,28 +4067,28 @@
           ],
           "loc": {
             "start": {
-              "line": 479,
+              "line": 526,
               "column": 2
             },
             "end": {
-              "line": 483,
+              "line": 530,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 484,
+                "line": 531,
                 "column": 2
               },
               "end": {
-                "line": 489,
+                "line": 536,
                 "column": 4
               }
             },
             "file": "packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L484-L489"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L531-L536"
           },
           "kind": "function",
           "name": "redraw",
@@ -4174,28 +4174,28 @@
           ],
           "loc": {
             "start": {
-              "line": 491,
+              "line": 538,
               "column": 2
             },
             "end": {
-              "line": 495,
+              "line": 542,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 496,
+                "line": 543,
                 "column": 2
               },
               "end": {
-                "line": 498,
+                "line": 545,
                 "column": 4
               }
             },
             "file": "packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L496-L498"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L543-L545"
           },
           "kind": "function",
           "name": "flush",
@@ -4314,7 +4314,7 @@
       },
       "file": "packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L108-L149"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L108-L149"
     },
     "kind": "namespace",
     "name": "Shaders",
@@ -4377,7 +4377,7 @@
             },
             "file": "packages/gl-react/src/Shaders.js",
             "path": "packages/gl-react/src/Shaders.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L122-L138"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L122-L138"
           },
           "memberof": "Shaders",
           "params": [
@@ -4623,7 +4623,7 @@
       },
       "file": "packages/gl-react/src/LinearCopy.js",
       "path": "packages/gl-react/src/LinearCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/LinearCopy.js#L14-L24"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/LinearCopy.js#L14-L24"
     },
     "properties": [
       {
@@ -4795,7 +4795,7 @@
       },
       "file": "packages/gl-react/src/NearestCopy.js",
       "path": "packages/gl-react/src/NearestCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/NearestCopy.js#L14-L25"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/NearestCopy.js#L14-L25"
     },
     "properties": [
       {
@@ -5310,7 +5310,7 @@
       },
       "file": "packages/gl-react/src/Bus.js",
       "path": "packages/gl-react/src/Bus.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Bus.js#L44-L201"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Bus.js#L44-L201"
     },
     "properties": [
       {
@@ -5683,7 +5683,7 @@
             },
             "file": "packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Bus.js#L154-L157"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Bus.js#L154-L157"
           },
           "name": "capture",
           "kind": "function",
@@ -5836,7 +5836,7 @@
             },
             "file": "packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Bus.js#L169-L171"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Bus.js#L169-L171"
           },
           "kind": "function",
           "name": "redraw",
@@ -6059,7 +6059,7 @@
       },
       "file": "packages/gl-react/src/connectSize.js",
       "path": "packages/gl-react/src/connectSize.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/connectSize.js#L18-L56"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/connectSize.js#L18-L56"
     },
     "kind": "function",
     "name": "connectSize",
@@ -6434,7 +6434,7 @@
       },
       "file": "packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/GLSL.js#L26-L32"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/GLSL.js#L26-L32"
     },
     "returns": [
       {
@@ -6770,7 +6770,7 @@
       },
       "file": "packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/GLSL.js#L7-L7"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/GLSL.js#L7-L7"
     },
     "name": "GLSLCode",
     "kind": "typedef",
@@ -6925,7 +6925,7 @@
       },
       "file": "packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L44-L46"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L44-L46"
     },
     "examples": [
       {
@@ -7067,7 +7067,7 @@
       },
       "file": "packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L15-L17"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L15-L17"
     },
     "examples": [
       {
@@ -7258,7 +7258,7 @@
       },
       "file": "packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L51-L53"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L51-L53"
     },
     "name": "ShadersSheet",
     "kind": "typedef",
@@ -7304,7 +7304,7 @@
       },
       "file": "packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Shaders.js#L24-L27"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Shaders.js#L24-L27"
     },
     "name": "ShaderIdentifier",
     "kind": "typedef",
@@ -8161,28 +8161,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 122,
+        "line": 119,
         "column": 0
       },
       "end": {
-        "line": 161,
+        "line": 158,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 162,
+          "line": 159,
           "column": 0
         },
         "end": {
-          "line": 164,
+          "line": 161,
           "column": 2
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L162-L164"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L159-L161"
     },
     "name": "Uniforms",
     "kind": "typedef",
@@ -8445,28 +8445,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 64,
+        "line": 61,
         "column": 0
       },
       "end": {
-        "line": 68,
+        "line": 65,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 69,
+          "line": 66,
           "column": 0
         },
         "end": {
-          "line": 72,
+          "line": 69,
           "column": 2
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L69-L72"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L66-L69"
     },
     "name": "TextureOptions",
     "kind": "typedef",
@@ -8474,7 +8474,7 @@
       {
         "title": "property",
         "name": "interpolation",
-        "lineNumber": 70,
+        "lineNumber": 67,
         "type": {
           "type": "NameExpression",
           "name": "Interpolation"
@@ -8483,7 +8483,7 @@
       {
         "title": "property",
         "name": "wrap",
-        "lineNumber": 71,
+        "lineNumber": 68,
         "type": {
           "type": "UnionType",
           "elements": [
@@ -8783,28 +8783,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 42,
+        "line": 39,
         "column": 0
       },
       "end": {
-        "line": 48,
+        "line": 45,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 49,
+          "line": 46,
           "column": 0
         },
         "end": {
-          "line": 49,
+          "line": 46,
           "column": 42
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L49-L49"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L46-L46"
     },
     "name": "Interpolation",
     "kind": "typedef",
@@ -9113,28 +9113,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 51,
+        "line": 48,
         "column": 0
       },
       "end": {
-        "line": 58,
+        "line": 55,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 59,
+          "line": 56,
           "column": 0
         },
         "end": {
-          "line": 62,
+          "line": 59,
           "column": 20
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L59-L62"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L56-L59"
     },
     "name": "WrapMode",
     "kind": "typedef",
@@ -9172,28 +9172,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 96,
+        "line": 93,
         "column": 0
       },
       "end": {
-        "line": 98,
+        "line": 95,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 99,
+          "line": 96,
           "column": 0
         },
         "end": {
-          "line": 102,
+          "line": 99,
           "column": 3
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L99-L102"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L96-L99"
     },
     "name": "BlendFuncSrcDst",
     "kind": "typedef",
@@ -9201,7 +9201,7 @@
       {
         "title": "property",
         "name": "src",
-        "lineNumber": 100,
+        "lineNumber": 97,
         "type": {
           "type": "NameExpression",
           "name": "BlendFunc"
@@ -9210,7 +9210,7 @@
       {
         "title": "property",
         "name": "dst",
-        "lineNumber": 101,
+        "lineNumber": 98,
         "type": {
           "type": "NameExpression",
           "name": "BlendFunc"
@@ -10202,28 +10202,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 74,
+        "line": 71,
         "column": 0
       },
       "end": {
-        "line": 93,
+        "line": 90,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 94,
+          "line": 91,
           "column": 0
         },
         "end": {
-          "line": 94,
+          "line": 91,
           "column": 48
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L94-L94"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L91-L91"
     },
     "name": "BlendFunc",
     "kind": "typedef",
@@ -10305,28 +10305,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 114,
+        "line": 111,
         "column": 0
       },
       "end": {
-        "line": 116,
+        "line": 113,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 117,
+          "line": 114,
           "column": 0
         },
         "end": {
-          "line": 119,
+          "line": 116,
           "column": 3
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L117-L119"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L114-L116"
     },
     "name": "Clear",
     "kind": "typedef",
@@ -10334,7 +10334,7 @@
       {
         "title": "property",
         "name": "color",
-        "lineNumber": 118,
+        "lineNumber": 115,
         "type": {
           "type": "NameExpression",
           "name": "Vec4"
@@ -10477,28 +10477,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 104,
+        "line": 101,
         "column": 0
       },
       "end": {
-        "line": 106,
+        "line": 103,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 107,
+          "line": 104,
           "column": 0
         },
         "end": {
-          "line": 112,
+          "line": 109,
           "column": 2
         }
       },
       "file": "packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Node.js#L107-L112"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Node.js#L104-L109"
     },
     "name": "Vec4",
     "kind": "typedef",
@@ -10653,7 +10653,7 @@
       },
       "file": "packages/gl-react/flow/ndarray.js",
       "path": "packages/gl-react/flow/ndarray.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/flow/ndarray.js#L7-L13"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/flow/ndarray.js#L7-L13"
     },
     "name": "NDArray",
     "kind": "typedef",
@@ -10858,379 +10858,6 @@
           "children": [
             {
               "type": "text",
-              "value": "This type is provided by the library ",
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 38,
-                  "offset": 37
-                },
-                "indent": []
-              }
-            },
-            {
-              "type": "link",
-              "title": null,
-              "url": "https://github.com/stackgl/gl-texture2d",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "gl-texture2d",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 39,
-                      "offset": 38
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 51,
-                      "offset": 50
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 38,
-                  "offset": 37
-                },
-                "end": {
-                  "line": 1,
-                  "column": 93,
-                  "offset": 92
-                },
-                "indent": []
-              }
-            },
-            {
-              "type": "text",
-              "value": ".",
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 93,
-                  "offset": 92
-                },
-                "end": {
-                  "line": 1,
-                  "column": 94,
-                  "offset": 93
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 94,
-              "offset": 93
-            },
-            "indent": []
-          }
-        }
-      ],
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 94,
-          "offset": 93
-        }
-      }
-    },
-    "tags": [
-      {
-        "title": "type",
-        "description": "Texture",
-        "lineNumber": 2,
-        "type": null,
-        "errors": [
-          "Missing or invalid tag type"
-        ]
-      }
-    ],
-    "loc": {
-      "start": {
-        "line": 3,
-        "column": 0
-      },
-      "end": {
-        "line": 6,
-        "column": 3
-      }
-    },
-    "context": {
-      "loc": {
-        "start": {
-          "line": 7,
-          "column": 0
-        },
-        "end": {
-          "line": 15,
-          "column": 2
-        }
-      },
-      "file": "packages/gl-react/flow/gl-texture2d.js",
-      "path": "packages/gl-react/flow/gl-texture2d.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/flow/gl-texture2d.js#L7-L15"
-    },
-    "name": "Texture",
-    "kind": "typedef",
-    "properties": [
-      {
-        "title": "property",
-        "name": "dispose",
-        "lineNumber": 8,
-        "type": {
-          "type": "FunctionType",
-          "params": [],
-          "result": {
-            "type": "VoidLiteral"
-          }
-        }
-      },
-      {
-        "title": "property",
-        "name": "setPixels",
-        "lineNumber": 9,
-        "type": {
-          "type": "FunctionType",
-          "params": [
-            {
-              "type": "ParameterType",
-              "name": "d",
-              "expression": {
-                "type": "AllLiteral"
-              }
-            }
-          ],
-          "result": {
-            "type": "VoidLiteral"
-          }
-        }
-      },
-      {
-        "title": "property",
-        "name": "bind",
-        "lineNumber": 10,
-        "type": {
-          "type": "FunctionType",
-          "params": [
-            {
-              "type": "ParameterType",
-              "name": "unit",
-              "expression": {
-                "type": "NameExpression",
-                "name": "number"
-              }
-            }
-          ],
-          "result": {
-            "type": "NameExpression",
-            "name": "number"
-          }
-        }
-      },
-      {
-        "title": "property",
-        "name": "minFilter",
-        "lineNumber": 11,
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        }
-      },
-      {
-        "title": "property",
-        "name": "magFilter",
-        "lineNumber": 12,
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        }
-      },
-      {
-        "title": "property",
-        "name": "wrap",
-        "lineNumber": 13,
-        "type": {
-          "type": "ArrayType",
-          "elements": [
-            {
-              "type": "NameExpression",
-              "name": "number"
-            },
-            {
-              "type": "NameExpression",
-              "name": "number"
-            }
-          ]
-        }
-      },
-      {
-        "title": "property",
-        "name": "shape",
-        "lineNumber": 14,
-        "type": {
-          "type": "ArrayType",
-          "elements": [
-            {
-              "type": "NameExpression",
-              "name": "number"
-            },
-            {
-              "type": "NameExpression",
-              "name": "number"
-            }
-          ]
-        }
-      }
-    ],
-    "type": {
-      "type": "RecordType",
-      "fields": [
-        {
-          "type": "FieldType",
-          "key": "dispose",
-          "value": {
-            "type": "FunctionType",
-            "params": [],
-            "result": {
-              "type": "VoidLiteral"
-            }
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "setPixels",
-          "value": {
-            "type": "FunctionType",
-            "params": [
-              {
-                "type": "ParameterType",
-                "name": "d",
-                "expression": {
-                  "type": "AllLiteral"
-                }
-              }
-            ],
-            "result": {
-              "type": "VoidLiteral"
-            }
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "bind",
-          "value": {
-            "type": "FunctionType",
-            "params": [
-              {
-                "type": "ParameterType",
-                "name": "unit",
-                "expression": {
-                  "type": "NameExpression",
-                  "name": "number"
-                }
-              }
-            ],
-            "result": {
-              "type": "NameExpression",
-              "name": "number"
-            }
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "minFilter",
-          "value": {
-            "type": "NameExpression",
-            "name": "number"
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "magFilter",
-          "value": {
-            "type": "NameExpression",
-            "name": "number"
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "wrap",
-          "value": {
-            "type": "ArrayType",
-            "elements": [
-              {
-                "type": "NameExpression",
-                "name": "number"
-              },
-              {
-                "type": "NameExpression",
-                "name": "number"
-              }
-            ]
-          }
-        },
-        {
-          "type": "FieldType",
-          "key": "shape",
-          "value": {
-            "type": "ArrayType",
-            "elements": [
-              {
-                "type": "NameExpression",
-                "name": "number"
-              },
-              {
-                "type": "NameExpression",
-                "name": "number"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "members": {
-      "instance": [],
-      "static": []
-    },
-    "path": [
-      {
-        "name": "Texture",
-        "kind": "typedef"
-      }
-    ],
-    "namespace": "Texture"
-  },
-  {
-    "description": {
-      "type": "root",
-      "children": [
-        {
-          "type": "paragraph",
-          "children": [
-            {
-              "type": "text",
               "value": "A texture loader is an extensible way to add more \"renderable texture\" into gl-react.",
               "position": {
                 "start": {
@@ -11278,28 +10905,28 @@
     "tags": [],
     "loc": {
       "start": {
-        "line": 7,
+        "line": 6,
         "column": 0
       },
       "end": {
-        "line": 9,
+        "line": 8,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 10,
+          "line": 9,
           "column": 0
         },
         "end": {
-          "line": 51,
+          "line": 50,
           "column": 1
         }
       },
       "file": "packages/gl-react/src/TextureLoader.js",
       "path": "packages/gl-react/src/TextureLoader.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L10-L51"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L9-L50"
     },
     "name": "TextureLoader",
     "kind": "class",
@@ -11321,28 +10948,28 @@
           ],
           "loc": {
             "start": {
-              "line": 12,
+              "line": 11,
               "column": 2
             },
             "end": {
-              "line": 14,
+              "line": 13,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 15,
+                "line": 14,
                 "column": 2
               },
               "end": {
-                "line": 15,
+                "line": 14,
                 "column": 28
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L15-L15"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L14-L14"
           },
           "properties": [
             {
@@ -11436,28 +11063,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 17,
+              "line": 16,
               "column": 2
             },
             "end": {
-              "line": 19,
+              "line": 18,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 20,
+                "line": 19,
                 "column": 2
               },
               "end": {
-                "line": 22,
+                "line": 21,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L20-L22"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L19-L21"
           },
           "name": "constructor",
           "kind": "function",
@@ -11465,7 +11092,7 @@
             {
               "title": "param",
               "name": "gl",
-              "lineNumber": 20,
+              "lineNumber": 19,
               "type": {
                 "type": "NameExpression",
                 "name": "WebGLRenderingContext"
@@ -11547,28 +11174,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 24,
+              "line": 23,
               "column": 2
             },
             "end": {
-              "line": 26,
+              "line": 25,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 27,
+                "line": 26,
                 "column": 2
               },
               "end": {
-                "line": 27,
+                "line": 26,
                 "column": 21
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L27-L27"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L26-L26"
           },
           "name": "dispose",
           "kind": "member",
@@ -11654,28 +11281,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 29,
+              "line": 28,
               "column": 2
             },
             "end": {
-              "line": 31,
+              "line": 30,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 32,
+                "line": 31,
                 "column": 2
               },
               "end": {
-                "line": 32,
+                "line": 31,
                 "column": 34
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L32-L32"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L31-L31"
           },
           "name": "canLoad",
           "kind": "member",
@@ -11770,28 +11397,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 34,
+              "line": 33,
               "column": 2
             },
             "end": {
-              "line": 36,
+              "line": 35,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 37,
+                "line": 36,
                 "column": 2
               },
               "end": {
-                "line": 37,
-                "column": 29
+                "line": 36,
+                "column": 34
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L37-L37"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L36-L36"
           },
           "name": "get",
           "kind": "member",
@@ -11813,7 +11440,7 @@
               "type": "NullableType",
               "expression": {
                 "type": "NameExpression",
-                "name": "Texture"
+                "name": "WebGLTexture"
               }
             }
           },
@@ -11896,28 +11523,28 @@
           "tags": [],
           "loc": {
             "start": {
-              "line": 39,
+              "line": 38,
               "column": 2
             },
             "end": {
-              "line": 43,
+              "line": 42,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 44,
+                "line": 43,
                 "column": 2
               },
               "end": {
-                "line": 50,
+                "line": 49,
                 "column": 3
               }
             },
             "file": "packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoader.js#L44-L50"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoader.js#L43-L49"
           },
           "name": "load",
           "kind": "function",
@@ -11925,7 +11552,7 @@
             {
               "title": "param",
               "name": "input",
-              "lineNumber": 44,
+              "lineNumber": 43,
               "type": {
                 "type": "NameExpression",
                 "name": "T"
@@ -11943,7 +11570,7 @@
                 "applications": [
                   {
                     "type": "NameExpression",
-                    "name": "Texture"
+                    "name": "WebGLTexture"
                   }
                 ]
               }
@@ -12064,7 +11691,7 @@
       },
       "file": "packages/gl-react/src/Visitors.js",
       "path": "packages/gl-react/src/Visitors.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitors.js#L10-L28"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitors.js#L10-L28"
     },
     "kind": "namespace",
     "name": "Visitors",
@@ -12103,7 +11730,7 @@
             },
             "file": "packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitors.js#L14-L16"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitors.js#L14-L16"
           },
           "memberof": "Visitors",
           "name": "add",
@@ -12167,7 +11794,7 @@
             },
             "file": "packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitors.js#L20-L23"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitors.js#L20-L23"
           },
           "memberof": "Visitors",
           "name": "remove",
@@ -12331,7 +11958,7 @@
       },
       "file": "packages/gl-react/src/TextureLoaders.js",
       "path": "packages/gl-react/src/TextureLoaders.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoaders.js#L14-L33"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoaders.js#L14-L33"
     },
     "kind": "namespace",
     "name": "TextureLoaders",
@@ -12421,7 +12048,7 @@
             },
             "file": "packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoaders.js#L19-L21"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoaders.js#L19-L21"
           },
           "memberof": "TextureLoaders",
           "name": "add",
@@ -12553,7 +12180,7 @@
             },
             "file": "packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/TextureLoaders.js#L26-L29"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/TextureLoaders.js#L26-L29"
           },
           "memberof": "TextureLoaders",
           "name": "remove",
@@ -12638,7 +12265,7 @@
       },
       "file": "packages/gl-react/src/VisitorLogger.js",
       "path": "packages/gl-react/src/VisitorLogger.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/VisitorLogger.js#L20-L100"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/VisitorLogger.js#L20-L100"
     },
     "name": "VisitorLogger",
     "augments": [
@@ -12686,7 +12313,7 @@
       },
       "file": "packages/gl-react/src/Visitor.js",
       "path": "packages/gl-react/src/Visitor.js",
-      "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L24-L64"
+      "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L24-L64"
     },
     "name": "Visitor",
     "kind": "class",
@@ -12718,7 +12345,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L28-L28"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L28-L28"
           },
           "name": "onSurfaceMount",
           "kind": "function",
@@ -12778,7 +12405,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L32-L32"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L32-L32"
           },
           "name": "onSurfaceUnmount",
           "kind": "function",
@@ -12838,7 +12465,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L36-L36"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L36-L36"
           },
           "name": "onSurfaceGLContextChange",
           "kind": "function",
@@ -12910,7 +12537,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L39-L39"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L39-L39"
           },
           "name": "onSurfaceDrawSkipped",
           "kind": "function",
@@ -12970,7 +12597,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L42-L42"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L42-L42"
           },
           "name": "onSurfaceDrawStart",
           "kind": "function",
@@ -13030,7 +12657,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L45-L45"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L45-L45"
           },
           "name": "onSurfaceDrawError",
           "kind": "function",
@@ -13090,7 +12717,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L48-L48"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L48-L48"
           },
           "name": "onSurfaceDrawEnd",
           "kind": "function",
@@ -13150,7 +12777,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L51-L51"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L51-L51"
           },
           "name": "onNodeDrawSkipped",
           "kind": "function",
@@ -13210,7 +12837,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L54-L54"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L54-L54"
           },
           "name": "onNodeDrawStart",
           "kind": "function",
@@ -13270,7 +12897,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L57-L57"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L57-L57"
           },
           "name": "onNodeSyncDeps",
           "kind": "function",
@@ -13384,7 +13011,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L60-L60"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L60-L60"
           },
           "name": "onNodeDraw",
           "kind": "function",
@@ -13459,7 +13086,7 @@
             },
             "file": "packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/dc4ac09fe025de36e4434ffdd372852c9b06f8fd/packages/gl-react/src/Visitor.js#L63-L63"
+            "github": "https://github.com/gre/gl-react/blob/18537428f1c80c76e673d0ef7d89afdd5737d1ea/packages/gl-react/src/Visitor.js#L63-L63"
           },
           "name": "onNodeDrawEnd",
           "kind": "function",

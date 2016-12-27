@@ -1,11 +1,12 @@
 //@flow
-import {Texture2DLoader} from "gl-react";
+import {TextureLoaderRawObject} from "gl-react";
 
-export default class VideoTextureLoader extends Texture2DLoader<HTMLVideoElement> {
+export default class VideoTextureLoader extends TextureLoaderRawObject<HTMLVideoElement> {
   canLoad (input: any) {
     return input instanceof HTMLVideoElement;
   }
-  inferShape (canvas: HTMLVideoElement) {
-    return [ canvas.videoWidth, canvas.videoHeight ];
+  mapInput (video: HTMLVideoElement) {
+    if (video.videoWidth === 0) return null;
+    return video;
   }
 }

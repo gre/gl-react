@@ -29,8 +29,6 @@ import {
   Surface,
 } from "gl-react-headless";
 import loseGL from "gl-react-headless/lib/loseGL";
-import createTexture from "gl-texture2d";
-import type {Texture} from "gl-texture2d";
 import type {
   DisposablePromise,
 } from "gl-react/lib/helpers/disposable";
@@ -44,6 +42,7 @@ import {
   delay,
   create,
   CountersVisitor,
+  createNDArrayTexture,
   createOneTextureLoader,
   red2x2,
   white3x3,
@@ -1335,7 +1334,7 @@ test("can be extended with addTextureLoaderClass", async () => {
     }
   });
 
-  const loader = createOneTextureLoader(gl => createTexture(gl, red2x2));
+  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
   TextureLoaders.add(loader.Loader);
   const inst = create(
     <Surface width={64} height={64} webglContextAttributes={{ preserveDrawingBuffer: true }}>
@@ -1370,7 +1369,7 @@ test("Surface `preload` prevent to draw anything", async () => {
 
   let onLoadCounter = 0;
   const visitor = new CountersVisitor();
-  const loader = createOneTextureLoader(gl => createTexture(gl, red2x2));
+  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
   TextureLoaders.add(loader.Loader);
   const el =
     <Surface width={64} height={64} visitor={visitor} onLoad={() => {++onLoadCounter}} preload={[ loader.textureId ]} webglContextAttributes={{ preserveDrawingBuffer: true }}>
@@ -1410,7 +1409,7 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
 
   let onLoadCounter = 0;
   let onLoadErrorCounter = 0;
-  const loader = createOneTextureLoader(gl => createTexture(gl, red2x2));
+  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
   TextureLoaders.add(loader.Loader);
   const el =
     <Surface

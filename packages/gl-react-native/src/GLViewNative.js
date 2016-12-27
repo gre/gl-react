@@ -11,6 +11,8 @@ const propTypes = {
 };
 
 const tmpPatch = cb => gl => {
+  gl.enableLogging = true;
+  /*
   const {
     texSubImage2D,
     bindFramebuffer,
@@ -18,13 +20,17 @@ const tmpPatch = cb => gl => {
     bindTexture,
     getParameter,
   } = gl;
-  gl.enableLogging = true;
   gl.texSubImage2D = function (...args) {
     if (args.length === 9 && args[2] === 0 && args[3] === 0) {
       const [target, level, , , width, height, format, type, pixels] = args;
       gl.texImage2D(target, level, format, width, height, 0, format, type, pixels);
     } else {
-      texSubImage2D.apply(gl, args);
+      try {
+        texSubImage2D.apply(gl, args);
+      }
+      catch (e) { // FIXME current not impl by Exponent
+        console.warn(e);
+      }
     }
   };
   gl.createRenderbuffer = () => null;
@@ -63,6 +69,7 @@ const tmpPatch = cb => gl => {
     }
     return getParameter.call(gl, pname);
   };
+  */
   return cb(gl);
 };
 
