@@ -28,7 +28,6 @@ export default class TextureLoaderNDArray extends TextureLoader<NDArray> {
       this.textures.set(array, texture);
     }
     gl.bindTexture(gl.TEXTURE_2D, texture);
-    console.log("array get", array);
     drawNDArrayTexture(gl, texture, array);
     return texture;
   }
