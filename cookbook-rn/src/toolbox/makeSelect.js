@@ -16,7 +16,7 @@ export default (choices: Array<{ key: string, label: string }>) => class Select 
   render() {
     const {value, onChange} = this.props;
     return (
-      <Picker style={styles.root} selectValue={value} onValueChange={onChange}>
+      <Picker style={styles.root} selectedValue={value} onValueChange={onChange}>
       {choices.map(({ key, label }) =>
         <Picker.Item key={key} value={key} label={label} />)}
       </Picker>

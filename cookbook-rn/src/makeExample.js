@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     justifyContent: "space-around",
+    flex: 1,
   },
   header: {
 
