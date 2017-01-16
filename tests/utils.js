@@ -222,7 +222,7 @@ export function createOneTextureLoader (makeTexture: (gl: any)=>WebGLTexture) {
 }
 
 import drawNDArrayTexture from "gl-react/lib/helpers/drawNDArrayTexture";
-export function createNDArrayTexture (gl, ndarray) {
+export function createNDArrayTexture (gl: WebGLRenderingContext, ndarray: *) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
   drawNDArrayTexture(gl, texture, ndarray);

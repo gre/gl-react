@@ -1,26 +1,25 @@
 //@flow
 import TextureLoader from "./TextureLoader";
 export default class TextureLoaderRawObject<T> extends TextureLoader<T> {
-  textures: WeakMap<T, WebGLTexture>;
+  textureMemoized: WeakMap<T, WebGLTexture> = new WeakMap();
+  textures: Array<WebGLTexture> = [];
+
   +mapInput: (t: T)=>any;
-  constructor(gl: WebGLRenderingContext) {
-    super(gl);
-    this.textures = new WeakMap();
-  }
+
   dispose() {
     const {gl} = this;
-    for (let k in this.textures) {
-      if (this.textures.hasOwnProperty(k)) {
-        gl.deleteTexture(this.textures[k]);
-      }
-    }
+    this.textures.forEach(t => gl.deleteTexture(t));
+    this.textureMemoized = new WeakMap();
+    this.textures = [];
   }
+
   get (obj: T) {
     const { gl } = this;
-    let texture = this.textures.get(obj);
+    let texture = this.textureMemoized.get(obj);
     if (!texture) {
       texture = gl.createTexture();
-      this.textures.set(obj, texture);
+      this.textureMemoized.set(obj, texture);
+      this.textures.push(texture);
     }
     gl.bindTexture(gl.TEXTURE_2D, texture);
     // $FlowFixMe we are loosely on types here because we allow more that browser WebGL impl
