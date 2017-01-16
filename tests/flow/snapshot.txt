@@ -1,88 +1,88 @@
-../all.test.js:1846
-1846:     <Node shader={shaders.helloTexture}
+../all.test.js:1845
+1845:     <Node shader={shaders.helloTexture}
           ^ props of React element `Node`
-1847:       uniformsOptions={{ t: { interpolation: "nope" } }}
+1846:       uniformsOptions={{ t: { interpolation: "nope" } }}
                                                    ^^^^^^ string. This type is incompatible with
- 70:   interpolation: Interpolation,
-                      ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:70
+ 67:   interpolation: Interpolation,
+                      ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:67
 
-../all.test.js:1854
-1854:     <Node shader={shaders.helloTexture}
+../all.test.js:1853
+1853:     <Node shader={shaders.helloTexture}
           ^ props of React element `Node`
-1855:       uniformsOptions={{ t: { wrap: "nope" } }}
+1854:       uniformsOptions={{ t: { wrap: "nope" } }}
                                           ^^^^^^ string. This type is incompatible with
- 71:   wrap: [WrapMode, WrapMode] | WrapMode,
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:71
+ 68:   wrap: [WrapMode, WrapMode] | WrapMode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Member 1:
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Error:
-  1855:       uniformsOptions={{ t: { wrap: "nope" } }}
+  1854:       uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Member 2:
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-                                      ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+                                      ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Error:
-  1855:       uniformsOptions={{ t: { wrap: "nope" } }}
+  1854:       uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-                                      ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+                                      ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:68
 
-../all.test.js:1862
-1862:     <Node shader={shaders.helloTexture}
+../all.test.js:1861
+1861:     <Node shader={shaders.helloTexture}
           ^ props of React element `Node`
-1863:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
+1862:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
                                           ^^^^^^^^^^^^^^^ array literal. This type is incompatible with
- 71:   wrap: [WrapMode, WrapMode] | WrapMode,
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:71
+ 68:   wrap: [WrapMode, WrapMode] | WrapMode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Member 1:
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+               ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Error:
-  1863:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
+  1862:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
                                              ^^^^^^ string. This type is incompatible with
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-                ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+                ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Member 2:
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-                                      ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+                                      ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:68
   Error:
-  1863:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
+  1862:       uniformsOptions={{ t: { wrap: ["nope","nope"] } }}
                                             ^^^^^^^^^^^^^^^ array literal. This type is incompatible with
-   71:   wrap: [WrapMode, WrapMode] | WrapMode,
-                                      ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:71
+   68:   wrap: [WrapMode, WrapMode] | WrapMode,
+                                      ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:68
 
-../all.test.js:1870
-1870:     <Node
+../all.test.js:1869
+1869:     <Node
           ^ props of React element `Node`
-1871:       blendFunc="nope"
+1870:       blendFunc="nope"
                       ^^^^^^ string. Inexact type is incompatible with exact type
-187:   blendFunc: BlendFuncSrcDst,
-                  ^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:187
+184:   blendFunc: BlendFuncSrcDst,
+                  ^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:184
 
 incorrect.js:21
  21: <Node />;
      ^^^^^^^^ React element `Node`
-170: type Props = {|
-                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:167
  21: <Node />;
      ^^^^^^^^ props of React element `Node`
 
 incorrect.js:22
  22: <Surface />;
      ^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  22: <Surface />;
      ^^^^^^^^^^^ props of React element `Surface`
 
 incorrect.js:22
  22: <Surface />;
      ^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  22: <Surface />;
      ^^^^^^^^^^^ props of React element `Surface`
 
@@ -91,30 +91,30 @@ incorrect.js:27
      ^^^^^^^^^^^^^ React element `Node`
  27: <Node nope />;
      ^^^^^^^^^^^^^ property `nope`. Property not found in
-170: type Props = {|
-                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:167
 
 incorrect.js:27
  27: <Node nope />;
      ^^^^^^^^^^^^^ React element `Node`
-170: type Props = {|
-                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:167
  27: <Node nope />;
      ^^^^^^^^^^^^^ props of React element `Node`
 
 incorrect.js:28
  28: <Surface nope />;
      ^^^^^^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  28: <Surface nope />;
      ^^^^^^^^^^^^^^^^ props of React element `Surface`
 
 incorrect.js:28
  28: <Surface nope />;
      ^^^^^^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  28: <Surface nope />;
      ^^^^^^^^^^^^^^^^ props of React element `Surface`
 
@@ -181,16 +181,16 @@ incorrect.js:49
 incorrect.js:54
  54:     <Surface ref={ref => this.surface=ref} notexists>
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  54:     <Surface ref={ref => this.surface=ref} notexists>
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
 
 incorrect.js:54
  54:     <Surface ref={ref => this.surface=ref} notexists>
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
- 38: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:38
+ 35: interface ISurface extends Component<void, SurfaceProps, any> {
+                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
  54:     <Surface ref={ref => this.surface=ref} notexists>
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
 
@@ -205,8 +205,8 @@ incorrect.js:55
 incorrect.js:56
  56:         <Node />
              ^^^^^^^^ React element `Node`
-170: type Props = {|
-                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:167
  56:         <Node />
              ^^^^^^^^ props of React element `Node`
 
@@ -223,22 +223,22 @@ incorrect.js:59
              ^ React element `Node`
  59:         <Node
              ^ property `notexists`. Property not found in
-170: type Props = {|
-                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:167
 
 incorrect.js:59
  59:         <Node
              ^ React element `Node`
  59:         <Node
              ^ property `shaders`. Property not found in
-170: type Props = {|
-                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:167
 
 incorrect.js:59
  59:         <Node
              ^ React element `Node`
-170: type Props = {|
-                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:167
  59:         <Node
              ^ props of React element `Node`
 
@@ -271,102 +271,102 @@ incorrect.js:73
      ^ React element `Node`
  73: <Node
      ^ property `preload`. Property not found in
-170: type Props = {|
-                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:167
 
 incorrect.js:73
  73: <Node
      ^ React element `Node`
  73: <Node
      ^ property `visitor`. Property not found in
-170: type Props = {|
-                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:170
+167: type Props = {|
+                  ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:167
 
 incorrect.js:73
  73: <Node
      ^ React element `Node`
  74:   sync={1}
              ^ number. This type is incompatible with
-174:   sync?: boolean,
-              ^^^^^^^ boolean. See: ../node_modules/gl-react/lib/Node.js.flow:174
+171:   sync?: boolean,
+              ^^^^^^^ boolean. See: ../node_modules/gl-react/lib/Node.js.flow:171
 
 incorrect.js:73
  73: <Node
      ^ props of React element `Node`
  75:   clear={42}
               ^^ number. Inexact type is incompatible with exact type
-188:   clear: ?Clear,
-               ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:188
+185:   clear: ?Clear,
+               ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:185
 
 incorrect.js:73
  73: <Node
      ^ React element `Node`
  76:   width={false}
               ^^^^^ boolean. This type is incompatible with
-175:   width?: number,
-               ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:175
+172:   width?: number,
+               ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:172
 
 incorrect.js:73
  73: <Node
      ^ React element `Node`
  77:   height={false}
                ^^^^^ boolean. This type is incompatible with
-176:   height?: number,
-                ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:176
+173:   height?: number,
+                ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:173
 
 incorrect.js:73
  73: <Node
      ^ props of React element `Node`
  78:   blendFunc={{
                   ^ property `interpolation`. Property not found in
- 99: type BlendFuncSrcDst = {|
-                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:99
+ 96: type BlendFuncSrcDst = {|
+                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:96
 
 incorrect.js:73
  73: <Node
      ^ props of React element `Node`
  78:   blendFunc={{
                   ^ property `wrap`. Property not found in
- 99: type BlendFuncSrcDst = {|
-                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:99
+ 96: type BlendFuncSrcDst = {|
+                            ^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:96
 
 incorrect.js:73
  73: <Node
      ^ props of React element `Node`
  79:     src: "nope",
               ^^^^^^ property `nope`. Property not found in
-100:   src: BlendFunc,
-            ^^^^^^^^^ object literal. See: ../node_modules/gl-react/lib/Node.js.flow:100
+ 97:   src: BlendFunc,
+            ^^^^^^^^^ object literal. See: ../node_modules/gl-react/lib/Node.js.flow:97
 
 incorrect.js:73
  73: <Node
      ^ React element `Node`
  85:   shader={false}
                ^^^^^ boolean. This type is incompatible with
-171:   shader: ShaderIdentifier | ShaderDefinition,
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: ShaderIdentifier | ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:171
+168:   shader: ShaderIdentifier | ShaderDefinition,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: ShaderIdentifier | ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:168
   Member 1:
-  171:   shader: ShaderIdentifier | ShaderDefinition,
-                 ^^^^^^^^^^^^^^^^ ShaderIdentifier. See: ../node_modules/gl-react/lib/Node.js.flow:171
+  168:   shader: ShaderIdentifier | ShaderDefinition,
+                 ^^^^^^^^^^^^^^^^ ShaderIdentifier. See: ../node_modules/gl-react/lib/Node.js.flow:168
   Error:
    85:   shader={false}
                  ^^^^^ boolean. This type is incompatible with
-  171:   shader: ShaderIdentifier | ShaderDefinition,
-                 ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:171
+  168:   shader: ShaderIdentifier | ShaderDefinition,
+                 ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:168
   Member 2:
-  171:   shader: ShaderIdentifier | ShaderDefinition,
-                                    ^^^^^^^^^^^^^^^^ ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:171
+  168:   shader: ShaderIdentifier | ShaderDefinition,
+                                    ^^^^^^^^^^^^^^^^ ShaderDefinition. See: ../node_modules/gl-react/lib/Node.js.flow:168
   Error:
    85:   shader={false}
                  ^^^^^ boolean. Inexact type is incompatible with exact type
-  171:   shader: ShaderIdentifier | ShaderDefinition,
-                                    ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:171
+  168:   shader: ShaderIdentifier | ShaderDefinition,
+                                    ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:168
 
 incorrect.js:73
  73: <Node
      ^ props of React element `Node`
- 99: type BlendFuncSrcDst = {|
-                            ^ property `dst`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:99
+ 96: type BlendFuncSrcDst = {|
+                            ^ property `dst`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:96
  78:   blendFunc={{
                   ^ object literal
 

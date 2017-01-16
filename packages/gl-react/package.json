@@ -28,11 +28,10 @@
     "react": "*"
   },
   "dependencies": {
-    "gl-fbo": "^2.0.5",
     "gl-shader": "^4.2.1",
-    "gl-texture2d": "^2.0.12",
     "invariant": "^2.2.1",
     "ndarray": "^1.0.18",
+    "ndarray-ops": "^1.2.2",
     "raf": "^3.3.0",
     "typedarray-pool": "^1.1.0"
   }

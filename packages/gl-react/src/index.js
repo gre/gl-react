@@ -8,8 +8,8 @@ import LinearCopy from "./LinearCopy";
 import NearestCopy from "./NearestCopy";
 import Node from "./Node";
 import Shaders from "./Shaders";
-import Texture2DLoader from "./Texture2DLoader";
 import TextureLoader from "./TextureLoader";
+import TextureLoaderRawObject from "./TextureLoaderRawObject";
 import TextureLoaders from "./TextureLoaders";
 import Visitor from "./Visitor";
 import VisitorLogger from "./VisitorLogger";
@@ -28,8 +28,8 @@ export {
   NearestCopy,
   Node,
   Shaders,
-  Texture2DLoader,
   TextureLoader,
+  TextureLoaderRawObject,
   TextureLoaders,
   Visitor,
   VisitorLogger,

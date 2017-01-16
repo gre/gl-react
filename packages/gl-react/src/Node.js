@@ -2,7 +2,6 @@
 import invariant from "invariant";
 import React, {Component, PropTypes} from "react";
 import pool from "typedarray-pool";
-import createFBO from "gl-fbo";
 import ndarray from "ndarray";
 import Backbuffer from "./Backbuffer";
 import Bus from "./Bus";
@@ -15,11 +14,9 @@ import Shaders, {
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
 import type {Shader} from "gl-shader";
-import type {Framebuffer} from "gl-fbo";
 import type {NDArray} from "ndarray";
 import type {ShaderIdentifier, ShaderInfo, ShaderDefinition} from "./Shaders";
 import type {Surface, SurfaceContext} from "./createSurface";
-import type {Texture} from "gl-texture2d";
 
 const blendFuncAliases = {
   "zero": "ZERO",
@@ -206,7 +203,7 @@ const mapBlendFunc = (gl: WebGLRenderingContext, name: BlendFunc): ?number => {
   console.warn("Invalid blendFunc. Got:", name);
 };
 
-const parseWrap = (gl: WebGLRenderingContext, w: string): ?number => {
+const parseWrap = (gl: WebGLRenderingContext, w: string): number => {
   switch (w) {
   case "clamp to edge":
     return gl.CLAMP_TO_EDGE;
@@ -216,6 +213,7 @@ const parseWrap = (gl: WebGLRenderingContext, w: string): ?number => {
     return gl.MIRRORED_REPEAT;
   default:
     console.warn("Invalid wrap. Got:", w);
+    return gl.CLAMP_TO_EDGE;
   }
 };
 
@@ -228,7 +226,7 @@ const mergeArrays = (a: Array<*>, b: Array<*>): Array<*> => {
   return t;
 };
 
-const parseInterpolation = (gl: WebGLRenderingContext, i: string): ?number => {
+const parseInterpolation = (gl: WebGLRenderingContext, i: string): number => {
   switch (i) {
   case "linear":
     return gl.LINEAR;
@@ -236,7 +234,51 @@ const parseInterpolation = (gl: WebGLRenderingContext, i: string): ?number => {
     return gl.NEAREST;
   default:
     console.warn("Invalid interpolation. Got:", i);
+    return gl.LINEAR;
   }
+};
+
+type Framebuffer = {
+  handle: WebGLFramebuffer,
+  color: WebGLTexture,
+  bind: () => void,
+  dispose: () => void,
+  syncSize: (w: number, h: number) => void,
+};
+
+// minimal version of gl-fbo
+const createFBO = (gl: WebGLRenderingContext, width: number, height: number): Framebuffer => {
+  var handle = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, handle);
+  var color = gl.createTexture();
+  if (!color) throw new Error("createTexture returned null");
+  gl.bindTexture(gl.TEXTURE_2D, color);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, color, 0);
+  return {
+    handle,
+    color,
+    bind: () => {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, handle);
+      gl.viewport(0, 0, width, height);
+    },
+    syncSize: (w: number, h: number) => {
+      if (w !== width || h !== height) {
+        width = w;
+        height = h;
+        gl.bindTexture(gl.TEXTURE_2D, color);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      }
+    },
+    dispose: () => {
+      gl.deleteFramebuffer(handle);
+      gl.deleteTexture(color);
+    },
+  };
 };
 
 const defaultTextureOptions: TextureOptions = {
@@ -246,20 +288,32 @@ const defaultTextureOptions: TextureOptions = {
 
 const applyTextureOptions = (
   gl: WebGLRenderingContext,
-  texture: Texture,
   partialOpts: ?$Shape<TextureOptions>,
 ) => {
   const opts: TextureOptions = { ...defaultTextureOptions, ...partialOpts };
-  texture.minFilter = texture.magFilter = parseInterpolation(gl, opts.interpolation);
-  let wrap;
+  let filter = parseInterpolation(gl, opts.interpolation);
+  if (filter===gl.LINEAR && !gl.getExtension("OES_texture_float_linear")) {
+    // filter = gl.NEAREST; // fallback
+    // FIXME we should only call getExtension in case of a float texture.. need to figure out how to express that later. only then we can enable that fallback.
+  }
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
+  let wrapS, wrapT;
   if (Array.isArray(opts.wrap)) {
-    if(opts.wrap.length!==2) console.warn("textureOptions wrap: should be an array of 2 values. Got:", opts.wrap);
-    else wrap = opts.wrap.map(w => parseWrap(gl, w));
+    if(opts.wrap.length!==2) {
+      console.warn("textureOptions wrap: should be an array of 2 values. Got:", opts.wrap);
+      wrapS = wrapT = gl.CLAMP_TO_EDGE;
+    }
+    else {
+      wrapS = parseWrap(gl, opts.wrap[0]);
+      wrapT = parseWrap(gl, opts.wrap[1]);
+    }
   }
   else {
-    wrap = parseWrap(gl, opts.wrap);
+    wrapS = wrapT = parseWrap(gl, opts.wrap);
   }
-  texture.wrap = wrap;
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrapS);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrapT);
 };
 
 const NodePropTypes = {
@@ -365,12 +419,9 @@ export default class Node extends Component {
   componentWillReceiveProps (nextProps: Props, nextContext: *) {
     const nextWidthHeight = nodeWidthHeight(nextProps, nextContext);
     if (this.framebuffer) {
-      const [ width, height ] = this.framebuffer.shape;
-      if (nextWidthHeight[0] !== width || nextWidthHeight[1] !== height) {
-        this.framebuffer.shape = nextWidthHeight;
-        if (this.backbuffer) this.backbuffer.shape = nextWidthHeight;
-      }
+      this.framebuffer.syncSize(...nextWidthHeight);
     }
+    // FIXME should we do same for backbuffer?
     invariant(
       nextProps.backbuffering === this.props.backbuffering,
       "Node backbuffering prop must not changed. (not yet supported)"
@@ -441,14 +492,14 @@ export default class Node extends Component {
     return `Node#${this.id}(${shaderName})`;
   }
 
-  getGLSize(): [number,number] {
+  getGLSize(): [number, number] {
     return nodeWidthHeight(this.props, this.context);
   }
 
-  getGLOutput(): Texture {
+  getGLOutput(): WebGLTexture {
     const {framebuffer} = this;
     invariant(framebuffer, "Node#getGLOutput: framebuffer is not defined. It cannot be called on a root Node");
-    return framebuffer.color[0];
+    return framebuffer.color;
   }
 
   /**
@@ -534,10 +585,10 @@ export default class Node extends Component {
       );
     }
     else {
-      const fbo = createFBO(gl, [ width, height ]);
+      const fbo = createFBO(gl, width, height);
       this.framebuffer = fbo;
       if (this.props.backbuffering) {
-        const fbo = createFBO(gl, [ width, height ]);
+        const fbo = createFBO(gl, width, height);
         this.backbuffer = fbo;
       }
     }
@@ -603,8 +654,7 @@ export default class Node extends Component {
       this.framebuffer.bind();
     }
     else {
-      const {glSurface} = this.context;
-      glSurface._bindRootNode();
+      this.context.glSurface._bindRootNode();
     }
   }
 
@@ -696,7 +746,7 @@ export default class Node extends Component {
         providedUniforms.push(k);
       }
     }
-    const textureUnits: WeakMap<Texture,number> = new WeakMap();
+    const textureUnits: WeakMap<WebGLTexture, number> = new WeakMap();
 
     const prepareTexture = (
       initialObj: mixed,
@@ -705,7 +755,7 @@ export default class Node extends Component {
     ) => {
       let obj = initialObj,
         dependency: ?(Node | Bus),
-        result: ?{directTexture?: ?Texture, glNode?: Node};
+        result: ?{directTexture?: ?WebGLTexture, glNode?: Node};
 
       if (typeof obj === "function") {
         // texture uniform can be a function that resolves the object at draw time.
@@ -799,7 +849,7 @@ export default class Node extends Component {
         textureOptions,
       });
       const prepare = () => {
-        const texture: Texture =
+        const texture: WebGLTexture =
           result && (
             result.directTexture
             || result.glNode && result.glNode.getGLOutput()
@@ -809,8 +859,9 @@ export default class Node extends Component {
           return textureUnits.get(texture);
         }
         const value = units++;
-        texture.bind(value);
-        applyTextureOptions(gl, texture, textureOptions);
+        gl.activeTexture(gl.TEXTURE0 + value);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        applyTextureOptions(gl, textureOptions);
         textureUnits.set(texture, value);
         return value;
       };

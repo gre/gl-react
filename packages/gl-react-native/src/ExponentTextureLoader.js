@@ -2,7 +2,6 @@
 import Exponent from "exponent";
 import {TextureLoader} from "gl-react";
 import type {DisposablePromise} from "gl-react/lib/helpers/disposable";
-import createTexture from "gl-texture2d";
 
 export default class ExponentTextureLoader extends TextureLoader<number> {
   loads: Map<number, DisposablePromise<*>> = new Map();
@@ -32,10 +31,9 @@ export default class ExponentTextureLoader extends TextureLoader<number> {
         if (ignored) return;
         const { gl } = this;
         const { width, height } = asset;
-        const texture = createTexture(gl, [ width, height ]);
-        console.log("texture...", texture.shape.slice(0))
-        console.log("raw", asset)
-        texture.setPixels({ raw: asset, width, height });
+        const texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, asset);
         this.textures.set(module, texture);
         this.loads.delete(module);
         return texture;
@@ -46,7 +44,6 @@ export default class ExponentTextureLoader extends TextureLoader<number> {
     return d;
   }
   get (module: number) {
-    console.log(module, this.textures.get(module));
     return this.textures.get(module);
   }
 }
