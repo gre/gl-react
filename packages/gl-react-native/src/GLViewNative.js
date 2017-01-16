@@ -11,65 +11,7 @@ const propTypes = {
 };
 
 const tmpPatch = cb => gl => {
-  gl.enableLogging = true;
-  /*
-  const {
-    texSubImage2D,
-    bindFramebuffer,
-    bindRenderbuffer,
-    bindTexture,
-    getParameter,
-  } = gl;
-  gl.texSubImage2D = function (...args) {
-    if (args.length === 9 && args[2] === 0 && args[3] === 0) {
-      const [target, level, , , width, height, format, type, pixels] = args;
-      gl.texImage2D(target, level, format, width, height, 0, format, type, pixels);
-    } else {
-      try {
-        texSubImage2D.apply(gl, args);
-      }
-      catch (e) { // FIXME current not impl by Exponent
-        console.warn(e);
-      }
-    }
-  };
-  gl.createRenderbuffer = () => null;
-  gl.framebufferRenderbuffer =
-  gl.renderbufferStorage =
-    () => {};
-  let currentFboBinding = null;
-  gl.bindFramebuffer = (target, fbo) => {
-    currentFboBinding = fbo;
-    bindFramebuffer.call(gl, target, fbo);
-  };
-  let currentRenderbufferBinding = null;
-  gl.bindRenderbuffer = (target, renderbuffer) => {
-    currentRenderbufferBinding = renderbuffer;
-    try {
-      bindRenderbuffer.call(gl, target, renderbuffer);
-    }
-    catch (e) { // FIXME current not impl by Exponent
-      console.warn(e);
-    }
-  };
-  let currentTextureBinding = null;
-  gl.bindTexture = (target, texture) => {
-    currentTextureBinding = texture;
-    bindTexture.call(gl, target, texture);
-  };
-  gl.getParameter = (pname) => {
-    if (pname === gl.FRAMEBUFFER_BINDING) {
-      return currentFboBinding;
-    }
-    if (pname === gl.RENDERBUFFER_BINDING) {
-      return currentRenderbufferBinding;
-    }
-    if (pname === gl.TEXTURE_BINDING_2D) {
-      return currentTextureBinding;
-    }
-    return getParameter.call(gl, pname);
-  };
-  */
+  gl.enableLogging = true; // our impl is still WIP so keeping that flag on for now.
   return cb(gl);
 };
 
