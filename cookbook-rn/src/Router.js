@@ -9,8 +9,9 @@ export default createRouter(() => {
   const routes = {
     home: () => Home,
   };
-  Object.keys(examples).map(k => {
-    routes[k] = () => makeExample(examples[k], k);
+  const keys = Object.keys(examples);
+  keys.map((k, i) => {
+    routes[k] = () => makeExample(examples[k], k, keys[i+1]);
   });
   return routes;
 });

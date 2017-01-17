@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from "react-native";
 
 const styles = StyleSheet.create({
@@ -14,14 +15,19 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 14,
   },
-  title: {
+  id: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#222",
     margin: 2,
   },
-  titleDisabled: {
-    color: "#aaa",
+  title: {
+    fontSize: 16,
+    color: "#222",
+    margin: 2,
+  },
+  disabled: {
+    opacity: 0.3,
   },
   description: {
     fontSize: 12,
@@ -31,16 +37,20 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
+  id: string,
   title: string,
   description: string,
   onPress: Function,
   disabled?: boolean,
 };
 
-export default function ListItem({ title, description, onPress, disabled }: Props) {
+export default function ListItem({ id, title, description, onPress, disabled }: Props) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} disabled={disabled}>
-      <Text style={[styles.title, disabled ? styles.titleDisabled : null ]}>{title}</Text>
+    <TouchableOpacity style={[ styles.container, disabled ? styles.titleDisabled : null ]} onPress={onPress} disabled={disabled}>
+      <View>
+        <Text style={[styles.id]}>{id}</Text>
+        <Text style={[styles.title]}>{title}</Text>
+      </View>
       <Text style={styles.description}>{description}</Text>
     </TouchableOpacity>
   );

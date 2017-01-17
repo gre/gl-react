@@ -1,2 +1,2 @@
 //@flow
-export default Symbol("Backbuffer");
+export default "Backbuffer";

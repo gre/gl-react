@@ -1,5 +1,5 @@
 //@flow
-export const GLSLSymbol = Symbol("GLSL");
+export const GLSLSymbol = "GLSL";
 
 /**
  * object created by **GLSL``** string template

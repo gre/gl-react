@@ -5,7 +5,7 @@ export const description = "This is a showcase for Array of textures support.";
 const imgPicker = {
   Editor: ImagesPicker,
   style: { width: 380 },
-  imageStyle: { maxWidth: 42, maxHeight: 42 },
+  imageStyle: { width: 42, height: 42 },
   images: [
     require("./img1.png"),
     require("./img2.png"),

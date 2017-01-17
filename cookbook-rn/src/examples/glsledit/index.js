@@ -49,7 +49,10 @@ export default class Example extends Component {
   constructor() {
     super();
     const visitor = new Visitor();
-    visitor.onSurfaceDrawError = (error: Error) => this.setState({ error });
+    visitor.onSurfaceDrawError = (error: Error) => {
+      this.setState({ error });
+      return true;
+    };
     visitor.onSurfaceDrawEnd = () => this.setState({ error: null });
     this.state = { error: null, visitor };
   }

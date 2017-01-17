@@ -50,8 +50,8 @@ class Slideshow extends Component {
 const SlideshowLoop = timeLoop(Slideshow);
 
 import images from "./images";
-export default () =>
-  <Surface width={600} height={400}>
+export default ({ width }) =>
+  <Surface width={width} height={Math.round(width * 0.6)}>
     <SlideshowLoop
       slides={images}
       slideDuration={2000}

@@ -12,10 +12,11 @@ uniform bool drawing;
 uniform vec4 color;
 uniform vec2 center;
 uniform float brushRadius;
+uniform float ratio;
 void main() {
   if (drawing) {
     vec2 d = uv - center;
-    if (length(d) < brushRadius) {
+    if (length(d * vec2(ratio, 1.0)) < brushRadius) {
       gl_FragColor = color;
     }
     else {
@@ -48,19 +49,21 @@ export default respondToTouchPosition(class Example extends Component {
   }
 
   render() {
-    const { touching, touchPosition } = this.props;
+    const { touching, touchPosition, width, height } = this.props;
     const { color } = this.state;
+    const brushRadius = 0.03 + 0.01 * Math.cos(Date.now() / 1000);
     return (
       <Surface
-        width={300}
-        height={300}
+        width={width}
+        height={height}
         webglContextAttributes={{ preserveDrawingBuffer: true }}>
         <Node
           shader={shaders.paint}
           uniforms={{
             center: [ touchPosition.x, touchPosition.y ],
             drawing: touching,
-            brushRadius: 0.03 + 0.01 * Math.cos(Date.now() / 1000),
+            brushRadius,
+            ratio: width / height,
             color,
           }}
           clear={null}

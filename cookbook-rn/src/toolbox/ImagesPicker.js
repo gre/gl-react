@@ -38,7 +38,6 @@ export default class ImagesPicker extends Component {
     const {value, onChange, images, style, imageStyle} = this.props;
     return (
       <View style={{
-        flex: 1,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around",

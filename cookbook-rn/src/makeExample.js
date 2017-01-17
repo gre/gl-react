@@ -1,11 +1,13 @@
 //@flow
-import React from "react";
+import React, {Component} from "react";
 import {
   StyleSheet,
   View,
   ScrollView,
   Text,
+  Button,
 } from "react-native";
+import { withNavigation } from "@exponent/ex-navigation";
 
 const styles = StyleSheet.create({
   root: {
@@ -13,12 +15,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center"
   },
   header: {
-
   },
   description: {
-
+    padding: 10,
   },
   rendering: {
     alignSelf: "center",
@@ -42,6 +46,26 @@ const styles = StyleSheet.create({
   },
 });
 
+@withNavigation
+class NextButton extends Component {
+  props: {
+    navigator: *,
+    next: string,
+  };
+  goToNext = () => {
+    this.props.navigator.replace(this.props.next);
+  };
+  render() {
+    return (
+      <Button
+        title="NEXT"
+        color="#fff"
+        onPress={this.goToNext}
+      />
+    );
+  }
+}
+
 export default ({
   Example,
   title,
@@ -49,16 +73,31 @@ export default ({
   toolbox,
   ToolboxFooter,
   overrideStyles = {},
-}, id) => class extends React.Component {
+}, id, nextId) => class extends React.Component {
   static displayName = id;
   static route = {
     navigationBar: {
-      title,
-      // TODO: use renderRight to have bg modes, like in Atom image-viewer // renderRight: (route, props) => ...
+      title: id,
+      renderRight: () =>
+        nextId
+        ? <NextButton next={nextId} />
+        : null,
+      // TODO: also could use renderRight to have bg modes, like in Atom image-viewer // renderRight: (route, props) => ...
     },
   };
   state = {
     ...Example.defaultProps,
+    width: 0,
+    height: 0,
+  };
+  onLayout = (e) => {
+    const { width, height } = e.nativeEvent.layout;
+    if (this.state.width !== width || this.state.height !== height) {
+      this.setState({
+        width,
+        height,
+      });
+    }
   };
   render() {
     const { state } = this;
@@ -67,7 +106,7 @@ export default ({
       ...state,
     };
     return (
-      <ScrollView bounces={false} style={styles.root} contentContainerStyle={styles.container}>
+      <ScrollView bounces={false} style={styles.root} contentContainerStyle={styles.container} onLayout={this.onLayout}>
         <View style={styles.header}>
           { description ?
             <Text style={styles.description}>
@@ -76,7 +115,9 @@ export default ({
             : null }
         </View>
         <View style={styles.rendering}>
-          <Example {...props} />
+          { props.width && props.height ?
+            <Example {...props} />
+            : null }
         </View>
         <View style={[ styles.toolbox, overrideStyles.toolbox ]}>
           { ToolboxFooter

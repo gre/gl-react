@@ -46,12 +46,16 @@ This universal library must be coupled with one of the concrete implementations:
 - **unfinished** [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android via OpenGL).
 - [`gl-react-headless`](packages/gl-react-headless/) for Node.js (used for testing for now)
 
-
 ## Links
 
 - [Cookbook, examples, API](https://gl-react-cookbook.surge.sh)
 - [![Join the chat at https://gitter.im/gl-react/Lobby](https://badges.gitter.im/gl-react/Lobby.svg)](https://gitter.im/gl-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## References
+
+- [GLSL spec](https://www.khronos.org/registry/gles/specs/2.0/GLSL_ES_Specification_1.0.17.pdf)
+- ['the books of shaders'](https://thebookofshaders.com)
+- [shader-school workshop](https://www.npmjs.com/package/shader-school)
 
 ## Gist
 

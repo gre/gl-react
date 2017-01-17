@@ -3,7 +3,7 @@ import invariant from "invariant";
 import GLSL from "./GLSL";
 import type {GLSLCode} from "./GLSL";
 
-const ShaderID = Symbol("ShaderID");
+const ShaderID = "ShaderID";
 
 /**
  * An object that contains a `frag` GLSLCode.
