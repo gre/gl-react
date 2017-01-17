@@ -22,7 +22,7 @@ const Offset = ({ t, offset }) =>
 
 const Example = respondToTouchPosition(class Example extends Component {
   render() {
-    const { map, touching, touchPosition } = this.props;
+    const { map, touching, touchPosition, width } = this.props;
 // Sharing computation of a GL Node.
 // <Offset /> should not be passed straight to BlurV's map because
 // it would duplicates it in the tree ([passes] times)
@@ -30,7 +30,7 @@ const Example = respondToTouchPosition(class Example extends Component {
 // computation with a Bus ref.
 // We pass to BlurV's map prop a function that resolve that ref.
     return (
-      <Surface width={300} height={142}>
+      <Surface width={width} height={width*142/300}>
         <Bus ref="blurMapBus">
           <Offset
             offset={

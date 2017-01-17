@@ -23,8 +23,9 @@ export const DiamondCrop = ({ children: t }) =>
 
 export default class Example extends Component {
   render() {
+    const {width} = this.props;
     return (
-      <Surface width={300} height={300}>
+      <Surface width={width} height={width}>
         <DiamondCrop>
           {require("../../5EOyTDQ.jpg")}
         </DiamondCrop>

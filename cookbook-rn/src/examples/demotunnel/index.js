@@ -31,7 +31,7 @@ const SquareTunnel = ({ time }) =>
 
 const DesertPassageLoop = timeLoop(SquareTunnel);
 
-export default() =>
-  <Surface width={400} height={400}>
+export default ({ width }) =>
+  <Surface width={width} height={width}>
     <DesertPassageLoop />
   </Surface>

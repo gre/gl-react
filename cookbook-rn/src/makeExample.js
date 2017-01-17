@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     // FIXME might do the background color for showing opacity.
   },
   toolbox: {
-    paddingBottom: 10,
     flexDirection: "column",
   },
   toolboxTitle: {

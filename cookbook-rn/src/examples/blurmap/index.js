@@ -49,9 +49,9 @@ export const BlurV =
 
 export default class Example extends Component {
   render() {
-    const { factor, passes, map } = this.props;
+    const { factor, passes, map, width } = this.props;
     return (
-      <Surface width={600} height={284}>
+      <Surface width={width} height={width*284/600}>
         <BlurV map={map} passes={passes} factor={factor}>
           {require("../../NjbLHx2.jpg")}
         </BlurV>

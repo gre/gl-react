@@ -21,10 +21,11 @@ const GameOfLifeLoop = timeLoop(({ tick, size }) =>
 
 export default class Example extends Component {
   render() {
+    const { width } = this.props;
     return (
       <Surface
-        width={500}
-        height={500}
+        width={width}
+        height={width}
         preload={[ // preload textures before starting rendering
           gliderGunImage
         ]}>

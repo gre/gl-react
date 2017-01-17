@@ -35,9 +35,9 @@ export class MergeChannels extends Component {
 
 export default class Example extends Component {
   render() {
-    const { red, green, blue } = this.props;
+    const { red, green, blue, width } = this.props;
     return (
-      <Surface width={400} height={400}>
+      <Surface width={width} height={width}>
         <MergeChannels
           red={red}
           green={green}

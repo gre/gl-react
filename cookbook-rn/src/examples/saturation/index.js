@@ -30,8 +30,9 @@ export const Saturate = ({ contrast, saturation, brightness, children }) =>
 
 export default class Example extends Component {
   render() {
+    const {width} = this.props;
     return (
-    <Surface width={480} height={300}>
+    <Surface width={width} height={width*300/480}>
       <Saturate {...this.props}>
         {require("../../uTP9Xfr.jpg")}
       </Saturate>

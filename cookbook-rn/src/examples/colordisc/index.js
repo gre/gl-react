@@ -33,9 +33,9 @@ class ColoredDisc extends Component {
 
 export default class Example extends Component {
   render() {
-    const { fromColor, toColor } = this.props;
+    const { fromColor, toColor, width } = this.props;
     return (
-      <Surface width={300} height={300}>
+      <Surface width={width} height={width}>
         <ColoredDisc fromColor={fromColor} toColor={toColor} />
       </Surface>
     );

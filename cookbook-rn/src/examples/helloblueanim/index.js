@@ -11,9 +11,9 @@ import timeLoop from "../../HOC/timeLoop";
 
 export default timeLoop(class Example extends Component {
   render() {
-    const { time } = this.props;
+    const { time, width } = this.props;
     return (
-      <Surface width={300} height={300}>
+      <Surface width={width} height={width}>
         <HelloBlue blue={0.5 + 0.5 * Math.cos(time / 500)} />
       </Surface>
     );

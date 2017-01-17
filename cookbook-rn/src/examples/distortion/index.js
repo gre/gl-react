@@ -54,9 +54,9 @@ const Vignette = timeLoop(({ children: t, time, mouse }) =>
 export default respondToTouchPosition(class Example extends Component {
   props: { touchPosition: { x: number, y: number } };
   render() {
-    const { touchPosition: {x, y} } = this.props;
+    const { touchPosition: {x, y}, width } = this.props;
     return (
-      <Surface width={500} height={400}>
+      <Surface width={width} height={width*400/500}>
         <Vignette mouse={[ x, y ]}>
           {require("../../2VP5osy.jpg")}
         </Vignette>

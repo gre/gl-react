@@ -37,14 +37,14 @@ class InteractiveHeart extends Component {
     toggle: this.state.toggle ? 0 : 1
   });
   render() {
-    const { color, image } = this.props;
+    const { color, image, width } = this.props;
     const { over, toggle } = this.state;
     return (
     <TouchableWithoutFeedback
       onPress={this.onPress}
       onPressIn={this.onPressIn}
       onPressOut={this.onPressOut}>
-      <Surface width={300} height={300}>
+      <Surface width={width} height={width}>
         <Motion
           defaultStyle={{ over, toggle }}
           style={{

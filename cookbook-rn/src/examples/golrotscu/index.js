@@ -27,8 +27,9 @@ export const RotatingGameOfLifeLoop = timeLoop(RotatingGameOfLife);
 
 export default class Example extends Component {
   render() {
+    const { width } = this.props;
     return (
-      <Surface width={500} height={500}>
+      <Surface width={width} height={width}>
         <RotatingGameOfLifeLoop />
       </Surface>
     );

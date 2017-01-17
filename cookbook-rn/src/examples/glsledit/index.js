@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
 
 });
 
-const Preview = timeLoop(({ frag, visitor, time }) =>
-  <Surface width={500} height={200} visitor={visitor}>
+const Preview = timeLoop(({ frag, visitor, time, width, height }) =>
+  <Surface width={width} height={height/3} visitor={visitor}>
     <Node shader={{ frag }} uniforms={{ time: time / 1000 }} />
   </Surface>);
 
@@ -58,11 +58,11 @@ export default class Example extends Component {
   }
 
   render() {
-    const { frag } = this.props;
+    const { frag, width, height } = this.props;
     const { error, visitor } = this.state;
     return (
     <View>
-      <Preview frag={frag} visitor={visitor} />
+      <Preview frag={frag} visitor={visitor} width={width} height={height} />
       <DisplayError error={error} />
     </View>
     );

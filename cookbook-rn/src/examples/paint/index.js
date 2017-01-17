@@ -33,6 +33,8 @@ export default respondToTouchPosition(class Example extends Component {
   props: {
     touching: boolean,
     touchPosition: { x: number, y: number },
+    width: number,
+    height: number,
   }
 
   state = {

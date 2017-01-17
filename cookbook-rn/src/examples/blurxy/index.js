@@ -46,9 +46,9 @@ export const BlurXY =
 
 export default class Example extends Component {
   render() {
-    const { factor } = this.props;
+    const { factor, width } = this.props;
     return (
-      <Surface width={400} height={300}>
+      <Surface width={width} height={width*300/400}>
         <BlurXY factor={factor}>
           {require("../../iPKTONG.jpg")}
         </BlurXY>

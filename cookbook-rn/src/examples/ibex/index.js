@@ -551,10 +551,10 @@ export default class Example extends Component {
     initialState: generate(0, size),
   };
   render() {
-    const { forestGrowFactor, fireFactor, waterFactor, speed } = this.props;
+    const { forestGrowFactor, fireFactor, waterFactor, speed, width } = this.props;
     const { initialState } = this.state;
     return (
-      <Surface width={400} height={400}>
+      <Surface width={width} height={width}>
         <Game
           speed={speed}
           size={size}

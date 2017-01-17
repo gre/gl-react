@@ -128,12 +128,12 @@ const tools = {
 
 const Example = respondToTouchPosition(class extends Component {
   render() {
-    const { color, toolKey, touching, touchPosition } = this.props;
+    const { color, toolKey, touching, touchPosition, width } = this.props;
     const tool = tools[toolKey];
     return (
       <Surface
-        width={300}
-        height={300}
+        width={width}
+        height={width}
         preload={[ marioPNG ]}
         webglContextAttributes={{ preserveDrawingBuffer: true }}>
         <PixelEditor

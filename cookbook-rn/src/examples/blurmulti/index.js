@@ -29,9 +29,9 @@ export const Blur = connectSize(({ children, factor, passes }) => {
 
 export default class Example extends Component {
   render() {
-    const { factor, passes } = this.props;
+    const { factor, passes, width } = this.props;
     return (
-      <Surface width={400} height={300}>
+      <Surface width={width} height={width*300/400}>
         <Blur passes={passes} factor={factor}>
           {require("../../iPKTONG.jpg")}
         </Blur>

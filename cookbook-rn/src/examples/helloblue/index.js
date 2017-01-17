@@ -26,8 +26,9 @@ export class HelloBlue extends Component {
 // Our example will pass the slider value to HelloBlue
 export default class Example extends Component {
   render() {
+    const {width} = this.props;
     return (
-      <Surface width={300} height={300}>
+      <Surface width={width} height={width}>
         <HelloBlue blue={this.props.blue} />
       </Surface>
     );

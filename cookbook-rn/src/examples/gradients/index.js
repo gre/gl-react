@@ -46,8 +46,8 @@ const Gradients = ({ time }) =>
 
 const GradientsLoop = timeLoop(Gradients);
 
-export default () =>
-  <Surface width={300} height={300}>
+export default ({ width, height }) =>
+  <Surface width={width} height={height}>
     <GradientsLoop />
   </Surface>;
 

@@ -117,13 +117,13 @@ export default class Example extends Component {
     });
 
   render() {
-    const { distortion } = this.props;
+    const { distortion, width } = this.props;
     const { surfacePixels, desertPixels } = this.state;
     return (
 <View>
   <Surface ref="surface"
-    width={400}
-    height={400}
+    width={width}
+    height={width}
     webglContextAttributes={{ preserveDrawingBuffer: true }}>
 
     <Bus ref="desert">{/* we use a Bus to have a ref for capture */}
@@ -140,13 +140,13 @@ export default class Example extends Component {
 
   </Surface>
 
-  <View className="buttons">
+  <View>
     <Button
       onPress={this.onCapture}
       title="capture"
     />
   </View>
-  <View className="snaps">
+  <View style={{ flexDirection: "row" }}>
     <ShowCaptured t={surfacePixels} />
     <ShowCaptured t={desertPixels} />
   </View>

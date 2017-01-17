@@ -26,10 +26,10 @@ const ConicalGradiantLoop = timeLoop(({ time }) =>
 
 export default class Example extends Component {
   render() {
-    const { factor, passes } = this.props;
+    const { factor, passes, width } = this.props;
     // <ConicalGradiant/> also needs to be computed once.
     return (
-      <Surface width={600} height={284}>
+      <Surface width={width} height={width*284/600}>
         <Bus ref="blurMapBus">
           <ConicalGradiantLoop />
         </Bus>

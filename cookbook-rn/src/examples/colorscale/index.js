@@ -28,9 +28,9 @@ export const Colorify =
 
 export default class Example extends Component {
   render() {
-    const { interpolation, color } = this.props;
+    const { interpolation, color, width } = this.props;
     return (
-    <Surface width={400} height={300}>
+    <Surface width={width} height={width*300/400}>
       <Colorify colorScale={colorScales[color]} interpolation={interpolation}>
         {require("../../iPKTONG.jpg")}
       </Colorify>
