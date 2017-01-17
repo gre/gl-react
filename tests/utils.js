@@ -243,9 +243,11 @@ class FakeTextureLoader extends TextureLoader<FakeTexture> {
   }
   get (ft: FakeTexture) {
     const array = ft.getPixels();
-    const t = createNDArrayTexture(this.gl, array);
-    this.textures.push(t);
-    return t;
+    if (array) {
+      const t = createNDArrayTexture(this.gl, array);
+      this.textures.push(t);
+      return t;
+    }
   }
 }
 

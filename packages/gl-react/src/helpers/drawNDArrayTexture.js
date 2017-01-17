@@ -4,6 +4,12 @@ import ndarray from "ndarray";
 import ops from "ndarray-ops";
 import pool from "typedarray-pool";
 
+if (typeof Buffer === "undefined") {
+  global.Buffer = class Buffer { // mock shim so pool don't crash..
+    static isBuffer = b => b instanceof Buffer;
+  };
+}
+
 // code is partly taken from https://github.com/stackgl/gl-texture2d/blob/master/texture.js
 
 function isPacked(shape, stride) {
@@ -21,14 +27,14 @@ function convertFloatToUint8 (out, inp) {
 }
 
 export default (gl: WebGLRenderingContext, texture: WebGLTexture, array: NDArray) => {
-  var dtype = array.dtype;
-  var shape = array.shape.slice();
-  var maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+  let dtype = array.dtype;
+  let shape = array.shape.slice();
+  let maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
   if(shape[0] < 0 || shape[0] > maxSize || shape[1] < 0 || shape[1] > maxSize) {
     throw new Error("gl-react: Invalid texture size");
   }
-  var packed = isPacked(shape, array.stride.slice());
-  var type = 0;
+  let packed = isPacked(shape, array.stride.slice());
+  let type = 0;
   if(dtype === "float32") {
     type = gl.FLOAT;
   } else if(dtype === "float64") {
@@ -42,7 +48,7 @@ export default (gl: WebGLRenderingContext, texture: WebGLTexture, array: NDArray
     packed = false;
     dtype = "uint8";
   }
-  var format = 0;
+  let format = 0;
   if(shape.length === 2) {
     format = gl.LUMINANCE;
     shape = [shape[0], shape[1], 1];
@@ -66,12 +72,12 @@ export default (gl: WebGLRenderingContext, texture: WebGLTexture, array: NDArray
     type = gl.UNSIGNED_BYTE;
     packed = false;
   }
-  var buffer, buf_store;
-  var size = array.size;
+  let buffer, buf_store;
+  let size = array.size;
   if(!packed) {
-    var stride = [shape[2], shape[2]*shape[0], 1];
+    let stride = [shape[2], shape[2]*shape[0], 1];
     buf_store = pool.malloc(size, dtype);
-    var buf_array = ndarray(buf_store, shape, stride, 0);
+    let buf_array = ndarray(buf_store, shape, stride, 0);
     if((dtype === "float32" || dtype === "float64") && type === gl.UNSIGNED_BYTE) {
       convertFloatToUint8(buf_array, array);
     } else {
@@ -84,7 +90,7 @@ export default (gl: WebGLRenderingContext, texture: WebGLTexture, array: NDArray
     buffer = array.data.subarray(array.offset, array.offset + size);
   }
   gl.texImage2D(gl.TEXTURE_2D, 0, format, shape[0], shape[1], 0, format, type, buffer);
-  if(!packed) {
+  if(buf_store) {
     pool.free(buf_store);
   }
 };

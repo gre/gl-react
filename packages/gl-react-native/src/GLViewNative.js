@@ -12,6 +12,10 @@ const propTypes = {
 
 const tmpPatch = cb => gl => {
   gl.enableLogging = true; // our impl is still WIP so keeping that flag on for now.
+
+  // FIXME these needs to be implemented by EXGL
+  gl.isShader = shader => shader instanceof global.WebGLShader;
+
   return cb(gl);
 };
 
@@ -27,6 +31,7 @@ export default class GLViewNative extends Component {
 
   afterDraw (gl: WebGLRenderingContext) {
     gl.flush();
+    // $FlowFixMe
     gl.endFrameEXP();
   }
 

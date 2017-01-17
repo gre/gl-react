@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   container: {
-    flexDirection: "column",
-    justifyContent: "space-around",
-    flex: 1,
   },
   header: {
 
@@ -82,6 +79,9 @@ export default ({
           <Example {...props} />
         </View>
         <View style={[ styles.toolbox, overrideStyles.toolbox ]}>
+          { ToolboxFooter
+            ? <ToolboxFooter {...props} />
+            : null }
           {(toolbox || []).map((field, i) =>
             <View key={i} style={[ styles.field, overrideStyles.field ]}>
             { field.title
@@ -105,9 +105,6 @@ export default ({
               : null }
               </View>
             </View>)}
-            { ToolboxFooter
-              ? <ToolboxFooter {...props} />
-              : null }
           </View>
       </ScrollView>
     );

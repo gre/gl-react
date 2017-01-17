@@ -9,7 +9,7 @@ export type VisitorLike = {
   +onSurfaceGLContextChange: (surface: Surface, gl: ?WebGLRenderingContext) => void,
   +onSurfaceDrawSkipped: (surface: Surface) => void,
   +onSurfaceDrawStart: (surface: Surface) => void,
-  +onSurfaceDrawError: (e: Error) => void,
+  +onSurfaceDrawError: (e: Error) => any,
   +onSurfaceDrawEnd: (surface: Surface) => void,
   +onNodeDrawSkipped: (node: Node) => void,
   +onNodeDrawStart: (node: Node) => void,
@@ -41,8 +41,9 @@ export default class Visitor {
    */
   onSurfaceDrawStart(surface: Surface) {}// eslint-disable-line no-unused-vars
   /**
+   * if returns true, it prevent a throw to happen from the request animation frame loop (or from a surface.flush() call).
    */
-  onSurfaceDrawError (e: Error) {}// eslint-disable-line no-unused-vars
+  onSurfaceDrawError (e: Error) { return false; }// eslint-disable-line no-unused-vars
   /**
    */
   onSurfaceDrawEnd(surface: Surface) {}// eslint-disable-line no-unused-vars

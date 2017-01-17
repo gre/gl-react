@@ -6,16 +6,16 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "@exponent/ex-navigation": "^2.3.0",
-    "exponent": "^12.0.5",
+    "@exponent/ex-navigation": "^2.7.1",
+    "exponent": "^13.0.0",
     "gl-react": "^3.0.0-alpha1",
     "gl-react-native": "^3.0.0-alpha1",
-    "glsl-transitions": "^2016.12.26",
+    "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
     "raf": "^3.3.0",
-    "react": "~15.3.2",
+    "react": "~15.4.2",
     "react-motion": "^0.4.7",
-    "react-native": "github:exponentjs/react-native#sdk-12.0.0"
+    "react-native": "github:exponentjs/react-native#sdk-13.0.0"
   },
   "scripts": {
     "generate-examples": "cd src/examples; ./gen.sh 1> index.js"

@@ -40,6 +40,7 @@ export default class VisitorLogger extends Visitor {
       console.groupEnd();
       this.groupNestedLvl --;
     }
+    return true;
   }
   onSurfaceDrawEnd() {
     this.groupNestedLvl --;

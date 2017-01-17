@@ -548,8 +548,16 @@ class Surface extends Component {
       root._draw();
     }
     catch (e) {
-      visitors.forEach(v => v.onSurfaceDrawError(e));
-      return;
+      let silent = false;
+      visitors.forEach(v => {
+        silent = v.onSurfaceDrawError(e) || silent;
+      });
+      if (!silent) {
+        throw e;
+      }
+      else {
+        return;
+      }
     }
     if (glView.afterDraw) glView.afterDraw(gl);
     visitors.forEach(v => v.onSurfaceDrawEnd(this));
