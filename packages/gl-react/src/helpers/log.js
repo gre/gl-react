@@ -2,6 +2,11 @@
 // https://github.com/adamschwartz/log/blob/master/log.js
 /* eslint-disable */
 
+const { userAgent, vendor } =
+  typeof navigator !== "undefined"
+  ? navigator
+  : { userAgent: "", vendor: "" };
+
 var exportedLog, ffSupport, formats, getOrderedMatches, hasMatches, isFF, isIE, isOpera, isSafari, log, makeArray, operaSupport, safariSupport, stringToArgs, _log;
 
 log = function() {
@@ -103,24 +108,24 @@ stringToArgs = function(str) {
 };
 
 isSafari = function() {
-  return /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+  return /Safari/.test(userAgent) && /Apple Computer/.test(vendor);
 };
 
 isOpera = function() {
-  return /OPR/.test(navigator.userAgent) && /Opera/.test(navigator.vendor);
+  return /OPR/.test(userAgent) && /Opera/.test(vendor);
 };
 
 isFF = function() {
-  return /Firefox/.test(navigator.userAgent);
+  return /Firefox/.test(userAgent);
 };
 
 isIE = function() {
-  return /MSIE/.test(navigator.userAgent);
+  return /MSIE/.test(userAgent);
 };
 
 safariSupport = function() {
   var m;
-  m = navigator.userAgent.match(/AppleWebKit\/(\d+)\.(\d+)(\.|\+|\s)/);
+  m = userAgent.match(/AppleWebKit\/(\d+)\.(\d+)(\.|\+|\s)/);
   if (!m) {
     return false;
   }
@@ -129,7 +134,7 @@ safariSupport = function() {
 
 operaSupport = function() {
   var m;
-  m = navigator.userAgent.match(/OPR\/(\d+)\./);
+  m = userAgent.match(/OPR\/(\d+)\./);
   if (!m) {
     return false;
   }
@@ -137,7 +142,7 @@ operaSupport = function() {
 };
 
 ffSupport = function() {
-  return window.console.firebug || window.console.exception;
+  return typeof window !== "undefined" && (window.console.firebug || window.console.exception);
 };
 
 if (isIE() || (isFF() && !ffSupport()) || (isOpera() && !operaSupport()) || (isSafari() && !safariSupport())) {
