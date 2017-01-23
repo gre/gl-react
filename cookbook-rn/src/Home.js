@@ -194,6 +194,14 @@ export default class Home extends React.Component {
           <View style={{ alignItems: "center", padding: 20 }}>
             <Ex1Loop />
           </View>
+          <View>
+            <Text style={styles.also}>
+              Checkout also:
+            </Text>
+            <Text style={styles.link} onPress={this.onPressWebCookbook}>
+              gl-react-cookbook.surge.sh
+            </Text>
+          </View>
           <Text style={styles.subHeaderText}>
             Here is a collection of gl-react-native examples:
           </Text>

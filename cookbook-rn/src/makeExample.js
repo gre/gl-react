@@ -5,7 +5,7 @@ import {
   View,
   ScrollView,
   Text,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 import { withNavigation } from "@exponent/ex-navigation";
 
@@ -43,6 +43,16 @@ const styles = StyleSheet.create({
   fieldValue: {
     flexDirection: "row",
   },
+  btn: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 12,
+  }
 });
 
 @withNavigation
@@ -56,11 +66,9 @@ class NextButton extends Component {
   };
   render() {
     return (
-      <Button
-        title="NEXT"
-        color="#fff"
-        onPress={this.goToNext}
-      />
+      <TouchableOpacity style={styles.btn} onPress={this.goToNext}>
+        <Text style={styles.btnText}>NEXT</Text>
+      </TouchableOpacity>
     );
   }
 }

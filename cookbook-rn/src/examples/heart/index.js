@@ -29,7 +29,7 @@ void main() {
   }
 });
 
-class InteractiveHeart extends Component {
+export class InteractiveHeart extends Component {
   state = { over: 0, toggle: 0 };
   onPressIn = () => this.setState({ over: 1 });
   onPressOut = () => this.setState({ over: 0 });
@@ -62,8 +62,9 @@ class InteractiveHeart extends Component {
   }
 }
 
-export default () =>
+export default ({ width }) =>
   <InteractiveHeart
     color={[ 1, 0, 0 ]}
     image={require("../../GQo1KWq.jpg")}
+    width={width}
   />;
