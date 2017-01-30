@@ -10,7 +10,7 @@ import {
 import ListItem from "./ListItem";
 import * as examples from "./examples";
 import Router from "./Router";
-import {Surface} from "gl-react-native";
+import {Surface} from "gl-react-exponent";
 import {Node, Shaders, GLSL, Backbuffer, LinearCopy} from "gl-react";
 import timeLoop from "./HOC/timeLoop";
 
@@ -176,7 +176,7 @@ export default class Home extends React.Component {
     navigationBar: {
       renderTitle: () =>
         <View style={styles.title}>
-          <Text style={styles.titleText}>gl-react-native</Text>
+          <Text style={styles.titleText}>gl-react-exponent</Text>
         </View>
     },
   };
@@ -203,7 +203,7 @@ export default class Home extends React.Component {
             </Text>
           </View>
           <Text style={styles.subHeaderText}>
-            Here is a collection of gl-react-native examples:
+            Here is a collection of gl-react examples:
           </Text>
         </View>
         <View style={styles.list}>

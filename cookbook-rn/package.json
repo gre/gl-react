@@ -9,7 +9,7 @@
     "@exponent/ex-navigation": "^2.7.1",
     "exponent": "^13.0.0",
     "gl-react": "^3.0.0-alpha1",
-    "gl-react-native": "^3.0.0-alpha1",
+    "gl-react-exponent": "^3.0.0-alpha1",
     "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
     "raf": "^3.3.0",

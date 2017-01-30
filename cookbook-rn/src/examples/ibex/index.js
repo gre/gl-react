@@ -8,7 +8,7 @@
 //@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL, Backbuffer } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import ndarray from "ndarray";
 import timeLoop from "../../HOC/timeLoop";
 

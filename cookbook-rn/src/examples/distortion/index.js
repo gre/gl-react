@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import timeLoop from "../../HOC/timeLoop";
 import respondToTouchPosition from "../../HOC/respondToTouchPosition";
 

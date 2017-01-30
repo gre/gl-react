@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import { DiamondCrop } from "../diamondcrop";
 import { HelloBlue } from "../helloblue";
 

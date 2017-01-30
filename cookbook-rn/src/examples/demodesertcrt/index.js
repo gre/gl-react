@@ -2,7 +2,7 @@
 import React, { Component, PureComponent } from "react";
 import { View, Button } from "react-native";
 import {Shaders, Node, GLSL, Bus, connectSize} from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import {DesertPassageLoop} from "../demodesert";
 
 const shaders = Shaders.create({

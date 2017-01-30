@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Animated, PanResponder, View } from "react-native";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import respondToTouchPosition from "../../HOC/respondToTouchPosition";
 
 const shaders = Shaders.create({

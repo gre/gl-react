@@ -12,26 +12,14 @@ See also this article: http://greweb.me/2016/12/gl-react-v3/ .
 - [x] gl-react-dom, DOM implementation
 - [x] gl-react-headless, Node.js implementation
   - [x] tests: 100% test coverage!
-- [ ] gl-react-native, React Native implementation
+- [x] gl-react-exponent, React Native via Exponent implementation
+- [ ] gl-react-native, React Native standalone implementation
 
 **The main remaining work of v3 is the React Native implementation**:
 
-The long term plan is to rely on [Exponent's WebGL implementation](https://docs.getexponent.com/versions/v11.0.0/sdk/gl-view.html) to implement the WebGL layer. The implementation is still very young and experimental (only implement a subset of WebGL), but as soon as this implementation guarantees a good conformance, the library should just work! **I encourage everyone to contribute to make Exponent WebGL implementation robust**, independently from the library you use at the end (Three.js / Pixi.js / regl / gl-react / whatever!).
+We are relying on **Exponent's GLView** to implement the WebGL layer. The implementation is still very young and experimental (only implement a subset of WebGL), but as soon as this implementation guarantees a good conformance, the library should just work! **I encourage everyone to contribute to make Exponent WebGL implementation robust**, independently from the library you use at the end (Three.js / Pixi.js / regl / gl-react / whatever!).
 
-Here is the parts we would like to focus on solving in that implementation:
-- Support for framebuffers. This is fundamental for gl-react.
-- interoperability with React Native Image `source` prop (basically should support same format as a input for `gl.texImage2D`)
-- The WebGL implementation should be a standalone implementation that we can depend as a library (shouldn't requires you to use Exponent if you just use React Native).
-- interoperability with more "pixel sources" (Video, Camera, ...)
-
-
-**Other remaining topics:**
-- Flow type support: we are waiting the next flow version that should bring WebGL type support: https://github.com/facebook/flow/pull/2764 .
-- make inspector a Chrome plugin.
-- the Game of Life example, when inspected AND enabling snapshot capture, seems to memleak.
-- Node should expose a more generic escape hatch to use `gl` and do any WebGL stuff. The main problem is most WebGL libs are intrusive and alter the gl state (e.g. they don't expect to just draw in the current bounded framebuffer).
-- more than ~12 simultaneous canvas won't work in web, because WebGL don't allow that. an idea to workaround that is to implement a `<SurfaceContainer>`, a super surface, that discover the underlying Surface, and will position an absolute canvas that render all surface in one... we can use "gl scissor" for that. inspiration: `multi-regl`.
-- re-using fbo in the tree, is a complex idea which might be premature optim', but it might make sense in some cases. We can introduce a new prop in Node that says it should not hold its own Framebuffer copy (which make it non-cachable).
+To track the status of React Native implementation, please see https://github.com/gre/gl-react/issues/74
 
 ---
 
@@ -88,6 +76,7 @@ import the correct implementation,
 
 ```js
 import {Surface} from "gl-react-dom"; // for React DOM
+import {Surface} from "gl-react-exponrnt"; // for React Native via Exponent GLView
 import {Surface} from "gl-react-native"; // for React Native
 import {Surface} from "gl-react-headless"; // for Node.js!
 ```

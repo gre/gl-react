@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { Backbuffer, Node, NearestCopy } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import {shaders} from "../gol";
 import timeLoop from "../../HOC/timeLoop";
 import gliderGunImage from "./glider-gun-64.png";

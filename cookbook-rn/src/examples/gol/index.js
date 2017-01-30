@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import {Backbuffer,Shaders,Node,GLSL,NearestCopy} from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import timeLoop from "../../HOC/timeLoop";
 
 export const shaders = Shaders.create({

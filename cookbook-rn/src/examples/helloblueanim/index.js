@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 
 // Reuse that previous HelloBlue component to animate it...
 import { HelloBlue } from "../helloblue";

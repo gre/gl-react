@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import { DiamondCrop } from "../diamondcrop";
 import timeLoop from "../../HOC/timeLoop";
 

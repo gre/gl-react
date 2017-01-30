@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { Shaders, Node, Bus, GLSL } from "gl-react";
-import { Surface } from "gl-react-native";
+import { Surface } from "gl-react-exponent";
 import {BlurV} from "../blurmap";
 import respondToTouchPosition from "../../HOC/respondToTouchPosition";
 
