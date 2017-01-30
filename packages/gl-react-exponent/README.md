@@ -1,8 +1,8 @@
 
-<img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react-native
+<img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react-exponent
 ========
 
-`gl-react-exponent` is the [React Native](https://facebook.github.io/react-native/)  implementation of [gl-react](https://github.com/gre/gl-react), library to write and compose WebGL shaders.
+`gl-react-exponent` is the [React Native](https://facebook.github.io/react-native/) via Exponent implementation of [gl-react](https://github.com/gre/gl-react), library to write and compose WebGL shaders.
 
 ## Links
 
