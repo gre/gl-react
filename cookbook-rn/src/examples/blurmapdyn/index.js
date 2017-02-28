@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { Shaders, Node, Bus, GLSL } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import {BlurV} from "../blurmap";
 import timeLoop from "../../HOC/timeLoop";
 

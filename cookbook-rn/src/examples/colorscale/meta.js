@@ -2,7 +2,7 @@ import React from "react";
 import colorScales from "./colorScales";
 import makeSelect from "../../toolbox/makeSelect";
 import { LinearCopy, NearestCopy } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 
 export const title = "color mapping with gradient texture";
 export const description = "A gradient texture defines the color mapping of the image greyscale.";

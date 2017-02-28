@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 
 // in gl-react you need to statically define "shaders":
 const shaders = Shaders.create({

@@ -17,5 +17,11 @@
   },
   "packagerOpts": {
     "assetExts": ["ttf", "mp4"]
+  },
+  "android": {
+    "package": "fr.greweb.glrncookbook"
+  },
+  "ios": {
+    "bundleIdentifier": "fr.greweb.glrncookbook"
   }
 }

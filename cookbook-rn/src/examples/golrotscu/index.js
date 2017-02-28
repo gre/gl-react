@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import timeLoop from "../../HOC/timeLoop";
 import {GameOfLife} from "../gol";
 import {Rotating} from "../golrot";

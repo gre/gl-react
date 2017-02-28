@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import respondToTouchPosition from "../../HOC/respondToTouchPosition";
 
 const shaders = Shaders.create({

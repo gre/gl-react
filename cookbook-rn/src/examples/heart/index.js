@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import { Shaders, Node, GLSL } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import {Motion, spring} from "react-motion";
 
 const shaders = Shaders.create({

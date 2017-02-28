@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import {Shaders, Node, GLSL, connectSize} from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 
 const shaders = Shaders.create({
   blur1D: { // blur9: from https://github.com/Jam3/glsl-fast-gaussian-blur

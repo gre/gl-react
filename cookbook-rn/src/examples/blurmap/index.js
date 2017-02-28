@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL, connectSize } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 
 const shaders = Shaders.create({
   blurV1D: {

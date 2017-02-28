@@ -1,7 +1,7 @@
 //@flow
 import React, { PureComponent, Component, PropTypes } from "react";
 import { Shaders, Node, GLSL, Bus, LinearCopy } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import JSON2D from "react-json2d";
 import {Blur1D} from "../blurxy";
 import {Blur} from "../blurmulti";

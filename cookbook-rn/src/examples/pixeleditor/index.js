@@ -1,7 +1,7 @@
 //@flow
 import React, { PureComponent, Component } from "react";
 import { Shaders, Node, GLSL, Bus } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import marioPNG from "./mario.png";
 import respondToTouchPosition from "../../HOC/respondToTouchPosition";
 

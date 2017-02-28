@@ -1,24 +1,26 @@
 {
-  "name": "glrn-cookbook",
-  "version": "0.0.0",
-  "description": "GL React Native cookbook",
-  "author": "Gaëtan Renaudeau",
+  "name": "cookbookrn",
+  "version": "0.0.1",
   "private": true,
-  "main": "main.js",
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
   "dependencies": {
     "@exponent/ex-navigation": "^2.7.1",
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "exponent": "^13.0.0",
-    "gl-react": "^3.0.0-alpha1",
-    "gl-react-exponent": "^3.0.0-alpha1",
+    "gl-react": "^3.0.0-alpha.3",
+    "gl-react-native": "^3.0.0-alpha1",
     "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
     "raf": "^3.3.0",
-    "react": "~15.4.2",
+    "react": "~15.4.0",
     "react-motion": "^0.4.7",
-    "react-native": "github:exponentjs/react-native#sdk-13.0.0",
+    "react-native": "0.41.2",
     "seedrandom": "github:gre/seedrandom#released"
   },
-  "scripts": {
-    "generate-examples": "cd src/examples; ./gen.sh 1> index.js"
+  "devDependencies": {
+    "babel-preset-react-native": "1.9.1"
   }
 }

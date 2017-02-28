@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Node, Visitor, GLSL } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import timeLoop from "../../HOC/timeLoop";
 
 const styles = StyleSheet.create({

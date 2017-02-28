@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { connectSize } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import { Blur1D } from "../blurxy";
 
 // empirical strategy to chose a 2d vector for a blur pass

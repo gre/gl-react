@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Shaders, Node, LinearCopy, connectSize } from "gl-react";
-import { Surface } from "gl-react-exponent";
+import { Surface } from "gl-react-native";
 import timeLoop from "../../HOC/timeLoop";
 import {shadersDefs, randomTransition} from "./transitions";
 const shaders = Shaders.create(shadersDefs);

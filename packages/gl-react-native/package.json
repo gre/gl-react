@@ -1,0 +1,32 @@
+{
+  "name": "gl-react-native",
+  "version": "3.0.0-alpha.3",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "React Native standalone implementation of gl-react, an universal React library to write and compose WebGL shaders",
+  "keywords": [
+    "gl-react",
+    "gl",
+    "opengl",
+    "react",
+    "react-native",
+    "react-component"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "android",
+    "cpp",
+    "ios",
+    "lib",
+    "src",
+    ".flowconfig",
+    "LICENSE",
+    "install-steps.png",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "gl-react": "*"
+  }
+}
