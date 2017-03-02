@@ -22,8 +22,14 @@ export default class TextureLoaderRawObject<T> extends TextureLoader<T> {
       this.textures.push(texture);
     }
     gl.bindTexture(gl.TEXTURE_2D, texture);
-    // $FlowFixMe we are loosely on types here because we allow more that browser WebGL impl
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.mapInput ? this.mapInput(obj) : obj);
+    const value = this.mapInput ? this.mapInput(obj) : obj;
+    if (value) {
+      // $FlowFixMe we are loosely on types here because we allow more that browser WebGL impl
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, value);
+    }
+    else {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2, 2, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    }
     return texture;
   }
 }
