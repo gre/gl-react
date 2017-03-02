@@ -29,7 +29,7 @@ export default class Example extends Component {
     const { factor, passes, width } = this.props;
     // <ConicalGradiant/> also needs to be computed once.
     return (
-      <Surface width={width} height={width*284/600}>
+      <Surface style={{ width, height: width*284/600 }}>
         <Bus ref="blurMapBus">
           <ConicalGradiantLoop />
         </Bus>

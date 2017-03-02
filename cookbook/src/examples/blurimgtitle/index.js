@@ -1,6 +1,6 @@
 //@flow
 import React, { PureComponent, Component, PropTypes } from "react";
-import { Shaders, Node, GLSL, Bus, LinearCopy } from "gl-react";
+import { Shaders, Node, GLSL, Bus, LinearCopy, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
 import JSON2D from "react-json2d";
 import {Blur1D} from "../blurxy";
@@ -93,14 +93,16 @@ class Title extends PureComponent {
   }
 }
 
-class ImageTitle extends Component {
-  static contextTypes = {
+class ImageTitleC extends Component {
+  static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
+    children: PropTypes.any.isRequired,
+    text: PropTypes.string.isRequired,
+    colorThreshold: PropTypes.number.isRequired,
   };
   render() {
-    const { children: img, text, colorThreshold } = this.props;
-    const { width, height } = this.context;
+    const { width, height, children: img, text, colorThreshold } = this.props;
     return (
     <Node
       shader={shaders.ImageTitle}
@@ -144,6 +146,7 @@ class ImageTitle extends Component {
     );
   }
 }
+const ImageTitle = connectSize(ImageTitleC);
 
 export default class Example extends Component {
   render() {

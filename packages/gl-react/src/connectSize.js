@@ -22,8 +22,7 @@ const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>
     children?: any,
   };
   context: {
-    width: number,
-    height: number,
+    glSizable: { +getGLSize: () => [number, number] },
   };
   static displayName = `connectSize(${GLComponent.displayName||GLComponent.name||"?"})`;
   static propTypes = {
@@ -31,22 +30,27 @@ const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>
     height: PropTypes.number,
   };
   static contextTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    glSizable: PropTypes.object.isRequired,
   };
   static childContextTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    glSizable: PropTypes.object.isRequired,
   };
-  getChildContext(): { width: number, height: number } {
-    const { props, context } = this;
+  getGLSize(): [ number, number ] {
+    const { props: { width, height }, context: { glSizable } } = this;
+    if (width && height) return [ width, height ];
+    const [ cw, ch ] = glSizable.getGLSize();
+    return [
+      width || cw,
+      height || ch,
+    ];
+  }
+  getChildContext() {
     return {
-      width: props.width || context.width,
-      height: props.height || context.height,
+      glSizable: this,
     };
   }
   render() {
-    const { width, height } = this.getChildContext();
+    const [ width, height ] = this.getGLSize();
     return <GLComponent
       {...this.props}
       width={width}

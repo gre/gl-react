@@ -221,6 +221,6 @@ const DesertPassage = ({ time }) =>
 export const DesertPassageLoop = timeLoop(DesertPassage, { frameRate: 30 });
 
 export default ({ width }) =>
-  <Surface width={width} height={width}>
+  <Surface style={{ width, height: width }}>
     <DesertPassageLoop />
   </Surface>

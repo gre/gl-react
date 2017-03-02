@@ -56,7 +56,7 @@ export default respondToTouchPosition(class Example extends Component {
   render() {
     const { touchPosition: {x, y}, width } = this.props;
     return (
-      <Surface width={width} height={width*400/500}>
+      <Surface style={{ width, height: width*400/500 }}>
         <Vignette mouse={[ x, y ]}>
           {require("../../2VP5osy.jpg")}
         </Vignette>

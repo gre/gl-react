@@ -8,7 +8,7 @@ export default class Example extends Component {
   render() {
     const { factor, width } = this.props;
     return (
-      <Surface width={width} height={width*300/400}>
+      <Surface style={{ width, height: width*300/400 }}>
         <LinearCopy>
           <BlurXY factor={factor} width={100} height={75}>
             {require("../../iPKTONG.jpg")}

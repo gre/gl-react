@@ -144,7 +144,7 @@ class Ex1 extends Component {
     const angle = 2 * Math.PI * (0.5 + 0.5 * Math.cos(0.001 * time));
     return (
       <View style={styles.ex1}>
-        <Surface width={250} height={250}>
+        <Surface style={{ width: 250, height: 250 }}>
           <LinearCopy>
             <MotionBlur persistence={persistence}>
               <Rotate scale={scale} angle={angle}>
@@ -154,7 +154,7 @@ class Ex1 extends Component {
           </LinearCopy>
         </Surface>
         <Text style={styles.code}>{
-`<Surface width={250} height={250}>
+`<Surface style={{width:250,height:250}}>
   <LinearCopy>
     <MotionBlur persistence={${persistence.toFixed(2)}}>
       <Rotate scale={${scale.toFixed(2)}} angle={${angle.toFixed(2)}}>

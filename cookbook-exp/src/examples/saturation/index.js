@@ -32,7 +32,7 @@ export default class Example extends Component {
   render() {
     const {width} = this.props;
     return (
-    <Surface width={width} height={width*300/480}>
+    <Surface style={{ width, height: width*300/480 }}>
       <Saturate {...this.props}>
         {require("../../uTP9Xfr.jpg")}
       </Saturate>

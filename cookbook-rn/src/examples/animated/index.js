@@ -47,7 +47,7 @@ export default respondToTouchPosition(class Example extends Component {
   render() {
     const { width, height } = this.props;
     return (
-      <Surface width={width} height={height}>
+      <Surface style={{ width, height }}>
         <AnimatedCursor {...this.state} />
       </Surface>
     );

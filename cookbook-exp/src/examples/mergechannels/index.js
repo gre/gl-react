@@ -37,7 +37,7 @@ export default class Example extends Component {
   render() {
     const { red, green, blue, width } = this.props;
     return (
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <MergeChannels
           red={red}
           green={green}

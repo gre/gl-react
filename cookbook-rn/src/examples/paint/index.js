@@ -56,8 +56,7 @@ export default respondToTouchPosition(class Example extends Component {
     const brushRadius = 0.03 + 0.01 * Math.cos(Date.now() / 1000);
     return (
       <Surface
-        width={width}
-        height={height}
+        style={{ width, height }}
         webglContextAttributes={{ preserveDrawingBuffer: true }}>
         <Node
           shader={shaders.paint}

@@ -132,7 +132,7 @@
             },
             {
               "type": "text",
-              "value": " performs the concrete GL draw with provided dimension (width, height).",
+              "value": " performs the final GL draws for a given implementation.",
               "position": {
                 "start": {
                   "line": 3,
@@ -141,8 +141,8 @@
                 },
                 "end": {
                   "line": 3,
-                  "column": 83,
-                  "offset": 163
+                  "column": 68,
+                  "offset": 148
                 },
                 "indent": []
               }
@@ -156,8 +156,196 @@
             },
             "end": {
               "line": 3,
-              "column": 83,
-              "offset": 163
+              "column": 68,
+              "offset": 148
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "inlineCode",
+              "value": "width",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 1,
+                  "offset": 150
+                },
+                "end": {
+                  "line": 5,
+                  "column": 8,
+                  "offset": 157
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " and ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 8,
+                  "offset": 157
+                },
+                "end": {
+                  "line": 5,
+                  "column": 13,
+                  "offset": 162
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "height",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 13,
+                  "offset": 162
+                },
+                "end": {
+                  "line": 5,
+                  "column": 21,
+                  "offset": 170
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " props are required for ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 21,
+                  "offset": 170
+                },
+                "end": {
+                  "line": 5,
+                  "column": 45,
+                  "offset": 194
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "gl-react-dom",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 45,
+                  "offset": 194
+                },
+                "end": {
+                  "line": 5,
+                  "column": 59,
+                  "offset": 208
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " and ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 59,
+                  "offset": 208
+                },
+                "end": {
+                  "line": 5,
+                  "column": 64,
+                  "offset": 213
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "gl-react-headless",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 64,
+                  "offset": 213
+                },
+                "end": {
+                  "line": 5,
+                  "column": 83,
+                  "offset": 232
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": ", but are not supported for React Native, where the paradigm is to use ",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 83,
+                  "offset": 232
+                },
+                "end": {
+                  "line": 5,
+                  "column": 154,
+                  "offset": 303
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "inlineCode",
+              "value": "style",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 154,
+                  "offset": 303
+                },
+                "end": {
+                  "line": 5,
+                  "column": 161,
+                  "offset": 310
+                },
+                "indent": []
+              }
+            },
+            {
+              "type": "text",
+              "value": " (and either use flexbox or set a width/height from there).",
+              "position": {
+                "start": {
+                  "line": 5,
+                  "column": 161,
+                  "offset": 310
+                },
+                "end": {
+                  "line": 5,
+                  "column": 220,
+                  "offset": 369
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 5,
+              "column": 1,
+              "offset": 150
+            },
+            "end": {
+              "line": 5,
+              "column": 220,
+              "offset": 369
             },
             "indent": []
           }
@@ -173,14 +361,14 @@
                   "value": "Surface is the only component that isn't \"universal\",\ntherefore ",
                   "position": {
                     "start": {
-                      "line": 5,
+                      "line": 7,
                       "column": 3,
-                      "offset": 167
+                      "offset": 373
                     },
                     "end": {
-                      "line": 6,
+                      "line": 8,
                       "column": 11,
-                      "offset": 231
+                      "offset": 437
                     },
                     "indent": [
                       1
@@ -195,14 +383,14 @@
                       "value": "Surface is exposed by the platform implementation",
                       "position": {
                         "start": {
-                          "line": 6,
+                          "line": 8,
                           "column": 13,
-                          "offset": 233
+                          "offset": 439
                         },
                         "end": {
-                          "line": 6,
+                          "line": 8,
                           "column": 62,
-                          "offset": 282
+                          "offset": 488
                         },
                         "indent": []
                       }
@@ -210,14 +398,14 @@
                   ],
                   "position": {
                     "start": {
-                      "line": 6,
+                      "line": 8,
                       "column": 11,
-                      "offset": 231
+                      "offset": 437
                     },
                     "end": {
-                      "line": 6,
+                      "line": 8,
                       "column": 64,
-                      "offset": 284
+                      "offset": 490
                     },
                     "indent": []
                   }
@@ -227,14 +415,14 @@
                   "value": "\n(",
                   "position": {
                     "start": {
-                      "line": 6,
+                      "line": 8,
                       "column": 64,
-                      "offset": 284
+                      "offset": 490
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 2,
-                      "offset": 286
+                      "offset": 492
                     },
                     "indent": [
                       1
@@ -246,14 +434,14 @@
                   "value": "gl-react-dom",
                   "position": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 2,
-                      "offset": 286
+                      "offset": 492
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 16,
-                      "offset": 300
+                      "offset": 506
                     },
                     "indent": []
                   }
@@ -263,14 +451,14 @@
                   "value": " / ",
                   "position": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 16,
-                      "offset": 300
+                      "offset": 506
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 19,
-                      "offset": 303
+                      "offset": 509
                     },
                     "indent": []
                   }
@@ -280,14 +468,14 @@
                   "value": "gl-react-native",
                   "position": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 19,
-                      "offset": 303
+                      "offset": 509
                     },
                     "end": {
-                      "line": 7,
+                      "line": 9,
                       "column": 36,
-                      "offset": 320
+                      "offset": 526
                     },
                     "indent": []
                   }
@@ -297,14 +485,14 @@
                   "value": " / ...),\nunlike the rest of the API exposed through ",
                   "position": {
                     "start": {
-                      "line": 7,
+                      "line": 9,
                       "column": 36,
-                      "offset": 320
+                      "offset": 526
                     },
                     "end": {
-                      "line": 8,
+                      "line": 10,
                       "column": 44,
-                      "offset": 372
+                      "offset": 578
                     },
                     "indent": [
                       1
@@ -316,14 +504,14 @@
                   "value": "gl-react",
                   "position": {
                     "start": {
-                      "line": 8,
+                      "line": 10,
                       "column": 44,
-                      "offset": 372
+                      "offset": 578
                     },
                     "end": {
-                      "line": 8,
+                      "line": 10,
                       "column": 54,
-                      "offset": 382
+                      "offset": 588
                     },
                     "indent": []
                   }
@@ -333,14 +521,14 @@
                   "value": ".\nEach platform have its own implementation but most props are shared.\nIf you write a gl-react library, you shouldn't use ",
                   "position": {
                     "start": {
-                      "line": 8,
+                      "line": 10,
                       "column": 54,
-                      "offset": 382
+                      "offset": 588
                     },
                     "end": {
-                      "line": 10,
+                      "line": 12,
                       "column": 52,
-                      "offset": 504
+                      "offset": 710
                     },
                     "indent": [
                       1,
@@ -353,14 +541,14 @@
                   "value": "<Surface>",
                   "position": {
                     "start": {
-                      "line": 10,
+                      "line": 12,
                       "column": 52,
-                      "offset": 504
+                      "offset": 710
                     },
                     "end": {
-                      "line": 10,
+                      "line": 12,
                       "column": 63,
-                      "offset": 515
+                      "offset": 721
                     },
                     "indent": []
                   }
@@ -370,14 +558,14 @@
                   "value": " but only\nlet the final user doing it. Therefore your code should remain platform-independant.",
                   "position": {
                     "start": {
-                      "line": 10,
+                      "line": 12,
                       "column": 63,
-                      "offset": 515
+                      "offset": 721
                     },
                     "end": {
-                      "line": 11,
+                      "line": 13,
                       "column": 85,
-                      "offset": 609
+                      "offset": 815
                     },
                     "indent": [
                       1
@@ -387,14 +575,14 @@
               ],
               "position": {
                 "start": {
-                  "line": 5,
+                  "line": 7,
                   "column": 3,
-                  "offset": 167
+                  "offset": 373
                 },
                 "end": {
-                  "line": 11,
+                  "line": 13,
                   "column": 85,
-                  "offset": 609
+                  "offset": 815
                 },
                 "indent": [
                   1,
@@ -409,14 +597,14 @@
           ],
           "position": {
             "start": {
-              "line": 5,
+              "line": 7,
               "column": 1,
-              "offset": 165
+              "offset": 371
             },
             "end": {
-              "line": 11,
+              "line": 13,
               "column": 85,
-              "offset": 609
+              "offset": 815
             },
             "indent": [
               1,
@@ -436,9 +624,9 @@
           "offset": 0
         },
         "end": {
-          "line": 11,
+          "line": 13,
           "column": 85,
-          "offset": 609
+          "offset": 815
         }
       }
     },
@@ -446,36 +634,16 @@
       {
         "title": "class",
         "description": null,
-        "lineNumber": 13,
+        "lineNumber": 15,
         "type": null,
         "name": "Surface"
       },
       {
         "title": "extends",
         "description": null,
-        "lineNumber": 14,
+        "lineNumber": 16,
         "type": null,
         "name": "Component"
-      },
-      {
-        "title": "prop",
-        "description": "width of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.",
-        "lineNumber": 15,
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        },
-        "name": "width"
-      },
-      {
-        "title": "prop",
-        "description": "height of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.",
-        "lineNumber": 16,
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        },
-        "name": "height"
       },
       {
         "title": "prop",
@@ -489,8 +657,34 @@
       },
       {
         "title": "prop",
-        "description": "CSS styles that get passed to the underlying `<canvas/>` or `<View/>`",
+        "description": "**(only for DOM)** - width of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.",
         "lineNumber": 18,
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "number"
+          }
+        },
+        "name": "width"
+      },
+      {
+        "title": "prop",
+        "description": "**(only for DOM)** - height of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.",
+        "lineNumber": 19,
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "number"
+          }
+        },
+        "name": "height"
+      },
+      {
+        "title": "prop",
+        "description": "CSS styles that get passed to the underlying `<canvas/>` or `<View/>`",
+        "lineNumber": 20,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -503,7 +697,7 @@
       {
         "title": "prop",
         "description": "an array of things to preload before the Surface start rendering. Help avoiding blinks and providing required textures to render an initial state.",
-        "lineNumber": 19,
+        "lineNumber": 21,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -525,7 +719,7 @@
       {
         "title": "prop",
         "description": "a callback called when Surface is ready and just after it rendered.",
-        "lineNumber": 20,
+        "lineNumber": 22,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -538,7 +732,7 @@
       {
         "title": "prop",
         "description": "a callback called when the Surface was not able to load initially.",
-        "lineNumber": 21,
+        "lineNumber": 23,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -563,7 +757,7 @@
       {
         "title": "prop",
         "description": "a callback called when the Surface context was lost.",
-        "lineNumber": 22,
+        "lineNumber": 24,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -576,7 +770,7 @@
       {
         "title": "prop",
         "description": "a callback called when the Surface was restored and ready.",
-        "lineNumber": 23,
+        "lineNumber": 25,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -589,7 +783,7 @@
       {
         "title": "prop",
         "description": "an internal visitor used for logs and tests.",
-        "lineNumber": 24,
+        "lineNumber": 26,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -602,7 +796,7 @@
       {
         "title": "prop",
         "description": "**(gl-react-dom only)** a optional set of attributes to init WebGL with.",
-        "lineNumber": 26,
+        "lineNumber": 28,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -615,7 +809,7 @@
       {
         "title": "prop",
         "description": "**(gl-react-dom only)** allows to override the pixelRatio. (default `devicePixelRatio`)",
-        "lineNumber": 27,
+        "lineNumber": 29,
         "type": {
           "type": "OptionalType",
           "expression": {
@@ -629,43 +823,43 @@
       {
         "title": "example",
         "description": "<Surface width={300} height={200}>\n   <Node shader={shaders.helloGL} />\n </Surface>",
-        "lineNumber": 29
+        "lineNumber": 31
       },
       {
         "title": "example",
         "description": "<Surface width={200} height={100}>\n   <HelloGL />\n </Surface>",
-        "lineNumber": 35
+        "lineNumber": 37
       },
       {
         "title": "example",
         "description": "<Surface width={200} height={100}>\n   <Blur factor={2}>\n     <Negative>\n       https://i.imgur.com/wxqlQkh.jpg\n     </Negative>\n   </Blur>\n </Surface>",
-        "lineNumber": 41
+        "lineNumber": 43
       }
     ],
     "loc": {
       "start": {
-        "line": 107,
+        "line": 99,
         "column": 0
       },
       "end": {
-        "line": 157,
+        "line": 151,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 158,
+          "line": 152,
           "column": 0
         },
         "end": {
-          "line": 565,
+          "line": 556,
           "column": 1
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
       "path": "packages/gl-react/src/createSurface.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L158-L565"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L152-L556"
     },
     "kind": "class",
     "name": "Surface",
@@ -673,200 +867,12 @@
       {
         "title": "extends",
         "description": null,
-        "lineNumber": 14,
+        "lineNumber": 16,
         "type": null,
         "name": "Component"
       }
     ],
     "properties": [
-      {
-        "name": "width",
-        "lineNumber": 15,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "width of the Surface. multiplied by ",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 37,
-                      "offset": 36
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "inlineCode",
-                  "value": "pixelRatio",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 37,
-                      "offset": 36
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 49,
-                      "offset": 48
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "text",
-                  "value": " for the actual canvas pixel size.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 49,
-                      "offset": 48
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 83,
-                      "offset": 82
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 83,
-                  "offset": 82
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 83,
-              "offset": 82
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        }
-      },
-      {
-        "name": "height",
-        "lineNumber": 16,
-        "description": {
-          "type": "root",
-          "children": [
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "type": "text",
-                  "value": "height of the Surface. multiplied by ",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 1,
-                      "offset": 0
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 38,
-                      "offset": 37
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "inlineCode",
-                  "value": "pixelRatio",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 38,
-                      "offset": 37
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 50,
-                      "offset": 49
-                    },
-                    "indent": []
-                  }
-                },
-                {
-                  "type": "text",
-                  "value": " for the actual canvas pixel size.",
-                  "position": {
-                    "start": {
-                      "line": 1,
-                      "column": 50,
-                      "offset": 49
-                    },
-                    "end": {
-                      "line": 1,
-                      "column": 84,
-                      "offset": 83
-                    },
-                    "indent": []
-                  }
-                }
-              ],
-              "position": {
-                "start": {
-                  "line": 1,
-                  "column": 1,
-                  "offset": 0
-                },
-                "end": {
-                  "line": 1,
-                  "column": 84,
-                  "offset": 83
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 1,
-              "offset": 0
-            },
-            "end": {
-              "line": 1,
-              "column": 84,
-              "offset": 83
-            }
-          }
-        },
-        "type": {
-          "type": "NameExpression",
-          "name": "number"
-        }
-      },
       {
         "name": "children",
         "lineNumber": 17,
@@ -1036,8 +1042,272 @@
         }
       },
       {
-        "name": "style",
+        "name": "width",
         "lineNumber": 18,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "strong",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "(only for DOM)",
+                      "position": {
+                        "start": {
+                          "line": 1,
+                          "column": 3,
+                          "offset": 2
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 17,
+                          "offset": 16
+                        },
+                        "indent": []
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 19,
+                      "offset": 18
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": " - width of the Surface. multiplied by ",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 19,
+                      "offset": 18
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 58,
+                      "offset": 57
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "pixelRatio",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 58,
+                      "offset": 57
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 70,
+                      "offset": 69
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": " for the actual canvas pixel size.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 70,
+                      "offset": 69
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 104,
+                      "offset": 103
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 104,
+                  "offset": 103
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 104,
+              "offset": 103
+            }
+          }
+        },
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "number"
+          }
+        }
+      },
+      {
+        "name": "height",
+        "lineNumber": 19,
+        "description": {
+          "type": "root",
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "strong",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "(only for DOM)",
+                      "position": {
+                        "start": {
+                          "line": 1,
+                          "column": 3,
+                          "offset": 2
+                        },
+                        "end": {
+                          "line": 1,
+                          "column": 17,
+                          "offset": 16
+                        },
+                        "indent": []
+                      }
+                    }
+                  ],
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 1,
+                      "offset": 0
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 19,
+                      "offset": 18
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": " - height of the Surface. multiplied by ",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 19,
+                      "offset": 18
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 59,
+                      "offset": 58
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "pixelRatio",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 59,
+                      "offset": 58
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 71,
+                      "offset": 70
+                    },
+                    "indent": []
+                  }
+                },
+                {
+                  "type": "text",
+                  "value": " for the actual canvas pixel size.",
+                  "position": {
+                    "start": {
+                      "line": 1,
+                      "column": 71,
+                      "offset": 70
+                    },
+                    "end": {
+                      "line": 1,
+                      "column": 105,
+                      "offset": 104
+                    },
+                    "indent": []
+                  }
+                }
+              ],
+              "position": {
+                "start": {
+                  "line": 1,
+                  "column": 1,
+                  "offset": 0
+                },
+                "end": {
+                  "line": 1,
+                  "column": 105,
+                  "offset": 104
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 1,
+              "column": 105,
+              "offset": 104
+            }
+          }
+        },
+        "type": {
+          "type": "OptionalType",
+          "expression": {
+            "type": "NameExpression",
+            "name": "number"
+          }
+        }
+      },
+      {
+        "name": "style",
+        "lineNumber": 20,
         "description": {
           "type": "root",
           "children": [
@@ -1151,7 +1421,7 @@
       },
       {
         "name": "preload",
-        "lineNumber": 19,
+        "lineNumber": 21,
         "description": {
           "type": "root",
           "children": [
@@ -1223,7 +1493,7 @@
       },
       {
         "name": "onLoad",
-        "lineNumber": 20,
+        "lineNumber": 22,
         "description": {
           "type": "root",
           "children": [
@@ -1286,7 +1556,7 @@
       },
       {
         "name": "onLoadError",
-        "lineNumber": 21,
+        "lineNumber": 23,
         "description": {
           "type": "root",
           "children": [
@@ -1361,7 +1631,7 @@
       },
       {
         "name": "onContextLost",
-        "lineNumber": 22,
+        "lineNumber": 24,
         "description": {
           "type": "root",
           "children": [
@@ -1424,7 +1694,7 @@
       },
       {
         "name": "onContextRestored",
-        "lineNumber": 23,
+        "lineNumber": 25,
         "description": {
           "type": "root",
           "children": [
@@ -1487,7 +1757,7 @@
       },
       {
         "name": "visitor",
-        "lineNumber": 24,
+        "lineNumber": 26,
         "description": {
           "type": "root",
           "children": [
@@ -1550,7 +1820,7 @@
       },
       {
         "name": "webglContextAttributes",
-        "lineNumber": 26,
+        "lineNumber": 28,
         "description": {
           "type": "root",
           "children": [
@@ -1648,7 +1918,7 @@
       },
       {
         "name": "pixelRatio",
-        "lineNumber": 27,
+        "lineNumber": 29,
         "description": {
           "type": "root",
           "children": [
@@ -1916,28 +2186,28 @@
           ],
           "loc": {
             "start": {
-              "line": 276,
+              "line": 267,
               "column": 2
             },
             "end": {
-              "line": 282,
+              "line": 273,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 283,
+                "line": 274,
                 "column": 2
               },
               "end": {
-                "line": 286,
+                "line": 277,
                 "column": 3
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L283-L286"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L274-L277"
           },
           "params": [
             {
@@ -2063,7 +2333,7 @@
             {
               "title": "param",
               "name": "args",
-              "lineNumber": 283,
+              "lineNumber": 274,
               "type": {
                 "type": "RestType",
                 "expression": {
@@ -2226,28 +2496,28 @@
           ],
           "loc": {
             "start": {
-              "line": 288,
+              "line": 279,
               "column": 2
             },
             "end": {
-              "line": 294,
+              "line": 285,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 295,
+                "line": 286,
                 "column": 2
               },
               "end": {
-                "line": 298,
+                "line": 289,
                 "column": 3
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L295-L298"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L286-L289"
           },
           "params": [
             {
@@ -2373,7 +2643,7 @@
             {
               "title": "param",
               "name": "args",
-              "lineNumber": 295,
+              "lineNumber": 286,
               "type": {
                 "type": "RestType",
                 "expression": {
@@ -2556,28 +2826,28 @@
           ],
           "loc": {
             "start": {
-              "line": 300,
+              "line": 291,
               "column": 2
             },
             "end": {
-              "line": 304,
+              "line": 295,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 305,
+                "line": 296,
                 "column": 2
               },
               "end": {
-                "line": 308,
+                "line": 299,
                 "column": 3
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L305-L308"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L296-L299"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -2587,7 +2857,7 @@
             {
               "title": "param",
               "name": "x",
-              "lineNumber": 305,
+              "lineNumber": 296,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2596,7 +2866,7 @@
             {
               "title": "param",
               "name": "y",
-              "lineNumber": 305,
+              "lineNumber": 296,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2605,7 +2875,7 @@
             {
               "title": "param",
               "name": "w",
-              "lineNumber": 305,
+              "lineNumber": 296,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2614,7 +2884,7 @@
             {
               "title": "param",
               "name": "h",
-              "lineNumber": 305,
+              "lineNumber": 296,
               "type": {
                 "type": "NameExpression",
                 "name": "number"
@@ -2720,28 +2990,28 @@
           ],
           "loc": {
             "start": {
-              "line": 310,
+              "line": 301,
               "column": 2
             },
             "end": {
-              "line": 315,
+              "line": 306,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 316,
+                "line": 307,
                 "column": 2
               },
               "end": {
-                "line": 318,
+                "line": 309,
                 "column": 4
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L316-L318"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L307-L309"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -2838,28 +3108,28 @@
           ],
           "loc": {
             "start": {
-              "line": 320,
+              "line": 311,
               "column": 2
             },
             "end": {
-              "line": 325,
+              "line": 316,
               "column": 5
             }
           },
           "context": {
             "loc": {
               "start": {
-                "line": 326,
+                "line": 317,
                 "column": 2
               },
               "end": {
-                "line": 328,
+                "line": 319,
                 "column": 4
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/createSurface.js#L326-L328"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/createSurface.js#L317-L319"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -3139,28 +3409,28 @@
     ],
     "loc": {
       "start": {
-        "line": 332,
+        "line": 336,
         "column": 0
       },
       "end": {
-        "line": 348,
+        "line": 352,
         "column": 3
       }
     },
     "context": {
       "loc": {
         "start": {
-          "line": 349,
+          "line": 353,
           "column": 0
         },
         "end": {
-          "line": 1006,
+          "line": 1007,
           "column": 1
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L349-L1006"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L353-L1007"
     },
     "properties": [
       {
@@ -3940,7 +4210,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L510-L528"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L510-L528"
           },
           "name": "capture",
           "kind": "function",
@@ -4094,7 +4364,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L535-L540"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L535-L540"
           },
           "kind": "function",
           "name": "redraw",
@@ -4202,7 +4472,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L547-L549"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L547-L549"
           },
           "kind": "function",
           "name": "flush",
@@ -4322,7 +4592,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L108-L149"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L108-L149"
     },
     "kind": "namespace",
     "name": "Shaders",
@@ -4385,7 +4655,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
             "path": "packages/gl-react/src/Shaders.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L122-L138"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L122-L138"
           },
           "memberof": "Shaders",
           "params": [
@@ -4633,7 +4903,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/LinearCopy.js",
       "path": "packages/gl-react/src/LinearCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/LinearCopy.js#L14-L24"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/LinearCopy.js#L14-L24"
     },
     "properties": [
       {
@@ -4806,7 +5076,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/NearestCopy.js",
       "path": "packages/gl-react/src/NearestCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/NearestCopy.js#L14-L25"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/NearestCopy.js#L14-L25"
     },
     "properties": [
       {
@@ -5322,7 +5592,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
       "path": "packages/gl-react/src/Bus.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Bus.js#L44-L201"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Bus.js#L44-L201"
     },
     "properties": [
       {
@@ -5695,7 +5965,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Bus.js#L154-L157"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Bus.js#L154-L157"
           },
           "name": "capture",
           "kind": "function",
@@ -5849,7 +6119,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Bus.js#L169-L171"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Bus.js#L169-L171"
           },
           "kind": "function",
           "name": "redraw",
@@ -6067,13 +6337,13 @@
           "column": 0
         },
         "end": {
-          "line": 56,
+          "line": 60,
           "column": 2
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/connectSize.js",
       "path": "packages/gl-react/src/connectSize.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/connectSize.js#L18-L56"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/connectSize.js#L18-L60"
     },
     "kind": "function",
     "name": "connectSize",
@@ -6449,7 +6719,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/GLSL.js#L26-L32"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/GLSL.js#L26-L32"
     },
     "returns": [
       {
@@ -6786,7 +7056,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/GLSL.js#L7-L7"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/GLSL.js#L7-L7"
     },
     "name": "GLSLCode",
     "kind": "typedef",
@@ -6942,7 +7212,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L44-L46"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L44-L46"
     },
     "examples": [
       {
@@ -7085,7 +7355,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L15-L17"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L15-L17"
     },
     "examples": [
       {
@@ -7277,7 +7547,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L51-L53"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L51-L53"
     },
     "name": "ShadersSheet",
     "kind": "typedef",
@@ -7324,7 +7594,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Shaders.js#L24-L27"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Shaders.js#L24-L27"
     },
     "name": "ShaderIdentifier",
     "kind": "typedef",
@@ -8203,7 +8473,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L159-L161"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L159-L161"
     },
     "name": "Uniforms",
     "kind": "typedef",
@@ -8488,7 +8758,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L66-L69"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L66-L69"
     },
     "name": "TextureOptions",
     "kind": "typedef",
@@ -8827,7 +9097,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L46-L46"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L46-L46"
     },
     "name": "Interpolation",
     "kind": "typedef",
@@ -9158,7 +9428,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L56-L59"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L56-L59"
     },
     "name": "WrapMode",
     "kind": "typedef",
@@ -9218,7 +9488,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L96-L99"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L96-L99"
     },
     "name": "BlendFuncSrcDst",
     "kind": "typedef",
@@ -10249,7 +10519,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L91-L91"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L91-L91"
     },
     "name": "BlendFunc",
     "kind": "typedef",
@@ -10353,7 +10623,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L114-L116"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L114-L116"
     },
     "name": "Clear",
     "kind": "typedef",
@@ -10526,7 +10796,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Node.js#L104-L109"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Node.js#L104-L109"
     },
     "name": "Vec4",
     "kind": "typedef",
@@ -10682,7 +10952,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/flow/ndarray.js",
       "path": "packages/gl-react/flow/ndarray.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/flow/ndarray.js#L7-L13"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/flow/ndarray.js#L7-L13"
     },
     "name": "NDArray",
     "kind": "typedef",
@@ -10956,7 +11226,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
       "path": "packages/gl-react/src/TextureLoader.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L9-L50"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L9-L50"
     },
     "name": "TextureLoader",
     "kind": "class",
@@ -10999,7 +11269,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L14-L14"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L14-L14"
           },
           "properties": [
             {
@@ -11115,7 +11385,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L19-L21"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L19-L21"
           },
           "name": "constructor",
           "kind": "function",
@@ -11227,7 +11497,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L26-L26"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L26-L26"
           },
           "name": "dispose",
           "kind": "member",
@@ -11335,7 +11605,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L31-L31"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L31-L31"
           },
           "name": "canLoad",
           "kind": "member",
@@ -11452,7 +11722,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L36-L36"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L36-L36"
           },
           "name": "get",
           "kind": "member",
@@ -11579,7 +11849,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoader.js#L43-L49"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoader.js#L43-L49"
           },
           "name": "load",
           "kind": "function",
@@ -11727,7 +11997,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
       "path": "packages/gl-react/src/Visitors.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitors.js#L10-L28"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitors.js#L10-L28"
     },
     "kind": "namespace",
     "name": "Visitors",
@@ -11766,7 +12036,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitors.js#L14-L16"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitors.js#L14-L16"
           },
           "memberof": "Visitors",
           "name": "add",
@@ -11831,7 +12101,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitors.js#L20-L23"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitors.js#L20-L23"
           },
           "memberof": "Visitors",
           "name": "remove",
@@ -11997,7 +12267,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
       "path": "packages/gl-react/src/TextureLoaders.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoaders.js#L14-L33"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoaders.js#L14-L33"
     },
     "kind": "namespace",
     "name": "TextureLoaders",
@@ -12087,7 +12357,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoaders.js#L19-L21"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoaders.js#L19-L21"
           },
           "memberof": "TextureLoaders",
           "name": "add",
@@ -12220,7 +12490,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/TextureLoaders.js#L26-L29"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/TextureLoaders.js#L26-L29"
           },
           "memberof": "TextureLoaders",
           "name": "remove",
@@ -12307,7 +12577,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/VisitorLogger.js",
       "path": "packages/gl-react/src/VisitorLogger.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/VisitorLogger.js#L20-L101"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/VisitorLogger.js#L20-L101"
     },
     "name": "VisitorLogger",
     "augments": [
@@ -12356,7 +12626,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
       "path": "packages/gl-react/src/Visitor.js",
-      "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L24-L65"
+      "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L24-L65"
     },
     "name": "Visitor",
     "kind": "class",
@@ -12388,7 +12658,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L28-L28"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L28-L28"
           },
           "name": "onSurfaceMount",
           "kind": "function",
@@ -12449,7 +12719,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L32-L32"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L32-L32"
           },
           "name": "onSurfaceUnmount",
           "kind": "function",
@@ -12510,7 +12780,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L36-L36"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L36-L36"
           },
           "name": "onSurfaceGLContextChange",
           "kind": "function",
@@ -12583,7 +12853,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L39-L39"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L39-L39"
           },
           "name": "onSurfaceDrawSkipped",
           "kind": "function",
@@ -12644,7 +12914,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L42-L42"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L42-L42"
           },
           "name": "onSurfaceDrawStart",
           "kind": "function",
@@ -12756,7 +13026,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L46-L46"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L46-L46"
           },
           "name": "onSurfaceDrawError",
           "kind": "function",
@@ -12817,7 +13087,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L49-L49"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L49-L49"
           },
           "name": "onSurfaceDrawEnd",
           "kind": "function",
@@ -12878,7 +13148,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L52-L52"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L52-L52"
           },
           "name": "onNodeDrawSkipped",
           "kind": "function",
@@ -12939,7 +13209,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L55-L55"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L55-L55"
           },
           "name": "onNodeDrawStart",
           "kind": "function",
@@ -13000,7 +13270,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L58-L58"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L58-L58"
           },
           "name": "onNodeSyncDeps",
           "kind": "function",
@@ -13115,7 +13385,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L61-L61"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L61-L61"
           },
           "name": "onNodeDraw",
           "kind": "function",
@@ -13191,7 +13461,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/4f1622ae9c9423b2d1d9cc670b7f98f000bdd8bf/packages/gl-react/src/Visitor.js#L64-L64"
+            "github": "https://github.com/gre/gl-react/blob/cf49cf717fd91b0aec92d1cd5a7c23233fe0785f/packages/gl-react/src/Visitor.js#L64-L64"
           },
           "name": "onNodeDrawEnd",
           "kind": "function",

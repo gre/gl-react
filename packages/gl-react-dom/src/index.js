@@ -10,10 +10,6 @@ TextureLoaders.add(ImageTextureLoader);
 TextureLoaders.add(CanvasTextureLoader);
 TextureLoaders.add(VideoTextureLoader);
 
-const getPixelSize =
-  ({ width, height, pixelRatio = Number(window.devicePixelRatio||1) }) =>
-  [ pixelRatio * width, pixelRatio * height ];
-
 const RenderLessElement = "span";
 
 export * from "./legacy";
@@ -25,7 +21,6 @@ const mapRenderableContent = (el: mixed) =>
 
 export const Surface = createSurface({
   GLView,
-  getPixelSize,
   RenderLessElement,
   mapRenderableContent,
 });

@@ -48,7 +48,7 @@ export default class Example extends Component {
   render() {
     const { factor, width } = this.props;
     return (
-      <Surface width={width} height={width*300/400}>
+      <Surface style={{ width, height: width*300/400 }}>
         <BlurXY factor={factor}>
           {require("../../iPKTONG.jpg")}
         </BlurXY>

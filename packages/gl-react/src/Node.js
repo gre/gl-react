@@ -187,10 +187,14 @@ type DefaultProps = {
 
 type AsyncMixed = (redraw?: ()=>void) => mixed;
 
-const nodeWidthHeight = (props: Props, context: SurfaceContext): [number, number] => [
-  props.width || context.width,
-  props.height || context.height,
-];
+const nodeWidthHeight = ({ width, height }: Props, { glSizable }: SurfaceContext): [number, number] => {
+  if (width && height) return [ width, height ];
+  const [ cw, ch ] = glSizable.getGLSize();
+  return [
+    width || cw,
+    height || ch,
+  ];
+};
 
 const mapBlendFunc = (gl: WebGLRenderingContext, name: BlendFunc): ?number => {
   // $FlowFixMe
@@ -375,22 +379,18 @@ export default class Node extends Component {
   static contextTypes = {
     glParent: PropTypes.object.isRequired,
     glSurface: PropTypes.object.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    glSizable: PropTypes.object.isRequired,
   };
 
   static childContextTypes = {
     glParent: PropTypes.object.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    glSizable: PropTypes.object.isRequired,
   };
 
   getChildContext() {
-    const [ width, height ] = this.getGLSize();
     return {
       glParent: this,
-      width,
-      height,
+      glSizable: this,
     };
   }
 
@@ -719,7 +719,8 @@ export default class Node extends Component {
     //~ PREPARE phase
 
     if (!this.framebuffer) {
-      const {width,height} = this.context;
+      const {glSizable} = this.context;
+      const [width,height] = glSizable.getGLSize();
       const [nw,nh] = this.getGLSize();
       invariant(
         nw===width && nh===height,

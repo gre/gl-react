@@ -122,8 +122,7 @@ export default class Example extends Component {
     return (
 <View>
   <Surface ref="surface"
-    width={width}
-    height={width}
+    style={{ width, height: width }}
     webglContextAttributes={{ preserveDrawingBuffer: true }}>
 
     <Bus ref="desert">{/* we use a Bus to have a ref for capture */}

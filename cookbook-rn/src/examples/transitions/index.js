@@ -51,7 +51,7 @@ const SlideshowLoop = timeLoop(Slideshow);
 
 import images from "./images";
 export default ({ width }) =>
-  <Surface width={width} height={Math.round(width * 0.6)}>
+  <Surface style={{ width, height: Math.round(width * 0.6) }}>
     <SlideshowLoop
       slides={images}
       slideDuration={2000}

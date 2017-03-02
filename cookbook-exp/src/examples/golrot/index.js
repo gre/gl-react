@@ -38,7 +38,7 @@ const RotatingLoop = timeLoop(({ time, children }) => Rotating({
 const GameOfLifeLoop = timeLoop(GameOfLife, { refreshRate: 5 });
 
 export default ({ width }) =>
-  <Surface width={width} height={width}>
+  <Surface style={{ width, height: width }}>
     <RotatingLoop>
       <GameOfLifeLoop />
     </RotatingLoop>

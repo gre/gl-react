@@ -19,9 +19,6 @@ import type Node from "./Node";
 type ReactClassLike<T> = string | ReactClass<T> | (props: any)=>React.Element<T>;
 
 type SurfaceProps = {
-  width: number,
-  height: number,
-  pixelRatio?: number, // FIXME the pixelRatio needs to move to implementations
   children?: any,
   style?: Object,
   preload?: Array<mixed>,
@@ -67,15 +64,11 @@ export type Surface = ISurface;
 export type SurfaceContext = {
   glParent: Node | Surface | Bus,
   glSurface: Surface,
-  width: number,
-  height: number,
+  glSizable: { +getGLSize: () => [number, number] },
 };
 
 const SurfacePropTypes = {
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
   children: PropTypes.any.isRequired,
-  pixelRatio: PropTypes.number,
   style: PropTypes.any,
   preload: PropTypes.array,
   onLoad: PropTypes.func,
@@ -93,21 +86,22 @@ const allSurfaceProps = Object.keys(SurfacePropTypes);
 
 type SurfaceOpts = {
   GLView: ReactClass<*>,
-  getPixelSize: (props: SurfaceProps)=>[number,number],
   RenderLessElement: ReactClassLike<*>,
   mapRenderableContent?: (instance: mixed)=>mixed,
 };
 
 export default ({
   GLView,
-  getPixelSize,
+  // ^ FIXME: drop this. instead we should trust gl.drawingBufferWidth to get the size.. and just let the canvas impl doing the <canvas> scaling work.
   RenderLessElement,
   mapRenderableContent,
 }: SurfaceOpts): Class<ISurface> =>
 /**
  * **Renders the final tree of [Node](#node) in a WebGL Canvas / OpenGLView /...**
  *
- * `<Surface>` performs the concrete GL draw with provided dimension (width, height).
+ * `<Surface>` performs the final GL draws for a given implementation.
+ *
+ * `width` and `height` props are required for `gl-react-dom` and `gl-react-headless`, but are not supported for React Native, where the paradigm is to use `style` (and either use flexbox or set a width/height from there).
  *
  * > Surface is the only component that isn't "universal",
  * therefore **Surface is exposed by the platform implementation**
@@ -119,9 +113,9 @@ export default ({
  *
  * @class Surface
  * @extends Component
- * @prop {number} width - width of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.
- * @prop {number} height - height of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.
  * @prop {any} children - a tree of React Element that renders some [Node](#node) and/or [Bus](#bus).
+ * @prop {number} [width] **(only for DOM)** - width of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.
+ * @prop {number} [height] **(only for DOM)** - height of the Surface. multiplied by `pixelRatio` for the actual canvas pixel size.
  * @prop {object} [style] - CSS styles that get passed to the underlying `<canvas/>` or `<View/>`
  * @prop {Array<any>} [preload] - an array of things to preload before the Surface start rendering. Help avoiding blinks and providing required textures to render an initial state.
  * @prop {function} [onLoad] - a callback called when Surface is ready and just after it rendered.
@@ -183,17 +177,14 @@ class Surface extends Component {
   static childContextTypes: {[_: $Keys<SurfaceContext>]: any} = {
     glSurface: PropTypes.object.isRequired,
     glParent: PropTypes.object.isRequired,
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
+    glSizable: PropTypes.object.isRequired,
   };
 
   getChildContext(): SurfaceContext {
-    const [ width, height ] = getPixelSize(this.props);
     return {
       glParent: this,
       glSurface: this,
-      width,
-      height,
+      glSizable: this,
     };
   }
 
@@ -216,9 +207,7 @@ class Surface extends Component {
 
   render() {
     const { props, state: { ready, rebootId, debug } } = this;
-    const { children, width, height, style } = props;
-    const [pixelWidth, pixelHeight] = getPixelSize(props);
-    // FIXME i'm not sure we should do style={..} from here. should be up to impl.
+    const { children, style } = props;
 
     // We allow to pass-in all props we don't know so you can hook to DOM events.
     const rest = {};
@@ -237,9 +226,7 @@ class Surface extends Component {
         onContextFailure={this._onContextFailure}
         onContextLost={this._onContextLost}
         onContextRestored={this._onContextRestored}
-        style={{ ...style, width, height }}
-        width={pixelWidth}
-        height={pixelHeight}
+        style={style}
         {...rest}>
         {ready ? children : null}
       </GLView>
@@ -261,8 +248,12 @@ class Surface extends Component {
     return Visitors.get().concat(this.props.visitor||[]);
   }
 
-  getGLSize(): [number,number] {
-    return getPixelSize(this.props);
+  getGLSize(): [number, number] {
+    const {gl} = this;
+    return [
+      gl ? gl.drawingBufferWidth : 0,
+      gl ? gl.drawingBufferHeight : 0
+    ];
   }
 
   getGLName(): string {
@@ -516,7 +507,7 @@ class Surface extends Component {
     const {gl} = this;
     invariant(gl, "gl context not available");
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    const [width,height] = getPixelSize(this.props);
+    const [ width, height ] = this.getGLSize();
     gl.viewport(0, 0, width, height);
   }
 

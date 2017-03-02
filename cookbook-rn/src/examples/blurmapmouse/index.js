@@ -30,7 +30,7 @@ const Example = respondToTouchPosition(class Example extends Component {
 // computation with a Bus ref.
 // We pass to BlurV's map prop a function that resolve that ref.
     return (
-      <Surface width={width} height={width*142/300}>
+      <Surface style={{ width, height: width*142/300 }}>
         <Bus ref="blurMapBus">
           <Offset
             offset={

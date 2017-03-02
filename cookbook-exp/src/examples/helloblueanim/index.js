@@ -13,7 +13,7 @@ export default timeLoop(class Example extends Component {
   render() {
     const { time, width } = this.props;
     return (
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <HelloBlue blue={0.5 + 0.5 * Math.cos(time / 500)} />
       </Surface>
     );

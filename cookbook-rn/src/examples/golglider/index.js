@@ -24,8 +24,7 @@ export default class Example extends Component {
     const { width } = this.props;
     return (
       <Surface
-        width={width}
-        height={width}
+        style={{ width, height: width }}
         preload={[ // preload textures before starting rendering
           gliderGunImage
         ]}>

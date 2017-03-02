@@ -30,7 +30,7 @@ export default class Example extends Component {
   render() {
     const { interpolation, color, width } = this.props;
     return (
-    <Surface width={width} height={width*300/400}>
+    <Surface style={{ width, height: width*300/400 }}>
       <Colorify colorScale={colorScales[color]} interpolation={interpolation}>
         {require("../../iPKTONG.jpg")}
       </Colorify>

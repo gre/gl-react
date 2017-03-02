@@ -24,7 +24,7 @@ const HelloGLAnimated = timeLoop( ({ time }) =>
 );
 
 export default ({ width }) =>
-  <Surface width={width} height={width}>
+  <Surface style={{ width, height: width }}>
     <DiamondCrop>
       <HelloGLAnimated blue={0.8} />
     </DiamondCrop>

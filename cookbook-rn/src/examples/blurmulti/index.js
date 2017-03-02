@@ -31,7 +31,7 @@ export default class Example extends Component {
   render() {
     const { factor, passes, width } = this.props;
     return (
-      <Surface width={width} height={width*300/400}>
+      <Surface style={{ width, height: width*300/400 }}>
         <Blur passes={passes} factor={factor}>
           {require("../../iPKTONG.jpg")}
         </Blur>

@@ -6,7 +6,7 @@ import { View, Platform, requireNativeComponent } from "react-native";
 
 // A component that acts as an OpenGL render target.
 
-export default class GLView extends React.Component {
+export default class EXGLView extends React.Component {
   static propTypes = {
     // Called when the OpenGL context is created, with the context object as a
     // parameter. The context object has an API mirroring WebGL"s
@@ -31,7 +31,7 @@ export default class GLView extends React.Component {
     //       regression. Not sure why yet...
     return (
       <View {...viewProps}>
-        <GLView.NativeView
+        <EXGLView.NativeView
           style={{ flex: 1, backgroundColor: "transparent" }}
           onSurfaceCreate={this._onSurfaceCreate}
           msaaSamples={Platform.OS === "ios" ? msaaSamples : undefined}
@@ -47,7 +47,7 @@ export default class GLView extends React.Component {
     }
   }
 
-  static NativeView = requireNativeComponent("EXGLView", GLView, {
+  static NativeView = requireNativeComponent("EXGLView", EXGLView, {
     nativeOnly: { onSurfaceCreate: true },
   });
 }

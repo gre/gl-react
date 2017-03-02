@@ -44,7 +44,7 @@ export class InteractiveHeart extends Component {
       onPress={this.onPress}
       onPressIn={this.onPressIn}
       onPressOut={this.onPressOut}>
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <Motion
           defaultStyle={{ over, toggle }}
           style={{

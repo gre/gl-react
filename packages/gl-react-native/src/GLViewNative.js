@@ -1,13 +1,11 @@
 //@flow
 import React, {Component, PropTypes} from "react";
 import {View} from "react-native";
-import GLView from "./GLView";
+import EXGLView from "./EXGLView";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  style: PropTypes.object,
 };
 
 const tmpPatch = cb => gl => {
@@ -19,9 +17,7 @@ const tmpPatch = cb => gl => {
 export default class GLViewNative extends Component {
   props: {
     onContextCreate: (gl: WebGLRenderingContext) => void,
-    style: any,
-    width: number,
-    height: number,
+    style?: any,
     children?: any,
   };
   static propTypes = propTypes;
@@ -35,7 +31,7 @@ export default class GLViewNative extends Component {
   render() {
     const { style, onContextCreate, children, ...rest } = this.props;
     return <View {...rest} style={[ style, { position: "relative", overflow: "hidden" } ]}>
-      <GLView
+      <EXGLView
         style={[style, {
           flex: 1,
           position: "absolute",

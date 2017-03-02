@@ -132,8 +132,7 @@ const Example = respondToTouchPosition(class extends Component {
     const tool = tools[toolKey];
     return (
       <Surface
-        width={width}
-        height={width}
+        style={{ width, height: width }}
         preload={[ marioPNG ]}
         webglContextAttributes={{ preserveDrawingBuffer: true }}>
         <PixelEditor

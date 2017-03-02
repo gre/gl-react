@@ -70,22 +70,6 @@ incorrect.js:21
  21: <Node />;
      ^^^^^^^^ props of React element `Node`
 
-incorrect.js:22
- 22: <Surface />;
-     ^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 22: <Surface />;
-     ^^^^^^^^^^^ props of React element `Surface`
-
-incorrect.js:22
- 22: <Surface />;
-     ^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 22: <Surface />;
-     ^^^^^^^^^^^ props of React element `Surface`
-
 incorrect.js:27
  27: <Node nope />;
      ^^^^^^^^^^^^^ React element `Node`
@@ -101,22 +85,6 @@ incorrect.js:27
                   ^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:167
  27: <Node nope />;
      ^^^^^^^^^^^^^ props of React element `Node`
-
-incorrect.js:28
- 28: <Surface nope />;
-     ^^^^^^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 28: <Surface nope />;
-     ^^^^^^^^^^^^^^^^ props of React element `Surface`
-
-incorrect.js:28
- 28: <Surface nope />;
-     ^^^^^^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 28: <Surface nope />;
-     ^^^^^^^^^^^^^^^^ props of React element `Surface`
 
 incorrect.js:29
  29: <LinearCopy nope />;
@@ -177,22 +145,6 @@ incorrect.js:49
                 ^^^^ property `nope`. Property not found in
  49:       node.nope();
            ^^^^ Node
-
-incorrect.js:54
- 54:     <Surface ref={ref => this.surface=ref} notexists>
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `height`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 54:     <Surface ref={ref => this.surface=ref} notexists>
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
-
-incorrect.js:54
- 54:     <Surface ref={ref => this.surface=ref} notexists>
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Surface`
- 35: interface ISurface extends Component<void, SurfaceProps, any> {
-                                                ^^^^^^^^^^^^ property `width`. Property not found in. See: ../node_modules/gl-react/lib/createSurface.js.flow:35
- 54:     <Surface ref={ref => this.surface=ref} notexists>
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Surface`
 
 incorrect.js:55
  55:       <Bus ref="o" notexists>
@@ -371,4 +323,4 @@ incorrect.js:73
                   ^ object literal
 
 
-Found 39 errors
+Found 33 errors

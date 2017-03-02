@@ -76,7 +76,7 @@ export const GameOfLife = ({ tick }) => {
 const GameOfLifeLoop = timeLoop(GameOfLife, { refreshRate: 20 });
 
 export default ({ width }) =>
-  <Surface width={width} height={width}>
+  <Surface style={{ width, height: width }}>
     <NearestCopy>
       <GameOfLifeLoop />
     </NearestCopy>

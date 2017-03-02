@@ -24,6 +24,9 @@ const propTypes = {
   onContextLost: PropTypes.func.isRequired,
   onContextRestored: PropTypes.func.isRequired,
   webglContextAttributes: PropTypes.object,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  style: PropTypes.object,
   pixelRatio: PropTypes.number,
 };
 
@@ -35,6 +38,9 @@ export default class GLViewDOM extends Component {
     onContextRestored: (gl: ?WebGLRenderingContext)=>void,
     webglContextAttributes?: WebGLContextAttributes,
     pixelRatio?: number,
+    width: number,
+    height: number,
+    style?: any,
     debug?: number,
   };
   static propTypes = propTypes;
@@ -71,10 +77,15 @@ export default class GLViewDOM extends Component {
   }
 
   render() {
-    const {
+    let {
+      width,
+      height,
+      pixelRatio,
+      style,
       debug, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
+    if (!pixelRatio) pixelRatio = Number(window.devicePixelRatio || 1);
     for (let k in propTypes) {
       if (rest.hasOwnProperty(k)) {
         delete rest[k];
@@ -82,6 +93,9 @@ export default class GLViewDOM extends Component {
     }
     return <canvas
       ref={this.onRef}
+      style={{ ...style, width, height }}
+      width={width * pixelRatio}
+      height={height * pixelRatio}
       {...rest}
     />;
   }

@@ -1,7 +1,7 @@
 {
-  "name": "glrn-cookbook",
+  "name": "gl-react-exponent-cookbook",
   "description": "GL React Native Cookbook",
-  "slug": "glrn-cookbook",
+  "slug": "gl-react-exponent-cookbook",
   "sdkVersion": "13.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
@@ -19,9 +19,9 @@
     "assetExts": ["ttf", "mp4"]
   },
   "android": {
-    "package": "fr.greweb.glrncookbook"
+    "package": "fr.greweb.glrcookbook"
   },
   "ios": {
-    "bundleIdentifier": "fr.greweb.glrncookbook"
+    "bundleIdentifier": "fr.greweb.glrcookbook"
   }
 }

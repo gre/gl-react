@@ -21,9 +21,13 @@ type WebGLContextAttributes = {
 };
 
 const propTypes = {
+  onContextLost: PropTypes.func.isRequired,
+  onContextRestored: PropTypes.func.isRequired,
   onContextCreate: PropTypes.func.isRequired,
   onContextFailure: PropTypes.func.isRequired,
   webglContextAttributes: PropTypes.object,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
 
 class GLView extends Component {
@@ -84,12 +88,14 @@ class GLView extends Component {
   }
 
   render() {
-    const { ...rest } = this.props;
+    const { width, height, ...rest } = this.props;
     for (let k in propTypes) {
       delete rest[k];
     }
     return <canvas
       ref={this.onRef}
+      width={width}
+      height={height}
       {...rest}
     />;
   }
@@ -98,8 +104,6 @@ class GLView extends Component {
     this.canvas = ref;
   };
 }
-
-const getPixelSize = ({ width, height }: { width: number, height: number }) => [ width, height ];
 
 class RenderLessElement extends Component {
   static propTypes = {
@@ -139,7 +143,6 @@ class RenderLessElement extends Component {
 
 export const Surface = createSurface({
   GLView,
-  getPixelSize,
   RenderLessElement,
   // $FlowFixMe trust me flow xD
   mapRenderableContent: (el: RenderLessElement) => el.getFirstChild(),

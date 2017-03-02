@@ -554,7 +554,7 @@ export default class Example extends Component {
     const { forestGrowFactor, fireFactor, waterFactor, speed, width } = this.props;
     const { initialState } = this.state;
     return (
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <Game
           speed={speed}
           size={size}

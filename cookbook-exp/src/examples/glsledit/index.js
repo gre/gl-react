@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 });
 
 const Preview = timeLoop(({ frag, visitor, time, width, height }) =>
-  <Surface width={width} height={height/3} visitor={visitor}>
+  <Surface style={{ width, height: height/3 }} visitor={visitor}>
     <Node shader={{ frag }} uniforms={{ time: time / 1000 }} />
   </Surface>);
 

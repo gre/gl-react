@@ -25,7 +25,7 @@ export default class Example extends Component {
   render() {
     const {width} = this.props;
     return (
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <DiamondCrop>
           {require("../../5EOyTDQ.jpg")}
         </DiamondCrop>

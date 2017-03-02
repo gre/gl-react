@@ -35,7 +35,7 @@ export default class Example extends Component {
   render() {
     const { fromColor, toColor, width } = this.props;
     return (
-      <Surface width={width} height={width}>
+      <Surface style={{ width, height: width }}>
         <ColoredDisc fromColor={fromColor} toColor={toColor} />
       </Surface>
     );
