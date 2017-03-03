@@ -270,7 +270,7 @@ test("Surface can be resized", () => {
   const renderForSize = (width, height) =>
     <Surface width={width} height={height} webglContextAttributes={{ preserveDrawingBuffer: true }}>
       <LinearCopy>
-        <Node shader={shaders.red} />
+        <Node shader={shaders.red} backbuffering />
       </LinearCopy>
     </Surface>;
   const inst = create(renderForSize(1, 1));

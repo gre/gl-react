@@ -421,6 +421,9 @@ export default class Node extends Component {
     if (this.framebuffer) {
       this.framebuffer.syncSize(...nextWidthHeight);
     }
+    if (this.backbuffer) {
+      this.backbuffer.syncSize(...nextWidthHeight);
+    }
     // FIXME should we do same for backbuffer?
     invariant(
       nextProps.backbuffering === this.props.backbuffering,
