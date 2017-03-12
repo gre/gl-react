@@ -1,6 +1,6 @@
 ### *feature request*? 
 
-# or 
+# -- OR -- 
 
 ### *bug report*?
 
