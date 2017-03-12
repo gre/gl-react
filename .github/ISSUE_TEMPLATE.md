@@ -1,15 +1,17 @@
-### *feature request* or *bug report*?
+### *feature request*? 
 
-<!-- If you report a bug: -->
+# or 
 
-### library version
+### *bug report*?
+
+#### library version
 
 ```bash
 npm ls gl-react gl-react-dom gl-react-native gl-react-exponent # Please run and paste the output of this
 ```
 
-### Expected behavior
+#### Expected behavior
 
-### Actual behavior
+#### Actual behavior
 
-### Steps to reproduce the behavior
+#### Steps to reproduce the behavior
