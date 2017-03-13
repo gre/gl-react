@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#282c34",
     color: "#ABB2BF",
     fontSize: 10,
-    lineHeight: 1.5,
     fontFamily: "Courier New",
   },
 });

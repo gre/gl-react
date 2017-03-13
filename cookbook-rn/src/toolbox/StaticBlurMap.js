@@ -2,11 +2,11 @@
 import React, { Component } from "react";
 import ImagesPicker from "./ImagesPicker";
 const images = [
-  require("../SzbbUvX.jpg"),
-  require("../0PkQEk1.jpg"),
-  require("../z2CQHpg.jpg"),
-  require("../k9Eview.jpg"),
-  require("../wh0On3P.jpg"),
+  { "uri": "https://i.imgur.com/SzbbUvX.jpg" },
+  { "uri": "https://i.imgur.com/0PkQEk1.jpg" },
+  { "uri": "https://i.imgur.com/z2CQHpg.jpg" },
+  { "uri": "https://i.imgur.com/k9Eview.jpg" },
+  { "uri": "https://i.imgur.com/wh0On3P.jpg" },
 ];
 export default class StaticBlurMap extends Component {
   static images = images;

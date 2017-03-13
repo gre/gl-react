@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     color: "#c22",
     fontSize: 10,
-    lineHeight: 18,
     fontFamily: "Courier New",
   },
   compileError: {

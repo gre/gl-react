@@ -1,0 +1,5 @@
+- share codebase across the RN and the Exponent app.
+- the example align center but does not scroll?
+- you should be able to swipe across examples.
+- the list of example texts are shitty. we need to make it better. I think a thumbnail would be neat, simplify and cleanify the text too.
+- implement blurimgtitle. probably will use react-native-view-shot for rasterizing the text.

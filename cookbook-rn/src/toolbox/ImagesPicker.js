@@ -30,9 +30,9 @@ export default class ImagesPicker extends Component {
   props: {
     imageStyle?: any,
     style?: any,
-    value: string,
-    images: Array<string>,
-    onChange: (c: string)=>any,
+    value: Object,
+    images: Array<Object>,
+    onChange: (c: Object)=>any,
   };
   render() {
     const {value, onChange, images, style, imageStyle} = this.props;
@@ -44,9 +44,9 @@ export default class ImagesPicker extends Component {
         flexWrap: "wrap",
         ...style,
       }}>
-      {images.map(src =>
+      {images.map((src, k) =>
         <ImagePickable
-          key={src}
+          key={k}
           onChange={onChange}
           src={src}
           selected={src===value}

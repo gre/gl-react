@@ -1,11 +1,12 @@
+import {Dimensions} from "react-native";
 import ImagesPicker from "../../toolbox/ImagesPicker";
 export const title = "Merge color channels";
 export const description = "This is a showcase for Array of textures support.";
 
 const imgPicker = {
   Editor: ImagesPicker,
-  style: { width: 380 },
-  imageStyle: { width: 42, height: 42 },
+  style: { width: Dimensions.get("window").width - 20 },
+  imageStyle: { width: 40, height: 40 },
   images: [
     require("./img1.png"),
     require("./img2.png"),
