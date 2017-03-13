@@ -1,29 +1,12 @@
-> **NB:** This is gl-react v3. For gl-react v2, please see [ProjectSeptemberInc/gl-react](https://github.com/ProjectSeptemberInc/gl-react).
+**This repository hosts [gl-react v3](http://greweb.me/2016/12/gl-react-v3/). For gl-react v2, please see [ProjectSeptemberInc/gl-react](https://github.com/ProjectSeptemberInc/gl-react).**
 
 > [gre/gl-react](https://github.com/gre/gl-react) repository is a complete rewrite of [ProjectSeptemberInc/gl-react](https://github.com/ProjectSeptemberInc/gl-react) library (gl-react v2).
 It plans to be the gl-react v3.
 We keep both repository at same time because (1) this work is not yet finished and (2) this repository is now a "multi libraries" repository (it's just easier to maintain that way).
 
-See also this article: http://greweb.me/2016/12/gl-react-v3/ .
-
-## v3 alpha: development in progress
-
-- [x] gl-react, universal implementation
-- [x] gl-react-dom, DOM implementation
-- [x] gl-react-headless, Node.js implementation
-  - [x] tests: 100% test coverage!
-- [x] gl-react-exponent, React Native via Exponent implementation
-- [ ] gl-react-native, React Native standalone implementation
-
-**The main remaining work of v3 is the React Native implementation**:
-
-We are relying on **Exponent's GLView** to implement the WebGL layer. The implementation is still very young and experimental (only implement a subset of WebGL), but as soon as this implementation guarantees a good conformance, the library should just work! **I encourage everyone to contribute to make Exponent WebGL implementation robust**, independently from the library you use at the end (Three.js / Pixi.js / regl / gl-react / whatever!).
-
-To track the status of React Native implementation, please see https://github.com/gre/gl-react/issues/74
-
 ---
 
-<img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react
+<img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react (v3 alpha)
 ========
 
 `gl-react` is a [React](https://facebook.github.io/react/) library to write and compose WebGL shaders. *Implement complex effects by composing React components.*
@@ -31,7 +14,8 @@ To track the status of React Native implementation, please see https://github.co
 This universal library must be coupled with one of the concrete implementations:
 
 - [`gl-react-dom`](packages/gl-react-dom/) for React DOM (web using WebGL).
-- **unfinished** [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android via OpenGL).
+- **in progress** [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android via OpenGL).
+- **in progress** [`gl-react-exponent`](packages/gl-react-exponent/) for React Native (iOS/Android via OpenGL – Exponent implementation).
 - [`gl-react-headless`](packages/gl-react-headless/) for Node.js (used for testing for now)
 
 ## Links
