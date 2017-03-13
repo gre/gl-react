@@ -1,4 +1,5 @@
 package fr.greweb.rngl;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,10 @@ public class RNGLPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
-        return Collections.emptyList();
+        List<NativeModule> modules = new ArrayList<>();
+        modules.add(new GLImagesModule(reactApplicationContext));
+        return modules;
+
     }
 
     @Override

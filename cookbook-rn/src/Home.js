@@ -6,6 +6,7 @@ import {
   ScrollView,
   View,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import ListItem from "./ListItem";
 import * as examples from "./examples";
@@ -183,7 +184,14 @@ export default class Home extends React.Component {
   props: {
     navigator: *,
   };
+  state = {
+    paused: false,
+  };
+  onPress = () => {
+    this.setState(({ paused }) => ({ paused: !paused }));
+  };
   render() {
+    const { paused } = this.state;
     const {navigator} = this.props;
     return (
       <ScrollView style={styles.container} bounces={false}>
@@ -192,7 +200,11 @@ export default class Home extends React.Component {
             a React Native library to write and compose WebGL shaders
           </Text>
           <View style={{ alignItems: "center", padding: 20 }}>
-            <Ex1Loop />
+            <TouchableOpacity onPress={this.onPress}>
+              <Ex1Loop
+                paused={paused}
+              />
+            </TouchableOpacity>
           </View>
           <View>
             <Text style={styles.also}>

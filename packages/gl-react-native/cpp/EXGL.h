@@ -35,7 +35,8 @@ void EXGLContextFlush(EXGLContextId exglCtxId);
 // [GL thread] Set the default framebuffer (used when binding 0). Allows using
 // platform-specific extensions on the default framebuffer, such as MSAA.
 void EXGLContextSetDefaultFramebuffer(EXGLContextId exglCtxId, GLint framebuffer);
-
+    
+    
 #ifdef __cplusplus
 }
 #endif

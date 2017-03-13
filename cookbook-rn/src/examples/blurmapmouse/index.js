@@ -45,7 +45,7 @@ const Example = respondToTouchPosition(class Example extends Component {
           />
         </Bus>
         <BlurV map={() => this.refs.blurMapBus} passes={6} factor={6}>
-          {require("../../NjbLHx2.jpg")}
+          {{ uri: "https://i.imgur.com/NjbLHx2.jpg" }}
         </BlurV>
       </Surface>
     );

@@ -33,7 +33,7 @@ export default class Example extends Component {
     return (
       <Surface style={{ width, height: width*300/400 }}>
         <Blur passes={passes} factor={factor}>
-          {require("../../iPKTONG.jpg")}
+          {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
         </Blur>
       </Surface>
     );

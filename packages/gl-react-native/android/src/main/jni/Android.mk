@@ -11,9 +11,11 @@ LOCAL_MODULE := exgl
 LOCAL_C_INCLUDES += ../../../../cpp/
 LOCAL_SRC_FILES := \
   ../../../../cpp/EXGL.cpp \
+  ../../../../cpp/GLImages.cpp \
   ../../../../cpp/EXJSUtils.c \
   ../../../../cpp/EXJSConvertTypedArray.c \
-  EXGL.c
+  EXGL.c \
+  GLImages.c
 
 # weird hack that lets us mix C++ with -std=c++11 and C with -std=c99
 LOCAL_C99_FILES := $(filter %.c, $(LOCAL_SRC_FILES))

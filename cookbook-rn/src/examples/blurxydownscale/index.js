@@ -11,7 +11,7 @@ export default class Example extends Component {
       <Surface style={{ width, height: width*300/400 }}>
         <LinearCopy>
           <BlurXY factor={factor} width={100} height={75}>
-            {require("../../iPKTONG.jpg")}
+            {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
           </BlurXY>
         </LinearCopy>
       </Surface>

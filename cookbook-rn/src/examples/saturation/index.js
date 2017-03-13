@@ -34,7 +34,7 @@ export default class Example extends Component {
     return (
     <Surface style={{ width, height: width*300/480 }}>
       <Saturate {...this.props}>
-        {require("../../uTP9Xfr.jpg")}
+        {{ uri: "https://i.imgur.com/uTP9Xfr.jpg" }}
       </Saturate>
     </Surface>
     );

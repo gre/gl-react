@@ -27,7 +27,7 @@ export default class Example extends Component {
     return (
       <Surface style={{ width, height: width }}>
         <DiamondCrop>
-          {require("../../5EOyTDQ.jpg")}
+          {{ uri: "https://i.imgur.com/5EOyTDQ.jpg" }}
         </DiamondCrop>
       </Surface>
     );

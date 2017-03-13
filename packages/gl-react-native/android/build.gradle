@@ -1,3 +1,14 @@
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.2.3'
+    classpath 'de.undercouch:gradle-download-task:3.1.2'
+  }
+}
+
 import org.apache.tools.ant.taskdefs.condition.Os
 import de.undercouch.gradle.tasks.download.Download
 
@@ -6,17 +17,6 @@ apply plugin: 'com.android.library'
 
 def downloadsDir = new File("$buildDir/downloads")
 def thirdPartyNdkDir = new File("$buildDir/third-party-ndk")
-
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.2'
-    classpath 'de.undercouch:gradle-download-task:3.1.2'
-  }
-}
 
 task createNativeDepsDirectories {
   downloadsDir.mkdirs()

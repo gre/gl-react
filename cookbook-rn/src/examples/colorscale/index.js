@@ -32,7 +32,7 @@ export default class Example extends Component {
     return (
     <Surface style={{ width, height: width*300/400 }}>
       <Colorify colorScale={colorScales[color]} interpolation={interpolation}>
-        {require("../../iPKTONG.jpg")}
+        {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
       </Colorify>
     </Surface>
     );

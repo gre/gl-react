@@ -859,7 +859,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
       "path": "packages/gl-react/src/createSurface.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L152-L556"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L152-L556"
     },
     "kind": "class",
     "name": "Surface",
@@ -2207,7 +2207,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L274-L277"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L274-L277"
           },
           "params": [
             {
@@ -2517,7 +2517,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L286-L289"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L286-L289"
           },
           "params": [
             {
@@ -2847,7 +2847,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L296-L299"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L296-L299"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -3011,7 +3011,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L307-L309"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L307-L309"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -3129,7 +3129,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
             "path": "packages/gl-react/src/createSurface.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/createSurface.js#L317-L319"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/createSurface.js#L317-L319"
           },
           "memberof": "Surface",
           "scope": "instance",
@@ -3430,7 +3430,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L353-L1010"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L353-L1010"
     },
     "properties": [
       {
@@ -4210,7 +4210,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L513-L531"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L513-L531"
           },
           "name": "capture",
           "kind": "function",
@@ -4364,7 +4364,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L538-L543"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L538-L543"
           },
           "kind": "function",
           "name": "redraw",
@@ -4472,7 +4472,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
             "path": "packages/gl-react/src/Node.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L550-L552"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L550-L552"
           },
           "kind": "function",
           "name": "flush",
@@ -4592,7 +4592,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L108-L149"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L108-L149"
     },
     "kind": "namespace",
     "name": "Shaders",
@@ -4655,7 +4655,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
             "path": "packages/gl-react/src/Shaders.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L122-L138"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L122-L138"
           },
           "memberof": "Shaders",
           "params": [
@@ -4903,7 +4903,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/LinearCopy.js",
       "path": "packages/gl-react/src/LinearCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/LinearCopy.js#L14-L24"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/LinearCopy.js#L14-L24"
     },
     "properties": [
       {
@@ -5076,7 +5076,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/NearestCopy.js",
       "path": "packages/gl-react/src/NearestCopy.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/NearestCopy.js#L14-L25"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/NearestCopy.js#L14-L25"
     },
     "properties": [
       {
@@ -5592,7 +5592,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
       "path": "packages/gl-react/src/Bus.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Bus.js#L44-L201"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Bus.js#L44-L201"
     },
     "properties": [
       {
@@ -5965,7 +5965,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Bus.js#L154-L157"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Bus.js#L154-L157"
           },
           "name": "capture",
           "kind": "function",
@@ -6119,7 +6119,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
             "path": "packages/gl-react/src/Bus.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Bus.js#L169-L171"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Bus.js#L169-L171"
           },
           "kind": "function",
           "name": "redraw",
@@ -6343,7 +6343,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/connectSize.js",
       "path": "packages/gl-react/src/connectSize.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/connectSize.js#L18-L60"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/connectSize.js#L18-L60"
     },
     "kind": "function",
     "name": "connectSize",
@@ -6719,7 +6719,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/GLSL.js#L26-L32"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/GLSL.js#L26-L32"
     },
     "returns": [
       {
@@ -7056,7 +7056,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
       "path": "packages/gl-react/src/GLSL.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/GLSL.js#L7-L7"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/GLSL.js#L7-L7"
     },
     "name": "GLSLCode",
     "kind": "typedef",
@@ -7212,7 +7212,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L44-L46"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L44-L46"
     },
     "examples": [
       {
@@ -7355,7 +7355,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L15-L17"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L15-L17"
     },
     "examples": [
       {
@@ -7547,7 +7547,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L51-L53"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L51-L53"
     },
     "name": "ShadersSheet",
     "kind": "typedef",
@@ -7594,7 +7594,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
       "path": "packages/gl-react/src/Shaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Shaders.js#L24-L27"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Shaders.js#L24-L27"
     },
     "name": "ShaderIdentifier",
     "kind": "typedef",
@@ -8473,7 +8473,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L159-L161"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L159-L161"
     },
     "name": "Uniforms",
     "kind": "typedef",
@@ -8758,7 +8758,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L66-L69"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L66-L69"
     },
     "name": "TextureOptions",
     "kind": "typedef",
@@ -9097,7 +9097,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L46-L46"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L46-L46"
     },
     "name": "Interpolation",
     "kind": "typedef",
@@ -9428,7 +9428,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L56-L59"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L56-L59"
     },
     "name": "WrapMode",
     "kind": "typedef",
@@ -9488,7 +9488,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L96-L99"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L96-L99"
     },
     "name": "BlendFuncSrcDst",
     "kind": "typedef",
@@ -10519,7 +10519,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L91-L91"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L91-L91"
     },
     "name": "BlendFunc",
     "kind": "typedef",
@@ -10623,7 +10623,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L114-L116"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L114-L116"
     },
     "name": "Clear",
     "kind": "typedef",
@@ -10796,7 +10796,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
       "path": "packages/gl-react/src/Node.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Node.js#L104-L109"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Node.js#L104-L109"
     },
     "name": "Vec4",
     "kind": "typedef",
@@ -10952,7 +10952,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/flow/ndarray.js",
       "path": "packages/gl-react/flow/ndarray.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/flow/ndarray.js#L7-L13"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/flow/ndarray.js#L7-L13"
     },
     "name": "NDArray",
     "kind": "typedef",
@@ -11226,7 +11226,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
       "path": "packages/gl-react/src/TextureLoader.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L9-L50"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L9-L50"
     },
     "name": "TextureLoader",
     "kind": "class",
@@ -11269,7 +11269,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L14-L14"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L14-L14"
           },
           "properties": [
             {
@@ -11385,7 +11385,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L19-L21"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L19-L21"
           },
           "name": "constructor",
           "kind": "function",
@@ -11497,7 +11497,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L26-L26"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L26-L26"
           },
           "name": "dispose",
           "kind": "member",
@@ -11605,7 +11605,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L31-L31"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L31-L31"
           },
           "name": "canLoad",
           "kind": "member",
@@ -11722,7 +11722,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L36-L36"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L36-L36"
           },
           "name": "get",
           "kind": "member",
@@ -11849,7 +11849,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
             "path": "packages/gl-react/src/TextureLoader.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoader.js#L43-L49"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoader.js#L43-L49"
           },
           "name": "load",
           "kind": "function",
@@ -11997,7 +11997,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
       "path": "packages/gl-react/src/Visitors.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitors.js#L10-L28"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitors.js#L10-L28"
     },
     "kind": "namespace",
     "name": "Visitors",
@@ -12036,7 +12036,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitors.js#L14-L16"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitors.js#L14-L16"
           },
           "memberof": "Visitors",
           "name": "add",
@@ -12101,7 +12101,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
             "path": "packages/gl-react/src/Visitors.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitors.js#L20-L23"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitors.js#L20-L23"
           },
           "memberof": "Visitors",
           "name": "remove",
@@ -12267,7 +12267,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
       "path": "packages/gl-react/src/TextureLoaders.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoaders.js#L14-L33"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoaders.js#L14-L33"
     },
     "kind": "namespace",
     "name": "TextureLoaders",
@@ -12357,7 +12357,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoaders.js#L19-L21"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoaders.js#L19-L21"
           },
           "memberof": "TextureLoaders",
           "name": "add",
@@ -12490,7 +12490,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
             "path": "packages/gl-react/src/TextureLoaders.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/TextureLoaders.js#L26-L29"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/TextureLoaders.js#L26-L29"
           },
           "memberof": "TextureLoaders",
           "name": "remove",
@@ -12577,7 +12577,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/VisitorLogger.js",
       "path": "packages/gl-react/src/VisitorLogger.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/VisitorLogger.js#L20-L101"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/VisitorLogger.js#L20-L101"
     },
     "name": "VisitorLogger",
     "augments": [
@@ -12626,7 +12626,7 @@
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
       "path": "packages/gl-react/src/Visitor.js",
-      "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L24-L65"
+      "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L24-L65"
     },
     "name": "Visitor",
     "kind": "class",
@@ -12658,7 +12658,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L28-L28"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L28-L28"
           },
           "name": "onSurfaceMount",
           "kind": "function",
@@ -12719,7 +12719,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L32-L32"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L32-L32"
           },
           "name": "onSurfaceUnmount",
           "kind": "function",
@@ -12780,7 +12780,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L36-L36"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L36-L36"
           },
           "name": "onSurfaceGLContextChange",
           "kind": "function",
@@ -12853,7 +12853,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L39-L39"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L39-L39"
           },
           "name": "onSurfaceDrawSkipped",
           "kind": "function",
@@ -12914,7 +12914,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L42-L42"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L42-L42"
           },
           "name": "onSurfaceDrawStart",
           "kind": "function",
@@ -13026,7 +13026,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L46-L46"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L46-L46"
           },
           "name": "onSurfaceDrawError",
           "kind": "function",
@@ -13087,7 +13087,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L49-L49"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L49-L49"
           },
           "name": "onSurfaceDrawEnd",
           "kind": "function",
@@ -13148,7 +13148,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L52-L52"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L52-L52"
           },
           "name": "onNodeDrawSkipped",
           "kind": "function",
@@ -13209,7 +13209,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L55-L55"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L55-L55"
           },
           "name": "onNodeDrawStart",
           "kind": "function",
@@ -13270,7 +13270,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L58-L58"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L58-L58"
           },
           "name": "onNodeSyncDeps",
           "kind": "function",
@@ -13385,7 +13385,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L61-L61"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L61-L61"
           },
           "name": "onNodeDraw",
           "kind": "function",
@@ -13461,7 +13461,7 @@
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
             "path": "packages/gl-react/src/Visitor.js",
-            "github": "https://github.com/gre/gl-react/blob/93086151ef4c6e21eeb4982738f3ddf0479b4b87/packages/gl-react/src/Visitor.js#L64-L64"
+            "github": "https://github.com/gre/gl-react/blob/addf8d134039621ec6f3c120929c2ad6788c5383/packages/gl-react/src/Visitor.js#L64-L64"
           },
           "name": "onNodeDrawEnd",
           "kind": "function",

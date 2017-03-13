@@ -17,6 +17,17 @@ export default (
     };
     _r: any;
     componentDidMount() {
+      this.onPausedChange(this.props.paused);
+    }
+    componentWillReceiveProps({ paused }) {
+      if (this.props.paused !== paused) {
+        this.onPausedChange(paused);
+      }
+    }
+    componentWillUnmount() {
+      raf.cancel(this._r);
+    }
+    startLoop = () => {
       let startTime: number, lastTime: number;
       let interval = 1000 / refreshRate;
       lastTime = -interval;
@@ -32,10 +43,15 @@ export default (
         }
       };
       this._r = raf(loop);
-    }
-    componentWillUnmount() {
-      raf.cancel(this._r);
-    }
+    };
+    onPausedChange = paused => {
+      if (paused) {
+        raf.cancel(this._r);
+      }
+      else {
+        this.startLoop();
+      }
+    };
     render() {
       return <C
         {...this.props}

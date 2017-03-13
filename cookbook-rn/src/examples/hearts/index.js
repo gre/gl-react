@@ -20,7 +20,7 @@ const genRows = nb => {
   for (let i = 0; i < nb; i++) {
     rows.push({
       color: [ random(), random(), random() ],
-      image: require("../../GQo1KWq.jpg"),
+      image: { uri: "https://i.imgur.com/GQo1KWq.jpg" },
     });
   }
   return rows;

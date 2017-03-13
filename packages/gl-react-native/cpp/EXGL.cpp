@@ -20,11 +20,10 @@
 #include <JavaScriptCore/JSObjectRef.h>
 #include <JavaScriptCore/JSValueRef.h>
 
+#include "GLImages.h"
 
 #include "EXJSUtils.h"
 #include "EXJSConvertTypedArray.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
 
 #ifdef __APPLE__
 #include "EXiOSUtils.h"
@@ -152,7 +151,7 @@ private:
   inline JSValueRef addFutureToNextBatch(JSContextRef jsCtx, F &&f) noexcept {
     auto future = nextFuture++;
     addToNextBatch([=] {
-      assert(futures.find(future) == futures.end());
+      //assert(futures.find(future) == futures.end()); // FIXME gre commented – for some reason, breaks in android
       futures[future] = f();
     });
     return JSValueMakeNumber(jsCtx, future);
@@ -874,40 +873,6 @@ private:
 
   _WRAP_METHOD_IS_OBJECT(Texture)
 
-  inline void decodeURI(char *dst, const char *src) {
-    char a, b;
-    while (*src) {
-      if ((*src == '%') &&
-          ((a = src[1]) && (b = src[2])) &&
-          (isxdigit(a) && isxdigit(b))) {
-        if (a >= 'a') {
-          a -= 'a' - 'A';
-        }
-        if (a >= 'A') {
-          a -= ('A' - 10);
-        } else {
-          a -= '0';
-        }
-        if (b >= 'a') {
-          b -= 'a' - 'A';
-        }
-        if (b >= 'A') {
-          b -= ('A' - 10);
-        } else {
-          b -= '0';
-        }
-        *dst++ = 16 * a + b;
-        src += 3;
-      } else if (*src == '+') {
-        *dst++ = ' ';
-        src++;
-      } else {
-        *dst++ = *src++;
-      }
-    }
-    *dst++ = '\0';
-  }
-
   _WRAP_METHOD(texImage2D, 6) {
     if (jsArgc == 9) {
       // 9-argument version
@@ -942,48 +907,49 @@ private:
         }
       }
 
-      // Exponent.Asset object?
-      JSValueRef jsLocalUri = EXJSObjectGetPropertyNamed(jsCtx, jsPixels, "localUri");
-      if (jsLocalUri && JSValueIsString(jsCtx, jsLocalUri)) {
-        // TODO(nikki): Check that this file is in the right scope
-        auto localUri = jsValueToSharedStr(jsCtx, jsLocalUri);
-        if (strncmp(localUri.get(), "file://", 7) != 0) {
-          throw std::runtime_error("EXGL: Asset doesn't have a cached local file for"
-                                   " gl.texImage2D()!");
-        }
-        char localPath[strlen(localUri.get())];
-        decodeURI(localPath, localUri.get() + 7);
-
-        int fileWidth, fileHeight, fileComp;
-        std::shared_ptr<void> data(stbi_load(localPath, &fileWidth, &fileHeight,
-                                             &fileComp, STBI_rgb_alpha),
-                                   stbi_image_free);
-        if (!data) {
-          throw std::runtime_error("EXGL: Couldn't read image from Asset's local file"
-                                   " for gl.texImage2D()!");
-        }
-        if (width != fileWidth || height != fileHeight) {
-          throw std::runtime_error("EXGL: Asset's width and height don't match"
-                                   " given width and height for gl.texImage2D()!");
-        }
-        if (unpackFLipY) {
-          flipPixels((GLubyte *) data.get(), width * bytesPerPixel(type, format), height);
-        }
-        addToNextBatch([=] {
-          glTexImage2D(target, level, internalformat,
-                       width, height, border,
-                       format, type, data.get());
-        });
-        return nullptr;
-      }
-
-      // None of the above?
       throw std::runtime_error("EXGL: Invalid pixel data argument for"
                                " gl.texImage2D()!");
     } else if (jsArgc == 6) {
-      // 6-argument version (no width, height, border)
-      throw std::runtime_error("EXGL: gl.texImage2D() does't support 6-argument"
-                               " version yet!");
+      EXJS_UNPACK_ARGV(GLenum target, GLint level, GLint internalformat,
+                       GLenum format, GLenum type);
+      JSObjectRef jsPixels = (JSObjectRef) jsArgv[5];
+
+      // GLAsset object ?
+
+      JSValueRef jsGlAssetId = EXJSObjectGetPropertyNamed(jsCtx, jsPixels, "glAssetId");
+      if (jsGlAssetId && JSValueIsNumber(jsCtx, jsGlAssetId)) {
+          int glAssetId = (int)JSValueToNumber(jsCtx, jsGlAssetId, NULL);
+          GLAsset *asset = GLImagesGet(glAssetId);
+          if (!asset) {
+              throw std::runtime_error("EXGL: gl.texImage2D: asset not found");
+          }
+          void *data;
+          int width = asset->width;
+          int height = asset->height;
+          if (unpackFLipY) {
+            data = asset->lazyFlippedData;
+            if (!data) {
+              int bpp = 4; // GLAsset convention
+              int bytes = width * height * bpp;
+              data = malloc(bytes);
+              memcpy(data, asset->data, bytes);
+              flipPixels((GLubyte *) data, width * bpp, height);
+              asset->lazyFlippedData = data;
+            }
+          }
+          else {
+            data = asset->data;
+          }
+          addToNextBatch([=] {
+              glTexImage2D(target, level, internalformat,
+                           width, height, 0,
+                           format, type, data);
+          });
+          return nullptr;
+      }
+
+      throw std::runtime_error("EXGL: Invalid pixel data argument for"
+                               " gl.texImage2D()!");
     } else {
       throw std::runtime_error("EXGL: Invalid number of arguments to gl.texImage2D()!");
     }

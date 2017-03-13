@@ -15,5 +15,6 @@ APP_LDFLAGS := -Wl,--build-id
 APP_LDFLAGS += -llog
 APP_LDFLAGS += -lGLESv2
 APP_LDFLAGS += -pthread
+APP_LDFLAGS += -ljnigraphics
 
 NDK_TOOLCHAIN_VERSION := 4.8

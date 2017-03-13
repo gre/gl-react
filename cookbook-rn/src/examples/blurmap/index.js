@@ -53,7 +53,7 @@ export default class Example extends Component {
     return (
       <Surface style={{ width, height: width*284/600 }}>
         <BlurV map={map} passes={passes} factor={factor}>
-          {require("../../NjbLHx2.jpg")}
+          {{ uri: "https://i.imgur.com/NjbLHx2.jpg" }}
         </BlurV>
       </Surface>
     );

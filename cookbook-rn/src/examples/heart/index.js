@@ -65,6 +65,6 @@ export class InteractiveHeart extends Component {
 export default ({ width }) =>
   <InteractiveHeart
     color={[ 1, 0, 0 ]}
-    image={require("../../GQo1KWq.jpg")}
+    image={{ uri: "https://i.imgur.com/GQo1KWq.jpg" }}
     width={width}
   />;

@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3472BD151E7554E800B8731B /* GLImages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3472BD131E7554E800B8731B /* GLImages.cpp */; };
 		3481A20E1E604A6200E19C6F /* EXGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3481A20A1E604A6200E19C6F /* EXGLView.m */; };
 		3481A20F1E604A6200E19C6F /* EXGLViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3481A20C1E604A6200E19C6F /* EXGLViewManager.m */; };
 		3481A2191E604A6A00E19C6F /* EXGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3481A2101E604A6A00E19C6F /* EXGL.cpp */; };
 		3481A21A1E604A6A00E19C6F /* EXiOSUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3481A2131E604A6A00E19C6F /* EXiOSUtils.mm */; };
 		3481A21B1E604A6A00E19C6F /* EXJSConvertTypedArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 3481A2141E604A6A00E19C6F /* EXJSConvertTypedArray.c */; };
 		3481A21C1E604A6A00E19C6F /* EXJSUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 3481A2161E604A6A00E19C6F /* EXJSUtils.c */; };
+		348788441E7340A3009CEAEA /* GLImagesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 348788431E7340A3009CEAEA /* GLImagesModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3472BD131E7554E800B8731B /* GLImages.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLImages.cpp; path = ../cpp/GLImages.cpp; sourceTree = "<group>"; };
+		3472BD141E7554E800B8731B /* GLImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLImages.h; path = ../cpp/GLImages.h; sourceTree = "<group>"; };
 		3481A2091E604A6200E19C6F /* EXGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXGLView.h; sourceTree = "<group>"; };
 		3481A20A1E604A6200E19C6F /* EXGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXGLView.m; sourceTree = "<group>"; };
 		3481A20B1E604A6200E19C6F /* EXGLViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXGLViewManager.h; sourceTree = "<group>"; };
@@ -41,7 +45,8 @@
 		3481A2151E604A6A00E19C6F /* EXJSConvertTypedArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXJSConvertTypedArray.h; path = ../cpp/EXJSConvertTypedArray.h; sourceTree = "<group>"; };
 		3481A2161E604A6A00E19C6F /* EXJSUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = EXJSUtils.c; path = ../cpp/EXJSUtils.c; sourceTree = "<group>"; };
 		3481A2171E604A6A00E19C6F /* EXJSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EXJSUtils.h; path = ../cpp/EXJSUtils.h; sourceTree = "<group>"; };
-		3481A2181E604A6A00E19C6F /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stb_image.h; path = ../cpp/stb_image.h; sourceTree = "<group>"; };
+		348788421E7340A3009CEAEA /* GLImagesModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLImagesModule.h; sourceTree = "<group>"; };
+		348788431E7340A3009CEAEA /* GLImagesModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLImagesModule.m; sourceTree = "<group>"; };
 		4107012F1ACB723B00C6AA39 /* libRNGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,6 +64,8 @@
 		410701241ACB719800C6AA39 = {
 			isa = PBXGroup;
 			children = (
+				3472BD131E7554E800B8731B /* GLImages.cpp */,
+				3472BD141E7554E800B8731B /* GLImages.h */,
 				3481A2101E604A6A00E19C6F /* EXGL.cpp */,
 				3481A2111E604A6A00E19C6F /* EXGL.h */,
 				3481A2121E604A6A00E19C6F /* EXiOSUtils.h */,
@@ -67,12 +74,13 @@
 				3481A2151E604A6A00E19C6F /* EXJSConvertTypedArray.h */,
 				3481A2161E604A6A00E19C6F /* EXJSUtils.c */,
 				3481A2171E604A6A00E19C6F /* EXJSUtils.h */,
-				3481A2181E604A6A00E19C6F /* stb_image.h */,
 				3481A2091E604A6200E19C6F /* EXGLView.h */,
 				3481A20A1E604A6200E19C6F /* EXGLView.m */,
 				3481A20B1E604A6200E19C6F /* EXGLViewManager.h */,
 				3481A20C1E604A6200E19C6F /* EXGLViewManager.m */,
 				3481A20D1E604A6200E19C6F /* EXUnversioned.h */,
+				348788421E7340A3009CEAEA /* GLImagesModule.h */,
+				348788431E7340A3009CEAEA /* GLImagesModule.m */,
 				410701301ACB723B00C6AA39 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -140,7 +148,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				348788441E7340A3009CEAEA /* GLImagesModule.m in Sources */,
 				3481A2191E604A6A00E19C6F /* EXGL.cpp in Sources */,
+				3472BD151E7554E800B8731B /* GLImages.cpp in Sources */,
 				3481A20F1E604A6200E19C6F /* EXGLViewManager.m in Sources */,
 				3481A21B1E604A6A00E19C6F /* EXJSConvertTypedArray.c in Sources */,
 				3481A21A1E604A6A00E19C6F /* EXiOSUtils.mm in Sources */,
