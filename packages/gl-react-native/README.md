@@ -60,13 +60,23 @@ protected List<ReactPackage> getPackages() {
 ### RN ImageLoader <> GL Texture
 
 **JS side**:
+
 - `RN.NativeModules.GLImagesModule.load(imageSource: ImageSource, glAssetId: number, onSuccess: ()=>{})` allows to associate an imageSource with a given asset id.
 - this glAssetId can then be given to `gl.texImage2D()`: it accepts one more pixel data format: a `{ glAssetId }` object (I’ve put that in the 6 args version, because we can’t know the width/height on the JS side – which is consistent to WebGL’s api, e.g. when you give a `HTMLImageElement`)
-**iOS side**: the `GLImagesModule.load` implementation uses `brdge.imageLoader` to load the image by ImageSource (which reuses all the React Native networking and image loading logic). It extracts out the bytes from it and call the C++ method `GLImagesSet(glAssetId, data, width, height);`.
-**Android side**: same principle, there is one extra step that involves some JNI code that manage to extract the pixels out of a `Bitmap` object.
-**C++ side**: `GLImages.c` implements a registry of images, which caches the pixel arrays in a map (`glAssetId -> {data,width,height}`). It also provides  `GLImagesGet(glAssetId)` function that the EXGL code uses in `texImage2D` implementation to resolve pixels by glAssetId at the end. There is also a cache on the “flipped pixels” so these are never computed again ever (experimental idea).
 
-**(FIXME) Remaining things to be covered:**
+**iOS side**:
+
+the `GLImagesModule.load` implementation uses `brdge.imageLoader` to load the image by ImageSource (which reuses all the React Native networking and image loading logic). It extracts out the bytes from it and call the C++ method `GLImagesSet(glAssetId, data, width, height);`.
+
+**Android side**:
+
+same principle, there is one extra step that involves some JNI code that manage to extract the pixels out of a `Bitmap` object.
+
+**C++ side**:
+
+`GLImages.c` implements a registry of images, which caches the pixel arrays in a map (`glAssetId -> {data,width,height}`). It also provides  `GLImagesGet(glAssetId)` function that the EXGL code uses in `texImage2D` implementation to resolve pixels by glAssetId at the end. There is also a cache on the “flipped pixels” so these are never computed again ever (experimental idea).
+
+#### (FIXME) Remaining things to be covered:
 
 - implement unload mechanism. because current approach leaks. (pixels data never gets unloaded, it can crashes if you switch a lot of images)
 - onError case is not covered, I'm not sure if there is anything to be done actually. At least we can tell the JS side that it fails to load in the GLImages logic but there is not much to do from that information.
