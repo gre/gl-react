@@ -4,6 +4,15 @@ const THREE = require("three");
 global.THREE = THREE;
 require("three/examples/js/renderers/Projector");
 
+const colors = [
+  0xA2394A,
+  0xD30324,
+  0xF5677D,
+  0xAD001B,
+  0xF24560,
+  0xEE2242,
+];
+
 // inspired from https://github.com/mrdoob/three.js/blob/master/examples/canvas_geometry_panorama_fisheye.html
 
 export default (gl: WebGLRenderingContext, initialProps: *) => {
@@ -25,8 +34,8 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 1);
 
-  var camera, scene, requestId;
-  var isUserInteracting = false,
+  let camera, scene, requestId;
+  let isUserInteracting = false,
     downAtPosition,
     downAtLon,
     downAtLat,
@@ -38,11 +47,11 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
   init();
   animate();
   function init() {
-    var mesh;
+    let mesh;
     camera = new THREE.PerspectiveCamera( 75, width / height, 1, 1100 );
     camera.fov = initialProps.fov;
     scene = new THREE.Scene();
-    var materials = [
+    let materials = [
       loadTexture(require("./skybox/px.jpg")), // right
       loadTexture(require("./skybox/nx.jpg")), // left
       loadTexture(require("./skybox/py.jpg")), // top
@@ -53,16 +62,32 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     mesh = new THREE.Mesh( new THREE.BoxGeometry( 300, 300, 300, 7, 7, 7 ), new THREE.MultiMaterial( materials ) );
     mesh.scale.x = - 1;
     scene.add( mesh );
-    for ( var i = 0, l = mesh.geometry.vertices.length; i < l; i ++ ) {
-      var vertex = mesh.geometry.vertices[ i ];
+
+    // Cube
+    let cube;
+    let geometry = new THREE.BoxGeometry( 200, 200, 200 );
+    for (let i = 0; i < geometry.faces.length; i += 2 ) {
+      let hex = colors[Math.floor(i / 2)];
+      geometry.faces[ i ].color.setHex( hex );
+      geometry.faces[ i + 1 ].color.setHex( hex );
+    }
+
+    let material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
+
+    cube = new THREE.Mesh( geometry, material );
+    cube.position.y = 0;
+    scene.add( cube );
+
+    for (let i = 0, l = mesh.geometry.vertices.length; i < l; i ++ ) {
+      let vertex = mesh.geometry.vertices[ i ];
       vertex.normalize();
       vertex.multiplyScalar( 550 );
     }
   }
   function loadTexture (src) {
-    var texture = new THREE.Texture();
-    var material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
-    var image = new Image();
+    let texture = new THREE.Texture();
+    let material = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 } );
+    let image = new Image();
     image.onload = function () {
       texture.image = this;
       texture.needsUpdate = true;
