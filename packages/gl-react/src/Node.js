@@ -750,7 +750,7 @@ export default class Node extends Component {
         providedUniforms.push(k);
       }
     }
-    const textureUnits: WeakMap<WebGLTexture, number> = new WeakMap();
+    const textureUnits: Map<WebGLTexture, number> = new Map();
 
     const prepareTexture = (
       initialObj: mixed,
