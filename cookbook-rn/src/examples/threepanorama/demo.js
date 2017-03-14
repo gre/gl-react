@@ -93,7 +93,6 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
 
   return {
     onPropsChange ({ fov, touching, touchPosition }: *) {
-      console.log(fov, "<>", camera.fov);
       if (fov !== camera.fov) {
         camera.fov = fov;
         camera.updateProjectionMatrix();
