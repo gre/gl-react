@@ -18,7 +18,8 @@
     "react": "~15.4.0",
     "react-motion": "^0.4.7",
     "react-native": "0.41.2",
-    "seedrandom": "github:gre/seedrandom#released"
+    "seedrandom": "github:gre/seedrandom#released",
+    "three": "^0.84.0"
   },
   "devDependencies": {
     "babel-preset-react-native": "1.9.1"

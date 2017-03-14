@@ -8,6 +8,7 @@
 - `demodesertcrt` example breaks too.
 - Android: `paint` example does not work as expected. when you tap, the whole surface get colored! some issue with `discard;` ?! Same happen to the `pixeleditor`, everything gets paint, like if `discard` was not working?
 - Android: `animated` renders black on first touch. (touch event issue in that example?)
+- expose a requestGLFrame that will allows the webgl impl to "slow down" the renderer if it can't follow.
 
 # Medium Priority
 

@@ -60,7 +60,7 @@ import the correct implementation,
 
 ```js
 import {Surface} from "gl-react-dom"; // for React DOM
-import {Surface} from "gl-react-exponrnt"; // for React Native via Exponent GLView
+import {Surface} from "gl-react-exponent"; // for React Native via Exponent GLView
 import {Surface} from "gl-react-native"; // for React Native
 import {Surface} from "gl-react-headless"; // for Node.js!
 ```

@@ -100,3 +100,6 @@ export const demodesertcrt={ Example: demodesertcrt_E, ...demodesertcrt_m };
 import ibex_E from './ibex';
 import * as ibex_m from './ibex/meta';
 export const ibex={ Example: ibex_E, ...ibex_m };
+import threepanorama_E from './threepanorama';
+import * as threepanorama_m from './threepanorama/meta';
+export const threepanorama={ Example: threepanorama_E, ...threepanorama_m };

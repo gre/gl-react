@@ -18,6 +18,8 @@ function imageSourceHash (imageSource: ImageSource): ImageSourceHash {
   return uri;
 }
 
+// TODO: should unload in a smart LRU way
+
 const load = (source: ImageSource): Promise<number> => {
   const hash = imageSourceHash(source);
   let promise = cache.get(hash);
@@ -36,11 +38,6 @@ const load = (source: ImageSource): Promise<number> => {
   return promise;
 };
 
-const unload = (id: number): void => {
-  console.warn("GLImages.unload("+id+") not implemented");
-};
-
 export default {
   load,
-  unload,
 };

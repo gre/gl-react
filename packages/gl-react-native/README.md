@@ -4,9 +4,13 @@
 
 `gl-react-native` is the [React Native](https://facebook.github.io/react-native/) standalone implementation of [gl-react](https://github.com/gre/gl-react), library to write and compose WebGL shaders. If you are using Exponent, it is recommended to use `gl-react-exponent` instead.
 
-This implementation is a standalone fork of Exponent GLView (MIT License) available on
+> This implementation is a standalone fork of Exponent GLView (MIT License) available on
 https://github.com/exponent/exponent and https://github.com/exponent/exponent-sdk.
 Huge kudos to Exponent team and especially [@nikki93](https://github.com/nikki93) for implementing it.
+
+## Vanilla WebGL
+
+You can also use this library as way to do vanilla WebGL in React Native. For that, the library will expose `EXGLView` and `Image` (polyfill of browser's `Image`). You can also directly import them from `gl-react-native/lib/Image` and `gl-react-native/lib/EXGLView` (in such case, you probably won't need dependency to `gl-react`).
 
 ## Links
 
