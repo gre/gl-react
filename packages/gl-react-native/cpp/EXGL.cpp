@@ -1338,7 +1338,7 @@ private:
   }
 
 
-  // Exponent extensions
+  // Expo extensions
   // -------------------
 
   _WRAP_METHOD(endFrameEXP, 0) {
@@ -1519,7 +1519,7 @@ private:
     _INSTALL_METHOD(getSupportedExtensions);
     _INSTALL_METHOD(getExtension);
 
-    // Exponent extensions
+    // Expo extensions
     _INSTALL_METHOD(endFrameEXP);
 
 #undef _INSTALL_METHOD

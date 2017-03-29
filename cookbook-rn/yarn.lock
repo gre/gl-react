@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@exponent/ex-navigation@^2.7.1":
+"@expo/ex-navigation@^2.7.1":
   version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@exponent/ex-navigation/-/ex-navigation-2.9.1.tgz#ccdff2abb7b0c291e4ca011da16bb9351b75a7c8"
+  resolved "https://registry.yarnpkg.com/@expo/ex-navigation/-/ex-navigation-2.9.1.tgz#ccdff2abb7b0c291e4ca011da16bb9351b75a7c8"
   dependencies:
-    "@exponent/react-native-touchable-native-feedback-safe" "^1.1.0"
+    "@expo/react-native-touchable-native-feedback-safe" "^1.1.0"
     clamp "^1.0.1"
     core-decorators "^0.12.2"
     fbemitter "^2.0.2"
@@ -29,9 +29,9 @@
     uuid-js "^0.7.5"
     warning "^2.1.0"
 
-"@exponent/react-native-touchable-native-feedback-safe@^1.1.0":
+"@expo/react-native-touchable-native-feedback-safe@^1.1.0":
   version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@exponent/react-native-touchable-native-feedback-safe/-/react-native-touchable-native-feedback-safe-1.1.1.tgz#410aaa2a2a777a614127772b9ecba69fbe04cabd"
+  resolved "https://registry.yarnpkg.com/@expo/react-native-touchable-native-feedback-safe/-/react-native-touchable-native-feedback-safe-1.1.1.tgz#410aaa2a2a777a614127772b9ecba69fbe04cabd"
 
 absolute-path@^0.0.0:
   version "0.0.0"
@@ -666,9 +666,9 @@ babel-preset-es2015-node@^6.1.1:
     babel-plugin-transform-es2015-unicode-regex "6.x"
     semver "5.x"
 
-babel-preset-exponent@1.0.0:
+babel-preset-expo@1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-exponent/-/babel-preset-exponent-1.0.0.tgz#07045ee1a6483952367c267f2acac74749257d7f"
+  resolved "https://registry.yarnpkg.com/babel-preset-expo/-/babel-preset-expo-1.0.0.tgz#07045ee1a6483952367c267f2acac74749257d7f"
   dependencies:
     babel-plugin-module-resolver "^2.3.0"
     babel-plugin-transform-decorators-legacy "^1.3.4"
@@ -1349,26 +1349,26 @@ exit-hook@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/exit-hook/-/exit-hook-1.1.1.tgz#f05ca233b48c05d54fff07765df8507e95c02ff8"
 
-exponent@^11.0.0-rc1:
+expo@^11.0.0-rc1:
   version "11.0.2"
-  resolved "https://registry.yarnpkg.com/exponent/-/exponent-11.0.2.tgz#10d65c2433e8f6b76821a9eb9dad0760992d6cd8"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-11.0.2.tgz#10d65c2433e8f6b76821a9eb9dad0760992d6cd8"
   dependencies:
-    babel-preset-exponent "1.0.0"
+    babel-preset-expo "1.0.0"
     fbemitter "^2.1.1"
     md5-file "^3.1.1"
     react-native-maps "git+https://github.com/exponentjs/react-native-maps#12853f0"
     react-native-svg "git+https://github.com/exponentjs/react-native-svg#afadb19"
     uuid-js "^0.7.5"
 
-exponent@^13.0.0:
+expo@^13.0.0:
   version "13.1.0"
-  resolved "https://registry.yarnpkg.com/exponent/-/exponent-13.1.0.tgz#c18edb9e19d222fba82f7166c3e44f3a78894421"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-13.1.0.tgz#c18edb9e19d222fba82f7166c3e44f3a78894421"
   dependencies:
-    babel-preset-exponent "1.0.0"
+    babel-preset-expo "1.0.0"
     fbemitter "^2.1.1"
     md5-file "^3.1.1"
-    react-native-maps "git+https://github.com/exponent/react-native-maps#v0.12.2-exp.1"
-    react-native-svg "git+https://github.com/exponent/react-native-svg#4.4.1"
+    react-native-maps "git+https://github.com/expo/react-native-maps#v0.12.2-exp.1"
+    react-native-svg "git+https://github.com/expo/react-native-svg#4.4.1"
     uuid-js "^0.7.5"
 
 express-session@~1.11.3:
@@ -1550,7 +1550,7 @@ gl-react-native@^3.0.0-alpha1:
   version "3.0.0-alpha1"
   resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.0.0-alpha1.tgz#15788fd75a4a63e9c8f276b1920b356c93679219"
   dependencies:
-    exponent "^11.0.0-rc1"
+    expo "^11.0.0-rc1"
     invariant "^2.2.1"
 
 gl-react@^3.0.0-alpha.3:
@@ -2557,17 +2557,17 @@ react-native-drawer-layout@^1.0.0:
     autobind-decorator "^1.3.2"
     react-native-dismiss-keyboard "1.0.0"
 
-"react-native-maps@git+https://github.com/exponent/react-native-maps#v0.12.2-exp.1":
+"react-native-maps@git+https://github.com/expo/react-native-maps#v0.12.2-exp.1":
   version "0.12.2"
-  resolved "git+https://github.com/exponent/react-native-maps#268871ed909b02267671fb40576f50963f09bd7c"
+  resolved "git+https://github.com/expo/react-native-maps#268871ed909b02267671fb40576f50963f09bd7c"
 
 "react-native-maps@git+https://github.com/exponentjs/react-native-maps#12853f0":
   version "0.11.0"
   resolved "git+https://github.com/exponentjs/react-native-maps#12853f0"
 
-"react-native-svg@git+https://github.com/exponent/react-native-svg#4.4.1":
+"react-native-svg@git+https://github.com/expo/react-native-svg#4.4.1":
   version "4.4.1"
-  resolved "git+https://github.com/exponent/react-native-svg#e26bec094b87ada3fa2f2557210226d06f1aec5e"
+  resolved "git+https://github.com/expo/react-native-svg#e26bec094b87ada3fa2f2557210226d06f1aec5e"
   dependencies:
     color "^0.11.1"
     lodash "^4.0.0"

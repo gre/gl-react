@@ -7,7 +7,7 @@ gl-react API documentation
 This universal library must be coupled with one of the concrete implementations:
 
 - [`gl-react-dom`](https://github.com/gre/gl-react/tree/master/packages/gl-react-dom/) for React DOM (web using WebGL).
-- [`gl-react-exponent`](https://github.com/gre/gl-react/tree/master/packages/gl-react-exponent/) for React Native via Exponent WebGL implementation.
+- [`gl-react-expo`](https://github.com/gre/gl-react/tree/master/packages/gl-react-expo/) for React Native via Expo WebGL implementation.
 - [`gl-react-native`](https://github.com/gre/gl-react/tree/master/packages/gl-react-native/), for React Native (standalone library, iOS/Android via OpenGL).
 - [`gl-react-headless`](https://github.com/gre/gl-react/tree/master/packages/gl-react-headless/) for Node.js (used for testing for now)
 

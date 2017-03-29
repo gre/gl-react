@@ -15,7 +15,7 @@ This universal library must be coupled with one of the concrete implementations:
 
 - [`gl-react-dom`](packages/gl-react-dom/) for React DOM (web using WebGL).
 - **in progress** [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android via OpenGL).
-- **in progress** [`gl-react-exponent`](packages/gl-react-exponent/) for React Native (iOS/Android via OpenGL – Exponent implementation).
+- **in progress** [`gl-react-expo`](packages/gl-react-expo/) for React Native (iOS/Android via OpenGL – Expo implementation).
 - [`gl-react-headless`](packages/gl-react-headless/) for Node.js (used for testing for now)
 
 ## Links
@@ -60,7 +60,7 @@ import the correct implementation,
 
 ```js
 import {Surface} from "gl-react-dom"; // for React DOM
-import {Surface} from "gl-react-exponent"; // for React Native via Exponent GLView
+import {Surface} from "gl-react-expo"; // for React Native via Expo GLView
 import {Surface} from "gl-react-native"; // for React Native
 import {Surface} from "gl-react-headless"; // for Node.js!
 ```

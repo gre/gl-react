@@ -3,7 +3,7 @@ set -e
 cd `dirname $0`/..
 
 packages=`ls packages`
-projs="cookbook cookbook-rn cookbook-exp tests"
+projs="cookbook cookbook-rn cookbook-expo tests"
 
 for pkg in $packages; do
   echo "Building $pkg..."

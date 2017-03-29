@@ -2,11 +2,11 @@
 <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react-native
 ========
 
-`gl-react-native` is the [React Native](https://facebook.github.io/react-native/) standalone implementation of [gl-react](https://github.com/gre/gl-react), library to write and compose WebGL shaders. If you are using Exponent, it is recommended to use `gl-react-exponent` instead.
+`gl-react-native` is the [React Native](https://facebook.github.io/react-native/) standalone implementation of [gl-react](https://github.com/gre/gl-react), library to write and compose WebGL shaders. If you are using Expo, it is recommended to use `gl-react-expo` instead.
 
-> This implementation is a standalone fork of Exponent GLView (MIT License) available on
-https://github.com/exponent/exponent and https://github.com/exponent/exponent-sdk.
-Huge kudos to Exponent team and especially [@nikki93](https://github.com/nikki93) for implementing it.
+> This implementation is a standalone fork of Expo GLView (MIT License) available on
+https://github.com/expo/expo and https://github.com/expo/expo-sdk.
+Huge kudos to Expo team and especially [@nikki93](https://github.com/nikki93) for implementing it.
 
 ## Vanilla WebGL
 

@@ -7,9 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@exponent/ex-navigation": "^2.7.1",
+    "@expo/ex-navigation": "^2.7.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
-    "exponent": "^13.0.0",
     "gl-react": "next",
     "gl-react-native": "next",
     "glsl-transitions": "^2017.1.16",

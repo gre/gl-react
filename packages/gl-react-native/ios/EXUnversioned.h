@@ -1,5 +1,5 @@
 /**
- * Fork of https://github.com/exponent/exponent (MIT License)
+ * Fork of https://github.com/expo/expo (MIT License)
  */
 // Copyright 2015-present 650 Industries. All rights reserved.
 

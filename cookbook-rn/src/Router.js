@@ -1,7 +1,7 @@
 //@flow
 import {
   createRouter,
-} from "@exponent/ex-navigation";
+} from "@expo/ex-navigation";
 import * as examples from "./examples";
 import Home from "./Home";
 import About from "./About";
