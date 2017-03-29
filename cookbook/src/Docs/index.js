@@ -12,7 +12,13 @@ import remarkReactRenderer from "remark-react";
 import API from "../../API.json";
 import "./style.css";
 import Code from "../Code";
-import DocIntroMD from "raw!../../DocIntro.md";
+import DocIntroMDBase64 from "../../DocIntro.md";
+
+const mdheader = "data:text/x-markdown;base64,";
+const DocIntroMD =
+  DocIntroMDBase64.indexOf(mdheader)===0
+  ? atob(DocIntroMDBase64.slice(mdheader.length))
+  : "";
 
 const paths = {
   "Component": "https://facebook.github.io/react/docs/react-component.html",
@@ -479,6 +485,12 @@ class DocSection extends PureComponent {
   }
 }
 
+class DocIntro extends Component {
+  render() {
+    return MD.processSync(DocIntroMD).contents;
+  }
+}
+
 class DocBody extends Component {
   render() {
     return (
@@ -492,13 +504,6 @@ class DocBody extends Component {
           : null)}
       </div>
     );
-  }
-}
-
-
-class DocIntro extends Component {
-  render() {
-    return MD.process(DocIntroMD).contents;
   }
 }
 

@@ -2,6 +2,10 @@
 set -e
 cd `dirname $0`/..
 
+cd coobook
+npm run generate-examples
+cd -
+
 packages=`ls packages`
 projs="cookbook cookbook-rn cookbook-expo tests"
 

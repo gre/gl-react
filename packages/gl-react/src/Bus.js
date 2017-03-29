@@ -27,7 +27,7 @@ type Props = {|
  *
  * **Usage Example**
  *
- * [![](https://github.com/gre/gl-react/raw/master/docs/examples/blur.gif)](/blurmapmouse)
+ * [![](https://github.com/ProjectSeptemberInc/gl-react/raw/master/docs/examples/blur.gif)](/blurmapmouse)
  *
  * @example
  *
