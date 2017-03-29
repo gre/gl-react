@@ -5,7 +5,7 @@ cd `dirname $0`/..
 for pkg in packages/*/; do
   echo "Publishing $pkg..."
   cd $pkg;
-  npm publish
+  npm publish --tag=next
   cd -;
 done;
 

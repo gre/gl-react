@@ -13,8 +13,8 @@
   "dependencies": {
     "animated": "^0.1.3",
     "github-slugger": "^1.1.1",
-    "gl-react": "file:../packages/gl-react",
-    "gl-react-dom": "file:../packages/gl-react-dom",
+    "gl-react": "next",
+    "gl-react-dom": "next",
     "gl-texture2d": "^2.0.12",
     "glsl-transitions": "^2016.10.24",
     "hoist-non-react-statics": "^1.2.0",
