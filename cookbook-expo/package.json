@@ -9,7 +9,7 @@
     "@expo/ex-navigation": "^2.9.4",
     "expo": "^15.0.0",
     "gl-react": "next",
-    "gl-react-expo": "../packages/gl-react-expo",
+    "gl-react-expo": "next",
     "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
     "raf": "^3.3.0",
