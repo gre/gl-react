@@ -2,7 +2,7 @@
 set -e
 cd `dirname $0`/..
 
-cd coobook
+cd cookbook
 npm run generate-examples
 cd -
 
