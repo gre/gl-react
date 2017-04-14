@@ -29,6 +29,14 @@ This universal library must be coupled with one of the concrete implementations:
 - ['the books of shaders'](https://thebookofshaders.com)
 - [shader-school workshop](https://www.npmjs.com/package/shader-school)
 
+## They use gl-react 🙂
+
+<!-- alphabetic order -->
+
+- [ProjectSeptember](https://projectseptember.com/)
+- [WallGen](https://szymonkaliski.github.io/wallgen/)
+- *... your project ?*
+
 ## Gist
 
 ```js
@@ -114,3 +122,4 @@ atom-text-editor::shadow .line .ttl-grammar:first-child:last-child {
   display: block; /* force background to take full width only if ttl-grammar is alone in the line. */
 }
 ```
+
