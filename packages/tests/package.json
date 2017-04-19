@@ -12,15 +12,16 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
     "baboon-image": "github:gre/baboon-image",
-    "ndpack-image": "github:gre/ndpack-image",
     "flow-copy-source": "^1.1.0",
-    "gl-react": "3.0.0-alpha.6",
-    "gl-react-headless": "3.0.0-alpha.6",
+    "gl-react": "^3.0.0-alpha.7",
+    "gl-react-headless": "^3.0.0-alpha.7",
     "gl-texture2d": "^2.0.12",
     "jest": "^19.0.0",
     "ndarray": "^1.0.18",
+    "ndpack-image": "github:gre/ndpack-image",
     "promise-defer": "^1.0.0",
-    "react-test-renderer": "^15.4.0",
-    "react": "^15.4.0"
-  }
+    "react": "^15.4.0",
+    "react-test-renderer": "^15.4.0"
+  },
+  "version": "3.0.0-alpha.7"
 }

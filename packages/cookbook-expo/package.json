@@ -1,6 +1,6 @@
 {
   "name": "cookbook-expo",
-  "version": "0.0.0",
+  "version": "3.0.0-alpha.7",
   "description": "GL React Native cookbook",
   "author": "Gaëtan Renaudeau",
   "private": true,
@@ -8,8 +8,8 @@
   "dependencies": {
     "@expo/ex-navigation": "^2.9.4",
     "expo": "^15.0.0",
-    "gl-react": "3.0.0-alpha.6",
-    "gl-react-expo": "3.0.0-alpha.6",
+    "gl-react": "^3.0.0-alpha.7",
+    "gl-react-expo": "^3.0.0-alpha.7",
     "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
     "raf": "^3.3.0",
