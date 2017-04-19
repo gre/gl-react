@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
+    "watch": "lerna run watch --stream --no-sort",
     "flow": "cd packages/gl-react && flow --quiet",
     "lint": "eslint packages/gl-react*/src/",
     "test": "cd packages/tests && yarn test",
