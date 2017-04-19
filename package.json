@@ -24,7 +24,7 @@
     "babel-preset-stage-1": "^6.13.0",
     "browserify": "^14.3.0",
     "browserify-shim": "^3.8.12",
-    "documentation": "4.0.0-beta.19",
+    "documentation": "4.0.0-beta.18",
     "eslint": "^3.13.1",
     "eslint-plugin-flowtype": "^2.30.0",
     "eslint-plugin-react": "^6.9.0",

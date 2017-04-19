@@ -239,7 +239,7 @@ function signature (section) {
   } else if (section.kind !== "function") {
     return section.name;
   }
-  if (section.returns) {
+  if (section.returns && section.returns.length>0) {
     returns = [": ", formatType(section.returns[0].type)];
   }
   return [prefix + section.name, parameters(section), returns];

@@ -858,11 +858,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L152-L556",
-        "path": "packages/gl-react/src/createSurface.js"
-      }
+      "path": "packages/gl-react/src/createSurface.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L152-L556"
     },
+    "kind": "class",
+    "name": "Surface",
     "augments": [
       {
         "title": "extends",
@@ -872,21 +872,8 @@
         "name": "Component"
       }
     ],
-    "examples": [
-      {
-        "description": "<Surface width={300} height={200}>\n   <Node shader={shaders.helloGL} />\n </Surface>"
-      },
-      {
-        "description": "<Surface width={200} height={100}>\n   <HelloGL />\n </Surface>"
-      },
-      {
-        "description": "<Surface width={200} height={100}>\n   <Blur factor={2}>\n     <Negative>\n       https://i.imgur.com/wxqlQkh.jpg\n     </Negative>\n   </Blur>\n </Surface>"
-      }
-    ],
-    "params": [],
     "properties": [
       {
-        "title": "property",
         "name": "children",
         "lineNumber": 17,
         "description": {
@@ -1055,7 +1042,6 @@
         }
       },
       {
-        "title": "property",
         "name": "width",
         "lineNumber": 18,
         "description": {
@@ -1188,7 +1174,6 @@
         }
       },
       {
-        "title": "property",
         "name": "height",
         "lineNumber": 19,
         "description": {
@@ -1321,7 +1306,6 @@
         }
       },
       {
-        "title": "property",
         "name": "style",
         "lineNumber": 20,
         "description": {
@@ -1436,7 +1420,6 @@
         }
       },
       {
-        "title": "property",
         "name": "preload",
         "lineNumber": 21,
         "description": {
@@ -1509,7 +1492,6 @@
         }
       },
       {
-        "title": "property",
         "name": "onLoad",
         "lineNumber": 22,
         "description": {
@@ -1573,7 +1555,6 @@
         }
       },
       {
-        "title": "property",
         "name": "onLoadError",
         "lineNumber": 23,
         "description": {
@@ -1649,7 +1630,6 @@
         }
       },
       {
-        "title": "property",
         "name": "onContextLost",
         "lineNumber": 24,
         "description": {
@@ -1713,7 +1693,6 @@
         }
       },
       {
-        "title": "property",
         "name": "onContextRestored",
         "lineNumber": 25,
         "description": {
@@ -1777,7 +1756,6 @@
         }
       },
       {
-        "title": "property",
         "name": "visitor",
         "lineNumber": 26,
         "description": {
@@ -1841,7 +1819,6 @@
         }
       },
       {
-        "title": "property",
         "name": "webglContextAttributes",
         "lineNumber": 28,
         "description": {
@@ -1940,7 +1917,6 @@
         }
       },
       {
-        "title": "property",
         "name": "pixelRatio",
         "lineNumber": 29,
         "description": {
@@ -2073,15 +2049,18 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "kind": "class",
-    "name": "Surface",
+    "examples": [
+      {
+        "description": "<Surface width={300} height={200}>\n   <Node shader={shaders.helloGL} />\n </Surface>"
+      },
+      {
+        "description": "<Surface width={200} height={100}>\n   <HelloGL />\n </Surface>"
+      },
+      {
+        "description": "<Surface width={200} height={100}>\n   <Blur factor={2}>\n     <Negative>\n       https://i.imgur.com/wxqlQkh.jpg\n     </Negative>\n   </Blur>\n </Surface>"
+      }
+    ],
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [
         {
           "description": {
@@ -2227,16 +2206,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L274-L277",
-              "path": "packages/gl-react/src/createSurface.js"
-            }
+            "path": "packages/gl-react/src/createSurface.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L274-L277"
           },
-          "augments": [],
-          "examples": [],
           "params": [
             {
-              "title": "param",
               "name": "mimeType",
               "lineNumber": 2,
               "description": {
@@ -2297,7 +2271,6 @@
               }
             },
             {
-              "title": "param",
               "name": "quality",
               "lineNumber": 3,
               "description": {
@@ -2369,29 +2342,22 @@
               }
             }
           ],
-          "properties": [],
+          "memberof": "Surface",
+          "scope": "instance",
+          "name": "captureAsDataURL",
+          "kind": "function",
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "NameExpression",
                 "name": "string"
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Surface",
-          "scope": "instance",
-          "name": "captureAsDataURL",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -2550,16 +2516,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L286-L289",
-              "path": "packages/gl-react/src/createSurface.js"
-            }
+            "path": "packages/gl-react/src/createSurface.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L286-L289"
           },
-          "augments": [],
-          "examples": [],
           "params": [
             {
-              "title": "param",
               "name": "mimeType",
               "lineNumber": 2,
               "description": {
@@ -2620,7 +2581,6 @@
               }
             },
             {
-              "title": "param",
               "name": "quality",
               "lineNumber": 3,
               "description": {
@@ -2692,10 +2652,12 @@
               }
             }
           ],
-          "properties": [],
+          "memberof": "Surface",
+          "scope": "instance",
+          "name": "captureAsBlob",
+          "kind": "function",
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "TypeApplication",
                 "expression": {
@@ -2711,19 +2673,10 @@
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Surface",
-          "scope": "instance",
-          "name": "captureAsBlob",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -2893,13 +2846,13 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L296-L299",
-              "path": "packages/gl-react/src/createSurface.js"
-            }
+            "path": "packages/gl-react/src/createSurface.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L296-L299"
           },
-          "augments": [],
-          "examples": [],
+          "memberof": "Surface",
+          "scope": "instance",
+          "name": "capture",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -2938,29 +2891,18 @@
               }
             }
           ],
-          "properties": [],
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "NameExpression",
                 "name": "NDArray"
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Surface",
-          "scope": "instance",
-          "name": "capture",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -3068,29 +3010,17 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L307-L309",
-              "path": "packages/gl-react/src/createSurface.js"
-            }
+            "path": "packages/gl-react/src/createSurface.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L307-L309"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "memberof": "Surface",
           "scope": "instance",
           "kind": "function",
           "name": "redraw",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -3198,29 +3128,17 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/createSurface.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/createSurface.js#L317-L319",
-              "path": "packages/gl-react/src/createSurface.js"
-            }
+            "path": "packages/gl-react/src/createSurface.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/createSurface.js#L317-L319"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "memberof": "Surface",
           "scope": "instance",
           "kind": "function",
           "name": "flush",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -3236,8 +3154,8 @@
           "namespace": "Surface#flush"
         }
       ],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -3511,26 +3429,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L353-L1010",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L353-L1010"
     },
-    "augments": [
-      {
-        "title": "augments",
-        "name": "Component"
-      }
-    ],
-    "examples": [
-      {
-        "description": "<Node shader={shaders.helloGL} />"
-      }
-    ],
-    "params": [],
     "properties": [
       {
-        "title": "property",
         "name": "shader",
         "lineNumber": 4,
         "description": {
@@ -3608,7 +3511,6 @@
         }
       },
       {
-        "title": "property",
         "name": "uniforms",
         "lineNumber": 5,
         "description": {
@@ -3672,7 +3574,6 @@
         }
       },
       {
-        "title": "property",
         "name": "uniformsOptions",
         "lineNumber": 6,
         "description": {
@@ -3736,7 +3637,6 @@
         }
       },
       {
-        "title": "property",
         "name": "width",
         "lineNumber": 7,
         "description": {
@@ -3800,7 +3700,6 @@
         }
       },
       {
-        "title": "property",
         "name": "height",
         "lineNumber": 8,
         "description": {
@@ -3864,7 +3763,6 @@
         }
       },
       {
-        "title": "property",
         "name": "sync",
         "lineNumber": 9,
         "description": {
@@ -3928,7 +3826,6 @@
         }
       },
       {
-        "title": "property",
         "name": "backbuffering",
         "lineNumber": 10,
         "description": {
@@ -4026,7 +3923,6 @@
         }
       },
       {
-        "title": "property",
         "name": "blendFunc",
         "lineNumber": 11,
         "description": {
@@ -4090,7 +3986,6 @@
         }
       },
       {
-        "title": "property",
         "name": "clear",
         "lineNumber": 12,
         "description": {
@@ -4154,7 +4049,6 @@
         }
       },
       {
-        "title": "property",
         "name": "children",
         "lineNumber": 13,
         "description": {
@@ -4218,15 +4112,20 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
+    "examples": [
+      {
+        "description": "<Node shader={shaders.helloGL} />"
+      }
+    ],
     "name": "Node",
+    "augments": [
+      {
+        "title": "augments",
+        "name": "Component"
+      }
+    ],
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [
         {
           "description": {
@@ -4310,13 +4209,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L513-L531",
-              "path": "packages/gl-react/src/Node.js"
-            }
+            "path": "packages/gl-react/src/Node.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L513-L531"
           },
-          "augments": [],
-          "examples": [],
+          "name": "capture",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -4355,29 +4252,20 @@
               }
             }
           ],
-          "properties": [],
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "NameExpression",
                 "name": "NDArray"
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "capture",
-          "kind": "function",
           "memberof": "Node",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -4475,29 +4363,17 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L538-L543",
-              "path": "packages/gl-react/src/Node.js"
-            }
+            "path": "packages/gl-react/src/Node.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L538-L543"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "kind": "function",
           "name": "redraw",
           "memberof": "Node",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -4595,29 +4471,17 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L550-L552",
-              "path": "packages/gl-react/src/Node.js"
-            }
+            "path": "packages/gl-react/src/Node.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L550-L552"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "kind": "function",
           "name": "flush",
           "memberof": "Node",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -4633,8 +4497,8 @@
           "namespace": "Node#flush"
         }
       ],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -4727,26 +4591,13 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L108-L149",
-        "path": "packages/gl-react/src/Shaders.js"
-      }
+      "path": "packages/gl-react/src/Shaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L108-L149"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "kind": "namespace",
     "name": "Shaders",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
       "static": [
         {
           "description": "",
@@ -4803,20 +4654,12 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L122-L138",
-              "path": "packages/gl-react/src/Shaders.js"
-            }
+            "path": "packages/gl-react/src/Shaders.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L122-L138"
           },
-          "augments": [],
-          "examples": [
-            {
-              "description": "const shaders = Shaders.create({\n   helloGL: {\n     frag: GLSL`...`\n   }\n });\n ...\n <Node shader={shaders.helloGL} />"
-            }
-          ],
+          "memberof": "Shaders",
           "params": [
             {
-              "title": "param",
               "name": "shadersDef",
               "lineNumber": 2,
               "description": {
@@ -4877,7 +4720,6 @@
               }
             }
           ],
-          "properties": [],
           "returns": [
             {
               "description": {
@@ -4932,25 +4774,23 @@
                   }
                 }
               },
-              "title": "returns",
               "type": {
                 "type": "NameExpression",
                 "name": "ShadersSheet"
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Shaders",
+          "examples": [
+            {
+              "description": "const shaders = Shaders.create({\n   helloGL: {\n     frag: GLSL`...`\n   }\n });\n ...\n <Node shader={shaders.helloGL} />"
+            }
+          ],
           "name": "create",
           "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -4964,7 +4804,8 @@
           ],
           "namespace": "Shaderscreate"
         }
-      ]
+      ],
+      "events": []
     },
     "path": [
       {
@@ -5061,22 +4902,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/LinearCopy.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/LinearCopy.js#L14-L24",
-        "path": "packages/gl-react/src/LinearCopy.js"
-      }
+      "path": "packages/gl-react/src/LinearCopy.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/LinearCopy.js#L14-L24"
     },
-    "augments": [
-      {
-        "title": "augments",
-        "name": "Component"
-      }
-    ],
-    "examples": [],
-    "params": [],
     "properties": [
       {
-        "title": "property",
         "name": "children",
         "lineNumber": 2,
         "description": {
@@ -5137,18 +4967,18 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "LinearCopy",
+    "augments": [
+      {
+        "title": "augments",
+        "name": "Component"
+      }
+    ],
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -5245,22 +5075,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/NearestCopy.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/NearestCopy.js#L14-L25",
-        "path": "packages/gl-react/src/NearestCopy.js"
-      }
+      "path": "packages/gl-react/src/NearestCopy.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/NearestCopy.js#L14-L25"
     },
-    "augments": [
-      {
-        "title": "augments",
-        "name": "Component"
-      }
-    ],
-    "examples": [],
-    "params": [],
     "properties": [
       {
-        "title": "property",
         "name": "children",
         "lineNumber": 2,
         "description": {
@@ -5321,18 +5140,18 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "NearestCopy",
+    "augments": [
+      {
+        "title": "augments",
+        "name": "Component"
+      }
+    ],
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -5772,26 +5591,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Bus.js#L44-L201",
-        "path": "packages/gl-react/src/Bus.js"
-      }
+      "path": "packages/gl-react/src/Bus.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Bus.js#L44-L201"
     },
-    "augments": [
-      {
-        "title": "augments",
-        "name": "Component"
-      }
-    ],
-    "examples": [
-      {
-        "description": "<Surface ...>\n  <Bus ref=\"myBus\">\n    //here, glEffects or content like a canvas/video...\n  </Bus>\n  <Node uniforms={{\n    texture: () => this.refs.myBus\n  }} ... />\n</Surface>"
-      }
-    ],
-    "params": [],
     "properties": [
       {
-        "title": "property",
         "name": "children",
         "lineNumber": 7,
         "description": {
@@ -5852,7 +5656,6 @@
         }
       },
       {
-        "title": "property",
         "name": "uniform",
         "lineNumber": 8,
         "description": {
@@ -6066,15 +5869,20 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
+    "examples": [
+      {
+        "description": "<Surface ...>\n  <Bus ref=\"myBus\">\n    //here, glEffects or content like a canvas/video...\n  </Bus>\n  <Node uniforms={{\n    texture: () => this.refs.myBus\n  }} ... />\n</Surface>"
+      }
+    ],
     "name": "Bus",
+    "augments": [
+      {
+        "title": "augments",
+        "name": "Component"
+      }
+    ],
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [
         {
           "description": {
@@ -6156,13 +5964,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Bus.js#L154-L157",
-              "path": "packages/gl-react/src/Bus.js"
-            }
+            "path": "packages/gl-react/src/Bus.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Bus.js#L154-L157"
           },
-          "augments": [],
-          "examples": [],
+          "name": "capture",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -6201,29 +6007,20 @@
               }
             }
           ],
-          "properties": [],
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "NameExpression",
                 "name": "NDArray"
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "capture",
-          "kind": "function",
           "memberof": "Bus",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -6321,29 +6118,17 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Bus.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Bus.js#L169-L171",
-              "path": "packages/gl-react/src/Bus.js"
-            }
+            "path": "packages/gl-react/src/Bus.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Bus.js#L169-L171"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "kind": "function",
           "name": "redraw",
           "memberof": "Bus",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -6359,8 +6144,8 @@
           "namespace": "Bus#redraw"
         }
       ],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -6557,20 +6342,13 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/connectSize.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/connectSize.js#L18-L60",
-        "path": "packages/gl-react/src/connectSize.js"
-      }
+      "path": "packages/gl-react/src/connectSize.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/connectSize.js#L18-L60"
     },
-    "augments": [],
-    "examples": [
-      {
-        "description": "const Foo = ({ width, height }) => <Node uniforms={{ width, height }} />;\n const FooConnected = connectSize(Foo);\n <FooConnected /> // you don't have to provide width, height.\n <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height."
-      }
-    ],
+    "kind": "function",
+    "name": "connectSize",
     "params": [
       {
-        "title": "param",
         "name": "GLComponent",
         "lineNumber": 5,
         "description": {
@@ -6635,9 +6413,7 @@
                 "name": "ReactClass"
               },
               "applications": [
-                {
-                  "type": "AllLiteral"
-                }
+                null
               ]
             },
             {
@@ -6657,9 +6433,7 @@
                   "type": "NameExpression"
                 },
                 "applications": [
-                  {
-                    "type": "AllLiteral"
-                  }
+                  null
                 ]
               }
             }
@@ -6667,7 +6441,6 @@
         }
       }
     ],
-    "properties": [],
     "returns": [
       {
         "description": {
@@ -6760,7 +6533,6 @@
             }
           }
         },
-        "title": "returns",
         "type": {
           "type": "TypeApplication",
           "expression": {
@@ -6775,17 +6547,15 @@
         }
       }
     ],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "kind": "function",
-    "name": "connectSize",
+    "examples": [
+      {
+        "description": "const Foo = ({ width, height }) => <Node uniforms={{ width, height }} />;\n const FooConnected = connectSize(Foo);\n <FooConnected /> // you don't have to provide width, height.\n <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height."
+      }
+    ],
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -6948,59 +6718,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/GLSL.js#L26-L32",
-        "path": "packages/gl-react/src/GLSL.js"
-      }
+      "path": "packages/gl-react/src/GLSL.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/GLSL.js#L26-L32"
     },
-    "augments": [],
-    "examples": [
-      {
-        "description": "GLSL`\nprecision highp float;\nvarying vec2 uv;\nvoid main() {\n  gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);\n}\n`"
-      }
-    ],
-    "params": [
-      {
-        "title": "param",
-        "name": "strings",
-        "lineNumber": 26,
-        "type": {
-          "type": "TypeApplication",
-          "expression": {
-            "type": "NameExpression",
-            "name": "Array"
-          },
-          "applications": [
-            {
-              "type": "NameExpression",
-              "name": "string"
-            }
-          ]
-        }
-      },
-      {
-        "title": "param",
-        "name": "values",
-        "lineNumber": 26,
-        "type": {
-          "type": "RestType",
-          "expression": {
-            "type": "TypeApplication",
-            "expression": {
-              "type": "NameExpression",
-              "name": "Array"
-            },
-            "applications": [
-              {
-                "type": "NameExpression",
-                "name": "string"
-              }
-            ]
-          }
-        }
-      }
-    ],
-    "properties": [],
     "returns": [
       {
         "description": {
@@ -7123,24 +6843,64 @@
             }
           }
         },
-        "title": "returns",
         "type": {
           "type": "NameExpression",
           "name": "GLSLCode"
         }
       }
     ],
-    "sees": [],
-    "throws": [],
-    "todos": [],
+    "examples": [
+      {
+        "description": "GLSL`\nprecision highp float;\nvarying vec2 uv;\nvoid main() {\n  gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);\n}\n`"
+      }
+    ],
     "name": "GLSL",
     "kind": "class",
+    "params": [
+      {
+        "title": "param",
+        "name": "strings",
+        "lineNumber": 26,
+        "type": {
+          "type": "TypeApplication",
+          "expression": {
+            "type": "NameExpression",
+            "name": "Array"
+          },
+          "applications": [
+            {
+              "type": "NameExpression",
+              "name": "string"
+            }
+          ]
+        }
+      },
+      {
+        "title": "param",
+        "name": "values",
+        "lineNumber": 26,
+        "type": {
+          "type": "RestType",
+          "expression": {
+            "type": "TypeApplication",
+            "expression": {
+              "type": "NameExpression",
+              "name": "Array"
+            },
+            "applications": [
+              {
+                "type": "NameExpression",
+                "name": "string"
+              }
+            ]
+          }
+        }
+      }
+    ],
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -7295,19 +7055,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/GLSL.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/GLSL.js#L7-L7",
-        "path": "packages/gl-react/src/GLSL.js"
-      }
+      "path": "packages/gl-react/src/GLSL.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/GLSL.js#L7-L7"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "GLSLCode",
     "kind": "typedef",
     "type": {
@@ -7315,11 +7065,9 @@
       "name": "string"
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -7463,23 +7211,14 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L44-L46",
-        "path": "packages/gl-react/src/Shaders.js"
-      }
+      "path": "packages/gl-react/src/Shaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L44-L46"
     },
-    "augments": [],
     "examples": [
       {
         "description": "{\n   helloGL: {\n     frag: GLSL`...`\n   }\n }"
       }
     ],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "ShadersDefinition",
     "kind": "typedef",
     "type": {
@@ -7487,11 +7226,9 @@
       "fields": []
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -7617,18 +7354,16 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L15-L17",
-        "path": "packages/gl-react/src/Shaders.js"
-      }
+      "path": "packages/gl-react/src/Shaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L15-L17"
     },
-    "augments": [],
     "examples": [
       {
         "description": "{\n   frag: GLSL`...`\n }"
       }
     ],
-    "params": [],
+    "name": "ShaderDefinition",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
@@ -7640,12 +7375,6 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "ShaderDefinition",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
@@ -7660,11 +7389,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -7819,19 +7546,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L51-L53",
-        "path": "packages/gl-react/src/Shaders.js"
-      }
+      "path": "packages/gl-react/src/Shaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L51-L53"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "ShadersSheet",
     "kind": "typedef",
     "type": {
@@ -7839,11 +7556,9 @@
       "fields": []
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -7878,22 +7593,16 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Shaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Shaders.js#L24-L27",
-        "path": "packages/gl-react/src/Shaders.js"
-      }
+      "path": "packages/gl-react/src/Shaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Shaders.js#L24-L27"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
+    "name": "ShaderIdentifier",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
         "name": "type",
-        "lineNumber": 25,
-        "type": {
-          "type": "AllLiteral"
-        }
+        "lineNumber": 25
       },
       {
         "title": "property",
@@ -7905,21 +7614,12 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "ShaderIdentifier",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
         {
           "type": "FieldType",
-          "key": "type",
-          "value": {
-            "type": "AllLiteral"
-          }
+          "key": "type"
         },
         {
           "type": "FieldType",
@@ -7932,11 +7632,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -8774,19 +8472,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L159-L161",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L159-L161"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "Uniforms",
     "kind": "typedef",
     "type": {
@@ -8794,11 +8482,9 @@
       "fields": []
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -9071,14 +8757,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L66-L69",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L66-L69"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
+    "name": "TextureOptions",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
@@ -9117,12 +8800,6 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "TextureOptions",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
@@ -9163,11 +8840,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -9421,19 +9096,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L46-L46",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L46-L46"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "Interpolation",
     "kind": "typedef",
     "type": {
@@ -9450,11 +9115,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -9764,19 +9427,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L56-L59",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L56-L59"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "WrapMode",
     "kind": "typedef",
     "type": {
@@ -9797,11 +9450,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -9836,14 +9487,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L96-L99",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L96-L99"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
+    "name": "BlendFuncSrcDst",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
@@ -9864,12 +9512,6 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "BlendFuncSrcDst",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
@@ -9892,11 +9534,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -10878,19 +10518,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L91-L91",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L91-L91"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "BlendFunc",
     "kind": "typedef",
     "type": {
@@ -10900,17 +10530,13 @@
         "name": "$Keys"
       },
       "applications": [
-        {
-          "type": "AllLiteral"
-        }
+        null
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -10996,14 +10622,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L114-L116",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L114-L116"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
+    "name": "Clear",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
@@ -11015,12 +10638,6 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "Clear",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
@@ -11035,11 +10652,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -11180,19 +10795,9 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Node.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Node.js#L104-L109",
-        "path": "packages/gl-react/src/Node.js"
-      }
+      "path": "packages/gl-react/src/Node.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Node.js#L104-L109"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "Vec4",
     "kind": "typedef",
     "type": {
@@ -11217,11 +10822,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -11348,14 +10951,11 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/flow/ndarray.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/flow/ndarray.js#L7-L13",
-        "path": "packages/gl-react/flow/ndarray.js"
-      }
+      "path": "packages/gl-react/flow/ndarray.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/flow/ndarray.js#L7-L13"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
+    "name": "NDArray",
+    "kind": "typedef",
     "properties": [
       {
         "title": "property",
@@ -11447,12 +11047,6 @@
         }
       }
     ],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "NDArray",
-    "kind": "typedef",
     "type": {
       "type": "RecordType",
       "fields": [
@@ -11543,11 +11137,9 @@
       ]
     },
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -11633,24 +11225,12 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L9-L50",
-        "path": "packages/gl-react/src/TextureLoader.js"
-      }
+      "path": "packages/gl-react/src/TextureLoader.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L9-L50"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "TextureLoader",
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [
         {
           "description": "",
@@ -11688,17 +11268,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L14-L14",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L14-L14"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
           "properties": [
             {
-              "title": "property",
               "name": "gl",
               "lineNumber": 1,
               "description": {
@@ -11759,10 +11333,6 @@
               }
             }
           ],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "name": "gl",
           "kind": "member",
           "memberof": "TextureLoader",
@@ -11772,11 +11342,9 @@
             "name": "WebGLRenderingContext"
           },
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -11816,13 +11384,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L19-L21",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L19-L21"
           },
-          "augments": [],
-          "examples": [],
+          "name": "constructor",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -11834,21 +11400,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "constructor",
-          "kind": "function",
           "memberof": "TextureLoader",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -11939,19 +11496,9 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L26-L26",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L26-L26"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "name": "dispose",
           "kind": "member",
           "memberof": "TextureLoader",
@@ -11964,11 +11511,9 @@
             }
           },
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12059,19 +11604,9 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L31-L31",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L31-L31"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "name": "canLoad",
           "kind": "member",
           "memberof": "TextureLoader",
@@ -12093,11 +11628,9 @@
             }
           },
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12188,19 +11721,9 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L36-L36",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L36-L36"
           },
-          "augments": [],
-          "examples": [],
-          "params": [],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
           "name": "get",
           "kind": "member",
           "memberof": "TextureLoader",
@@ -12226,11 +11749,9 @@
             }
           },
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12327,13 +11848,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoader.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoader.js#L43-L49",
-              "path": "packages/gl-react/src/TextureLoader.js"
-            }
+            "path": "packages/gl-react/src/TextureLoader.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoader.js#L43-L49"
           },
-          "augments": [],
-          "examples": [],
+          "name": "load",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -12345,10 +11864,8 @@
               }
             }
           ],
-          "properties": [],
           "returns": [
             {
-              "title": "returns",
               "type": {
                 "type": "TypeApplication",
                 "expression": {
@@ -12364,19 +11881,12 @@
               }
             }
           ],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "load",
-          "kind": "function",
           "memberof": "TextureLoader",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12392,8 +11902,8 @@
           "namespace": "TextureLoader#load"
         }
       ],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -12486,26 +11996,13 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitors.js#L10-L28",
-        "path": "packages/gl-react/src/Visitors.js"
-      }
+      "path": "packages/gl-react/src/Visitors.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitors.js#L10-L28"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "kind": "namespace",
     "name": "Visitors",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
       "static": [
         {
           "description": "",
@@ -12538,13 +12035,12 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitors.js#L14-L16",
-              "path": "packages/gl-react/src/Visitors.js"
-            }
+            "path": "packages/gl-react/src/Visitors.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitors.js#L14-L16"
           },
-          "augments": [],
-          "examples": [],
+          "memberof": "Visitors",
+          "name": "add",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -12556,20 +12052,10 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Visitors",
-          "name": "add",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12614,13 +12100,12 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitors.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitors.js#L20-L23",
-              "path": "packages/gl-react/src/Visitors.js"
-            }
+            "path": "packages/gl-react/src/Visitors.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitors.js#L20-L23"
           },
-          "augments": [],
-          "examples": [],
+          "memberof": "Visitors",
+          "name": "remove",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -12632,20 +12117,10 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "Visitors",
-          "name": "remove",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -12659,7 +12134,8 @@
           ],
           "namespace": "Visitorsremove"
         }
-      ]
+      ],
+      "events": []
     },
     "path": [
       {
@@ -12790,26 +12266,13 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoaders.js#L14-L33",
-        "path": "packages/gl-react/src/TextureLoaders.js"
-      }
+      "path": "packages/gl-react/src/TextureLoaders.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoaders.js#L14-L33"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "kind": "namespace",
     "name": "TextureLoaders",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
       "static": [
         {
           "description": {
@@ -12893,13 +12356,12 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoaders.js#L19-L21",
-              "path": "packages/gl-react/src/TextureLoaders.js"
-            }
+            "path": "packages/gl-react/src/TextureLoaders.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoaders.js#L19-L21"
           },
-          "augments": [],
-          "examples": [],
+          "memberof": "TextureLoaders",
+          "name": "add",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -12928,20 +12390,10 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "TextureLoaders",
-          "name": "add",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13037,13 +12489,12 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/TextureLoaders.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/TextureLoaders.js#L26-L29",
-              "path": "packages/gl-react/src/TextureLoaders.js"
-            }
+            "path": "packages/gl-react/src/TextureLoaders.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/TextureLoaders.js#L26-L29"
           },
-          "augments": [],
-          "examples": [],
+          "memberof": "TextureLoaders",
+          "name": "remove",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13072,20 +12523,10 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "memberof": "TextureLoaders",
-          "name": "remove",
-          "kind": "function",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13099,7 +12540,8 @@
           ],
           "namespace": "TextureLoadersremove"
         }
-      ]
+      ],
+      "events": []
     },
     "path": [
       {
@@ -13134,32 +12576,21 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/VisitorLogger.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/VisitorLogger.js#L20-L101",
-        "path": "packages/gl-react/src/VisitorLogger.js"
-      }
+      "path": "packages/gl-react/src/VisitorLogger.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/VisitorLogger.js#L20-L101"
     },
+    "name": "VisitorLogger",
     "augments": [
       {
         "title": "augments",
         "name": "Visitor"
       }
     ],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
-    "name": "VisitorLogger",
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
@@ -13194,24 +12625,12 @@
         }
       },
       "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-      "github": {
-        "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L24-L65",
-        "path": "packages/gl-react/src/Visitor.js"
-      }
+      "path": "packages/gl-react/src/Visitor.js",
+      "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L24-L65"
     },
-    "augments": [],
-    "examples": [],
-    "params": [],
-    "properties": [],
-    "returns": [],
-    "sees": [],
-    "throws": [],
-    "todos": [],
     "name": "Visitor",
     "kind": "class",
     "members": {
-      "global": [],
-      "inner": [],
       "instance": [
         {
           "description": "",
@@ -13238,13 +12657,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L28-L28",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L28-L28"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceMount",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13256,21 +12673,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceMount",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13310,13 +12718,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L32-L32",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L32-L32"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceUnmount",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13328,21 +12734,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceUnmount",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13382,13 +12779,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L36-L36",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L36-L36"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceGLContextChange",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13412,21 +12807,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceGLContextChange",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13466,13 +12852,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L39-L39",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L39-L39"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceDrawSkipped",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13484,21 +12868,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceDrawSkipped",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13538,13 +12913,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L42-L42",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L42-L42"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceDrawStart",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13556,21 +12929,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceDrawStart",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13661,13 +13025,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L46-L46",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L46-L46"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceDrawError",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13679,21 +13041,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceDrawError",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13733,13 +13086,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L49-L49",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L49-L49"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onSurfaceDrawEnd",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13751,21 +13102,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onSurfaceDrawEnd",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13805,13 +13147,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L52-L52",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L52-L52"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onNodeDrawSkipped",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13823,21 +13163,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onNodeDrawSkipped",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13877,13 +13208,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L55-L55",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L55-L55"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onNodeDrawStart",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -13895,21 +13224,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onNodeDrawStart",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -13949,13 +13269,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L58-L58",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L58-L58"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onNodeSyncDeps",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -14021,21 +13339,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onNodeSyncDeps",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -14075,13 +13384,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L61-L61",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L61-L61"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onNodeDraw",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -14103,28 +13410,17 @@
                   "name": "Array"
                 },
                 "applications": [
-                  {
-                    "type": "AllLiteral"
-                  }
+                  null
                 ]
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onNodeDraw",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -14164,13 +13460,11 @@
               }
             },
             "file": "/Users/gre/dev/gl-react-next/packages/gl-react/src/Visitor.js",
-            "github": {
-              "url": "https://github.com/gre/gl-react/blob/7badc8c5195557169974470e6d38a34673383e85/packages/gl-react/src/Visitor.js#L64-L64",
-              "path": "packages/gl-react/src/Visitor.js"
-            }
+            "path": "packages/gl-react/src/Visitor.js",
+            "github": "https://github.com/gre/gl-react/blob/3fa0113ef29d18db25e282b7ffd4a2022892d79f/packages/gl-react/src/Visitor.js#L64-L64"
           },
-          "augments": [],
-          "examples": [],
+          "name": "onNodeDrawEnd",
+          "kind": "function",
           "params": [
             {
               "title": "param",
@@ -14182,21 +13476,12 @@
               }
             }
           ],
-          "properties": [],
-          "returns": [],
-          "sees": [],
-          "throws": [],
-          "todos": [],
-          "name": "onNodeDrawEnd",
-          "kind": "function",
           "memberof": "Visitor",
           "scope": "instance",
           "members": {
-            "global": [],
-            "inner": [],
             "instance": [],
-            "events": [],
-            "static": []
+            "static": [],
+            "events": []
           },
           "path": [
             {
@@ -14212,8 +13497,8 @@
           "namespace": "Visitor#onNodeDrawEnd"
         }
       ],
-      "events": [],
-      "static": []
+      "static": [],
+      "events": []
     },
     "path": [
       {
