@@ -19,3 +19,13 @@ Java_fr_greweb_rngl_GLImages_set
   AndroidBitmap_unlockPixels(env, bitmap);
   GLImagesSet(glAssetId, data, width, height);
 }
+
+JNIEXPORT void JNICALL
+Java_fr_greweb_rngl_GLImages_remove
+(JNIEnv *env, jclass clazz, jint glAssetId) {
+  GLAsset *asset = GLImagesGet(glAssetId);
+  if (asset) {
+    free(asset->data);
+  }
+  GLImagesRemove(glAssetId);
+}

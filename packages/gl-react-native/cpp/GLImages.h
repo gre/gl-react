@@ -11,9 +11,9 @@ typedef struct _GLAsset {
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+    
     void GLImagesSet(int glAssetId, void *data, int width, int height);
-
+    void GLImagesRemove(int glAssetId);
     GLAsset* GLImagesGet(int glAssetId);
 
 #ifdef __cplusplus

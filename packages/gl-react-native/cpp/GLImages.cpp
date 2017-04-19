@@ -1,13 +1,12 @@
 #include "GLImages.h"
+#include <stdlib.h>
 #include <memory>
 #include <unordered_map>
 #include <mutex>
 
 static std::unordered_map<int, GLAsset*> GLImagesMap;
-static std::mutex GLImagesMapMutex;
 
 void GLImagesSet(int glAssetId, void* data, int width, int height) {
-    std::lock_guard<decltype(GLImagesMapMutex)> lock(GLImagesMapMutex);
     GLAsset* asset = new GLAsset();
     asset->data = data;
     asset->width = width;
@@ -15,8 +14,18 @@ void GLImagesSet(int glAssetId, void* data, int width, int height) {
     GLImagesMap[glAssetId] = asset;
 }
 
+void GLImagesRemove(int glAssetId) {
+    GLAsset *asset = GLImagesGet(glAssetId);
+    if (asset) {
+      if (asset->lazyFlippedData) {
+        // FIXME mmh this was not malloc-ed here. a good practice would be to keep it with the malloc. move the malloc responsible code in another function here..
+        free(asset->lazyFlippedData);
+      }
+    }
+    GLImagesMap.erase(glAssetId);
+}
+
 GLAsset* GLImagesGet(int glAssetId) {
-    std::lock_guard<decltype(GLImagesMapMutex)> lock(GLImagesMapMutex);
     auto iter = GLImagesMap.find(glAssetId);
     if (iter != GLImagesMap.end()) {
         return iter->second;

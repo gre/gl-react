@@ -60,6 +60,15 @@ RCT_EXPORT_METHOD(load:(nonnull RCTImageSource *)source
                                  }];
 }
 
+
+RCT_EXPORT_METHOD(unload:(int) glAssetId) {
+  GLAsset *asset = GLImagesGet(glAssetId);
+  if (asset) {
+    free(asset->data);
+  }
+  GLImagesRemove(glAssetId);
+}
+
 @end
 
 @implementation RCTBridge (GLImagesModule)

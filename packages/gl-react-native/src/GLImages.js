@@ -1,4 +1,5 @@
 //@flow
+import LRU from "lru";
 import {NativeModules} from "react-native";
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 const {GLImagesModule} = NativeModules;
@@ -7,7 +8,11 @@ export type ImageSource = Object | number;
 type ImageSourceHash = string | number;
 
 let id = 1;
-const cache: Map<ImageSourceHash, Promise<number>> = new Map();
+const cache = new LRU(50);
+
+cache.on("evict", ({ value }) => {
+  value.then(id => GLImagesModule.unload(id));
+});
 
 function imageSourceHash (imageSource: ImageSource): ImageSourceHash {
   if (typeof imageSource === "number") return imageSource;

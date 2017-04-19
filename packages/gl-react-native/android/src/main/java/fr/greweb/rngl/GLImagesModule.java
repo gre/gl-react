@@ -65,4 +65,9 @@ public class GLImagesModule extends ReactContextBaseJavaModule {
             }
         }, executorSupplier.forDecode());
     }
+
+    @ReactMethod
+    public void unload (final Integer glAssetId) {
+        GLImages.remove(glAssetId);
+    }
 }
