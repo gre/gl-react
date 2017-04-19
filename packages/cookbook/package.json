@@ -1,0 +1,48 @@
+{
+  "name": "gl-react-cookbook",
+  "version": "3.0.0-alpha.6",
+  "private": true,
+  "devDependencies": {
+    "babel-preset-react-app": "^2.2.0",
+    "raw-loader": "^0.5.1",
+    "react-scripts": "0.9.5"
+  },
+  "cookbook": {
+    "githubprefix": "https://github.com/gre/gl-react/tree/master/cookbook/"
+  },
+  "dependencies": {
+    "animated": "^0.2.0",
+    "github-slugger": "^1.1.1",
+    "gl-react": "3.0.0-alpha.6",
+    "gl-react-dom": "3.0.0-alpha.6",
+    "gl-shader": "^4.2.1",
+    "gl-texture2d": "^2.1.0",
+    "glsl-transitions": "^2016.10.24",
+    "hoist-non-react-statics": "^1.2.0",
+    "lodash": "^4.17.2",
+    "ndarray": "^1.0.18",
+    "ndarray-ops": "^1.2.2",
+    "prism-theme-one-dark": "^1.0.0",
+    "prismjs": "^1.5.1",
+    "raf": "^3.3.0",
+    "react": "^15.4.0",
+    "react-addons-perf": "^15.4.0",
+    "react-color": "^2.4.0",
+    "react-dom": "^15.4.0",
+    "react-json2d": "^0.1.0",
+    "react-motion": "^0.4.5",
+    "react-prism": "^4.0.0",
+    "react-router": "^2.8.1",
+    "react-sidebar": "^2.2.1",
+    "remark": "^7.0.0",
+    "remark-react": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "prepublish": "npm run generate-examples && npm run generate-doc",
+    "generate-examples": "cd src/examples; ./gen.sh 1> index.js",
+    "generate-doc": "cd ../.. && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/API.json -f json"
+  }
+}

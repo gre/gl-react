@@ -1,33 +1,35 @@
 {
   "name": "gl-react-dev",
+  "version": "0.0.0",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "clean-all": "./scripts/clean-all.sh",
-    "install-all": "./scripts/install-all.sh",
-    "build": "./scripts/build.sh",
-    "flow": "./scripts/flow.sh",
-    "lint": "./scripts/lint.sh",
-    "test": "cd tests && npm test",
-    "test-rewrite-snapshots": "cd tests && npm test -- -u",
-    "deploy-cookbook": "./scripts/deploy-cookbook.sh"
+    "bootstrap": "yarn && lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
+    "build": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
+    "flow": "cd packages/gl-react && flow --quiet",
+    "lint": "eslint packages/gl-react*/src/",
+    "test": "cd packages/tests && yarn test",
+    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
+    "deploy-cookbook": "cd packages/cookbook && yarn run build && cp build/index.html build/200.html && surge -p build -d gl-react-cookbook.surge.sh"
   },
   "dependencies": {
+    "react": "^15.5.4",
+    "react-native": "~0.42.3"
+  },
+  "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-eslint": "^7.1.1",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
-    "browserify": "^13.3.0",
+    "browserify": "^14.3.0",
     "browserify-shim": "^3.8.12",
-    "documentation": "4.0.0-beta.18",
+    "documentation": "4.0.0-beta.19",
     "eslint": "^3.13.1",
     "eslint-plugin-flowtype": "^2.30.0",
     "eslint-plugin-react": "^6.9.0",
-    "flow-copy-source": "^1.1.0"
-  },
-  "version": "3.0.0-alpha.5",
-  "devDependencies": {
-    "flow-bin": "^0.37.4"
+    "flow-bin": "^0.44.2",
+    "flow-copy-source": "^1.1.0",
+    "lerna": "^2.0.0-rc.2"
   }
 }

@@ -25,8 +25,14 @@
     "README.md"
   ],
   "peerDependencies": {
+    "gl-react": "*",
     "react": "*",
-    "react-native": "*",
-    "gl-react": "*"
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "gl-react": "3.0.0-alpha.6"
+  },
+  "scripts": {
+    "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - &&rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib"
   }
 }
