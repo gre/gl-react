@@ -10,7 +10,8 @@ Contributions are always welcome, no matter how large or small.
 
 ```sh
 git clone https://github.com/gre/gl-react.git
-yarn run bootstrap
+yarn
+yarn run build
 ```
 
 ## Building

@@ -4,7 +4,6 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "bootstrap": "yarn && lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
     "build": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
     "flow": "cd packages/gl-react && flow --quiet",
     "lint": "eslint packages/gl-react*/src/",
@@ -30,6 +29,6 @@
     "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.44.2",
     "flow-copy-source": "^1.1.0",
-    "lerna": "^2.0.0-rc.2"
+    "lerna": "^2.0.0-rc.3"
   }
 }
