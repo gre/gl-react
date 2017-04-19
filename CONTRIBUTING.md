@@ -23,6 +23,14 @@ yarn run build
 You must run this each time you modify one of the packages/ of the library.
 It rebuild the lib/ folders and will copy the packages into the projects.
 
+### Developing
+
+```sh
+yarn run watch
+```
+
+> For a faster reload experience, this do like `build` but only for a specific file you modify.
+
 ## Testing
 
 ```sh
