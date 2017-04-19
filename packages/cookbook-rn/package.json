@@ -1,6 +1,6 @@
 {
   "name": "cookbook-rn",
-  "version": "3.0.0-alpha.7",
+  "version": "3.0.0-alpha.8",
   "private": true,
   "scripts": {
     "prepublish": "cd src/examples; ./gen.sh 1> index.js",
@@ -11,8 +11,8 @@
     "@expo/ex-navigation": "~2.9.4",
     "babel-preset-react-native-stage-0": "~1.0.1",
     "core-js": "^2.4.1",
-    "gl-react": "^3.0.0-alpha.7",
-    "gl-react-native": "^3.0.0-alpha.7",
+    "gl-react": "^3.0.0-alpha.8",
+    "gl-react-native": "^3.0.0-alpha.8",
     "glsl-transitions": "~2017.1.16",
     "ndarray": "~1.0.18",
     "raf": "~3.3.0",
