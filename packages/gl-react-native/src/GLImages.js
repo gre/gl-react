@@ -23,8 +23,6 @@ function imageSourceHash (imageSource: ImageSource): ImageSourceHash {
   return uri;
 }
 
-// TODO: should unload in a smart LRU way
-
 const load = (source: ImageSource): Promise<number> => {
   const hash = imageSourceHash(source);
   let promise = cache.get(hash);
