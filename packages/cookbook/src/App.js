@@ -1,5 +1,6 @@
 //@flow
-import React, { PureComponent, Component, PropTypes } from "react";
+import React, { PureComponent, Component } from "react";
+import PropTypes from "prop-types";
 import { findDOMNode } from "react-dom";
 import "./App.css";
 import {Link} from "react-router";

@@ -33,7 +33,8 @@
     "gl-react": "^3.0.0-alpha.8"
   },
   "dependencies": {
-    "invariant": "^2.2.1"
+    "invariant": "^2.2.1",
+    "prop-types": "^15.5.8"
   },
   "scripts": {
     "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib gl-react-dom.js && babel --source-maps -d lib src && flow-copy-source -v src lib && browserify lib/index.js -t [ browserify-shim ] --standalone GLReactDOM > gl-react-dom.js",

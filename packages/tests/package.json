@@ -23,5 +23,8 @@
     "react": "^15.4.0",
     "react-test-renderer": "^15.4.0"
   },
-  "version": "3.0.0-alpha.8"
+  "version": "3.0.0-alpha.8",
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
 }

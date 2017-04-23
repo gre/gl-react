@@ -1,7 +1,8 @@
 //@flow
 import invariant from "invariant";
 import raf from "raf";
-import React, {PropTypes, Component} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 import createShader from "gl-shader";
 import {disposeArray, disposeObjectMap} from "./helpers/disposable";
 import Bus from "./Bus";

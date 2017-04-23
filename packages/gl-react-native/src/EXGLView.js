@@ -1,6 +1,7 @@
 "use strict";
 
-import React, { PropTypes } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { View, Platform, requireNativeComponent } from "react-native";
 
 // A component that acts as an OpenGL render target.

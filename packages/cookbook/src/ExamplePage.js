@@ -1,4 +1,5 @@
-import React, {PropTypes, Component} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 const encodeQueryValue = value => JSON.stringify(value);
 const decodeQueryValue = value => JSON.parse(value);
