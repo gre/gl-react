@@ -6,16 +6,17 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "@expo/ex-navigation": "^2.9.4",
-    "expo": "^15.0.0",
-    "gl-react": "3.0.0-alpha.8",
-    "gl-react-expo": "3.0.0-alpha.8",
+    "@expo/ex-navigation": "^2.11.0",
+    "expo": "^16.0.0",
+    "gl-react": "^3.0.0-alpha.8",
+    "gl-react-expo": "^3.0.0-alpha.8",
     "glsl-transitions": "^2017.1.16",
     "ndarray": "^1.0.18",
+    "prop-types": "^15.5.8",
     "raf": "^3.3.0",
-    "react": "~15.4.2",
+    "react": "16.0.0-alpha.6",
     "react-motion": "^0.4.7",
-    "react-native": "github:exponentjs/react-native#sdk-15.0.0",
+    "react-native": "github:exponentjs/react-native#sdk-16.0.0",
     "seedrandom": "github:gre/seedrandom#released"
   },
   "scripts": {

@@ -2502,6 +2502,12 @@ gl-constants@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gl-constants/-/gl-constants-1.0.0.tgz#597a504e364750ff50253aa35f8dea7af4a5d233"
 
+gl-fbo@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/gl-fbo/-/gl-fbo-2.0.5.tgz#0fa75a497cf787695530691c8f04abb6fb55fa22"
+  dependencies:
+    gl-texture2d "^2.0.0"
+
 gl-format-compiler-error@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/gl-format-compiler-error/-/gl-format-compiler-error-1.0.2.tgz#34397d2ae613e2d83a58f35d571de1be7d3080fa"
@@ -2511,6 +2517,25 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
+gl-react-dom@^3.0.0-alpha.8:
+  version "3.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/gl-react-dom/-/gl-react-dom-3.0.0-alpha1.tgz#dd57e2723374a33e78741f656e3285076036103e"
+  dependencies:
+    gl-texture2d "^2.0.11"
+    invariant "^2.2.1"
+
+gl-react@^3.0.0-alpha.8:
+  version "3.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.0.0-alpha1.tgz#a7c491b55df17982158958fdcb0fcd5b274c2d67"
+  dependencies:
+    gl-fbo "^2.0.5"
+    gl-shader "^4.2.1"
+    gl-texture2d "^2.0.12"
+    invariant "^2.2.1"
+    ndarray "^1.0.18"
+    raf "^3.3.0"
+    typedarray-pool "^1.1.0"
+
 gl-shader@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/gl-shader/-/gl-shader-4.2.1.tgz#bc9b808e9293c51b668e88de615b0c113708dc2f"
@@ -2518,7 +2543,7 @@ gl-shader@^4.2.1:
     gl-format-compiler-error "^1.0.2"
     weakmap-shim "^1.1.0"
 
-gl-texture2d@^2.1.0:
+gl-texture2d@^2.0.0, gl-texture2d@^2.0.11, gl-texture2d@^2.0.12, gl-texture2d@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/gl-texture2d/-/gl-texture2d-2.1.0.tgz#ff6824e7e7c31a8ba6fdcdbe9e5c695d7e2187c7"
   dependencies:
@@ -4821,7 +4846,7 @@ react-prism@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-prism/-/react-prism-4.0.0.tgz#9a2bc384820dfa9ba8f5e08120ef62eed868fb50"
 
-react-router@^2.8.1:
+react-router@2.x:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-2.8.1.tgz#73e9491f6ceb316d0f779829081863e378ee4ed7"
   dependencies:

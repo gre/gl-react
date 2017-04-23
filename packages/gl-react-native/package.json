@@ -37,6 +37,7 @@
     "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   },
   "dependencies": {
-    "lru": "^3.1.0"
+    "lru": "^3.1.0",
+    "prop-types": "^15.5.8"
   }
 }

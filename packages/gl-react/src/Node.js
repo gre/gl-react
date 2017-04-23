@@ -1,6 +1,7 @@
 //@flow
 import invariant from "invariant";
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 import pool from "typedarray-pool";
 import ndarray from "ndarray";
 import Backbuffer from "./Backbuffer";

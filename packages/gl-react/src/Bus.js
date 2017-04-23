@@ -1,6 +1,7 @@
 //@flow
 import invariant from "invariant";
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 import Node from "./Node";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";

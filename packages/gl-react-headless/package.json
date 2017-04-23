@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "gl": "^4.0.2",
-    "invariant": "^2.2.1"
+    "invariant": "^2.2.1",
+    "prop-types": "^15.5.8"
   },
   "devDependencies": {
     "gl-react": "^3.0.0-alpha.8"
