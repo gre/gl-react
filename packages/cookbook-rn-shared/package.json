@@ -18,7 +18,7 @@
     "ndarray": "~1.0.18",
     "prop-types": "^15.5.8",
     "raf": "~3.3.0",
-    "react-motion": "~0.4.7",
+    "react-motion": "^0.5.0",
     "seedrandom": "github:gre/seedrandom#released",
     "three": "0.84.0"
   }

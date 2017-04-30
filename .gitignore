@@ -6,6 +6,7 @@ build
 npm-debug.log
 lerna-debug.log
 *.tmp
+packages/*/yarn.lock
 packages/*/lib
 packages/gl-react/gl-react.js
 packages/gl-react-dom/gl-react-dom.js
