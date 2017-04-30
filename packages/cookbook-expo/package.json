@@ -1,17 +1,17 @@
 {
   "name": "cookbook-expo",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "GL React Native cookbook",
   "author": "Gaëtan Renaudeau",
   "private": true,
   "main": "main.js",
   "dependencies": {
     "@expo/ex-navigation": "^2.11.0",
+    "cookbook-rn-shared": "^3.1.0",
     "expo": "^16.0.0",
-    "react": "16.0.0-alpha.6",
-    "gl-react-expo": "^3.0.0",
-    "cookbook-rn-shared": "^3.0.0",
+    "gl-react-expo": "^3.1.0",
     "prop-types": "^15.5.8",
+    "react": "16.0.0-alpha.6",
     "react-native": "github:exponentjs/react-native#sdk-16.0.0"
   }
 }
