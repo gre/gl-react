@@ -65,7 +65,7 @@ export default (
     };
     render() {
       return (
-        <View ref="root" {...this.panResponder.panHandlers}>
+        <View ref="root" collapsable={false} {...this.panResponder.panHandlers}>
           <Comp {...this.props} {...this.state} />
         </View>
       );
