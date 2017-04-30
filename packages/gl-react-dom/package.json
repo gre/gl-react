@@ -22,7 +22,7 @@
     "gl-react-dom.js"
   ],
   "browserify-shim": {
-    "gl-react": "global:GL",
+    "gl-react": "global:GLReact",
     "react": "global:React"
   },
   "peerDependencies": {
