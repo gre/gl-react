@@ -1,6 +1,6 @@
 {
   "name": "gl-react-native",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "React Native standalone implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -25,20 +25,20 @@
     "README.md"
   ],
   "peerDependencies": {
-    "gl-react": "^3.1.0",
+    "gl-react": "^3.1.1",
     "react": "*",
     "react-native": "*"
   },
   "devDependencies": {
-    "gl-react": "^3.1.0"
+    "gl-react": "^3.1.1"
   },
   "scripts": {
     "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib",
     "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   },
   "dependencies": {
-    "lru": "^3.1.0",
     "events": "^1.1.1",
+    "lru": "^3.1.0",
     "prop-types": "^15.5.8"
   }
 }
