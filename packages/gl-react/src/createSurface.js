@@ -488,7 +488,7 @@ export default ({
     _handleError = (e: Error): void => {
       const { onLoadError } = this.props;
       if (onLoadError) onLoadError(e);
-      else console.error(e); // eslint-disable-line no-console
+      else console.error(e);
     };
 
     _handleRestoredFailure = (): void => {

@@ -73,7 +73,6 @@ export default class ExponentTextureLoader extends TextureLoader<*> {
     if (this.loads.has(key)) {
       return this.loads.get(key);
     }
-    /* eslint-disable */
     let dispose = () => {};
     let ignored = false;
     const promise = loadAsset(module).then(asset => {

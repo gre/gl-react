@@ -24,7 +24,6 @@ export default class EXGLView extends React.Component {
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
     const { onContextCreate, msaaSamples, ...viewProps } = this.props;
 
     // NOTE: Removing `backgroundColor: "transparent"` causes a performance

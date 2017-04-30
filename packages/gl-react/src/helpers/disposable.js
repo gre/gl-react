@@ -40,5 +40,5 @@ export function disposeObjectMap<T: Disposable>(objmap: { [key: string]: T }) {
 export function disposeArray<T: Disposable>(arr: Array<T>) {
   let d;
   while ((d = arr.pop()))
-    d.dispose(); // eslint-disable-line no-cond-assign
+    d.dispose();
 }

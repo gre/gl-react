@@ -1,12 +1,15 @@
 //@flow
-import React, {
-  PureComponent,
-  Component,
-  PropTypes,
-} from "react";
-import {Visitors, VisitorLogger, Node, Bus, Backbuffer, listSurfaces} from "gl-react";
+import React, { PureComponent, Component, PropTypes } from "react";
+import {
+  Visitors,
+  VisitorLogger,
+  Node,
+  Bus,
+  Backbuffer,
+  listSurfaces,
+} from "gl-react";
 import raf from "raf";
-import type {Surface} from "gl-react-dom";
+import type { Surface } from "gl-react-dom";
 import createTexture from "gl-texture2d";
 import createShader from "gl-shader";
 import throttle from "lodash/throttle";
@@ -19,13 +22,13 @@ const formatNumber = (n: number) => {
   const str = String(n);
   const i = str.indexOf(".");
   if (i === -1) return str;
-  return str.slice(0, i + 1 + Math.max(1, 5-i));
+  return str.slice(0, i + 1 + Math.max(1, 5 - i));
 };
 const formatObject = (o: any) => {
   if (typeof o === "object") {
     const name = o && o.constructor && o.constructor.name;
     if (name) {
-      return "[object "+String(name)+"]";
+      return "[object " + String(name) + "]";
     }
   }
   return String(o);
@@ -46,10 +49,9 @@ const primitiveTypeAlias = {
   mat4: Array(16).fill("float"),
 };
 
-
 const classType = type => {
-  if (Array.isArray(type)) return "type-array-"+type[0];
-  return "type-"+type;
+  if (Array.isArray(type)) return "type-array-" + type[0];
+  return "type-" + type;
 };
 
 const inferSize = (obj: any): [number, number] => {
@@ -64,7 +66,7 @@ const inferSize = (obj: any): [number, number] => {
       return [obj.width, obj.height];
     }
   }
-  return [0,0];
+  return [0, 0];
 };
 
 class PreviewRenderer {
@@ -72,39 +74,53 @@ class PreviewRenderer {
   copyShader: any;
   gl: ?WebGLRenderingContext;
   texture: any;
-  constructor () {
+  constructor() {
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 2;
     const opts = { preserveDrawingBuffer: true };
     const gl = canvas.getContext("webgl", opts);
     if (!gl) return;
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
-    const texture = createTexture(gl, [2,2]);
+    const texture = createTexture(gl, [2, 2]);
     const buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1.0, -1.0,
-      1.0, -1.0,
-      -1.0,  1.0,
-      -1.0,  1.0,
-      1.0, -1.0,
-      1.0,  1.0
-    ]), gl.STATIC_DRAW);
-    const copyShader = createShader(gl,  `
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([
+        -1.0,
+        -1.0,
+        1.0,
+        -1.0,
+        -1.0,
+        1.0,
+        -1.0,
+        1.0,
+        1.0,
+        -1.0,
+        1.0,
+        1.0,
+      ]),
+      gl.STATIC_DRAW
+    );
+    const copyShader = createShader(
+      gl,
+      `
 attribute vec2 _p;
 varying vec2 uv;
 void main() {
   gl_Position = vec4(_p,0.0,1.0);
   uv = vec2(0.5, 0.5) * (_p+vec2(1.0, 1.0));
 }
-`, `
+`,
+      `
 precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
 void main () {
   vec4 c = texture2D(t, uv);
   gl_FragColor = c;
-}`);
+}`
+    );
     copyShader.bind();
     copyShader.attributes._p.pointer();
     this.copyShader = copyShader;
@@ -112,17 +128,20 @@ void main () {
     this.canvas = canvas;
     this.gl = gl;
   }
-  setSize (newWidth, newHeight) {
+  setSize(newWidth, newHeight) {
     const { gl, canvas, texture } = this;
     if (!gl) return;
-    if (gl.drawingBufferWidth === newWidth &&
-      gl.drawingBufferHeight === newHeight) return;
-    texture.shape = [ newWidth, newHeight ];
+    if (
+      gl.drawingBufferWidth === newWidth &&
+      gl.drawingBufferHeight === newHeight
+    )
+      return;
+    texture.shape = [newWidth, newHeight];
     canvas.width = newWidth;
     canvas.height = newHeight;
     gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
   }
-  draw (obj) {
+  draw(obj) {
     const { texture, gl, copyShader } = this;
     if (!gl) return;
     const [w, h] = inferSize(obj);
@@ -132,7 +151,7 @@ void main () {
     copyShader.uniforms.t = texture.bind();
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
-  copyToCanvas2D (ctx) {
+  copyToCanvas2D(ctx) {
     const { canvas } = this;
     ctx.canvas.width = canvas.width;
     ctx.canvas.height = canvas.height;
@@ -148,46 +167,51 @@ class UniformValue extends Component {
     type: any,
     info: any,
   };
-  render () {
+  render() {
     let { id, node, value, type, info } = this.props;
     if (type in primitiveTypeAlias) {
       type = primitiveTypeAlias[type];
     }
-    return (
-      Array.isArray(type)
-      ? <span className={"value-array "+classType(type)}>
-        {type.map((type, i) =>
-          <UniformValue
-            id={id+"["+i+"]"}
-            key={i}
-            node={node}
-            value={Array.isArray(value) ? value[i] : null}
-            type={type}
-            info={info && info[i]}
-          />)}
+    return Array.isArray(type)
+      ? <span className={"value-array " + classType(type)}>
+          {type.map((type, i) => (
+            <UniformValue
+              id={id + "[" + i + "]"}
+              key={i}
+              node={node}
+              value={Array.isArray(value) ? value[i] : null}
+              type={type}
+              info={info && info[i]}
+            />
+          ))}
         </span>
-      : <span className={"value "+classType(type)}>
+      : <span className={"value " + classType(type)}>
           <span className="val">
-          { typeof value === "number"
-            ? formatNumber(value)
-            : String(value) }
+            {typeof value === "number" ? formatNumber(value) : String(value)}
           </span>
           {info ? <MetaInfo id={id} node={node} info={info} /> : null}
-        </span>
-    );
+        </span>;
   }
 }
 
 class Btn extends Component {
   props: {
-    onClick: ?()=>void,
+    onClick: ?() => void,
     children?: any,
   };
   render() {
-    const {onClick,children} = this.props;
-    return <span className="btn" onClick={onClick} style={{
-      opacity: onClick?1:0.5,
-    }}>{children}</span>;
+    const { onClick, children } = this.props;
+    return (
+      <span
+        className="btn"
+        onClick={onClick}
+        style={{
+          opacity: onClick ? 1 : 0.5,
+        }}
+      >
+        {children}
+      </span>
+    );
   }
 }
 
@@ -212,7 +236,7 @@ class Anchor extends Component {
       this.context.inspector.removeAnchor(this.props.id, this);
       this.context.inspector.addAnchor(id, this);
     }
-    for (let i=this.props.drawCount; i<drawCount; i++) {
+    for (let i = this.props.drawCount; i < drawCount; i++) {
       this.drawHistoryDates.push(Date.now());
       if (this.drawHistoryDates.length > 200) {
         this.drawHistoryDates.shift();
@@ -224,9 +248,9 @@ class Anchor extends Component {
   }
   getDrawCountsForTimeWindow = (w: number) => {
     const now = Date.now();
-    const {drawHistoryDates} = this;
+    const { drawHistoryDates } = this;
     const values = [];
-    for (let i=drawHistoryDates.length-1; i>0; i--) {
+    for (let i = drawHistoryDates.length - 1; i > 0; i--) {
       const t = (now - drawHistoryDates[i]) / w;
       if (t > 1) break;
       values.push(t);
@@ -234,9 +258,9 @@ class Anchor extends Component {
     return values;
   };
   getXY = () => {
-    const {root} = this.refs;
-    const {top,left,height} = root.getBoundingClientRect();
-    return [left,top+height/2];
+    const { root } = this.refs;
+    const { top, left, height } = root.getBoundingClientRect();
+    return [left, top + height / 2];
   };
   render() {
     return <span className="hook" ref="root" />;
@@ -278,9 +302,9 @@ class AnchorHook extends Component {
     return this.props.anchorId;
   };
   getXY = () => {
-    const {root} = this.refs;
-    const {top,left,height} = root.getBoundingClientRect();
-    return [left,top+height/2];
+    const { root } = this.refs;
+    const { top, left, height } = root.getBoundingClientRect();
+    return [left, top + height / 2];
   };
   render() {
     return <span className="anchor-hook" ref="root" />;
@@ -296,31 +320,31 @@ class MetaInfo extends Component {
       initialObj: ?Object,
       dependency: ?Object,
       textureOptions: ?Object,
-    }
+    },
   };
   render() {
     const { id, info, node } = this.props;
     const { dependency, obj } = info;
     return (
       <span className="meta-info">
-      { dependency
-        ? <AnchorHook
-            id={dependency.id+"_"+node.id+"_"+id}
-            nodeId={node.id}
-            anchorId={dependency.id}
-          />
-        : obj===Backbuffer
+        {dependency
           ? <AnchorHook
-              id={"rec_"+node.id+"_"+id}
+              id={dependency.id + "_" + node.id + "_" + id}
               nodeId={node.id}
-              anchorId={node.id}
+              anchorId={dependency.id}
             />
-          : null }
-      { dependency
-        ? dependency.getGLShortName()
-        : typeof obj === "string"
-          ? <a href={obj} target="_blank">{obj}</a>
-          : formatObject(obj) }
+          : obj === Backbuffer
+              ? <AnchorHook
+                  id={"rec_" + node.id + "_" + id}
+                  nodeId={node.id}
+                  anchorId={node.id}
+                />
+              : null}
+        {dependency
+          ? dependency.getGLShortName()
+          : typeof obj === "string"
+              ? <a href={obj} target="_blank">{obj}</a>
+              : formatObject(obj)}
       </span>
     );
   }
@@ -338,13 +362,13 @@ class Preview extends Component {
   componentWillReceiveProps() {
     this.capture();
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.capture.cancel();
   }
   capture = throttle(() => {
-    const {ctx} = this;
+    const { ctx } = this;
     if (!ctx) return;
-    const {capture} = this.props;
+    const { capture } = this.props;
     const snap = capture();
     if (snap) {
       sharedRenderer.draw(snap);
@@ -356,8 +380,7 @@ class Preview extends Component {
     const ctx = canvas.getContext("2d");
     if ("imageSmoothingEnabled" in ctx) {
       ctx.imageSmoothingEnabled = false;
-    }
-    else {
+    } else {
       ctx.imageSmoothingEnabled = false;
       ctx.mozImageSmoothingEnabled = false;
       ctx.webkitImageSmoothingEnabled = false;
@@ -368,9 +391,11 @@ class Preview extends Component {
     this.capture();
   };
   render() {
-    return <div className="preview">
-      <canvas ref={this.onCanvasRef} />
-    </div>;
+    return (
+      <div className="preview">
+        <canvas ref={this.onCanvasRef} />
+      </div>
+    );
   }
 }
 
@@ -379,11 +404,10 @@ class PreviewNode extends PureComponent {
     node: Object,
   };
   capture = () => {
-    const {node} = this.props;
+    const { node } = this.props;
     try {
       return node.capture();
-    }
-    catch(e) {} // eslint-disable-line no-empty
+    } catch (e) {}
   };
   render() {
     return <Preview capture={this.capture} />;
@@ -395,7 +419,7 @@ class PreviewContent extends Component {
     content: Object,
   };
   capture = () => {
-    const {content} = this.props;
+    const { content } = this.props;
     return content;
   };
   render() {
@@ -409,9 +433,11 @@ class DrawCount extends PureComponent {
   };
   render() {
     const { drawCount } = this.props;
-    return <span className="drawCount">
-      {drawCount}
-    </span>;
+    return (
+      <span className="drawCount">
+        {drawCount}
+      </span>
+    );
   }
 }
 
@@ -429,8 +455,8 @@ class InspectorBox extends Component {
     root?: boolean,
     grabbed?: boolean,
     minimized: boolean,
-    onGrabStart: (id: number, e: MouseEvent)=>void,
-    onMinimizeChange: (id: number, minimized: boolean)=>void,
+    onGrabStart: (id: number, e: MouseEvent) => void,
+    onMinimizeChange: (id: number, minimized: boolean) => void,
   };
   static contextTypes = {
     inspector: PropTypes.object.isRequired,
@@ -444,7 +470,7 @@ class InspectorBox extends Component {
     this.context.inspector.addBox(this.props.glObject.id, this);
     this.onNewDraw();
   }
-  componentWillReceiveProps({ drawCount, glObject: {id} }) {
+  componentWillReceiveProps({ drawCount, glObject: { id } }) {
     if (id !== this.props.glObject.id) {
       this.context.inspector.removeBox(id, this);
       this.context.inspector.addBox(id, this);
@@ -459,7 +485,7 @@ class InspectorBox extends Component {
   }
   getSize() {
     const { width, height } = this.refs.box.getBoundingClientRect();
-    return [ width, height ];
+    return [width, height];
   }
   onNewDraw = () => {
     if (!this.state.recentDraw) {
@@ -483,9 +509,7 @@ class InspectorBox extends Component {
   };
   onRedraw = () => this.props.glObject.redraw();
   render() {
-    const {
-      recentDraw
-    } = this.state;
+    const { recentDraw } = this.state;
     const {
       pos,
       drawCount,
@@ -499,41 +523,39 @@ class InspectorBox extends Component {
       minimized,
     } = this.props;
     return (
-    <div
-      ref="box"
-      style={{ left: pos[0], top: pos[1] }}
-      className={
-        "box"+
-        (cls ? " "+cls : "")+
-        (recentDraw ? " recent-draw" : "")+
-        (grabbed ? " grabbed" : "")+
-        (minimized ? " minimized" : "")
-      }>
-      <header onMouseDown={this.onMouseDown}>
-        <Anchor
-          id={glObject.id}
-          drawCount={drawCount}
-        />
-        <span className="name">
-          {glObject.getGLShortName()}
-        </span>
-        <span className="redraw" onClick={this.onRedraw}>
-          <DrawCount drawCount={drawCount} />
-        </span>
-      </header>
-      {children}
-      <footer onClick={this.onClickMinimize}>
-        <span className="minimize">↕</span>
-        <span className="dim">{width}⨉{height}</span>
-        <span className="mode">{mode}</span>
-      </footer>
-    </div>
+      <div
+        ref="box"
+        style={{ left: pos[0], top: pos[1] }}
+        className={
+          "box" +
+            (cls ? " " + cls : "") +
+            (recentDraw ? " recent-draw" : "") +
+            (grabbed ? " grabbed" : "") +
+            (minimized ? " minimized" : "")
+        }
+      >
+        <header onMouseDown={this.onMouseDown}>
+          <Anchor id={glObject.id} drawCount={drawCount} />
+          <span className="name">
+            {glObject.getGLShortName()}
+          </span>
+          <span className="redraw" onClick={this.onRedraw}>
+            <DrawCount drawCount={drawCount} />
+          </span>
+        </header>
+        {children}
+        <footer onClick={this.onClickMinimize}>
+          <span className="minimize">↕</span>
+          <span className="dim">{width}⨉{height}</span>
+          <span className="mode">{mode}</span>
+        </footer>
+      </div>
     );
   }
 }
 
 const formatType = t => {
-  if (Array.isArray(t)) return t[0]+"[]";
+  if (Array.isArray(t)) return t[0] + "[]";
   return t;
 };
 
@@ -544,27 +566,33 @@ class Uniforms extends PureComponent {
   };
   render() {
     const { node, preparedUniforms } = this.props;
-    return <div className="uniforms">
-      { preparedUniforms &&
-        preparedUniforms.map(u =>
-          <div key={u.key} className={"uniform "+classType(u.type)}>
-            <span className="name" title={"uniform "+formatType(u.type)+" "+u.key}>
-              {u.key}
-            </span>
-            <span
-              className={"value-container "+classType(u.type)}
-              title={JSON.stringify(u.value)}>
-              <UniformValue
-                id={u.key}
-                node={node}
-                value={u.value}
-                type={u.type}
-                info={u.getMetaInfo ? u.getMetaInfo() : null}
-              />
-            </span>
-          </div>
-        )}
-    </div>;
+    return (
+      <div className="uniforms">
+        {preparedUniforms &&
+          preparedUniforms.map(u => (
+            <div key={u.key} className={"uniform " + classType(u.type)}>
+              <span
+                className="name"
+                title={"uniform " + formatType(u.type) + " " + u.key}
+              >
+                {u.key}
+              </span>
+              <span
+                className={"value-container " + classType(u.type)}
+                title={JSON.stringify(u.value)}
+              >
+                <UniformValue
+                  id={u.key}
+                  node={node}
+                  value={u.value}
+                  type={u.type}
+                  info={u.getMetaInfo ? u.getMetaInfo() : null}
+                />
+              </span>
+            </div>
+          ))}
+      </div>
+    );
   }
 }
 
@@ -593,27 +621,26 @@ class SVGConnectionLine extends PureComponent {
     const factor = Math.abs(dx) + Math.abs(dy);
     const t = Math.round((recursive ? 0.1 : 0.3) * factor);
     const s = Math.round((recursive ? 0.02 : 0.05) * factor, 8);
-    return <path
-      ref={onPathRef}
-      className="connection-line"
-      d={
-        `M${anchorX},${anchorY} `+
-        `L${anchorX+s},${anchorY} `+
-        `C${anchorX+t},${anchorY} `+
-        (
-          recursive
-          ?
-          `${anchorX+t},${anchorY - anchorYOff} `+
-          `${anchorX+s},${anchorY - anchorYOff} `+
-          `L${hookX-s},${anchorY - anchorYOff} `+
-          `C${hookX-t},${anchorY - anchorYOff} `
-          : ""
-        )+
-        `${hookX-t * (reversedHook?-1:1)},${hookY} `+
-        `${hookX-s * (reversedHook?-1:1)},${hookY} `+
-        `L${hookX},${hookY}`
-      }
-    />;
+    return (
+      <path
+        ref={onPathRef}
+        className="connection-line"
+        d={
+          `M${anchorX},${anchorY} ` +
+            `L${anchorX + s},${anchorY} ` +
+            `C${anchorX + t},${anchorY} ` +
+            (recursive
+              ? `${anchorX + t},${anchorY - anchorYOff} ` +
+                  `${anchorX + s},${anchorY - anchorYOff} ` +
+                  `L${hookX - s},${anchorY - anchorYOff} ` +
+                  `C${hookX - t},${anchorY - anchorYOff} `
+              : "") +
+            `${hookX - t * (reversedHook ? -1 : 1)},${hookY} ` +
+            `${hookX - s * (reversedHook ? -1 : 1)},${hookY} ` +
+            `L${hookX},${hookY}`
+        }
+      />
+    );
   }
 }
 
@@ -636,13 +663,15 @@ class SVGConnection extends Component {
   path: any;
   _raf: any;
   componentDidMount() {
-    const {path} = this;
+    const { path } = this;
     const loop = () => {
       this._raf = raf(loop);
       if (!this.props.animated) return;
-      const values = this.props.anchor.getDrawCountsForTimeWindow(drawTimeWindow);
-      if (values.length===0) {
-        if (this.state.draws.length!==0) {
+      const values = this.props.anchor.getDrawCountsForTimeWindow(
+        drawTimeWindow
+      );
+      if (values.length === 0) {
+        if (this.state.draws.length !== 0) {
           this.setState({ draws: [] });
         }
         return;
@@ -651,7 +680,7 @@ class SVGConnection extends Component {
       this.setState({
         draws: values.map(v => {
           const { x, y } = path.getPointAtLength(v * length);
-          return [ x.toFixed(1), y.toFixed(1) ]; // round is too aggressive and great jump. but using full float is also more consuming
+          return [x.toFixed(1), y.toFixed(1)]; // round is too aggressive and great jump. but using full float is also more consuming
         }),
       });
     };
@@ -668,8 +697,17 @@ class SVGConnection extends Component {
   onPathRef = ref => {
     this.path = ref;
   };
-  render () {
-    const { hookX, hookY, anchorX, anchorY, tension, solid, recursive, reversedHook } = this.props;
+  render() {
+    const {
+      hookX,
+      hookY,
+      anchorX,
+      anchorY,
+      tension,
+      solid,
+      recursive,
+      reversedHook,
+    } = this.props;
     const { draws } = this.state;
     return (
       <g className="connection">
@@ -684,8 +722,7 @@ class SVGConnection extends Component {
           recursive={recursive}
           reversedHook={reversedHook}
         />
-        {draws.map(([x,y], i) =>
-          <circle key={i} cx={x} cy={y} />)}
+        {draws.map(([x, y], i) => <circle key={i} cx={x} cy={y} />)}
       </g>
     );
   }
@@ -701,23 +738,21 @@ class SVGStandaloneConnection extends Component {
     hookY: number,
   };
   render() {
-    const {animated, anchor, anchorX, anchorY, hookX, hookY} = this.props;
-    return <g className="standalone-connection">
-      <SVGConnection
-        animated={animated}
-        anchor={anchor}
-        anchorX={anchorX}
-        anchorY={anchorY}
-        hookX={hookX}
-        hookY={hookY}
-        reversedHook
-      />
-      <circle
-        className="standalone-output"
-        cx={hookX}
-        cy={hookY}
-      />
-    </g>;
+    const { animated, anchor, anchorX, anchorY, hookX, hookY } = this.props;
+    return (
+      <g className="standalone-connection">
+        <SVGConnection
+          animated={animated}
+          anchor={anchor}
+          anchorX={anchorX}
+          anchorY={anchorY}
+          hookX={hookX}
+          hookY={hookY}
+          reversedHook
+        />
+        <circle className="standalone-output" cx={hookX} cy={hookY} />
+      </g>
+    );
   }
 }
 
@@ -741,56 +776,69 @@ class HookDrawer extends Component {
       boxSizes,
       grabbing,
     } = this.props;
-    return <svg ref="svg" className="hook-drawer">{
-      [...anchorsById].map(([ anchorId, anchor ]) => {
-        const hooks = anchorHooksByAnchorId.get(anchorId) || [];
-        const anchorPosition = anchorPositions.get(anchorId);
-        const size = boxSizes.get(anchorId);
-        const anchorIsGrabbed = grabbing && grabbing.id===anchorId;
-        if (!anchorPosition || !size) return null;
-        return <g className={"anchor-group"+(anchorIsGrabbed?" grabbed":"")} key={anchorId}>
-        { hooks.length===0
-          ? <SVGStandaloneConnection
-              animated={animated}
-              anchor={anchor}
-              anchorX={anchorPosition[0]}
-              anchorY={anchorPosition[1]}
-              hookX={anchorPosition[0]}
-              hookY={anchorPosition[1] + size[1] - 22}
-            />
-          : hooks.map(hook => {
-            const hookId = hook.getId();
-            const hookNodeId = hook.getNodeId();
-            const hookIsGrabbed = grabbing && grabbing.id===hookNodeId;
-            const hookPosition = anchorHookPositions.get(hook);
-            if (!hookPosition) return null;
-            return (
-              <g className={"hook-group"+(hookIsGrabbed?" grabbed":"")} key={hookId}>
-                <SVGConnection
-                  animated={animated}
-                  anchor={anchor}
-                  anchorX={anchorPosition[0]}
-                  anchorY={anchorPosition[1]}
-                  hookX={hookPosition[0]}
-                  hookY={hookPosition[1]}
-                  recursive={hookNodeId === anchorId}
-                />
-                <circle
-                  className="hook"
-                  cx={hookPosition[0]}
-                  cy={hookPosition[1]}
-                />
-              </g>
-            );
-          })}
-          <circle
-            className="anchor"
-            cx={anchorPosition[0]}
-            cy={anchorPosition[1]}
-          />
-        </g>;
-      })
-    }</svg>;
+    return (
+      <svg ref="svg" className="hook-drawer">
+        {[...anchorsById].map(([anchorId, anchor]) => {
+          const hooks = anchorHooksByAnchorId.get(anchorId) || [];
+          const anchorPosition = anchorPositions.get(anchorId);
+          const size = boxSizes.get(anchorId);
+          const anchorIsGrabbed = grabbing && grabbing.id === anchorId;
+          if (!anchorPosition || !size) return null;
+          return (
+            <g
+              className={"anchor-group" + (anchorIsGrabbed ? " grabbed" : "")}
+              key={anchorId}
+            >
+              {hooks.length === 0
+                ? <SVGStandaloneConnection
+                    animated={animated}
+                    anchor={anchor}
+                    anchorX={anchorPosition[0]}
+                    anchorY={anchorPosition[1]}
+                    hookX={anchorPosition[0]}
+                    hookY={anchorPosition[1] + size[1] - 22}
+                  />
+                : hooks.map(hook => {
+                    const hookId = hook.getId();
+                    const hookNodeId = hook.getNodeId();
+                    const hookIsGrabbed =
+                      grabbing && grabbing.id === hookNodeId;
+                    const hookPosition = anchorHookPositions.get(hook);
+                    if (!hookPosition) return null;
+                    return (
+                      <g
+                        className={
+                          "hook-group" + (hookIsGrabbed ? " grabbed" : "")
+                        }
+                        key={hookId}
+                      >
+                        <SVGConnection
+                          animated={animated}
+                          anchor={anchor}
+                          anchorX={anchorPosition[0]}
+                          anchorY={anchorPosition[1]}
+                          hookX={hookPosition[0]}
+                          hookY={hookPosition[1]}
+                          recursive={hookNodeId === anchorId}
+                        />
+                        <circle
+                          className="hook"
+                          cx={hookPosition[0]}
+                          cy={hookPosition[1]}
+                        />
+                      </g>
+                    );
+                  })}
+              <circle
+                className="anchor"
+                cx={anchorPosition[0]}
+                cy={anchorPosition[1]}
+              />
+            </g>
+          );
+        })}
+      </svg>
+    );
   }
 }
 
@@ -805,7 +853,7 @@ export default class Inspector extends Component {
   };
   static childContextTypes = {
     inspector: PropTypes.object.isRequired,
-  }
+  };
   getChildContext() {
     return { inspector: this };
   }
@@ -820,14 +868,14 @@ export default class Inspector extends Component {
   boxesById: Map<number, InspectorBox> = new Map();
 
   // FIXME anchorPositions will become relative to nodePositions when it's stable
-  anchorPositions: Map<number, [number,number]> = new Map();
-  anchorHookPositions: Map<AnchorHook, [number,number]> = new Map();
+  anchorPositions: Map<number, [number, number]> = new Map();
+  anchorHookPositions: Map<AnchorHook, [number, number]> = new Map();
 
   boxMinimized: Map<number, boolean> = new Map();
-  boxPos: Map<number, [number,number]> = new Map();
-  boxVel: Map<number, [number,number]> = new Map();
-  boxAcc: Map<number, [number,number]> = new Map();
-  boxSizes: Map<number, [number,number]> = new Map();
+  boxPos: Map<number, [number, number]> = new Map();
+  boxVel: Map<number, [number, number]> = new Map();
+  boxAcc: Map<number, [number, number]> = new Map();
+  boxSizes: Map<number, [number, number]> = new Map();
   _startupTimeout: number;
   _raf: any;
   grabbing: ?{
@@ -860,7 +908,7 @@ export default class Inspector extends Component {
     Visitors.remove(this);
   }
 
-  setSurface (surface: ?Surface) {
+  setSurface(surface: ?Surface) {
     if (surface === this.surface) return;
     this.preparedUniformsMap = new WeakMap();
     this.surface = surface;
@@ -873,30 +921,25 @@ export default class Inspector extends Component {
     this.setSurface(surface);
   }
 
-  onSurfaceMount () {
+  onSurfaceMount() {
     if (!this.surface) {
       this.detectSurface();
     }
   }
 
-  onSurfaceUnmount (surface: Surface) {
-    if (surface===this.surface) {
+  onSurfaceUnmount(surface: Surface) {
+    if (surface === this.surface) {
       this.setSurface(null);
     }
   }
 
-  onSurfaceGLContextChange () {
-  }
+  onSurfaceGLContextChange() {}
 
-  onSurfaceDrawSkipped() {
-  }
+  onSurfaceDrawSkipped() {}
 
-  onSurfaceDrawStart() {
-  }
+  onSurfaceDrawStart() {}
 
-  onSurfaceDrawError () {
-
-  }
+  onSurfaceDrawError() {}
 
   onSurfaceDrawEnd(surface: Surface) {
     if (surface === this.surface) {
@@ -904,27 +947,21 @@ export default class Inspector extends Component {
     }
   }
 
-  onNodeDrawSkipped() {
+  onNodeDrawSkipped() {}
 
-  }
+  onNodeDrawStart() {}
 
-  onNodeDrawStart() {
-
-  }
-
-  onNodeSyncDeps() {
-
-  }
+  onNodeSyncDeps() {}
 
   onNodeDraw(node: Node, preparedUniforms: Object) {
     this.preparedUniformsMap.set(node, preparedUniforms);
   }
 
   onNodeDrawEnd(node: Node) {
-    this.nodeDrawCounts.set(node, (this.nodeDrawCounts.get(node)||0)+1);
+    this.nodeDrawCounts.set(node, (this.nodeDrawCounts.get(node) || 0) + 1);
     node.dependencies.forEach(obj => {
       if (obj instanceof Bus) {
-        this.busDrawCounts.set(obj, (this.busDrawCounts.get(obj)||0)+1);
+        this.busDrawCounts.set(obj, (this.busDrawCounts.get(obj) || 0) + 1);
       }
     });
   }
@@ -933,8 +970,7 @@ export default class Inspector extends Component {
     let hooks = this.anchorHooksByAnchorId.get(id);
     if (!hooks) {
       this.anchorHooksByAnchorId.set(id, [hook]);
-    }
-    else {
+    } else {
       hooks.push(hook);
     }
     this.forceUpdate();
@@ -945,7 +981,7 @@ export default class Inspector extends Component {
     if (hooks) {
       const i = hooks.indexOf(hook);
       hooks.splice(i, 1);
-      if (hooks.length===0) {
+      if (hooks.length === 0) {
         this.anchorHooksByAnchorId.delete(id);
       }
       this.forceUpdate();
@@ -965,8 +1001,9 @@ export default class Inspector extends Component {
   addBox(id: number, box: InspectorBox) {
     this.boxesById.set(id, box);
     const i = this.boxPos.size;
-    const pos = [ // FIXME TMP
-      60 + 240 * ((i+1) % 2),
+    const pos = [
+      // FIXME TMP
+      60 + 240 * ((i + 1) % 2),
       40 + 200 * Math.floor(i / 2),
     ];
     this.boxPos.set(id, pos);
@@ -983,8 +1020,8 @@ export default class Inspector extends Component {
   }
 
   bounds: any;
-  syncFromDom () {
-    const {nodes, body} = this.refs;
+  syncFromDom() {
+    const { nodes, body } = this.refs;
     let hasChanged = false;
     if (nodes) {
       this.bounds = body.getBoundingClientRect();
@@ -1000,22 +1037,22 @@ export default class Inspector extends Component {
       // FIXME only the Anchor and AnchorHook should be allow to "sync this"
       // as soon as we make this local position, not global...
       anchorsById.forEach((anchor, id) => {
-        let [x,y] = anchor.getXY();
+        let [x, y] = anchor.getXY();
         x = Math.round(x - offX);
         y = Math.round(y - offY);
         const old = anchorPositions.get(id);
-        if (!old || x!==old[0] || y!==old[1]) {
+        if (!old || x !== old[0] || y !== old[1]) {
           hasChanged = true;
           anchorPositions.set(id, [x, y]);
         }
       });
       anchorHooksByAnchorId.forEach(anchorHooks => {
         anchorHooks.forEach(anchorHook => {
-          let [x,y] = anchorHook.getXY();
+          let [x, y] = anchorHook.getXY();
           x = Math.round(x - offX);
           y = Math.round(y - offY);
           const old = anchorHookPositions.get(anchorHook);
-          if (!old || x!==old[0] || y!==old[1]) {
+          if (!old || x !== old[0] || y !== old[1]) {
             hasChanged = true;
             anchorHookPositions.set(anchorHook, [x, y]);
           }
@@ -1025,7 +1062,7 @@ export default class Inspector extends Component {
       boxesById.forEach((box, id) => {
         const size = box.getSize();
         const old = boxSizes.get(id);
-        if (!old || size[0]!==old[0] || size[1]!==old[1]) {
+        if (!old || size[0] !== old[0] || size[1] !== old[1]) {
           hasChanged = true;
           boxSizes.set(id, size);
         }
@@ -1034,14 +1071,11 @@ export default class Inspector extends Component {
     return hasChanged;
   }
 
-  applyForce(id: */* FIXME number|string !?*/, force: [number, number]) {
-    const {boxAcc} = this;
+  applyForce(id: * /* FIXME number|string !?*/, force: [number, number]) {
+    const { boxAcc } = this;
     const mass = 1;
-    const acc = boxAcc.get(id) || [0,0];
-    boxAcc.set(id, [
-      acc[0] + force[0] / mass,
-      acc[1] + force[1] / mass,
-    ]);
+    const acc = boxAcc.get(id) || [0, 0];
+    boxAcc.set(id, [acc[0] + force[0] / mass, acc[1] + force[1] / mass]);
   }
 
   spring() {
@@ -1068,80 +1102,59 @@ export default class Inspector extends Component {
           const dy = anchorPos[1] - hookPos[1];
           const magn = Math.sqrt(dx * dx + dy * dy);
           const dist = magn + 0.1;
-          const dir = [ dx / magn, dy / magn ];
+          const dir = [dx / magn, dy / magn];
           // Coulombs law
           const m = 8 / (dist * dist);
-          this.applyForce(anchorId, [
-            m * dir[0],
-            m * dir[1]
-          ]);
-          this.applyForce(hookId, [
-            -m * dir[0],
-            -m * dir[1]
-          ]);
+          this.applyForce(anchorId, [m * dir[0], m * dir[1]]);
+          this.applyForce(hookId, [-m * dir[0], -m * dir[1]]);
           // Hookes law
           const length = 1.0; // FIXME mysterious constant xD
           const disp = length - magn;
           const n = 0.5 * 0.00001 * disp;
-          this.applyForce(hookId, [
-            -n * dir[0],
-            -n * dir[1]
-          ]);
-          this.applyForce(anchorId, [
-            n * dir[0],
-            n * dir[1]
-          ]);
+          this.applyForce(hookId, [-n * dir[0], -n * dir[1]]);
+          this.applyForce(anchorId, [n * dir[0], n * dir[1]]);
         }
       });
     });
 
     // a box push other boxes
     const boxIds = [...boxPos.keys()];
-    for (let i=0; i<boxIds.length; i++) {
+    for (let i = 0; i < boxIds.length; i++) {
       const box1id = boxIds[i];
       const box1pos = boxPos.get(box1id);
       const box1size = boxSizes.get(box1id);
       if (!box1size) continue;
-      for (let j=i+1; j<boxIds.length; j++) {
+      for (let j = i + 1; j < boxIds.length; j++) {
         const box2id = boxIds[j];
         const box2pos = boxPos.get(box2id);
         const box2size = boxSizes.get(box2id);
         if (!box2size || !box2pos || !box1pos) continue;
-        const dx = box1pos[0] + box1size[0]/2 - (box2pos[0] + box2size[0]);
-        const dy = box1pos[1] + box1size[1]/2 - (box2pos[1] + box2size[1]);
+        const dx = box1pos[0] + box1size[0] / 2 - (box2pos[0] + box2size[0]);
+        const dy = box1pos[1] + box1size[1] / 2 - (box2pos[1] + box2size[1]);
         const magn = Math.sqrt(dx * dx + dy * dy);
         const dist = magn + 0.1;
-        const dir = [ dx / magn, dy / magn ];
+        const dir = [dx / magn, dy / magn];
         const m = 6 / (dist * dist);
-        this.applyForce(box1id, [
-          m * dir[0],
-          m * dir[1]
-        ]);
-        this.applyForce(box2id, [
-          -m * dir[0],
-          -m * dir[1]
-        ]);
+        this.applyForce(box1id, [m * dir[0], m * dir[1]]);
+        this.applyForce(box2id, [-m * dir[0], -m * dir[1]]);
       }
     }
   }
 
-  updateVelocityPosition (timestep: number) {
-    const {grabbing, boxPos, boxVel, boxAcc, bounds, boxSizes} = this;
+  updateVelocityPosition(timestep: number) {
+    const { grabbing, boxPos, boxVel, boxAcc, bounds, boxSizes } = this;
     const damping = 0.5;
     const grabId = grabbing && grabbing.id;
     boxPos.forEach((p, id) => {
       if (id === grabId) return;
-      let a = boxAcc.get(id) || [0,0];
-      let v = boxVel.get(id) || [0,0];
-      const size = boxSizes.get(id) || [0,0];
+      let a = boxAcc.get(id) || [0, 0];
+      let v = boxVel.get(id) || [0, 0];
+      const size = boxSizes.get(id) || [0, 0];
       v = [
         (v[0] + a[0] * timestep) * damping,
         (v[1] + a[1] * timestep) * damping,
       ];
-      p = [
-        p[0] + v[0] * timestep,
-        p[1] + v[1] * timestep,
-      ];
+      p = [p[0] + v[0] * timestep, p[1] + v[1] * timestep];
       if (bounds) {
         const pad = 20;
         p[0] = Math.max(pad, Math.min(p[0], bounds.width - size[0] - pad));
@@ -1155,7 +1168,7 @@ export default class Inspector extends Component {
     });
   }
 
-  physicsStep (timestep: number) {
+  physicsStep(timestep: number) {
     this.spring();
     this.updateVelocityPosition(timestep);
     var energy = 0.0;
@@ -1182,12 +1195,9 @@ export default class Inspector extends Component {
       const { id, initialPos, initialEventPos } = this.grabbing;
       const dx = e.clientX - initialEventPos[0];
       const dy = e.clientY - initialEventPos[1];
-      const pos = [
-        initialPos[0] + dx,
-        initialPos[1] + dy,
-      ];
+      const pos = [initialPos[0] + dx, initialPos[1] + dy];
       this.boxPos.set(id, pos);
-      this.forceUpdate();// NB for better perf we should only make the box to update.. same for the physicsStep
+      this.forceUpdate(); // NB for better perf we should only make the box to update.. same for the physicsStep
     }
   };
 
@@ -1221,7 +1231,7 @@ export default class Inspector extends Component {
   onMinimizeAllChange = (e: *) => {
     const minimizeAll = e.target.checked;
     this.setState({ minimizeAll });
-    const {boxPos, boxMinimized} = this;
+    const { boxPos, boxMinimized } = this;
     boxPos.forEach((p, id) => {
       boxMinimized.set(id, minimizeAll);
     });
@@ -1232,11 +1242,9 @@ export default class Inspector extends Component {
   };
 
   onSelectChange = (e: *) => {
-    const {selectedIndex} = e.target;
+    const { selectedIndex } = e.target;
     this.setSurface(
-      selectedIndex===0
-      ? undefined
-      : listSurfaces()[selectedIndex - 1]
+      selectedIndex === 0 ? undefined : listSurfaces()[selectedIndex - 1]
     );
   };
 
@@ -1247,9 +1255,9 @@ export default class Inspector extends Component {
 
   loseContextLatestExtension: any;
   loseContext = () => {
-    const {surface} = this;
+    const { surface } = this;
     if (surface) {
-      const {gl} = surface;
+      const { gl } = surface;
       if (gl) {
         this.loseContextLatestExtension = gl.getExtension("WEBGL_lose_context");
         this.loseContextLatestExtension.loseContext();
@@ -1259,7 +1267,7 @@ export default class Inspector extends Component {
   };
 
   restoreContext = () => {
-    const {loseContextLatestExtension} = this;
+    const { loseContextLatestExtension } = this;
     if (loseContextLatestExtension) {
       loseContextLatestExtension.restoreContext();
       this.loseContextLatestExtension = null;
@@ -1272,11 +1280,11 @@ export default class Inspector extends Component {
     if (e.target.checked) {
       Visitors.add(inspectorVisitorLogger);
     }
-  }
+  };
 
-  render () {
-    const {surface, boxPos, grabbing} = this;
-    const {capture, animated, minimizeAll, physics} = this.state;
+  render() {
+    const { surface, boxPos, grabbing } = this;
+    const { capture, animated, minimizeAll, physics } = this.state;
 
     const key = surface && surface.id;
     let headerBody, body;
@@ -1288,29 +1296,29 @@ export default class Inspector extends Component {
       // when you over a uniform, it should bold the connected lines.
 
       if (root) {
-        let stack: Array<Bus | Node> = [ root ];
+        let stack: Array<Bus | Node> = [root];
         const explored = {};
         while (stack.length > 0) {
           const n: Node | Bus = stack.pop();
           const deps = n instanceof Node ? n.dependencies : [];
           stack = deps.concat(stack);
-          const {id} = n;
+          const { id } = n;
           if (explored[id]) continue; // FIXME for some reason i can't yet figure out, it can't be before the stacking in advanced examples like Behind Asteroids
           explored[id] = true;
-          const pos = boxPos.get(id) || [0,0];
+          const pos = boxPos.get(id) || [0, 0];
           const minimized = this.boxMinimized.get(id) || false;
           const props = {
             animated,
             key: id,
             pos,
             glObject: n,
-            grabbed: grabbing ? grabbing.id===id : false,
+            grabbed: grabbing ? grabbing.id === id : false,
             minimized,
             onMinimizeChange: this.onMinimizeChange,
             onGrabStart: this.onGrabStart,
           };
           if (n instanceof Node) {
-            const [ width, height ] = n.getGLSize();
+            const [width, height] = n.getGLSize();
             const drawCount = this.nodeDrawCounts.get(n);
             nodeElements.push(
               <InspectorBox
@@ -1320,24 +1328,19 @@ export default class Inspector extends Component {
                 width={width}
                 height={height}
                 mode={
-                  n.framebuffer
-                  ? (minimized ? "fbo" : "framebuffer")
-                  : "canvas"
-                }>
+                  n.framebuffer ? minimized ? "fbo" : "framebuffer" : "canvas"
+                }
+              >
                 <Uniforms
                   preparedUniforms={this.preparedUniformsMap.get(n)}
                   node={n}
                 />
-                { capture && !minimized
-                  ? <PreviewNode
-                      node={n}
-                      drawCount={drawCount}
-                    />
-                  : null }
+                {capture && !minimized
+                  ? <PreviewNode node={n} drawCount={drawCount} />
+                  : null}
               </InspectorBox>
             );
-          }
-          else {
+          } else {
             const content = n.getGLRenderableContent();
             const [width, height] = inferSize(content);
             const drawCount = this.busDrawCounts.get(n);
@@ -1349,15 +1352,14 @@ export default class Inspector extends Component {
                 drawCount={drawCount}
                 width={width}
                 height={height}
-                mode={String(content)}>
-              <div className="content-html">
-                { (content && content.outerHTML) || null }
-              </div>
-              { capture && !minimized
-                ? <PreviewContent
-                    content={content}
-                  />
-                : null}
+                mode={String(content)}
+              >
+                <div className="content-html">
+                  {(content && content.outerHTML) || null}
+                </div>
+                {capture && !minimized
+                  ? <PreviewContent content={content} />
+                  : null}
               </InspectorBox>
             );
           }
@@ -1400,48 +1402,47 @@ export default class Inspector extends Component {
             </label>
           </div>,
           lost
-          ?
-          <Btn key="ctx" onClick={this.restoreContext}>
-            restore GL context
-          </Btn>
-          :
-          <Btn key="ctx" onClick={this.loseContext}>
-            lose GL context
-          </Btn>
+            ? <Btn key="ctx" onClick={this.restoreContext}>
+                restore GL context
+              </Btn>
+            : <Btn key="ctx" onClick={this.loseContext}>
+                lose GL context
+              </Btn>,
         ];
-        body =
-        <div ref="body" className="body">
-          <div ref="nodes" className="nodes">
-            {nodeElements}
+        body = (
+          <div ref="body" className="body">
+            <div ref="nodes" className="nodes">
+              {nodeElements}
+            </div>
+            <HookDrawer
+              animated={animated}
+              anchorHooksByAnchorId={this.anchorHooksByAnchorId}
+              anchorsById={this.anchorsById}
+              anchorPositions={this.anchorPositions}
+              anchorHookPositions={this.anchorHookPositions}
+              boxSizes={this.boxSizes}
+              grabbing={grabbing}
+            />
           </div>
-          <HookDrawer
-            animated={animated}
-            anchorHooksByAnchorId={this.anchorHooksByAnchorId}
-            anchorsById={this.anchorsById}
-            anchorPositions={this.anchorPositions}
-            anchorHookPositions={this.anchorHookPositions}
-            boxSizes={this.boxSizes}
-            grabbing={grabbing}
-          />
-        </div>;
+        );
       }
-    }
-
-    else {
-      body =
-      <div className="body">
-        <div className="no-surface">
-          <h2>No Surface is currently inspected. Select one of these:</h2>
-          <ul>
-          {listSurfaces().map(surface =>
-            <li key={surface.id}>
-              <span onClick={() => this.setSurface(surface)}>
-                {surface.getGLName()}
-              </span>
-            </li>)}
-          </ul>
+    } else {
+      body = (
+        <div className="body">
+          <div className="no-surface">
+            <h2>No Surface is currently inspected. Select one of these:</h2>
+            <ul>
+              {listSurfaces().map(surface => (
+                <li key={surface.id}>
+                  <span onClick={() => this.setSurface(surface)}>
+                    {surface.getGLName()}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>;
+      );
     }
 
     return (
@@ -1451,21 +1452,26 @@ export default class Inspector extends Component {
         onMouseUp={this.onMouseUp}
         onMouseLeave={this.onMouseLeave}
         onMouseMove={this.onMouseMove}
-        className={"gl-react-inspector"}>
+        className={"gl-react-inspector"}
+      >
         <header>
           <div>
-            <select value={surface ? surface.id : ""} onChange={this.onSelectChange}>
+            <select
+              value={surface ? surface.id : ""}
+              onChange={this.onSelectChange}
+            >
               <option value="">(none)</option>
-              {listSurfaces().map(surface =>
+              {listSurfaces().map(surface => (
                 <option key={surface.id} value={surface.id}>
                   {surface.getGLName()}
-                </option>)}
+                </option>
+              ))}
             </select>
             <label>
               <input
                 type="checkbox"
                 onChange={this.onVisitorLoggerChange}
-                value={Visitors.get().indexOf(inspectorVisitorLogger)!==-1}
+                value={Visitors.get().indexOf(inspectorVisitorLogger) !== -1}
               />
               console logs
             </label>

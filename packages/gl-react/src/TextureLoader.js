@@ -40,7 +40,6 @@ export default class TextureLoader<T> {
    * If load() is called twice, same value should be returned. but you can drop it when it's loaded.
    */
   load(input: T): DisposablePromise<WebGLTexture> {
-    // eslint-disable-line no-unused-vars
     // noop default implementation
     return {
       promise: new Promise(noop),

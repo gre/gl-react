@@ -3,8 +3,8 @@
 
 
 "@expo/ex-navigation@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@expo/ex-navigation/-/ex-navigation-2.11.0.tgz#429f9ee1121e5174e7473171a013d1be048ee425"
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/@expo/ex-navigation/-/ex-navigation-2.11.1.tgz#c2d1e831cf9ee2990832c62ca68e9a3d6cacad02"
   dependencies:
     "@expo/react-native-touchable-native-feedback-safe" "^1.1.0"
     clamp "^1.0.1"
@@ -20,7 +20,7 @@
     react-clone-referenced-element "^1.0.1"
     react-mixin "^3.0.5"
     react-native-drawer-layout-polyfill "^1.1.0"
-    react-native-tab-view "0.0.52"
+    react-native-tab-view "^0.0.61"
     react-redux "^4.4.5"
     react-static-container "^1.0.0"
     react-timer-mixin "^0.13.3"
@@ -539,8 +539,8 @@ create-react-class@^15.5.1, create-react-class@^15.5.2:
     object-assign "^4.1.1"
 
 debug@^2.2.0:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.4.tgz#7586a9b3c39741c0282ae33445c4e8ac74734fe0"
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.6.tgz#a9fa6fbe9ca43cf1e79f73b75c0189cbb7d6db5a"
   dependencies:
     ms "0.7.3"
 
@@ -606,8 +606,8 @@ hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.0.5:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
 iconv-lite@~0.4.13:
-  version "0.4.15"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
+  version "0.4.16"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.16.tgz#65de3beeb39e2960d67f049f1634ffcbcde9014b"
 
 invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1:
   version "2.2.2"
@@ -768,9 +768,11 @@ react-native-drawer-layout@1.3.0:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-tab-view@0.0.52:
-  version "0.0.52"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.52.tgz#61655f93974ff4f26f02bd739566848984ad53c7"
+react-native-tab-view@^0.0.61:
+  version "0.0.61"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.61.tgz#9f5446c9ad33158b87f0bccf5004fbff79ca1f92"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-proxy@^1.1.7:
   version "1.1.8"
@@ -819,8 +821,8 @@ redux@^3.5.2:
     symbol-observable "^1.0.2"
 
 regenerator-runtime@^0.10.0:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.3.tgz#8c4367a904b51ea62a908ac310bf99ff90a82a3e"
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
 regenerator-transform@0.9.11:
   version "0.9.11"
@@ -865,8 +867,8 @@ three@0.84.0:
   resolved "https://registry.yarnpkg.com/three/-/three-0.84.0.tgz#95be85a55a0fa002aa625ed559130957dcffd918"
 
 to-fast-properties@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.2.tgz#f3f5c0c3ba7299a7ef99427e44633257ade43320"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
 
 ua-parser-js@^0.7.9:
   version "0.7.12"
@@ -883,5 +885,5 @@ warning@^2.1.0:
     loose-envify "^1.0.0"
 
 whatwg-fetch@>=0.10.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-1.1.1.tgz#ac3c9d39f320c6dce5339969d054ef43dd333319"
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"

@@ -80,14 +80,7 @@ export default class GLViewDOM extends Component {
   }
 
   render() {
-    let {
-      width,
-      height,
-      pixelRatio,
-      style,
-      debug, // eslint-disable-line no-unused-vars
-      ...rest
-    } = this.props;
+    let { width, height, pixelRatio, style, debug, ...rest } = this.props;
     if (!pixelRatio) pixelRatio = Number(window.devicePixelRatio || 1);
     for (let k in propTypes) {
       if (rest.hasOwnProperty(k)) {

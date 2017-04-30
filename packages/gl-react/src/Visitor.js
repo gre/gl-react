@@ -32,47 +32,47 @@ export default class Visitor {
   /**
    *
    */
-  onSurfaceMount(surface: Surface) {} // eslint-disable-line no-unused-vars
+  onSurfaceMount(surface: Surface) {}
   /**
    *
    */
-  onSurfaceUnmount(surface: Surface) {} // eslint-disable-line no-unused-vars
+  onSurfaceUnmount(surface: Surface) {}
   /**
    *
    */
-  onSurfaceGLContextChange(surface: Surface, gl: ?WebGLRenderingContext) {} // eslint-disable-line no-unused-vars
+  onSurfaceGLContextChange(surface: Surface, gl: ?WebGLRenderingContext) {}
   /**
    */
-  onSurfaceDrawSkipped(surface: Surface) {} // eslint-disable-line no-unused-vars
+  onSurfaceDrawSkipped(surface: Surface) {}
   /**
    */
-  onSurfaceDrawStart(surface: Surface) {} // eslint-disable-line no-unused-vars
+  onSurfaceDrawStart(surface: Surface) {}
   /**
    * if returns true, it prevent a throw to happen from the request animation frame loop (or from a surface.flush() call).
    */
   onSurfaceDrawError(e: Error) {
     return false;
-  } // eslint-disable-line no-unused-vars
+  }
   /**
    */
-  onSurfaceDrawEnd(surface: Surface) {} // eslint-disable-line no-unused-vars
+  onSurfaceDrawEnd(surface: Surface) {}
   /**
    */
-  onNodeDrawSkipped(node: Node) {} // eslint-disable-line no-unused-vars
+  onNodeDrawSkipped(node: Node) {}
   /**
    */
-  onNodeDrawStart(node: Node) {} // eslint-disable-line no-unused-vars
+  onNodeDrawStart(node: Node) {}
   /**
    */
   onNodeSyncDeps(
     node: Node,
     additions: Array<Node | Bus>,
     deletions: Array<Node | Bus>
-  ) {} // eslint-disable-line no-unused-vars
+  ) {}
   /**
    */
-  onNodeDraw(node: Node, preparedUniforms: Array<*>) {} // eslint-disable-line no-unused-vars
+  onNodeDraw(node: Node, preparedUniforms: Array<*>) {}
   /**
    */
-  onNodeDrawEnd(node: Node) {} // eslint-disable-line no-unused-vars
+  onNodeDrawEnd(node: Node) {}
 }

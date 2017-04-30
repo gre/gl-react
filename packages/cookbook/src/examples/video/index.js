@@ -27,7 +27,7 @@ export class Video extends Component {
     raf.cancel(this._raf);
   }
   render() {
-    const { onFrame, ...rest } = this.props; // eslint-disable-line
+    const { onFrame, ...rest } = this.props;
     return <video {...rest} ref="video" />;
   }
 }
