@@ -1,8 +1,0 @@
-- the example align center but does not scroll?
-- you should be able to swipe across examples.
-- the list of example texts are shitty. we need to make it better. I think a thumbnail would be neat, simplify and cleanify the text too.
-- implement blurimgtitle. probably will use react-native-view-shot for rasterizing the text.
-- write more "pure tests" screens. accessible from the about screen.
-  - add back the image orientations test
-  - test if opacity "works"
-  - try to put one surface in the corner of another to see if z-index and also if there is no rendering weirdness.
