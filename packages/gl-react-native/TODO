@@ -1,16 +1,18 @@
+# Android issues
+
+- if you try to "Debug JS Remotely" it will throw an error, unlike the iOS implementation that "recover" this state.
+- there is a flash/blink issue. Maybe related to that onDrawFrame gets called even if there is nothing to draw. See for instance example 'blurmapdyn': I have 2+ fbos, only the "final" fbo is supposed to run, but rendering seems to alternate them producing a blink between the normal fbo and the "utility" fbo :o
+- black opacity rendered from a shader does not work as espected (iOS works). See for instance example diamondcrop.
+
 
 # Highest Priority
 
-- Android Bug: each time I reopen my app from background OR more simply if I switch orientation of my phone, it starts "accumulating" renderings & blink like crazy... It looks like the way the gl calls are stacking over and over?
 - Improve overall performance: Pretty bad in Simulator, not that great on device. in Release mode, it's much better, but I still feel it's not the best. Profile and investigate what's slow. Might be good to also have some way to measure things, show FPS.
 – `animated` example needs to be as smooth as used to be gl-react-native v2. we're close.
 - Bug: something is wrong on supporting many views at same time: `hearts` cookbook example renders black and make the app unresponsive. That example renders a list of GLViews, Not sure what happens. no crash tho. On Android it's working a bit better, but also crash after some scrolls.
 - `colorscale` example breaks on iOS. it's not even crashing the app \o/ . works fine in Android.
 - `demodesertcrt` example breaks too.
-- Android: `paint` example does not work as expected. when you tap, the whole surface get colored! some issue with `discard;` ?! Same happen to the `pixeleditor`, everything gets paint, like if `discard` was not working?
-- Android: `animated` renders black on first touch. (touch event issue in that example?)
 - expose a requestGLFrame that will allows the webgl impl to "slow down" the renderer if it can't follow.
-- there are weird flash going on when you switch from one example to another. some weird usage of memory?
 
 # Medium Priority
 
