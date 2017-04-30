@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
+import raf from "raf";
 import { createSurface } from "gl-react";
 import getContext from "./getContext";
 import loseGL from "./loseGL";
@@ -149,4 +150,6 @@ export const Surface = createSurface({
   RenderLessElement,
   // $FlowFixMe trust me flow xD
   mapRenderableContent: (el: RenderLessElement) => el.getFirstChild(),
+  requestFrame: raf,
+  cancelFrame: raf.cancel,
 });

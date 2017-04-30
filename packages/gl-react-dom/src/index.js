@@ -1,5 +1,6 @@
 //@flow
 import { createSurface, TextureLoaders } from "gl-react";
+import raf from "raf";
 import GLView from "./GLViewDOM";
 import ImageTextureLoader from "./ImageTextureLoader";
 import CanvasTextureLoader from "./CanvasTextureLoader";
@@ -20,4 +21,6 @@ export const Surface = createSurface({
   GLView,
   RenderLessElement,
   mapRenderableContent,
+  requestFrame: raf,
+  cancelFrame: raf.cancel,
 });

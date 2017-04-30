@@ -33,7 +33,6 @@
     "ndarray": "^1.0.18",
     "ndarray-ops": "^1.2.2",
     "prop-types": "^15.5.8",
-    "raf": "^3.3.0",
     "typedarray-pool": "^1.1.0"
   },
   "scripts": {

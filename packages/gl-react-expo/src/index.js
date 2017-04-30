@@ -11,4 +11,6 @@ const RenderLessElement = View;
 export const Surface = createSurface({
   GLView,
   RenderLessElement,
+  requestFrame: global.requestAnimationFrame,
+  cancelFrame: global.cancelAnimationFrame,
 });
