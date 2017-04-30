@@ -1,6 +1,6 @@
 {
   "name": "cookbook-rn-shared",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "private": true,
   "main": "lib/index.js",
   "scripts": {

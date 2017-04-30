@@ -1,15 +1,15 @@
 {
   "name": "cookbook-rn",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "private": true,
   "scripts": {
     "start": "haul start"
   },
   "dependencies": {
     "@expo/ex-navigation": "^2.11.0",
-    "cookbook-rn-shared": "^3.1.1",
+    "cookbook-rn-shared": "^3.1.2",
     "core-js": "^2.4.1",
-    "gl-react-native": "^3.1.1",
+    "gl-react-native": "^3.1.2",
     "prop-types": "^15.5.8",
     "react-native": "~0.42.3"
   },
