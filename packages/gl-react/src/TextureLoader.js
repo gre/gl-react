@@ -1,5 +1,5 @@
 //@flow
-import type {DisposablePromise} from "./helpers/disposable";
+import type { DisposablePromise } from "./helpers/disposable";
 
 const noop = () => {};
 
@@ -7,7 +7,6 @@ const noop = () => {};
  * A texture loader is an extensible way to add more "renderable texture" into gl-react.
  */
 export default class TextureLoader<T> {
-
   /**
    * @property {WebGLRenderingContext} gl - the contextual rendering context
    */
@@ -16,31 +15,32 @@ export default class TextureLoader<T> {
   /**
    *
    */
-  constructor (gl: WebGLRenderingContext) {
+  constructor(gl: WebGLRenderingContext) {
     this.gl = gl;
   }
 
   /**
    * You must free everything you have done and stop all pending load() calls.
    */
-  +dispose: ()=>void;
+  +dispose: () => void;
 
   /**
    * Check if the loader should handle a given input
    */
-  +canLoad: (input: any)=>boolean;
+  +canLoad: (input: any) => boolean;
 
   /**
    * try to get in sync the texture for a given output. otherwise null.
    */
-  +get: (input: T)=>?WebGLTexture;
+  +get: (input: T) => ?WebGLTexture;
 
   /**
    * load() called if get() was null. it returns a promise and a dispose function.
    * It is your responsability to cache the disposable per input.
    * If load() is called twice, same value should be returned. but you can drop it when it's loaded.
    */
-  load (input: T): DisposablePromise<WebGLTexture> { // eslint-disable-line no-unused-vars
+  load(input: T): DisposablePromise<WebGLTexture> {
+    // eslint-disable-line no-unused-vars
     // noop default implementation
     return {
       promise: new Promise(noop),

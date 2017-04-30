@@ -2,8 +2,11 @@
 import GLImages from "./GLImages";
 
 // This is a window.Image polyfill implementation that works with WebGL implementation. (can be provided to gl.texImage2D 6-args version)
-export default function GLImage () {
-  if (!(this instanceof GLImage)) throw new Error("Failed to construct 'Image': Please use the 'new' operator.");
+export default function GLImage() {
+  if (!(this instanceof GLImage))
+    throw new Error(
+      "Failed to construct 'Image': Please use the 'new' operator."
+    );
   this.onload = null;
   this._src = null;
   this.glAssetId = null;
@@ -25,5 +28,5 @@ GLImage.prototype = {
         if (this.onload) this.onload();
       });
     }
-  }
+  },
 };

@@ -1,9 +1,8 @@
-
 //@flow
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
-import {createSurface} from "gl-react";
+import { createSurface } from "gl-react";
 import getContext from "./getContext";
 import loseGL from "./loseGL";
 
@@ -33,10 +32,10 @@ const propTypes = {
 
 class GLView extends Component {
   props: {
-    onContextCreate: (gl: WebGLRenderingContext)=>void,
-    onContextFailure: (e: Error)=>void,
-    onContextLost: ()=>void,
-    onContextRestored: (gl: ?WebGLRenderingContext)=>void,
+    onContextCreate: (gl: WebGLRenderingContext) => void,
+    onContextFailure: (e: Error) => void,
+    onContextLost: () => void,
+    onContextRestored: (gl: ?WebGLRenderingContext) => void,
     webglContextAttributes?: WebGLContextAttributes,
     width: number,
     height: number,
@@ -47,16 +46,25 @@ class GLView extends Component {
   gl: ?WebGLRenderingContext;
 
   componentDidMount() {
-    invariant(this.canvas, "GLView: canvas is not available in componentDidMount!");
+    invariant(
+      this.canvas,
+      "GLView: canvas is not available in componentDidMount!"
+    );
     // TODO hook context lost / restore
-    const { webglContextAttributes, onContextCreate, onContextFailure } = this.props;
-    const gl: ?WebGLRenderingContext = getContext(this.canvas, webglContextAttributes);
-    this.webglContextAttributes = webglContextAttributes||{};
+    const {
+      webglContextAttributes,
+      onContextCreate,
+      onContextFailure,
+    } = this.props;
+    const gl: ?WebGLRenderingContext = getContext(
+      this.canvas,
+      webglContextAttributes
+    );
+    this.webglContextAttributes = webglContextAttributes || {};
     if (gl) {
       this.gl = gl;
       onContextCreate(gl);
-    }
-    else {
+    } else {
       onContextFailure(new Error("no-webgl-context"));
     }
   }
@@ -64,7 +72,9 @@ class GLView extends Component {
   componentWillReceiveProps({ width, height }) {
     if (this.props.width !== width || this.props.height !== height) {
       if (this.gl) {
-        this.gl.getExtension("STACKGL_resize_drawingbuffer").resize(width, height);
+        this.gl
+          .getExtension("STACKGL_resize_drawingbuffer")
+          .resize(width, height);
       }
     }
   }
@@ -81,24 +91,15 @@ class GLView extends Component {
     this.props.onContextRestored(this.gl);
   }
 
-  captureAsDataURL () {
-
-  }
-  captureAsBlob () {
-
-  }
+  captureAsDataURL() {}
+  captureAsBlob() {}
 
   render() {
     const { width, height, ...rest } = this.props;
     for (let k in propTypes) {
       delete rest[k];
     }
-    return <canvas
-      ref={this.onRef}
-      width={width}
-      height={height}
-      {...rest}
-    />;
+    return <canvas ref={this.onRef} width={width} height={height} {...rest} />;
   }
 
   onRef = (ref: HTMLCanvasElement) => {
@@ -117,28 +118,29 @@ class RenderLessElement extends Component {
     const ref = this.refMap.get(0);
     if (ref && typeof ref.getRootRef === "function") return ref.getRootRef();
     return ref;
-  }
+  };
   render() {
-    const {children} = this.props;
-    return <span>{
-      React.Children.map(children, (element, i) => {
-        if (!element) return element;
-        const cloneRef = ref => this.refMap.set(i, ref);
-        const originalRef = element.ref;
-        if (typeof originalRef==="string") {
-          return element; // we don't want to be intrusive
-        }
-        return React.cloneElement(element, {
-          ref:
-            !originalRef
-            ? cloneRef
-            : (component) => {
-              cloneRef(component);
-              originalRef(component);
-            }
-        });
-      })
-    }</span>;
+    const { children } = this.props;
+    return (
+      <span>
+        {React.Children.map(children, (element, i) => {
+          if (!element) return element;
+          const cloneRef = ref => this.refMap.set(i, ref);
+          const originalRef = element.ref;
+          if (typeof originalRef === "string") {
+            return element; // we don't want to be intrusive
+          }
+          return React.cloneElement(element, {
+            ref: !originalRef
+              ? cloneRef
+              : component => {
+                  cloneRef(component);
+                  originalRef(component);
+                },
+          });
+        })}
+      </span>
+    );
   }
 }
 

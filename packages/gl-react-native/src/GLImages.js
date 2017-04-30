@@ -1,8 +1,9 @@
 //@flow
 import LRU from "lru";
-import {NativeModules} from "react-native";
-import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
-const {GLImagesModule} = NativeModules;
+import { NativeModules } from "react-native";
+import resolveAssetSource
+  from "react-native/Libraries/Image/resolveAssetSource";
+const { GLImagesModule } = NativeModules;
 
 export type ImageSource = Object | number;
 type ImageSourceHash = string | number;
@@ -11,14 +12,16 @@ let id = 1;
 const cache = new LRU(50);
 
 cache.on("evict", ({ value }) => {
-  value.then(id => GLImagesModule.unload(id));
+  value.then(id => (console.log("evict " + id), GLImagesModule.unload(id)));
 });
 
-function imageSourceHash (imageSource: ImageSource): ImageSourceHash {
+function imageSourceHash(imageSource: ImageSource): ImageSourceHash {
   if (typeof imageSource === "number") return imageSource;
   const { uri } = imageSource;
   if (!uri) {
-    throw new Error("GLImages: unsupported imageSource: {uri} needs to be defined");
+    throw new Error(
+      "GLImages: unsupported imageSource: {uri} needs to be defined"
+    );
   }
   return uri;
 }
@@ -28,10 +31,12 @@ const load = (source: ImageSource): Promise<number> => {
   let promise = cache.get(hash);
   if (!promise) {
     promise = new Promise(success => {
+      console.log(
+        "load " +
+          (typeof source === "number" ? resolveAssetSource(source) : source)
+      );
       GLImagesModule.load(
-        typeof source === "number"
-        ? resolveAssetSource(source)
-        : source,
+        typeof source === "number" ? resolveAssetSource(source) : source,
         ++id,
         success
       );

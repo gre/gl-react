@@ -1,5 +1,5 @@
 //@flow
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
 import getContext from "./getContext";
@@ -33,10 +33,10 @@ const propTypes = {
 
 export default class GLViewDOM extends Component {
   props: {
-    onContextCreate: (gl: WebGLRenderingContext)=>void,
-    onContextFailure: (e: Error)=>void,
-    onContextLost: ()=>void,
-    onContextRestored: (gl: ?WebGLRenderingContext)=>void,
+    onContextCreate: (gl: WebGLRenderingContext) => void,
+    onContextFailure: (e: Error) => void,
+    onContextLost: () => void,
+    onContextRestored: (gl: ?WebGLRenderingContext) => void,
     webglContextAttributes?: WebGLContextAttributes,
     pixelRatio?: number,
     width: number,
@@ -55,12 +55,11 @@ export default class GLViewDOM extends Component {
     if (gl) {
       this.gl = gl;
       onContextCreate(gl);
-      const {canvas} = this;
+      const { canvas } = this;
       invariant(canvas, "canvas is not settled in GLViewDOM#componentDidMount");
       canvas.addEventListener("webglcontextlost", this._onContextLost);
       canvas.addEventListener("webglcontextrestored", this._onContextRestored);
-    }
-    else {
+    } else {
       onContextFailure(new Error("no-webgl-context"));
     }
   }
@@ -70,10 +69,13 @@ export default class GLViewDOM extends Component {
       loseGL(this.gl);
       this.gl = null;
     }
-    const {canvas} = this;
+    const { canvas } = this;
     if (canvas) {
       canvas.removeEventListener("webglcontextlost", this._onContextLost);
-      canvas.removeEventListener("webglcontextrestored", this._onContextRestored);
+      canvas.removeEventListener(
+        "webglcontextrestored",
+        this._onContextRestored
+      );
     }
   }
 
@@ -92,24 +94,26 @@ export default class GLViewDOM extends Component {
         delete rest[k];
       }
     }
-    return <canvas
-      ref={this.onRef}
-      style={{ ...style, width, height }}
-      width={width * pixelRatio}
-      height={height * pixelRatio}
-      {...rest}
-    />;
+    return (
+      <canvas
+        ref={this.onRef}
+        style={{ ...style, width, height }}
+        width={width * pixelRatio}
+        height={height * pixelRatio}
+        {...rest}
+      />
+    );
   }
 
   _createContext() {
-    const {webglContextAttributes, debug} = this.props;
+    const { webglContextAttributes, debug } = this.props;
     const gl: ?WebGLRenderingContext = getContext(
       this.canvas,
       debug
-      ? { ...webglContextAttributes, preserveDrawingBuffer: true }
-      : webglContextAttributes
+        ? { ...webglContextAttributes, preserveDrawingBuffer: true }
+        : webglContextAttributes
     );
-    this.webglContextAttributes = webglContextAttributes||{};
+    this.webglContextAttributes = webglContextAttributes || {};
     return gl;
   }
 
@@ -130,7 +134,9 @@ export default class GLViewDOM extends Component {
 
   captureAsDataURL(...args: any): string {
     if (!this.webglContextAttributes.preserveDrawingBuffer) {
-      console.warn("Surface#captureAsDataURL is likely to not work if you don't define webglContextAttributes={{ preserveDrawingBuffer: true }}");
+      console.warn(
+        "Surface#captureAsDataURL is likely to not work if you don't define webglContextAttributes={{ preserveDrawingBuffer: true }}"
+      );
     }
     invariant(this.canvas, "canvas is no longer available");
     return this.canvas.toDataURL(...args);
@@ -138,11 +144,18 @@ export default class GLViewDOM extends Component {
 
   captureAsBlob(...args: any): Promise<Blob> {
     if (!this.webglContextAttributes.preserveDrawingBuffer) {
-      console.warn("Surface#captureAsBlob is likely to not work if you don't define webglContextAttributes={{ preserveDrawingBuffer: true }}");
+      console.warn(
+        "Surface#captureAsBlob is likely to not work if you don't define webglContextAttributes={{ preserveDrawingBuffer: true }}"
+      );
     }
-    return Promise.resolve().then(() => new Promise((resolve, reject) =>
-      this.canvas
-      ? this.canvas.toBlob(resolve, ...args)
-      : reject(new Error("canvas is no longer available"))));
+    return Promise.resolve().then(
+      () =>
+        new Promise(
+          (resolve, reject) =>
+            (this.canvas
+              ? this.canvas.toBlob(resolve, ...args)
+              : reject(new Error("canvas is no longer available")))
+        )
+    );
   }
 }

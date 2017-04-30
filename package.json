@@ -4,8 +4,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
+    "build": "lerna bootstrap --hoist && ./packages/undo-unsupported-symlinks.sh",
     "watch": "lerna run watch --stream --no-sort",
+    "prettier": "prettier --trailing-comma es5 --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "flow": "cd packages/gl-react && flow --quiet",
     "lint": "eslint packages/gl-react*/src/",
     "test": "cd packages/tests && yarn test",
@@ -13,7 +14,7 @@
     "deploy-cookbook": "cd packages/cookbook && yarn run build && cp build/index.html build/200.html && surge -p build -d gl-react-cookbook.surge.sh"
   },
   "dependencies": {
-    "react": "^15.5.4",
+    "react": "~15.4.1",
     "react-native": "~0.42.3"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.44.2",
     "flow-copy-source": "^1.1.0",
-    "lerna": "^2.0.0-rc.3"
+    "lerna": "^2.0.0-rc.3",
+    "prettier": "^1.2.2"
   }
 }

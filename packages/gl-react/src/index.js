@@ -2,7 +2,7 @@
 import Backbuffer from "./Backbuffer";
 import Bus from "./Bus";
 import connectSize from "./connectSize";
-import createSurface, {list as listSurfaces} from "./createSurface";
+import createSurface, { list as listSurfaces } from "./createSurface";
 import GLSL from "./GLSL";
 import LinearCopy from "./LinearCopy";
 import NearestCopy from "./NearestCopy";
@@ -36,4 +36,4 @@ export {
   Visitors,
 };
 
-export type {Surface} from "./createSurface";
+export type { Surface } from "./createSurface";

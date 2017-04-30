@@ -1,17 +1,17 @@
 //@flow
 import invariant from "invariant";
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Node from "./Node";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
-import type {Surface} from "./createSurface";
-import type {NDArray} from "ndarray";
+import type { Surface } from "./createSurface";
+import type { NDArray } from "ndarray";
 
 type Props = {|
-  children?: React.Element<*> | (redraw?: ()=>void)=>React.Element<*>,
+  children?: React.Element<*> | ((redraw?: () => void) => React.Element<*>),
   uniform?: string,
-  index: number
+  index: number,
 |};
 
 /**
@@ -47,7 +47,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   props: Props;
   context: {
     glParent: Surface | Node,
-    glSurface: Surface
+    glSurface: Surface,
   };
   dependents: Array<Node | Surface> = [];
 
@@ -68,7 +68,10 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     const { uniform, index } = this.props;
     if (uniform) {
       const { glParent } = this.context;
-      invariant(glParent instanceof Node, "a <Bus uniform=\"..\" /> needs to be inside a Node");
+      invariant(
+        glParent instanceof Node,
+        'a <Bus uniform=".." /> needs to be inside a Node'
+      );
       glParent._addUniformBus(this, uniform, index);
     }
   }
@@ -77,7 +80,10 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     const { uniform, index } = this.props;
     if (uniform) {
       const { glParent } = this.context;
-      invariant(glParent instanceof Node, "a <Bus uniform=\"..\" /> needs to be inside a Node");
+      invariant(
+        glParent instanceof Node,
+        'a <Bus uniform=".." /> needs to be inside a Node'
+      );
       glParent._removeUniformBus(this, uniform, index);
     }
   }
@@ -90,11 +96,14 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     this.redraw();
   }
 
-  componentWillReceiveProps ({ uniform, index }: Props) {
-    const {uniform: oldUniform, index: oldIndex} = this.props;
+  componentWillReceiveProps({ uniform, index }: Props) {
+    const { uniform: oldUniform, index: oldIndex } = this.props;
     if (uniform && (uniform !== oldUniform || index !== oldIndex)) {
       const { glParent } = this.context;
-      invariant(glParent instanceof Node, "a <Bus uniform=\"..\" /> needs to be inside a Node");
+      invariant(
+        glParent instanceof Node,
+        'a <Bus uniform=".." /> needs to be inside a Node'
+      );
       if (oldUniform) glParent._removeUniformBus(this, oldUniform, oldIndex);
       glParent._addUniformBus(this, uniform, index);
     }
@@ -107,25 +116,25 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   }
 
   glNode: ?Node = null;
-  _addGLNodeChild (node: Node) {
+  _addGLNodeChild(node: Node) {
     this.glNode = node;
     this.context.glParent.redraw();
   }
-  _removeGLNodeChild () {
+  _removeGLNodeChild() {
     this.glNode = null;
   }
 
-  _addDependent (node: Node | Surface) {
+  _addDependent(node: Node | Surface) {
     const i = this.dependents.indexOf(node);
-    if (i===-1) {
+    if (i === -1) {
       invariantNoDependentsLoop(this, node);
       this.dependents.push(node);
     }
   }
 
-  _removeDependent (node: Node | Surface) {
+  _removeDependent(node: Node | Surface) {
     const i = this.dependents.indexOf(node);
-    if (i!==-1) this.dependents.splice(i, 1);
+    if (i !== -1) this.dependents.splice(i, 1);
   }
 
   getGLRenderableNode(): ?Node {
@@ -135,7 +144,9 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   getGLRenderableContent(): mixed {
     const { mapRenderableContent } = this.context.glSurface;
     const { glBusRootNode } = this;
-    return glBusRootNode && mapRenderableContent ? mapRenderableContent(glBusRootNode) : null;
+    return glBusRootNode && mapRenderableContent
+      ? mapRenderableContent(glBusRootNode)
+      : null;
   }
 
   getGLName(): string {
@@ -144,7 +155,9 @@ export default class Bus extends Component<{ index: number }, Props, void> {
 
   getGLShortName(): string {
     const content = this.getGLRenderableContent();
-    const shortContentName = String(content && content.constructor && content.constructor.name || content);
+    const shortContentName = String(
+      (content && content.constructor && content.constructor.name) || content
+    );
     return `Bus(${this.glNode ? this.glNode.getGLShortName() : shortContentName})`;
   }
 
@@ -171,13 +184,13 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     this.dependents.forEach(d => d.redraw());
   };
 
-  _onContextLost () {
-    const {glNode} = this;
+  _onContextLost() {
+    const { glNode } = this;
     if (glNode) glNode._onContextLost();
   }
 
-  _onContextRestored (gl: WebGLRenderingContext) {
-    const {glNode} = this;
+  _onContextRestored(gl: WebGLRenderingContext) {
+    const { glNode } = this;
     if (glNode) glNode._onContextRestored(gl);
   }
 
@@ -188,15 +201,12 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   render() {
     const { children } = this.props;
     const {
-      glSurface: {
-        RenderLessElement,
-        mapRenderableContent
-      }
+      glSurface: { RenderLessElement, mapRenderableContent },
     } = this.context;
-    return <RenderLessElement ref={mapRenderableContent ? this.onRef : undefined}>{
-      typeof children==="function"
-      ? children(this.redraw)
-      : children
-    }</RenderLessElement>;
+    return (
+      <RenderLessElement ref={mapRenderableContent ? this.onRef : undefined}>
+        {typeof children === "function" ? children(this.redraw) : children}
+      </RenderLessElement>
+    );
   }
 }

@@ -3,25 +3,15 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "prepublish": "cd src/examples; ./gen.sh 1> index.js",
-    "test": "jest",
     "start": "haul start"
   },
   "dependencies": {
     "@expo/ex-navigation": "^2.11.0",
-    "babel-preset-react-native-stage-0": "~1.0.1",
     "core-js": "^2.4.1",
-    "gl-react": "^3.0.0",
     "gl-react-native": "^3.0.0",
-    "glsl-transitions": "~2017.1.16",
-    "ndarray": "~1.0.18",
+    "cookbook-rn-shared": "^3.0.0",
     "prop-types": "^15.5.8",
-    "raf": "~3.3.0",
-    "react": "^15.5.4",
-    "react-motion": "~0.4.7",
-    "react-native": "~0.42.3",
-    "seedrandom": "github:gre/seedrandom#released",
-    "three": "^0.85.0"
+    "react-native": "~0.42.3"
   },
   "devDependencies": {
     "babel-preset-react-native": "~1.9.1",

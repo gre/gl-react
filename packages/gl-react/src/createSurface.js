@@ -1,63 +1,68 @@
 //@flow
 import invariant from "invariant";
 import raf from "raf";
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import createShader from "gl-shader";
-import {disposeArray, disposeObjectMap} from "./helpers/disposable";
+import { disposeArray, disposeObjectMap } from "./helpers/disposable";
 import Bus from "./Bus";
 import Shaders from "./Shaders";
 import TextureLoaders from "./TextureLoaders";
 import Visitors from "./Visitors";
-import type {DisposablePromise} from "./helpers/disposable";
-import type {NDArray} from "ndarray";
-import type {ShaderIdentifier, ShaderInfo} from "./Shaders";
-import type {Shader} from "gl-shader";
-import type {VisitorLike} from "./Visitor";
+import type { DisposablePromise } from "./helpers/disposable";
+import type { NDArray } from "ndarray";
+import type { ShaderIdentifier, ShaderInfo } from "./Shaders";
+import type { Shader } from "gl-shader";
+import type { VisitorLike } from "./Visitor";
 import type TextureLoader from "./TextureLoader";
 import type Node from "./Node";
 
-type ReactClassLike<T> = string | ReactClass<T> | (props: any)=>React.Element<T>;
+type ReactClassLike<T> =
+  | string
+  | ReactClass<T>
+  | ((props: any) => React.Element<T>);
 
 type SurfaceProps = {
   children?: any,
   style?: Object,
   preload?: Array<mixed>,
-  onLoad?: ()=>void,
-  onLoadError?: (e: Error)=>void,
-  onContextLost?: ()=>void,
-  onContextRestored?: ()=>void,
+  onLoad?: () => void,
+  onLoadError?: (e: Error) => void,
+  onContextLost?: () => void,
+  onContextRestored?: () => void,
   visitor?: VisitorLike,
 };
 
 interface ISurface extends Component<void, SurfaceProps, any> {
-  props: SurfaceProps;
-  gl: ?WebGLRenderingContext;
-  RenderLessElement: ReactClassLike<*>;
-  root: ?Node;
-  id: number;
+  props: SurfaceProps,
+  gl: ?WebGLRenderingContext,
+  RenderLessElement: ReactClassLike<*>,
+  root: ?Node,
+  id: number,
 
-  +mapRenderableContent: ?(inst: mixed)=>mixed;
-  +getVisitors: () => Array<VisitorLike>;
-  +getGLSize: () => [number,number];
-  +getGLName: () => string;
-  +getGLShortName: () => string;
-  +captureAsDataURL: (...args: any) => string;
-  +captureAsBlob: (...args: any) => Promise<Blob>;
-  +capture: (x?: number, y?: number, w?: number, h?: number) => NDArray;
-  +redraw: () => void;
-  +flush: () => void;
-  +getEmptyTexture: () => WebGLTexture;
-  +glIsAvailable: () => boolean;
+  +mapRenderableContent: ?(inst: mixed) => mixed,
+  +getVisitors: () => Array<VisitorLike>,
+  +getGLSize: () => [number, number],
+  +getGLName: () => string,
+  +getGLShortName: () => string,
+  +captureAsDataURL: (...args: any) => string,
+  +captureAsBlob: (...args: any) => Promise<Blob>,
+  +capture: (x?: number, y?: number, w?: number, h?: number) => NDArray,
+  +redraw: () => void,
+  +flush: () => void,
+  +getEmptyTexture: () => WebGLTexture,
+  +glIsAvailable: () => boolean,
 
-  +rebootForDebug: () => void;
-  +_addGLNodeChild: (node: Node) => void;
-  +_removeGLNodeChild: (node: Node) => void;
-  +_resolveTextureLoader: (raw: any) => { loader: ?TextureLoader<*>, input: mixed };
-  +_getShader: (shaderId: ShaderIdentifier) => Shader;
-  +_makeShader: (shaderInfo: ShaderInfo) => Shader;
-  +_draw: ()=>void;
-  +_bindRootNode: ()=>void;
+  +rebootForDebug: () => void,
+  +_addGLNodeChild: (node: Node) => void,
+  +_removeGLNodeChild: (node: Node) => void,
+  +_resolveTextureLoader: (
+    raw: any
+  ) => { loader: ?TextureLoader<*>, input: mixed },
+  +_getShader: (shaderId: ShaderIdentifier) => Shader,
+  +_makeShader: (shaderInfo: ShaderInfo) => Shader,
+  +_draw: () => void,
+  +_bindRootNode: () => void,
 }
 
 export type Surface = ISurface;
@@ -88,7 +93,7 @@ const allSurfaceProps = Object.keys(SurfacePropTypes);
 type SurfaceOpts = {
   GLView: ReactClass<*>,
   RenderLessElement: ReactClassLike<*>,
-  mapRenderableContent?: (instance: mixed)=>mixed,
+  mapRenderableContent?: (instance: mixed) => mixed,
 };
 
 export default ({
@@ -96,8 +101,9 @@ export default ({
   // ^ FIXME: drop this. instead we should trust gl.drawingBufferWidth to get the size.. and just let the canvas impl doing the <canvas> scaling work.
   RenderLessElement,
   mapRenderableContent,
-}: SurfaceOpts): Class<ISurface> =>
-/**
+}: SurfaceOpts): Class<
+  ISurface
+> => /**
  * **Renders the final tree of [Node](#node) in a WebGL Canvas / OpenGLView /...**
  *
  * `<Surface>` performs the final GL draws for a given implementation.
@@ -175,7 +181,7 @@ class Surface extends Component {
   mapRenderableContent = mapRenderableContent;
 
   static propTypes = SurfacePropTypes;
-  static childContextTypes: {[_: $Keys<SurfaceContext>]: any} = {
+  static childContextTypes: { [_: $Keys<SurfaceContext>]: any } = {
     glSurface: PropTypes.object.isRequired,
     glParent: PropTypes.object.isRequired,
     glSizable: PropTypes.object.isRequired,
@@ -198,7 +204,7 @@ class Surface extends Component {
     this._stopLoop();
     this._destroyGL();
     const i = _instances.indexOf(this);
-    if (i!==-1) _instances.splice(i, 1);
+    if (i !== -1) _instances.splice(i, 1);
     this.getVisitors().forEach(v => v.onSurfaceUnmount(this));
   }
 
@@ -213,7 +219,7 @@ class Surface extends Component {
     // We allow to pass-in all props we don't know so you can hook to DOM events.
     const rest = {};
     Object.keys(props).forEach(key => {
-      if (allSurfaceProps.indexOf(key)===-1) {
+      if (allSurfaceProps.indexOf(key) === -1) {
         rest[key] = props[key];
       }
     });
@@ -228,7 +234,8 @@ class Surface extends Component {
         onContextLost={this._onContextLost}
         onContextRestored={this._onContextRestored}
         style={style}
-        {...rest}>
+        {...rest}
+      >
         {ready ? children : null}
       </GLView>
     );
@@ -246,15 +253,12 @@ class Surface extends Component {
   }
 
   getVisitors(): Array<VisitorLike> {
-    return Visitors.get().concat(this.props.visitor||[]);
+    return Visitors.get().concat(this.props.visitor || []);
   }
 
   getGLSize(): [number, number] {
-    const {gl} = this;
-    return [
-      gl ? gl.drawingBufferWidth : 0,
-      gl ? gl.drawingBufferHeight : 0
-    ];
+    const { gl } = this;
+    return [gl ? gl.drawingBufferWidth : 0, gl ? gl.drawingBufferHeight : 0];
   }
 
   getGLName(): string {
@@ -273,7 +277,11 @@ class Surface extends Component {
    * @instance
    */
   captureAsDataURL(...args: any): string {
-    invariant(this.glView.captureAsDataURL, "captureAsDataURL is not defined in %s", GLView.displayName||GLView.name);
+    invariant(
+      this.glView.captureAsDataURL,
+      "captureAsDataURL is not defined in %s",
+      GLView.displayName || GLView.name
+    );
     return this.glView.captureAsDataURL(...args);
   }
 
@@ -285,7 +293,11 @@ class Surface extends Component {
    * @instance
    */
   captureAsBlob(...args: any): Promise<Blob> {
-    invariant(this.glView.captureAsBlob, "captureAsBlob is not defined in %s", GLView.displayName||GLView.name);
+    invariant(
+      this.glView.captureAsBlob,
+      "captureAsBlob is not defined in %s",
+      GLView.displayName || GLView.name
+    );
     return this.glView.captureAsBlob(...args);
   }
 
@@ -295,7 +307,10 @@ class Surface extends Component {
    * @instance
    */
   capture(x?: number, y?: number, w?: number, h?: number): NDArray {
-    invariant(this.root, "Surface#capture: surface is not yet ready or don't have any root Node");
+    invariant(
+      this.root,
+      "Surface#capture: surface is not yet ready or don't have any root Node"
+    );
     return this.root.capture(x, y, w, h);
   }
 
@@ -324,34 +339,41 @@ class Surface extends Component {
   }
 
   _emptyTexture: ?WebGLTexture;
-  getEmptyTexture (): WebGLTexture {
-    let {gl, _emptyTexture} = this;
+  getEmptyTexture(): WebGLTexture {
+    let { gl, _emptyTexture } = this;
     invariant(gl, "getEmptyTexture called while gl was not defined");
     if (!_emptyTexture) {
       this._emptyTexture = _emptyTexture = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, _emptyTexture);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 2, 2, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([
-        0,0,0,0,
-        0,0,0,0,
-        0,0,0,0,
-        0,0,0,0,
-      ]));
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        2,
+        2,
+        0,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      );
     }
     return _emptyTexture;
   }
 
   _onContextCreate = (gl: WebGLRenderingContext): void => {
     const onSuccess = () => {
-      this.setState({
-        ready: true,
-      }, () => {
-        try {
-          this._handleLoad();
+      this.setState(
+        {
+          ready: true,
+        },
+        () => {
+          try {
+            this._handleLoad();
+          } catch (e) {
+            this._handleError(e);
+          }
         }
-        catch (e) {
-          this._handleError(e);
-        }
-      });
+      );
     };
     this._prepareGL(gl, onSuccess, this._handleError);
   };
@@ -369,11 +391,15 @@ class Surface extends Component {
 
   _onContextRestored = (gl: WebGLRenderingContext) => {
     if (this.root) this.root._onContextRestored(gl);
-    this._prepareGL(gl, this._handleRestoredSuccess, this._handleRestoredFailure);
+    this._prepareGL(
+      gl,
+      this._handleRestoredSuccess,
+      this._handleRestoredFailure
+    );
   };
 
-  _destroyGL () {
-    const {gl} = this;
+  _destroyGL() {
+    const { gl } = this;
     if (gl) {
       this.gl = null;
       if (this._emptyTexture) {
@@ -388,10 +414,10 @@ class Surface extends Component {
     }
   }
 
-  _prepareGL (
+  _prepareGL(
     gl: WebGLRenderingContext,
-    onSuccess: ()=>void,
-    onError: (e: Error)=>void,
+    onSuccess: () => void,
+    onError: (e: Error) => void
   ) {
     this.gl = gl;
     this.getVisitors().map(v => v.onSurfaceGLContextChange(this, gl));
@@ -404,7 +430,7 @@ class Surface extends Component {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(
       gl.ARRAY_BUFFER,
-      new Float32Array([ -1, -1, -1, 4, 4, -1 ]), // see a-big-triangle
+      new Float32Array([-1, -1, -1, 4, 4, -1]), // see a-big-triangle
       gl.STATIC_DRAW
     );
     this.buffer = buffer;
@@ -413,7 +439,7 @@ class Surface extends Component {
 
     const all: Array<DisposablePromise<*>> = [];
 
-    (preload||[]).forEach(raw => {
+    (preload || []).forEach(raw => {
       if (!raw) {
         console.warn("Can't preload value", raw);
         return;
@@ -433,8 +459,7 @@ class Surface extends Component {
 
     if (all.length > 0) {
       Promise.all(all.map(d => d.promise)).then(onSuccess, onError); // FIXME make sure this never finish if _prepareGL is called again.
-    }
-    else {
+    } else {
       onSuccess();
     }
   }
@@ -443,13 +468,17 @@ class Surface extends Component {
     this.glView = ref;
   };
 
-  _addGLNodeChild (node: Node): void {
-    invariant(!this.root, "Surface can only contains a single root. Got: %s", this.root && this.root.getGLName());
+  _addGLNodeChild(node: Node): void {
+    invariant(
+      !this.root,
+      "Surface can only contains a single root. Got: %s",
+      this.root && this.root.getGLName()
+    );
     this.root = node;
     node._addDependent(this);
     this.redraw();
   }
-  _removeGLNodeChild (): void {
+  _removeGLNodeChild(): void {
     this.root = null;
     this.redraw();
   }
@@ -473,7 +502,9 @@ class Surface extends Component {
 
   _handleLoad = (): void => {
     if (!this.root) {
-      console.warn(this.getGLName()+" children does not contain any discoverable Node");
+      console.warn(
+        this.getGLName() + " children does not contain any discoverable Node"
+      );
     }
     const { onLoad } = this.props;
     this.redraw();
@@ -489,7 +520,7 @@ class Surface extends Component {
     return { loader, input };
   }
 
-  _makeShader ({ frag, vert }: ShaderInfo): Shader {
+  _makeShader({ frag, vert }: ShaderInfo): Shader {
     const { gl } = this;
     invariant(gl, "gl is not available");
     const shader = createShader(gl, vert, frag);
@@ -497,18 +528,19 @@ class Surface extends Component {
     return shader;
   }
 
-  _getShader (shaderId: ShaderIdentifier): Shader {
+  _getShader(shaderId: ShaderIdentifier): Shader {
     const { shaders } = this;
-    return shaders[shaderId.id] || (
-      shaders[shaderId.id] = this._makeShader(Shaders.get(shaderId))
+    return (
+      shaders[shaderId.id] ||
+      (shaders[shaderId.id] = this._makeShader(Shaders.get(shaderId)))
     );
   }
 
   _bindRootNode(): void {
-    const {gl} = this;
+    const { gl } = this;
     invariant(gl, "gl context not available");
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    const [ width, height ] = this.getGLSize();
+    const [width, height] = this.getGLSize();
     gl.viewport(0, 0, width, height);
   }
 
@@ -538,16 +570,14 @@ class Surface extends Component {
     if (glView.beforeDraw) glView.beforeDraw(gl);
     try {
       root._draw();
-    }
-    catch (e) {
+    } catch (e) {
       let silent = false;
       visitors.forEach(v => {
         silent = v.onSurfaceDrawError(e) || silent;
       });
       if (!silent) {
         throw e;
-      }
-      else {
+      } else {
         return;
       }
     }

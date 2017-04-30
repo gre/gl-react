@@ -1,3 +1,2 @@
-import { AppRegistry } from "react-native";
-import App from "./src";
-AppRegistry.registerComponent("cookbookrn", () => App);
+import "./inject-gl-react-implementation";
+import "./inject-app";

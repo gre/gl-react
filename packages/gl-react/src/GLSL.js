@@ -5,7 +5,7 @@ export const GLSLSymbol = "GLSL";
  * object created by **GLSL``** string template
  */
 type GLSLCode = string;
-export type {GLSLCode};
+export type { GLSLCode };
 
 /**
  * GLSL string template to write your shader.
@@ -23,10 +23,13 @@ export type {GLSLCode};
  * }
  * `
  */
-export default function GLSL (strings: Array<string>, ...values: Array<string>): GLSLCode {
+export default function GLSL(
+  strings: Array<string>,
+  ...values: Array<string>
+): GLSLCode {
   let code = "";
-  for (let i=0; i<strings.length; i++) {
-    code += (i===0?"":values[i-1]) + strings[i];
+  for (let i = 0; i < strings.length; i++) {
+    code += (i === 0 ? "" : values[i - 1]) + strings[i];
   }
   return code;
 }

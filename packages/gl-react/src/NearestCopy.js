@@ -1,5 +1,5 @@
 //@flow
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Node from "./Node";
 import copyShader from "./copyShader";
 
@@ -14,13 +14,15 @@ type Props = {|
 class NearestCopy extends Component {
   props: Props;
   render() {
-    const {children: t} = this.props;
-    return <Node
-      shader={copyShader}
-      blendFunc={{ src: "one", dst: "one minus src alpha" }}
-      uniformsOptions={{ t: { interpolation: "nearest" } }}
-      uniforms={{ t }}
-    />;
+    const { children: t } = this.props;
+    return (
+      <Node
+        shader={copyShader}
+        blendFunc={{ src: "one", dst: "one minus src alpha" }}
+        uniformsOptions={{ t: { interpolation: "nearest" } }}
+        uniforms={{ t }}
+      />
+    );
   }
 }
 

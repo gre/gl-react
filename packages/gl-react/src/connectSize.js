@@ -16,7 +16,9 @@ import PropTypes from "prop-types";
  *  <FooConnected /> // you don't have to provide width, height.
  *  <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height.
  */
-const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>) => class extends Component {
+const connectSize = (
+  GLComponent: ReactClass<*> | ((props: any) => React.Element<*>)
+) => class extends Component {
   props: {
     width?: number,
     height?: number,
@@ -25,7 +27,7 @@ const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>
   context: {
     glSizable: { +getGLSize: () => [number, number] },
   };
-  static displayName = `connectSize(${GLComponent.displayName||GLComponent.name||"?"})`;
+  static displayName = `connectSize(${GLComponent.displayName || GLComponent.name || "?"})`;
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
@@ -36,14 +38,11 @@ const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>
   static childContextTypes = {
     glSizable: PropTypes.object.isRequired,
   };
-  getGLSize(): [ number, number ] {
+  getGLSize(): [number, number] {
     const { props: { width, height }, context: { glSizable } } = this;
-    if (width && height) return [ width, height ];
-    const [ cw, ch ] = glSizable.getGLSize();
-    return [
-      width || cw,
-      height || ch,
-    ];
+    if (width && height) return [width, height];
+    const [cw, ch] = glSizable.getGLSize();
+    return [width || cw, height || ch];
   }
   getChildContext() {
     return {
@@ -51,12 +50,8 @@ const connectSize = (GLComponent: ReactClass<*> | (props: any)=>React.Element<*>
     };
   }
   render() {
-    const [ width, height ] = this.getGLSize();
-    return <GLComponent
-      {...this.props}
-      width={width}
-      height={height}
-    />;
+    const [width, height] = this.getGLSize();
+    return <GLComponent {...this.props} width={width} height={height} />;
   }
 };
 

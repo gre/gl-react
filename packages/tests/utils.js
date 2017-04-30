@@ -1,14 +1,15 @@
 //@flow
 import React from "react";
-import {Visitor, TextureLoader, TextureLoaders} from "gl-react";
+import { Visitor, TextureLoader, TextureLoaders } from "gl-react";
 import invariant from "invariant";
-import type {Surface, Node} from "gl-react";
-import type {Texture} from "gl-texture2d";
+import type { Surface, Node } from "gl-react";
+import type { Texture } from "gl-texture2d";
 import renderer from "react-test-renderer";
 import ndarray from "ndarray";
 import defer from "promise-defer";
 
-export const delay = (ms: number) => new Promise(success => setTimeout(success, ms));
+export const delay = (ms: number) =>
+  new Promise(success => setTimeout(success, ms));
 
 class FakeTexture {
   width: number;
@@ -20,17 +21,17 @@ class FakeTexture {
   }
 }
 
-function createNodeMock (o) {
+function createNodeMock(o) {
   switch (o.type) {
-  case "faketexture":
-    return new FakeTexture(o.props);
-  case "canvas":
-    return {
-      width: o.props.width,
-      height: o.props.height,
-    };
-  default:
-    return null;
+    case "faketexture":
+      return new FakeTexture(o.props);
+    case "canvas":
+      return {
+        width: o.props.width,
+        height: o.props.height,
+      };
+    default:
+      return null;
   }
 }
 
@@ -127,39 +128,113 @@ export class CountersVisitor extends Visitor {
   }
 }
 
-export const red2x2 = ndarray(new Uint8Array([
-  255, 0, 0, 255,
-  255, 0, 0, 255,
-  255, 0, 0, 255,
-  255, 0, 0, 255,
-]), [ 2, 2, 4 ]);
+export const red2x2 = ndarray(
+  new Uint8Array([
+    255,
+    0,
+    0,
+    255,
+    255,
+    0,
+    0,
+    255,
+    255,
+    0,
+    0,
+    255,
+    255,
+    0,
+    0,
+    255,
+  ]),
+  [2, 2, 4]
+);
 
+export const white3x3 = ndarray(
+  new Uint8Array([
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+    255,
+  ]),
+  [3, 3, 4]
+);
 
-export const white3x3 = ndarray(new Uint8Array([
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-  255, 255, 255, 255,
-]), [ 3, 3, 4 ]);
+export const yellow3x3 = ndarray(
+  new Uint8Array([
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+  ]),
+  [3, 3, 4]
+);
 
-export const yellow3x3 = ndarray(new Uint8Array([
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-  255, 255, 0, 255,
-]), [ 3, 3, 4 ]);
-
-export function createOneTextureLoader (makeTexture: (gl: any)=>WebGLTexture) {
+export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
   const textureId = Symbol("one-texture");
   const counters = {
     constructor: 0,
@@ -181,7 +256,7 @@ export function createOneTextureLoader (makeTexture: (gl: any)=>WebGLTexture) {
   }
   class Loader extends TextureLoader<typeof textureId> {
     texture: ?Texture = null;
-    constructor (gl: WebGLRenderingContext) {
+    constructor(gl: WebGLRenderingContext) {
       super(gl);
       ++counters.constructor;
     }
@@ -222,7 +297,7 @@ export function createOneTextureLoader (makeTexture: (gl: any)=>WebGLTexture) {
 }
 
 import drawNDArrayTexture from "gl-react/lib/helpers/drawNDArrayTexture";
-export function createNDArrayTexture (gl: WebGLRenderingContext, ndarray: *) {
+export function createNDArrayTexture(gl: WebGLRenderingContext, ndarray: *) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
   drawNDArrayTexture(gl, texture, ndarray);
@@ -235,13 +310,13 @@ class FakeTextureLoader extends TextureLoader<FakeTexture> {
     this.textures = [];
   }
   dispose() {
-    const {gl} = this;
+    const { gl } = this;
     this.textures.forEach(t => gl.deleteTexture(t));
   }
-  canLoad (input: any) {
+  canLoad(input: any) {
     return input instanceof FakeTexture;
   }
-  get (ft: FakeTexture) {
+  get(ft: FakeTexture) {
     const array = ft.getPixels();
     if (array) {
       const t = createNDArrayTexture(this.gl, array);

@@ -2,19 +2,32 @@
 // https://github.com/adamschwartz/log/blob/master/log.js
 /* eslint-disable */
 
-const { userAgent, vendor } =
-  typeof navigator !== "undefined"
+const { userAgent, vendor } = typeof navigator !== "undefined"
   ? navigator
   : { userAgent: "", vendor: "" };
 
-var exportedLog, ffSupport, formats, getOrderedMatches, hasMatches, isFF, isIE, isOpera, isSafari, log, makeArray, operaSupport, safariSupport, stringToArgs, _log;
+var exportedLog,
+  ffSupport,
+  formats,
+  getOrderedMatches,
+  hasMatches,
+  isFF,
+  isIE,
+  isOpera,
+  isSafari,
+  log,
+  makeArray,
+  operaSupport,
+  safariSupport,
+  stringToArgs,
+  _log;
 
 log = function() {
   var args;
   args = [];
   makeArray(arguments).forEach(function(arg) {
-    if (typeof arg === 'string') {
-      return args = args.concat(stringToArgs(arg));
+    if (typeof arg === "string") {
+      return (args = args.concat(stringToArgs(arg)));
     } else {
       return args.push(arg);
     }
@@ -23,7 +36,11 @@ log = function() {
 };
 
 _log = function() {
-  return Function.prototype.apply.call(console.log, console, makeArray(arguments));
+  return Function.prototype.apply.call(
+    console.log,
+    console,
+    makeArray(arguments)
+  );
 };
 
 makeArray = function(arrayLikeThing) {
@@ -37,33 +54,39 @@ formats = [
       return "%c" + p1 + "%c";
     },
     styles: function() {
-      return ['font-style: italic', ''];
-    }
-  }, {
+      return ["font-style: italic", ""];
+    },
+  },
+  {
     regex: /_([^_]+)_/,
     replacer: function(m, p1) {
       return "%c" + p1 + "%c";
     },
     styles: function() {
-      return ['font-weight: bold', ''];
-    }
-  }, {
+      return ["font-weight: bold", ""];
+    },
+  },
+  {
     regex: /`([^`]+)`/,
     replacer: function(m, p1) {
       return "%c" + p1 + "%c";
     },
     styles: function() {
-      return ['background: rgb(255, 255, 219); padding: 1px 5px; border: 1px solid rgba(0, 0, 0, 0.1)', ''];
-    }
-  }, {
+      return [
+        "background: rgb(255, 255, 219); padding: 1px 5px; border: 1px solid rgba(0, 0, 0, 0.1)",
+        "",
+      ];
+    },
+  },
+  {
     regex: /\[c=(?:"|')?((?:(?!(?:"|')\]).)*)(?:"|')?\]((?:(?!\[c\]).)*)\[c\]/,
     replacer: function(m, p1, p2) {
       return "%c" + p2 + "%c";
     },
     styles: function(match) {
-      return [match[1], ''];
-    }
-  }
+      return [match[1], ""];
+    },
+  },
 ];
 
 hasMatches = function(str) {
@@ -71,7 +94,7 @@ hasMatches = function(str) {
   _hasMatches = false;
   formats.forEach(function(format) {
     if (format.regex.test(str)) {
-      return _hasMatches = true;
+      return (_hasMatches = true);
     }
   });
   return _hasMatches;
@@ -86,7 +109,7 @@ getOrderedMatches = function(str) {
     if (match) {
       return matches.push({
         format: format,
-        match: match
+        match: match,
       });
     }
   });
@@ -129,7 +152,7 @@ safariSupport = function() {
   if (!m) {
     return false;
   }
-  return 537.38 <= parseInt(m[1], 10) + (parseInt(m[2], 10) / 100);
+  return 537.38 <= parseInt(m[1], 10) + parseInt(m[2], 10) / 100;
 };
 
 operaSupport = function() {
@@ -142,10 +165,18 @@ operaSupport = function() {
 };
 
 ffSupport = function() {
-  return typeof window !== "undefined" && (window.console.firebug || window.console.exception);
+  return (
+    typeof window !== "undefined" &&
+    (window.console.firebug || window.console.exception)
+  );
 };
 
-if (isIE() || (isFF() && !ffSupport()) || (isOpera() && !operaSupport()) || (isSafari() && !safariSupport())) {
+if (
+  isIE() ||
+  (isFF() && !ffSupport()) ||
+  (isOpera() && !operaSupport()) ||
+  (isSafari() && !safariSupport())
+) {
   exportedLog = _log;
 } else {
   exportedLog = log;

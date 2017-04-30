@@ -1,6 +1,5 @@
-
 //@flow
-import {createSurface, TextureLoaders} from "gl-react";
+import { createSurface, TextureLoaders } from "gl-react";
 import GLView from "./GLViewDOM";
 import ImageTextureLoader from "./ImageTextureLoader";
 import CanvasTextureLoader from "./CanvasTextureLoader";
@@ -15,9 +14,7 @@ const RenderLessElement = "span";
 export * from "./legacy";
 
 const mapRenderableContent = (el: mixed) =>
-  el instanceof Element
-  ? el.firstElementChild
-  : null;
+  (el instanceof Element ? el.firstElementChild : null);
 
 export const Surface = createSurface({
   GLView,

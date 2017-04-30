@@ -1,5 +1,5 @@
 //@flow
-import type {VisitorLike} from "./Visitor";
+import type { VisitorLike } from "./Visitor";
 
 let _globalVisitors: Array<VisitorLike> = [];
 
@@ -11,15 +11,15 @@ const Visitors = {
   /**
    * @memberof Visitors
    */
-  add (visitor: VisitorLike) {
+  add(visitor: VisitorLike) {
     _globalVisitors.push(visitor);
   },
   /**
    * @memberof Visitors
    */
-  remove (visitor: VisitorLike) {
+  remove(visitor: VisitorLike) {
     const i = _globalVisitors.indexOf(visitor);
-    if (i!==-1) _globalVisitors.splice(i, 1);
+    if (i !== -1) _globalVisitors.splice(i, 1);
   },
 
   get() {

@@ -1,8 +1,8 @@
 //@flow
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {View} from "react-native";
-import { GLView }  from "expo";
+import { View } from "react-native";
+import { GLView } from "expo";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
@@ -21,27 +21,47 @@ export default class GLViewNative extends Component {
   };
   static propTypes = propTypes;
 
-  afterDraw (gl: WebGLRenderingContext) {
+  afterDraw(gl: WebGLRenderingContext) {
     gl.flush();
     // $FlowFixMe
     gl.endFrameEXP();
   }
 
   render() {
-    const { width, height, style, onContextCreate, children, ...rest } = this.props;
-    return <View {...rest} style={[{ width, height }, style, { position: "relative", overflow: "hidden" } ]}>
-      <GLView
-        style={[{ width, height }, style, {
-          flex: 1,
-          position: "absolute",
-          top: 0,
-          left: 0
-        }]}
-        onContextCreate={onContextCreate}
-      />
-      <View style={{ opacity: 0 }}>
-        {children}
+    const {
+      width,
+      height,
+      style,
+      onContextCreate,
+      children,
+      ...rest
+    } = this.props;
+    return (
+      <View
+        {...rest}
+        style={[
+          { width, height },
+          style,
+          { position: "relative", overflow: "hidden" },
+        ]}
+      >
+        <GLView
+          style={[
+            { width, height },
+            style,
+            {
+              flex: 1,
+              position: "absolute",
+              top: 0,
+              left: 0,
+            },
+          ]}
+          onContextCreate={onContextCreate}
+        />
+        <View style={{ opacity: 0 }}>
+          {children}
+        </View>
       </View>
-    </View>;
+    );
   }
 }

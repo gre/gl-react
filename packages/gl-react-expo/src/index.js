@@ -1,6 +1,6 @@
 //@flow
-import {View} from "react-native";
-import {createSurface, TextureLoaders} from "gl-react";
+import { View } from "react-native";
+import { createSurface, TextureLoaders } from "gl-react";
 import GLView from "./GLViewNative";
 import ExponentTextureLoader from "./ExponentTextureLoader";
 

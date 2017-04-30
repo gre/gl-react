@@ -1,7 +1,7 @@
 //@flow
-import {disposeObjectMap} from "./helpers/disposable";
+import { disposeObjectMap } from "./helpers/disposable";
 import TextureLoader from "./TextureLoader";
-import type {NDArray} from "ndarray";
+import type { NDArray } from "ndarray";
 import drawNDArrayTexture from "./helpers/drawNDArrayTexture";
 
 export default class TextureLoaderNDArray extends TextureLoader<NDArray> {
@@ -10,17 +10,13 @@ export default class TextureLoaderNDArray extends TextureLoader<NDArray> {
     super(gl);
     this.textures = new WeakMap();
   }
-  canLoad (obj: *) {
-    return (
-      obj.shape &&
-      obj.data &&
-      obj.stride
-    );
+  canLoad(obj: *) {
+    return obj.shape && obj.data && obj.stride;
   }
   dispose() {
     disposeObjectMap(this.textures);
   }
-  get (array: NDArray) {
+  get(array: NDArray) {
     const { gl } = this;
     let texture = this.textures.get(array);
     if (!texture) {

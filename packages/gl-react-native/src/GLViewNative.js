@@ -1,7 +1,7 @@
 //@flow
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {View} from "react-native";
+import { View } from "react-native";
 import EXGLView from "./EXGLView";
 
 const propTypes = {
@@ -23,7 +23,7 @@ export default class GLViewNative extends Component {
   };
   static propTypes = propTypes;
 
-  afterDraw (gl: WebGLRenderingContext) {
+  afterDraw(gl: WebGLRenderingContext) {
     gl.flush();
     // $FlowFixMe
     gl.endFrameEXP();
@@ -31,19 +31,27 @@ export default class GLViewNative extends Component {
 
   render() {
     const { style, onContextCreate, children, ...rest } = this.props;
-    return <View {...rest} style={[ style, { position: "relative", overflow: "hidden" } ]}>
-      <EXGLView
-        style={[style, {
-          flex: 1,
-          position: "absolute",
-          top: 0,
-          left: 0
-        }]}
-        onContextCreate={tmpPatch(onContextCreate)}
-      />
-      <View style={{ opacity: 0 }}>
-        {children}
+    return (
+      <View
+        {...rest}
+        style={[style, { position: "relative", overflow: "hidden" }]}
+      >
+        <EXGLView
+          style={[
+            style,
+            {
+              flex: 1,
+              position: "absolute",
+              top: 0,
+              left: 0,
+            },
+          ]}
+          onContextCreate={tmpPatch(onContextCreate)}
+        />
+        <View style={{ opacity: 0 }}>
+          {children}
+        </View>
       </View>
-    </View>;
+    );
   }
 }

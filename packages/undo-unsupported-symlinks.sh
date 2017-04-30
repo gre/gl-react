@@ -5,7 +5,12 @@ rm -f node_modules/gl-react node_modules/gl-react-headless
 npm i ../gl-react ../gl-react-headless
 cd -
 
+cd cookbook-rn
+rm -f node_modules/gl-react node_modules/gl-react-native node_modules/cookbook-rn-shared
+npm i ../gl-react ../gl-react-native ../cookbook-rn-shared
+cd -
+
 cd cookbook-expo
-rm -f node_modules/gl-react node_modules/gl-react-expo
-npm i ../gl-react ../gl-react-expo
+rm -f node_modules/gl-react node_modules/gl-react-expo node_modules/cookbook-rn-shared
+npm i ../gl-react ../gl-react-expo ../cookbook-rn-shared
 cd -

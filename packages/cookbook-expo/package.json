@@ -8,18 +8,10 @@
   "dependencies": {
     "@expo/ex-navigation": "^2.11.0",
     "expo": "^16.0.0",
-    "gl-react": "^3.0.0",
-    "gl-react-expo": "^3.0.0",
-    "glsl-transitions": "^2017.1.16",
-    "ndarray": "^1.0.18",
-    "prop-types": "^15.5.8",
-    "raf": "^3.3.0",
     "react": "16.0.0-alpha.6",
-    "react-motion": "^0.4.7",
-    "react-native": "github:exponentjs/react-native#sdk-16.0.0",
-    "seedrandom": "github:gre/seedrandom#released"
-  },
-  "scripts": {
-    "prepublish": "cd src/examples; ./gen.sh 1> index.js"
+    "gl-react-expo": "^3.0.0",
+    "cookbook-rn-shared": "^3.0.0",
+    "prop-types": "^15.5.8",
+    "react-native": "github:exponentjs/react-native#sdk-16.0.0"
   }
 }
