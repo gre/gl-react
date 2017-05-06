@@ -1,14 +1,22 @@
 import makeFloatSlider from "../../toolbox/makeFloatSlider";
-export const title = "Contrast/Saturation/Brightness example";
+export const title = "saturation";
+export const description = "Contrast/Saturation/Brightness example";
+export thumbnail from "../../../images/thumbnails/saturation.png";
 
 export const toolbox = [
-  { prop: "contrast",
+  {
+    prop: "contrast",
     title: "Contrast",
-    Editor: makeFloatSlider(0, 2, 0.05) },
-  { prop: "saturation",
+    Editor: makeFloatSlider(0, 2, 0.05),
+  },
+  {
+    prop: "saturation",
     title: "Saturation",
-    Editor: makeFloatSlider(0, 2, 0.05) },
-  { prop: "brightness",
+    Editor: makeFloatSlider(0, 2, 0.05),
+  },
+  {
+    prop: "brightness",
     title: "Brightness",
-    Editor: makeFloatSlider(0, 2, 0.05) },
+    Editor: makeFloatSlider(0, 2, 0.05),
+  },
 ];

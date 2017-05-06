@@ -1,2 +1,3 @@
-export const title = "GLSL transitions between images";
-export const description = "using transitions.glsl.io";
+export const title = "transitions";
+export const description = "GLSL transitions between images";
+export thumbnail from "../../../images/thumbnails/transitions.png";

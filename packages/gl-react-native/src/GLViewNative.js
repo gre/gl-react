@@ -9,12 +9,6 @@ const propTypes = {
   style: PropTypes.object,
 };
 
-const tmpPatch = cb => gl => {
-  // FIXME these needs to be implemented by EXGL
-  gl.isShader = shader => shader instanceof global.WebGLShader;
-  return cb(gl);
-};
-
 export default class GLViewNative extends Component {
   props: {
     onContextCreate: (gl: WebGLRenderingContext) => void,
@@ -34,7 +28,7 @@ export default class GLViewNative extends Component {
     return (
       <View
         {...rest}
-        style={[style, { position: "relative", overflow: "hidden" }]}
+        style={[{ position: "relative", overflow: "hidden" }, style]}
       >
         <EXGLView
           style={[
@@ -46,7 +40,7 @@ export default class GLViewNative extends Component {
               left: 0,
             },
           ]}
-          onContextCreate={tmpPatch(onContextCreate)}
+          onContextCreate={onContextCreate}
         />
         <View style={{ opacity: 0 }}>
           {children}

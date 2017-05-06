@@ -1,20 +1,25 @@
 //@flow
-import {
-  createRouter,
-} from "@expo/ex-navigation";
+import { createRouter } from "@expo/ex-navigation";
 import * as examples from "./examples";
+import * as tests from "./tests";
 import Home from "./Home";
 import About from "./About";
-import makeExample from "./makeExample";
+import makeDemo from "./makeDemo";
 export default createRouter(() => {
   const routes = {
     home: () => Home,
     about: () => About,
   };
-  const keys = Object.keys(examples);
+  let keys;
+  keys = Object.keys(examples);
   keys.map((k, i) => {
-    const next = keys.slice(i+1).find(k => examples[k] && examples[k].Example);
-    routes[k] = () => makeExample(examples[k], k, next);
+    const next = keys.slice(i + 1).find(k => examples[k] && examples[k].Main);
+    routes[k] = () => makeDemo(examples[k], k, next);
+  });
+  keys = Object.keys(tests);
+  keys.map((k, i) => {
+    const next = keys.slice(i + 1).find(k => tests[k] && tests[k].Main);
+    routes[k] = () => makeDemo(tests[k], k, next);
   });
   return routes;
 });

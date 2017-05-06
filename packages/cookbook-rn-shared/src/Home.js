@@ -1,36 +1,26 @@
-
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  ScrollView,
-  View,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, ScrollView, View, Button } from "react-native";
 import getGLReactImplementation from "./gl-react-implementation";
 const { name } = getGLReactImplementation();
-import ListItem from "./ListItem";
+import Item from "./Item";
 import * as examples from "./examples";
+import * as tests from "./tests";
 import Router from "./Router";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f9f9f9",
     flexDirection: "column",
   },
   list: {
     flex: 1,
+    backgroundColor: "#fff",
+    marginBottom: 50,
   },
   subHeader: {
     padding: 10,
     paddingVertical: 40,
-    backgroundColor: "#f9f9f9",
-  },
-  subHeaderText: {
-    color: "#333",
-    fontSize: 12,
-    fontStyle: "italic",
   },
   title: {
     flex: 1,
@@ -43,47 +33,53 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
   },
+  sectionTitle: {
+    fontWeight: "bold",
+    color: "#000",
+    fontSize: 18,
+    padding: 10,
+  },
 });
 
 export default class Home extends Component {
   static route = {
     navigationBar: {
-      renderTitle: () =>
+      renderTitle: () => (
         <View style={styles.title}>
           <Text style={styles.titleText}>{name}</Text>
         </View>
+      ),
     },
   };
   props: {
     navigator: *,
   };
   render() {
-    const {navigator} = this.props;
+    const { navigator } = this.props;
     return (
-      <ScrollView style={styles.container} bounces={false}>
+      <ScrollView style={styles.container}>
         <View style={styles.subHeader}>
           <Button
             onPress={() => navigator.push(Router.getRoute("about"))}
             color="#e24"
-            title="You said gl-react ?"
+            title="What is gl-react ?"
           />
         </View>
         <View style={styles.list}>
-          {Object.keys(examples).map(ex => {
-            const { title, description, Example } = examples[ex];
-            return <ListItem
-              key={ex}
-              id={ex}
-              title={title}
-              description={description||""}
-              disabled={!Example}
-              onPress={
-                Example
-                ? () => navigator.push(Router.getRoute(ex))
-                : null
-              }
-            />;
-          })}
+          <Text style={styles.sectionTitle}>
+            Examples
+          </Text>
+          {Object.keys(examples).map(ex => (
+            <Item key={ex} id={ex} navigator={navigator} {...examples[ex]} />
+          ))}
+        </View>
+        <View style={styles.list}>
+          <Text style={styles.sectionTitle}>
+            Tests
+          </Text>
+          {Object.keys(tests).map(ex => (
+            <Item key={ex} id={ex} navigator={navigator} {...tests[ex]} />
+          ))}
         </View>
       </ScrollView>
     );

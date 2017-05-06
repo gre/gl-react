@@ -1,2 +1,4 @@
-export const title = "Crazy distortion effect on an image";
-export const description = "Vignette color separation distortion + touch responsive";
+export const title = "distortion on image";
+export const description = "Vignette color separation + touch responsive";
+
+export thumbnail from "../../../images/thumbnails/distortion.png";

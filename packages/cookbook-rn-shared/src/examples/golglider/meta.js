@@ -1,2 +1,4 @@
-export const title = "GameOfLife is initialized with a glider texture";
-export const description = "Game of Life init with an image";
+export const title = "GameOfLife glider";
+export const description = "GameOfLife is initialized with a glider texture";
+
+export thumbnail from "../../../images/thumbnails/golglider.png";

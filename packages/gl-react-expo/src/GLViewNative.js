@@ -2,13 +2,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import { GLView } from "expo";
+import { GLView as EXGLView } from "expo";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
   style: PropTypes.object,
-  width: PropTypes.number,
-  height: PropTypes.number,
 };
 
 export default class GLViewNative extends Component {
@@ -16,8 +14,6 @@ export default class GLViewNative extends Component {
     onContextCreate: (gl: WebGLRenderingContext) => void,
     style?: any,
     children?: any,
-    width?: number,
-    height?: number,
   };
   static propTypes = propTypes;
 
@@ -28,26 +24,14 @@ export default class GLViewNative extends Component {
   }
 
   render() {
-    const {
-      width,
-      height,
-      style,
-      onContextCreate,
-      children,
-      ...rest
-    } = this.props;
+    const { style, onContextCreate, children, ...rest } = this.props;
     return (
       <View
         {...rest}
-        style={[
-          { width, height },
-          style,
-          { position: "relative", overflow: "hidden" },
-        ]}
+        style={[{ position: "relative", overflow: "hidden" }, style]}
       >
-        <GLView
+        <EXGLView
           style={[
-            { width, height },
             style,
             {
               flex: 1,

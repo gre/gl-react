@@ -4,7 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "cd src/examples; ./gen.sh 1> index.js && cd - && cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib"
+    "prepublish": "cd src/examples; ./gen.sh 1> index.js && cd - && cd src/tests; ./gen.sh 1> index.js && cd - && cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib"
   },
   "peerDependencies": {
     "react": "*",

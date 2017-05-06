@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
-export const title = "GLSL live editor";
+export const title = "GLSL Edit";
+export const description = "GLSL Live Editor";
 import makeTextArea from "../../toolbox/makeTextArea";
 
+export thumbnail from "../../../images/thumbnails/glsledit.png";
 const styles = StyleSheet.create({
   editor: {
     flex: 1,
@@ -22,10 +24,12 @@ export const overrideStyles = StyleSheet.create({
   field: {
     paddingVertical: 0,
     paddingHorizontal: 0,
-  }
+  },
 });
 
 export const toolbox = [
-  { prop: "frag",
-    Editor: makeTextArea(styles.editor) }
+  {
+    prop: "frag",
+    Editor: makeTextArea(styles.editor),
+  },
 ];
