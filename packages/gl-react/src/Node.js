@@ -167,6 +167,7 @@ type Props = {|
   backbuffering?: boolean,
   blendFunc: BlendFuncSrcDst,
   clear: ?Clear,
+  onDraw?: () => void,
 |};
 
 // not sure why, but we must define this for Flow to properly type check
@@ -354,6 +355,7 @@ const NodePropTypes = {
   backbuffering: PropTypes.bool,
   blendFunc: PropTypes.object,
   clear: PropTypes.object,
+  onDraw: PropTypes.func,
 };
 
 /**
@@ -369,6 +371,7 @@ const NodePropTypes = {
  * @prop {bool} [backbuffering] - enable the backbuffering that allows to use `Backbuffer` in uniforms to get the previous framebuffer texture state in the fragment shader.
  * @prop {BlendFuncSrcDst} [blendFunc] - configure the blending function to use
  * @prop {Clear} [clear] - configure the clear to use (color,...)
+ * @prop {Function} [onDraw] - a callback called each time a draw was produced for this Node.
  * @prop {any} [children] - in advanced use-cases, you can render things like Bus or contents to be used by Node
  * @example
  *  <Node shader={shaders.helloGL} />
@@ -753,6 +756,7 @@ export default class Node extends Component {
       shader: shaderProp,
       blendFunc,
       clear,
+      onDraw,
     } = this.props;
 
     //~ PREPARE phase
@@ -1038,6 +1042,8 @@ export default class Node extends Component {
     }
 
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+    if (onDraw) onDraw();
 
     visitors.forEach(v => v.onNodeDrawEnd(this));
   }
