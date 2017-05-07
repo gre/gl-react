@@ -419,12 +419,12 @@ export default class Node extends Component {
   }
 
   componentWillMount() {
-    const { glParent, glSurface: { gl } } = this.context;
+    const { glSurface: { gl } } = this.context;
     if (gl) this._prepareGLObjects(gl);
-    glParent._addGLNodeChild(this);
   }
 
   componentDidMount() {
+    this.context.glParent._addGLNodeChild(this);
     this.redraw();
     if (this.props.sync) this.flush();
   }
