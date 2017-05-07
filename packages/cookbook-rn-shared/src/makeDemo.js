@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 }
 
 export default (
-  { Main, title, toolbox, ToolboxFooter, overrideStyles = {} },
+  { Main, title, toolbox, noScrollView, ToolboxFooter, overrideStyles = {} },
   id,
   nextId
 ) => class extends React.Component {
@@ -99,6 +99,53 @@ export default (
       ...state,
     };
     const { width, height } = props;
+    const renderingEl = (
+      <View style={styles.rendering}>
+        {width && height ? <Main {...props} /> : null}
+      </View>
+    );
+    const toolboxEl = (
+      <View style={[styles.toolbox, overrideStyles.toolbox]}>
+        {ToolboxFooter ? <ToolboxFooter {...props} /> : null}
+        {(toolbox || []).map((field, i) => (
+          <View key={i} style={[styles.field, overrideStyles.field]}>
+            {field.title
+              ? <Text style={styles.toolboxTitle}>
+                  {typeof field.title === "function"
+                    ? field.title(props[field.prop])
+                    : field.title}
+                </Text>
+              : null}
+            <View
+              key={i}
+              style={[styles.fieldValue, overrideStyles.fieldValue]}
+            >
+              {field.Editor
+                ? <field.Editor
+                    {...field}
+                    value={props[field.prop]}
+                    onChange={value => {
+                      this.setState({
+                        [field.prop]: value,
+                      });
+                    }}
+                  />
+                : null}
+            </View>
+          </View>
+        ))}
+      </View>
+    );
+
+    if (noScrollView) {
+      return (
+        <View onLayout={this.onLayout} style={[styles.root, styles.container]}>
+          {renderingEl}
+          {toolboxEl}
+        </View>
+      );
+    }
+
     return (
       <ScrollView
         bounces={false}
@@ -106,39 +153,8 @@ export default (
         contentContainerStyle={styles.container}
         onLayout={this.onLayout}
       >
-        <View style={styles.rendering}>
-          {width && height ? <Main {...props} /> : null}
-        </View>
-        <View style={[styles.toolbox, overrideStyles.toolbox]}>
-          {ToolboxFooter ? <ToolboxFooter {...props} /> : null}
-          {(toolbox || []).map((field, i) => (
-            <View key={i} style={[styles.field, overrideStyles.field]}>
-              {field.title
-                ? <Text style={styles.toolboxTitle}>
-                    {typeof field.title === "function"
-                      ? field.title(props[field.prop])
-                      : field.title}
-                  </Text>
-                : null}
-              <View
-                key={i}
-                style={[styles.fieldValue, overrideStyles.fieldValue]}
-              >
-                {field.Editor
-                  ? <field.Editor
-                      {...field}
-                      value={props[field.prop]}
-                      onChange={value => {
-                        this.setState({
-                          [field.prop]: value,
-                        });
-                      }}
-                    />
-                  : null}
-              </View>
-            </View>
-          ))}
-        </View>
+        {renderingEl}
+        {toolboxEl}
       </ScrollView>
     );
   }
