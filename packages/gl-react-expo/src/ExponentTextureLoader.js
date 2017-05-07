@@ -31,11 +31,7 @@ const remoteAsset = (uri: string) => {
   }
   const promise = Promise.all([
     new Promise((success, failure) =>
-      Image.getSize(
-        { uri },
-        (width, height) => success({ width, height }),
-        failure
-      )
+      Image.getSize(uri, (width, height) => success({ width, height }), failure)
     ),
     NativeModules.ExponentFileSystem.downloadAsync(
       uri,
