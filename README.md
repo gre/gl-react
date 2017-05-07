@@ -6,6 +6,8 @@ We keep both repository at same time because (1) this work is not yet finished a
 
 ---
 
+[![Build Status](https://travis-ci.org/gre/gl-react.svg?branch=master)](https://travis-ci.org/gre/gl-react)
+
 <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react (v3 alpha)
 ========
 
