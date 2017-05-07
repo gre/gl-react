@@ -72,11 +72,11 @@ class Paint extends PureComponent {
   state = {
     initialized: false,
   };
-  componentDidMount() {
-    this.setState({
-      initialized: true,
-    });
-  }
+  onDraw = () => {
+    if (!this.state.initialized) {
+      this.setState({ initialized: true });
+    }
+  };
   render() {
     const { initialTexture, onPaintNodeRef, ...rest } = this.props;
     const { initialized } = this.state;
@@ -89,6 +89,7 @@ class Paint extends PureComponent {
         height={rest.size[1]}
         uniforms={!initialized ? { t: initialTexture } : rest}
         clear={null}
+        onDraw={this.onDraw}
       />
     );
   }

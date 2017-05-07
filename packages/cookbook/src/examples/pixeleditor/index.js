@@ -6,7 +6,7 @@ import { Shaders, Node, GLSL, Bus } from "gl-react";
 import { Surface } from "gl-react-dom";
 import marioPNG from "./mario.png";
 import "./index.css";
-type Vec2 = [number,number];
+type Vec2 = [number, number];
 
 const shaders = Shaders.create({
   paint: {
@@ -41,7 +41,7 @@ varying vec2 uv;
 uniform sampler2D t;
 void main(){
   gl_FragColor=texture2D(t,uv);
-}`
+}`,
   },
   pixelEditor: {
     frag: GLSL`
@@ -65,30 +65,33 @@ void main() {
     m * c.rgb,
     mix(1.0, c.a, m));
 }`,
-  }
+  },
 });
 
 class Paint extends PureComponent {
   state = {
     initialized: false,
   };
-  componentDidMount() {
-    this.setState({
-      initialized: true,
-    });
-  }
+  onDraw = () => {
+    if (!this.state.initialized) {
+      this.setState({ initialized: true });
+    }
+  };
   render() {
     const { initialTexture, onPaintNodeRef, ...rest } = this.props;
     const { initialized } = this.state;
-    return <Node
-      ref={onPaintNodeRef}
-      sync={!initialized}
-      shader={!initialized ? shaders.initTexture : shaders.paint}
-      width={rest.size[0]}
-      height={rest.size[1]}
-      uniforms={!initialized ? { t: initialTexture } : rest}
-      clear={null}
-    />;
+    return (
+      <Node
+        ref={onPaintNodeRef}
+        sync={!initialized}
+        shader={!initialized ? shaders.initTexture : shaders.paint}
+        width={rest.size[0]}
+        height={rest.size[1]}
+        uniforms={!initialized ? { t: initialTexture } : rest}
+        clear={null}
+        onDraw={this.onDraw}
+      />
+    );
   }
 }
 
@@ -100,7 +103,7 @@ class PixelEditor extends PureComponent {
       <Node
         shader={shaders.pixelEditor}
         uniformsOptions={{
-          t: { interpolation: "nearest" }
+          t: { interpolation: "nearest" },
         }}
         uniforms={{
           size,
@@ -108,7 +111,8 @@ class PixelEditor extends PureComponent {
           brushRadius,
           mouse,
           color,
-        }}>
+        }}
+      >
         <Bus uniform="t">
           <Paint {...rest} />
         </Bus>
@@ -117,8 +121,7 @@ class PixelEditor extends PureComponent {
   }
 }
 
-
-function getPosition (e: any): Vec2 {
+function getPosition(e: any): Vec2 {
   const rect = e.target.getBoundingClientRect();
   return [
     (e.clientX - rect.left) / rect.width,
@@ -126,20 +129,20 @@ function getPosition (e: any): Vec2 {
   ];
 }
 
-const size = [ 16, 16 ];
-const gridBorder = [ 1/8, 1/8 ];
+const size = [16, 16];
+const gridBorder = [1 / 8, 1 / 8];
 const tools = {
   "brush-1": { brushRadius: 0.55 / 16 },
   "brush-2": { brushRadius: 1.1 / 16 },
   "brush-4": { brushRadius: 2.2 / 16 },
-  "rubber": { brushRadius: 4 / 16, forceColor: [0,0,0,0] },
+  rubber: { brushRadius: 4 / 16, forceColor: [0, 0, 0, 0] },
   "color-picker": { colorPick: true },
 };
 
 export default class Example extends Component {
   state = {
     drawing: false,
-    mouse: [ 0.5, 0.5 ],
+    mouse: [0.5, 0.5],
   };
 
   render() {
@@ -147,44 +150,45 @@ export default class Example extends Component {
     const { drawing, mouse } = this.state;
     const tool = tools[toolKey];
     return (
-    <div>
-      <Surface
-        width={128*3}
-        height={128*3}
-        preload={[ marioPNG ]}
-        onMouseLeave={this.onMouseLeave}
-        onMouseMove={this.onMouseMove}
-        onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
-        webglContextAttributes={{ preserveDrawingBuffer: true }}
-        style={{ cursor: "crosshair" }}>
-        <PixelEditor
-          gridBorder={gridBorder}
-          initialTexture={marioPNG}
-          drawing={drawing}
-          color={tool.forceColor || color}
-          mouse={mouse}
-          brushRadius={tool.brushRadius || 0}
-          size={size}
-          onPaintNodeRef={this.onPaintNodeRef}
-        />
-      </Surface>
-      <div className="buttons">
-        <button onClick={this.onDownload}>DOWNLOAD PNG</button>
+      <div>
+        <Surface
+          width={128 * 3}
+          height={128 * 3}
+          preload={[marioPNG]}
+          onMouseLeave={this.onMouseLeave}
+          onMouseMove={this.onMouseMove}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
+          webglContextAttributes={{ preserveDrawingBuffer: true }}
+          style={{ cursor: "crosshair" }}
+        >
+          <PixelEditor
+            gridBorder={gridBorder}
+            initialTexture={marioPNG}
+            drawing={drawing}
+            color={tool.forceColor || color}
+            mouse={mouse}
+            brushRadius={tool.brushRadius || 0}
+            size={size}
+            onPaintNodeRef={this.onPaintNodeRef}
+          />
+        </Surface>
+        <div className="buttons">
+          <button onClick={this.onDownload}>DOWNLOAD PNG</button>
+        </div>
       </div>
-    </div>
     );
   }
 
   onColorChange = ({ rgb: { r, g, b, a } }: any) => {
-    const color = [ r, g, b ].map(n => n / 255).concat([ a ]);
+    const color = [r, g, b].map(n => n / 255).concat([a]);
     this.props.setToolState({ color });
   };
 
   paintNode: Node;
   onPaintNodeRef = (ref: Node) => {
     this.paintNode = ref;
-  }
+  };
 
   onDownload = () => {
     const captured = this.paintNode.capture();
@@ -195,8 +199,12 @@ export default class Example extends Component {
     if (!ctx) return;
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     ops.assign(
-      ndarray(imageData.data, [canvas.height, canvas.width, 4]).transpose(1, 0, 2),
-      captured,
+      ndarray(imageData.data, [canvas.height, canvas.width, 4]).transpose(
+        1,
+        0,
+        2
+      ),
+      captured
     );
     ctx.putImageData(imageData, 0, 0);
     canvas.toBlob(blob => {
@@ -204,7 +212,7 @@ export default class Example extends Component {
     });
   };
 
-  colorPick = ([ x, y ]: Vec2) => {
+  colorPick = ([x, y]: Vec2) => {
     x = Math.floor(x * size[0]);
     y = Math.floor(y * size[1]);
     const ndarray = this.paintNode.capture(x, y, 1, 1);
@@ -241,14 +249,14 @@ export default class Example extends Component {
   onMouseLeave = () => {
     this.setState({
       drawing: false,
-      mouse: [ -1, -1 ],
+      mouse: [-1, -1],
     });
   };
 
   static defaultProps = {
-    color: [ 1, 1, 1, 1 ],
+    color: [1, 1, 1, 1],
     toolKey: "brush-4",
   };
 }
 
-export {tools};
+export { tools };
