@@ -35,6 +35,22 @@ function createNodeMock(o) {
   }
 }
 
+export const expectToBeCloseToColorArray = (
+  actual: Uint8Array,
+  expected: Uint8Array
+) => {
+  expect(actual).toBeInstanceOf(Uint8Array);
+  expect(expected).toBeInstanceOf(Uint8Array);
+  expect(actual.length).toBe(expected.length);
+  for (let i = 0; i < actual.length; i += 4) {
+    const dr = actual[i + 0] - expected[i + 0];
+    const dg = actual[i + 1] - expected[i + 1];
+    const db = actual[i + 2] - expected[i + 2];
+    const da = actual[i + 3] - expected[i + 3];
+    expect(dr * dr + dg * dg + db * db + da * da).toBeLessThan(10);
+  }
+};
+
 export const create = (el: React.Element<*>) =>
   renderer.create(el, { createNodeMock });
 

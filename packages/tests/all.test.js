@@ -42,6 +42,7 @@ import {
   red2x2,
   white3x3,
   yellow3x3,
+  expectToBeCloseToColorArray,
 } from "./utils";
 
 test("renders a red shader", () => {
@@ -65,7 +66,10 @@ test("renders a red shader", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture().data).toEqual(new Uint8Array([255, 0, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
   inst.unmount();
 });
 
@@ -90,7 +94,77 @@ test("renders HelloGL", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture()).toMatchSnapshot();
+  const snap = surface.capture();
+  expect(snap.shape).toEqual([4, 4, 4]);
+  expectToBeCloseToColorArray(
+    snap.data,
+    new Uint8Array([
+      32,
+      32,
+      128,
+      255,
+      96,
+      32,
+      128,
+      255,
+      159,
+      32,
+      128,
+      255,
+      223,
+      32,
+      128,
+      255,
+      32,
+      96,
+      128,
+      255,
+      96,
+      96,
+      128,
+      255,
+      159,
+      96,
+      128,
+      255,
+      223,
+      96,
+      128,
+      255,
+      32,
+      159,
+      128,
+      255,
+      96,
+      159,
+      128,
+      255,
+      159,
+      159,
+      128,
+      255,
+      223,
+      159,
+      128,
+      255,
+      32,
+      223,
+      128,
+      255,
+      96,
+      223,
+      128,
+      255,
+      159,
+      223,
+      128,
+      255,
+      223,
+      223,
+      128,
+      255,
+    ])
+  );
   inst.unmount();
 });
 
@@ -129,17 +203,20 @@ test("ndarray texture", () => {
   );
   invariant(helloTexture, "helloTexture is defined");
   const surface = inst.getInstance();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   helloTexture.setState({ t: baboon });
   helloTexture.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([126, 153, 153, 255])
   );
   helloTexture.setState({ t: null });
   helloTexture.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   inst.unmount();
@@ -176,13 +253,22 @@ test("renders a color uniform", () => {
 
   const inst = create(<ColorSurface color={[1, 0, 0, 1]} />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture().data).toEqual(new Uint8Array([255, 0, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
   inst.update(<ColorSurface color={[0, 1, 0, 1]} />);
   surface.flush();
-  expect(surface.capture().data).toEqual(new Uint8Array([0, 255, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([0, 255, 0, 255])
+  );
   inst.update(<ColorSurface color={[0.5, 0, 1, 1]} />);
   surface.flush();
-  expect(surface.capture().data).toEqual(new Uint8Array([128, 0, 255, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([128, 0, 255, 255])
+  );
   inst.unmount();
 });
 
@@ -218,7 +304,10 @@ test("composes color uniform with LinearCopy", () => {
   }
   const inst = create(<ColorSurface color={[0, 0, 1, 1]} />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture().data).toEqual(new Uint8Array([0, 0, 255, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([0, 0, 255, 255])
+  );
   inst.unmount();
 });
 
@@ -255,11 +344,20 @@ test("no needs to flush if use of sync", () => {
 
   const inst = create(<ColorSurface color={[1, 0, 0, 1]} />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture().data).toEqual(new Uint8Array([255, 0, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
   inst.update(<ColorSurface color={[0, 1, 0, 1]} />);
-  expect(surface.capture().data).toEqual(new Uint8Array([0, 255, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([0, 255, 0, 255])
+  );
   inst.update(<ColorSurface color={[0, 0, 1, 1]} />);
-  expect(surface.capture().data).toEqual(new Uint8Array([0, 0, 255, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([0, 0, 255, 255])
+  );
   inst.unmount();
 });
 
@@ -286,7 +384,8 @@ test("Node can have a different size and be scaled up", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture(100, 100, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(100, 100, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -318,7 +417,8 @@ test("Surface can be resized", () => {
   const surface = inst.getInstance();
   inst.update(renderForSize(20, 20));
   surface.flush();
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.update(renderForSize(100, 100));
@@ -329,7 +429,8 @@ test("Surface can be resized", () => {
   surface.flush();
   inst.update(renderForSize(500, 100));
   surface.flush();
-  expect(surface.capture(400, 50, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(400, 50, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -368,7 +469,8 @@ test("bus uniform code style", () => {
       </Node>
     </Surface>
   );
-  expect(inst.getInstance().capture(10, 10, 1, 1).data).toEqual(
+  expect(
+    inst.getInstance().capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -402,7 +504,8 @@ test("bus example 1", () => {
     }
   }
   const inst = create(<Example />);
-  expect(inst.getInstance().refs.bus.capture(10, 10, 1, 1).data).toEqual(
+  expect(
+    inst.getInstance().refs.bus.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -441,7 +544,8 @@ test("bus example 2", () => {
   }
   const inst = create(<Example />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -483,7 +587,8 @@ test("bus example 3", () => {
   }
   const inst = create(<Example />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -532,7 +637,8 @@ test("bus example 4", () => {
   }
   const inst = create(<Example />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -590,7 +696,8 @@ test("bus example 5", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -666,7 +773,8 @@ test("bus example 6", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.update(
@@ -679,7 +787,8 @@ test("bus example 6", () => {
     </Surface>
   );
   surface.flush();
-  expect(surface.capture(10, 10, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 255, 255])
   );
   inst.unmount();
@@ -730,7 +839,8 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
     }
   }
   const inst = create(<Example />);
-  expect(inst.getInstance().refs.surface.capture(10, 10, 1, 1).data).toEqual(
+  expect(
+    inst.getInstance().refs.surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 102, 50, 204])
   );
   inst.unmount();
@@ -756,12 +866,14 @@ test("a surface can be captured and resized", () => {
   );
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
-  expect(surface.capture(0, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 1, 1, 1).data,
     new Uint8Array([64, 191, 0, 255])
   );
   inst.update(render(20, 20));
   surface.flush();
-  expect(surface.capture(12, 1, 2, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(12, 1, 2, 1).data,
     new Uint8Array([159, 64, 0, 255, 172, 64, 0, 255])
   );
   inst.unmount();
@@ -794,12 +906,11 @@ test("a node can be captured and resized", () => {
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   invariant(node, "node is defined");
-  expect(node.capture(0, 1, 1, 1).data).toEqual(
-    new Uint8Array([64, 191, 0, 255])
-  );
+  expect(node.capture(0, 1, 1, 1).data, new Uint8Array([64, 191, 0, 255]));
   inst.update(render(20, 20));
   surface.flush();
-  expect(node.capture(12, 1, 1, 2).data).toEqual(
+  expect(
+    node.capture(12, 1, 1, 2).data,
     new Uint8Array([159, 19, 0, 255, 159, 32, 0, 255])
   );
   inst.unmount();
@@ -857,27 +968,32 @@ test("Uniform children redraw=>el function", () => {
   const inst = create(<Example />);
   invariant(surface, "surface is defined");
   invariant(updatingTexture, "updatingTexture is defined");
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   inst.update(<Example />);
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   updatingTexture.setPixels(red2x2, 2, 2);
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   updatingTexture.setPixels(white3x3, 3, 3);
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([255, 255, 255, 255])
   );
   updatingTexture.setPixels(yellow3x3, 3, 3);
   surface.flush();
-  expect(surface.capture(2, 2, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 2, 1, 1).data,
     new Uint8Array([255, 255, 0, 255])
   );
   inst.unmount();
@@ -949,12 +1065,14 @@ test("Bus redraw=>el function", () => {
   const inst = create(<Example />);
   invariant(surface, "surface is defined");
   invariant(updatingTexture, "updatingTexture is defined");
-  expect(surface.capture(2, 2, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 2, 1, 1).data,
     new Uint8Array([255, 255, 0, 255])
   );
   updatingTexture.setPixels(red2x2, 2, 2);
   surface.flush();
-  expect(surface.capture(2, 2, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 2, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -1005,7 +1123,8 @@ test("many Surface updates don't result of many redraws", () => {
   inst.update(wrap(<JustBlue blue={1} />));
   surface.flush();
   expect(globalCounters.onSurfaceDrawStart).toEqual(3);
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.unmount();
@@ -1202,7 +1321,8 @@ test("nested GL Component update will re-draw the Surface", () => {
   justBlueNode.flush();
   expect(surfaceCounters.onSurfaceDrawStart).toEqual(5);
   expect(justBlueNodeCounters.onNodeDraw).toEqual(5);
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.unmount();
@@ -1261,7 +1381,8 @@ test("Node `clear` and discard;", () => {
   );
   invariant(paint, "paint is defined");
   const surface = inst.getInstance();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   paint.setState({
@@ -1271,10 +1392,12 @@ test("Node `clear` and discard;", () => {
     brushRadius: 0.6,
   });
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  expect(surface.capture(7, 7, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(7, 7, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   paint.setState({
@@ -1291,13 +1414,16 @@ test("Node `clear` and discard;", () => {
     brushRadius: 0.6,
   });
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
-  expect(surface.capture(3, 3, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(3, 3, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  expect(surface.capture(7, 7, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(7, 7, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   inst.unmount();
@@ -1329,30 +1455,35 @@ test("Node `backbuffering`", () => {
   );
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
   inst.update(render(red2x2));
   surface.flush();
 
   // since node was drawn once, there were a first shift.
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
   inst.update(render(Backbuffer));
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.update(render(Backbuffer));
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.update(render(Backbuffer));
   inst.update(render(Backbuffer));
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
   surface.glView.simulateContextLost();
@@ -1393,20 +1524,24 @@ test("Node `backbuffering` in `sync`", () => {
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
   // since node was drawn once, there were a first shift.
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
   inst.update(render(Backbuffer));
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.update(render(Backbuffer));
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.update(render(Backbuffer));
   inst.update(render(Backbuffer));
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.unmount();
@@ -1434,7 +1569,8 @@ test("texture can be null", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   inst.unmount();
@@ -1494,7 +1630,10 @@ test("array of textures", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture().data).toEqual(new Uint8Array([255, 255, 255, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 255, 255, 255])
+  );
   inst.unmount();
 });
 
@@ -1534,30 +1673,38 @@ test("Node uniformsOptions texture interpolation", () => {
     4,
   ]);
   inst.update(render(redToBlue));
-  expect(surface.capture(0, 2, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 2, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  expect(surface.capture(250, 7, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(250, 7, 1, 1).data,
     new Uint8Array([127, 0, 128, 255])
   );
-  expect(surface.capture(499, 5, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(499, 5, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.update(render(redToBlue, { interpolation: "nearest" }));
-  expect(surface.capture(200, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(200, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  expect(surface.capture(300, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(300, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.update(render(redToBlue, { interpolation: "linear" }));
-  expect(surface.capture(0, 2, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 2, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  expect(surface.capture(250, 7, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(250, 7, 1, 1).data,
     new Uint8Array([127, 0, 128, 255])
   );
-  expect(surface.capture(499, 5, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(499, 5, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
   inst.unmount();
@@ -1589,13 +1736,15 @@ test("can be extended with addTextureLoaderClass", async () => {
   );
   const surface = inst.getInstance();
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   expect(loader.counters).toMatchSnapshot();
   await loader.resolve();
   surface.flush();
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   expect(loader.counters).toMatchSnapshot();
@@ -1649,7 +1798,8 @@ test("Surface `preload` prevent to draw anything", async () => {
   surface.flush();
   expect(onLoadCounter).toEqual(1);
   expect(counters.onSurfaceDrawEnd).toEqual(1);
-  expect(surface.capture(0, 0, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -1730,13 +1880,22 @@ void main() { gl_FragColor = color; }
 
   const inst = create(<ColorSurface color={[1, 0, 0, 1]} />);
   const surface = inst.getInstance().refs.surface;
-  expect(surface.capture().data).toEqual(new Uint8Array([255, 0, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
   inst.update(<ColorSurface color={[0, 1, 0, 1]} />);
   surface.flush();
-  expect(surface.capture().data).toEqual(new Uint8Array([0, 255, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([0, 255, 0, 255])
+  );
   inst.update(<ColorSurface color={[0.5, 0, 1, 1]} />);
   surface.flush();
-  expect(surface.capture().data).toEqual(new Uint8Array([128, 0, 255, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([128, 0, 255, 255])
+  );
   surface.glView.simulateContextLost();
   inst.unmount();
 });
@@ -1770,7 +1929,8 @@ test("testing connectSize() feature", () => {
     </Surface>
   );
   const surface = inst.getInstance();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([153, 102, 0, 255])
   );
   inst.update(
@@ -1783,7 +1943,8 @@ test("testing connectSize() feature", () => {
     </Surface>
   );
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([15, 10, 0, 255])
   );
   inst.update(
@@ -1796,7 +1957,8 @@ test("testing connectSize() feature", () => {
     </Surface>
   );
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([153, 255, 0, 255])
   );
   inst.unmount();
@@ -1848,7 +2010,8 @@ test("handle context lost nicely", () => {
   expect(contextLost).toEqual(3);
   expect(contextRestored).toEqual(3);
   surface.flush();
-  expect(surface.capture(1, 1, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
@@ -1915,17 +2078,20 @@ void main() {
 
   const inst = create(wrap(<WeirdSwapping i={0} />));
   const surface = inst.getInstance();
-  expect(surface.capture(2, 3, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 3, 1, 1).data,
     new Uint8Array([128, 76, 51, 255])
   );
   inst.update(wrap(<WeirdSwapping i={1} />));
   surface.flush();
-  expect(surface.capture(2, 3, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 3, 1, 1).data,
     new Uint8Array([128, 51, 76, 255])
   );
   inst.update(wrap(<WeirdSwapping i={2} />));
   surface.flush();
-  expect(surface.capture(2, 3, 1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(2, 3, 1, 1).data,
     new Uint8Array([51, 76, 128, 255])
   );
   inst.unmount();
@@ -2130,14 +2296,18 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     )
   );
   surface.flush();
-  expect(surface.capture(1, 1).data).toEqual(
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1).data,
     new Uint8Array([255, 128, 128, 255])
   );
   inst.update(
     wrap(<Node shader={shaders.helloTexture} uniforms={{ t: red2x2 }} />)
   );
   surface.flush();
-  expect(surface.capture(1, 1).data).toEqual(new Uint8Array([255, 0, 0, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1).data,
+    new Uint8Array([255, 0, 0, 255])
+  );
   inst.update(wrap(<TreeWithZombiesDontBreak />));
   surface.flush();
   expect(error).toEqual(1);
@@ -2229,7 +2399,10 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   surface.flush();
   inst.update(wrap(<JustBlue blue={0.5} />));
   surface.flush();
-  expect(surface.capture(1, 1).data).toEqual(new Uint8Array([0, 0, 128, 255]));
+  expectToBeCloseToColorArray(
+    surface.capture(1, 1).data,
+    new Uint8Array([0, 0, 128, 255])
+  );
   class Ex extends React.Component {
     render() {
       return (

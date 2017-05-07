@@ -1,15 +1,15 @@
-../all.test.js:2175
-2175:       <Node
+../all.test.js:2345
+2345:       <Node
             ^ props of React element `Node`
-2177:         uniformsOptions={{ t: { interpolation: "nope" } }}
+2347:         uniformsOptions={{ t: { interpolation: "nope" } }}
                                                      ^^^^^^ string. This type is incompatible with
  65:   interpolation: Interpolation,
                       ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:65
 
-../all.test.js:2187
-2187:       <Node
+../all.test.js:2357
+2357:       <Node
             ^ props of React element `Node`
-2189:         uniformsOptions={{ t: { wrap: "nope" } }}
+2359:         uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -17,7 +17,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2189:         uniformsOptions={{ t: { wrap: "nope" } }}
+  2359:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -25,15 +25,15 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2189:         uniformsOptions={{ t: { wrap: "nope" } }}
+  2359:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2199
-2199:       <Node
+../all.test.js:2369
+2369:       <Node
             ^ props of React element `Node`
-2201:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+2371:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                             ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -41,7 +41,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2201:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+  2371:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                                ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                 ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -49,15 +49,15 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2201:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+  2371:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                               ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2211
-2211:       <Node
+../all.test.js:2381
+2381:       <Node
             ^ props of React element `Node`
-2212:         blendFunc="nope"
+2382:         blendFunc="nope"
                         ^^^^^^ string. Inexact type is incompatible with exact type
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
@@ -334,5 +334,9 @@ incorrect.js:73
  78:   blendFunc={{
                   ^ object literal
 
+../utils.js:42
+ 42:   expect(actual).toBeInstanceOf(Uint8Array);
+       ^^^^^^ identifier `expect`. Could not resolve name
 
-Found 33 errors
+
+Found 34 errors
