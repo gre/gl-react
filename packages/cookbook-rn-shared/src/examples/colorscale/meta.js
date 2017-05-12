@@ -5,7 +5,7 @@ import { LinearCopy, NearestCopy } from "gl-react";
 import getGLReactImplementation from "../../gl-react-implementation";
 const { Surface } = getGLReactImplementation();
 
-export thumbnail from "../../../images/thumbnails/colorscale.png";
+export thumbnail from "../../../images/thumbnails/colorscale.jpg";
 export const title = "colorscale";
 export const description =
   "A gradient defines color mapping of the image greyscale";

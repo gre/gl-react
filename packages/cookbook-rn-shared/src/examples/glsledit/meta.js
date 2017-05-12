@@ -3,7 +3,7 @@ export const title = "GLSL Edit";
 export const description = "GLSL Live Editor";
 import makeTextArea from "../../toolbox/makeTextArea";
 
-export thumbnail from "../../../images/thumbnails/glsledit.png";
+export thumbnail from "../../../images/thumbnails/glsledit.jpg";
 const styles = StyleSheet.create({
   editor: {
     flex: 1,

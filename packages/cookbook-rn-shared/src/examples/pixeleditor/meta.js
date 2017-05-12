@@ -2,7 +2,7 @@ import ToolPicker from "./ToolPicker";
 import Vec3ColorPicker from "../../toolbox/Vec3ColorPicker";
 import { tools } from ".";
 
-export thumbnail from "../../../images/thumbnails/pixeleditor.png";
+export thumbnail from "../../../images/thumbnails/pixeleditor.jpg";
 export const title = "Pixel Editor";
 export const description = "Pixel Editor";
 

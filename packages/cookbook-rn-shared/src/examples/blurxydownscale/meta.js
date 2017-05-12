@@ -10,4 +10,4 @@ export const toolbox = [
   },
 ];
 
-export thumbnail from "../../../images/thumbnails/blurxydownscale.png";
+export thumbnail from "../../../images/thumbnails/blurxydownscale.jpg";

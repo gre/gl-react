@@ -13,4 +13,4 @@ export const toolbox = [
     Editor: makeFloatSlider(1, 8, 1),
   },
 ];
-export thumbnail from "../../../images/thumbnails/blurmapdyn.png";
+export thumbnail from "../../../images/thumbnails/blurmapdyn.jpg";

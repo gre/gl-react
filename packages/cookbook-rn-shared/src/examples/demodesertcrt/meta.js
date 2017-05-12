@@ -1,6 +1,6 @@
 import makeFloatSlider from "../../toolbox/makeFloatSlider";
 
-export thumbnail from "../../../images/thumbnails/demodesertcrt.png";
+export thumbnail from "../../../images/thumbnails/demodesertcrt.jpg";
 export const title = "Desert + CRT";
 export const description = "Desert Shadertoy + CRT effect + snapshot()";
 

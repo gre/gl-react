@@ -9,4 +9,4 @@ export const toolbox = [
   },
 ];
 
-export thumbnail from "../../../images/thumbnails/blurmapmouse.png";
+export thumbnail from "../../../images/thumbnails/blurmapmouse.jpg";

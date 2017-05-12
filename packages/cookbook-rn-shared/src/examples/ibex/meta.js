@@ -3,7 +3,7 @@ import makeFloatSlider from "../../toolbox/makeFloatSlider";
 export const title = "IBEX";
 export const description = "forked from greweb's js13k 2014 game";
 
-export thumbnail from "../../../images/thumbnails/ibex.png";
+export thumbnail from "../../../images/thumbnails/ibex.jpg";
 export const toolbox = [
   {
     prop: "speed",

@@ -1,7 +1,7 @@
 import makeFloatSlider from "../../toolbox/makeFloatSlider";
 export const title = "saturation";
 export const description = "Contrast/Saturation/Brightness example";
-export thumbnail from "../../../images/thumbnails/saturation.png";
+export thumbnail from "../../../images/thumbnails/saturation.jpg";
 
 export const toolbox = [
   {

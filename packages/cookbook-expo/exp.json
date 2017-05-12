@@ -2,7 +2,7 @@
   "name": "gl-react-expo-cookbook",
   "description": "GL React Native Cookbook",
   "slug": "gl-react",
-  "sdkVersion": "16.0.0",
+  "sdkVersion": "UNVERSIONED",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",

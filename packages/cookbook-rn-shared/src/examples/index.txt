@@ -26,6 +26,7 @@ gol
 golglider
 golrot
 golrotscu
+camera
 mergechannels
 demotunnel
 demodesert

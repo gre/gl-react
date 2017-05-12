@@ -580,6 +580,7 @@ export default ({
           silent = v.onSurfaceDrawError(e) || silent;
         });
         if (!silent) {
+          console.warn(e);
           throw e;
         } else {
           return;
