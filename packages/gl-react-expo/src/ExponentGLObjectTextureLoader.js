@@ -8,11 +8,18 @@ function hash(obj) {
   return JSON.stringify(obj); // FIXME ikr XD
 }
 
-export default class ExponentTextureLoader extends TextureLoader<Object> {
+export default class ExponentGLObjectTextureLoader
+  extends TextureLoader<Object> {
   loads: Map<string, DisposablePromise<*>> = new Map();
   textures: Map<string, *> = new Map();
   dispose() {}
   canLoad(input: any) {
+    if (
+      !NativeModules.ExponentGLObjectManager ||
+      !NativeModules.ExponentGLObjectManager.createObjectAsync
+    ) {
+      return false;
+    }
     return input && typeof input === "object" && input.camera;
   }
   load(texture: Object): DisposablePromise<*> {
