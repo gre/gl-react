@@ -15,7 +15,7 @@ const RenderLessElement = "span";
 export * from "./legacy";
 
 const mapRenderableContent = (el: mixed) =>
-  (el instanceof Element ? el.firstElementChild : null);
+  el instanceof Element ? el.firstElementChild : null;
 
 export const Surface = createSurface({
   GLView,

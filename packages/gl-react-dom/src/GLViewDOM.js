@@ -145,9 +145,9 @@ export default class GLViewDOM extends Component {
       () =>
         new Promise(
           (resolve, reject) =>
-            (this.canvas
+            this.canvas
               ? this.canvas.toBlob(resolve, ...args)
-              : reject(new Error("canvas is no longer available")))
+              : reject(new Error("canvas is no longer available"))
         )
     );
   }

@@ -18,41 +18,42 @@ import PropTypes from "prop-types";
  */
 const connectSize = (
   GLComponent: ReactClass<*> | ((props: any) => React.Element<*>)
-) => class extends Component {
-  props: {
-    width?: number,
-    height?: number,
-    children?: any,
-  };
-  context: {
-    glSizable: { +getGLSize: () => [number, number] },
-  };
-  static displayName = `connectSize(${GLComponent.displayName || GLComponent.name || "?"})`;
-  static propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-  };
-  static contextTypes = {
-    glSizable: PropTypes.object.isRequired,
-  };
-  static childContextTypes = {
-    glSizable: PropTypes.object.isRequired,
-  };
-  getGLSize(): [number, number] {
-    const { props: { width, height }, context: { glSizable } } = this;
-    if (width && height) return [width, height];
-    const [cw, ch] = glSizable.getGLSize();
-    return [width || cw, height || ch];
-  }
-  getChildContext() {
-    return {
-      glSizable: this,
+) =>
+  class extends Component {
+    props: {
+      width?: number,
+      height?: number,
+      children?: any,
     };
-  }
-  render() {
-    const [width, height] = this.getGLSize();
-    return <GLComponent {...this.props} width={width} height={height} />;
-  }
-};
+    context: {
+      glSizable: { +getGLSize: () => [number, number] },
+    };
+    static displayName = `connectSize(${GLComponent.displayName || GLComponent.name || "?"})`;
+    static propTypes = {
+      width: PropTypes.number,
+      height: PropTypes.number,
+    };
+    static contextTypes = {
+      glSizable: PropTypes.object.isRequired,
+    };
+    static childContextTypes = {
+      glSizable: PropTypes.object.isRequired,
+    };
+    getGLSize(): [number, number] {
+      const { props: { width, height }, context: { glSizable } } = this;
+      if (width && height) return [width, height];
+      const [cw, ch] = glSizable.getGLSize();
+      return [width || cw, height || ch];
+    }
+    getChildContext() {
+      return {
+        glSizable: this,
+      };
+    }
+    render() {
+      const [width, height] = this.getGLSize();
+      return <GLComponent {...this.props} width={width} height={height} />;
+    }
+  };
 
 export default connectSize;

@@ -13,7 +13,7 @@ type Asset = {
 };
 
 const hash = (module: number | { uri: string }) =>
-  (typeof module === "number" ? module : module.uri);
+  typeof module === "number" ? module : module.uri;
 
 const localAsset = (module: number) => {
   const asset = Expo.Asset.fromModule(module);
@@ -46,7 +46,7 @@ const remoteAsset = (uri: string) => {
 };
 
 export const loadAsset = (module: number | { uri: string }): Promise<Asset> =>
-  (typeof module === "number" ? localAsset(module) : remoteAsset(module.uri));
+  typeof module === "number" ? localAsset(module) : remoteAsset(module.uri);
 
 export default class ExponentTextureLoader extends TextureLoader<*> {
   loads: Map<number | string, DisposablePromise<*>> = new Map();

@@ -7,13 +7,13 @@ import type Bus from "./Bus";
 import Visitor from "./Visitor";
 
 const aggregateInfo = info =>
-  (Array.isArray(info)
+  Array.isArray(info)
     ? info.reduce((acc, info) => acc.concat(aggregateInfo(info)), [])
     : [
         String(
           (info.dependency && info.dependency.getGLName()) || info.initialObj
         ),
-      ].concat(info.textureOptions ? [info.textureOptions] : []));
+      ].concat(info.textureOptions ? [info.textureOptions] : []);
 
 /**
  *
