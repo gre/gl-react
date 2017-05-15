@@ -1,7 +1,7 @@
 {
-  "name": "gl-react-expo-cookbook",
-  "description": "GL React Native Cookbook",
-  "slug": "gl-react",
+  "name": "gl-react-camera-effects",
+  "description": "GL React Camera Effects",
+  "slug": "gl-react-camera-effects",
   "sdkVersion": "UNVERSIONED",
   "version": "1.0.0",
   "orientation": "portrait",
@@ -19,9 +19,9 @@
     "assetExts": ["ttf", "mp4"]
   },
   "android": {
-    "package": "fr.greweb.glrcookbook"
+    "package": "fr.greweb.glreactcameraffects"
   },
   "ios": {
-    "bundleIdentifier": "fr.greweb.glrcookbook"
+    "bundleIdentifier": "fr.greweb.glreactcameraffects"
   }
 }

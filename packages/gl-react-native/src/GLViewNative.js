@@ -6,7 +6,7 @@ import EXGLView from "./EXGLView";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
-  style: PropTypes.object,
+  style: PropTypes.any,
 };
 
 export default class GLViewNative extends Component {

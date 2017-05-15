@@ -15,8 +15,6 @@ export default class EXGLView extends React.Component {
 
     // [iOS only] Number of samples for Apple"s built-in multisampling.
     msaaSamples: PropTypes.number,
-
-    ...View.propTypes,
   };
 
   static defaultProps = {
