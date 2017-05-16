@@ -9,7 +9,8 @@ Contributions are always welcome, no matter how large or small.
 ## Setup
 
 ```sh
-git clone https://github.com/gre/gl-react.git
+git clone https://github.com/gre/gl-react.git       && cd gl-react
+
 yarn
 yarn run build
 ```
