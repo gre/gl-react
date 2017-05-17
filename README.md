@@ -23,6 +23,7 @@ This universal library must be coupled with one of the concrete implementations:
 ## Links
 
 - [Cookbook, examples, API](https://gl-react-cookbook.surge.sh)
+- [Expo Cookbook](https://expo.io/@gre/gl-react)
 - [JSFiddle hello gl example](https://jsfiddle.net/greweb/cup5feke/)
 - [![Join the chat at https://gitter.im/gl-react/Lobby](https://badges.gitter.im/gl-react/Lobby.svg)](https://gitter.im/gl-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
