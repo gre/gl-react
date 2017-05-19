@@ -71,13 +71,13 @@ export default class App extends Component {
     }));
   };
 
-  onEffectChange = (value, id) => {
+  onEffectChange = (value: *, id: *) => {
     this.setState(({ effects }) => ({
       effects: { ...effects, [id]: value },
     }));
   };
 
-  onEffectReset = id => {
+  onEffectReset = (id: *) => {
     this.setState(({ effects }) => ({
       effects: { ...effects, [id]: initialEffectsState[id] },
     }));

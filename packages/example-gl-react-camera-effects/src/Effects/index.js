@@ -38,7 +38,7 @@ const Effects = ({
   hue,
   sepia,
   flyeye,
-}) => (
+}: *) => (
   <ColorMatrix matrix={matrixForSepia(sepia)}>
     <Flyeye value={flyeye}>
       <HueRotate hue={hue}>
