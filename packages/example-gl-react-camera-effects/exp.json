@@ -2,7 +2,7 @@
   "name": "gl-react-camera-effects",
   "description": "GL React Camera Effects",
   "slug": "gl-react-camera-effects",
-  "sdkVersion": "UNVERSIONED",
+  "sdkVersion": "17.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",

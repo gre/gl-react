@@ -6,10 +6,10 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "expo": "expo/expo-sdk",
+    "expo": "17.0.0",
     "gl-react": "^3.4.0",
     "gl-react-expo": "^3.4.0",
     "react": "16.0.0-alpha.6",
-    "react-native": "github:exponentjs/react-native#exp-latest"
+    "react-native": "github:exponentjs/react-native#sdk-17.0.0"
   }
 }
