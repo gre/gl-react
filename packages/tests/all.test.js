@@ -73,6 +73,77 @@ test("renders a red shader", () => {
   inst.unmount();
 });
 
+test("it does not crash when editing back and forth a shader", () => {
+  const fa = GLSL`
+precision highp float;
+varying vec2 uv;
+void main() {
+  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+}`;
+  const fb = GLSL`
+precision highp float;
+varying vec2 uv;
+void main() { gl_FragColor=vec4(1.0, 0.0, 0.0, 1.0); }`;
+  const inst = create(
+    <Surface width={1} height={1}>
+      <Node shader={{ frag: fa }} />
+    </Surface>
+  );
+  const surface = inst.getInstance();
+  surface.flush();
+  inst.update(
+    <Surface width={1} height={1}>
+      <Node shader={{ frag: fb }} />
+    </Surface>
+  );
+  surface.flush();
+  inst.update(
+    <Surface width={1} height={1}>
+      <Node shader={{ frag: fa }} />
+    </Surface>
+  );
+  surface.flush();
+  inst.unmount();
+});
+
+test("it does not crash when editing back and forth from a shader that crashed (resilient)", () => {
+  const fa = GLSL`
+precision highp float;
+varying vec2 uv;
+void main() {
+  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+}`;
+  const fb = GLSL`THIS IS NOT A SHADER`;
+
+  const inst = create(
+    <Surface width={1} height={1}>
+      <Node shader={{ frag: fa }} />
+    </Surface>
+  );
+  const surface = inst.getInstance();
+  surface.flush();
+
+  class IgnoreErrorVisitor extends Visitor {
+    onSurfaceDrawError() {
+      return true;
+    }
+  }
+  inst.update(
+    <Surface visitor={new IgnoreErrorVisitor()} width={1} height={1}>
+      <Node shader={{ frag: fb }} />
+    </Surface>
+  );
+  surface.flush();
+
+  inst.update(
+    <Surface width={1} height={1}>
+      <Node shader={{ frag: fa }} />
+    </Surface>
+  );
+  surface.flush();
+  inst.unmount();
+});
+
 test("renders HelloGL", () => {
   const shaders = Shaders.create({
     helloGL: {
