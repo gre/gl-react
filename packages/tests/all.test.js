@@ -343,6 +343,76 @@ test("renders a color uniform", () => {
   inst.unmount();
 });
 
+test("use the imperative setDrawProps escape hatch", () => {
+  const shaders = Shaders.create({
+    clr: {
+      frag: GLSL`
+  precision highp float;
+  varying vec2 uv;
+  uniform vec4 color;
+  void main() {
+    gl_FragColor = color;
+  }`,
+    },
+    white: {
+      frag: GLSL`
+  precision highp float;
+  varying vec2 uv;
+  void main() {
+    gl_FragColor = vec4(1.0);
+  }`,
+    },
+  });
+
+  let node;
+  const inst = create(
+    <Surface
+      width={1}
+      height={1}
+      webglContextAttributes={{ preserveDrawingBuffer: true }}
+    >
+      <Node
+        ref={ref => {
+          node = ref;
+        }}
+        shader={shaders.clr}
+        uniforms={{ color: [1, 0, 0, 1] }}
+      />
+    </Surface>
+  );
+  const surface = inst.getInstance();
+  invariant(node, "nodeRef is set");
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
+  node.setDrawProps({
+    uniforms: {
+      color: [1, 1, 0, 1],
+    },
+  });
+  // check it's still lazy
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 0, 0, 255])
+  );
+  surface.flush();
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 255, 0, 255])
+  );
+  node.setDrawProps({
+    shader: shaders.white,
+    uniforms: {},
+  });
+  surface.flush();
+  expectToBeCloseToColorArray(
+    surface.capture().data,
+    new Uint8Array([255, 255, 255, 255])
+  );
+  inst.unmount();
+});
+
 test("composes color uniform with LinearCopy", () => {
   const shaders = Shaders.create({
     clr: {

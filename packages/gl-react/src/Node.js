@@ -378,6 +378,7 @@ const NodePropTypes = {
  */
 export default class Node extends Component {
   props: Props;
+  drawProps: Props = this.props;
   context: SurfaceContext;
   framebuffer: ?Framebuffer;
   backbuffer: ?Framebuffer;
@@ -444,6 +445,10 @@ export default class Node extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props, nextContext: *) {
+    this._syncNextDrawProps(nextProps, nextContext);
+  }
+
+  _syncNextDrawProps(nextProps: Props, nextContext: *) {
     const nextWidthHeight = nodeWidthHeight(nextProps, nextContext);
     if (this.framebuffer) {
       this.framebuffer.syncSize(...nextWidthHeight);
@@ -453,9 +458,10 @@ export default class Node extends Component {
     }
     // FIXME should we do same for backbuffer?
     invariant(
-      nextProps.backbuffering === this.props.backbuffering,
+      nextProps.backbuffering === this.drawProps.backbuffering,
       "Node backbuffering prop must not changed. (not yet supported)"
     );
+    this.drawProps = nextProps;
   }
 
   _resolveElement = (
@@ -509,7 +515,7 @@ export default class Node extends Component {
   }
 
   getGLShortName(): string {
-    const { shader } = this.props;
+    const { shader } = this.drawProps;
     const shaderName = isShaderIdentifier(shader)
       ? // $FlowFixMe FIXME
         Shaders.getShortName(shader)
@@ -518,7 +524,7 @@ export default class Node extends Component {
   }
 
   getGLName(): string {
-    const { shader } = this.props;
+    const { shader } = this.drawProps;
     const shaderName = isShaderIdentifier(shader)
       ? // $FlowFixMe FIXME
         Shaders.getName(shader)
@@ -527,7 +533,7 @@ export default class Node extends Component {
   }
 
   getGLSize(): [number, number] {
-    return nodeWidthHeight(this.props, this.context);
+    return nodeWidthHeight(this.drawProps, this.context);
   }
 
   getGLOutput(): WebGLTexture {
@@ -537,6 +543,23 @@ export default class Node extends Component {
       "Node#getGLOutput: framebuffer is not defined. It cannot be called on a root Node"
     );
     return framebuffer.color;
+  }
+
+  /**
+   * Imperatively set the props with a partial subset of props to apply.
+   * This is an escape hatch to perform a redraw with different props without having to trigger a new React draw. Only use it when reaching a performance bottleneck.
+   * NB: at any time, render() needs to consistently render the same props you set in setDrawProps to avoid any potential blink (if a React draw would occur).
+   * @param {Props} patch a subset of props to apply on top of the previous draw props.
+   */
+  setDrawProps(patch: Props) {
+    // $FlowFixMe
+    const nextProps: Props = {
+      ...this.drawProps,
+      ...patch,
+    };
+    this._syncNextDrawProps(nextProps, this.context);
+    this.redraw();
+    if (nextProps.sync) this.flush();
   }
 
   /**
@@ -620,7 +643,7 @@ export default class Node extends Component {
       // when a FBO is not created, _draw() happens on the final Canvas (null fbo)
       // NB we can just do this in WillMount because this context will not change.
       invariant(
-        !this.props.backbuffering,
+        !this.drawProps.backbuffering,
         "`backbuffering` is currently not supported for a Root Node. " +
           "Try to wrap %s in a <LinearCopy> or <NearestCopy>.",
         this.getGLName()
@@ -628,7 +651,7 @@ export default class Node extends Component {
     } else {
       const fbo = createFBO(gl, width, height);
       this.framebuffer = fbo;
-      if (this.props.backbuffering) {
+      if (this.drawProps.backbuffering) {
         const fbo = createFBO(gl, width, height);
         this.backbuffer = fbo;
       }
@@ -760,7 +783,7 @@ export default class Node extends Component {
       blendFunc,
       clear,
       onDraw,
-    } = this.props;
+    } = this.drawProps;
 
     //~ PREPARE phase
 
@@ -821,7 +844,7 @@ export default class Node extends Component {
         }
       } else if (obj === Backbuffer) {
         // maybe it's backbuffer?
-        if (!this.props.backbuffering) {
+        if (!this.drawProps.backbuffering) {
           console.warn(
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on Node when using Backbuffer`
           );

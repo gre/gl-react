@@ -1,25 +1,25 @@
-../all.test.js:2416
+../all.test.js:2486
             v----
-2416:       <Node
-2417:         shader={shaders.helloTexture}
-2418:         uniformsOptions={{ t: { interpolation: "nope" } }}
-2419:         uniforms={{ t: <JustBlue blue={1} /> }}
-2420:       />
+2486:       <Node
+2487:         shader={shaders.helloTexture}
+2488:         uniformsOptions={{ t: { interpolation: "nope" } }}
+2489:         uniforms={{ t: <JustBlue blue={1} /> }}
+2490:       />
             -^ props of React element `Node`
-2418:         uniformsOptions={{ t: { interpolation: "nope" } }}
+2488:         uniformsOptions={{ t: { interpolation: "nope" } }}
                                                      ^^^^^^ string. This type is incompatible with
  65:   interpolation: Interpolation,
                       ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:65
 
-../all.test.js:2428
+../all.test.js:2498
             v----
-2428:       <Node
-2429:         shader={shaders.helloTexture}
-2430:         uniformsOptions={{ t: { wrap: "nope" } }}
-2431:         uniforms={{ t: <JustBlue blue={1} /> }}
-2432:       />
+2498:       <Node
+2499:         shader={shaders.helloTexture}
+2500:         uniformsOptions={{ t: { wrap: "nope" } }}
+2501:         uniforms={{ t: <JustBlue blue={1} /> }}
+2502:       />
             -^ props of React element `Node`
-2430:         uniformsOptions={{ t: { wrap: "nope" } }}
+2500:         uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -27,7 +27,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2430:         uniformsOptions={{ t: { wrap: "nope" } }}
+  2500:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -35,20 +35,20 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2430:         uniformsOptions={{ t: { wrap: "nope" } }}
+  2500:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2440
+../all.test.js:2510
             v----
-2440:       <Node
-2441:         shader={shaders.helloTexture}
-2442:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
-2443:         uniforms={{ t: <JustBlue blue={1} /> }}
-2444:       />
+2510:       <Node
+2511:         shader={shaders.helloTexture}
+2512:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+2513:         uniforms={{ t: <JustBlue blue={1} /> }}
+2514:       />
             -^ props of React element `Node`
-2442:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+2512:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                             ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -56,7 +56,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2442:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+  2512:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                                ^^^^^^ string. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                 ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
@@ -64,20 +64,20 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
-  2442:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+  2512:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                               ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
    66:   wrap: [WrapMode, WrapMode] | WrapMode,
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2452
+../all.test.js:2522
             v----
-2452:       <Node
-2453:         blendFunc="nope"
-2454:         shader={shaders.helloTexture}
-2455:         uniforms={{ t: <JustBlue blue={1} /> }}
-2456:       />
+2522:       <Node
+2523:         blendFunc="nope"
+2524:         shader={shaders.helloTexture}
+2525:         uniforms={{ t: <JustBlue blue={1} /> }}
+2526:       />
             -^ props of React element `Node`
-2453:         blendFunc="nope"
+2523:         blendFunc="nope"
                         ^^^^^^ string. Inexact type is incompatible with exact type
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
