@@ -11,3 +11,4 @@ packages/*/lib
 packages/gl-react/gl-react.js
 packages/gl-react-dom/gl-react-dom.js
 packages/tests/node_modules_to_test/
+packages/cookbook/API.json
