@@ -596,7 +596,10 @@ export default class Node extends Component {
       // We should only dispose() if gl is still here.
       // otherwise, GL should already have free resources.
       // (also workaround for https://github.com/stackgl/headless-gl/issues/90)
-      const { framebuffer, backbuffer } = this;
+      const { framebuffer, backbuffer, _shader } = this;
+      if (_shader) {
+        _shader.dispose();
+      }
       if (framebuffer) {
         framebuffer.dispose();
       }
@@ -707,7 +710,7 @@ export default class Node extends Component {
   }
 
   _latestShaderInfo: ?ShaderInfo;
-  _shader: ?Shader;
+  _shader: ?Shader; // in case of inline shader, a Node currently hold a Node
 
   _getShader(shaderProp: mixed): Shader {
     const { glSurface } = this.context;
@@ -728,6 +731,10 @@ export default class Node extends Component {
       !latestShaderInfo ||
       !shaderInfoEquals(latestShaderInfo, shaderInfo)
     ) {
+      if (shader) {
+        shader.dispose();
+        delete this._shader;
+      }
       shader = glSurface._makeShader(shaderInfo);
       this._latestShaderInfo = shaderInfo;
       this._shader = shader;
