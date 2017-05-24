@@ -551,7 +551,7 @@ export default class Node extends Component {
    * NB: at any time, render() needs to consistently render the same props you set in setDrawProps to avoid any potential blink (if a React draw would occur).
    * @param {Props} patch a subset of props to apply on top of the previous draw props.
    */
-  setDrawProps(patch: Props) {
+  setDrawProps(patch: $Shape<Props>) {
     // $FlowFixMe
     const nextProps: Props = {
       ...this.drawProps,

@@ -50,9 +50,23 @@ const connectSize = (
         glSizable: this,
       };
     }
+    component: ?GLComponent;
+    getComponent(): ?GLComponent {
+      return this.component;
+    }
+    onRef = (ref: GLComponent) => {
+      this.component = ref;
+    };
     render() {
       const [width, height] = this.getGLSize();
-      return <GLComponent {...this.props} width={width} height={height} />;
+      return (
+        <GLComponent
+          ref={this.onRef}
+          {...this.props}
+          width={width}
+          height={height}
+        />
+      );
     }
   };
 
