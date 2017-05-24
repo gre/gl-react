@@ -13,8 +13,8 @@
     "babel-preset-stage-1": "^6.13.0",
     "baboon-image": "github:gre/baboon-image",
     "flow-copy-source": "^1.1.0",
-    "gl-react": "^3.5.0",
-    "gl-react-headless": "^3.5.0",
+    "gl-react": "^3.6.0",
+    "gl-react-headless": "^3.6.0",
     "gl-texture2d": "^2.0.12",
     "jest": "^19.0.0",
     "ndarray": "^1.0.18",
@@ -23,7 +23,7 @@
     "react": "^15.4.0",
     "react-test-renderer": "^15.4.0"
   },
-  "version": "3.5.0",
+  "version": "3.6.0",
   "dependencies": {
     "prop-types": "^15.5.8"
   }
