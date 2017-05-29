@@ -36,7 +36,7 @@ export default class Example extends Component {
   }
 }
 `;
-export const hellogl = { Example: hellogl_E, source: hellogl_s, ...hellogl_m };
+export const hellogl={ Example: hellogl_E, source: hellogl_s, ...hellogl_m };
 import helloblue_E from "./helloblue";
 import * as helloblue_m from "./helloblue/meta";
 const helloblue_s = `
@@ -77,11 +77,7 @@ export default class Example extends Component {
   static defaultProps = { blue: 0.5 };
 }
 `;
-export const helloblue = {
-  Example: helloblue_E,
-  source: helloblue_s,
-  ...helloblue_m,
-};
+export const helloblue={ Example: helloblue_E, source: helloblue_s, ...helloblue_m };
 import helloblueanim_E from "./helloblueanim";
 import * as helloblueanim_m from "./helloblueanim/meta";
 const helloblueanim_s = `
@@ -107,11 +103,7 @@ export default timeLoop(class Example extends Component {
   }
 });
 `;
-export const helloblueanim = {
-  Example: helloblueanim_E,
-  source: helloblueanim_s,
-  ...helloblueanim_m,
-};
+export const helloblueanim={ Example: helloblueanim_E, source: helloblueanim_s, ...helloblueanim_m };
 import colordisc_E from "./colordisc";
 import * as colordisc_m from "./colordisc/meta";
 const colordisc_s = `
@@ -163,11 +155,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const colordisc = {
-  Example: colordisc_E,
-  source: colordisc_s,
-  ...colordisc_m,
-};
+export const colordisc={ Example: colordisc_E, source: colordisc_s, ...colordisc_m };
 import gradients_E from "./gradients";
 import * as gradients_m from "./gradients/meta";
 const gradients_s = `
@@ -228,11 +216,7 @@ export default () =>
 // it's not meant to be used with lot of objects.
 // GLSL 1 also don't support variable length in loops.
 `;
-export const gradients = {
-  Example: gradients_E,
-  source: gradients_s,
-  ...gradients_m,
-};
+export const gradients={ Example: gradients_E, source: gradients_s, ...gradients_m };
 import diamondcrop_E from "./diamondcrop";
 import * as diamondcrop_m from "./diamondcrop/meta";
 const diamondcrop_s = `
@@ -270,11 +254,7 @@ export default class Example extends Component {
   }
 };
 `;
-export const diamondcrop = {
-  Example: diamondcrop_E,
-  source: diamondcrop_s,
-  ...diamondcrop_m,
-};
+export const diamondcrop={ Example: diamondcrop_E, source: diamondcrop_s, ...diamondcrop_m };
 import diamondhello_E from "./diamondhello";
 import * as diamondhello_m from "./diamondhello/meta";
 const diamondhello_s = `
@@ -296,11 +276,7 @@ export default class Example extends Component {
   }
 }
 `;
-export const diamondhello = {
-  Example: diamondhello_E,
-  source: diamondhello_s,
-  ...diamondhello_m,
-};
+export const diamondhello={ Example: diamondhello_E, source: diamondhello_s, ...diamondhello_m };
 import diamondanim_E from "./diamondanim";
 import * as diamondanim_m from "./diamondanim/meta";
 const diamondanim_s = `
@@ -336,11 +312,7 @@ export default () =>
     </DiamondCrop>
   </Surface>;
 `;
-export const diamondanim = {
-  Example: diamondanim_E,
-  source: diamondanim_s,
-  ...diamondanim_m,
-};
+export const diamondanim={ Example: diamondanim_E, source: diamondanim_s, ...diamondanim_m };
 import heart_E from "./heart";
 import * as heart_m from "./heart/meta";
 const heart_s = `
@@ -362,7 +334,7 @@ void main() {
   float scale = 1.0 - 0.1 * over - 0.8 * toggle;
   vec2 offset = vec2(0.0, -0.3 - 0.1 * over - 0.7 * toggle);
   vec2 p = scale * (2.0 * uv - 1.0 + offset);
-  float a = atan(p.x, p.y) / ${/* \\o/ */ Math.PI};
+  float a = atan(p.x, p.y) / ${Math.PI/* \\o/ */};
   float r = length(p);
   float h = abs(a);
   float d = (13.0*h - 22.0*h*h + 10.0*h*h*h - 0.3 * (1.0-over))/(6.0-5.0*h);
@@ -409,7 +381,7 @@ export default () =>
     image="https://i.imgur.com/GQo1KWq.jpg"
   />;
 `;
-export const heart = { Example: heart_E, source: heart_s, ...heart_m };
+export const heart={ Example: heart_E, source: heart_s, ...heart_m };
 import animated_E from "./animated";
 import * as animated_m from "./animated/meta";
 const animated_s = `
@@ -460,11 +432,7 @@ export default class Example extends Component {
   }
 };
 `;
-export const animated = {
-  Example: animated_E,
-  source: animated_s,
-  ...animated_m,
-};
+export const animated={ Example: animated_E, source: animated_s, ...animated_m };
 import saturation_E from "./saturation";
 import * as saturation_m from "./saturation/meta";
 const saturation_s = `
@@ -515,11 +483,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const saturation = {
-  Example: saturation_E,
-  source: saturation_s,
-  ...saturation_m,
-};
+export const saturation={ Example: saturation_E, source: saturation_s, ...saturation_m };
 import colorscale_E from "./colorscale";
 import * as colorscale_m from "./colorscale/meta";
 const colorscale_s = `
@@ -568,11 +532,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const colorscale = {
-  Example: colorscale_E,
-  source: colorscale_s,
-  ...colorscale_m,
-};
+export const colorscale={ Example: colorscale_E, source: colorscale_s, ...colorscale_m };
 import distortion_E from "./distortion";
 import * as distortion_m from "./distortion/meta";
 const distortion_s = `
@@ -653,11 +613,7 @@ export default class Example extends Component {
   }
 };
 `;
-export const distortion = {
-  Example: distortion_E,
-  source: distortion_s,
-  ...distortion_m,
-};
+export const distortion={ Example: distortion_E, source: distortion_s, ...distortion_m };
 import transitions_E from "./transitions";
 import * as transitions_m from "./transitions/meta";
 const transitions_s = `
@@ -692,11 +648,7 @@ export default () => (
   </Surface>
 );
 `;
-export const transitions = {
-  Example: transitions_E,
-  source: transitions_s,
-  ...transitions_m,
-};
+export const transitions={ Example: transitions_E, source: transitions_s, ...transitions_m };
 import textfunky_E from "./textfunky";
 import * as textfunky_m from "./textfunky/meta";
 const textfunky_s = `
@@ -751,11 +703,7 @@ export default class Example extends Component {
   }
 };
 `;
-export const textfunky = {
-  Example: textfunky_E,
-  source: textfunky_s,
-  ...textfunky_m,
-};
+export const textfunky={ Example: textfunky_E, source: textfunky_s, ...textfunky_m };
 import textanimated_E from "./textanimated";
 import * as textanimated_m from "./textanimated/meta";
 const textanimated_s = `
@@ -864,11 +812,7 @@ export default class Example extends Component {
 
 export {size,font,lineHeight,padding};
 `;
-export const textanimated = {
-  Example: textanimated_E,
-  source: textanimated_s,
-  ...textanimated_m,
-};
+export const textanimated={ Example: textanimated_E, source: textanimated_s, ...textanimated_m };
 import glsledit_E from "./glsledit";
 import * as glsledit_m from "./glsledit/meta";
 const glsledit_s = `
@@ -945,11 +889,7 @@ void main() {
   };
 }
 `;
-export const glsledit = {
-  Example: glsledit_E,
-  source: glsledit_s,
-  ...glsledit_m,
-};
+export const glsledit={ Example: glsledit_E, source: glsledit_s, ...glsledit_m };
 import paint_E from "./paint";
 import * as paint_m from "./paint/meta";
 const paint_s = `
@@ -1046,7 +986,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const paint = { Example: paint_E, source: paint_s, ...paint_m };
+export const paint={ Example: paint_E, source: paint_s, ...paint_m };
 import pixeleditor_E from "./pixeleditor";
 import * as pixeleditor_m from "./pixeleditor/meta";
 const pixeleditor_s = `
@@ -1313,11 +1253,7 @@ export default class Example extends Component {
 
 export { tools };
 `;
-export const pixeleditor = {
-  Example: pixeleditor_E,
-  source: pixeleditor_s,
-  ...pixeleditor_m,
-};
+export const pixeleditor={ Example: pixeleditor_E, source: pixeleditor_s, ...pixeleditor_m };
 import blurxy_E from "./blurxy";
 import * as blurxy_m from "./blurxy/meta";
 const blurxy_s = `
@@ -1383,7 +1319,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const blurxy = { Example: blurxy_E, source: blurxy_s, ...blurxy_m };
+export const blurxy={ Example: blurxy_E, source: blurxy_s, ...blurxy_m };
 import blurxydownscale_E from "./blurxydownscale";
 import * as blurxydownscale_m from "./blurxydownscale/meta";
 const blurxydownscale_s = `
@@ -1412,11 +1348,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const blurxydownscale = {
-  Example: blurxydownscale_E,
-  source: blurxydownscale_s,
-  ...blurxydownscale_m,
-};
+export const blurxydownscale={ Example: blurxydownscale_E, source: blurxydownscale_s, ...blurxydownscale_m };
 import blurmulti_E from "./blurmulti";
 import * as blurmulti_m from "./blurmulti/meta";
 const blurmulti_s = `
@@ -1466,11 +1398,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const blurmulti = {
-  Example: blurmulti_E,
-  source: blurmulti_s,
-  ...blurmulti_m,
-};
+export const blurmulti={ Example: blurmulti_E, source: blurmulti_s, ...blurmulti_m };
 import blurmap_E from "./blurmap";
 import * as blurmap_m from "./blurmap/meta";
 const blurmap_s = `
@@ -1543,7 +1471,7 @@ export default class Example extends Component {
 };
 import StaticBlurMap from "../../toolbox/StaticBlurMap";
 `;
-export const blurmap = { Example: blurmap_E, source: blurmap_s, ...blurmap_m };
+export const blurmap={ Example: blurmap_E, source: blurmap_s, ...blurmap_m };
 import blurmapmouse_E from "./blurmapmouse";
 import * as blurmapmouse_m from "./blurmapmouse/meta";
 const blurmapmouse_s = `
@@ -1610,11 +1538,7 @@ export default class Example extends Component {
 };
 import StaticBlurMap from "../../toolbox/StaticBlurMap";
 `;
-export const blurmapmouse = {
-  Example: blurmapmouse_E,
-  source: blurmapmouse_s,
-  ...blurmapmouse_m,
-};
+export const blurmapmouse={ Example: blurmapmouse_E, source: blurmapmouse_s, ...blurmapmouse_m };
 import blurmapdyn_E from "./blurmapdyn";
 import * as blurmapdyn_m from "./blurmapdyn/meta";
 const blurmapdyn_s = `
@@ -1665,11 +1589,7 @@ export default class Example extends Component {
   };
 };
 `;
-export const blurmapdyn = {
-  Example: blurmapdyn_E,
-  source: blurmapdyn_s,
-  ...blurmapdyn_m,
-};
+export const blurmapdyn={ Example: blurmapdyn_E, source: blurmapdyn_s, ...blurmapdyn_m };
 import blurimgtitle_E from "./blurimgtitle";
 import * as blurimgtitle_m from "./blurimgtitle/meta";
 const blurimgtitle_s = `
@@ -1842,11 +1762,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const blurimgtitle = {
-  Example: blurimgtitle_E,
-  source: blurimgtitle_s,
-  ...blurimgtitle_m,
-};
+export const blurimgtitle={ Example: blurimgtitle_E, source: blurimgtitle_s, ...blurimgtitle_m };
 import gol_E from "./gol";
 import * as gol_m from "./gol/meta";
 const gol_s = `
@@ -1934,7 +1850,7 @@ export default () =>
     </NearestCopy>
   </Surface>
 `;
-export const gol = { Example: gol_E, source: gol_s, ...gol_m };
+export const gol={ Example: gol_E, source: gol_s, ...gol_m };
 import golglider_E from "./golglider";
 import * as golglider_m from "./golglider/meta";
 const golglider_s = `
@@ -1976,11 +1892,7 @@ export default class Example extends Component {
   }
 }
 `;
-export const golglider = {
-  Example: golglider_E,
-  source: golglider_s,
-  ...golglider_m,
-};
+export const golglider={ Example: golglider_E, source: golglider_s, ...golglider_m };
 import golrot_E from "./golrot";
 import * as golrot_m from "./golrot/meta";
 const golrot_s = `
@@ -2030,7 +1942,7 @@ export default () =>
     </RotatingLoop>
   </Surface>;
 `;
-export const golrot = { Example: golrot_E, source: golrot_s, ...golrot_m };
+export const golrot={ Example: golrot_E, source: golrot_s, ...golrot_m };
 import golrotscu_E from "./golrotscu";
 import * as golrotscu_m from "./golrotscu/meta";
 const golrotscu_s = `
@@ -2071,11 +1983,7 @@ export default class Example extends Component {
   }
 }
 `;
-export const golrotscu = {
-  Example: golrotscu_E,
-  source: golrotscu_s,
-  ...golrotscu_m,
-};
+export const golrotscu={ Example: golrotscu_E, source: golrotscu_s, ...golrotscu_m };
 import video_E from "./video";
 import * as video_m from "./video/meta";
 const video_s = `
@@ -2149,7 +2057,7 @@ export default () =>
     </SplitColor>
   </Surface>
 `;
-export const video = { Example: video_E, source: video_s, ...video_m };
+export const video={ Example: video_E, source: video_s, ...video_m };
 import blurvideo_E from "./blurvideo";
 import * as blurvideo_m from "./blurvideo/meta";
 const blurvideo_s = `
@@ -2199,11 +2107,7 @@ export default class Example extends Component {
 }
 import StaticBlurMap from "../../toolbox/StaticBlurMap";
 `;
-export const blurvideo = {
-  Example: blurvideo_E,
-  source: blurvideo_s,
-  ...blurvideo_m,
-};
+export const blurvideo={ Example: blurvideo_E, source: blurvideo_s, ...blurvideo_m };
 import webcam_E from "./webcam";
 import * as webcam_m from "./webcam/meta";
 const webcam_s = `
@@ -2247,7 +2151,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const webcam = { Example: webcam_E, source: webcam_s, ...webcam_m };
+export const webcam={ Example: webcam_E, source: webcam_s, ...webcam_m };
 import webcampersistence_E from "./webcampersistence";
 import * as webcampersistence_m from "./webcampersistence/meta";
 const webcampersistence_s = `
@@ -2301,11 +2205,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const webcampersistence = {
-  Example: webcampersistence_E,
-  source: webcampersistence_s,
-  ...webcampersistence_m,
-};
+export const webcampersistence={ Example: webcampersistence_E, source: webcampersistence_s, ...webcampersistence_m };
 import golwebcam_E from "./golwebcam";
 import * as golwebcam_m from "./golwebcam/meta";
 const golwebcam_s = `
@@ -2396,11 +2296,7 @@ export default class Example extends Component {
     this.setState({ reset: false });
 }
 `;
-export const golwebcam = {
-  Example: golwebcam_E,
-  source: golwebcam_s,
-  ...golwebcam_m,
-};
+export const golwebcam={ Example: golwebcam_E, source: golwebcam_s, ...golwebcam_m };
 import mergechannels_E from "./mergechannels";
 import * as mergechannels_m from "./mergechannels/meta";
 const mergechannels_s = `
@@ -2461,11 +2357,7 @@ export default class Example extends Component {
   };
 };
 `;
-export const mergechannels = {
-  Example: mergechannels_E,
-  source: mergechannels_s,
-  ...mergechannels_m,
-};
+export const mergechannels={ Example: mergechannels_E, source: mergechannels_s, ...mergechannels_m };
 import mergechannelsfun_E from "./mergechannelsfun";
 import * as mergechannelsfun_m from "./mergechannelsfun/meta";
 const mergechannelsfun_s = `
@@ -2505,11 +2397,7 @@ export default () =>
     />
   </Surface>;
 `;
-export const mergechannelsfun = {
-  Example: mergechannelsfun_E,
-  source: mergechannelsfun_s,
-  ...mergechannelsfun_m,
-};
+export const mergechannelsfun={ Example: mergechannelsfun_E, source: mergechannelsfun_s, ...mergechannelsfun_m };
 import demotunnel_E from "./demotunnel";
 import * as demotunnel_m from "./demotunnel/meta";
 const demotunnel_s = `
@@ -2551,11 +2439,7 @@ export default() =>
     <DesertPassageLoop />
   </Surface>
 `;
-export const demotunnel = {
-  Example: demotunnel_E,
-  source: demotunnel_s,
-  ...demotunnel_m,
-};
+export const demotunnel={ Example: demotunnel_E, source: demotunnel_s, ...demotunnel_m };
 import demodesert_E from "./demodesert";
 import * as demodesert_m from "./demodesert/meta";
 const demodesert_s = `
@@ -2786,11 +2670,7 @@ export default() =>
     <DesertPassageLoop />
   </Surface>
 `;
-export const demodesert = {
-  Example: demodesert_E,
-  source: demodesert_s,
-  ...demodesert_m,
-};
+export const demodesert={ Example: demodesert_E, source: demodesert_s, ...demodesert_m };
 import demodesertcrt_E from "./demodesertcrt";
 import * as demodesertcrt_m from "./demodesertcrt/meta";
 const demodesertcrt_s = `
@@ -2952,11 +2832,7 @@ export default class Example extends Component {
   };
 };
 `;
-export const demodesertcrt = {
-  Example: demodesertcrt_E,
-  source: demodesertcrt_s,
-  ...demodesertcrt_m,
-};
+export const demodesertcrt={ Example: demodesertcrt_E, source: demodesertcrt_s, ...demodesertcrt_m };
 import behindasteroids_E from "./behindasteroids";
 import * as behindasteroids_m from "./behindasteroids/meta";
 const behindasteroids_s = `
@@ -3300,11 +3176,7 @@ export default class Example extends Component {
   };
 }
 `;
-export const behindasteroids = {
-  Example: behindasteroids_E,
-  source: behindasteroids_s,
-  ...behindasteroids_m,
-};
+export const behindasteroids={ Example: behindasteroids_E, source: behindasteroids_s, ...behindasteroids_m };
 import ibex_E from "./ibex";
 import * as ibex_m from "./ibex/meta";
 const ibex_s = `
@@ -3924,4 +3796,4 @@ export default class Example extends Component {
 * Source + Water
 */
 `;
-export const ibex = { Example: ibex_E, source: ibex_s, ...ibex_m };
+export const ibex={ Example: ibex_E, source: ibex_s, ...ibex_m };

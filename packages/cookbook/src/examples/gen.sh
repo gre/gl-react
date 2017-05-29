@@ -7,7 +7,7 @@ do
     echo "import ${ex}_E from \"./$ex\";";
     echo "import * as ${ex}_m from \"./$ex/meta\";";
     echo "const ${ex}_s = \`";
-    cat ./$ex/index.js | sed 's/\\/\\\\/g' | sed 's/\`/\\\`/g';
+    cat ./$ex/index.js | sed -e 's/\\/\\\\/g' | sed -e 's/\`/\\\`/g';
     echo "\`;";
     echo "export const $ex={ Example: ${ex}_E, source: ${ex}_s, ...${ex}_m };"
   else
