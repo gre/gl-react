@@ -19,6 +19,6 @@ before_deploy:
   - cd packages/cookbook && yarn run build
 deploy:
   provider: surge
-  project: ./build
+  project: ./packages/cookbook/build/
   domain: gl-react-cookbook.surge.sh
   skip_cleanup: true
