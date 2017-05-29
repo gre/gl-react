@@ -9,8 +9,7 @@
     "prettier": "prettier --trailing-comma es5 --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "flow": "cd packages/gl-react && flow --quiet",
     "test": "cd packages/tests && yarn test",
-    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
-    "deploy-cookbook": "cd packages/cookbook && yarn run build && cp build/index.html build/200.html && surge -p build -d gl-react-cookbook.surge.sh"
+    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u"
   },
   "dependencies": {
     "react": "~15.4.1",

@@ -42,7 +42,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp build/index.html build/200.html",
     "eject": "react-scripts eject",
     "prepublish": "npm run generate-examples && npm run generate-doc",
     "generate-examples": "cd src/examples; ./gen.sh 1> index.js",

@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "node"
+before_script:
+  - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
 script: yarn test
 os: linux
 sudo: required
@@ -13,5 +15,10 @@ addons:
     - libgl1-mesa-dri
     - libglapi-mesa
     - libosmesa6
-before_script:
-  - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start
+before_deploy:
+  - cd packages/cookbook && yarn run build
+deploy:
+  provider: surge
+  project: build
+  domain: gl-react-cookbook.surge.sh
+  skip_cleanup: true
