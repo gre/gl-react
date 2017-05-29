@@ -18,7 +18,6 @@
     "gl-shader": "^4.2.1",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^0.44.0",
-    "glsl-transitions": "^2016.10.24",
     "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.2",
     "ndarray": "^1.0.18",
