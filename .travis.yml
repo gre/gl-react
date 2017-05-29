@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "node"
-script: yarn run build && yarn test
+script: yarn test
 os: linux
 sudo: required
 dist: trusty

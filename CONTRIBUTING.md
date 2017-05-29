@@ -6,17 +6,10 @@ Contributions are always welcome, no matter how large or small.
 
 [yarn](https://yarnpkg.com)
 
-## Setup
+## Setup / Building
 
 ```sh
 yarn
-yarn run build
-```
-
-## Building
-
-```sh
-yarn run build
 ```
 
 You must run this each time you modify one of the packages/ of the library.
