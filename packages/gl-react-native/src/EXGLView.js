@@ -45,7 +45,17 @@ export default class EXGLView extends React.Component {
   };
 
   static NativeView = requireNativeComponent("EXGLView", EXGLView, {
-    nativeOnly: { onSurfaceCreate: true },
+    nativeOnly: { 
+      onSurfaceCreate: true,
+      testID: true,
+      accessibilityLabel: true,
+      accessibilityLiveRegion: true,
+      accessibilityComponentType: true,
+      importantForAccessibility: true,
+      renderToHardwareTextureAndroid: true,
+      onLayout: true,
+      nativeID: true
+    },
   });
 }
 
