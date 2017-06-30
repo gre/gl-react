@@ -1,8 +1,15 @@
 "use strict";
 
+// Forked from https://github.com/expo/expo-sdk/blob/master/src/GLView.js
+
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Platform, requireNativeComponent } from "react-native";
+import {
+  View,
+  ViewPropTypes,
+  Platform,
+  requireNativeComponent
+} from "react-native";
 
 // A component that acts as an OpenGL render target.
 
@@ -15,10 +22,12 @@ export default class EXGLView extends React.Component {
 
     // [iOS only] Number of samples for Apple"s built-in multisampling.
     msaaSamples: PropTypes.number,
+
+    ...ViewPropTypes
   };
 
   static defaultProps = {
-    msaaSamples: 4,
+    msaaSamples: 4
   };
 
   render() {
@@ -45,37 +54,30 @@ export default class EXGLView extends React.Component {
   };
 
   static NativeView = requireNativeComponent("EXGLView", EXGLView, {
-    nativeOnly: { onSurfaceCreate: true },
+    nativeOnly: { onSurfaceCreate: true }
   });
 }
 
 // JavaScript WebGL types to wrap around native objects
-class WebGLRenderingContext {}
-class WebGLObject {
+
+global.WebGLRenderingContext = class WebGLRenderingContext {};
+
+const idToObject = {};
+
+global.WebGLObject = class WebGLObject {
   constructor(id) {
+    if (idToObject[id]) {
+      throw new Error(
+        `WebGL object with underlying EXGLObjectId '${id}' already exists!`
+      );
+    }
     this.id = id; // Native GL object id
   }
   toString() {
     return `[WebGLObject ${this.id}]`;
   }
-}
-class WebGLBuffer extends WebGLObject {}
-class WebGLFramebuffer extends WebGLObject {}
-class WebGLProgram extends WebGLObject {}
-class WebGLRenderbuffer extends WebGLObject {}
-class WebGLShader extends WebGLObject {}
-class WebGLTexture extends WebGLObject {}
+};
 
-global.WebGLRenderingContext = WebGLRenderingContext;
-global.WebGLObject = WebGLObject;
-global.WebGLBuffer = WebGLBuffer;
-global.WebGLFramebuffer = WebGLFramebuffer;
-global.WebGLProgram = WebGLProgram;
-global.WebGLRenderbuffer = WebGLRenderbuffer;
-global.WebGLShader = WebGLShader;
-global.WebGLTexture = WebGLTexture;
-
-const idToObject = {};
 const wrapObject = (type, id) => {
   const found = idToObject[id];
   if (found) {
@@ -84,25 +86,35 @@ const wrapObject = (type, id) => {
   return (idToObject[id] = new type(id));
 };
 
-class WebGLUniformLocation {
+global.WebGLBuffer = class WebGLBuffer extends WebGLObject {};
+
+global.WebGLFramebuffer = class WebGLFramebuffer extends WebGLObject {};
+
+global.WebGLProgram = class WebGLProgram extends WebGLObject {};
+
+global.WebGLRenderbuffer = class WebGLRenderbuffer extends WebGLObject {};
+
+global.WebGLShader = class WebGLShader extends WebGLObject {};
+
+global.WebGLTexture = class WebGLTexture extends WebGLObject {};
+
+global.WebGLUniformLocation = class WebGLUniformLocation {
   constructor(id) {
     this.id = id; // Native GL object id
   }
-}
-global.WebGLUniformLocation = WebGLUniformLocation;
+};
 
-class WebGLActiveInfo {
+global.WebGLActiveInfo = class WebGLActiveInfo {
   constructor(obj) {
     Object.assign(this, obj);
   }
-}
-global.WebGLActiveInfo = WebGLActiveInfo;
-class WebGLShaderPrecisionFormat {
+};
+
+global.WebGLShaderPrecisionFormat = class WebGLShaderPrecisionFormat {
   constructor(obj) {
     Object.assign(this, obj);
   }
-}
-global.WebGLShaderPrecisionFormat = WebGLShaderPrecisionFormat;
+};
 
 // Many functions need wrapping/unwrapping of arguments and return value. We
 // handle each case specifically so we can write the tightest code for
@@ -113,7 +125,7 @@ const wrapMethods = gl => {
       methodName => (gl[methodName] = wrapper(gl[methodName]))
     );
 
-  // We can be slow in `gl.getParameter(...)` since it"s a blocking call anyways
+  // We can be slow in `gl.getParameter(...)` since it's a blocking call anyways
   const getParameterTypes = {
     [gl.ARRAY_BUFFER_BINDING]: WebGLBuffer,
     [gl.ELEMENT_ARRAY_BUFFER_BINDING]: WebGLBuffer,
@@ -121,7 +133,7 @@ const wrapMethods = gl => {
     [gl.FRAMEBUFFER_BINDING]: WebGLFramebuffer,
     [gl.RENDERBUFFER_BINDING]: WebGLRenderbuffer,
     [gl.TEXTURE_BINDING_2D]: WebGLTexture,
-    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture,
+    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture
   };
   wrap("getParameter", orig => pname => {
     let ret = orig.call(gl, pname);
@@ -257,7 +269,7 @@ const wrapMethods = gl => {
       "vertexAttrib1fv",
       "vertexAttrib2fv",
       "vertexAttrib3fv",
-      "vertexAttrib4fv",
+      "vertexAttrib4fv"
     ],
     orig => (index, val) => orig.call(gl, index, new Float32Array(val))
   );
@@ -265,24 +277,22 @@ const wrapMethods = gl => {
 
 // Get the GL interface from an EXGLContextID and do JS-side setup
 const getGl = exglCtxId => {
-  if (!global.__EXGLContexts) {
-    console.warn(
-      "gl-react-native will renders black if it runs outside JavaScriptCore. " +
-        "For instance, it won't work with Chrome JS Debugging."
-    );
-    return null;
-  }
   const gl = global.__EXGLContexts[exglCtxId];
+  gl.__exglCtxId = exglCtxId;
   delete global.__EXGLContexts[exglCtxId];
   if (Object.setPrototypeOf) {
     Object.setPrototypeOf(gl, global.WebGLRenderingContext.prototype);
   } else {
     gl.__proto__ = global.WebGLRenderingContext.prototype;
   }
+
   wrapMethods(gl);
+
   gl.canvas = null;
+
   const viewport = gl.getParameter(gl.VIEWPORT);
   gl.drawingBufferWidth = viewport[2];
   gl.drawingBufferHeight = viewport[3];
+
   return gl;
 };
