@@ -2,17 +2,18 @@
 import React, { Component } from "react";
 import { Shaders, GLSL, Node } from "gl-react";
 import { Surface } from "gl-react-dom";
-import videoMP4 from "./video.mp4"; export {videoMP4};
+import raf from "raf";
+import videoMP4 from "./video.mp4";
+export { videoMP4 };
 
 // We implement a component <Video> that is like <video>
 // but provides a onFrame hook so we can efficiently only render
 // if when it effectively changes.
-import raf from "raf";
 export class Video extends Component {
   componentDidMount() {
     const loop = () => {
       this._raf = raf(loop);
-      const {video} = this.refs;
+      const { video } = this.refs;
       if (!video) return;
       const currentTime = video.currentTime;
       // Optimization that only call onFrame if time changes
@@ -47,23 +48,27 @@ void main () {
     c.g * step(1.0, y) * step(y, 2.0),
     c.b * step(0.0, y) * step(y, 1.0),
     1.0);
-}` }
-//^NB perf: in fragment shader paradigm, we want to avoid code branch (if / for)
-// and prefer use of built-in functions and just giving the GPU some computating.
-// step(a,b) is an alternative to do if(): returns 1.0 if a<b, 0.0 otherwise.
+}`
+  }
+  //^NB perf: in fragment shader paradigm, we want to avoid code branch (if / for)
+  // and prefer use of built-in functions and just giving the GPU some computating.
+  // step(a,b) is an alternative to do if(): returns 1.0 if a<b, 0.0 otherwise.
 });
-const SplitColor = ({ children }) =>
-  <Node shader={shaders.SplitColor} uniforms={{ children }} />;
+const SplitColor = ({ children }) => (
+  <Node shader={shaders.SplitColor} uniforms={{ children }} />
+);
 
 // We now uses <Video> in our GL graph.
 // The texture we give to <SplitColor> is a (redraw)=><Video> function.
 // redraw is passed to Video onFrame event and Node gets redraw each video frame.
-export default () =>
+export default () => (
   <Surface width={280} height={630} pixelRatio={1}>
     <SplitColor>
-      { redraw =>
+      {redraw => (
         <Video onFrame={redraw} autoPlay loop>
           <source type="video/mp4" src={videoMP4} />
-        </Video> }
+        </Video>
+      )}
     </SplitColor>
   </Surface>
+);

@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import { Shaders, Node, GLSL, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
+import { directionForPass } from "../blurmulti";
+import StaticBlurMap from "../../toolbox/StaticBlurMap";
 
 const shaders = Shaders.create({
   blurV1D: {
@@ -23,30 +25,30 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 void main() {
   gl_FragColor = blur9(t, uv, resolution, direction * texture2D(map, uv).rg);
 }`
- }
+  }
 });
 
 // Same concept than Blur1D except it takes one more prop:
 // a map texture that tells the blur intensity for a given position.
-export const BlurV1D =
-  connectSize(({ children: t, direction, map, width, height }) =>
+export const BlurV1D = connectSize(
+  ({ children: t, direction, map, width, height }) => (
     <Node
       shader={shaders.blurV1D}
-      uniforms={{ t, map, resolution: [ width, height ], direction }}
-    />);
+      uniforms={{ t, map, resolution: [width, height], direction }}
+    />
+  )
+);
 
 // And its N-pass version
-import {directionForPass} from "../blurmulti";
-export const BlurV =
-  connectSize(({ children, factor, map, passes }) => {
-    const rec = pass =>
+export const BlurV = connectSize(({ children, factor, map, passes }) => {
+  const rec = pass =>
     pass <= 0
-    ? children
-    : <BlurV1D map={map} direction={directionForPass(pass, factor, passes)}>
-        {rec(pass-1)}
-      </BlurV1D>;
-    return rec(passes);
-  });
+      ? children
+      : <BlurV1D map={map} direction={directionForPass(pass, factor, passes)}>
+          {rec(pass - 1)}
+        </BlurV1D>;
+  return rec(passes);
+});
 
 export default class Example extends Component {
   render() {
@@ -62,7 +64,6 @@ export default class Example extends Component {
   static defaultProps = {
     factor: 2,
     passes: 4,
-    map: StaticBlurMap.images[0],
+    map: StaticBlurMap.images[0]
   };
-};
-import StaticBlurMap from "../../toolbox/StaticBlurMap";
+}
