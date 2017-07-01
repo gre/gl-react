@@ -12,4 +12,3 @@ packages/gl-react/gl-react.js
 packages/gl-react-dom/gl-react-dom.js
 packages/tests/node_modules_to_test/
 packages/cookbook/src/API.json
-packages/cookbook/src/examples/*/index.source.js

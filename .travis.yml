@@ -16,7 +16,9 @@ addons:
     - libglapi-mesa
     - libosmesa6
 before_deploy:
-  - cd packages/cookbook && yarn run build
+  - unset CI
+  - cd packages/cookbook
+  - yarn run build
 deploy:
   provider: surge
   project: ./packages/cookbook/build/
