@@ -3,8 +3,10 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
+#import "RCTBridge+Private.h" // FIXME this is probably unrecommended and unstable. basically we need bridge.dispatchBlock to be public
+#import <React/RCTBridge+JavaScriptCore.h>
+
 #import <React/RCTUtils.h>
-#import <React/RCTJSCExecutor.h>
 
 #import "EXUnversioned.h"
 #import "EXGL.h"
@@ -63,22 +65,10 @@ RCT_NOT_IMPLEMENTED(- (instancetype)init);
 
     // Setup JS binding -- only possible on JavaScriptCore
     _exglCtxId = 0;
-    id<RCTJavaScriptExecutor> executor = [_viewManager.bridge valueForKey:@"javaScriptExecutor"];
-    if ([executor isKindOfClass:NSClassFromString(@"RCTJSCExecutor")]) {
-      // On JS thread, extract JavaScriptCore context, create EXGL context, call JS callback
-      __weak __typeof__(self) weakSelf = self;
-      __weak __typeof__(executor) weakExecutor = executor;
-      [executor executeBlockOnJavaScriptQueue:^{
-        __typeof__(self) self = weakSelf;
-        RCTJSCExecutor *executor = weakExecutor;
-        if (self && executor) {
-          _exglCtxId = EX_UNVERSIONED(EXGLContextCreate(executor.jsContext.JSGlobalContextRef));
-          _onSurfaceCreate(@{ @"exglCtxId": @(_exglCtxId) });
-        }
-      }];
-    } else {
-      RCTLog(@"EXGL: Can only run on JavaScriptCore! Do you have 'Remote Debugging' enabled in your app's Developer Menu (https://facebook.github.io/react-native/docs/debugging.html)? EXGL is not supported while using Remote Debugging, you will need to disable it to use EXGL.");
-    }
+    [_viewManager.bridge dispatchBlock:^{
+        _exglCtxId = EX_UNVERSIONED(EXGLContextCreate(_viewManager.bridge.jsContextRef));
+        _onSurfaceCreate(@{ @"exglCtxId": @(_exglCtxId) });
+    } queue:RCTJSThread];
   }
   return self;
 }

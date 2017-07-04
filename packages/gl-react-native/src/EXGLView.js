@@ -20,6 +20,9 @@ export default class EXGLView extends React.Component {
     // WebGLRenderingContext.
     onContextCreate: PropTypes.func,
 
+    // Called when the OpenGL context failed to be created
+    onContextFailure: PropTypes.func,
+
     // [iOS only] Number of samples for Apple"s built-in multisampling.
     msaaSamples: PropTypes.number,
 
@@ -48,8 +51,14 @@ export default class EXGLView extends React.Component {
 
   _onSurfaceCreate = ({ nativeEvent: { exglCtxId } }) => {
     const gl = getGl(exglCtxId);
-    if (this.props.onContextCreate) {
-      this.props.onContextCreate(gl);
+    if (gl) {
+      if (this.props.onContextCreate) {
+        this.props.onContextCreate(gl);
+      }
+    } else {
+      if (this.props.onContextFailure) {
+        this.props.onContextFailure(new Error("EXGL context creation failed"));
+      }
     }
   };
 
@@ -277,6 +286,12 @@ const wrapMethods = gl => {
 
 // Get the GL interface from an EXGLContextID and do JS-side setup
 const getGl = exglCtxId => {
+  if (!global.__EXGLContexts) {
+    console.warn(
+      "EXGL: Can only run on JavaScriptCore! Do you have 'Remote Debugging' enabled in your app's Developer Menu (https://facebook.github.io/react-native/docs/debugging.html)? EXGL is not supported while using Remote Debugging, you will need to disable it to use EXGL."
+    );
+    return null;
+  }
   const gl = global.__EXGLContexts[exglCtxId];
   gl.__exglCtxId = exglCtxId;
   delete global.__EXGLContexts[exglCtxId];
