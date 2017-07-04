@@ -17,6 +17,7 @@ addons:
     - libosmesa6
 before_deploy:
   - unset CI
+  - export GL_REACT_VERSION=`node -e "console.log(require('./packages/gl-react/package.json').version)"`
   - cd packages/cookbook
   - yarn run build
 deploy:
