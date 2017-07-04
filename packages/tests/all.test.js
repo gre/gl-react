@@ -22,7 +22,7 @@ import {
   Backbuffer,
   Bus,
   VisitorLogger,
-  connectSize,
+  connectSize
 } from "gl-react";
 import { Surface } from "gl-react-headless";
 import loseGL from "gl-react-headless/lib/loseGL";
@@ -42,7 +42,7 @@ import {
   red2x2,
   white3x3,
   yellow3x3,
-  expectToBeCloseToColorArray,
+  expectToBeCloseToColorArray
 } from "./utils";
 
 test("renders a red shader", () => {
@@ -53,8 +53,8 @@ test("renders a red shader", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const inst = create(
     <Surface
@@ -152,8 +152,8 @@ test("renders HelloGL", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const inst = create(
     <Surface
@@ -233,7 +233,7 @@ test("renders HelloGL", () => {
       223,
       223,
       128,
-      255,
+      255
     ])
   );
   inst.unmount();
@@ -248,8 +248,8 @@ test("ndarray texture", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
   class HelloTextureStateful extends React.Component {
     state = { t: red2x2 };
@@ -302,8 +302,8 @@ test("renders a color uniform", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`,
-    },
+  }`
+    }
   });
 
   class ColorSurface extends React.Component {
@@ -352,7 +352,7 @@ test("use the imperative setDrawProps escape hatch", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`,
+  }`
     },
     white: {
       frag: GLSL`
@@ -360,8 +360,8 @@ test("use the imperative setDrawProps escape hatch", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0);
-  }`,
-    },
+  }`
+    }
   });
 
   let node;
@@ -388,8 +388,8 @@ test("use the imperative setDrawProps escape hatch", () => {
   );
   node.setDrawProps({
     uniforms: {
-      color: [1, 1, 0, 1],
-    },
+      color: [1, 1, 0, 1]
+    }
   });
   // check it's still lazy
   expectToBeCloseToColorArray(
@@ -403,7 +403,7 @@ test("use the imperative setDrawProps escape hatch", () => {
   );
   node.setDrawProps({
     shader: shaders.white,
-    uniforms: {},
+    uniforms: {}
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -422,8 +422,8 @@ test("composes color uniform with LinearCopy", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`,
-    },
+  }`
+    }
   });
 
   class ColorSurface extends React.Component {
@@ -461,8 +461,8 @@ test("no needs to flush if use of sync", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`,
-    },
+  }`
+    }
   });
 
   class ColorSurface extends React.Component {
@@ -510,8 +510,8 @@ test("Node can have a different size and be scaled up", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const inst = create(
     <Surface
@@ -540,8 +540,8 @@ test("Surface can be resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const renderForSize = (width, height) => (
     <Surface
@@ -585,7 +585,7 @@ test("bus uniform code style", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
+  }`
     },
     helloTexture: {
       frag: GLSL`
@@ -594,8 +594,8 @@ test("bus uniform code style", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`,
-    },
+      }`
+    }
   });
   const inst = create(
     <Surface
@@ -625,8 +625,8 @@ test("bus example 1", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   class Example extends React.Component {
     render() {
@@ -660,8 +660,8 @@ test("bus example 2", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   class Example extends React.Component {
     render() {
@@ -700,8 +700,8 @@ test("bus example 3", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   class Red extends React.Component {
     render() {
@@ -743,7 +743,7 @@ test("bus example 4", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
+  }`
     },
     helloTexture: {
       frag: GLSL`
@@ -752,8 +752,8 @@ test("bus example 4", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`,
-    },
+      }`
+    }
   });
   class Example extends React.Component {
     render() {
@@ -767,7 +767,7 @@ test("bus example 4", () => {
           <Node
             shader={shaders.helloTexture}
             uniforms={{
-              t: () => this.refs.red,
+              t: () => this.refs.red
             }}
           >
             <Node ref="red" width={1} height={1} shader={shaders.red} />
@@ -793,7 +793,7 @@ test("bus example 5", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`,
+  }`
     },
     helloTexture: {
       frag: GLSL`
@@ -802,8 +802,8 @@ test("bus example 5", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`,
-    },
+      }`
+    }
   });
   class Red extends React.Component {
     render() {
@@ -816,7 +816,7 @@ test("bus example 5", () => {
         <Node
           shader={shaders.helloTexture}
           uniforms={{
-            t: () => this.refs.red,
+            t: () => this.refs.red
           }}
         >
           <Bus ref="red">
@@ -852,7 +852,7 @@ test("bus example 6", () => {
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
   }
-`,
+`
     },
     pink: {
       frag: GLSL`
@@ -860,7 +860,7 @@ test("bus example 6", () => {
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
   }
-  `,
+  `
     },
     helloTexture: {
       frag: GLSL`
@@ -870,8 +870,8 @@ test("bus example 6", () => {
       void main() {
         gl_FragColor = texture2D(t, uv);
       }
-      `,
-    },
+      `
+    }
   });
   class Red extends React.Component {
     render() {
@@ -890,7 +890,7 @@ test("bus example 6", () => {
         <Node
           shader={shaders.helloTexture}
           uniforms={{
-            t: () => (pink ? this.refs.pink : this.refs.red),
+            t: () => (pink ? this.refs.pink : this.refs.red)
           }}
         >
           <Bus ref="red">
@@ -943,7 +943,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(0.5, 0.2, 0.1, 0.4);
-  }`,
+  }`
     },
     add: {
       frag: GLSL`
@@ -953,8 +953,8 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
         void main() {
           gl_FragColor = texture2D(a, uv) + texture2D(b, uv);
         }
-      `,
-    },
+      `
+    }
   });
   class Example extends React.Component {
     render() {
@@ -972,7 +972,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
             shader={shaders.add}
             uniforms={{
               a: () => this.refs.bus,
-              b: () => this.refs.bus,
+              b: () => this.refs.bus
             }}
           />
         </Surface>
@@ -995,8 +995,8 @@ test("a surface can be captured and resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const render = (w, h) => (
     <Surface width={w} height={h}>
@@ -1028,8 +1028,8 @@ test("a node can be captured and resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   let node;
   const render = (w, h) => (
@@ -1061,7 +1061,7 @@ test("Uniform children redraw=>el function", () => {
   let surface, updatingTexture;
   class UpdatingTexture extends React.Component {
     props: {
-      redraw: Function,
+      redraw: Function
     };
     pixels = null;
     setPixels = (pixels, w, h) => {
@@ -1147,11 +1147,11 @@ test("Bus redraw=>el function", () => {
       redraw: Function,
       initialPixels: any,
       initialWidth: number,
-      initialHeight: number,
+      initialHeight: number
     };
     static defaultProps = {
       initialWidth: 2,
-      initialHeight: 2,
+      initialHeight: 2
     };
     pixels = this.props.initialPixels;
     setPixels = (pixels, w, h) => {
@@ -1228,8 +1228,8 @@ test("many Surface updates don't result of many redraws", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`,
-    },
+  }`
+    }
   });
 
   const visitor = new CountersVisitor();
@@ -1280,8 +1280,8 @@ test("many Surface flush() don't result of extra redraws", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`,
-    },
+  }`
+    }
   });
   const visitor = new CountersVisitor();
 
@@ -1326,8 +1326,8 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`,
-    },
+  }`
+    }
   });
 
   let justBlueNode;
@@ -1397,8 +1397,8 @@ test("nested GL Component update will re-draw the Surface", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`,
-    },
+  }`
+    }
   });
 
   let justBlue, justBlueNode;
@@ -1494,15 +1494,15 @@ test("Node `clear` and discard;", () => {
     else {
       discard;
     }
-  }`,
-    },
+  }`
+    }
   });
   class Paint extends React.Component {
     state = {
       drawing: false,
       color: [0, 0, 0, 0],
       center: [0, 0],
-      brushRadius: 0.2,
+      brushRadius: 0.2
     };
     render() {
       return <Node shader={shaders.paint} clear={null} uniforms={this.state} />;
@@ -1530,7 +1530,7 @@ test("Node `clear` and discard;", () => {
     drawing: true,
     color: [1, 0, 0, 1],
     center: [0, 0],
-    brushRadius: 0.6,
+    brushRadius: 0.6
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -1545,14 +1545,14 @@ test("Node `clear` and discard;", () => {
     drawing: true,
     color: [0, 1, 0, 1],
     center: [0.1, 0.1],
-    brushRadius: 0.2,
+    brushRadius: 0.2
   });
   surface.flush();
   paint.setState({
     drawing: false, // actually not drawing here ;)
     color: [1, 0, 0, 1],
     center: [0, 0],
-    brushRadius: 0.6,
+    brushRadius: 0.6
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -1580,8 +1580,8 @@ test("Node `backbuffering`", () => {
   void main() {
     vec4 c = texture2D(t, uv);
     gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
-  }`,
-    },
+  }`
+    }
   });
   const render = t => (
     <Surface
@@ -1641,8 +1641,8 @@ test("Node `backbuffering` in `sync`", () => {
   void main() {
     vec4 c = texture2D(t, uv);
     gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
-  }`,
-    },
+  }`
+    }
   });
   const render = t => (
     <Surface
@@ -1697,8 +1697,8 @@ test("texture can be null", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
   const inst = create(
     <Surface
@@ -1739,10 +1739,10 @@ test("array of textures", () => {
                 1.0
               );
             }
-          `,
+          `
           }}
           uniforms={{
-            channels: [red, green, blue],
+            channels: [red, green, blue]
           }}
         />
       );
@@ -1787,8 +1787,8 @@ test("Node uniformsOptions texture interpolation", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
   function render(t, tOptions) {
     return (
@@ -1811,7 +1811,7 @@ test("Node uniformsOptions texture interpolation", () => {
   const redToBlue = ndarray(new Uint8Array([255, 0, 0, 255, 0, 0, 255, 255]), [
     2,
     1,
-    4,
+    4
   ]);
   inst.update(render(redToBlue));
   expectToBeCloseToColorArray(
@@ -1860,8 +1860,8 @@ test("can be extended with addTextureLoaderClass", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
 
   const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
@@ -1903,8 +1903,8 @@ test("Surface `preload` prevent to draw anything", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
 
   let onLoadCounter = 0;
@@ -1956,8 +1956,8 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
-    },
+  }`
+    }
   });
 
   let onLoadCounter = 0;
@@ -2010,7 +2010,7 @@ precision highp float;
 varying vec2 uv;
 uniform vec4 color;
 void main() { gl_FragColor = color; }
-`,
+`
             }}
             uniforms={{ color }}
           />
@@ -2050,13 +2050,18 @@ test("testing connectSize() feature", () => {
   uniform vec2 size;
   void main() {
     gl_FragColor = vec4(size.x / 50.0, size.y / 50.0, 0.0, 1.0);
-  }`,
-    },
+  }`
+    }
   });
 
-  const Useless = ({ width, height }) => (
-    <Node shader={shaders.Useless} uniforms={{ size: [width, height] }} />
-  );
+  class Useless extends React.Component {
+    render() {
+      const { width, height } = this.props;
+      return (
+        <Node shader={shaders.Useless} uniforms={{ size: [width, height] }} />
+      );
+    }
+  }
 
   const ConnectedUseless = connectSize(Useless);
 
@@ -2168,7 +2173,7 @@ test("Bus#uniform and Bus#index", () => {
   void main() {
     gl_FragColor = vec4(c, 1.0);
   }
-      `,
+      `
     },
     helloTexture3: {
       frag: GLSL`
@@ -2181,8 +2186,8 @@ void main() {
     0.5 * texture2D(t, uv) +
     0.3 * texture2D(t2[0], uv)+
     0.2 * texture2D(t2[1], uv);
-}`,
-    },
+}`
+    }
   });
 
   class WeirdSwapping extends React.Component {
@@ -2249,7 +2254,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(rg.x, rg.y, blue, 1.0);
-  }`,
+  }`
     },
     helloTexture: {
       frag: GLSL`
@@ -2258,7 +2263,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`,
+  }`
     },
     helloTexture2: {
       frag: GLSL`
@@ -2267,8 +2272,8 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform sampler2D t2[2];
   void main() {
     gl_FragColor = 0.5*(texture2D(t2[0], uv)+texture2D(t2[1], uv));
-  }`,
-    },
+  }`
+    }
   });
 
   expect(Shaders.getName(shaders.justBlue)).toBeDefined();
@@ -2282,10 +2287,10 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     ...oldConsole,
     log: () => log++,
     warn: () => warn++,
-    error: () => error++,
+    error: e => error++,
     group: () => group++,
     groupCollapsed: () => group++,
-    groupEnd: () => groupEnd++,
+    groupEnd: () => groupEnd++
   };
 
   let justBlueNode;
@@ -2339,23 +2344,28 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     />
   );
 
-  const TreeWithZombiesDontBreak = ({ blue }) => (
-    <LinearCopy>
-      <Node shader={shaders.justBlue} uniforms={{ blue, rg: [0, 0] }}>
-        <BadNode />
-        <Node
-          shader={shaders.justBlue}
-          uniforms={{ blue, rg: [0, 0] }}
-          ref={ref => {
-            if (ref) {
-              ref.redraw();
-              ref.flush();
-            }
-          }}
-        />
-      </Node>
-    </LinearCopy>
-  );
+  class TreeWithZombiesDontBreak extends React.Component {
+    render() {
+      const { blue } = this.props;
+      return (
+        <LinearCopy>
+          <Node shader={shaders.justBlue} uniforms={{ blue, rg: [0, 0] }}>
+            <BadNode />
+            <Node
+              shader={shaders.justBlue}
+              uniforms={{ blue, rg: [0, 0] }}
+              ref={ref => {
+                if (ref) {
+                  ref.redraw();
+                  ref.flush();
+                }
+              }}
+            />
+          </Node>
+        </LinearCopy>
+      );
+    }
+  }
 
   class EmptyBusUsedByANode extends React.Component {
     render() {

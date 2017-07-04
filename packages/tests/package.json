@@ -20,8 +20,8 @@
     "ndarray": "^1.0.18",
     "ndpack-image": "github:gre/ndpack-image",
     "promise-defer": "^1.0.0",
-    "react": "^15.4.0",
-    "react-test-renderer": "^15.4.0"
+    "react": "16.0.0-alpha.12",
+    "react-test-renderer": "16.0.0-alpha.12"
   },
   "version": "3.6.0",
   "dependencies": {
