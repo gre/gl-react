@@ -10,7 +10,7 @@ import Sidebar from "react-sidebar";
 import Inspector from "./Inspector";
 
 const conf = {
-  version: process.env.GL_REACT_VERSION,
+  version: process.env.REACT_APP_GL_VERSION,
   githubprefix: "https://github.com/gre/gl-react/tree/master/packages/cookbook/"
 };
 
