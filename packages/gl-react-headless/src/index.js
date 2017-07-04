@@ -18,7 +18,7 @@ type WebGLContextAttributes = {
   premultipliedAlpha?: boolean,
   preserveDrawingBuffer?: boolean,
   preferLowPowerToHighPerformance?: boolean,
-  failIfMajorPerformanceCaveat?: boolean,
+  failIfMajorPerformanceCaveat?: boolean
 };
 
 const propTypes = {
@@ -28,7 +28,7 @@ const propTypes = {
   onContextFailure: PropTypes.func.isRequired,
   webglContextAttributes: PropTypes.object,
   width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 };
 
 class GLView extends Component {
@@ -39,7 +39,7 @@ class GLView extends Component {
     onContextRestored: (gl: ?WebGLRenderingContext) => void,
     webglContextAttributes?: WebGLContextAttributes,
     width: number,
-    height: number,
+    height: number
   };
   static propTypes = propTypes;
   webglContextAttributes: WebGLContextAttributes;
@@ -55,7 +55,7 @@ class GLView extends Component {
     const {
       webglContextAttributes,
       onContextCreate,
-      onContextFailure,
+      onContextFailure
     } = this.props;
     const gl: ?WebGLRenderingContext = getContext(
       this.canvas,
@@ -110,7 +110,7 @@ class GLView extends Component {
 
 class RenderLessElement extends Component {
   static propTypes = {
-    children: PropTypes.any,
+    children: PropTypes.any
   };
   // we keep ref so we can actually mapRenderableContent() on refs.
   // These are all escape hatch for testing.
@@ -137,7 +137,7 @@ class RenderLessElement extends Component {
               : component => {
                   cloneRef(component);
                   originalRef(component);
-                },
+                }
           });
         })}
       </span>
@@ -151,5 +151,5 @@ export const Surface = createSurface({
   // $FlowFixMe trust me flow xD
   mapRenderableContent: (el: RenderLessElement) => el.getFirstChild(),
   requestFrame: raf,
-  cancelFrame: raf.cancel,
+  cancelFrame: raf.cancel
 });

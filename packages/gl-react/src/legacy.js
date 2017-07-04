@@ -24,7 +24,7 @@ export function createComponent(
 
 type UniformProps = {
   children?: React.Element<*>,
-  name: string,
+  name: string
 };
 export class Uniform extends React.Component {
   props: UniformProps;

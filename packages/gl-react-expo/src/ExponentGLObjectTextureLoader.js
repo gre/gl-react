@@ -38,14 +38,14 @@ export default class ExponentGLObjectTextureLoader extends TextureLoader<
       promise: NativeModules.ExponentGLObjectManager
         .createObjectAsync({
           exglCtxId,
-          texture,
+          texture
         })
         .then(({ exglObjId }) => {
           if (disposed) return;
           const webglTexture = new WebGLTexture(exglObjId);
           this.textures.set(key, webglTexture);
           return webglTexture;
-        }),
+        })
     };
     this.loads.set(key, d);
     return d;

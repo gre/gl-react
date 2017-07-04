@@ -33,7 +33,7 @@ export {
   TextureLoaders,
   Visitor,
   VisitorLogger,
-  Visitors,
+  Visitors
 };
 
 export type { Surface } from "./createSurface";

@@ -27,7 +27,7 @@ const TextureLoaders = {
   },
   get() {
     return loaderClasses;
-  },
+  }
 };
 
 export default TextureLoaders;

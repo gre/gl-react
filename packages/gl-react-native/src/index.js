@@ -15,5 +15,5 @@ export const Surface = createSurface({
   GLView,
   RenderLessElement,
   requestFrame: global.requestAnimationFrame,
-  cancelFrame: global.cancelAnimationFrame,
+  cancelFrame: global.cancelAnimationFrame
 });

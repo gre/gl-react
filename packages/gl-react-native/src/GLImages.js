@@ -46,5 +46,5 @@ const load = (source: ImageSource): Promise<number> => {
 };
 
 export default {
-  load,
+  load
 };

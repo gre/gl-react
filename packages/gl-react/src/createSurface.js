@@ -29,7 +29,7 @@ type SurfaceProps = {
   onLoadError?: (e: Error) => void,
   onContextLost?: () => void,
   onContextRestored?: () => void,
-  visitor?: VisitorLike,
+  visitor?: VisitorLike
 };
 
 interface ISurface extends Component<void, SurfaceProps, any> {
@@ -61,7 +61,7 @@ interface ISurface extends Component<void, SurfaceProps, any> {
   +_getShader: (shaderId: ShaderIdentifier) => Shader,
   +_makeShader: (shaderInfo: ShaderInfo) => Shader,
   +_draw: () => void,
-  +_bindRootNode: () => void,
+  +_bindRootNode: () => void
 }
 
 export type Surface = ISurface;
@@ -69,7 +69,7 @@ export type Surface = ISurface;
 export type SurfaceContext = {
   glParent: Node | Surface | Bus,
   glSurface: Surface,
-  glSizable: { +getGLSize: () => [number, number] },
+  glSizable: { +getGLSize: () => [number, number] }
 };
 
 const SurfacePropTypes = {
@@ -80,7 +80,7 @@ const SurfacePropTypes = {
   onLoadError: PropTypes.func,
   onContextLost: PropTypes.func,
   onContextRestored: PropTypes.func,
-  visitor: PropTypes.object,
+  visitor: PropTypes.object
 };
 
 let surfaceId = 0;
@@ -94,7 +94,7 @@ type SurfaceOpts = {
   RenderLessElement: ReactClassLike<*>,
   mapRenderableContent?: (instance: mixed) => mixed,
   requestFrame: (f: Function) => number,
-  cancelFrame: (id: number) => void,
+  cancelFrame: (id: number) => void
 };
 
 export default ({
@@ -103,7 +103,7 @@ export default ({
   RenderLessElement,
   mapRenderableContent,
   requestFrame,
-  cancelFrame,
+  cancelFrame
 }: SurfaceOpts): Class<ISurface> => {
   /**
    * **Renders the final tree of [Node](#node) in a WebGL Canvas / OpenGLView /...**
@@ -172,11 +172,11 @@ export default ({
     state: {
       ready: boolean,
       rebootId: number,
-      debug: boolean,
+      debug: boolean
     } = {
       ready: false,
       rebootId: 0,
-      debug: false,
+      debug: false
     };
 
     RenderLessElement = RenderLessElement;
@@ -186,14 +186,14 @@ export default ({
     static childContextTypes: { [_: $Keys<SurfaceContext>]: any } = {
       glSurface: PropTypes.object.isRequired,
       glParent: PropTypes.object.isRequired,
-      glSizable: PropTypes.object.isRequired,
+      glSizable: PropTypes.object.isRequired
     };
 
     getChildContext(): SurfaceContext {
       return {
         glParent: this,
         glSurface: this,
-        glSizable: this,
+        glSizable: this
       };
     }
 
@@ -250,7 +250,7 @@ export default ({
       this.setState(({ rebootId }) => ({
         rebootId: rebootId + 1,
         ready: false,
-        debug: true,
+        debug: true
       }));
     }
 
@@ -366,7 +366,7 @@ export default ({
       const onSuccess = () => {
         this.setState(
           {
-            ready: true,
+            ready: true
           },
           () => {
             try {

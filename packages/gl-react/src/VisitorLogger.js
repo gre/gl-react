@@ -99,9 +99,10 @@ export default class VisitorLogger extends Visitor {
     preparedUniforms.forEach(obj => {
       let { key, type, value, getMetaInfo } = obj;
       type = String(type || "UNKNOWN");
-      const values = value === undefined
-        ? ""
-        : Array.isArray(value)
+      const values =
+        value === undefined
+          ? ""
+          : Array.isArray(value)
             ? "[" + value.map(v => "`" + String(v) + "`").join(",") + "]"
             : "`" + String(value) + "`";
       let spaces = "";
@@ -109,7 +110,9 @@ export default class VisitorLogger extends Visitor {
         spaces += " ";
       }
       log(
-        `${spaces}*${type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type}* _${key}_ = ${values}`,
+        `${spaces}*${type === "UNKNOWN"
+          ? "[c='color:red']UNKNOWN[c]"
+          : type}* _${key}_ = ${values}`,
         ...(getMetaInfo ? aggregateInfo(getMetaInfo()) : [])
       );
     });

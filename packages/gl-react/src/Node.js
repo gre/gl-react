@@ -10,7 +10,7 @@ import Shaders, {
   isShaderIdentifier,
   ensureShaderDefinition,
   shaderDefinitionToShaderInfo,
-  shaderInfoEquals,
+  shaderInfoEquals
 } from "./Shaders";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
@@ -34,7 +34,7 @@ const blendFuncAliases = {
   "one minus constant color": "ONE_MINUS_CONSTANT_COLOR",
   "constant alpha": "CONSTANT_ALPHA",
   "one minus constant alpha": "ONE_MINUS_CONSTANT_ALPHA",
-  "src alpha saturate": "SRC_ALPHA_SATURATE",
+  "src alpha saturate": "SRC_ALPHA_SATURATE"
 };
 
 /**
@@ -63,7 +63,7 @@ type WrapMode = "clamp to edge" | "repeat" | "mirrored repeat";
  */
 type TextureOptions = {
   interpolation: Interpolation,
-  wrap: [WrapMode, WrapMode] | WrapMode,
+  wrap: [WrapMode, WrapMode] | WrapMode
 };
 
 /**
@@ -93,7 +93,7 @@ type BlendFunc = $Keys<typeof blendFuncAliases>;
  */
 type BlendFuncSrcDst = {|
   src: BlendFunc,
-  dst: BlendFunc,
+  dst: BlendFunc
 |};
 
 /**
@@ -105,7 +105,7 @@ type Vec4 = [number, number, number, number];
  * The GL clear mode.
  */
 type Clear = {|
-  color: Vec4,
+  color: Vec4
 |};
 
 /**
@@ -149,11 +149,11 @@ type Clear = {|
  *
  */
 type Uniforms = {
-  [_: string]: mixed,
+  [_: string]: mixed
 };
 
 type UniformsOptions = {
-  [_: string]: ?$Shape<TextureOptions>,
+  [_: string]: ?$Shape<TextureOptions>
 };
 
 type Props = {|
@@ -167,7 +167,7 @@ type Props = {|
   backbuffering?: boolean,
   blendFunc: BlendFuncSrcDst,
   clear: ?Clear,
-  onDraw?: () => void,
+  onDraw?: () => void
 |};
 
 // not sure why, but we must define this for Flow to properly type check
@@ -175,7 +175,7 @@ type DefaultProps = {
   uniformsOptions: UniformsOptions,
   uniforms: Uniforms,
   blendFunc: BlendFuncSrcDst,
-  clear: ?Clear,
+  clear: ?Clear
 };
 
 type AsyncMixed = (redraw?: () => void) => mixed;
@@ -240,7 +240,7 @@ type Framebuffer = {
   color: WebGLTexture,
   bind: () => void,
   dispose: () => void,
-  syncSize: (w: number, h: number) => void,
+  syncSize: (w: number, h: number) => void
 };
 
 // minimal version of gl-fbo
@@ -304,13 +304,13 @@ const createFBO = (
     dispose: () => {
       gl.deleteFramebuffer(handle);
       gl.deleteTexture(color);
-    },
+    }
   };
 };
 
 const defaultTextureOptions: TextureOptions = {
   interpolation: "linear",
-  wrap: ["clamp to edge", "clamp to edge"],
+  wrap: ["clamp to edge", "clamp to edge"]
 };
 
 const applyTextureOptions = (
@@ -355,7 +355,7 @@ const NodePropTypes = {
   backbuffering: PropTypes.bool,
   blendFunc: PropTypes.object,
   clear: PropTypes.object,
-  onDraw: PropTypes.func,
+  onDraw: PropTypes.func
 };
 
 /**
@@ -397,28 +397,28 @@ export default class Node extends Component {
     blendFunc: {
       // FIXME should this actually just be null by default? opt-in?
       src: "src alpha",
-      dst: "one minus src alpha",
+      dst: "one minus src alpha"
     },
     clear: {
-      color: [0, 0, 0, 0],
-    },
+      color: [0, 0, 0, 0]
+    }
   };
 
   static contextTypes = {
     glParent: PropTypes.object.isRequired,
     glSurface: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired,
+    glSizable: PropTypes.object.isRequired
   };
 
   static childContextTypes = {
     glParent: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired,
+    glSizable: PropTypes.object.isRequired
   };
 
   getChildContext() {
     return {
       glParent: this,
-      glSizable: this,
+      glSizable: this
     };
   }
 
@@ -555,7 +555,7 @@ export default class Node extends Component {
     // $FlowFixMe
     const nextProps: Props = {
       ...this.drawProps,
-      ...patch,
+      ...patch
     };
     this._syncNextDrawProps(nextProps, this.context);
     this.redraw();
@@ -782,7 +782,7 @@ export default class Node extends Component {
       shader: shaderProp,
       blendFunc,
       clear,
-      onDraw,
+      onDraw
     } = this.drawProps;
 
     //~ PREPARE phase
@@ -850,7 +850,7 @@ export default class Node extends Component {
           );
         }
         result = {
-          directTexture: this.getGLOutput(),
+          directTexture: this.getGLOutput()
         };
       } else if (obj instanceof Node) {
         // maybe it's a Node?
@@ -909,7 +909,7 @@ export default class Node extends Component {
         initialObj,
         obj,
         dependency,
-        textureOptions,
+        textureOptions
       });
       const prepare = () => {
         const texture: WebGLTexture =
@@ -930,7 +930,7 @@ export default class Node extends Component {
       };
       return {
         getMetaInfo,
-        prepare,
+        prepare
       };
     };
 
@@ -955,7 +955,7 @@ export default class Node extends Component {
           key,
           type: uniformType,
           getMetaInfo,
-          prepare,
+          prepare
         };
       } else if (Array.isArray(uniformType) && uniformType[0] === "sampler2D") {
         let values;
@@ -988,7 +988,7 @@ export default class Node extends Component {
           type: uniformType,
           getMetaInfo: () =>
             all.reduce((acc, o) => acc.concat(o.getMetaInfo()), []),
-          prepare: () => all.map(o => o.prepare()),
+          prepare: () => all.map(o => o.prepare())
         };
       } else {
         if (uniformValue === undefined) {
@@ -997,7 +997,7 @@ export default class Node extends Component {
         return {
           key,
           type: uniformType,
-          value: uniformValue,
+          value: uniformValue
         };
       }
     };

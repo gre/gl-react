@@ -6,14 +6,14 @@ import EXGLView from "./EXGLView";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
-  style: PropTypes.any,
+  style: PropTypes.any
 };
 
 export default class GLViewNative extends Component {
   props: {
     onContextCreate: (gl: WebGLRenderingContext) => void,
     style?: any,
-    children?: any,
+    children?: any
   };
   static propTypes = propTypes;
 
@@ -37,8 +37,8 @@ export default class GLViewNative extends Component {
               flex: 1,
               position: "absolute",
               top: 0,
-              left: 0,
-            },
+              left: 0
+            }
           ]}
           onContextCreate={onContextCreate}
         />

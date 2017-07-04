@@ -11,7 +11,7 @@ import type { NDArray } from "ndarray";
 type Props = {|
   children?: React.Element<*> | ((redraw?: () => void) => React.Element<*>),
   uniform?: string,
-  index: number,
+  index: number
 |};
 
 /**
@@ -47,21 +47,21 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   props: Props;
   context: {
     glParent: Surface | Node,
-    glSurface: Surface,
+    glSurface: Surface
   };
   dependents: Array<Node | Surface> = [];
 
   static defaultProps = {
-    index: 0,
+    index: 0
   };
 
   static contextTypes = {
     glParent: PropTypes.object.isRequired,
-    glSurface: PropTypes.object.isRequired,
+    glSurface: PropTypes.object.isRequired
   };
 
   static childContextTypes = {
-    glParent: PropTypes.object.isRequired,
+    glParent: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -111,7 +111,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
 
   getChildContext(): { glParent: Bus } {
     return {
-      glParent: this,
+      glParent: this
     };
   }
 
@@ -205,7 +205,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   render() {
     const { children } = this.props;
     const {
-      glSurface: { RenderLessElement, mapRenderableContent },
+      glSurface: { RenderLessElement, mapRenderableContent }
     } = this.context;
     return (
       <RenderLessElement ref={mapRenderableContent ? this.onRef : undefined}>

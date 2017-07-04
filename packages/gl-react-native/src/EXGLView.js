@@ -8,7 +8,7 @@ import {
   View,
   ViewPropTypes,
   Platform,
-  requireNativeComponent,
+  requireNativeComponent
 } from "react-native";
 
 // A component that acts as an OpenGL render target.
@@ -26,11 +26,11 @@ export default class EXGLView extends React.Component {
     // [iOS only] Number of samples for Apple"s built-in multisampling.
     msaaSamples: PropTypes.number,
 
-    ...ViewPropTypes,
+    ...ViewPropTypes
   };
 
   static defaultProps = {
-    msaaSamples: 4,
+    msaaSamples: 4
   };
 
   render() {
@@ -63,7 +63,7 @@ export default class EXGLView extends React.Component {
   };
 
   static NativeView = requireNativeComponent("EXGLView", EXGLView, {
-    nativeOnly: { onSurfaceCreate: true },
+    nativeOnly: { onSurfaceCreate: true }
   });
 }
 
@@ -142,7 +142,7 @@ const wrapMethods = gl => {
     [gl.FRAMEBUFFER_BINDING]: WebGLFramebuffer,
     [gl.RENDERBUFFER_BINDING]: WebGLRenderbuffer,
     [gl.TEXTURE_BINDING_2D]: WebGLTexture,
-    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture,
+    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture
   };
   wrap("getParameter", orig => pname => {
     let ret = orig.call(gl, pname);
@@ -311,7 +311,7 @@ const wrapMethods = gl => {
       "vertexAttrib1fv",
       "vertexAttrib2fv",
       "vertexAttrib3fv",
-      "vertexAttrib4fv",
+      "vertexAttrib4fv"
     ],
     orig => (index, val) => orig.call(gl, index, new Float32Array(val))
   );

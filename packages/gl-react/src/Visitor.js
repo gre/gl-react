@@ -22,7 +22,7 @@ export type VisitorLike = {
     deletions: Array<Node | Bus>
   ) => void,
   +onNodeDraw: (node: Node, preparedUniforms: Array<*>) => void,
-  +onNodeDrawEnd: (node: Node) => void,
+  +onNodeDrawEnd: (node: Node) => void
 };
 
 /**

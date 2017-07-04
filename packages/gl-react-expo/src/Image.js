@@ -26,5 +26,5 @@ GLImage.prototype = {
         if (this.onload) this.onload();
       });
     }
-  },
+  }
 };

@@ -9,7 +9,7 @@ type Asset = {
   width: number,
   height: number,
   uri: string,
-  localUri: string,
+  localUri: string
 };
 
 const hash = (module: number | { uri: string }) =>
@@ -37,9 +37,9 @@ const remoteAsset = (uri: string) => {
       uri,
       `ExponentAsset-${key}${ext}`,
       {
-        cache: true,
+        cache: true
       }
-    ),
+    )
   ]).then(([size, asset]) => ({ ...size, uri, localUri: asset.uri }));
   remoteAssetCache[key] = promise;
   return promise;
@@ -96,7 +96,7 @@ export default class ExponentTextureLoader extends TextureLoader<*> {
       dispose() {
         ignored = true;
       },
-      promise,
+      promise
     };
     this.loads.set(key, d);
     return d;

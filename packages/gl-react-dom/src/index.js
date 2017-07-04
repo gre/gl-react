@@ -22,5 +22,5 @@ export const Surface = createSurface({
   RenderLessElement,
   mapRenderableContent,
   requestFrame: raf,
-  cancelFrame: raf.cancel,
+  cancelFrame: raf.cancel
 });

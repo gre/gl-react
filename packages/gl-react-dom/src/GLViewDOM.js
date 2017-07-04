@@ -16,7 +16,7 @@ type WebGLContextAttributes = {
   premultipliedAlpha?: boolean,
   preserveDrawingBuffer?: boolean,
   preferLowPowerToHighPerformance?: boolean,
-  failIfMajorPerformanceCaveat?: boolean,
+  failIfMajorPerformanceCaveat?: boolean
 };
 
 const propTypes = {
@@ -28,7 +28,7 @@ const propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   style: PropTypes.object,
-  pixelRatio: PropTypes.number,
+  pixelRatio: PropTypes.number
 };
 
 export default class GLViewDOM extends Component {
@@ -42,7 +42,7 @@ export default class GLViewDOM extends Component {
     width: number,
     height: number,
     style?: any,
-    debug?: number,
+    debug?: number
   };
   static propTypes = propTypes;
   webglContextAttributes: WebGLContextAttributes;

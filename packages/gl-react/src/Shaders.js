@@ -13,7 +13,7 @@ const ShaderID = "ShaderID";
  *  }
  */
 type ShaderDefinition = {|
-  frag: GLSLCode,
+  frag: GLSLCode
 |};
 
 export type { ShaderDefinition };
@@ -23,13 +23,13 @@ export type { ShaderDefinition };
  */
 type ShaderIdentifier = {
   type: typeof ShaderID,
-  id: string,
+  id: string
 };
 
 export type { ShaderIdentifier };
 
 type ShaderIdentifierMap<T> = {
-  [key: string]: T,
+  [key: string]: T
 };
 
 /**
@@ -42,19 +42,19 @@ type ShaderIdentifierMap<T> = {
  *  }
  */
 type ShadersDefinition = {
-  [key: string]: ShaderDefinition,
+  [key: string]: ShaderDefinition
 };
 
 /**
  * An object map from a key string to a **ShaderIdentifier** that you can pass to `<Node shader>`
  */
 type ShadersSheet<S: ShadersDefinition> = {
-  [key: $Keys<S>]: ShaderIdentifier,
+  [key: $Keys<S>]: ShaderIdentifier
 };
 
 type ShaderInfo = {
   frag: GLSLCode,
-  vert: GLSLCode,
+  vert: GLSLCode
 };
 
 export type { ShaderInfo };
@@ -98,7 +98,7 @@ export function shaderDefinitionToShaderInfo(
 ): ShaderInfo {
   return {
     frag: definition.frag,
-    vert: staticVert, // FIXME this is static for now. we will eventually improve this.
+    vert: staticVert // FIXME this is static for now. we will eventually improve this.
   };
 }
 
@@ -157,6 +157,6 @@ const Shaders = {
       shaderIdentifier.id
     );
     return shaderResults[shaderIdentifier.id];
-  },
+  }
 };
 export default Shaders;

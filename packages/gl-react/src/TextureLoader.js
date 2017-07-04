@@ -43,7 +43,7 @@ export default class TextureLoader<T> {
     // noop default implementation
     return {
       promise: new Promise(noop),
-      dispose: noop,
+      dispose: noop
     };
   }
 }

@@ -23,23 +23,23 @@ const connectSize = (
     props: {
       width?: number,
       height?: number,
-      children?: any,
+      children?: any
     };
     context: {
-      glSizable: { +getGLSize: () => [number, number] },
+      glSizable: { +getGLSize: () => [number, number] }
     };
     static displayName = `connectSize(${GLComponent.displayName ||
       GLComponent.name ||
       "?"})`;
     static propTypes = {
       width: PropTypes.number,
-      height: PropTypes.number,
+      height: PropTypes.number
     };
     static contextTypes = {
-      glSizable: PropTypes.object.isRequired,
+      glSizable: PropTypes.object.isRequired
     };
     static childContextTypes = {
-      glSizable: PropTypes.object.isRequired,
+      glSizable: PropTypes.object.isRequired
     };
     getGLSize(): [number, number] {
       const { props: { width, height }, context: { glSizable } } = this;
@@ -49,7 +49,7 @@ const connectSize = (
     }
     getChildContext() {
       return {
-        glSizable: this,
+        glSizable: this
       };
     }
     component: ?GLComponent;
