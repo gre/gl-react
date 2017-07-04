@@ -1,8 +1,9 @@
 //@flow
 import { TextureLoaderRawObject } from "gl-react";
 
-export default class VideoTextureLoader
-  extends TextureLoaderRawObject<HTMLVideoElement> {
+export default class VideoTextureLoader extends TextureLoaderRawObject<
+  HTMLVideoElement
+> {
   canLoad(input: any) {
     return input instanceof HTMLVideoElement;
   }

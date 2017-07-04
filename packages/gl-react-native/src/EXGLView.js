@@ -8,7 +8,7 @@ import {
   View,
   ViewPropTypes,
   Platform,
-  requireNativeComponent
+  requireNativeComponent,
 } from "react-native";
 
 // A component that acts as an OpenGL render target.
@@ -26,11 +26,11 @@ export default class EXGLView extends React.Component {
     // [iOS only] Number of samples for Apple"s built-in multisampling.
     msaaSamples: PropTypes.number,
 
-    ...ViewPropTypes
+    ...ViewPropTypes,
   };
 
   static defaultProps = {
-    msaaSamples: 4
+    msaaSamples: 4,
   };
 
   render() {
@@ -63,7 +63,7 @@ export default class EXGLView extends React.Component {
   };
 
   static NativeView = requireNativeComponent("EXGLView", EXGLView, {
-    nativeOnly: { onSurfaceCreate: true }
+    nativeOnly: { onSurfaceCreate: true },
   });
 }
 
@@ -142,7 +142,7 @@ const wrapMethods = gl => {
     [gl.FRAMEBUFFER_BINDING]: WebGLFramebuffer,
     [gl.RENDERBUFFER_BINDING]: WebGLRenderbuffer,
     [gl.TEXTURE_BINDING_2D]: WebGLTexture,
-    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture
+    [gl.TEXTURE_BINDING_CUBE_MAP]: WebGLTexture,
   };
   wrap("getParameter", orig => pname => {
     let ret = orig.call(gl, pname);
@@ -156,129 +156,162 @@ const wrapMethods = gl => {
 
   // Buffers
   wrap("bindBuffer", orig => (target, buffer) =>
-    orig.call(gl, target, buffer && buffer.id));
+    orig.call(gl, target, buffer && buffer.id)
+  );
   wrap("createBuffer", orig => () => wrapObject(WebGLBuffer, orig.call(gl)));
   wrap("deleteBuffer", orig => buffer => orig.call(gl, buffer && buffer.id));
   wrap("isBuffer", orig => buffer =>
-    buffer instanceof WebGLBuffer && orig.call(gl, buffer.id));
+    buffer instanceof WebGLBuffer && orig.call(gl, buffer.id)
+  );
 
   // Framebuffers
   wrap("bindFramebuffer", orig => (target, framebuffer) =>
-    orig.call(gl, target, framebuffer && framebuffer.id));
+    orig.call(gl, target, framebuffer && framebuffer.id)
+  );
   wrap("createFramebuffer", orig => () =>
-    wrapObject(WebGLFramebuffer, orig.call(gl)));
+    wrapObject(WebGLFramebuffer, orig.call(gl))
+  );
   wrap("deleteFramebuffer", orig => framebuffer =>
-    orig.call(gl, framebuffer && framebuffer.id));
+    orig.call(gl, framebuffer && framebuffer.id)
+  );
   wrap("framebufferRenderbuffer", orig => (target, attachment, rbtarget, rb) =>
-    orig.call(gl, target, attachment, rbtarget, rb && rb.id));
-  wrap("framebufferTexture2D", orig => (
-    target,
-    attachment,
-    textarget,
-    tex,
-    level
-  ) => orig.call(gl, target, attachment, textarget, tex && tex.id, level));
+    orig.call(gl, target, attachment, rbtarget, rb && rb.id)
+  );
+  wrap(
+    "framebufferTexture2D",
+    orig => (target, attachment, textarget, tex, level) =>
+      orig.call(gl, target, attachment, textarget, tex && tex.id, level)
+  );
   wrap("isFramebuffer", orig => framebuffer =>
-    framebuffer instanceof WebGLFramebuffer && orig.call(gl, framebuffer.id));
+    framebuffer instanceof WebGLFramebuffer && orig.call(gl, framebuffer.id)
+  );
 
   // Renderbuffers
   wrap("bindRenderbuffer", orig => (target, renderbuffer) =>
-    orig.call(gl, target, renderbuffer && renderbuffer.id));
+    orig.call(gl, target, renderbuffer && renderbuffer.id)
+  );
   wrap("createRenderbuffer", orig => () =>
-    wrapObject(WebGLRenderbuffer, orig.call(gl)));
+    wrapObject(WebGLRenderbuffer, orig.call(gl))
+  );
   wrap("deleteRenderbuffer", orig => renderbuffer =>
-    orig.call(gl, renderbuffer && renderbuffer.id));
+    orig.call(gl, renderbuffer && renderbuffer.id)
+  );
   wrap("isRenderbuffer", orig => renderbuffer =>
-    renderbuffer instanceof WebGLRenderbuffer &&
-    orig.call(gl, renderbuffer.id));
+    renderbuffer instanceof WebGLRenderbuffer && orig.call(gl, renderbuffer.id)
+  );
 
   // Textures
   wrap("bindTexture", orig => (target, texture) =>
-    orig.call(gl, target, texture && texture.id));
+    orig.call(gl, target, texture && texture.id)
+  );
   wrap("createTexture", orig => () => wrapObject(WebGLTexture, orig.call(gl)));
   wrap("deleteTexture", orig => texture =>
-    orig.call(gl, texture && texture.id));
+    orig.call(gl, texture && texture.id)
+  );
   wrap("isTexture", orig => texture =>
-    texture instanceof WebGLTexture && orig.call(gl, texture.id));
+    texture instanceof WebGLTexture && orig.call(gl, texture.id)
+  );
 
   // Programs and shaders
   wrap("attachShader", orig => (program, shader) =>
-    orig.call(gl, program && program.id, shader && shader.id));
+    orig.call(gl, program && program.id, shader && shader.id)
+  );
   wrap("bindAttribLocation", orig => (program, index, name) =>
-    orig.call(gl, program && program.id, index, name));
+    orig.call(gl, program && program.id, index, name)
+  );
   wrap("compileShader", orig => shader => orig.call(gl, shader && shader.id));
   wrap("createProgram", orig => () => wrapObject(WebGLProgram, orig.call(gl)));
   wrap("createShader", orig => type =>
-    wrapObject(WebGLShader, orig.call(gl, type)));
+    wrapObject(WebGLShader, orig.call(gl, type))
+  );
   wrap("deleteProgram", orig => program =>
-    orig.call(gl, program && program.id));
+    orig.call(gl, program && program.id)
+  );
   wrap("deleteShader", orig => shader => orig.call(gl, shader && shader.id));
   wrap("detachShader", orig => (program, shader) =>
-    orig.call(gl, program && program.id, shader && shader.id));
+    orig.call(gl, program && program.id, shader && shader.id)
+  );
   wrap("getAttachedShaders", orig => program =>
-    orig
-      .call(gl, program && program.id)
-      .map(id => wrapObject(WebGLShader, id)));
+    orig.call(gl, program && program.id).map(id => wrapObject(WebGLShader, id))
+  );
   wrap("getProgramParameter", orig => (program, pname) =>
-    orig.call(gl, program && program.id, pname));
+    orig.call(gl, program && program.id, pname)
+  );
   wrap("getProgramInfoLog", orig => program =>
-    orig.call(gl, program && program.id));
+    orig.call(gl, program && program.id)
+  );
   wrap("getShaderParameter", orig => (shader, pname) =>
-    orig.call(gl, shader && shader.id, pname));
+    orig.call(gl, shader && shader.id, pname)
+  );
   wrap("getShaderPrecisionFormat", orig => (shadertype, precisiontype) =>
-    new WebGLShaderPrecisionFormat(orig.call(gl, shadertype, precisiontype)));
+    new WebGLShaderPrecisionFormat(orig.call(gl, shadertype, precisiontype))
+  );
   wrap("getShaderInfoLog", orig => shader =>
-    orig.call(gl, shader && shader.id));
+    orig.call(gl, shader && shader.id)
+  );
   wrap("getShaderSource", orig => shader => orig.call(gl, shader && shader.id));
   wrap("linkProgram", orig => program => orig.call(gl, program && program.id));
   wrap("shaderSource", orig => (shader, source) =>
-    orig.call(gl, shader && shader.id, source));
+    orig.call(gl, shader && shader.id, source)
+  );
   wrap("useProgram", orig => program => orig.call(gl, program && program.id));
   wrap("validateProgram", orig => program =>
-    orig.call(gl, program && program.id));
+    orig.call(gl, program && program.id)
+  );
   wrap("isShader", orig => shader =>
-    shader instanceof WebGLShader && orig.call(gl, shader.id));
+    shader instanceof WebGLShader && orig.call(gl, shader.id)
+  );
   wrap("isProgram", orig => program =>
-    program instanceof WebGLProgram && orig.call(gl, program.id));
+    program instanceof WebGLProgram && orig.call(gl, program.id)
+  );
 
   // Uniforms and attributes
   wrap("getActiveAttrib", orig => (program, index) =>
-    new WebGLActiveInfo(orig.call(gl, program && program.id, index)));
+    new WebGLActiveInfo(orig.call(gl, program && program.id, index))
+  );
   wrap("getActiveUniform", orig => (program, index) =>
-    new WebGLActiveInfo(orig.call(gl, program && program.id, index)));
+    new WebGLActiveInfo(orig.call(gl, program && program.id, index))
+  );
   wrap("getAttribLocation", orig => (program, name) =>
-    orig.call(gl, program && program.id, name));
+    orig.call(gl, program && program.id, name)
+  );
   wrap("getUniform", orig => (program, location) =>
-    orig.call(gl, program && program.id, location && location.id));
+    orig.call(gl, program && program.id, location && location.id)
+  );
   wrap("getUniformLocation", orig => (program, name) =>
-    new WebGLUniformLocation(orig.call(gl, program && program.id, name)));
+    new WebGLUniformLocation(orig.call(gl, program && program.id, name))
+  );
   wrap(["uniform1f", "uniform1i"], orig => (loc, x) =>
-    orig.call(gl, loc && loc.id, x));
+    orig.call(gl, loc && loc.id, x)
+  );
   wrap(["uniform2f", "uniform2i"], orig => (loc, x, y) =>
-    orig.call(gl, loc && loc.id, x, y));
+    orig.call(gl, loc && loc.id, x, y)
+  );
   wrap(["uniform3f", "uniform3i"], orig => (loc, x, y, z) =>
-    orig.call(gl, loc && loc.id, x, y, z));
+    orig.call(gl, loc && loc.id, x, y, z)
+  );
   wrap(["uniform4f", "uniform4i"], orig => (loc, x, y, z, w) =>
-    orig.call(gl, loc && loc.id, x, y, z, w));
-  wrap(["uniform1fv", "uniform2fv", "uniform3fv", "uniform4fv"], orig => (
-    loc,
-    val
-  ) => orig.call(gl, loc && loc.id, new Float32Array(val)));
-  wrap(["uniform1iv", "uniform2iv", "uniform3iv", "uniform4iv"], orig => (
-    loc,
-    val
-  ) => orig.call(gl, loc && loc.id, new Int32Array(val)));
-  wrap(["uniformMatrix2fv", "uniformMatrix3fv", "uniformMatrix4fv"], orig => (
-    loc,
-    transpose,
-    val
-  ) => orig.call(gl, loc && loc.id, transpose, new Float32Array(val)));
+    orig.call(gl, loc && loc.id, x, y, z, w)
+  );
+  wrap(
+    ["uniform1fv", "uniform2fv", "uniform3fv", "uniform4fv"],
+    orig => (loc, val) => orig.call(gl, loc && loc.id, new Float32Array(val))
+  );
+  wrap(
+    ["uniform1iv", "uniform2iv", "uniform3iv", "uniform4iv"],
+    orig => (loc, val) => orig.call(gl, loc && loc.id, new Int32Array(val))
+  );
+  wrap(
+    ["uniformMatrix2fv", "uniformMatrix3fv", "uniformMatrix4fv"],
+    orig => (loc, transpose, val) =>
+      orig.call(gl, loc && loc.id, transpose, new Float32Array(val))
+  );
   wrap(
     [
       "vertexAttrib1fv",
       "vertexAttrib2fv",
       "vertexAttrib3fv",
-      "vertexAttrib4fv"
+      "vertexAttrib4fv",
     ],
     orig => (index, val) => orig.call(gl, index, new Float32Array(val))
   );

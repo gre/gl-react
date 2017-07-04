@@ -28,7 +28,9 @@ const connectSize = (
     context: {
       glSizable: { +getGLSize: () => [number, number] },
     };
-    static displayName = `connectSize(${GLComponent.displayName || GLComponent.name || "?"})`;
+    static displayName = `connectSize(${GLComponent.displayName ||
+      GLComponent.name ||
+      "?"})`;
     static propTypes = {
       width: PropTypes.number,
       height: PropTypes.number,

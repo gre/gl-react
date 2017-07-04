@@ -4,8 +4,9 @@ import type { DisposablePromise } from "gl-react/lib/helpers/disposable";
 import GLImages from "./GLImages";
 import type { ImageSource } from "./GLImages";
 
-export default class ImageSourceTextureLoader
-  extends TextureLoader<ImageSource> {
+export default class ImageSourceTextureLoader extends TextureLoader<
+  ImageSource
+> {
   loads: Array<DisposablePromise<*>> = [];
   textures: Map<number, *> = new Map();
   assetIdForImageSource: Map<ImageSource, number> = new Map();

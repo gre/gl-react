@@ -8,8 +8,9 @@ function hash(obj) {
   return JSON.stringify(obj); // FIXME ikr XD
 }
 
-export default class ExponentGLObjectTextureLoader
-  extends TextureLoader<Object> {
+export default class ExponentGLObjectTextureLoader extends TextureLoader<
+  Object
+> {
   loads: Map<string, DisposablePromise<*>> = new Map();
   textures: Map<string, *> = new Map();
   dispose() {}

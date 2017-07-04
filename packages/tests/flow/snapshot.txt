@@ -1,14 +1,24 @@
 ../all.test.js:2496
+            v----
 2496:       <Node
-            ^ props of React element `Node`
+2497:         shader={shaders.helloTexture}
+2498:         uniformsOptions={{ t: { interpolation: "nope" } }}
+2499:         uniforms={{ t: <JustBlue blue={1} /> }}
+2500:       />
+            -^ props of React element `Node`
 2498:         uniformsOptions={{ t: { interpolation: "nope" } }}
                                                      ^^^^^^ string. This type is incompatible with
  65:   interpolation: Interpolation,
                       ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:65
 
 ../all.test.js:2508
+            v----
 2508:       <Node
-            ^ props of React element `Node`
+2509:         shader={shaders.helloTexture}
+2510:         uniformsOptions={{ t: { wrap: "nope" } }}
+2511:         uniforms={{ t: <JustBlue blue={1} /> }}
+2512:       />
+            -^ props of React element `Node`
 2510:         uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
@@ -31,8 +41,13 @@
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
 ../all.test.js:2520
+            v----
 2520:       <Node
-            ^ props of React element `Node`
+2521:         shader={shaders.helloTexture}
+2522:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
+2523:         uniforms={{ t: <JustBlue blue={1} /> }}
+2524:       />
+            -^ props of React element `Node`
 2522:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                             ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
  66:   wrap: [WrapMode, WrapMode] | WrapMode,
@@ -55,8 +70,13 @@
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
 ../all.test.js:2532
+            v----
 2532:       <Node
-            ^ props of React element `Node`
+2533:         blendFunc="nope"
+2534:         shader={shaders.helloTexture}
+2535:         uniforms={{ t: <JustBlue blue={1} /> }}
+2536:       />
+            -^ props of React element `Node`
 2533:         blendFunc="nope"
                         ^^^^^^ string. Inexact type is incompatible with exact type
 177:   blendFunc: BlendFuncSrcDst,
@@ -111,16 +131,26 @@ incorrect.js:31
                                                                    ^^^^^ object type. See: ../node_modules/gl-react/lib/Bus.js.flow:45
 
 incorrect.js:33
+                     v---------------
  33: const shaders = Shaders.create({
-                     ^ call of method `create`
+ 34:   valid: {
+ 35:     frag: GLSL`...`,
+...:
+ 40: });
+     -^ call of method `create`
  37:   a: null,
           ^^^^ null. Inexact type is incompatible with exact type
  45:   [key: string]: ShaderDefinition,
                       ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
 
 incorrect.js:33
+                     v---------------
  33: const shaders = Shaders.create({
-                     ^ call of method `create`
+ 34:   valid: {
+ 35:     frag: GLSL`...`,
+...:
+ 40: });
+     -^ call of method `create`
  45:   [key: string]: ShaderDefinition,
                       ^^^^^^^^^^^^^^^^ property `frag`. Property not found in. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
  38:   b: {},
@@ -174,28 +204,52 @@ incorrect.js:58
               ^^^^^ object type. See: ../node_modules/gl-react/lib/LinearCopy.js.flow:15
 
 incorrect.js:59
+             v----
  59:         <Node
-             ^ React element `Node`
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ React element `Node`
+             v----
  59:         <Node
-             ^ property `notexists`. Property not found in
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ property `notexists`. Property not found in
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
 
 incorrect.js:59
+             v----
  59:         <Node
-             ^ React element `Node`
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ React element `Node`
+             v----
  59:         <Node
-             ^ property `shaders`. Property not found in
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ property `shaders`. Property not found in
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
 
 incorrect.js:59
+             v----
  59:         <Node
-             ^ React element `Node`
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ React element `Node`
 380:   props: Props;
               ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:380
+             v----
  59:         <Node
-             ^ props of React element `Node`
+ 60:           shaders={shaders.valid}
+ 61:           notexists
+ 62:         />
+             -^ props of React element `Node`
 
 incorrect.js:69
  69: connectSize();
@@ -222,24 +276,49 @@ incorrect.js:69
                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function type. See: ../node_modules/gl-react/lib/connectSize.js.flow:20
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ React element `Node`
+     v----
  73: <Node
-     ^ property `preload`. Property not found in
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ property `preload`. Property not found in
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ React element `Node`
+     v----
  73: <Node
-     ^ property `visitor`. Property not found in
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ property `visitor`. Property not found in
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ React element `Node`
  85:   shader={false}
                ^^^^^ boolean. This type is incompatible with
 160:   shader: ShaderIdentifier | ShaderDefinition,
@@ -262,8 +341,13 @@ incorrect.js:73
                                     ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:160
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`. This type is incompatible with
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`. This type is incompatible with
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
   Property `height` is incompatible:
@@ -273,8 +357,13 @@ incorrect.js:73
                     ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:165
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`. This type is incompatible with
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`. This type is incompatible with
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
   Property `sync` is incompatible:
@@ -284,8 +373,13 @@ incorrect.js:73
                   ^^^^^^^ boolean. See: ../node_modules/gl-react/lib/Node.js.flow:163
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`. This type is incompatible with
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`. This type is incompatible with
 380:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:380
   Property `width` is incompatible:
@@ -295,56 +389,280 @@ incorrect.js:73
                    ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:164
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`
  75:   clear={42}
               ^^ number. Inexact type is incompatible with exact type
 178:   clear: ?Clear,
                ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:178
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`
+                  v
  78:   blendFunc={{
-                  ^ property `interpolation`. Property not found in
+ 79:     src: "nope",
+ 80:     interpolation: "interpolation_nope",
+ 81:     wrap: "wrap_nope",
+ 82:   }}
+       ^ property `interpolation`. Property not found in
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`
+                  v
  78:   blendFunc={{
-                  ^ property `wrap`. Property not found in
+ 79:     src: "nope",
+ 80:     interpolation: "interpolation_nope",
+ 81:     wrap: "wrap_nope",
+ 82:   }}
+       ^ property `wrap`. Property not found in
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`
  79:     src: "nope",
               ^^^^^^ property `nope`. Property not found in
  95:   src: BlendFunc,
             ^^^^^^^^^ object literal. See: ../node_modules/gl-react/lib/Node.js.flow:95
 
 incorrect.js:73
+     v----
  73: <Node
-     ^ props of React element `Node`
+ 74:   sync={1}
+ 75:   clear={42}
+...:
+ 86: />
+     -^ props of React element `Node`
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ property `dst`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:177
+                  v
  78:   blendFunc={{
-                  ^ object literal
+ 79:     src: "nope",
+ 80:     interpolation: "interpolation_nope",
+ 81:     wrap: "wrap_nope",
+ 82:   }}
+       ^ object literal
 
-../node_modules/kefir/dist/kefir.js.flow:3
-  3: import type EventEmitter from "events";
-                                   ^^^^^^^^ This modules resolves to "<<PROJECT_ROOT>>/../../node_modules/events/package.json", which is outside both your root directory and all of the entries in the [include] section of your .flowconfig. You should either add this directory to the [include] section of your .flowconfig, move your .flowconfig file higher in the project directory tree, or move this package under your Flow root directory.
+../node_modules/gl-react/lib/Node.js.flow:431
+431:     this.context.glParent._addGLNodeChild(this);
+                                               ^^^^ unused function argument
+  672:   _addGLNodeChild() {}
+         ^^^^^^^^^^^^^^^^^^^^ function expects no arguments
 
-../node_modules/kefir/kefir.js.flow:3
-  3: import type EventEmitter from "events";
-                                   ^^^^^^^^ This modules resolves to "<<PROJECT_ROOT>>/../../node_modules/events/package.json", which is outside both your root directory and all of the entries in the [include] section of your .flowconfig. You should either add this directory to the [include] section of your .flowconfig, move your .flowconfig file higher in the project directory tree, or move this package under your Flow root directory.
+../node_modules/gl-react/lib/Node.js.flow:443
+443:     this.context.glParent._removeGLNodeChild(this);
+                                                  ^^^^ unused function argument
+         v---------------------
+  123:   _removeGLNodeChild() {
+  124:     this.glNode = null;
+  125:   }
+         ^ function expects no arguments. See: ../node_modules/gl-react/lib/Bus.js.flow:123
 
-../utils.js:42
- 42:   expect(actual).toBeInstanceOf(Uint8Array);
-       ^^^^^^ identifier `expect`. Could not resolve name
+../node_modules/gl-react/lib/Node.js.flow:443
+443:     this.context.glParent._removeGLNodeChild(this);
+                                                  ^^^^ unused function argument
+  673:   _removeGLNodeChild() {}
+         ^^^^^^^^^^^^^^^^^^^^^^^ function expects no arguments
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:25
+ 25:       log(surface.getGLName() + " _context acquired_");
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:25
+ 25:       log(surface.getGLName() + " _context acquired_");
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:27
+ 27:       log(surface.getGLName() + " _context lost_");
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:27
+ 27:       log(surface.getGLName() + " _context lost_");
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:35
+ 35:     log("_size_ `" + width + "`x`" + height + "`");
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:35
+ 35:     log("_size_ `" + width + "`x`" + height + "`");
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:51
+           v-----------------
+ 51:       node.getGLName() +
+ 52:         " redraw _skipped_: " +
+ 53:         (!node.context.glSurface.gl
+ 54:           ? "no gl context available!"
+ 55:           : !node._needsRedraw ? "no need to redraw" : "")
+               -----------------------------------------------^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:51
+           v-----------------
+ 51:       node.getGLName() +
+ 52:         " redraw _skipped_: " +
+ 53:         (!node.context.glSurface.gl
+ 54:           ? "no gl context available!"
+ 55:           : !node._needsRedraw ? "no need to redraw" : "")
+               -----------------------------------------------^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:86
+           v-----------
+ 86:       "_size_ `" +
+ 87:         w +
+ 88:         "`x`" +
+...:
+ 96:         "`"
+             --^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:86
+           v-----------
+ 86:       "_size_ `" +
+ 87:         w +
+ 88:         "`x`" +
+...:
+ 96:         "`"
+             --^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:98
+ 98:     log("_" + preparedUniforms.length + " uniforms:_");
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:98
+ 98:     log("_" + preparedUniforms.length + " uniforms:_");
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:112
+112:         `${spaces}*${type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type}* _${key}_ = ${values}`,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+             v-----------
+   25: log = function() {
+   26:   var args;
+   27:   args = [];
+  ...:
+   36: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
+
+../node_modules/gl-react/lib/VisitorLogger.js.flow:112
+112:         `${spaces}*${type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type}* _${key}_ = ${values}`,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+              v-----------
+   38: _log = function() {
+   39:   return Function.prototype.apply.call(
+   40:     console.log,
+  ...:
+   44: };
+       ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
 
 
-Found 36 errors
+... 24 more errors (only 50 out of 74 errors displayed)
+To see all errors, re-run Flow with --show-all-errors

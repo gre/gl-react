@@ -150,7 +150,9 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   }
 
   getGLName(): string {
-    return `Bus(${this.glNode ? this.glNode.getGLName() : String(this.getGLRenderableContent())})`;
+    return `Bus(${this.glNode
+      ? this.glNode.getGLName()
+      : String(this.getGLRenderableContent())})`;
   }
 
   getGLShortName(): string {
@@ -158,7 +160,9 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     const shortContentName = String(
       (content && content.constructor && content.constructor.name) || content
     );
-    return `Bus(${this.glNode ? this.glNode.getGLShortName() : shortContentName})`;
+    return `Bus(${this.glNode
+      ? this.glNode.getGLShortName()
+      : shortContentName})`;
   }
 
   /**

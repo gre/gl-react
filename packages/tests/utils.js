@@ -28,7 +28,7 @@ function createNodeMock(o) {
     case "canvas":
       return {
         width: o.props.width,
-        height: o.props.height,
+        height: o.props.height
       };
     default:
       return null;
@@ -57,7 +57,7 @@ export const create = (el: React.Element<*>) =>
 type SurfaceCounters = {
   onSurfaceDrawEnd: number,
   onSurfaceDrawStart: number,
-  onSurfaceDrawSkipped: number,
+  onSurfaceDrawSkipped: number
 };
 
 type NodeCounters = {
@@ -65,7 +65,7 @@ type NodeCounters = {
   onNodeDrawStart: number,
   onNodeSyncDeps: number,
   onNodeDraw: number,
-  onNodeDrawEnd: number,
+  onNodeDrawEnd: number
 };
 
 export class CountersVisitor extends Visitor {
@@ -77,7 +77,7 @@ export class CountersVisitor extends Visitor {
     onNodeDrawStart: 0,
     onNodeSyncDeps: 0,
     onNodeDraw: 0,
-    onNodeDrawEnd: 0,
+    onNodeDrawEnd: 0
   };
   _surfaceCounters: WeakMap<Surface, SurfaceCounters> = new WeakMap();
   _nodeCounters: WeakMap<Node, NodeCounters> = new WeakMap();
@@ -90,7 +90,7 @@ export class CountersVisitor extends Visitor {
       counters = {
         onSurfaceDrawSkipped: 0,
         onSurfaceDrawStart: 0,
-        onSurfaceDrawEnd: 0,
+        onSurfaceDrawEnd: 0
       };
       this._surfaceCounters.set(surface, counters);
     }
@@ -104,7 +104,7 @@ export class CountersVisitor extends Visitor {
         onNodeDrawStart: 0,
         onNodeSyncDeps: 0,
         onNodeDraw: 0,
-        onNodeDrawEnd: 0,
+        onNodeDrawEnd: 0
       };
       this._nodeCounters.set(node, counters);
     }
@@ -161,7 +161,7 @@ export const red2x2 = ndarray(
     255,
     0,
     0,
-    255,
+    255
   ]),
   [2, 2, 4]
 );
@@ -203,7 +203,7 @@ export const white3x3 = ndarray(
     255,
     255,
     255,
-    255,
+    255
   ]),
   [3, 3, 4]
 );
@@ -245,7 +245,7 @@ export const yellow3x3 = ndarray(
     255,
     255,
     0,
-    255,
+    255
   ]),
   [3, 3, 4]
 );
@@ -259,7 +259,7 @@ export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
     canLoad: 0,
     get: 0,
     load: 0,
-    createTexture: 0,
+    createTexture: 0
   };
   const d = defer();
   function resolve() {
@@ -299,7 +299,7 @@ export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
       }
       return {
         promise,
-        dispose,
+        dispose
       };
     }
   }
@@ -308,7 +308,7 @@ export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
     textureId,
     counters,
     resolve,
-    reject,
+    reject
   };
 }
 

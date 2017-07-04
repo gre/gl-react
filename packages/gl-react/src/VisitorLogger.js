@@ -12,7 +12,7 @@ const aggregateInfo = info =>
     : [
         String(
           (info.dependency && info.dependency.getGLName()) || info.initialObj
-        ),
+        )
       ].concat(info.textureOptions ? [info.textureOptions] : []);
 
 /**
