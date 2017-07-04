@@ -9,7 +9,6 @@ import Docs, { DocToc } from "./Docs";
 import Dashboard from "./Dashboard";
 
 if (process.env.NODE_ENV !== "production") {
-  window.Perf = require("react-addons-perf");
   document.write('<script src="http://localhost:8097"></script>'); // Nuclide React Inspector
 }
 

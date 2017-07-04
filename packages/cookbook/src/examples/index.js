@@ -46,7 +46,6 @@ const examples = {};
 
 names.forEach(name => {
   const { default: Example, ...rest } = require("./" + name + "/index.js");
-  console.log(name);
   const source = require("./" + name + "/index.source.js");
   examples[name] = { ...rest, Example, source };
 });
