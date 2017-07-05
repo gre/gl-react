@@ -21,23 +21,23 @@
             -^ props of React element `Node`
 2510:         uniformsOptions={{ t: { wrap: "nope" } }}
                                             ^^^^^^ string. This type is incompatible with
- 66:   wrap: [WrapMode, WrapMode] | WrapMode,
+ 66:   wrap: [WrapMode, WrapMode] | WrapMode
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Member 1:
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
   2510:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Member 2:
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
   2510:         uniformsOptions={{ t: { wrap: "nope" } }}
                                               ^^^^^^ string. This type is incompatible with
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
 ../all.test.js:2520
@@ -50,23 +50,23 @@
             -^ props of React element `Node`
 2522:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                             ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
- 66:   wrap: [WrapMode, WrapMode] | WrapMode,
+ 66:   wrap: [WrapMode, WrapMode] | WrapMode
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ union: tuple type | WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Member 1:
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                ^^^^^^^^^^^^^^^^^^^^ tuple type. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
   2522:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                                ^^^^^^ string. This type is incompatible with
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                 ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Member 2:
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ WrapMode. See: ../node_modules/gl-react/lib/Node.js.flow:66
   Error:
   2522:         uniformsOptions={{ t: { wrap: ["nope", "nope"] } }}
                                               ^^^^^^^^^^^^^^^^ array literal. This type is incompatible with
-   66:   wrap: [WrapMode, WrapMode] | WrapMode,
+   66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
 ../all.test.js:2532
@@ -140,7 +140,7 @@ incorrect.js:33
      -^ call of method `create`
  37:   a: null,
           ^^^^ null. Inexact type is incompatible with exact type
- 45:   [key: string]: ShaderDefinition,
+ 45:   [key: string]: ShaderDefinition
                       ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
 
 incorrect.js:33
@@ -151,7 +151,7 @@ incorrect.js:33
 ...:
  40: });
      -^ call of method `create`
- 45:   [key: string]: ShaderDefinition,
+ 45:   [key: string]: ShaderDefinition
                       ^^^^^^^^^^^^^^^^ property `frag`. Property not found in. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
  38:   b: {},
           ^^ object literal
@@ -159,12 +159,12 @@ incorrect.js:33
 incorrect.js:39
  39:   c: { frag: true },
           ^^^^^^^^^^^^^^ object literal. This type is incompatible with
- 45:   [key: string]: ShaderDefinition,
+ 45:   [key: string]: ShaderDefinition
                       ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
   Property `frag` is incompatible:
      39:   c: { frag: true },
                       ^^^^ boolean. This type is incompatible with
-     16:   frag: GLSLCode,
+     16:   frag: GLSLCode
                  ^^^^^^^^ string. See: ../node_modules/gl-react/lib/Shaders.js.flow:16
 
 incorrect.js:48
@@ -398,7 +398,7 @@ incorrect.js:73
      -^ props of React element `Node`
  75:   clear={42}
               ^^ number. Inexact type is incompatible with exact type
-178:   clear: ?Clear,
+178:   clear: ?Clear
                ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:178
 
 incorrect.js:73
@@ -641,9 +641,12 @@ incorrect.js:73
    44: };
        ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:38
 
-../node_modules/gl-react/lib/VisitorLogger.js.flow:112
-112:         `${spaces}*${type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type}* _${key}_ = ${values}`,
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+../node_modules/gl-react/lib/VisitorLogger.js.flow:113
+             v------------------------------
+113:         `${spaces}*${type === "UNKNOWN"
+114:           ? "[c='color:red']UNKNOWN[c]"
+115:           : type}* _${key}_ = ${values}`,
+               -----------------------------^ unused function argument
              v-----------
    25: log = function() {
    26:   var args;
@@ -652,9 +655,12 @@ incorrect.js:73
    36: };
        ^ function expects no arguments. See: ../node_modules/gl-react/lib/helpers/log.js.flow:25
 
-../node_modules/gl-react/lib/VisitorLogger.js.flow:112
-112:         `${spaces}*${type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type}* _${key}_ = ${values}`,
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused function argument
+../node_modules/gl-react/lib/VisitorLogger.js.flow:113
+             v------------------------------
+113:         `${spaces}*${type === "UNKNOWN"
+114:           ? "[c='color:red']UNKNOWN[c]"
+115:           : type}* _${key}_ = ${values}`,
+               -----------------------------^ unused function argument
               v-----------
    38: _log = function() {
    39:   return Function.prototype.apply.call(
