@@ -37,7 +37,7 @@ export default class TextureLoader<T> {
   /**
    * try to get in sync the texture size for a given input. otherwise null.
    */
-  +getSize: (input: T) => ?[width, height];
+  +getSize: (input: T) => ?[number, number];
 
   /**
    * load() called if get() was null. it returns a promise and a dispose function.

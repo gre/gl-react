@@ -544,7 +544,7 @@ test("Surface can be resized", () => {
   }`
     }
   });
-  const renderForSize = (width, height) => (
+  const renderForSize = (width, height) =>
     <Surface
       width={width}
       height={height}
@@ -553,8 +553,7 @@ test("Surface can be resized", () => {
       <LinearCopy>
         <Node shader={shaders.red} backbuffering />
       </LinearCopy>
-    </Surface>
-  );
+    </Surface>;
   const inst = create(renderForSize(1, 1));
   const surface = inst.getInstance();
   inst.update(renderForSize(20, 20));
@@ -640,7 +639,9 @@ test("bus example 1", () => {
           <Bus ref="bus">
             <Node shader={shaders.red} />
           </Bus>
-          <LinearCopy>{() => this.refs.bus}</LinearCopy>
+          <LinearCopy>
+            {() => this.refs.bus}
+          </LinearCopy>
         </Surface>
       );
     }
@@ -677,9 +678,13 @@ test("bus example 2", () => {
             <Node width={1} height={2} shader={shaders.red} />
           </Bus>
           <Bus ref="bus2">
-            <LinearCopy>{() => this.refs.bus1}</LinearCopy>
+            <LinearCopy>
+              {() => this.refs.bus1}
+            </LinearCopy>
           </Bus>
-          <LinearCopy>{() => this.refs.bus2}</LinearCopy>
+          <LinearCopy>
+            {() => this.refs.bus2}
+          </LinearCopy>
         </Surface>
       );
     }
@@ -722,7 +727,9 @@ test("bus example 3", () => {
           <Bus ref="bus">
             <Red />
           </Bus>
-          <LinearCopy>{() => this.refs.bus}</LinearCopy>
+          <LinearCopy>
+            {() => this.refs.bus}
+          </LinearCopy>
         </Surface>
       );
     }
@@ -999,13 +1006,12 @@ test("a surface can be captured and resized", () => {
   }`
     }
   });
-  const render = (w, h) => (
+  const render = (w, h) =>
     <Surface width={w} height={h}>
       <LinearCopy>
         <Node shader={shaders.helloGL} width={2} height={2} />
       </LinearCopy>
-    </Surface>
-  );
+    </Surface>;
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   expectToBeCloseToColorArray(
@@ -1033,7 +1039,7 @@ test("a node can be captured and resized", () => {
     }
   });
   let node;
-  const render = (w, h) => (
+  const render = (w, h) =>
     <Surface width={20} height={20}>
       <LinearCopy>
         <Node
@@ -1043,8 +1049,7 @@ test("a node can be captured and resized", () => {
           height={h}
         />
       </LinearCopy>
-    </Surface>
-  );
+    </Surface>;
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   invariant(node, "node is defined");
@@ -1095,12 +1100,11 @@ test("Uniform children redraw=>el function", () => {
         >
           <NearestCopy>
             <LinearCopy>
-              {redraw => (
+              {redraw =>
                 <UpdatingTexture
                   ref={ref => (updatingTexture = ref)}
                   redraw={redraw}
-                />
-              )}
+                />}
             </LinearCopy>
           </NearestCopy>
         </Surface>
@@ -1185,15 +1189,14 @@ test("Bus redraw=>el function", () => {
           webglContextAttributes={{ preserveDrawingBuffer: true }}
         >
           <Bus ref="bus">
-            {redraw => (
+            {redraw =>
               <UpdatingTexture
                 initialPixels={yellow3x3}
                 initialWidth={3}
                 initialHeight={3}
                 ref={ref => (updatingTexture = ref)}
                 redraw={redraw}
-              />
-            )}
+              />}
           </Bus>
           <NearestCopy>
             <LinearCopy>
@@ -1234,7 +1237,7 @@ test("many Surface updates don't result of many redraws", () => {
   });
 
   const visitor = new CountersVisitor();
-  const wrap = children => (
+  const wrap = children =>
     <Surface
       visitor={visitor}
       width={2}
@@ -1242,11 +1245,9 @@ test("many Surface updates don't result of many redraws", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>
-  );
-  const JustBlue = ({ blue }) => (
-    <Node shader={shaders.justBlue} uniforms={{ blue }} />
-  );
+    </Surface>;
+  const JustBlue = ({ blue }) =>
+    <Node shader={shaders.justBlue} uniforms={{ blue }} />;
 
   const inst = create(wrap(<JustBlue blue={0} />));
   const surface = inst.getInstance();
@@ -1286,7 +1287,7 @@ test("many Surface flush() don't result of extra redraws", () => {
   });
   const visitor = new CountersVisitor();
 
-  const wrap = children => (
+  const wrap = children =>
     <Surface
       visitor={visitor}
       width={2}
@@ -1294,11 +1295,9 @@ test("many Surface flush() don't result of extra redraws", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>
-  );
-  const JustBlue = ({ blue }) => (
-    <Node shader={shaders.justBlue} uniforms={{ blue }} />
-  );
+    </Surface>;
+  const JustBlue = ({ blue }) =>
+    <Node shader={shaders.justBlue} uniforms={{ blue }} />;
 
   const inst = create(wrap(<JustBlue blue={0} />));
   const surface = inst.getInstance();
@@ -1335,15 +1334,16 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
   const visitor = new CountersVisitor();
   Visitors.add(visitor);
 
-  const wrap = children => (
+  const wrap = children =>
     <Surface
       width={2}
       height={2}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
-      <LinearCopy>{children}</LinearCopy>
-    </Surface>
-  );
+      <LinearCopy>
+        {children}
+      </LinearCopy>
+    </Surface>;
   class JustBlue extends React.PureComponent {
     render() {
       const { blue } = this.props;
@@ -1584,7 +1584,7 @@ test("Node `backbuffering`", () => {
   }`
     }
   });
-  const render = t => (
+  const render = t =>
     <Surface
       width={10}
       height={10}
@@ -1593,8 +1593,7 @@ test("Node `backbuffering`", () => {
       <LinearCopy>
         <Node shader={shaders.colorShift} uniforms={{ t }} backbuffering />
       </LinearCopy>
-    </Surface>
-  );
+    </Surface>;
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
   expectToBeCloseToColorArray(
@@ -1645,7 +1644,7 @@ test("Node `backbuffering` in `sync`", () => {
   }`
     }
   });
-  const render = t => (
+  const render = t =>
     <Surface
       width={10}
       height={10}
@@ -1661,8 +1660,7 @@ test("Node `backbuffering` in `sync`", () => {
           />
         </LinearCopy>
       </LinearCopy>
-    </Surface>
-  );
+    </Surface>;
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
   // since node was drawn once, there were a first shift.
@@ -1980,7 +1978,6 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
     <Surface
       width={64}
       height={64}
-      preload={[loader.textureId]}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       <Node
@@ -1994,13 +1991,18 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
   );
   const inst = create(el);
   const surface = inst.getInstance();
+  await loader.resolve();
   surface.flush();
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 255, 0, 255])
   );
   expectToBeCloseToColorArray(
-    surface.capture(63, 63, 1, 1).data,
+    surface.capture(0, 32, 1, 1).data,
+    new Uint8Array([255, 255, 0, 255])
+  );
+  expectToBeCloseToColorArray(
+    surface.capture(0, 63, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
   inst.unmount();
@@ -2175,7 +2177,8 @@ test("testing connectSize() feature", () => {
 
 test("handle context lost nicely", () => {
   let surface;
-  let contextLost = 0, contextRestored = 0;
+  let contextLost = 0,
+    contextRestored = 0;
   class Example extends React.Component {
     render() {
       return (
@@ -2275,15 +2278,14 @@ void main() {
     }
   }
 
-  const wrap = children => (
+  const wrap = children =>
     <Surface
       width={4}
       height={4}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>
-  );
+    </Surface>;
 
   const inst = create(wrap(<WeirdSwapping i={0} />));
   const surface = inst.getInstance();
@@ -2344,7 +2346,12 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   expect(Shaders.get(shaders.helloTexture2)).toBeDefined();
 
   const oldConsole = console;
-  let groupEnd = 0, log = 0, warn = 0, error = 0, group = 0, groupCollapsed = 0;
+  let groupEnd = 0,
+    log = 0,
+    warn = 0,
+    error = 0,
+    group = 0,
+    groupCollapsed = 0;
 
   console = {
     ...oldConsole,
@@ -2359,11 +2366,12 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   let justBlueNode;
   const visitor = new VisitorLogger();
 
-  const wrap = children => (
+  const wrap = children =>
     <Surface visitor={visitor} width={2} height={2}>
-      <LinearCopy>{children}</LinearCopy>
-    </Surface>
-  );
+      <LinearCopy>
+        {children}
+      </LinearCopy>
+    </Surface>;
 
   class JustBlue extends React.PureComponent {
     render() {
@@ -2397,15 +2405,14 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
       );
     }
   }
-  const MissingOrInvalidUniforms = () => (
+  const MissingOrInvalidUniforms = () =>
     <Node
       ref={ref => {
         justBlueNode = ref;
       }}
       shader={shaders.justBlue}
       uniforms={{ nope: [1, 2] }}
-    />
-  );
+    />;
 
   class TreeWithZombiesDontBreak extends React.Component {
     render() {
@@ -2497,7 +2504,13 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   justBlueNode.flush();
   justBlueNode.redraw();
   justBlueNode.flush();
-  inst.update(wrap(<NearestCopy><JustBlue blue={0} /></NearestCopy>));
+  inst.update(
+    wrap(
+      <NearestCopy>
+        <JustBlue blue={0} />
+      </NearestCopy>
+    )
+  );
   surface.flush();
   inst.update(wrap(<TreeWithZombiesDontBreak />));
   surface.flush();
@@ -2629,7 +2642,9 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
           <Bus ref="bus">
             <JustBlue blue={0.2} />
           </Bus>
-          <LinearCopy>{() => this.refs.bus}</LinearCopy>
+          <LinearCopy>
+            {() => this.refs.bus}
+          </LinearCopy>
         </Surface>
       );
     }

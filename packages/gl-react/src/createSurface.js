@@ -480,7 +480,7 @@ export default ({
       node._addDependent(this);
       this.redraw();
     }
-    _removeGLNodeChild(): void {
+    _removeGLNodeChild(node: Node): void {
       this.root = null;
       this.redraw();
     }

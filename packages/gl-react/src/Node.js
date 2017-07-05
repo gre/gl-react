@@ -682,8 +682,8 @@ export default class Node extends Component {
     this._needsRedraw = true;
   }
 
-  _addGLNodeChild() {}
-  _removeGLNodeChild() {}
+  _addGLNodeChild(node: Node) {}
+  _removeGLNodeChild(node: Node) {}
 
   _addUniformBus(uniformBus: Bus, uniformName: string, index: number): void {
     const array =
@@ -994,19 +994,21 @@ export default class Node extends Component {
           value: this.getGLSize()
         };
       } else if (isTextureSizeGetter(uniformValue)) {
+        invariant(
+          uniformValue && typeof uniformValue === "object",
+          "unexpected textureSize object. Got: %s",
+          uniformValue
+        );
         const { getSize } = prepareTexture(uniformValue.obj, null, key);
         const size = getSize();
-        let value;
-        if (uniformValue.ratio) {
-          value = size ? size[0] / size[1] : 1;
-        } else {
-          value = size || [0, 0];
-        }
-        if (!value) {
+        if (!size) {
           console.warn(
             `${nodeName}, uniform ${key}: texture size is undetermined`
           );
         }
+        const value = uniformValue.ratio
+          ? size ? size[0] / size[1] : 1
+          : size || [0, 0];
         return {
           key,
           type: uniformType,

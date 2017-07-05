@@ -10,14 +10,10 @@ import Shaders from "./Shaders";
 import TextureLoader from "./TextureLoader";
 import TextureLoaderRawObject from "./TextureLoaderRawObject";
 import TextureLoaders from "./TextureLoaders";
-import Uniform_ from "./Uniform";
+import Uniform from "./Uniform";
 import Visitor from "./Visitor";
 import VisitorLogger from "./VisitorLogger";
 import Visitors from "./Visitors";
-
-import { Uniform, createComponent } from "./legacy";
-export { createComponent };
-Object.assign(Uniform, Uniform_); // we use the Uniform legacy class for now to preserve legacy feature (helping user migrating)
 
 export {
   Bus,
