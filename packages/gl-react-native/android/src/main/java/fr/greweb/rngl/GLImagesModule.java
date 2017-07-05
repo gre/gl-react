@@ -57,7 +57,7 @@ public class GLImagesModule extends ReactContextBaseJavaModule {
             @Override
             protected void onNewResultImpl(@Nullable Bitmap bitmap) {
                 GLImages.set(glAssetId, bitmap);
-                cb.invoke(glAssetId);
+                cb.invoke(glAssetId, bitmap.getWidth(), bitmap.getHeight());
             }
             @Override
             protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {

@@ -6,7 +6,7 @@ import {
   VisitorLogger,
   Node,
   Bus,
-  Backbuffer,
+  Uniform,
   listSurfaces
 } from "gl-react";
 import raf from "raf";
@@ -175,7 +175,7 @@ class UniformValue extends Component {
     }
     return Array.isArray(type)
       ? <span className={"value-array " + classType(type)}>
-          {type.map((type, i) => (
+          {type.map((type, i) =>
             <UniformValue
               id={id + "[" + i + "]"}
               key={i}
@@ -184,7 +184,7 @@ class UniformValue extends Component {
               type={type}
               info={info && info[i]}
             />
-          ))}
+          )}
         </span>
       : <span className={"value " + classType(type)}>
           <span className="val">
@@ -334,17 +334,21 @@ class MetaInfo extends Component {
               nodeId={node.id}
               anchorId={dependency.id}
             />
-          : obj === Backbuffer
-              ? <AnchorHook
-                  id={"rec_" + node.id + "_" + id}
-                  nodeId={node.id}
-                  anchorId={node.id}
-                />
-              : null}
+          : obj === Uniform.Backbuffer
+            ? <AnchorHook
+                id={"rec_" + node.id + "_" + id}
+                nodeId={node.id}
+                anchorId={node.id}
+              />
+            : null}
         {dependency
           ? dependency.getGLShortName()
-          : typeof obj === "string"
-              ? <a href={obj} target="_blank">{obj}</a>
+          : obj === Uniform.Backbuffer
+            ? "Backbuffer"
+            : typeof obj === "string"
+              ? <a href={obj} target="_blank">
+                  {obj}
+                </a>
               : formatObject(obj)}
       </span>
     );
@@ -529,10 +533,10 @@ class InspectorBox extends Component {
         style={{ left: pos[0], top: pos[1] }}
         className={
           "box" +
-            (cls ? " " + cls : "") +
-            (recentDraw ? " recent-draw" : "") +
-            (grabbed ? " grabbed" : "") +
-            (minimized ? " minimized" : "")
+          (cls ? " " + cls : "") +
+          (recentDraw ? " recent-draw" : "") +
+          (grabbed ? " grabbed" : "") +
+          (minimized ? " minimized" : "")
         }
       >
         <header onMouseDown={this.onMouseDown}>
@@ -547,8 +551,12 @@ class InspectorBox extends Component {
         {children}
         <footer onClick={this.onClickMinimize}>
           <span className="minimize">↕</span>
-          <span className="dim">{width}⨉{height}</span>
-          <span className="mode">{mode}</span>
+          <span className="dim">
+            {width}⨉{height}
+          </span>
+          <span className="mode">
+            {mode}
+          </span>
         </footer>
       </div>
     );
@@ -570,7 +578,7 @@ class Uniforms extends PureComponent {
     return (
       <div className="uniforms">
         {preparedUniforms &&
-          preparedUniforms.map(u => (
+          preparedUniforms.map(u =>
             <div key={u.key} className={"uniform " + classType(u.type)}>
               <span
                 className="name"
@@ -591,7 +599,7 @@ class Uniforms extends PureComponent {
                 />
               </span>
             </div>
-          ))}
+          )}
       </div>
     );
   }
@@ -628,17 +636,17 @@ class SVGConnectionLine extends PureComponent {
         className="connection-line"
         d={
           `M${anchorX},${anchorY} ` +
-            `L${anchorX + s},${anchorY} ` +
-            `C${anchorX + t},${anchorY} ` +
-            (recursive
-              ? `${anchorX + t},${anchorY - anchorYOff} ` +
-                  `${anchorX + s},${anchorY - anchorYOff} ` +
-                  `L${hookX - s},${anchorY - anchorYOff} ` +
-                  `C${hookX - t},${anchorY - anchorYOff} `
-              : "") +
-            `${hookX - t * (reversedHook ? -1 : 1)},${hookY} ` +
-            `${hookX - s * (reversedHook ? -1 : 1)},${hookY} ` +
-            `L${hookX},${hookY}`
+          `L${anchorX + s},${anchorY} ` +
+          `C${anchorX + t},${anchorY} ` +
+          (recursive
+            ? `${anchorX + t},${anchorY - anchorYOff} ` +
+              `${anchorX + s},${anchorY - anchorYOff} ` +
+              `L${hookX - s},${anchorY - anchorYOff} ` +
+              `C${hookX - t},${anchorY - anchorYOff} `
+            : "") +
+          `${hookX - t * (reversedHook ? -1 : 1)},${hookY} ` +
+          `${hookX - s * (reversedHook ? -1 : 1)},${hookY} ` +
+          `L${hookX},${hookY}`
         }
       />
     );
@@ -1433,13 +1441,13 @@ export default class Inspector extends Component {
           <div className="no-surface">
             <h2>No Surface is currently inspected. Select one of these:</h2>
             <ul>
-              {listSurfaces().map(surface => (
+              {listSurfaces().map(surface =>
                 <li key={surface.id}>
                   <span onClick={() => this.setSurface(surface)}>
                     {surface.getGLName()}
                   </span>
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         </div>
@@ -1462,11 +1470,11 @@ export default class Inspector extends Component {
               onChange={this.onSelectChange}
             >
               <option value="">(none)</option>
-              {listSurfaces().map(surface => (
+              {listSurfaces().map(surface =>
                 <option key={surface.id} value={surface.id}>
                   {surface.getGLName()}
                 </option>
-              ))}
+              )}
             </select>
             <label>
               <input

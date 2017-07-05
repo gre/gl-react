@@ -30,9 +30,14 @@ export default class TextureLoader<T> {
   +canLoad: (input: any) => boolean;
 
   /**
-   * try to get in sync the texture for a given output. otherwise null.
+   * try to get in sync the texture for a given input. otherwise null.
    */
   +get: (input: T) => ?WebGLTexture;
+
+  /**
+   * try to get in sync the texture size for a given input. otherwise null.
+   */
+  +getSize: (input: T) => ?[width, height];
 
   /**
    * load() called if get() was null. it returns a promise and a dispose function.

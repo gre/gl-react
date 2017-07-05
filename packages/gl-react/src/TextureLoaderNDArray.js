@@ -27,4 +27,7 @@ export default class TextureLoaderNDArray extends TextureLoader<NDArray> {
     drawNDArrayTexture(gl, texture, array);
     return texture;
   }
+  getSize(array: NDArray) {
+    return array.shape.slice(0, 2);
+  }
 }

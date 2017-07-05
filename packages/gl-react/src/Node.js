@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import pool from "typedarray-pool";
 import ndarray from "ndarray";
-import Backbuffer from "./Backbuffer";
+import Uniform from "./Uniform";
 import Bus from "./Bus";
 import Shaders, {
   isShaderIdentifier,
@@ -179,6 +179,19 @@ type DefaultProps = {
 };
 
 type AsyncMixed = (redraw?: () => void) => mixed;
+
+const isBackbuffer = (obj: *) => {
+  if (obj === "Backbuffer") {
+    console.warn(
+      'Backbuffer is deprecated, use Uniform.Backbuffer instead: `import {Uniform} from "gl-react"`'
+    );
+    return true;
+  }
+  return obj === Uniform.Backbuffer;
+};
+
+const isTextureSizeGetter = (obj: *) =>
+  obj && typeof obj === "object" && obj.type === "TextureSize";
 
 const nodeWidthHeight = (
   { width, height }: Props,
@@ -828,7 +841,11 @@ export default class Node extends Component {
     ) => {
       let obj = initialObj,
         dependency: ?(Node | Bus),
-        result: ?{ directTexture?: ?WebGLTexture, glNode?: Node };
+        result: ?{
+          directTexture?: ?WebGLTexture,
+          directTextureSize?: ?[number, number],
+          glNode?: Node
+        };
 
       if (typeof obj === "function") {
         // texture uniform can be a function that resolves the object at draw time.
@@ -842,7 +859,7 @@ export default class Node extends Component {
               "If you explicitely want to clear a texture, set it to null."
           );
         }
-      } else if (obj === Backbuffer) {
+      } else if (isBackbuffer(obj)) {
         // maybe it's backbuffer?
         if (!this.drawProps.backbuffering) {
           console.warn(
@@ -850,7 +867,8 @@ export default class Node extends Component {
           );
         }
         result = {
-          directTexture: this.getGLOutput()
+          directTexture: this.getGLOutput(),
+          directTextureSize: this.getGLSize()
         };
       } else if (obj instanceof Node) {
         // maybe it's a Node?
@@ -892,7 +910,10 @@ export default class Node extends Component {
         } else {
           const t = loader.get(input);
           if (t) {
-            result = { directTexture: t };
+            result = {
+              directTexture: t,
+              directTextureSize: loader.getSize(input)
+            };
           } else {
             // otherwise, we will have to load it and postpone the rendering.
             const d = loader.load(input);
@@ -911,6 +932,14 @@ export default class Node extends Component {
         dependency,
         textureOptions
       });
+      const getSize = (): ?[number, number] => {
+        const fallback = [2, 2];
+        return result
+          ? "directTextureSize" in result
+            ? result.directTextureSize
+            : result.glNode ? result.glNode.getGLSize() : fallback
+          : fallback;
+      };
       const prepare = () => {
         const texture: WebGLTexture =
           (result &&
@@ -930,6 +959,7 @@ export default class Node extends Component {
       };
       return {
         getMetaInfo,
+        getSize,
         prepare
       };
     };
@@ -956,6 +986,31 @@ export default class Node extends Component {
           type: uniformType,
           getMetaInfo,
           prepare
+        };
+      } else if (uniformValue === Uniform.Resolution) {
+        return {
+          key,
+          type: uniformType,
+          value: this.getGLSize()
+        };
+      } else if (isTextureSizeGetter(uniformValue)) {
+        const { getSize } = prepareTexture(uniformValue.obj, null, key);
+        const size = getSize();
+        let value;
+        if (uniformValue.ratio) {
+          value = size ? size[0] / size[1] : 1;
+        } else {
+          value = size || [0, 0];
+        }
+        if (!value) {
+          console.warn(
+            `${nodeName}, uniform ${key}: texture size is undetermined`
+          );
+        }
+        return {
+          key,
+          type: uniformType,
+          value
         };
       } else if (Array.isArray(uniformType) && uniformType[0] === "sampler2D") {
         let values;

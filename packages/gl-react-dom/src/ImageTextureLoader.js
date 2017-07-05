@@ -69,4 +69,10 @@ export default class ImageTextureLoader extends TextureLoader<string> {
   get(input: string) {
     return this.textures[input];
   }
+  getSize(input: string) {
+    const img = this.get(input);
+    if (img) {
+      return [img.width, img.height];
+    }
+  }
 }

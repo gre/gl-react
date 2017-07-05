@@ -16,9 +16,7 @@ import PropTypes from "prop-types";
  *  <FooConnected /> // you don't have to provide width, height.
  *  <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height.
  */
-const connectSize = (
-  GLComponent: ReactClass<*> | ((props: any) => React.Element<*>)
-) =>
+const connectSize = (GLComponent: ReactClass<*>) =>
   class extends Component {
     props: {
       width?: number,
@@ -54,6 +52,7 @@ const connectSize = (
     }
     component: ?GLComponent;
     getComponent(): ?GLComponent {
+      // FIXME drop this feature (was used on gl-transitions website...)
       return this.component;
     }
     onRef = (ref: GLComponent) => {
@@ -63,7 +62,10 @@ const connectSize = (
       const [width, height] = this.getGLSize();
       return (
         <GLComponent
-          ref={this.onRef}
+          ref={
+            // FIXME drop this feature
+            typeof GLComponent !== "function" ? this.onRef : undefined
+          }
           {...this.props}
           width={width}
           height={height}

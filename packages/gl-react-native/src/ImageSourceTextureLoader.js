@@ -4,11 +4,11 @@ import type { DisposablePromise } from "gl-react/lib/helpers/disposable";
 import GLImages from "./GLImages";
 import type { ImageSource } from "./GLImages";
 
-export default class ImageSourceTextureLoader extends TextureLoader<
-  ImageSource
-> {
+export default class ImageSourceTextureLoader
+  extends TextureLoader<ImageSource> {
   loads: Array<DisposablePromise<*>> = [];
   textures: Map<number, *> = new Map();
+  textureSizes: Map<number, *> = new Map();
   assetIdForImageSource: Map<ImageSource, number> = new Map();
   dispose() {
     this.loads.forEach(d => {
@@ -32,7 +32,9 @@ export default class ImageSourceTextureLoader extends TextureLoader<
     let dispose = () => {
       ignored = true;
     };
-    const promise = GLImages.load(imageSource).then((glAssetId: number) => {
+    const promise = GLImages.load(
+      imageSource
+    ).then((glAssetId: number, width: number, height: number) => {
       if (ignored) return;
       let texture;
       if (this.textures.has(glAssetId)) {
@@ -45,6 +47,7 @@ export default class ImageSourceTextureLoader extends TextureLoader<
           glAssetId
         });
         this.textures.set(glAssetId, texture);
+        this.textureSizes.set(glAssetId, [width, height]);
       }
       this.assetIdForImageSource.set(imageSource, glAssetId);
       return texture;
@@ -56,5 +59,9 @@ export default class ImageSourceTextureLoader extends TextureLoader<
   get(imageSource: ImageSource) {
     const assetId = this.assetIdForImageSource.get(imageSource);
     return assetId && this.textures.get(assetId);
+  }
+  getSize(imageSource: ImageSource) {
+    const assetId = this.assetIdForImageSource.get(imageSource);
+    return this.textureSizes.get(assetId);
   }
 }

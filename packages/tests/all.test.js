@@ -19,7 +19,7 @@ import {
   Visitors,
   TextureLoader,
   TextureLoaders,
-  Backbuffer,
+  Uniform,
   Bus,
   VisitorLogger,
   connectSize
@@ -42,6 +42,7 @@ import {
   red2x2,
   white3x3,
   yellow3x3,
+  yellow3x2,
   expectToBeCloseToColorArray
 } from "./utils";
 
@@ -1608,20 +1609,20 @@ test("Node `backbuffering`", () => {
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   surface.flush();
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   surface.flush();
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  inst.update(render(Backbuffer));
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   surface.flush();
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
@@ -1669,18 +1670,18 @@ test("Node `backbuffering` in `sync`", () => {
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 255, 0, 255])
   );
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
   );
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  inst.update(render(Backbuffer));
-  inst.update(render(Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
+  inst.update(render(Uniform.Backbuffer));
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([0, 0, 255, 255])
@@ -1864,7 +1865,10 @@ test("can be extended with addTextureLoaderClass", async () => {
     }
   });
 
-  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
+  const loader = createOneTextureLoader(
+    gl => createNDArrayTexture(gl, red2x2),
+    [2, 2]
+  );
   TextureLoaders.add(loader.Loader);
   const inst = create(
     <Surface
@@ -1909,7 +1913,10 @@ test("Surface `preload` prevent to draw anything", async () => {
 
   let onLoadCounter = 0;
   const visitor = new CountersVisitor();
-  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
+  const loader = createOneTextureLoader(
+    gl => createNDArrayTexture(gl, red2x2),
+    [2, 2]
+  );
   TextureLoaders.add(loader.Loader);
   const el = (
     <Surface
@@ -1947,6 +1954,59 @@ test("Surface `preload` prevent to draw anything", async () => {
   TextureLoaders.remove(loader.Loader);
 });
 
+test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform", async () => {
+  const shaders = Shaders.create({
+    contain: {
+      frag: GLSL`
+  precision highp float;
+  varying vec2 uv;
+  uniform sampler2D t;
+  uniform float tRatio;
+  void main() {
+    vec2 p = uv * vec2(max(1.0, 1.0/tRatio), max(1.0, tRatio)); // "contain" the texture to preserve ratio (without center alignment)
+    gl_FragColor =
+      step(0.0, p.x) * step(p.x, 1.0) * // returns 1.0 if x is in [0,1] otherwise 0.0
+      step(0.0, p.y) * step(p.y, 1.0) * // returns 1.0 if y is in [0,1] otherwise 0.0
+      texture2D(t, p);
+  }`
+    }
+  });
+  const loader = createOneTextureLoader(
+    gl => createNDArrayTexture(gl, yellow3x2),
+    [3, 2]
+  );
+  TextureLoaders.add(loader.Loader);
+  const el = (
+    <Surface
+      width={64}
+      height={64}
+      preload={[loader.textureId]}
+      webglContextAttributes={{ preserveDrawingBuffer: true }}
+    >
+      <Node
+        shader={shaders.contain}
+        uniforms={{
+          t: loader.textureId,
+          tRatio: Uniform.textureSizeRatio(loader.textureId)
+        }}
+      />
+    </Surface>
+  );
+  const inst = create(el);
+  const surface = inst.getInstance();
+  surface.flush();
+  expectToBeCloseToColorArray(
+    surface.capture(0, 0, 1, 1).data,
+    new Uint8Array([255, 255, 0, 255])
+  );
+  expectToBeCloseToColorArray(
+    surface.capture(63, 63, 1, 1).data,
+    new Uint8Array([0, 0, 0, 0])
+  );
+  inst.unmount();
+  TextureLoaders.remove(loader.Loader);
+});
+
 test("Surface `preload` that fails will trigger onLoadError", async () => {
   const shaders = Shaders.create({
     helloTexture: {
@@ -1962,7 +2022,10 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
 
   let onLoadCounter = 0;
   let onLoadErrorCounter = 0;
-  const loader = createOneTextureLoader(gl => createNDArrayTexture(gl, red2x2));
+  const loader = createOneTextureLoader(
+    gl => createNDArrayTexture(gl, red2x2),
+    [2, 2]
+  );
   TextureLoaders.add(loader.Loader);
   const el = (
     <Surface
@@ -2540,7 +2603,12 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   expect(warn).toBeGreaterThan(0);
   warn = 0;
   inst.update(
-    wrap(<Node shader={shaders.helloTexture} uniforms={{ t: Backbuffer }} />)
+    wrap(
+      <Node
+        shader={shaders.helloTexture}
+        uniforms={{ t: Uniform.Backbuffer }}
+      />
+    )
   );
   surface.flush();
   expect(warn).toBeGreaterThan(0);

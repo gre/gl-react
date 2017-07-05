@@ -249,8 +249,40 @@ export const yellow3x3 = ndarray(
   ]),
   [3, 3, 4]
 );
+export const yellow3x2 = ndarray(
+  new Uint8Array([
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255,
+    255,
+    255,
+    0,
+    255
+  ]),
+  [3, 2, 4]
+);
 
-export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
+export function createOneTextureLoader(
+  makeTexture: (gl: any) => WebGLTexture,
+  size: [number, number]
+) {
   const textureId = Symbol("one-texture");
   const counters = {
     constructor: 0,
@@ -286,6 +318,9 @@ export function createOneTextureLoader(makeTexture: (gl: any) => WebGLTexture) {
     get() {
       ++counters.get;
       return this.texture;
+    }
+    getSize() {
+      return size;
     }
     load() {
       ++counters.load;
@@ -331,6 +366,9 @@ class FakeTextureLoader extends TextureLoader<FakeTexture> {
   }
   canLoad(input: any) {
     return input instanceof FakeTexture;
+  }
+  getSize(ft: FakeTexture) {
+    return [ft.width, ft.height];
   }
   get(ft: FakeTexture) {
     const array = ft.getPixels();

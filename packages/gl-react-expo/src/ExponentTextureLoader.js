@@ -51,6 +51,7 @@ export const loadAsset = (module: number | { uri: string }): Promise<Asset> =>
 export default class ExponentTextureLoader extends TextureLoader<*> {
   loads: Map<number | string, DisposablePromise<*>> = new Map();
   textures: Map<number | string, *> = new Map();
+  assetSizes: Map<number | string, *> = new Map();
   dispose() {
     const { loads } = this;
     loads.forEach(d => {
@@ -89,6 +90,7 @@ export default class ExponentTextureLoader extends TextureLoader<*> {
         asset
       );
       this.textures.set(key, texture);
+      this.assetSizes.set(key, [width, height]);
       this.loads.delete(key);
       return texture;
     });
@@ -103,5 +105,8 @@ export default class ExponentTextureLoader extends TextureLoader<*> {
   }
   get(module: number) {
     return this.textures.get(hash(module));
+  }
+  getSize(texture: Object) {
+    return this.assetSizes.get(hash(module));
   }
 }
