@@ -25,6 +25,13 @@ export default class GLViewNative extends Component {
 
   render() {
     const { style, onContextCreate, children, ...rest } = this.props;
+    if (__DEV__) {
+      if ("width" in rest || "height" in rest) {
+        console.warn(
+          "gl-react-expo <Surface>: no such width/height prop. instead you must use the style prop like for a <View>."
+        );
+      }
+    }
     return (
       <View
         {...rest}
