@@ -153,7 +153,7 @@ const Shaders = {
   get(shaderIdentifier: ShaderIdentifier): ShaderInfo {
     invariant(
       shaderIdentifier.id in shaderDefinitions,
-      "Shader %s does not exist",
+      "Shader %s does not exist. Make sure you don't have gl-react dup issue: `npm ls gl-react`",
       shaderIdentifier.id
     );
     return shaderResults[shaderIdentifier.id];
