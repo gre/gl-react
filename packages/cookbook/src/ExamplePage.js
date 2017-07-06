@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 const encodeQueryValue = value => JSON.stringify(value);
@@ -18,8 +18,7 @@ const decodeQuery = query => {
     if (query.hasOwnProperty(k)) {
       try {
         query[k] = decodeQueryValue(query[k]);
-      }
-      catch (e) {
+      } catch (e) {
         console.warn(e);
         delete query[k];
       }
@@ -30,7 +29,7 @@ const decodeQuery = query => {
 
 export default class ExamplePage extends Component {
   static contextTypes = {
-    router: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired
   };
 
   setToolState = (obj: any) => {
@@ -51,38 +50,43 @@ export default class ExamplePage extends Component {
     const props = {
       setToolState: this.setToolState,
       ...Example.defaultProps,
-      ...decodeQuery(query),
+      ...decodeQuery(query)
     };
-    return <div id={path} className="example">
-      <div className="desc">{desc}</div>
-      <div className="rendering">
-        <Example {...props} />
+    return (
+      <div id={path} className="example">
+        <div className="desc">
+          {desc}
+        </div>
+        <div className="rendering">
+          <Example {...props} />
+        </div>
+        {toolbox
+          ? <div className="toolbox">
+              {toolbox.map((field, i) =>
+                <div key={i} className="field">
+                  {field.title
+                    ? <h3>
+                        {typeof field.title === "function"
+                          ? field.title(props[field.prop])
+                          : field.title}
+                      </h3>
+                    : null}
+                  {field.Editor
+                    ? <field.Editor
+                        {...field}
+                        value={props[field.prop]}
+                        onChange={this.onChangeField(field.prop)}
+                      />
+                    : null}
+                </div>
+              )}
+              {ToolboxFooter ? <ToolboxFooter {...props} /> : null}
+            </div>
+          : null}
+        <div className="desc">
+          {descAfter}
+        </div>
       </div>
-      { toolbox
-        ? <div className="toolbox">
-          {toolbox.map((field, i) =>
-            <div key={i} className="field">
-            { field.title
-              ? <h3>{
-                typeof field.title==="function"
-                ? field.title(props[field.prop])
-                : field.title
-              }</h3>
-              : null }
-            { field.Editor
-              ? <field.Editor
-                  {...field}
-                  value={props[field.prop]}
-                  onChange={this.onChangeField(field.prop)}
-                />
-              : null }
-            </div>)}
-            { ToolboxFooter
-              ? <ToolboxFooter {...props} />
-              : null}
-          </div>
-        : null }
-        <div className="desc">{descAfter}</div>
-      </div>;
+    );
   }
 }

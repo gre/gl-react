@@ -1,23 +1,27 @@
 module.exports=`//@flow
 import React, { Component } from "react";
-import { Backbuffer, Node, NearestCopy } from "gl-react";
+import { Uniform, Node, NearestCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
-import {shaders} from "../gol";
+import { shaders } from "../gol";
 import timeLoop from "../../HOC/timeLoop";
 import gliderGunImage from "./glider-gun-64.png";
 
-const GameOfLifeLoop = timeLoop(({ tick, size }) =>
-  <Node
-    shader={shaders.GameOfLife}
-    width={size}
-    height={size}
-    backbuffering
-    sync
-    uniforms={{
-      t: tick===0 ? gliderGunImage : Backbuffer,
-      size,
-    }}
-  />, { refreshRate: 20 });
+const GameOfLifeLoop = timeLoop(
+  ({ tick, size }) => (
+    <Node
+      shader={shaders.GameOfLife}
+      width={size}
+      height={size}
+      backbuffering
+      sync
+      uniforms={{
+        t: tick === 0 ? gliderGunImage : Uniform.Backbuffer,
+        size
+      }}
+    />
+  ),
+  { refreshRate: 20 }
+);
 
 export default class Example extends Component {
   render() {
@@ -25,9 +29,11 @@ export default class Example extends Component {
       <Surface
         width={500}
         height={500}
-        preload={[ // preload textures before starting rendering
+        preload={[
+          // preload textures before starting rendering
           gliderGunImage
-        ]}>
+        ]}
+      >
         <NearestCopy>
           <GameOfLifeLoop size={64} />
         </NearestCopy>

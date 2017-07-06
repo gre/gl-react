@@ -120,7 +120,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     this.glNode = node;
     this.context.glParent.redraw();
   }
-  _removeGLNodeChild() {
+  _removeGLNodeChild(node: Node) {
     this.glNode = null;
   }
 

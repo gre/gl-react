@@ -44,7 +44,7 @@ RCT_EXPORT_METHOD(load:(nonnull RCTImageSource *)source
                                          CGColorSpaceRelease(colorSpace);
                                          CGContextRelease(ctx);
                                          GLImagesSet(glAssetId, data, width, height);
-                                         cb(@[ @(glAssetId) ]);
+                                         cb(@[ @(glAssetId), @(width), @(height) ]);
                                      };
                                      if (error) {
                                          NSLog(@"Image failed to load: %@", error);

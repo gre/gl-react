@@ -1,11 +1,11 @@
-
-export const title = "GLSL live editor";
-
 import "./glsledit.css";
 import makeTextArea from "../../toolbox/makeTextArea";
 
+export const title = "GLSL live editor";
+
 export const toolbox = [
-  { prop: "frag",
+  {
+    prop: "frag",
     Editor: makeTextArea({
       height: 400,
       padding: 10,
@@ -16,6 +16,7 @@ export const toolbox = [
       color: "#ABB2BF",
       fontSize: 10,
       lineHeight: 1.5,
-      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
-    }) }
+      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace"
+    })
+  }
 ];

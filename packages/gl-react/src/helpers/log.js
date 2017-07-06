@@ -2,9 +2,8 @@
 // https://github.com/adamschwartz/log/blob/master/log.js
 /* eslint-disable */
 
-const { userAgent, vendor } = typeof navigator !== "undefined"
-  ? navigator
-  : { userAgent: "", vendor: "" };
+const { userAgent, vendor } =
+  typeof navigator !== "undefined" ? navigator : { userAgent: "", vendor: "" };
 
 var exportedLog,
   ffSupport,
@@ -22,10 +21,8 @@ var exportedLog,
   stringToArgs,
   _log;
 
-log = function() {
-  var args;
-  args = [];
-  makeArray(arguments).forEach(function(arg) {
+log = function(...args: *) {
+  args.forEach(function(arg) {
     if (typeof arg === "string") {
       return (args = args.concat(stringToArgs(arg)));
     } else {
@@ -35,16 +32,8 @@ log = function() {
   return _log.apply(window, args);
 };
 
-_log = function() {
-  return Function.prototype.apply.call(
-    console.log,
-    console,
-    makeArray(arguments)
-  );
-};
-
-makeArray = function(arrayLikeThing) {
-  return Array.prototype.slice.call(arrayLikeThing);
+_log = function(...args: *) {
+  return Function.prototype.apply.call(console.log, console, args);
 };
 
 formats = [
@@ -55,7 +44,7 @@ formats = [
     },
     styles: function() {
       return ["font-style: italic", ""];
-    },
+    }
   },
   {
     regex: /_([^_]+)_/,
@@ -64,7 +53,7 @@ formats = [
     },
     styles: function() {
       return ["font-weight: bold", ""];
-    },
+    }
   },
   {
     regex: /`([^`]+)`/,
@@ -74,9 +63,9 @@ formats = [
     styles: function() {
       return [
         "background: rgb(255, 255, 219); padding: 1px 5px; border: 1px solid rgba(0, 0, 0, 0.1)",
-        "",
+        ""
       ];
-    },
+    }
   },
   {
     regex: /\[c=(?:"|')?((?:(?!(?:"|')\]).)*)(?:"|')?\]((?:(?!\[c\]).)*)\[c\]/,
@@ -85,9 +74,11 @@ formats = [
     },
     styles: function(match) {
       return [match[1], ""];
-    },
-  },
+    }
+  }
 ];
+
+(formats: Array<{ styles: (m: *) => * }>);
 
 hasMatches = function(str) {
   var _hasMatches;
@@ -109,7 +100,7 @@ getOrderedMatches = function(str) {
     if (match) {
       return matches.push({
         format: format,
-        match: match,
+        match: match
       });
     }
   });

@@ -5,12 +5,19 @@ export default class TextureLoaderRawObject<T> extends TextureLoader<T> {
   textures: Array<WebGLTexture> = [];
 
   +mapInput: (t: T) => any;
+  +mapInputSize: (t: T) => ?[number, number];
 
   dispose() {
     const { gl } = this;
     this.textures.forEach(t => gl.deleteTexture(t));
     this.textureMemoized = new WeakMap();
     this.textures = [];
+  }
+
+  getSize(obj: T) {
+    let texture = this.textureMemoized.get(obj);
+    if (!texture) return null;
+    return this.mapInputSize(obj);
   }
 
   get(obj: T) {

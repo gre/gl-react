@@ -8,9 +8,8 @@ function hash(obj) {
   return JSON.stringify(obj); // FIXME ikr XD
 }
 
-export default class ExponentGLObjectTextureLoader extends TextureLoader<
-  Object
-> {
+export default class ExponentGLObjectTextureLoader
+  extends TextureLoader<Object> {
   loads: Map<string, DisposablePromise<*>> = new Map();
   textures: Map<string, *> = new Map();
   dispose() {}
@@ -52,5 +51,8 @@ export default class ExponentGLObjectTextureLoader extends TextureLoader<
   }
   get(texture: Object) {
     return this.textures.get(hash(texture));
+  }
+  getSize(texture: Object) {
+    return null; // FIXME there is currently no way to yield that ( related https://github.com/gre/gl-react/issues/131)
   }
 }

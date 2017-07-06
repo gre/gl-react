@@ -1,6 +1,6 @@
 module.exports=`//@flow
 import React, { Component } from "react";
-import { Shaders, Node, GLSL, Bus, Backbuffer } from "gl-react";
+import { Shaders, Node, GLSL, Bus, Uniform } from "gl-react";
 import { Surface } from "gl-react-dom";
 import gameBuild from "./build";
 
@@ -118,7 +118,6 @@ void main() {
     1.0);
 }
 \`
-
   },
   player: {
     frag: GLSL\`
@@ -213,118 +212,130 @@ void main() {
   }
 });
 
-const Blur1D =
-  ({ dim, dir, children: t }) =>
-  <Node shader={shaders.blur1d} uniforms={{ dim, dir, t }} />;
+const Blur1D = ({ dim, dir, children: t }) => (
+  <Node shader={shaders.blur1d} uniforms={{ dim, dir, t }} />
+);
 
 export default class Example extends Component {
-  render () {
-    const {showCanvas} = this.props;
-    const {pt,pl,ex,J,P,s,F,k,S,W,H} =
-    // HACK to just render the game
-    this._ ? this._.getWebGLParams() :
-({ pt: 0, pl: 0, ex: 0, J: 0, P: 0, s: 0, F: 0, k: [0,0], W: 2, H: 2, S: 0 });
-    const dim = [ W, H ];
+  render() {
+    const { showCanvas } = this.props;
+    const { pt, pl, ex, J, P, s, F, k, S, W, H } =
+      // HACK to just render the game
+      this._
+        ? this._.getWebGLParams()
+        : {
+            pt: 0,
+            pl: 0,
+            ex: 0,
+            J: 0,
+            P: 0,
+            s: 0,
+            F: 0,
+            k: [0, 0],
+            W: 2,
+            H: 2,
+            S: 0
+          };
+    const dim = [W, H];
 
     return (
-    <div style={{ background: "black" }} ref="container">
+      <div style={{ background: "black" }} ref="container">
 
-      <Surface width={W} height={H} pixelRatio={1}>
+        <Surface width={W} height={H} pixelRatio={1}>
 
-        <Bus ref="laser">
-          <Node
-            shader={shaders.laser}
-            uniforms={{ t: () => this.refs.gameCanvas }}
-          />
-        </Bus>
-
-        <Bus ref="player">
-          <Blur1D dim={dim} dir={[ 0, 2 ]}>
-            <Blur1D dim={dim} dir={[ 6, 0 ]}>
-              <Blur1D dim={dim} dir={[ 2, 2 ]}>
-                <Blur1D dim={dim} dir={[ -2, 2 ]}>
-                  <Node
-                    shader={shaders.player}
-                    uniforms={{ pt, pl, ex, J, P, S }}
-                  />
-                </Blur1D>
-              </Blur1D>
-            </Blur1D>
-          </Blur1D>
-        </Bus>
-
-        <Bus ref="glare">
-          <Blur1D dim={dim} dir={[ 2, -4 ]}>
+          <Bus ref="laser">
             <Node
-              shader={shaders.glare}
-              uniforms={{ t: () => this.refs.laser }}
+              shader={shaders.laser}
+              uniforms={{ t: () => this.refs.gameCanvas }}
             />
-          </Blur1D>
-        </Bus>
+          </Bus>
 
-        <Bus ref="glareCursor">
-          <Blur1D dim={dim} dir={[ 4, -8 ]}>
-            {() => this.refs.glare}
-          </Blur1D>
-        </Bus>
-
-        <Bus ref="glareBlurred">
-          <Blur1D dim={dim} dir={[ 0, 1 ]}>
-            <Blur1D dim={dim} dir={[ 1, 0 ]}>
-              <Blur1D dim={dim} dir={[ -0.5, 0.5 ]}>
-                <Blur1D dim={dim} dir={[ 0.5, 0.5 ]}>
-                  {() => this.refs.laser
-                  //FIXME this should be glare instead.
-                  //but i think there is a bug in gl-react!
-                  }
+          <Bus ref="player">
+            <Blur1D dim={dim} dir={[0, 2]}>
+              <Blur1D dim={dim} dir={[6, 0]}>
+                <Blur1D dim={dim} dir={[2, 2]}>
+                  <Blur1D dim={dim} dir={[-2, 2]}>
+                    <Node
+                      shader={shaders.player}
+                      uniforms={{ pt, pl, ex, J, P, S }}
+                    />
+                  </Blur1D>
                 </Blur1D>
               </Blur1D>
             </Blur1D>
-          </Blur1D>
-        </Bus>
+          </Bus>
 
-        <Bus ref="persistence">
+          <Bus ref="glare">
+            <Blur1D dim={dim} dir={[2, -4]}>
+              <Node
+                shader={shaders.glare}
+                uniforms={{ t: () => this.refs.laser }}
+              />
+            </Blur1D>
+          </Bus>
+
+          <Bus ref="glareCursor">
+            <Blur1D dim={dim} dir={[4, -8]}>
+              {() => this.refs.glare}
+            </Blur1D>
+          </Bus>
+
+          <Bus ref="glareBlurred">
+            <Blur1D dim={dim} dir={[0, 1]}>
+              <Blur1D dim={dim} dir={[1, 0]}>
+                <Blur1D dim={dim} dir={[-0.5, 0.5]}>
+                  <Blur1D dim={dim} dir={[0.5, 0.5]}>
+                    {() => this.refs.laser
+                    //FIXME this should be glare instead.
+                    //but i think there is a bug in gl-react!
+                    }
+                  </Blur1D>
+                </Blur1D>
+              </Blur1D>
+            </Blur1D>
+          </Bus>
+
+          <Bus ref="persistence">
+            <Node
+              shader={shaders.persistence}
+              backbuffering
+              uniforms={{
+                t: this.refs.glareBlurred,
+                r: Uniform.Backbuffer
+              }}
+            />
+          </Bus>
+
           <Node
-            shader={shaders.persistence}
-            backbuffering
+            shader={shaders.game}
             uniforms={{
-              t: this.refs.glareBlurred,
-              r: Backbuffer
+              G: () => this.refs.laser,
+              R: () => this.refs.persistence,
+              B: () => this.refs.glareBlurred,
+              L: () => this.refs.glareCursor,
+              E: () => this.refs.player,
+              s,
+              F,
+              k
             }}
           />
-        </Bus>
+        </Surface>
 
-        <Node
-          shader={shaders.game}
-          uniforms={{
-            G: () => this.refs.laser,
-            R: () => this.refs.persistence,
-            B: () => this.refs.glareBlurred,
-            L: () => this.refs.glareCursor,
-            E: () => this.refs.player,
-            s,
-            F,
-            k
-          }} />
-      </Surface>
+        <canvas id="c" ref="gameCanvas" hidden={!showCanvas} />
 
-      <canvas id="c" ref="gameCanvas" hidden={!showCanvas} />
-
-      <div style={{ textAlign: "center", padding: 20 }}>
-        <button onClick={this.sendAsteroid}>
-          SEND ASTEROID!
-        </button>
+        <div style={{ textAlign: "center", padding: 20 }}>
+          <button onClick={this.sendAsteroid}>
+            SEND ASTEROID!
+          </button>
+        </div>
       </div>
-    </div>
     );
   }
 
   _: any;
-  componentDidMount () {
-    this._ = gameBuild(
-      this.refs.container,
-      this.refs.gameCanvas,
-      () => this.forceUpdate()
+  componentDidMount() {
+    this._ = gameBuild(this.refs.container, this.refs.gameCanvas, () =>
+      this.forceUpdate()
     );
   }
   componentWillUnmount() {
@@ -334,7 +345,7 @@ export default class Example extends Component {
   sendAsteroid = () => window._behindAsteroids_send();
 
   static defaultProps = {
-    showCanvas: false,
+    showCanvas: false
   };
 }
 `

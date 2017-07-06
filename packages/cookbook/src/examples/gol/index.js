@@ -1,12 +1,12 @@
 //@flow
 import React from "react";
-import {Backbuffer,Shaders,Node,GLSL,NearestCopy} from "gl-react";
+import { Uniform, Shaders, Node, GLSL, NearestCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
 
 export const shaders = Shaders.create({
   InitGameOfLife: {
-// returns white or black randomly
+    // returns white or black randomly
     frag: GLSL`
 precision highp float;
 // i
@@ -20,7 +20,7 @@ void main() {
 }`
   },
   GameOfLife: {
-// implement Game Of Life.
+    // implement Game Of Life.
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
@@ -48,36 +48,37 @@ const refreshEveryTicks = 20;
 
 export const GameOfLife = ({ tick }) => {
   // Changing size is "destructive" and will reset the Game of Life state
-  const size = 16 * (1+Math.floor(tick/refreshEveryTicks));
+  const size = 16 * (1 + Math.floor(tick / refreshEveryTicks));
   // However, we can conditionally change shader/uniforms,
   // React reconciliation will preserve the same <Node> instance,
   // and our Game of Life state will get preserved!
-  return tick%refreshEveryTicks===0
-  ? <Node
-    shader={shaders.InitGameOfLife}
-    width={size}
-    height={size}
-    backbuffering // makes Node holding 2 fbos that get swapped each draw time
-    sync // force <Node> to draw in sync each componentDidUpdate time
-  />
-  : <Node
-    shader={shaders.GameOfLife}
-    width={size}
-    height={size}
-    backbuffering
-    sync
-    uniforms={{
-      t: Backbuffer, // Use previous frame buffer as a texture
-      size,
-    }}
-  />;
+  return tick % refreshEveryTicks === 0
+    ? <Node
+        shader={shaders.InitGameOfLife}
+        width={size}
+        height={size}
+        backbuffering // makes Node holding 2 fbos that get swapped each draw time
+        sync // force <Node> to draw in sync each componentDidUpdate time
+      />
+    : <Node
+        shader={shaders.GameOfLife}
+        width={size}
+        height={size}
+        backbuffering
+        sync
+        uniforms={{
+          t: Uniform.Backbuffer, // Use previous frame buffer as a texture
+          size
+        }}
+      />;
 };
 
 const GameOfLifeLoop = timeLoop(GameOfLife, { refreshRate: 20 });
 
-export default () =>
+export default () => (
   <Surface width={384} height={384}>
     <NearestCopy>
       <GameOfLifeLoop />
     </NearestCopy>
   </Surface>
+);

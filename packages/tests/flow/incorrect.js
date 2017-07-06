@@ -12,11 +12,9 @@ import {
   Backbuffer,
   Bus,
   VisitorLogger,
-  connectSize,
+  connectSize
 } from "gl-react";
-import {
-  Surface,
-} from "gl-react-headless";
+import { Surface } from "gl-react-headless";
 
 <Node />;
 <Surface />;
@@ -32,18 +30,18 @@ import {
 
 const shaders = Shaders.create({
   valid: {
-    frag: GLSL`...`,
+    frag: GLSL`...`
   },
   a: null,
   b: {},
-  c: { frag: true },
+  c: { frag: true }
 });
 
 class A extends React.Component {
   surface: ?Surface;
   node: ?Node;
   doThings() {
-    const {surface, node} = this;
+    const { surface, node } = this;
     if (surface && node) {
       surface.nope();
       node.nope();
@@ -51,17 +49,14 @@ class A extends React.Component {
   }
   render() {
     return (
-    <Surface ref={ref => this.surface=ref} notexists>
-      <Bus ref="o" notexists>
-        <Node />
-      </Bus>
-      <LinearCopy notexists>
-        <Node
-          shaders={shaders.valid}
-          notexists
-        />
-      </LinearCopy>
-    </Surface>
+      <Surface ref={ref => (this.surface = ref)} notexists>
+        <Bus ref="o" notexists>
+          <Node />
+        </Bus>
+        <LinearCopy notexists>
+          <Node shaders={shaders.valid} notexists />
+        </LinearCopy>
+      </Surface>
     );
   }
 }
@@ -69,19 +64,19 @@ class A extends React.Component {
 connectSize();
 
 const N = connectSize(() =>
-// these are all wrong props
-<Node
-  sync={1}
-  clear={42}
-  width={false}
-  height={false}
-  blendFunc={{
-    src: "nope",
-    interpolation: "interpolation_nope",
-    wrap: "wrap_nope",
-  }}
-  preload={false}
-  visitor={false}
-  shader={false}
-/>
+  // these are all wrong props
+  <Node
+    sync={1}
+    clear={42}
+    width={false}
+    height={false}
+    blendFunc={{
+      src: "nope",
+      interpolation: "interpolation_nope",
+      wrap: "wrap_nope"
+    }}
+    preload={false}
+    visitor={false}
+    shader={false}
+  />
 );

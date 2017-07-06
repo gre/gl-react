@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Backbuffer, Node, NearestCopy } from "gl-react";
+import { Uniform, Node, NearestCopy } from "gl-react";
 import getGLReactImplementation from "../../gl-react-implementation";
 const { Surface } = getGLReactImplementation();
 import { shaders } from "../gol";
@@ -16,8 +16,8 @@ const GameOfLifeLoop = timeLoop(
       backbuffering
       sync
       uniforms={{
-        t: tick === 0 ? gliderGunImage : Backbuffer,
-        size,
+        t: tick === 0 ? gliderGunImage : Uniform.Backbuffer,
+        size
       }}
     />
   ),
@@ -32,7 +32,7 @@ export default class Example extends Component {
         style={{ width, height: width }}
         preload={[
           // preload textures before starting rendering
-          gliderGunImage,
+          gliderGunImage
         ]}
       >
         <NearestCopy>
