@@ -20,7 +20,7 @@
     "ndarray": "^1.0.18",
     "ndarray-ops": "^1.2.2",
     "prism-theme-one-dark": "^1.0.0",
-    "prismjs": "^1.5.1",
+    "prismjs": "github:PrismJS/prism#16ce4b336d625e13065bfc12ab6d13ac862d6f50",
     "prop-types": "^15.5.8",
     "raf": "^3.3.0",
     "react": "16.0.0-alpha.12",
