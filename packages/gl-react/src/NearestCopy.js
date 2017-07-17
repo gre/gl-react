@@ -13,10 +13,23 @@ type Props = {|
  */
 class NearestCopy extends Component {
   props: Props;
+  _node: ?Node;
+  /**
+   * get a reference to the underlying Node instance
+   * @return {Node}
+   */
+  getNodeRef() {
+    return this._node;
+  }
+  _onRef = (node: Node) => {
+    this._node = node;
+  };
   render() {
-    const { children: t } = this.props;
+    const { children: t, ...rest } = this.props;
     return (
       <Node
+        {...rest}
+        ref={this._onRef}
         shader={copyShader}
         blendFunc={{ src: "one", dst: "one minus src alpha" }}
         uniformsOptions={{ t: { interpolation: "nearest" } }}

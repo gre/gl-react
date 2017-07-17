@@ -25,6 +25,7 @@ blurmap
 blurmapmouse
 blurmapdyn
 blurimgtitle
+blurfeedback
 gol
 golglider
 golrot

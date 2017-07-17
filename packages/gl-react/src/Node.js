@@ -190,6 +190,9 @@ const isBackbuffer = (obj: *) => {
   return obj === Uniform.Backbuffer;
 };
 
+const isBackbufferFrom = (obj: *) =>
+  obj && typeof obj === "object" && obj.type === "BackbufferFrom";
+
 const isTextureSizeGetter = (obj: *) =>
   obj && typeof obj === "object" && obj.type === "TextureSize";
 
@@ -866,9 +869,41 @@ export default class Node extends Component {
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on Node when using Backbuffer`
           );
         }
+        const { backbuffer } = this;
+        invariant(backbuffer, "in backbuffering mode, backbuffer exists");
         result = {
-          directTexture: this.getGLOutput(),
+          directTexture: backbuffer.color,
           directTextureSize: this.getGLSize()
+        };
+      } else if (isBackbufferFrom(obj)) {
+        // backbuffer of another node/bus
+        invariant(
+          typeof obj === "object",
+          "invalid backbufferFromNode. Got: %s",
+          obj
+        );
+        let node = obj.node;
+        if (node instanceof Bus) {
+          node = node.getGLRenderableNode();
+          invariant(
+            node,
+            "backbufferFromNode(bus) but bus.getGLRenderableNode() is %s",
+            node
+          );
+        }
+        invariant(
+          node instanceof Node,
+          "invalid backbufferFromNode(obj): obj must be an instanceof Node or Bus. Got: %s",
+          obj
+        );
+        if (!node.drawProps.backbuffering) {
+          console.warn(
+            `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on the Node referenced in backbufferFrom(node)`
+          );
+        }
+        result = {
+          directTexture: node.getGLOutput(),
+          directTextureSize: node.getGLSize()
         };
       } else if (obj instanceof Node) {
         // maybe it's a Node?
@@ -1087,15 +1122,6 @@ export default class Node extends Component {
     );
     visitors.forEach(v => v.onNodeSyncDeps(this, additions, deletions));
 
-    if (backbuffering) {
-      // swap framebuffer and backbuffer
-      const { backbuffer, framebuffer } = this;
-      this.backbuffer = framebuffer;
-      if (backbuffer) {
-        this.framebuffer = backbuffer;
-      }
-    }
-
     //~ DRAW dependencies step
     const drawDep = d => d._draw();
     this.dependencies.forEach(drawDep);
@@ -1125,6 +1151,15 @@ export default class Node extends Component {
     }
 
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+    if (backbuffering) {
+      // swap framebuffer and backbuffer
+      const { backbuffer, framebuffer } = this;
+      this.backbuffer = framebuffer;
+      if (backbuffer) {
+        this.framebuffer = backbuffer;
+      }
+    }
 
     if (onDraw) onDraw();
 
