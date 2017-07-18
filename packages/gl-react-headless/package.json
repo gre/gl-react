@@ -1,6 +1,6 @@
 {
   "name": "gl-react-headless",
-  "version": "3.8.0",
+  "version": "3.9.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "headless-gl implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -13,7 +13,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "gl-react": "^3.8.0",
+    "gl-react": "^3.9.0",
     "react": "*"
   },
   "dependencies": {
@@ -23,7 +23,7 @@
     "raf": "^3.3.0"
   },
   "devDependencies": {
-    "gl-react": "^3.8.0"
+    "gl-react": "^3.9.0"
   },
   "scripts": {
     "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - &&rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib",
