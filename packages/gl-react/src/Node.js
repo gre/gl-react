@@ -472,7 +472,6 @@ export default class Node extends Component {
     if (this.backbuffer) {
       this.backbuffer.syncSize(...nextWidthHeight);
     }
-    // FIXME should we do same for backbuffer?
     invariant(
       nextProps.backbuffering === this.drawProps.backbuffering,
       "Node backbuffering prop must not changed. (not yet supported)"
@@ -903,7 +902,7 @@ export default class Node extends Component {
         );
         if (!node.drawProps.backbuffering) {
           console.warn(
-            `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on the Node referenced in backbufferFrom(node)`
+            `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on the Node referenced in backbufferFrom(${node.getGLName()})`
           );
         }
         result = { glNode: node, glNodePickBackbuffer: true };
