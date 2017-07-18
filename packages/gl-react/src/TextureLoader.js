@@ -30,19 +30,8 @@ export default class TextureLoader<T> {
   +canLoad: (input: any) => boolean;
 
   /**
-   * try to get in sync the texture for a given input. otherwise null.
-   */
-  +get: (input: T) => ?WebGLTexture;
-
-  /**
-   * try to get in sync the texture size for a given input. otherwise null.
-   */
-  +getSize: (input: T) => ?[number, number];
-
-  /**
-   * load() called if get() was null. it returns a promise and a dispose function.
-   * It is your responsability to cache the disposable per input.
-   * If load() is called twice, same value should be returned. but you can drop it when it's loaded.
+   * Load the resource by its input. it returns a promise and a dispose function.
+   * If load() is called twice with the same input, same disposable object is expected (implementations needs to cache it).
    */
   load(input: T): DisposablePromise<WebGLTexture> {
     // noop default implementation
@@ -51,4 +40,15 @@ export default class TextureLoader<T> {
       dispose: noop
     };
   }
+
+  /**
+   * try to get in sync the texture for a given input. otherwise null.
+   * If null is returned, load() can be called in order to load the resource that will later be available in a future get().
+   */
+  +get: (input: T) => ?WebGLTexture;
+
+  /**
+   * try to get in sync the texture size for a given input. otherwise null.
+   */
+  +getSize: (input: T) => ?[number, number];
 }

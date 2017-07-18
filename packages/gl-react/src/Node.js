@@ -145,7 +145,7 @@ type Clear = {|
  *
  * ### struct types
  *
- * Consider it unsupported even though it *might* work since gl-react is based on `gl-texture2d`.
+ * Consider it unsupported even though it *might* work since gl-react is based on `gl-shader`.
  *
  */
 type Uniforms = {
