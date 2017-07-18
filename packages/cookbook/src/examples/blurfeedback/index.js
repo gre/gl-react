@@ -6,19 +6,7 @@ import { BlurXY } from "../blurxy";
 import { images } from "./meta";
 import timeLoop from "../../HOC/timeLoop";
 
-const ContinuousBlur = timeLoop(
-  class extends Component {
-    render() {
-      const { factor, children } = this.props;
-      return (
-        <BlurXY factor={factor}>
-          {children}
-        </BlurXY>
-      );
-    }
-  },
-  { refreshRate: 3 }
-);
+const ContinuousBlur = timeLoop(BlurXY);
 
 export default class Example extends Component {
   state = {

@@ -561,6 +561,15 @@ export default class Node extends Component {
     return framebuffer.color;
   }
 
+  getGLBackbufferOutput(): WebGLTexture {
+    const { backbuffer } = this;
+    invariant(
+      backbuffer,
+      "Node#getGLBackbufferOutput: backbuffer is not defined. Make sure `backbuffering` prop is defined"
+    );
+    return backbuffer.color;
+  }
+
   /**
    * Imperatively set the props with a partial subset of props to apply.
    * This is an escape hatch to perform a redraw with different props without having to trigger a new React draw. Only use it when reaching a performance bottleneck.
@@ -869,10 +878,8 @@ export default class Node extends Component {
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on Node when using Backbuffer`
           );
         }
-        const { backbuffer } = this;
-        invariant(backbuffer, "in backbuffering mode, backbuffer exists");
         result = {
-          directTexture: backbuffer.color,
+          directTexture: this.getGLOutput(),
           directTextureSize: this.getGLSize()
         };
       } else if (isBackbufferFrom(obj)) {
@@ -902,7 +909,7 @@ export default class Node extends Component {
           );
         }
         result = {
-          directTexture: node.getGLOutput(),
+          directTexture: node.getGLBackbufferOutput(),
           directTextureSize: node.getGLSize()
         };
       } else if (obj instanceof Node) {
@@ -1122,6 +1129,15 @@ export default class Node extends Component {
     );
     visitors.forEach(v => v.onNodeSyncDeps(this, additions, deletions));
 
+    if (backbuffering) {
+      // swap framebuffer and backbuffer
+      const { backbuffer, framebuffer } = this;
+      this.backbuffer = framebuffer;
+      if (backbuffer) {
+        this.framebuffer = backbuffer;
+      }
+    }
+
     //~ DRAW dependencies step
     const drawDep = d => d._draw();
     this.dependencies.forEach(drawDep);
@@ -1151,15 +1167,6 @@ export default class Node extends Component {
     }
 
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-
-    if (backbuffering) {
-      // swap framebuffer and backbuffer
-      const { backbuffer, framebuffer } = this;
-      this.backbuffer = framebuffer;
-      if (backbuffer) {
-        this.framebuffer = backbuffer;
-      }
-    }
 
     if (onDraw) onDraw();
 
