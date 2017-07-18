@@ -856,7 +856,8 @@ export default class Node extends Component {
         result: ?{
           directTexture?: ?WebGLTexture,
           directTextureSize?: ?[number, number],
-          glNode?: Node
+          glNode?: Node,
+          glNodePickBackbuffer?: boolean
         };
 
       if (typeof obj === "function") {
@@ -878,10 +879,7 @@ export default class Node extends Component {
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on Node when using Backbuffer`
           );
         }
-        result = {
-          directTexture: this.getGLOutput(),
-          directTextureSize: this.getGLSize()
-        };
+        result = { glNode: this, glNodePickBackbuffer: true };
       } else if (isBackbufferFrom(obj)) {
         // backbuffer of another node/bus
         invariant(
@@ -908,10 +906,7 @@ export default class Node extends Component {
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on the Node referenced in backbufferFrom(node)`
           );
         }
-        result = {
-          directTexture: node.getGLBackbufferOutput(),
-          directTextureSize: node.getGLSize()
-        };
+        result = { glNode: node, glNodePickBackbuffer: true };
       } else if (obj instanceof Node) {
         // maybe it's a Node?
         dependency = obj;
@@ -986,7 +981,10 @@ export default class Node extends Component {
         const texture: WebGLTexture =
           (result &&
             (result.directTexture ||
-              (result.glNode && result.glNode.getGLOutput()))) ||
+              (result.glNode &&
+                (result.glNodePickBackbuffer
+                  ? result.glNode.getGLBackbufferOutput()
+                  : result.glNode.getGLOutput())))) ||
           glSurface.getEmptyTexture();
         if (textureUnits.has(texture)) {
           // FIXME different uniform options on a same texture is not supported
