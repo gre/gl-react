@@ -1687,6 +1687,85 @@ test("Node `backbuffering` in `sync`", () => {
   inst.unmount();
 });
 
+test("Node `backbuffering` with Uniform.backbufferFrom", () => {
+  const shaders = Shaders.create({
+    colorShift: {
+      frag: GLSL`
+  precision highp float;
+  varying vec2 uv;
+  uniform sampler2D t;
+  void main() {
+    vec4 c = texture2D(t, uv);
+    gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
+  }`
+    },
+    darken: {
+      frag: GLSL`
+  precision highp float;
+  varying vec2 uv;
+  uniform sampler2D t;
+  uniform float m;
+  void main() {
+    gl_FragColor = m * texture2D(t, uv);
+  }`
+    }
+  });
+  class Darken extends React.Component {
+    render() {
+      const { children: t } = this.props;
+      return <Node shader={shaders.darken} uniforms={{ t, m: 0.8 }} />;
+    }
+  }
+  class Effect extends React.Component {
+    getMainBuffer = () => {
+      const { main } = this.refs;
+      return main ? Uniform.backbufferFrom(main.getNodeRef()) : null;
+    };
+    render() {
+      const { initWithImage } = this.props;
+      return (
+        <Surface
+          ref="surface"
+          width={10}
+          height={10}
+          webglContextAttributes={{ preserveDrawingBuffer: true }}
+        >
+          <NearestCopy>
+            <LinearCopy backbuffering ref="main">
+              <Darken>
+                <Node
+                  shader={shaders.colorShift}
+                  uniforms={{
+                    t: !initWithImage ? this.getMainBuffer : initWithImage
+                  }}
+                />
+              </Darken>
+            </LinearCopy>
+          </NearestCopy>
+        </Surface>
+      );
+    }
+  }
+
+  const inst = create(<Effect initWithImage={red2x2} />);
+  const surface = inst.getInstance().refs.surface;
+
+  for (let i = 1; i <= 6; i++) {
+    const val = Math.round(255 * Math.pow(0.8, i)); // Darken effect will multiply the color by 0.8 each draw time
+    const expected = [0, 0, 0, val];
+    expected[i % 3] = val; // the colorShift will shift the r,g,b components with the color val
+    expectToBeCloseToColorArray(
+      surface.capture(0, 0, 1, 1).data,
+      new Uint8Array(expected)
+    );
+    inst.update(<Effect />);
+    surface.flush();
+  }
+
+  surface.glView.simulateContextLost();
+  inst.unmount();
+});
+
 test("texture can be null", () => {
   const shaders = Shaders.create({
     helloTexture: {
