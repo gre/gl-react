@@ -12,6 +12,9 @@ const Uniform = {
    * the framebuffer size itself
    */
   Resolution: "_Resolution_",
+
+  backbufferFrom: (node: *) => ({ type: "BackbufferFrom", node }),
+
   /**
    * Inject the size of a given Texture input
    * @param {any} obj the texture input object

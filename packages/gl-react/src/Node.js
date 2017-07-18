@@ -190,6 +190,9 @@ const isBackbuffer = (obj: *) => {
   return obj === Uniform.Backbuffer;
 };
 
+const isBackbufferFrom = (obj: *) =>
+  obj && typeof obj === "object" && obj.type === "BackbufferFrom";
+
 const isTextureSizeGetter = (obj: *) =>
   obj && typeof obj === "object" && obj.type === "TextureSize";
 
@@ -469,7 +472,6 @@ export default class Node extends Component {
     if (this.backbuffer) {
       this.backbuffer.syncSize(...nextWidthHeight);
     }
-    // FIXME should we do same for backbuffer?
     invariant(
       nextProps.backbuffering === this.drawProps.backbuffering,
       "Node backbuffering prop must not changed. (not yet supported)"
@@ -556,6 +558,15 @@ export default class Node extends Component {
       "Node#getGLOutput: framebuffer is not defined. It cannot be called on a root Node"
     );
     return framebuffer.color;
+  }
+
+  getGLBackbufferOutput(): WebGLTexture {
+    const { backbuffer } = this;
+    invariant(
+      backbuffer,
+      "Node#getGLBackbufferOutput: backbuffer is not defined. Make sure `backbuffering` prop is defined"
+    );
+    return backbuffer.color;
   }
 
   /**
@@ -844,7 +855,8 @@ export default class Node extends Component {
         result: ?{
           directTexture?: ?WebGLTexture,
           directTextureSize?: ?[number, number],
-          glNode?: Node
+          glNode?: Node,
+          glNodePickBackbuffer?: boolean
         };
 
       if (typeof obj === "function") {
@@ -866,10 +878,34 @@ export default class Node extends Component {
             `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on Node when using Backbuffer`
           );
         }
-        result = {
-          directTexture: this.getGLOutput(),
-          directTextureSize: this.getGLSize()
-        };
+        result = { glNode: this, glNodePickBackbuffer: true };
+      } else if (isBackbufferFrom(obj)) {
+        // backbuffer of another node/bus
+        invariant(
+          typeof obj === "object",
+          "invalid backbufferFromNode. Got: %s",
+          obj
+        );
+        let node = obj.node;
+        if (node instanceof Bus) {
+          node = node.getGLRenderableNode();
+          invariant(
+            node,
+            "backbufferFromNode(bus) but bus.getGLRenderableNode() is %s",
+            node
+          );
+        }
+        invariant(
+          node instanceof Node,
+          "invalid backbufferFromNode(obj): obj must be an instanceof Node or Bus. Got: %s",
+          obj
+        );
+        if (!node.drawProps.backbuffering) {
+          console.warn(
+            `${nodeName}, uniform ${uniformKeyName}: you must set \`backbuffering\` on the Node referenced in backbufferFrom(${node.getGLName()})`
+          );
+        }
+        result = { glNode: node, glNodePickBackbuffer: true };
       } else if (obj instanceof Node) {
         // maybe it's a Node?
         dependency = obj;
@@ -944,7 +980,10 @@ export default class Node extends Component {
         const texture: WebGLTexture =
           (result &&
             (result.directTexture ||
-              (result.glNode && result.glNode.getGLOutput()))) ||
+              (result.glNode &&
+                (result.glNodePickBackbuffer
+                  ? result.glNode.getGLBackbufferOutput()
+                  : result.glNode.getGLOutput())))) ||
           glSurface.getEmptyTexture();
         if (textureUnits.has(texture)) {
           // FIXME different uniform options on a same texture is not supported
