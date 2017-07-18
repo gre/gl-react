@@ -24,8 +24,6 @@ import { Surface } from "gl-react-headless";
 
 <Node nope />;
 <Surface nope />;
-<LinearCopy nope />;
-<NearestCopy nope />;
 <Bus nope />;
 
 const shaders = Shaders.create({
@@ -53,7 +51,7 @@ class A extends React.Component {
         <Bus ref="o" notexists>
           <Node />
         </Bus>
-        <LinearCopy notexists>
+        <LinearCopy>
           <Node shaders={shaders.valid} notexists />
         </LinearCopy>
       </Surface>

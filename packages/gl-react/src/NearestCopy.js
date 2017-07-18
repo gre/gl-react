@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import Node from "./Node";
 import copyShader from "./copyShader";
 
-type Props = {|
+type Props = {
   children?: any
-|};
+};
 
 /**
  * copy pixel with no interpolation (nearest pixel)
