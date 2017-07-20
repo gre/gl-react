@@ -326,6 +326,9 @@ class MetaInfo extends Component {
   render() {
     const { id, info, node } = this.props;
     const { dependency, obj } = info;
+    const isBackbuffer = obj === Uniform.Backbuffer;
+    const isBackbufferFrom =
+      obj && typeof obj === "object" && obj.type === "BackbufferFrom";
     return (
       <span className="meta-info">
         {dependency
@@ -334,22 +337,30 @@ class MetaInfo extends Component {
               nodeId={node.id}
               anchorId={dependency.id}
             />
-          : obj === Uniform.Backbuffer
+          : isBackbuffer
             ? <AnchorHook
                 id={"rec_" + node.id + "_" + id}
                 nodeId={node.id}
                 anchorId={node.id}
               />
-            : null}
+            : isBackbufferFrom
+              ? <AnchorHook
+                  id={"bf_" + node.id + "_" + obj.node.id}
+                  nodeId={node.id}
+                  anchorId={obj.node.id}
+                />
+              : null}
         {dependency
           ? dependency.getGLShortName()
-          : obj === Uniform.Backbuffer
+          : isBackbuffer
             ? "Backbuffer"
-            : typeof obj === "string"
-              ? <a href={obj} target="_blank">
-                  {obj}
-                </a>
-              : formatObject(obj)}
+            : isBackbufferFrom
+              ? "BackbufferFrom"
+              : typeof obj === "string"
+                ? <a href={obj} target="_blank">
+                    {obj}
+                  </a>
+                : formatObject(obj)}
       </span>
     );
   }
