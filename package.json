@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "postinstall": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
+    "postinstall": "lerna bootstrap '--nohoist=react-native*' && ./packages/undo-unsupported-symlinks.sh",
     "watch": "lerna run watch --stream --no-sort",
     "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "flow": "cd packages/gl-react && flow --quiet",
@@ -12,8 +12,7 @@
     "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u"
   },
   "dependencies": {
-    "react": "16.0.0-alpha.12",
-    "react-native": "~0.45.0"
+    "react": "16.0.0-alpha.12"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",

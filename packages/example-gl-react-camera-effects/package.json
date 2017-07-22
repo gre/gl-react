@@ -7,8 +7,8 @@
   "main": "main.js",
   "dependencies": {
     "expo": "17.0.0",
-    "gl-react": "^3.9.0",
-    "gl-react-expo": "^3.9.0",
+    "gl-react": "file:../gl-react",
+    "gl-react-expo": "file:../gl-react-expo",
     "react": "16.0.0-alpha.6",
     "react-native": "github:exponentjs/react-native#sdk-17.0.0"
   }

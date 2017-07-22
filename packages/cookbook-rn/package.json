@@ -12,10 +12,10 @@
     "gl-react-native": "^3.9.0",
     "prop-types": "^15.5.8",
     "react": "16.0.0-alpha.12",
-    "react-native": "~0.45.0"
+    "react-native": "~0.46.4"
   },
   "devDependencies": {
     "babel-preset-react-native": "~1.9.1",
-    "haul-cli": "^0.5.0"
+    "haul-cli": "github:callstack-io/haul#870753d1df5f2d6f878584adb95a370bc2b5b169"
   }
 }

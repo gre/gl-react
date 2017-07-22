@@ -8,10 +8,10 @@
   "dependencies": {
     "@expo/ex-navigation": "^2.11.0",
     "cookbook-rn-shared": "^3.6.0",
-    "expo": "^18.0.2",
+    "expo": "^19.0.0",
     "gl-react-expo": "^3.9.0",
     "prop-types": "^15.5.8",
     "react": "16.0.0-alpha.12",
-    "react-native": "github:expo/react-native#sdk-18.0.2"
+    "react-native": "github:expo/react-native#sdk-19.0.0"
   }
 }
