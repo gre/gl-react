@@ -32,7 +32,7 @@
     "react-prism": "^4.0.0",
     "react-router": "2.x",
     "react-sidebar": "^2.2.1",
-    "remark": "^7.0.0",
+    "remark": "^8.0.0",
     "remark-react": "^4.0.0"
   },
   "scripts": {
