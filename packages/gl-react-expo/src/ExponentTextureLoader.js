@@ -1,5 +1,5 @@
 //@flow
-import { NativeModules, Image } from "react-native";
+import { Image } from "react-native";
 import Expo from "expo";
 import { TextureLoader } from "gl-react";
 import type { DisposablePromise } from "gl-react/lib/helpers/disposable";
@@ -33,9 +33,9 @@ const remoteAsset = (uri: string) => {
     new Promise((success, failure) =>
       Image.getSize(uri, (width, height) => success({ width, height }), failure)
     ),
-    NativeModules.ExponentFileSystem.downloadAsync(
+    Expo.FileSystem.downloadAsync(
       uri,
-      `ExponentAsset-${key}${ext}`,
+      Expo.FileSystem.documentDirectory + `ExponentAsset-${key}${ext}`,
       {
         cache: true
       }
