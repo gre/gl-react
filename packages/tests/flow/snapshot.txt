@@ -1,4 +1,4 @@
-../all.test.js:2651
+Error: ../all.test.js:2651
             v----
 2651:       <Node
 2652:         shader={shaders.helloTexture}
@@ -11,7 +11,7 @@
  65:   interpolation: Interpolation,
                       ^^^^^^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:65
 
-../all.test.js:2663
+Error: ../all.test.js:2663
             v----
 2663:       <Node
 2664:         shader={shaders.helloTexture}
@@ -40,7 +40,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2675
+Error: ../all.test.js:2675
             v----
 2675:       <Node
 2676:         shader={shaders.helloTexture}
@@ -69,7 +69,7 @@
    66:   wrap: [WrapMode, WrapMode] | WrapMode
                                       ^^^^^^^^ string enum. See: ../node_modules/gl-react/lib/Node.js.flow:66
 
-../all.test.js:2687
+Error: ../all.test.js:2687
             v----
 2687:       <Node
 2688:         blendFunc="nope"
@@ -82,7 +82,7 @@
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
 
-incorrect.js:19
+Error: incorrect.js:19
  19: <Node />;
      ^^^^^^^^ React element `Node`
 396:   props: Props;
@@ -90,7 +90,7 @@ incorrect.js:19
  19: <Node />;
      ^^^^^^^^ props of React element `Node`
 
-incorrect.js:25
+Error: incorrect.js:25
  25: <Node nope />;
      ^^^^^^^^^^^^^ React element `Node`
  25: <Node nope />;
@@ -98,7 +98,7 @@ incorrect.js:25
 396:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
 
-incorrect.js:25
+Error: incorrect.js:25
  25: <Node nope />;
      ^^^^^^^^^^^^^ React element `Node`
 396:   props: Props;
@@ -106,7 +106,7 @@ incorrect.js:25
  25: <Node nope />;
      ^^^^^^^^^^^^^ props of React element `Node`
 
-incorrect.js:27
+Error: incorrect.js:27
  27: <Bus nope />;
      ^^^^^^^^^^^^ React element `Bus`
  27: <Bus nope />;
@@ -114,7 +114,7 @@ incorrect.js:27
  45: export default class Bus extends Component<{ index: number }, Props, void> {
                                                                    ^^^^^ object type. See: ../node_modules/gl-react/lib/Bus.js.flow:45
 
-incorrect.js:29
+Error: incorrect.js:29
                      v---------------
  29: const shaders = Shaders.create({
  30:   valid: {
@@ -127,7 +127,7 @@ incorrect.js:29
  45:   [key: string]: ShaderDefinition
                       ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
 
-incorrect.js:29
+Error: incorrect.js:29
                      v---------------
  29: const shaders = Shaders.create({
  30:   valid: {
@@ -140,7 +140,7 @@ incorrect.js:29
  34:   b: {},
           ^^ object literal
 
-incorrect.js:35
+Error: incorrect.js:35
  35:   c: { frag: true }
           ^^^^^^^^^^^^^^ object literal. This type is incompatible with
  45:   [key: string]: ShaderDefinition
@@ -151,19 +151,19 @@ incorrect.js:35
      16:   frag: GLSLCode
                  ^^^^^^^^ string. See: ../node_modules/gl-react/lib/Shaders.js.flow:16
 
-incorrect.js:44
+Error: incorrect.js:44
  44:       surface.nope();
                    ^^^^ property `nope`. Property not found in
  44:       surface.nope();
            ^^^^^^^ ISurface
 
-incorrect.js:45
+Error: incorrect.js:45
  45:       node.nope();
                 ^^^^ property `nope`. Property not found in
  45:       node.nope();
            ^^^^ Node
 
-incorrect.js:51
+Error: incorrect.js:51
  51:         <Bus ref="o" notexists>
              ^^^^^^^^^^^^^^^^^^^^^^^ React element `Bus`
  51:         <Bus ref="o" notexists>
@@ -171,7 +171,7 @@ incorrect.js:51
  45: export default class Bus extends Component<{ index: number }, Props, void> {
                                                                    ^^^^^ object type. See: ../node_modules/gl-react/lib/Bus.js.flow:45
 
-incorrect.js:52
+Error: incorrect.js:52
  52:           <Node />
                ^^^^^^^^ React element `Node`
 396:   props: Props;
@@ -179,7 +179,7 @@ incorrect.js:52
  52:           <Node />
                ^^^^^^^^ props of React element `Node`
 
-incorrect.js:55
+Error: incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
  55:           <Node shaders={shaders.valid} notexists />
@@ -187,7 +187,7 @@ incorrect.js:55
 396:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
 
-incorrect.js:55
+Error: incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
  55:           <Node shaders={shaders.valid} notexists />
@@ -195,7 +195,7 @@ incorrect.js:55
 396:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
 
-incorrect.js:55
+Error: incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
 396:   props: Props;
@@ -203,7 +203,7 @@ incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Node`
 
-incorrect.js:62
+Error: incorrect.js:62
  62: connectSize();
      ^^^^^^^^^^^^^ function call
  62: connectSize();
@@ -211,7 +211,7 @@ incorrect.js:62
  19: const connectSize = (GLComponent: ReactClass<*>) =>
                                        ^^^^^^^^^^^^^ class type: C. See: ../node_modules/gl-react/lib/connectSize.js.flow:19
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -229,7 +229,7 @@ incorrect.js:66
 396:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -247,7 +247,7 @@ incorrect.js:66
 396:   props: Props;
               ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -276,7 +276,7 @@ incorrect.js:66
   160:   shader: ShaderIdentifier | ShaderDefinition,
                                     ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:160
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -292,7 +292,7 @@ incorrect.js:66
     165:   height?: number,
                     ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:165
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -308,7 +308,7 @@ incorrect.js:66
     163:   sync?: boolean,
                   ^^^^^^^ boolean. See: ../node_modules/gl-react/lib/Node.js.flow:163
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -324,7 +324,7 @@ incorrect.js:66
     164:   width?: number,
                    ^^^^^^ number. See: ../node_modules/gl-react/lib/Node.js.flow:164
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -337,7 +337,7 @@ incorrect.js:66
 178:   clear: ?Clear
                ^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Node.js.flow:178
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -355,7 +355,7 @@ incorrect.js:66
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -373,7 +373,7 @@ incorrect.js:66
 177:   blendFunc: BlendFuncSrcDst,
                   ^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:177
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -386,7 +386,7 @@ incorrect.js:66
  95:   src: BlendFunc,
             ^^^^^^^^^ object literal. See: ../node_modules/gl-react/lib/Node.js.flow:95
 
-incorrect.js:66
+Error: incorrect.js:66
        v----
  66:   <Node
  67:     sync={1}
@@ -404,7 +404,7 @@ incorrect.js:66
  75:     }}
          ^ object literal
 
-../utils.js:42
+Error: ../utils.js:42
  42:   expect(actual).toBeInstanceOf(Uint8Array);
        ^^^^^^ identifier `expect`. Could not resolve name
 
