@@ -335,10 +335,6 @@ const applyTextureOptions = (
 ) => {
   const opts: TextureOptions = { ...defaultTextureOptions, ...partialOpts };
   let filter = parseInterpolation(gl, opts.interpolation);
-  if (filter === gl.LINEAR && !gl.getExtension("OES_texture_float_linear")) {
-    // filter = gl.NEAREST; // fallback
-    // FIXME we should only call getExtension in case of a float texture.. need to figure out how to express that later. only then we can enable that fallback.
-  }
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
   let wrapS, wrapT;
