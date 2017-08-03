@@ -35,7 +35,7 @@ vec3 opRep(inout vec3 p, vec3 c) {
 
 vec2 scene (vec3 p) {
   p.x += time;
-  vec3 id = opRep(p, vec3(2.0, 10., 4.0));
+  vec3 id = opRep(p, vec3(2.0, 14.0, 4.0));
   p.y += 0.5 + 0.5 * cos(4.3 * (id.x + time) + 1.3 * (id.z + time));
   float rot = time + cos(30.0 * id.x + 123.4 * id.z);
   p.xz *= mat2(
