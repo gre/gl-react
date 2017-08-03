@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "postinstall": "lerna bootstrap '--nohoist=react-native*' && ./packages/undo-unsupported-symlinks.sh",
+    "postinstall": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
     "watch": "lerna run watch --stream --no-sort",
     "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "flow": "cd packages/gl-react && flow --quiet",

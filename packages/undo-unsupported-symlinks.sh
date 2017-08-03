@@ -12,7 +12,7 @@ cd -
 
 cd cookbook-expo
 rm -f node_modules/gl-react node_modules/gl-react-expo node_modules/cookbook-rn-shared
-npm i ../gl-react ../gl-react-expo ../cookbook-rn-shared
+npm i ../gl-react ../gl-react-expo ../cookbook-rn-shared react react-native expo prop-types
 cd -
 
 cd example-gl-react-camera-effects

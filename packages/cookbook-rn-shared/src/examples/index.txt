@@ -29,6 +29,7 @@ golrot
 golrotscu
 camera
 mergechannels
+sdf1
 demotunnel
 demodesert
 demodesertcrt

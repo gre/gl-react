@@ -85,8 +85,8 @@ Error: ../all.test.js:2687
 Error: incorrect.js:19
  19: <Node />;
      ^^^^^^^^ React element `Node`
-396:   props: Props;
-              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:392
  19: <Node />;
      ^^^^^^^^ props of React element `Node`
 
@@ -95,14 +95,14 @@ Error: incorrect.js:25
      ^^^^^^^^^^^^^ React element `Node`
  25: <Node nope />;
      ^^^^^^^^^^^^^ property `nope`. Property not found in
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
 
 Error: incorrect.js:25
  25: <Node nope />;
      ^^^^^^^^^^^^^ React element `Node`
-396:   props: Props;
-              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:392
  25: <Node nope />;
      ^^^^^^^^^^^^^ props of React element `Node`
 
@@ -174,8 +174,8 @@ Error: incorrect.js:51
 Error: incorrect.js:52
  52:           <Node />
                ^^^^^^^^ React element `Node`
-396:   props: Props;
-              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:392
  52:           <Node />
                ^^^^^^^^ props of React element `Node`
 
@@ -184,22 +184,22 @@ Error: incorrect.js:55
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ property `notexists`. Property not found in
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
 
 Error: incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ property `shaders`. Property not found in
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
 
 Error: incorrect.js:55
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ React element `Node`
-396:   props: Props;
-              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ property `shader`. Property not found in. See: ../node_modules/gl-react/lib/Node.js.flow:392
  55:           <Node shaders={shaders.valid} notexists />
                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ props of React element `Node`
 
@@ -226,8 +226,8 @@ Error: incorrect.js:66
 ...:
  79:   />
        -^ property `preload`. Property not found in
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
 
 Error: incorrect.js:66
        v----
@@ -244,8 +244,8 @@ Error: incorrect.js:66
 ...:
  79:   />
        -^ property `visitor`. Property not found in
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
 
 Error: incorrect.js:66
        v----
@@ -284,8 +284,8 @@ Error: incorrect.js:66
 ...:
  79:   />
        -^ props of React element `Node`. This type is incompatible with
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
   Property `height` is incompatible:
      70:     height={false}
                      ^^^^^ boolean. This type is incompatible with
@@ -300,8 +300,8 @@ Error: incorrect.js:66
 ...:
  79:   />
        -^ props of React element `Node`. This type is incompatible with
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
   Property `sync` is incompatible:
      67:     sync={1}
                    ^ number. This type is incompatible with
@@ -316,8 +316,8 @@ Error: incorrect.js:66
 ...:
  79:   />
        -^ props of React element `Node`. This type is incompatible with
-396:   props: Props;
-              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:396
+392:   props: Props;
+              ^^^^^ object type. See: ../node_modules/gl-react/lib/Node.js.flow:392
   Property `width` is incompatible:
      69:     width={false}
                     ^^^^^ boolean. This type is incompatible with
