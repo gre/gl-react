@@ -4,7 +4,7 @@ import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
 
-export const shaders = Shaders.create({
+const shaders = Shaders.create({
   sdf1: {
     frag: GLSL\`
 precision highp float;
@@ -35,7 +35,7 @@ vec3 opRep(inout vec3 p, vec3 c) {
 
 vec2 scene (vec3 p) {
   p.x += time;
-  vec3 id = opRep(p, vec3(2.0, 0.0, 4.0));
+  vec3 id = opRep(p, vec3(2.0, 14.0, 4.0));
   p.y += 0.5 + 0.5 * cos(4.3 * (id.x + time) + 1.3 * (id.z + time));
   float rot = time + cos(30.0 * id.x + 123.4 * id.z);
   p.xz *= mat2(
@@ -75,12 +75,10 @@ void main() {
   float totalDist = 0.0;
   vec2 res;
   vec3 p;
-  for(int i = 0; i < 100; i++) {
+  for(int i = 0; i < 36; i++) {
     p = origin + direction * totalDist;
     res = scene(p);
-	  float d = res.x;
-    totalDist += d;
-    if (totalDist > 100.0) break;
+    totalDist += res.x;
   }
   vec3 nrml = normal(p, 0.002);
   vec3 materialColor = hsv2rgb(vec3(res.y / 24.0, 0.8, 1.0));
