@@ -27,7 +27,8 @@
   "peerDependencies": {
     "gl-react": "^3.10.0",
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-webgl": "*"
   },
   "devDependencies": {
     "gl-react": "^3.10.0"

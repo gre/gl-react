@@ -1,10 +1,20 @@
-import EXGLView from "gl-react-native/lib/EXGLView";
-import Image from "gl-react-native/lib/Image";
+import { WebGLView } from "react-native-webgl";
 import { Surface } from "gl-react-native";
 import { setRuntime } from "cookbook-rn-shared/lib/gl-react-implementation";
 setRuntime({
   name: "gl-react-native",
-  EXGLView,
+  EXGLView: WebGLView,
   Surface,
-  Image,
+  endFrame: gl => gl.getExtension("RN").endFrame(),
+  loadThreeJSTexture: (gl, src, texture, renderer) => {
+    var properties = renderer.properties.get(texture);
+    gl
+      .getExtension("RN")
+      .loadTexture({ yflip: true, image: src })
+      .then(({ texture }) => {
+        properties.__webglTexture = texture;
+        properties.__webglInit = true;
+        texture.needsUpdate = true;
+      });
+  }
 });

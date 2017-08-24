@@ -1,10 +1,17 @@
 import Expo from "expo";
-import Image from "gl-react-expo/lib/Image";
 import { Surface } from "gl-react-expo";
 import { setRuntime } from "cookbook-rn-shared/lib/gl-react-implementation";
 setRuntime({
   name: "gl-react-expo",
   EXGLView: Expo.GLView,
   Surface,
-  Image,
+  endFrame: gl => gl.endFrameEXP(),
+  loadThreeJSTexture: (gl, src, texture) => {
+    let image = new Image();
+    image.onload = function() {
+      texture.image = image;
+      texture.needsUpdate = true;
+    };
+    image.src = src;
+  }
 });

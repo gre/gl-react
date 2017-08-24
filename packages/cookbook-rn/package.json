@@ -12,7 +12,8 @@
     "gl-react-native": "^3.10.0",
     "prop-types": "^15.5.8",
     "react": "16.0.0-alpha.12",
-    "react-native": "~0.46.4"
+    "react-native": "0.47.2",
+    "react-native-webgl": "0.x"
   },
   "devDependencies": {
     "babel-preset-react-native": "~1.9.1",

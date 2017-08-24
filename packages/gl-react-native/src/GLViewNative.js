@@ -2,29 +2,37 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import EXGLView from "./EXGLView";
+import { WebGLView } from "react-native-webgl";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,
+  onContextFailure: PropTypes.func.isRequired,
   style: PropTypes.any
 };
 
 export default class GLViewNative extends Component {
   props: {
     onContextCreate: (gl: WebGLRenderingContext) => void,
+    onContextFailure: (e: Error) => void,
     style?: any,
     children?: any
   };
   static propTypes = propTypes;
 
   afterDraw(gl: WebGLRenderingContext) {
+    const rngl = gl.getExtension("RN");
     gl.flush();
-    // $FlowFixMe
-    gl.endFrameEXP();
+    rngl.endFrame();
   }
 
   render() {
-    const { style, onContextCreate, children, ...rest } = this.props;
+    const {
+      style,
+      onContextCreate,
+      onContextFailure,
+      children,
+      ...rest
+    } = this.props;
     if (__DEV__) {
       if ("width" in rest || "height" in rest) {
         console.warn(
@@ -37,7 +45,7 @@ export default class GLViewNative extends Component {
         {...rest}
         style={[{ position: "relative", overflow: "hidden" }, style]}
       >
-        <EXGLView
+        <WebGLView
           style={[
             style,
             {
@@ -48,6 +56,7 @@ export default class GLViewNative extends Component {
             }
           ]}
           onContextCreate={onContextCreate}
+          onContextFailure={onContextFailure}
         />
         <View style={{ opacity: 0 }}>
           {children}

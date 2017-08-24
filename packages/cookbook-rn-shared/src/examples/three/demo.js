@@ -1,6 +1,6 @@
 //@flow
 import getGLReactImplementation from "../../gl-react-implementation";
-const { Image } = getGLReactImplementation();
+const { Image, endFrame, loadThreeJSTexture } = getGLReactImplementation();
 const THREE = require("three");
 global.THREE = THREE;
 require("three/examples/js/renderers/Projector");
@@ -18,9 +18,9 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
       style: {},
       addEventListener: () => {},
       removeEventListener: () => {},
-      clientHeight: height,
+      clientHeight: height
     },
-    context: gl,
+    context: gl
   });
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 1);
@@ -48,7 +48,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
       loadTexture(require("../../../images/skybox/py.jpg")), // top
       loadTexture(require("../../../images/skybox/ny.jpg")), // bottom
       loadTexture(require("../../../images/skybox/pz.jpg")), // back
-      loadTexture(require("../../../images/skybox/nz.jpg")), // front
+      loadTexture(require("../../../images/skybox/nz.jpg")) // front
     ];
     mesh = new THREE.Mesh(
       new THREE.BoxGeometry(300, 300, 300, 7, 7, 7),
@@ -68,7 +68,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
 
     let material = new THREE.MeshBasicMaterial({
       vertexColors: THREE.FaceColors,
-      overdraw: 0.5,
+      overdraw: 0.5
     });
 
     cube = new THREE.Mesh(geometry, material);
@@ -84,12 +84,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
   function loadTexture(src) {
     let texture = new THREE.Texture();
     let material = new THREE.MeshBasicMaterial({ map: texture, overdraw: 0.5 });
-    let image = new Image();
-    image.onload = function() {
-      texture.image = image;
-      texture.needsUpdate = true;
-    };
-    image.src = src;
+    loadThreeJSTexture(gl, src, texture, renderer);
     return material;
   }
   function animate() {
@@ -110,7 +105,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     camera.lookAt(target);
     renderer.render(scene, camera);
     gl.flush();
-    gl.endFrameEXP();
+    endFrame(gl);
   }
 
   return {
@@ -132,6 +127,6 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     },
     dispose() {
       cancelAnimationFrame(requestId);
-    },
+    }
   };
 };

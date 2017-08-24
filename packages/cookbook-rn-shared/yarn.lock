@@ -871,9 +871,9 @@ symbol-observable@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
 
-three@0.84.0:
-  version "0.84.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.84.0.tgz#95be85a55a0fa002aa625ed559130957dcffd918"
+three@0.85.0:
+  version "0.85.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.85.0.tgz#2efb33e8a449778fb8c71ac959e41bb81ef087d7"
 
 to-fast-properties@^1.0.1:
   version "1.0.3"

@@ -1,67 +1,73 @@
 //@flow
 import { TextureLoader } from "gl-react";
 import type { DisposablePromise } from "gl-react/lib/helpers/disposable";
-import GLImages from "./GLImages";
-import type { ImageSource } from "./GLImages";
 
-export default class ImageSourceTextureLoader
-  extends TextureLoader<ImageSource> {
-  loads: Array<DisposablePromise<*>> = [];
-  textures: Map<number, *> = new Map();
-  textureSizes: Map<number, *> = new Map();
-  assetIdForImageSource: Map<ImageSource, number> = new Map();
+type ImageSource = Object | "number";
+type ImageSourceHash = string | number;
+type Asset = { texture: WebGLTexture, width: number, height: number };
+
+function imageSourceHash(imageSource: ImageSource): ImageSourceHash {
+  if (typeof imageSource === "number") return imageSource;
+  const { uri } = imageSource;
+  if (!uri) {
+    throw new Error(
+      "GLImages: unsupported imageSource: {uri} needs to be defined"
+    );
+  }
+  return uri;
+}
+
+export default class ImageSourceTextureLoader extends TextureLoader<
+  ImageSource
+> {
+  loads: Map<*, DisposablePromise<WebGLTexture>> = new Map();
+  textureAssets: Map<*, Asset> = new Map();
   dispose() {
     this.loads.forEach(d => {
       d.dispose();
     });
-    this.loads = [];
+    this.loads.clear();
     const { gl } = this;
-    this.textures.forEach(texture => {
-      gl.deleteTexture(texture);
+    const rngl = gl.getExtension("RN");
+    this.textureAssets.forEach(({ texture }) => {
+      rngl.unloadTexture(texture);
     });
-    this.textures.clear();
+    this.textureAssets.clear();
   }
+
   canLoad(input: any) {
     return (
       typeof input === "number" ||
       (input && typeof input === "object" && typeof input.uri === "string")
     );
   }
+
   load(imageSource: ImageSource): DisposablePromise<*> {
+    const hash = imageSourceHash(imageSource);
+    const load = this.loads.get(hash);
+    if (load) return load;
     let ignored = false;
     let dispose = () => {
       ignored = true;
     };
-    const promise = GLImages.load(
-      imageSource
-    ).then((glAssetId: number, width: number, height: number) => {
-      if (ignored) return;
-      let texture;
-      if (this.textures.has(glAssetId)) {
-        texture = this.textures.get(glAssetId);
-      } else {
-        const { gl } = this;
-        texture = gl.createTexture();
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, {
-          glAssetId
-        });
-        this.textures.set(glAssetId, texture);
-        this.textureSizes.set(glAssetId, [width, height]);
-      }
-      this.assetIdForImageSource.set(imageSource, glAssetId);
-      return texture;
-    });
+    const promise = this.gl
+      .getExtension("RN")
+      .loadTexture({ yflip: true, image: imageSource })
+      .then(data => {
+        this.textureAssets.set(hash, data);
+        return data.texture;
+      });
     const d = { dispose, promise };
-    this.loads.push(d);
+    this.loads.set(hash, d);
     return d;
   }
   get(imageSource: ImageSource) {
-    const assetId = this.assetIdForImageSource.get(imageSource);
-    return assetId && this.textures.get(assetId);
+    const asset = this.textureAssets.get(imageSourceHash(imageSource));
+    return asset && asset.texture;
   }
   getSize(imageSource: ImageSource) {
-    const assetId = this.assetIdForImageSource.get(imageSource);
-    return this.textureSizes.get(assetId);
+    const asset = this.textureAssets.get(imageSourceHash(imageSource));
+    if (!asset) return;
+    return [asset.width, asset.height];
   }
 }
