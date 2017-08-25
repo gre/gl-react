@@ -53,12 +53,6 @@ cd packages/cookbook
 yarn start
 ```
 
-**Deploy** (only `gre` can do this at the moment!)
-
-```sh
-yarn run deploy-cookbook
-```
-
 ## License
 
 By contributing to gl-react, you agree that your contributions will be licensed
