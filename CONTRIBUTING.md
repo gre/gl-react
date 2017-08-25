@@ -4,7 +4,7 @@ Contributions are always welcome, no matter how large or small.
 
 ## Requirement
 
-- **Node 6** *(Project currently is broken in node 8, probably related to https://github.com/stackgl/headless-gl/issues/111)*
+- **Node 6**+
 - [yarn](https://yarnpkg.com)
 
 ## Setup / Building
