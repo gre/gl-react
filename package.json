@@ -24,7 +24,7 @@
     "documentation": "4.0.0-beta.18",
     "flow-bin": "^0.51.1",
     "flow-copy-source": "^1.2.0",
-    "lerna": "^2.0.0",
+    "lerna": "^2.1.0",
     "prettier": "^1.5.3"
   }
 }
