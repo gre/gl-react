@@ -21,7 +21,8 @@ const connectSize = (GLComponent: ReactClass<*>) =>
     props: {
       width?: number,
       height?: number,
-      children?: any
+      children?: any,
+      onConnectSizeComponentRef?: (ref: GLComponent) => void
     };
     context: {
       glSizable: { +getGLSize: () => [number, number] }
@@ -50,22 +51,12 @@ const connectSize = (GLComponent: ReactClass<*>) =>
         glSizable: this
       };
     }
-    component: ?GLComponent;
-    getComponent(): ?GLComponent {
-      // FIXME drop this feature (was used on gl-transitions website...)
-      return this.component;
-    }
-    onRef = (ref: GLComponent) => {
-      this.component = ref;
-    };
     render() {
+      const { onConnectSizeComponentRef } = this.props;
       const [width, height] = this.getGLSize();
       return (
         <GLComponent
-          ref={
-            // FIXME drop this feature
-            typeof GLComponent !== "function" ? this.onRef : undefined
-          }
+          ref={onConnectSizeComponentRef}
           {...this.props}
           width={width}
           height={height}
