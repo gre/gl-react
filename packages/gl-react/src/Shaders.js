@@ -13,7 +13,8 @@ const ShaderID = "ShaderID";
  *  }
  */
 type ShaderDefinition = {|
-  frag: GLSLCode
+  frag: GLSLCode,
+  vert?: GLSLCode
 |};
 
 export type { ShaderDefinition };
@@ -98,7 +99,7 @@ export function shaderDefinitionToShaderInfo(
 ): ShaderInfo {
   return {
     frag: definition.frag,
-    vert: staticVert // FIXME this is static for now. we will eventually improve this.
+    vert: definition.vert || staticVert // FIXME this is somewhat experimental for now, vert implement needs to expect a _p attribute
   };
 }
 
