@@ -8,6 +8,9 @@ class DeprecatedUriImageTextureLoader extends ImageTextureLoader {
   get(obj: any) {
     return super.get(obj.uri);
   }
+  getSize(obj: any) {
+    return super.getSize(obj.uri);
+  }
   load(obj: any) {
     console.warn(
       "gl-react-dom: usage of {uri} format in texture uniform is deprecated. Directly give an image URL instead."
