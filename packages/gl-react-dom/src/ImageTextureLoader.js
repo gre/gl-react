@@ -34,6 +34,7 @@ function loadImage(
 export default class ImageTextureLoader extends TextureLoader<string> {
   loads: { [key: string]: DisposablePromise<*> } = {};
   textures: { [key: string]: WebGLTexture } = {};
+  sizes: { [key: string]: [number, number] } = {};
   dispose() {
     disposeObjectMap(this.loads);
     const { gl } = this;
@@ -59,6 +60,7 @@ export default class ImageTextureLoader extends TextureLoader<string> {
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       this.textures[src] = texture;
+      this.sizes[src] = [img.width, img.height];
       delete this.loads[src];
       return texture;
     });
@@ -70,9 +72,6 @@ export default class ImageTextureLoader extends TextureLoader<string> {
     return this.textures[input];
   }
   getSize(input: string) {
-    const img = this.get(input);
-    if (img) {
-      return [img.width, img.height];
-    }
+    return this.sizes[input];
   }
 }
