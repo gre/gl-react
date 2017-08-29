@@ -124,8 +124,8 @@ Error: incorrect.js:29
      -^ call of method `create`
  33:   a: null,
           ^^^^ null. Inexact type is incompatible with exact type
- 45:   [key: string]: ShaderDefinition
-                      ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
+ 46:   [key: string]: ShaderDefinition
+                      ^^^^^^^^^^^^^^^^ exact type: object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:46
 
 Error: incorrect.js:29
                      v---------------
@@ -135,20 +135,20 @@ Error: incorrect.js:29
 ...:
  36: });
      -^ call of method `create`
- 45:   [key: string]: ShaderDefinition
-                      ^^^^^^^^^^^^^^^^ property `frag`. Property not found in. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
+ 46:   [key: string]: ShaderDefinition
+                      ^^^^^^^^^^^^^^^^ property `frag`. Property not found in. See: ../node_modules/gl-react/lib/Shaders.js.flow:46
  34:   b: {},
           ^^ object literal
 
 Error: incorrect.js:35
  35:   c: { frag: true }
           ^^^^^^^^^^^^^^ object literal. This type is incompatible with
- 45:   [key: string]: ShaderDefinition
-                      ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:45
+ 46:   [key: string]: ShaderDefinition
+                      ^^^^^^^^^^^^^^^^ object type. See: ../node_modules/gl-react/lib/Shaders.js.flow:46
   Property `frag` is incompatible:
      35:   c: { frag: true }
                       ^^^^ boolean. This type is incompatible with
-     16:   frag: GLSLCode
+     16:   frag: GLSLCode,
                  ^^^^^^^^ string. See: ../node_modules/gl-react/lib/Shaders.js.flow:16
 
 Error: incorrect.js:44
