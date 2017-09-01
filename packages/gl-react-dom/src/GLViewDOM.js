@@ -5,6 +5,8 @@ import invariant from "invariant";
 import getContext from "./getContext";
 import loseGL from "./loseGL";
 
+const __DEV__ = process.env.NODE_ENV === "development";
+
 /**
  * WebGL context initial options.
  */
@@ -31,6 +33,43 @@ const propTypes = {
   pixelRatio: PropTypes.number
 };
 
+class ErrorDebug extends Component {
+  render() {
+    const { error } = this.props;
+    let title = String(error.rawError || error.message || error);
+    let detail = String(error.longMessage || error.rawError || "");
+    const style = {
+      width: "100%",
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      padding: "1em",
+      background: "#a00",
+      color: "#fff",
+      fontSize: "12px",
+      lineHeight: "1.2em",
+      fontStyle: "normal",
+      fontWeight: "normal",
+      fontFamily: "monospace",
+      overflow: "auto"
+    };
+    const titleStyle = {
+      fontWeight: "bold",
+      marginBottom: "1em"
+    };
+    const detailStyle = {
+      whiteSpace: "pre"
+    };
+    return (
+      <div style={style}>
+        <div style={titleStyle}>{title}</div>
+        <div style={detailStyle}>{detail}</div>
+      </div>
+    );
+  }
+}
+
 export default class GLViewDOM extends Component {
   props: {
     onContextCreate: (gl: WebGLRenderingContext) => void,
@@ -43,6 +82,11 @@ export default class GLViewDOM extends Component {
     height: number,
     style?: any,
     debug?: number
+  };
+  state: {
+    error: ?Error
+  } = {
+    error: null
   };
   static propTypes = propTypes;
   webglContextAttributes: WebGLContextAttributes;
@@ -80,6 +124,7 @@ export default class GLViewDOM extends Component {
   }
 
   render() {
+    const { error } = this.state;
     let { width, height, pixelRatio, style, debug, ...rest } = this.props;
     if (!pixelRatio) pixelRatio = Number(window.devicePixelRatio || 1);
     for (let k in propTypes) {
@@ -88,13 +133,24 @@ export default class GLViewDOM extends Component {
       }
     }
     return (
-      <canvas
-        ref={this.onRef}
-        style={{ ...style, width, height }}
-        width={width * pixelRatio}
-        height={height * pixelRatio}
-        {...rest}
-      />
+      <span
+        style={{
+          ...style,
+          display: "inline-block",
+          position: "relative",
+          width,
+          height
+        }}
+      >
+        <canvas
+          ref={this.onRef}
+          style={{ width, height }}
+          width={width * pixelRatio}
+          height={height * pixelRatio}
+          {...rest}
+        />
+        {error ? <ErrorDebug error={error} /> : null}
+      </span>
     );
   }
 
@@ -124,6 +180,20 @@ export default class GLViewDOM extends Component {
   onRef = (ref: HTMLCanvasElement) => {
     this.canvas = ref;
   };
+
+  debugError = !__DEV__
+    ? null
+    : (error: Error) => {
+        this.setState({ error });
+      };
+
+  afterDraw = !__DEV__
+    ? null
+    : () => {
+        if (this.state.error) {
+          this.setState({ error: null });
+        }
+      };
 
   captureAsDataURL(...args: any): string {
     if (!this.webglContextAttributes.preserveDrawingBuffer) {

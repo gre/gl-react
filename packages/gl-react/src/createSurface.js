@@ -16,6 +16,11 @@ import type { VisitorLike } from "./Visitor";
 import type TextureLoader from "./TextureLoader";
 import type Node from "./Node";
 
+const __DEV__ = process.env.NODE_ENV === "development";
+
+const prependGLSLName = (glsl: string, name: ?string) =>
+  !name ? glsl : "#define SHADER_NAME " + name + "\n" + glsl;
+
 type ReactClassLike<T> =
   | string
   | ReactClass<T>
@@ -488,7 +493,9 @@ export default ({
     _handleError = (e: Error): void => {
       const { onLoadError } = this.props;
       if (onLoadError) onLoadError(e);
-      else console.error(e);
+      else {
+        console.error(e);
+      }
     };
 
     _handleRestoredFailure = (): void => {
@@ -524,10 +531,14 @@ export default ({
       return { loader, input };
     }
 
-    _makeShader({ frag, vert }: ShaderInfo): Shader {
+    _makeShader({ frag, vert }: ShaderInfo, name?: string): Shader {
       const { gl } = this;
       invariant(gl, "gl is not available");
-      const shader = createShader(gl, vert, frag);
+      const shader = createShader(
+        gl,
+        prependGLSLName(vert, name),
+        prependGLSLName(frag, name)
+      );
       shader.attributes._p.pointer();
       return shader;
     }
@@ -536,7 +547,10 @@ export default ({
       const { shaders } = this;
       return (
         shaders[shaderId.id] ||
-        (shaders[shaderId.id] = this._makeShader(Shaders.get(shaderId)))
+        (shaders[shaderId.id] = this._makeShader(
+          Shaders.get(shaderId),
+          Shaders.getName(shaderId)
+        ))
       );
     }
 
@@ -580,11 +594,18 @@ export default ({
           silent = v.onSurfaceDrawError(e) || silent;
         });
         if (!silent) {
-          console.warn(e);
-          throw e;
-        } else {
-          return;
+          if (
+            __DEV__ &&
+            glView.debugError &&
+            e.longMessage /* duck typing an "interesting" GLError (from lib gl-shader) */
+          ) {
+            glView.debugError(e);
+          } else {
+            console.warn(e);
+            throw e;
+          }
         }
+        return;
       }
       if (glView.afterDraw) glView.afterDraw(gl);
       visitors.forEach(v => v.onSurfaceDrawEnd(this));

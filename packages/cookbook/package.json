@@ -13,6 +13,8 @@
     "gl-react": "^3.13.0",
     "gl-react-dom": "^3.13.0",
     "gl-shader": "^4.2.1",
+    "gl-format-compiler-error":
+      "github:gre/gl-format-compiler-error#fix-null-ending-character",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.19.0",
     "hoist-non-react-statics": "^1.2.0",
@@ -41,6 +43,7 @@
     "eject": "react-scripts eject",
     "prepublish": "npm run generate-doc",
     "generate-examples": "./src/examples/gen.sh",
-    "generate-doc": "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
+    "generate-doc":
+      "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
   }
 }

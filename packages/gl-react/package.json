@@ -3,14 +3,9 @@
   "version": "3.13.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
-  "description": "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
-  "keywords": [
-    "gl-react",
-    "gl",
-    "opengl",
-    "react",
-    "react-component"
-  ],
+  "description":
+    "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
+  "keywords": ["gl-react", "gl", "opengl", "react", "react-component"],
   "main": "lib/index.js",
   "files": [
     "src",
@@ -28,6 +23,8 @@
     "react": "*"
   },
   "dependencies": {
+    "gl-format-compiler-error":
+      "github:gre/gl-format-compiler-error#fix-null-ending-character",
     "gl-shader": "^4.2.1",
     "invariant": "^2.2.1",
     "ndarray": "^1.0.18",
@@ -36,7 +33,9 @@
     "typedarray-pool": "^1.1.0"
   },
   "scripts": {
-    "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib gl-react.js && babel --source-maps -d lib src && flow-copy-source -v src lib && browserify lib/index.js -t [ browserify-shim ] --standalone GLReact > gl-react.js",
-    "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
+    "prepublish":
+      "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib gl-react.js && babel --source-maps -d lib src && flow-copy-source -v src lib && browserify lib/index.js -t [ browserify-shim ] --standalone GLReact > gl-react.js",
+    "watch":
+      "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   }
 }
