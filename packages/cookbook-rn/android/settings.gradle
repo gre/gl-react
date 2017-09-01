@@ -2,5 +2,5 @@ rootProject.name = 'cookbookrn'
 
 include ':app'
 
-include ':RNGL'
-project(':RNGL').projectDir = file('../node_modules/gl-react-native/android')
+include ':RNWebGL'
+project(':RNWebGL').projectDir = file('../node_modules/react-native-webgl/android')
