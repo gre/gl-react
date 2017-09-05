@@ -609,7 +609,9 @@ export default class Node extends Component {
     const pixels: Uint8Array = this._captureAlloc(size);
     this._bind();
     gl.readPixels(x, y, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-    return ndarray(pixels, [h, w, 4]).step(-1, 1, 1).transpose(1, 0, 2);
+    return ndarray(pixels, [h, w, 4])
+      .step(-1, 1, 1)
+      .transpose(1, 0, 2);
   }
 
   /**
@@ -829,7 +831,7 @@ export default class Node extends Component {
 
     const { types } = shader;
     const glRedrawableDependencies: Array<Node | Bus> = [];
-    const pendingTextures: Array<Promise<*>> = [];
+    const pendingTextures: Array<*> = [];
     let units = 0;
     const usedUniforms = Object.keys(types.uniforms);
     const providedUniforms = Object.keys(uniforms);
@@ -942,14 +944,15 @@ export default class Node extends Component {
         } else {
           const t = loader.get(input);
           if (t) {
+            loader.update(input);
             result = {
-              directTexture: t,
-              directTextureSize: loader.getSize(input)
+              directTexture: t.texture,
+              directTextureSize: [t.width, t.height]
             };
           } else {
             // otherwise, we will have to load it and postpone the rendering.
-            const d = loader.load(input);
-            pendingTextures.push(d.promise);
+            const p = loader.load(input);
+            pendingTextures.push(p);
           }
         }
       }

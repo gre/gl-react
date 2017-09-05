@@ -13,8 +13,6 @@
     "gl-react": "^3.13.0",
     "gl-react-dom": "^3.13.0",
     "gl-shader": "^4.2.1",
-    "gl-format-compiler-error":
-      "github:gre/gl-format-compiler-error#fix-null-ending-character",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.19.0",
     "hoist-non-react-statics": "^1.2.0",

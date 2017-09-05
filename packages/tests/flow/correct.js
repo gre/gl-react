@@ -7,8 +7,6 @@ import {
   NearestCopy,
   GLSL,
   Visitor,
-  TextureLoader,
-  TextureLoaders,
   Uniform,
   Bus,
   VisitorLogger,
@@ -73,7 +71,7 @@ class A extends React.Component {
   }
 }
 
-const N = connectSize(({ width, height }) =>
+const N = connectSize(({ width, height }) => (
   <Node
     sync
     clear={null}
@@ -82,9 +80,9 @@ const N = connectSize(({ width, height }) =>
     blendFunc={{ src: "one", dst: "zero" }}
     shader={shaders.b}
   />
-);
+));
 
-const B = () =>
+const B = () => (
   <Surface
     width={100}
     height={200}
@@ -95,4 +93,5 @@ const B = () =>
     <NearestCopy>
       <N width={10} height={10} />
     </NearestCopy>
-  </Surface>;
+  </Surface>
+);

@@ -1,12 +1,8 @@
 //@flow
 import { View } from "react-native";
-import { createSurface, TextureLoaders } from "gl-react";
+import { createSurface } from "gl-react";
 import GLView from "./GLViewNative";
-import ExponentTextureLoader from "./ExponentTextureLoader";
-import ExponentGLObjectTextureLoader from "./ExponentGLObjectTextureLoader";
-
-TextureLoaders.add(ExponentTextureLoader);
-TextureLoaders.add(ExponentGLObjectTextureLoader);
+import "webgltexture-loader-expo";
 
 const RenderLessElement = View;
 

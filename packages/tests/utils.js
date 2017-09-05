@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
-import { Visitor, TextureLoader, TextureLoaders } from "gl-react";
+import { Visitor } from "gl-react";
+import { globalRegistry, WebGLTextureLoader } from "webgltexture-loader";
 import invariant from "invariant";
 import type { Surface, Node } from "gl-react";
 import type { Texture } from "gl-texture2d";
@@ -287,7 +288,6 @@ export function createOneTextureLoader(
   const counters = {
     constructor: 0,
     dispose: 0,
-    textureDispose: 0,
     canLoad: 0,
     get: 0,
     load: 0,
@@ -302,7 +302,7 @@ export function createOneTextureLoader(
     d.reject(e);
     return delay(50); // FIXME this is a hack.
   }
-  class Loader extends TextureLoader<typeof textureId> {
+  class Loader extends WebGLTextureLoader<typeof textureId> {
     texture: ?Texture = null;
     constructor(gl: WebGLRenderingContext) {
       super(gl);
@@ -317,25 +317,26 @@ export function createOneTextureLoader(
     }
     get() {
       ++counters.get;
-      return this.texture;
-    }
-    getSize() {
-      return size;
+      return (
+        this.texture && {
+          texture: this.texture,
+          width: size[0],
+          height: size[1]
+        }
+      );
     }
     load() {
       ++counters.load;
       const promise = d.promise.then(() => {
         ++counters.createTexture;
         this.texture = makeTexture(this.gl);
-        return this.texture;
+        return {
+          texture: this.texture,
+          width: size[0],
+          height: size[1]
+        };
       });
-      function dispose() {
-        ++counters.textureDispose;
-      }
-      return {
-        promise,
-        dispose
-      };
+      return promise;
     }
   }
   return {
@@ -347,14 +348,14 @@ export function createOneTextureLoader(
   };
 }
 
-import drawNDArrayTexture from "gl-react/lib/helpers/drawNDArrayTexture";
+import drawNDArrayTexture from "webgltexture-loader-ndarray/lib/drawNDArrayTexture";
 export function createNDArrayTexture(gl: WebGLRenderingContext, ndarray: *) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
   drawNDArrayTexture(gl, texture, ndarray);
   return texture;
 }
-class FakeTextureLoader extends TextureLoader<FakeTexture> {
+class FakeTextureLoader extends WebGLTextureLoader<FakeTexture> {
   textures: Array<WebGLTexture>;
   constructor(gl: WebGLRenderingContext) {
     super(gl);
@@ -367,17 +368,22 @@ class FakeTextureLoader extends TextureLoader<FakeTexture> {
   canLoad(input: any) {
     return input instanceof FakeTexture;
   }
-  getSize(ft: FakeTexture) {
-    return [ft.width, ft.height];
-  }
   get(ft: FakeTexture) {
     const array = ft.getPixels();
     if (array) {
       const t = createNDArrayTexture(this.gl, array);
       this.textures.push(t);
-      return t;
+      return {
+        texture: t,
+        width: ft.width,
+        height: ft.height
+      };
     }
+  }
+  load(ft: FakeTexture) {
+    const res = this.get(ft);
+    return res ? Promise.resolve(res) : Promise.reject();
   }
 }
 
-TextureLoaders.add(FakeTextureLoader);
+globalRegistry.add(FakeTextureLoader);

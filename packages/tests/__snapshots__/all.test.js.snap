@@ -8,7 +8,6 @@ undefined {
   "dispose": 0,
   "get": 1,
   "load": 1,
-  "textureDispose": 0,
 }
 `;
 
@@ -20,7 +19,6 @@ undefined {
   "dispose": 0,
   "get": 2,
   "load": 1,
-  "textureDispose": 0,
 }
 `;
 
@@ -32,6 +30,5 @@ undefined {
   "dispose": 1,
   "get": 2,
   "load": 1,
-  "textureDispose": 0,
 }
 `;

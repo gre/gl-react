@@ -7,8 +7,6 @@ import {
   NearestCopy,
   GLSL,
   Visitor,
-  TextureLoader,
-  TextureLoaders,
   Backbuffer,
   Bus,
   VisitorLogger,
@@ -61,7 +59,7 @@ class A extends React.Component {
 
 connectSize();
 
-const N = connectSize(() =>
+const N = connectSize(() => (
   // these are all wrong props
   <Node
     sync={1}
@@ -77,4 +75,4 @@ const N = connectSize(() =>
     visitor={false}
     shader={false}
   />
-);
+));

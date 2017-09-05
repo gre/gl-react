@@ -3,17 +3,15 @@ import invariant from "invariant";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import createShader from "gl-shader";
-import { disposeArray, disposeObjectMap } from "./helpers/disposable";
 import Bus from "./Bus";
 import Shaders from "./Shaders";
-import TextureLoaders from "./TextureLoaders";
 import Visitors from "./Visitors";
-import type { DisposablePromise } from "./helpers/disposable";
+import { LoaderResolver } from "webgltexture-loader";
 import type { NDArray } from "ndarray";
 import type { ShaderIdentifier, ShaderInfo } from "./Shaders";
 import type { Shader } from "gl-shader";
 import type { VisitorLike } from "./Visitor";
-import type TextureLoader from "./TextureLoader";
+import type { WebGLTextureLoader } from "webgltexture-loader";
 import type Node from "./Node";
 
 const __DEV__ = process.env.NODE_ENV === "development";
@@ -62,7 +60,7 @@ interface ISurface extends Component<void, SurfaceProps, any> {
   +_removeGLNodeChild: (node: Node) => void,
   +_resolveTextureLoader: (
     raw: any
-  ) => { loader: ?TextureLoader<*>, input: mixed },
+  ) => { loader: ?WebGLTextureLoader<*>, input: mixed },
   +_getShader: (shaderId: ShaderIdentifier) => Shader,
   +_makeShader: (shaderInfo: ShaderInfo) => Shader,
   +_draw: () => void,
@@ -168,11 +166,11 @@ export default ({
     id: number = ++surfaceId;
     gl: ?WebGLRenderingContext;
     buffer: WebGLBuffer;
-    loaders: ?Array<TextureLoader<*>>;
+    loaderResolver: ?LoaderResolver;
     glView: ReactClass<*>;
     root: ?Node;
     shaders: { [key: string]: Shader } = {};
-    _preparingGL: Array<DisposablePromise<*>> = [];
+    _preparingGL: Array<*> = [];
     _needsRedraw: boolean = false;
     state: {
       ready: boolean,
@@ -413,9 +411,13 @@ export default ({
           gl.deleteTexture(this._emptyTexture);
           this._emptyTexture = null;
         }
-        if (this.loaders) disposeArray(this.loaders);
-        disposeArray(this._preparingGL);
-        disposeObjectMap(this.shaders);
+        if (this.loaderResolver) {
+          this.loaderResolver.dispose();
+        }
+        for (let k in this.shaders) {
+          this.shaders[k].dispose();
+        }
+        this.shaders = {};
         gl.deleteBuffer(this.buffer);
         this.getVisitors().map(v => v.onSurfaceGLContextChange(this, null));
       }
@@ -429,7 +431,7 @@ export default ({
       this.gl = gl;
       this.getVisitors().map(v => v.onSurfaceGLContextChange(this, gl));
 
-      this.loaders = TextureLoaders.get().map(L => new L(gl));
+      this.loaderResolver = new LoaderResolver(gl);
 
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 
@@ -444,7 +446,7 @@ export default ({
 
       const { preload } = this.props;
 
-      const all: Array<DisposablePromise<*>> = [];
+      const all: Array<Promise<*>> = [];
 
       (preload || []).forEach(raw => {
         if (!raw) {
@@ -461,11 +463,10 @@ export default ({
         all.push(loader.load(input));
       });
 
-      disposeArray(this._preparingGL);
       this._preparingGL = all;
 
       if (all.length > 0) {
-        Promise.all(all.map(d => d.promise)).then(onSuccess, onError); // FIXME make sure this never finish if _prepareGL is called again.
+        Promise.all(all).then(onSuccess, onError); // FIXME make sure this never finish if _prepareGL is called again.
       } else {
         onSuccess();
       }
@@ -524,10 +525,10 @@ export default ({
 
     _resolveTextureLoader(
       raw: mixed
-    ): { loader: ?TextureLoader<*>, input: any } {
+    ): { loader: ?WebGLTextureLoader<*>, input: any } {
       let input = raw;
-      let loader: ?TextureLoader<*> =
-        this.loaders && this.loaders.find(loader => loader.canLoad(input));
+      let loader: ?WebGLTextureLoader<*> =
+        this.loaderResolver && this.loaderResolver.resolve(input);
       return { loader, input };
     }
 

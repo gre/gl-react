@@ -1,9 +1,8 @@
 //@flow
 import { View } from "react-native";
-import { createSurface, TextureLoaders } from "gl-react";
+import { createSurface } from "gl-react";
 import GLView from "./GLViewNative";
-import ImageSourceTextureLoader from "./ImageSourceTextureLoader";
-TextureLoaders.add(ImageSourceTextureLoader);
+import "webgltexture-loader-react-native";
 
 const RenderLessElement = View;
 

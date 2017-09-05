@@ -3,7 +3,8 @@
   "version": "3.13.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
-  "description": "React Native via Expo implementation of gl-react, an universal React library to write and compose WebGL shaders",
+  "description":
+    "React Native via Expo implementation of gl-react, an universal React library to write and compose WebGL shaders",
   "keywords": [
     "gl-react",
     "gl",
@@ -14,13 +15,7 @@
     "react-component"
   ],
   "main": "lib/index.js",
-  "files": [
-    "src",
-    "lib",
-    ".flowconfig",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["src", "lib", ".flowconfig", "README.md", "LICENSE"],
   "peerDependencies": {
     "expo": "*",
     "gl-react": "^3.13.0",
@@ -32,10 +27,13 @@
   },
   "dependencies": {
     "invariant": "^2.2.1",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "webgltexture-loader-expo": "^0.6.1"
   },
   "scripts": {
-    "prepublish": "cd ../.. && export PATH=$(npm bin):$PATH && cd - &&rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib",
-    "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
+    "prepublish":
+      "cd ../.. && export PATH=$(npm bin):$PATH && cd - &&rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib",
+    "watch":
+      "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   }
 }

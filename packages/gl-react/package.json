@@ -23,14 +23,13 @@
     "react": "*"
   },
   "dependencies": {
-    "gl-format-compiler-error":
-      "github:gre/gl-format-compiler-error#fix-null-ending-character",
     "gl-shader": "^4.2.1",
     "invariant": "^2.2.1",
     "ndarray": "^1.0.18",
-    "ndarray-ops": "^1.2.2",
     "prop-types": "^15.5.8",
-    "typedarray-pool": "^1.1.0"
+    "typedarray-pool": "^1.1.0",
+    "webgltexture-loader": "^0.6.0",
+    "webgltexture-loader-ndarray": "^0.6.0"
   },
   "scripts": {
     "prepublish":

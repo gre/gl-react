@@ -7,13 +7,12 @@ import LinearCopy from "./LinearCopy";
 import NearestCopy from "./NearestCopy";
 import Node from "./Node";
 import Shaders from "./Shaders";
-import TextureLoader from "./TextureLoader";
-import TextureLoaderRawObject from "./TextureLoaderRawObject";
-import TextureLoaders from "./TextureLoaders";
 import Uniform from "./Uniform";
 import Visitor from "./Visitor";
 import VisitorLogger from "./VisitorLogger";
 import Visitors from "./Visitors";
+
+import "webgltexture-loader-ndarray";
 
 export {
   Bus,
@@ -25,9 +24,6 @@ export {
   NearestCopy,
   Node,
   Shaders,
-  TextureLoader,
-  TextureLoaderRawObject,
-  TextureLoaders,
   Uniform,
   Visitor,
   VisitorLogger,

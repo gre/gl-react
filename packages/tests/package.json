@@ -21,7 +21,8 @@
     "ndpack-image": "github:gre/ndpack-image",
     "promise-defer": "^1.0.0",
     "react": "16.0.0-alpha.12",
-    "react-test-renderer": "16.0.0-alpha.12"
+    "react-test-renderer": "16.0.0-alpha.12",
+    "webgltexture-loader": "^0.6.0"
   },
   "version": "3.13.0",
   "dependencies": {

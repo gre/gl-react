@@ -17,16 +17,14 @@ import {
   GLSL,
   Visitor,
   Visitors,
-  TextureLoader,
-  TextureLoaders,
   Uniform,
   Bus,
   VisitorLogger,
   connectSize
 } from "gl-react";
+import { globalRegistry } from "webgltexture-loader";
 import { Surface } from "gl-react-headless";
 import loseGL from "gl-react-headless/lib/loseGL";
-import type { DisposablePromise } from "gl-react/lib/helpers/disposable";
 import React from "react";
 import renderer from "react-test-renderer";
 import baboon from "baboon-image";
@@ -544,7 +542,7 @@ test("Surface can be resized", () => {
   }`
     }
   });
-  const renderForSize = (width, height) =>
+  const renderForSize = (width, height) => (
     <Surface
       width={width}
       height={height}
@@ -553,7 +551,8 @@ test("Surface can be resized", () => {
       <LinearCopy>
         <Node shader={shaders.red} backbuffering />
       </LinearCopy>
-    </Surface>;
+    </Surface>
+  );
   const inst = create(renderForSize(1, 1));
   const surface = inst.getInstance();
   inst.update(renderForSize(20, 20));
@@ -639,9 +638,7 @@ test("bus example 1", () => {
           <Bus ref="bus">
             <Node shader={shaders.red} />
           </Bus>
-          <LinearCopy>
-            {() => this.refs.bus}
-          </LinearCopy>
+          <LinearCopy>{() => this.refs.bus}</LinearCopy>
         </Surface>
       );
     }
@@ -678,13 +675,9 @@ test("bus example 2", () => {
             <Node width={1} height={2} shader={shaders.red} />
           </Bus>
           <Bus ref="bus2">
-            <LinearCopy>
-              {() => this.refs.bus1}
-            </LinearCopy>
+            <LinearCopy>{() => this.refs.bus1}</LinearCopy>
           </Bus>
-          <LinearCopy>
-            {() => this.refs.bus2}
-          </LinearCopy>
+          <LinearCopy>{() => this.refs.bus2}</LinearCopy>
         </Surface>
       );
     }
@@ -727,9 +720,7 @@ test("bus example 3", () => {
           <Bus ref="bus">
             <Red />
           </Bus>
-          <LinearCopy>
-            {() => this.refs.bus}
-          </LinearCopy>
+          <LinearCopy>{() => this.refs.bus}</LinearCopy>
         </Surface>
       );
     }
@@ -1006,12 +997,13 @@ test("a surface can be captured and resized", () => {
   }`
     }
   });
-  const render = (w, h) =>
+  const render = (w, h) => (
     <Surface width={w} height={h}>
       <LinearCopy>
         <Node shader={shaders.helloGL} width={2} height={2} />
       </LinearCopy>
-    </Surface>;
+    </Surface>
+  );
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   expectToBeCloseToColorArray(
@@ -1039,7 +1031,7 @@ test("a node can be captured and resized", () => {
     }
   });
   let node;
-  const render = (w, h) =>
+  const render = (w, h) => (
     <Surface width={20} height={20}>
       <LinearCopy>
         <Node
@@ -1049,7 +1041,8 @@ test("a node can be captured and resized", () => {
           height={h}
         />
       </LinearCopy>
-    </Surface>;
+    </Surface>
+  );
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   invariant(node, "node is defined");
@@ -1100,11 +1093,12 @@ test("Uniform children redraw=>el function", () => {
         >
           <NearestCopy>
             <LinearCopy>
-              {redraw =>
+              {redraw => (
                 <UpdatingTexture
                   ref={ref => (updatingTexture = ref)}
                   redraw={redraw}
-                />}
+                />
+              )}
             </LinearCopy>
           </NearestCopy>
         </Surface>
@@ -1189,19 +1183,18 @@ test("Bus redraw=>el function", () => {
           webglContextAttributes={{ preserveDrawingBuffer: true }}
         >
           <Bus ref="bus">
-            {redraw =>
+            {redraw => (
               <UpdatingTexture
                 initialPixels={yellow3x3}
                 initialWidth={3}
                 initialHeight={3}
                 ref={ref => (updatingTexture = ref)}
                 redraw={redraw}
-              />}
+              />
+            )}
           </Bus>
           <NearestCopy>
-            <LinearCopy>
-              {() => this.refs.bus}
-            </LinearCopy>
+            <LinearCopy>{() => this.refs.bus}</LinearCopy>
           </NearestCopy>
         </Surface>
       );
@@ -1237,7 +1230,7 @@ test("many Surface updates don't result of many redraws", () => {
   });
 
   const visitor = new CountersVisitor();
-  const wrap = children =>
+  const wrap = children => (
     <Surface
       visitor={visitor}
       width={2}
@@ -1245,9 +1238,11 @@ test("many Surface updates don't result of many redraws", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>;
-  const JustBlue = ({ blue }) =>
-    <Node shader={shaders.justBlue} uniforms={{ blue }} />;
+    </Surface>
+  );
+  const JustBlue = ({ blue }) => (
+    <Node shader={shaders.justBlue} uniforms={{ blue }} />
+  );
 
   const inst = create(wrap(<JustBlue blue={0} />));
   const surface = inst.getInstance();
@@ -1287,7 +1282,7 @@ test("many Surface flush() don't result of extra redraws", () => {
   });
   const visitor = new CountersVisitor();
 
-  const wrap = children =>
+  const wrap = children => (
     <Surface
       visitor={visitor}
       width={2}
@@ -1295,9 +1290,11 @@ test("many Surface flush() don't result of extra redraws", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>;
-  const JustBlue = ({ blue }) =>
-    <Node shader={shaders.justBlue} uniforms={{ blue }} />;
+    </Surface>
+  );
+  const JustBlue = ({ blue }) => (
+    <Node shader={shaders.justBlue} uniforms={{ blue }} />
+  );
 
   const inst = create(wrap(<JustBlue blue={0} />));
   const surface = inst.getInstance();
@@ -1334,16 +1331,15 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
   const visitor = new CountersVisitor();
   Visitors.add(visitor);
 
-  const wrap = children =>
+  const wrap = children => (
     <Surface
       width={2}
       height={2}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
-      <LinearCopy>
-        {children}
-      </LinearCopy>
-    </Surface>;
+      <LinearCopy>{children}</LinearCopy>
+    </Surface>
+  );
   class JustBlue extends React.PureComponent {
     render() {
       const { blue } = this.props;
@@ -1584,7 +1580,7 @@ test("Node `backbuffering`", () => {
   }`
     }
   });
-  const render = t =>
+  const render = t => (
     <Surface
       width={10}
       height={10}
@@ -1593,7 +1589,8 @@ test("Node `backbuffering`", () => {
       <LinearCopy>
         <Node shader={shaders.colorShift} uniforms={{ t }} backbuffering />
       </LinearCopy>
-    </Surface>;
+    </Surface>
+  );
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
   expectToBeCloseToColorArray(
@@ -1644,7 +1641,7 @@ test("Node `backbuffering` in `sync`", () => {
   }`
     }
   });
-  const render = t =>
+  const render = t => (
     <Surface
       width={10}
       height={10}
@@ -1660,7 +1657,8 @@ test("Node `backbuffering` in `sync`", () => {
           />
         </LinearCopy>
       </LinearCopy>
-    </Surface>;
+    </Surface>
+  );
   const inst = create(render(red2x2)); // init with red
   const surface = inst.getInstance();
   // since node was drawn once, there were a first shift.
@@ -1946,7 +1944,7 @@ test("can be extended with addTextureLoaderClass", async () => {
     gl => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
-  TextureLoaders.add(loader.Loader);
+  globalRegistry.add(loader.Loader);
   const inst = create(
     <Surface
       width={64}
@@ -1972,7 +1970,7 @@ test("can be extended with addTextureLoaderClass", async () => {
   expect(loader.counters).toMatchSnapshot();
   inst.unmount();
   expect(loader.counters).toMatchSnapshot();
-  TextureLoaders.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
 });
 
 test("Surface `preload` prevent to draw anything", async () => {
@@ -1994,7 +1992,7 @@ test("Surface `preload` prevent to draw anything", async () => {
     gl => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
-  TextureLoaders.add(loader.Loader);
+  globalRegistry.add(loader.Loader);
   const el = (
     <Surface
       width={64}
@@ -2028,7 +2026,7 @@ test("Surface `preload` prevent to draw anything", async () => {
     new Uint8Array([255, 0, 0, 255])
   );
   inst.unmount();
-  TextureLoaders.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
 });
 
 test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform", async () => {
@@ -2052,7 +2050,7 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
     gl => createNDArrayTexture(gl, yellow3x2),
     [3, 2]
   );
-  TextureLoaders.add(loader.Loader);
+  globalRegistry.add(loader.Loader);
   const el = (
     <Surface
       width={64}
@@ -2085,7 +2083,7 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
     new Uint8Array([0, 0, 0, 0])
   );
   inst.unmount();
-  TextureLoaders.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
 });
 
 test("Surface `preload` that fails will trigger onLoadError", async () => {
@@ -2107,12 +2105,11 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
     gl => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
-  TextureLoaders.add(loader.Loader);
+  globalRegistry.add(loader.Loader);
   const el = (
     <Surface
       width={64}
       height={64}
-      preload={[loader.textureId, Symbol("wrong_preload"), null]}
       onLoad={() => {
         ++onLoadCounter;
       }}
@@ -2130,10 +2127,10 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
   await loader.reject(new Error("simulate texture fail"));
   expect(onLoadCounter).toEqual(0);
   expect(onLoadErrorCounter).toEqual(1);
-  TextureLoaders.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
   inst.unmount();
-  TextureLoaders.remove(loader.Loader);
-  TextureLoaders.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
+  globalRegistry.remove(loader.Loader);
 });
 
 test("renders a shader inline in the Node", () => {
@@ -2357,14 +2354,15 @@ void main() {
     }
   }
 
-  const wrap = children =>
+  const wrap = children => (
     <Surface
       width={4}
       height={4}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       {children}
-    </Surface>;
+    </Surface>
+  );
 
   const inst = create(wrap(<WeirdSwapping i={0} />));
   const surface = inst.getInstance();
@@ -2445,12 +2443,11 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   let justBlueNode;
   const visitor = new VisitorLogger();
 
-  const wrap = children =>
+  const wrap = children => (
     <Surface visitor={visitor} width={2} height={2}>
-      <LinearCopy>
-        {children}
-      </LinearCopy>
-    </Surface>;
+      <LinearCopy>{children}</LinearCopy>
+    </Surface>
+  );
 
   class JustBlue extends React.PureComponent {
     render() {
@@ -2484,14 +2481,15 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
       );
     }
   }
-  const MissingOrInvalidUniforms = () =>
+  const MissingOrInvalidUniforms = () => (
     <Node
       ref={ref => {
         justBlueNode = ref;
       }}
       shader={shaders.justBlue}
       uniforms={{ nope: [1, 2] }}
-    />;
+    />
+  );
 
   class TreeWithZombiesDontBreak extends React.Component {
     render() {
@@ -2721,9 +2719,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
           <Bus ref="bus">
             <JustBlue blue={0.2} />
           </Bus>
-          <LinearCopy>
-            {() => this.refs.bus}
-          </LinearCopy>
+          <LinearCopy>{() => this.refs.bus}</LinearCopy>
         </Surface>
       );
     }
