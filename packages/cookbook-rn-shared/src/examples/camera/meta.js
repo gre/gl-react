@@ -9,7 +9,7 @@ import { LinearCopy, NearestCopy } from "gl-react";
 import getGLReactImplementation from "../../gl-react-implementation";
 const { Surface } = getGLReactImplementation();
 export const ToolboxFooter = ({ width, color, interpolation }) => (
-  <Surface width={width} height={20}>
+  <Surface style={{ width, height: 20 }}>
     {interpolation === "linear"
       ? <LinearCopy>{colorScales[color]}</LinearCopy>
       : <NearestCopy>{colorScales[color]}</NearestCopy>}

@@ -16,21 +16,23 @@ export const toolbox = [
     title: "color scale",
     Editor: makeSelect(
       Object.keys(colorScales).map(cs => ({ key: cs, label: cs }))
-    ),
+    )
   },
   {
     prop: "interpolation",
     Editor: makeSelect([
       { key: "linear", label: "linear interpolation" },
-      { key: "nearest", label: "nearest interpolation" },
-    ]),
-  },
+      { key: "nearest", label: "nearest interpolation" }
+    ])
+  }
 ];
 
 export const ToolboxFooter = ({ width, color, interpolation }) => (
-  <Surface width={width} height={20}>
-    {interpolation === "linear"
-      ? <LinearCopy>{colorScales[color]}</LinearCopy>
-      : <NearestCopy>{colorScales[color]}</NearestCopy>}
+  <Surface style={{ width, height: 20 }}>
+    {interpolation === "linear" ? (
+      <LinearCopy>{colorScales[color]}</LinearCopy>
+    ) : (
+      <NearestCopy>{colorScales[color]}</NearestCopy>
+    )}
   </Surface>
 );
