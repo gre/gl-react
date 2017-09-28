@@ -7,25 +7,25 @@
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
-    "babel-jest": "^19.0.0",
+    "babel-jest": "19",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
-    "baboon-image": "github:gre/baboon-image",
-    "flow-copy-source": "^1.1.0",
-    "gl-react": "^3.13.0",
-    "gl-react-headless": "^3.13.0",
-    "gl-texture2d": "^2.0.12",
-    "jest": "^19.0.0",
-    "ndarray": "^1.0.18",
-    "ndpack-image": "github:gre/ndpack-image",
-    "promise-defer": "^1.0.0",
-    "react": "16.0.0-alpha.12",
-    "react-test-renderer": "16.0.0-alpha.12",
-    "webgltexture-loader": "^0.6.0"
+    "flow-copy-source": "^1.1.0"
   },
   "version": "3.13.0",
   "dependencies": {
-    "prop-types": "^15.5.8"
+    "gl-react-headless": "^3.13.0",
+    "gl-react": "^3.13.0",
+    "gl-texture2d": "^2.0.12",
+    "jest": "19",
+    "jest-cli": "19",
+    "ndarray": "^1.0.18",
+    "promise-defer": "^1.0.0",
+    "prop-types": "^15.5.8",
+    "react": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
+    "webgltexture-loader": "^0.6.0",
+    "webgltexture-loader-ndarray": "^0.6.0"
   }
 }

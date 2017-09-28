@@ -6,7 +6,8 @@
   "scripts": {
     "postinstall": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
     "watch": "lerna run watch --stream --no-sort",
-    "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
+    "prettier":
+      "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "flow": "cd packages/gl-react && flow --quiet",
     "test": "cd packages/tests && yarn test",
     "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u"
@@ -24,7 +25,7 @@
     "documentation": "4.0.0-beta.18",
     "flow-bin": "^0.51.1",
     "flow-copy-source": "^1.2.0",
-    "lerna": "^2.1.0",
+    "lerna": "^2.2.0",
     "prettier": "^1.5.3"
   }
 }

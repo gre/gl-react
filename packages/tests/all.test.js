@@ -27,7 +27,6 @@ import { Surface } from "gl-react-headless";
 import loseGL from "gl-react-headless/lib/loseGL";
 import React from "react";
 import renderer from "react-test-renderer";
-import baboon from "baboon-image";
 import ndarray from "ndarray";
 import invariant from "invariant";
 
@@ -277,11 +276,11 @@ test("ndarray texture", () => {
     surface.capture(0, 0, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  helloTexture.setState({ t: baboon });
+  helloTexture.setState({ t: yellow3x3 });
   helloTexture.flush();
   expectToBeCloseToColorArray(
     surface.capture(0, 0, 1, 1).data,
-    new Uint8Array([126, 153, 153, 255])
+    new Uint8Array([255, 255, 0, 255])
   );
   helloTexture.setState({ t: null });
   helloTexture.flush();
@@ -609,7 +608,7 @@ test("bus uniform code style", () => {
       </Node>
     </Surface>
   );
-  expect(
+  expectToBeCloseToColorArray(
     inst.getInstance().capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
@@ -644,7 +643,7 @@ test("bus example 1", () => {
     }
   }
   const inst = create(<Example />);
-  expect(
+  expectToBeCloseToColorArray(
     inst.getInstance().refs.bus.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
@@ -979,7 +978,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
     }
   }
   const inst = create(<Example />);
-  expect(
+  expectToBeCloseToColorArray(
     inst.getInstance().refs.surface.capture(10, 10, 1, 1).data,
     new Uint8Array([255, 102, 50, 204])
   );
@@ -1046,10 +1045,13 @@ test("a node can be captured and resized", () => {
   const inst = create(render(2, 2));
   const surface = inst.getInstance();
   invariant(node, "node is defined");
-  expect(node.capture(0, 1, 1, 1).data, new Uint8Array([64, 191, 0, 255]));
+  expectToBeCloseToColorArray(
+    node.capture(0, 1, 1, 1).data,
+    new Uint8Array([64, 191, 0, 255])
+  );
   inst.update(render(20, 20));
   surface.flush();
-  expect(
+  expectToBeCloseToColorArray(
     node.capture(12, 1, 1, 2).data,
     new Uint8Array([159, 19, 0, 255, 159, 32, 0, 255])
   );

@@ -1,7 +1,8 @@
 //@flow
 import type { VisitorLike } from "./Visitor";
 
-let _globalVisitors: Array<VisitorLike> = [];
+let _globalVisitors: Array<VisitorLike> = (global.__glReactGlobalVisitor =
+  global.__glReactGlobalVisitor || []);
 
 /**
  * Utility to visit the Surface & Node draw lifecycle (used for logging and testing)

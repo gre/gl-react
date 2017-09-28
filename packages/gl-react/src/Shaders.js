@@ -111,7 +111,7 @@ export function shaderInfoEquals(s1: ShaderInfo, s2: ShaderInfo): boolean {
  * Define shaders statically.
  * @namespace
  */
-const Shaders = {
+const Shaders = (global.__glReactShaders = global.__glReactShaders || {
   /**
    * @memberof Shaders
    * @param {ShadersDefinition} shadersDef - an object that statically define all shaders.
@@ -159,5 +159,5 @@ const Shaders = {
     );
     return shaderResults[shaderIdentifier.id];
   }
-};
+});
 export default Shaders;
