@@ -9,6 +9,14 @@
 To use this library, you will need install `gl-react` and `gl-react-native` which are pure JS libraries.
 For the native WebGL implementation, you also need to install `react-native-webgl`, please refer to the [README / Install](https://github.com/gre/react-native-webgl#install).
 
+**To summarize:**
+
+```
+yarn add gl-react@next gl-react-native@next react-native-webgl
+```
+
+and then, [**don't forget to see how to configure react-native-webgl**]((https://github.com/gre/react-native-webgl#install)).
+
 ## Links
 
 - [Github](https://github.com/gre/gl-react)
