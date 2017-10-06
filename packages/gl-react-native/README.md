@@ -15,7 +15,7 @@ For the native WebGL implementation, you also need to install `react-native-webg
 yarn add gl-react@next gl-react-native@next react-native-webgl
 ```
 
-and then, [**don't forget to see how to configure react-native-webgl**]((https://github.com/gre/react-native-webgl#install)).
+and then, [**don't forget to see how to configure react-native-webgl**](https://github.com/gre/react-native-webgl#install).
 
 ## Links
 
