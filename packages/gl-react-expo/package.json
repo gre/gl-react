@@ -28,7 +28,7 @@
   "dependencies": {
     "invariant": "^2.2.1",
     "prop-types": "^15.5.8",
-    "webgltexture-loader-expo": "^0.7.0"
+    "webgltexture-loader-expo": "^0.8.0"
   },
   "scripts": {
     "prepublish":
