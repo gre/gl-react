@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import Code from "./Code";
 import { Surface } from "gl-react-dom";
 import { Node, Shaders, GLSL, Uniform, LinearCopy } from "gl-react";
@@ -97,9 +97,9 @@ class Ex1 extends Component {
   render() {
     const { time } = this.props;
     const { showCode, showInspector } = this.state;
-    const persistence = 0.75 - 0.20 * Math.cos(0.0005 * time);
+    const persistence = 0.75 - 0.2 * Math.cos(0.0005 * time);
     const red = 0.6 + 0.4 * Math.cos(0.004 * time);
-    const scale = 0.70 + 0.40 * Math.cos(0.001 * time);
+    const scale = 0.7 + 0.4 * Math.cos(0.001 * time);
     const angle = 2 * Math.PI * (0.5 + 0.5 * Math.cos(0.001 * time));
     return (
       <div className="ex">
@@ -113,28 +113,29 @@ class Ex1 extends Component {
               </MotionBlur>
             </LinearCopy>
           </Surface>
-          {!showCode
-            ? <div onClick={this.onShowCode} className="showcode">
-                SHOW ME THE CODE!
-              </div>
-            : <Code>{`  <Surface width={200} height={200}>
+          {!showCode ? (
+            <div onClick={this.onShowCode} className="showcode">
+              SHOW ME THE CODE!
+            </div>
+          ) : (
+            <Code>{`  <Surface width={200} height={200}>
       <MotionBlur persistence={${persistence.toFixed(2)}}>
         <Rotate scale={${scale.toFixed(2)}} angle={${angle.toFixed(2)}}>
           <HelloGL red={${red.toFixed(1)}} />
         </Rotate>
       </MotionBlur>
-    </Surface>`}</Code>}
+    </Surface>`}</Code>
+          )}
         </header>
-        {showCode
-          ? !showInspector
-              ? <div
-                  onClick={this.onShowInspector}
-                  className="showunderthehood"
-                >
-                  SHOW ME UNDER THE HOOD!
-                </div>
-              : <Inspector />
-          : null}
+        {showCode ? (
+          !showInspector ? (
+            <div onClick={this.onShowInspector} className="showunderthehood">
+              SHOW ME UNDER THE HOOD!
+            </div>
+          ) : (
+            <Inspector />
+          )
+        ) : null}
       </div>
     );
   }
@@ -147,26 +148,19 @@ export default class Dashboard extends Component {
     return (
       <div className="dashboard">
         <h2>
-          gl-react is a
-          {" "}
-          <a href="http://facebook.github.io/react/">React</a>
-          {" "}
+          gl-react is a <a href="http://facebook.github.io/react/">React</a>{" "}
           library to write and compose WebGL shaders.
         </h2>
         <Ex1Loop />
         <nav>
-          <Link to="/hellogl">
-            Checkout more examples
-          </Link>
+          <Link to="/hellogl">Checkout more examples</Link>
           <a href="http://greweb.me/2016/12/gl-react-v3/">
             gl-react-v3 release article
           </a>
           <a href="http://github.com/gre/gl-react">
             Explore source code on Github
           </a>
-          <a href="https://gitter.im/gl-react">
-            Chat with us
-          </a>
+          <a href="https://gitter.im/gl-react">Chat with us</a>
         </nav>
       </div>
     );

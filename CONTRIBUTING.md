@@ -4,8 +4,8 @@ Contributions are always welcome, no matter how large or small.
 
 ## Requirement
 
-- **Node 6**+
-- [yarn](https://yarnpkg.com)
+* **Node 6**+
+* [yarn](https://yarnpkg.com)
 
 ## Setup / Building
 
@@ -34,12 +34,6 @@ if you need to regenerate the snapshots:
 
 ```sh
 yarn run test-rewrite-snapshots
-```
-
-typecheck:
-
-```sh
-yarn run flow
 ```
 
 Finally, Please check that ALL examples of the cookbook are working correctly.

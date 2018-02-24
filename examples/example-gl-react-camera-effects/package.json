@@ -1,0 +1,15 @@
+{
+  "name": "example-gl-react-camera-effects",
+  "version": "3.13.0",
+  "description": "GL React Native cookbook",
+  "author": "Gaëtan Renaudeau",
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "expo": "25.0.0",
+    "gl-react": "^3.13.0",
+    "gl-react-expo": "^3.13.0",
+    "react": "^16.0.0",
+    "react-native": "github:exponentjs/react-native#sdk-25.0.0"
+  }
+}

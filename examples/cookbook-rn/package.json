@@ -1,0 +1,31 @@
+{
+  "name": "cookbook-rn",
+  "version": "3.13.0",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "prepare":
+      "rm -rf ./shared/ && cp -R ../cookbook-rn-shared/ shared && cp gl-react-implementation.js shared && ./shared/examples/gen.sh > ./shared/examples/index.js"
+  },
+  "dependencies": {
+    "@expo/ex-navigation": "^2.11.0",
+    "core-js": "^2.4.1",
+    "gl-react-native": "^3.13.0",
+    "gl-react": "^3.13.0",
+    "gl-transitions": "^0.44.0",
+    "ndarray": "~1.0.18",
+    "prop-types": "^15.6.0",
+    "raf": "~3.3.0",
+    "react-gl-transition": "^1.9.0",
+    "react-motion": "^0.5.0",
+    "react-native-webgl": "0.x",
+    "react-native": "0.53.x",
+    "react-navigation": "^1.1.2",
+    "react": "16.x",
+    "seedrandom": "github:gre/seedrandom#released",
+    "three": "0.85.0"
+  },
+  "devDependencies": {
+    "babel-preset-react-native": "~1.9.1"
+  }
+}

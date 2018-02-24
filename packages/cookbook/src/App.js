@@ -2,12 +2,17 @@
 import React, { PureComponent, Component } from "react";
 import PropTypes from "prop-types";
 import { findDOMNode } from "react-dom";
+import queryString from "query-string";
 import "./App.css";
-import { Link } from "react-router";
+import { Link, Route, Switch } from "react-router-dom";
 import logopng from "./logo.png";
 import Code from "./Code";
 import Sidebar from "react-sidebar";
 import Inspector from "./Inspector";
+import examples from "./examples";
+import ExamplePage from "./ExamplePage";
+import Docs, { DocToc } from "./Docs";
+import Dashboard from "./Dashboard";
 
 const conf = {
   version: process.env.REACT_APP_GL_VERSION,
@@ -19,34 +24,40 @@ function triggerLink(linkRef) {
   if (dom) dom.click();
 }
 
-const lenseSidebar = ({ location: { query: { menu, inspector } } }) => ({
-  menu,
-  inspector
-});
+const lenseSidebar = ({ location }) => {
+  const { menu, inspector } = queryString.parse(location.search);
+  return {
+    menu,
+    inspector
+  };
+};
 
 class MenuContext extends PureComponent {
   props: {
-    examples: Array<*>,
     menu: boolean,
     inspector: boolean,
     currentExample: ?Object
   };
   render() {
-    const { examples, menu, inspector } = this.props;
+    const { menu, inspector } = this.props;
+    const all = Object.keys(examples);
     return (
       <div>
-        <h3>{examples.length} Examples</h3>
+        <h3>{all.length} Examples</h3>
         <ul>
-          {examples.map(ex => (
-            <li key={ex.path}>
+          {all.map(key => (
+            <li key={key}>
               <Link
-                to={{ pathname: ex.path, query: { menu, inspector } }}
+                to={{
+                  pathname: key,
+                  search: queryString.stringify({ menu, inspector })
+                }}
                 activeClassName="active"
                 className="example-link"
               >
-                <strong>{ex.path}</strong>
+                <strong>{key}</strong>
                 &nbsp;
-                <span>{ex.title}</span>
+                <span>{examples[key].title}</span>
               </Link>
             </li>
           ))}
@@ -66,9 +77,11 @@ class Header extends Component {
     const { currentExample, toToggleMenu, toToggleInspector } = this.props;
     return (
       <header>
-        {currentExample
-          ? <Link to={toToggleMenu} className="sidebar-opener">☰</Link>
-          : null}
+        {currentExample ? (
+          <Link to={toToggleMenu} className="sidebar-opener">
+            ☰
+          </Link>
+        ) : null}
         <Link to="/" className="logo">
           <img alt="" src={logopng} />
           <span className="t1">gl</span>
@@ -77,9 +90,7 @@ class Header extends Component {
           <span className="v">{conf.version}</span>
         </Link>
         <nav>
-          <Link to="/api">
-            API
-          </Link>
+          <Link to="/api">API</Link>
           <Link
             to={
               currentExample && currentExample.path === "hellogl"
@@ -89,16 +100,14 @@ class Header extends Component {
           >
             Examples
           </Link>
-          <a href="http://github.com/gre/gl-react">
-            Github
-          </a>
+          <a href="http://github.com/gre/gl-react">Github</a>
         </nav>
-        <h1>
-          {currentExample && currentExample.title}
-        </h1>
-        {currentExample
-          ? <Link to={toToggleInspector} className="inspector-opener">☰</Link>
-          : null}
+        <h1>{currentExample && currentExample.title}</h1>
+        {currentExample ? (
+          <Link to={toToggleInspector} className="inspector-opener">
+            ☰
+          </Link>
+        ) : null}
       </header>
     );
   }
@@ -135,17 +144,17 @@ class App extends Component {
 
   render() {
     const { children, location, route, routes } = this.props;
+    const m = location.pathname.match(/\/([^/]+)/);
+    const firstPathPart = (m && m[1]) || "";
     const { menu, inspector } = lenseSidebar(this.props);
-    const currentExample = routes[1].isExample ? routes[1] : null;
-    const { LeftSidebar } = routes[1];
-    const menuOpened = (LeftSidebar && !currentExample) || !!menu;
+    const currentExample = examples[firstPathPart];
+    const menuOpened = firstPathPart === "api" || !!menu;
     const inspectorOpened = !!currentExample && !!inspector;
-    const examples = route.childRoutes;
-    const index = examples.indexOf(currentExample);
-    let prev = examples[index - 1];
-    if (prev && !prev.isExample) prev = null;
-    let next = examples[index + 1];
-    if (next && !next.isExample) next = null;
+    const examplesKeys = Object.keys(examples);
+    const index = examplesKeys.indexOf(firstPathPart);
+    let prev = examplesKeys[index - 1];
+    let next = examplesKeys[index + 1];
+    const query = queryString.parse(location.search);
     return (
       <Sidebar
         docked={inspectorOpened}
@@ -153,88 +162,101 @@ class App extends Component {
         sidebarClassName="inspector"
         sidebar={inspectorOpened ? <Inspector /> : <span />}
       >
-
         <Sidebar
           docked={menuOpened}
           contentClassName="App"
           sidebarClassName="menu"
           sidebar={
-            currentExample
-              ? <MenuContext
-                  menu={menu}
-                  inspector={inspector}
-                  currentExample={currentExample}
-                  examples={examples}
-                />
-              : LeftSidebar ? <LeftSidebar /> : <span />
+            currentExample ? (
+              <MenuContext
+                menu={menu}
+                inspector={inspector}
+                currentExample={currentExample}
+              />
+            ) : (
+              <Switch>
+                <Route path="/api" component={DocToc} />
+                <Route render={() => <span />} />
+              </Switch>
+            )
           }
         >
-
           <Header
             currentExample={currentExample}
             toToggleMenu={{
               pathname: location.pathname,
-              query: {
-                ...location.query,
+              search: queryString.stringify({
+                ...query,
                 menu: !menuOpened ? true : undefined,
                 ...(!menuOpened ? { inspector: undefined } : null)
-              }
+              })
             }}
             toToggleInspector={{
               pathname: location.pathname,
-              query: {
-                ...location.query,
+              search: queryString.stringify({
+                ...query,
                 inspector: !inspectorOpened ? true : undefined,
                 ...(!inspectorOpened ? { menu: undefined } : null)
-              }
+              })
             }}
           />
 
-          {prev
-            ? <Link
-                ref="left"
-                className="left"
-                to={{
-                  pathname: prev.path,
-                  query: { menu, inspector }
-                }}
-              >
-                ❮
-              </Link>
-            : null}
+          {prev ? (
+            <Link
+              ref="left"
+              className="left"
+              to={{
+                pathname: prev,
+                search: queryString.stringify({ menu, inspector })
+              }}
+            >
+              ❮
+            </Link>
+          ) : null}
 
-          {next
-            ? <Link
-                ref="right"
-                className="right"
-                to={{
-                  pathname: next.path,
-                  query: { menu, inspector }
-                }}
-              >
-                ❯
-              </Link>
-            : null}
+          {next ? (
+            <Link
+              ref="right"
+              className="right"
+              to={{
+                pathname: next,
+                search: queryString.stringify({ menu, inspector })
+              }}
+            >
+              ❯
+            </Link>
+          ) : null}
 
           <div className="container">
+            <Switch>
+              <Route path="/" exact component={Dashboard} />
+              {Object.keys(examples).map(key => (
+                <Route
+                  path={"/" + key}
+                  key={key}
+                  isExample
+                  render={props => (
+                    <ExamplePage example={examples[key]} {...props} />
+                  )}
+                />
+              ))}
+              <Route path="/api" component={Docs} />
+            </Switch>
 
-            {children}
-
-            {currentExample
-              ? <div className="source">
-                  <Code>{currentExample.source}</Code>
-                  <a
-                    className="viewsource"
-                    href={
-                      conf.githubprefix + "src/examples/" + currentExample.path
-                    }
-                  >
-                    view source
-                  </a>
-                </div>
-              : null}
+            {currentExample ? (
+              <div className="source">
+                <Code>{currentExample.source}</Code>
+                <a
+                  className="viewsource"
+                  href={
+                    conf.githubprefix + "src/examples/" + currentExample.path
+                  }
+                >
+                  view source
+                </a>
+              </div>
+            ) : null}
           </div>
-
         </Sidebar>
       </Sidebar>
     );

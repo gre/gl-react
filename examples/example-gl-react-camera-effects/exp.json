@@ -1,0 +1,31 @@
+{
+  "name": "gl-react-camera-effects",
+  "privacy": "public",
+  "description": "GL React Camera Effects",
+  "slug": "gl-react-camera-effects",
+  "sdkVersion": "25.0.0",
+  "version": "1.0.1",
+  "orientation": "portrait",
+  "primaryColor": "#cccccc",
+  "icon":
+    "https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png",
+  "notification": {
+    "icon":
+      "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
+    "color": "#000000"
+  },
+  "loading": {
+    "icon":
+      "https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png",
+    "hideExponentText": false
+  },
+  "packagerOpts": {
+    "assetExts": ["ttf", "mp4"]
+  },
+  "android": {
+    "package": "fr.greweb.glreactcameraffects"
+  },
+  "ios": {
+    "bundleIdentifier": "fr.greweb.glreactcameraffects"
+  }
+}

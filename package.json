@@ -1,19 +1,21 @@
 {
   "name": "gl-react-dev",
   "version": "0.0.0",
+  "workspaces": ["packages/*"],
   "private": true,
   "license": "MIT",
   "scripts": {
-    "postinstall": "lerna bootstrap && ./packages/undo-unsupported-symlinks.sh",
-    "watch": "lerna run watch --stream --no-sort",
+    "preinstall":
+      "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\u001b[31mPlease use yarn\u001b[0m'); process.exit(1); }\"",
+    "build": "BABEL_ENV=production && lerna run build",
+    "watch": "lerna run --parallel watch",
     "prettier":
       "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
-    "flow": "cd packages/gl-react && flow --quiet",
     "test": "cd packages/tests && yarn test",
-    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u"
-  },
-  "dependencies": {
-    "react": "16.0.0-alpha.12"
+    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
+    "clean": "rm -rf node_modules packages/*/node_modules/ packages/*/lib",
+    "publish":
+      "yarn && lerna run clean && lerna run build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -23,9 +25,8 @@
     "browserify": "^14.3.0",
     "browserify-shim": "^3.8.12",
     "documentation": "4.0.0-beta.18",
-    "flow-bin": "^0.51.1",
     "flow-copy-source": "^1.2.0",
-    "lerna": "^2.2.0",
+    "lerna": "^2.9.0",
     "prettier": "^1.5.3"
   }
 }
