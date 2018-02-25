@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { findDOMNode } from "react-dom";
 import queryString from "query-string";
 import "./App.css";
-import { Link, Route, Switch } from "react-router-dom";
+import { NavLink, Link, Route, Switch } from "react-router-dom";
 import logopng from "./logo.png";
 import Code from "./Code";
 import Sidebar from "react-sidebar";
@@ -47,9 +47,9 @@ class MenuContext extends PureComponent<*> {
         <ul>
           {all.map(key => (
             <li key={key}>
-              <Link
+              <NavLink
                 to={{
-                  pathname: key,
+                  pathname: "/" + key,
                   search: queryString.stringify({ menu, inspector })
                 }}
                 activeClassName="active"
@@ -58,7 +58,7 @@ class MenuContext extends PureComponent<*> {
                 <strong>{key}</strong>
                 &nbsp;
                 <span>{examples[key].title}</span>
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
