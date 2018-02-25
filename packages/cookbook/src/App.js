@@ -32,7 +32,7 @@ const lenseSidebar = ({ location }) => {
   };
 };
 
-class MenuContext extends PureComponent {
+class MenuContext extends PureComponent<*> {
   props: {
     menu: boolean,
     inspector: boolean,
@@ -67,7 +67,7 @@ class MenuContext extends PureComponent {
   }
 }
 
-class Header extends Component {
+class Header extends Component<*> {
   props: {
     currentExample: ?Object,
     toToggleMenu: Object,
@@ -113,12 +113,9 @@ class Header extends Component {
   }
 }
 
-class App extends Component {
+class App extends Component<*> {
   props: {
-    children: any,
-    location: Object,
-    routes: Array<*>,
-    route: Object
+    location: Object
   };
   static contextTypes = {
     router: PropTypes.object.isRequired
@@ -143,7 +140,7 @@ class App extends Component {
   };
 
   render() {
-    const { children, location, route, routes } = this.props;
+    const { location } = this.props;
     const m = location.pathname.match(/\/([^/]+)/);
     const firstPathPart = (m && m[1]) || "";
     const { menu, inspector } = lenseSidebar(this.props);

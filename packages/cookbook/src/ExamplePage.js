@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import queryString from "query-string";
 
 const encodeQueryValue = value => JSON.stringify(value);
