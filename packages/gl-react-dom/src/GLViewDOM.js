@@ -126,7 +126,10 @@ export default class GLViewDOM extends Component {
   render() {
     const { error } = this.state;
     let { width, height, pixelRatio, style, debug, ...rest } = this.props;
-    if (!pixelRatio) pixelRatio = Number(window.devicePixelRatio || 1);
+    if (!pixelRatio)
+      pixelRatio = Number(
+        (typeof window === "object" && window.devicePixelRatio) || 1
+      );
     for (let k in propTypes) {
       if (rest.hasOwnProperty(k)) {
         delete rest[k];
