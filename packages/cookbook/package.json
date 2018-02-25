@@ -27,7 +27,7 @@
     "react": "^16.0.0",
     "react-color": "^2.4.0",
     "react-dom": "^16.0.0",
-    "react-gl-transition": "^1.9.0",
+    "react-gl-transition": "^1.19.0",
     "react-json2d": "^0.3.0",
     "react-motion": "^0.5.0",
     "react-prism": "^4.0.0",
@@ -39,9 +39,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run generate-doc && react-scripts build && cp build/index.html build/200.html",
+    "build":
+      "npm run generate-doc && react-scripts build && cp build/index.html build/200.html",
     "eject": "react-scripts eject",
     "generate-examples": "./src/examples/gen.sh",
-    "generate-doc": "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
+    "generate-doc":
+      "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
   }
 }

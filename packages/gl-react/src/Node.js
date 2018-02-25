@@ -160,6 +160,7 @@ type Props = {|
   shader: ShaderIdentifier | ShaderDefinition,
   uniformsOptions: UniformsOptions,
   uniforms: Uniforms,
+  ignoreUnusedUniforms?: Array<string> | boolean,
   sync?: boolean,
   width?: number,
   height?: number,
@@ -360,6 +361,7 @@ const NodePropTypes = {
   shader: PropTypes.object.isRequired,
   uniformsOptions: PropTypes.object,
   uniforms: PropTypes.object,
+  ignoreUnusedUniforms: PropTypes.any,
   sync: PropTypes.bool,
   width: PropTypes.number,
   height: PropTypes.number,
@@ -385,6 +387,7 @@ const NodePropTypes = {
  * @prop {Clear} [clear] - configure the clear to use (color,...)
  * @prop {Function} [onDraw] - a callback called each time a draw was produced for this Node.
  * @prop {any} [children] - in advanced use-cases, you can render things like Bus or contents to be used by Node
+ * @prop {any} [ignoreUnusedUniforms] - ignore all or some uniforms to be warned if they are not existing or used in the actual shader code (by default it's good for dev to warn them but they are usecase where it's not easy to know, like if the GLSL code come from the user). boolean to ignore all or whitelist array of uniforms name to ignore.
  * @example
  *  <Node shader={shaders.helloGL} />
  */
@@ -804,7 +807,8 @@ export default class Node extends Component {
       shader: shaderProp,
       blendFunc,
       clear,
-      onDraw
+      onDraw,
+      ignoreUnusedUniforms
     } = this.drawProps;
 
     //~ PREPARE phase
@@ -1005,9 +1009,16 @@ export default class Node extends Component {
     const prepareUniform = key => {
       const uniformType = types.uniforms[key];
       if (!uniformType) {
-        console.warn(
-          `${nodeName} uniform '${key}' is not declared, nor used, in your shader code`
-        );
+        const ignoredWarn =
+          ignoreUnusedUniforms === true ||
+          (ignoreUnusedUniforms instanceof Array &&
+            ignoreUnusedUniforms.includes(key));
+        if (!ignoredWarn) {
+          console.warn(
+            `${nodeName} uniform '${key}' is not declared, nor used, in your shader code`
+          );
+        }
+        return { key };
       }
       const uniformValue = uniforms[key];
       usedUniforms.splice(usedUniforms.indexOf(key), 1);
@@ -1066,7 +1077,9 @@ export default class Node extends Component {
           values = uniformType.map(() => null);
         } else if (v.length !== uniformType.length) {
           console.warn(
-            `${nodeName}, uniform '${key}' should be an array of exactly ${uniformType.length} textures (not ${v.length}).`
+            `${nodeName}, uniform '${key}' should be an array of exactly ${
+              uniformType.length
+            } textures (not ${v.length}).`
           );
           values = uniformType.map(() => null);
         } else {

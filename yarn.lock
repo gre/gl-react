@@ -7920,9 +7920,9 @@ react-error-overlay@^1.0.9:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
-react-gl-transition@^1.9.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/react-gl-transition/-/react-gl-transition-1.13.0.tgz#0a6900c880a180d91b46db1fefdf746d77e027c4"
+react-gl-transition@^1.19.0:
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/react-gl-transition/-/react-gl-transition-1.19.0.tgz#bff7ab8fa7d1fb7adb83575ba0b45bf67c8a633b"
 
 react-json2d@^0.3.0:
   version "0.3.0"
