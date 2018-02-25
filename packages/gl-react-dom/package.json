@@ -1,10 +1,9 @@
 {
   "name": "gl-react-dom",
-  "version": "3.13.0",
+  "version": "3.14.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
-  "description":
-    "DOM implementation of gl-react, an universal React library to write and compose WebGL shaders",
+  "description": "DOM implementation of gl-react, an universal React library to write and compose WebGL shaders",
   "keywords": [
     "gl-react",
     "gl",
@@ -31,7 +30,7 @@
     "react": "*"
   },
   "devDependencies": {
-    "gl-react": "^3.13.0"
+    "gl-react": "^3.14.0"
   },
   "dependencies": {
     "invariant": "^2.2.1",
@@ -40,9 +39,7 @@
     "webgltexture-loader-dom": "^0.6.0"
   },
   "scripts": {
-    "build":
-      "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib gl-react-dom.js && babel --source-maps -d lib src && flow-copy-source -v src lib && browserify lib/index.js -t [ browserify-shim ] --standalone GLReactDOM > gl-react-dom.js",
-    "watch":
-      "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
+    "build": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf lib gl-react-dom.js && babel --source-maps -d lib src && flow-copy-source -v src lib && browserify lib/index.js -t [ browserify-shim ] --standalone GLReactDOM > gl-react-dom.js",
+    "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   }
 }

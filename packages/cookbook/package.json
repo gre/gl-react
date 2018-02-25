@@ -1,6 +1,6 @@
 {
   "name": "gl-react-cookbook",
-  "version": "3.13.0",
+  "version": "3.14.0",
   "private": true,
   "devDependencies": {
     "babel-preset-react-app": "^3.0.1",
@@ -10,8 +10,8 @@
   "dependencies": {
     "animated": "^0.2.0",
     "github-slugger": "^1.1.1",
-    "gl-react": "^3.13.0",
-    "gl-react-dom": "^3.13.0",
+    "gl-react": "^3.14.0",
+    "gl-react-dom": "^3.14.0",
     "gl-shader": "^4.2.1",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.19.0",
@@ -39,11 +39,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build":
-      "npm run generate-doc && react-scripts build && cp build/index.html build/200.html",
+    "build": "npm run generate-doc && react-scripts build && cp build/index.html build/200.html",
     "eject": "react-scripts eject",
     "generate-examples": "./src/examples/gen.sh",
-    "generate-doc":
-      "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
+    "generate-doc": "cd ../.. && export PATH=$(npm bin):$PATH && documentation build --shallow packages/gl-react/flow/*.js packages/gl-react/src/**.js -c documentation.yml -g --name gl-react -o ./packages/cookbook/src/API.json -f json"
   }
 }
