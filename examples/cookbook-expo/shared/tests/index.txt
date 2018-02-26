@@ -1,5 +1,0 @@
-alpha
-overlap
-overlapalpha
-orientation
-many
