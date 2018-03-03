@@ -2879,7 +2879,7 @@ function update () {
 
     // player lifecycle
 
-    if (lifes == 0 && playingSince > 0) {
+    if (lifes === 0 && playingSince > 0) {
       // player enter
       resurrectionTime = t;
       lifes = 4;

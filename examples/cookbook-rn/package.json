@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "core-js": "^2.4.1",
-    "gl-react": "3.15.0-beta.4cfdec8f",
-    "gl-react-native": "3.15.0-beta.4cfdec8f",
+    "gl-react": "^3.13.0",
+    "gl-react-native": "^3.13.0",
     "gl-transitions": "^1.37.0",
     "ndarray": "~1.0.18",
     "prop-types": "^15.6.0",

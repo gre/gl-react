@@ -1810,16 +1810,16 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-native@3.15.0-beta.4cfdec8f:
-  version "3.15.0-beta.4cfdec8f"
-  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.15.0-beta.4cfdec8f.tgz#3a6ff39f9fd842bd3133c73bed69f8963656033c"
+gl-react-native@3.15.0-beta.b489437b:
+  version "3.15.0-beta.b489437b"
+  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.15.0-beta.b489437b.tgz#1848005f779b9171f2dc2a52ac7c3c64b05e9ef7"
   dependencies:
     prop-types "^15.6.1"
     webgltexture-loader-react-native "^0.6.0"
 
-gl-react@3.15.0-beta.4cfdec8f:
-  version "3.15.0-beta.4cfdec8f"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.15.0-beta.4cfdec8f.tgz#aac1eff41b1fe321a5f96edccc099a66172ba95a"
+gl-react@3.15.0-beta.b489437b:
+  version "3.15.0-beta.b489437b"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.15.0-beta.b489437b.tgz#472c5c9b659185be97c8f5cff50bb99c1f492818"
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.1"
