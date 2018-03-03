@@ -21,7 +21,7 @@ type NDArray = {
 
 declare module "ndarray" {
   declare type NDArray = NDArray;
-  declare var exports: (
+  declare module.exports: (
     arr: $TypedArray | Array<number>,
     shape?: Array<number>,
     stride?: Array<number>,

@@ -16,8 +16,8 @@ import PropTypes from "prop-types";
  *  <FooConnected /> // you don't have to provide width, height.
  *  <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height.
  */
-const connectSize = (GLComponent: ReactClass<*>) =>
-  class extends Component {
+const connectSize = (GLComponent: *) =>
+  class extends Component<*> {
     props: {
       width?: number,
       height?: number,

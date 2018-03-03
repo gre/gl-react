@@ -16,7 +16,7 @@ declare module "typedarray-pool" {
     "data" |
     "uint8_clamped" |
     "buffer";
-  declare var exports: {
+  declare module.exports: {
     malloc: (n: number, t?: DType) => $TypedArray,
     free: (array: $TypedArray) => void,
     mallocUint8: (n: number) => Uint8Array,

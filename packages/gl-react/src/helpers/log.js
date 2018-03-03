@@ -105,6 +105,7 @@ getOrderedMatches = function(str) {
     }
   });
   return matches.sort(function(a, b) {
+    // $FlowFixMe
     return a.match.index - b.match.index;
   });
 };

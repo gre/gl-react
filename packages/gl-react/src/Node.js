@@ -391,7 +391,7 @@ const NodePropTypes = {
  * @example
  *  <Node shader={shaders.helloGL} />
  */
-export default class Node extends Component {
+export default class Node extends Component<*, *> {
   props: Props;
   drawProps: Props = this.props;
   context: SurfaceContext;
@@ -437,12 +437,9 @@ export default class Node extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { glSurface: { gl } } = this.context;
     if (gl) this._prepareGLObjects(gl);
-  }
-
-  componentDidMount() {
     this.context.glParent._addGLNodeChild(this);
     this.redraw();
     if (this.props.sync) this.flush();
@@ -457,10 +454,6 @@ export default class Node extends Component {
     this._needsRedraw = false;
     this.context.glParent._removeGLNodeChild(this);
     this.dependencies.forEach(d => d._removeDependent(this));
-  }
-
-  componentWillReceiveProps(nextProps: Props, nextContext: *) {
-    this._syncNextDrawProps(nextProps, nextContext);
   }
 
   _syncNextDrawProps(nextProps: Props, nextContext: *) {
@@ -482,7 +475,7 @@ export default class Node extends Component {
     uniform: string,
     value: mixed,
     index: number
-  ): ?React.Element<*> => {
+  ): ?React$Element<*> => {
     if (!React.isValidElement(value)) {
       if (typeof value === "function") {
         value = (value: AsyncMixed)(this.redraw);
@@ -524,6 +517,7 @@ export default class Node extends Component {
   }
 
   componentDidUpdate() {
+    this._syncNextDrawProps(this.props, this.context);
     this.redraw();
     if (this.props.sync) this.flush();
   }
@@ -1018,7 +1012,7 @@ export default class Node extends Component {
             `${nodeName} uniform '${key}' is not declared, nor used, in your shader code`
           );
         }
-        return { key };
+        return { key, value: undefined };
       }
       const uniformValue = uniforms[key];
       usedUniforms.splice(usedUniforms.indexOf(key), 1);

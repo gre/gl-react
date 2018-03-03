@@ -14,5 +14,5 @@ declare module "gl-shader" {
       uniforms: { [key:string]: string|Array<string> },
     },
   |};
-  declare var exports: (gl: WebGLRenderingContext, vert: string, frag: string) => Shader
+  declare module.exports: (gl: WebGLRenderingContext, vert: string, frag: string) => Shader
 }

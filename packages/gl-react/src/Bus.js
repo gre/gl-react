@@ -9,7 +9,7 @@ import type { Surface } from "./createSurface";
 import type { NDArray } from "ndarray";
 
 type Props = {|
-  children?: React.Element<*> | ((redraw?: () => void) => React.Element<*>),
+  children?: React$Element<*> | ((redraw?: () => void) => React$Element<*>),
   uniform?: string,
   index: number
 |};
@@ -42,7 +42,7 @@ type Props = {|
  * </Surface>
  *
  */
-export default class Bus extends Component<{ index: number }, Props, void> {
+export default class Bus extends Component<*, *> {
   id: number = genId();
   props: Props;
   context: {
@@ -64,7 +64,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     glParent: PropTypes.object.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { uniform, index } = this.props;
     if (uniform) {
       const { glParent } = this.context;
@@ -74,6 +74,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
       );
       glParent._addUniformBus(this, uniform, index);
     }
+    this.redraw();
   }
 
   componentWillUnmount() {
@@ -88,16 +89,8 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     }
   }
 
-  componentDidMount() {
-    this.redraw();
-  }
-
-  componentDidUpdate() {
-    this.redraw();
-  }
-
-  componentWillReceiveProps({ uniform, index }: Props) {
-    const { uniform: oldUniform, index: oldIndex } = this.props;
+  componentDidUpdate({ uniform: oldUniform, index: oldIndex }: *) {
+    const { uniform, index } = this.props;
     if (uniform && (uniform !== oldUniform || index !== oldIndex)) {
       const { glParent } = this.context;
       invariant(
@@ -107,6 +100,7 @@ export default class Bus extends Component<{ index: number }, Props, void> {
       if (oldUniform) glParent._removeUniformBus(this, oldUniform, oldIndex);
       glParent._addUniformBus(this, uniform, index);
     }
+    this.redraw();
   }
 
   getChildContext(): { glParent: Bus } {
@@ -150,9 +144,11 @@ export default class Bus extends Component<{ index: number }, Props, void> {
   }
 
   getGLName(): string {
-    return `Bus(${this.glNode
-      ? this.glNode.getGLName()
-      : String(this.getGLRenderableContent())})`;
+    return `Bus(${
+      this.glNode
+        ? this.glNode.getGLName()
+        : String(this.getGLRenderableContent())
+    })`;
   }
 
   getGLShortName(): string {
@@ -160,9 +156,9 @@ export default class Bus extends Component<{ index: number }, Props, void> {
     const shortContentName = String(
       (content && content.constructor && content.constructor.name) || content
     );
-    return `Bus(${this.glNode
-      ? this.glNode.getGLShortName()
-      : shortContentName})`;
+    return `Bus(${
+      this.glNode ? this.glNode.getGLShortName() : shortContentName
+    })`;
   }
 
   /**

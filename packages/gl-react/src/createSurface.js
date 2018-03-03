@@ -19,11 +19,6 @@ const __DEV__ = process.env.NODE_ENV === "development";
 const prependGLSLName = (glsl: string, name: ?string) =>
   !name ? glsl : "#define SHADER_NAME " + name + "\n" + glsl;
 
-type ReactClassLike<T> =
-  | string
-  | ReactClass<T>
-  | ((props: any) => React.Element<T>);
-
 type SurfaceProps = {
   children?: any,
   style?: Object,
@@ -35,36 +30,36 @@ type SurfaceProps = {
   visitor?: VisitorLike
 };
 
-interface ISurface extends Component<void, SurfaceProps, any> {
-  props: SurfaceProps,
-  gl: ?WebGLRenderingContext,
-  RenderLessElement: ReactClassLike<*>,
-  root: ?Node,
-  id: number,
+interface ISurface extends Component<SurfaceProps, *> {
+  props: SurfaceProps;
+  gl: ?WebGLRenderingContext;
+  RenderLessElement: React$ComponentType<*>;
+  root: ?Node;
+  id: number;
 
-  +mapRenderableContent: ?(inst: mixed) => mixed,
-  +getVisitors: () => Array<VisitorLike>,
-  +getGLSize: () => [number, number],
-  +getGLName: () => string,
-  +getGLShortName: () => string,
-  +captureAsDataURL: (...args: any) => string,
-  +captureAsBlob: (...args: any) => Promise<Blob>,
-  +capture: (x?: number, y?: number, w?: number, h?: number) => NDArray,
-  +redraw: () => void,
-  +flush: () => void,
-  +getEmptyTexture: () => WebGLTexture,
-  +glIsAvailable: () => boolean,
+  +mapRenderableContent: ?(inst: mixed) => mixed;
+  +getVisitors: () => Array<VisitorLike>;
+  +getGLSize: () => [number, number];
+  +getGLName: () => string;
+  +getGLShortName: () => string;
+  +captureAsDataURL: (...args: any) => string;
+  +captureAsBlob: (...args: any) => Promise<Blob>;
+  +capture: (x?: number, y?: number, w?: number, h?: number) => NDArray;
+  +redraw: () => void;
+  +flush: () => void;
+  +getEmptyTexture: () => WebGLTexture;
+  +glIsAvailable: () => boolean;
 
-  +rebootForDebug: () => void,
-  +_addGLNodeChild: (node: Node) => void,
-  +_removeGLNodeChild: (node: Node) => void,
+  +rebootForDebug: () => void;
+  +_addGLNodeChild: (node: Node) => void;
+  +_removeGLNodeChild: (node: Node) => void;
   +_resolveTextureLoader: (
     raw: any
-  ) => { loader: ?WebGLTextureLoader<*>, input: mixed },
-  +_getShader: (shaderId: ShaderIdentifier) => Shader,
-  +_makeShader: (shaderInfo: ShaderInfo) => Shader,
-  +_draw: () => void,
-  +_bindRootNode: () => void
+  ) => { loader: ?WebGLTextureLoader<*>, input: mixed };
+  +_getShader: (shaderId: ShaderIdentifier) => Shader;
+  +_makeShader: (shaderInfo: ShaderInfo) => Shader;
+  +_draw: () => void;
+  +_bindRootNode: () => void;
 }
 
 export type Surface = ISurface;
@@ -93,8 +88,8 @@ export const list = (): Array<ISurface> => _instances.slice(0);
 const allSurfaceProps = Object.keys(SurfacePropTypes);
 
 type SurfaceOpts = {
-  GLView: ReactClass<*>,
-  RenderLessElement: ReactClassLike<*>,
+  GLView: *,
+  RenderLessElement: React$ComponentType<*>,
   mapRenderableContent?: (instance: mixed) => mixed,
   requestFrame: (f: Function) => number,
   cancelFrame: (id: number) => void
@@ -102,7 +97,6 @@ type SurfaceOpts = {
 
 export default ({
   GLView,
-  // ^ FIXME: drop this. instead we should trust gl.drawingBufferWidth to get the size.. and just let the canvas impl doing the <canvas> scaling work.
   RenderLessElement,
   mapRenderableContent,
   requestFrame,
@@ -161,13 +155,13 @@ export default ({
    *    </Blur>
    *  </Surface>
    */
-  return class Surface extends Component {
+  return class Surface extends Component<*, *> {
     props: SurfaceProps;
     id: number = ++surfaceId;
     gl: ?WebGLRenderingContext;
     buffer: WebGLBuffer;
     loaderResolver: ?LoaderResolver;
-    glView: ReactClass<*>;
+    glView: *;
     root: ?Node;
     shaders: { [key: string]: Shader } = {};
     _preparingGL: Array<*> = [];
@@ -275,42 +269,46 @@ export default ({
     }
 
     /**
-   * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
-   * @param {string} mimeType (optional) the image MimeType
-   * @param {number} quality (optional) the image quality
-   * @memberof Surface
-   * @instance
-   */
+     * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+     * @param {string} mimeType (optional) the image MimeType
+     * @param {number} quality (optional) the image quality
+     * @memberof Surface
+     * @instance
+     */
     captureAsDataURL(...args: any): string {
+      const { glView } = this;
+      invariant(glView, "GLView is mounted");
       invariant(
-        this.glView.captureAsDataURL,
+        glView.captureAsDataURL,
         "captureAsDataURL is not defined in %s",
         GLView.displayName || GLView.name
       );
-      return this.glView.captureAsDataURL(...args);
+      return glView.captureAsDataURL(...args);
     }
 
     /**
-   * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
-   * @param {string} mimeType (optional) the image MimeType
-   * @param {number} quality (optional) the image quality
-   * @memberof Surface
-   * @instance
-   */
+     * see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob
+     * @param {string} mimeType (optional) the image MimeType
+     * @param {number} quality (optional) the image quality
+     * @memberof Surface
+     * @instance
+     */
     captureAsBlob(...args: any): Promise<Blob> {
+      const { glView } = this;
+      invariant(glView, "GLView is mounted");
       invariant(
-        this.glView.captureAsBlob,
+        glView.captureAsBlob,
         "captureAsBlob is not defined in %s",
         GLView.displayName || GLView.name
       );
-      return this.glView.captureAsBlob(...args);
+      return glView.captureAsBlob(...args);
     }
 
     /**
-   * capture the root Node pixels. Make sure you have set `preserveDrawingBuffer: true` in `webglContextAttributes` prop.
-   * @memberof Surface
-   * @instance
-   */
+     * capture the root Node pixels. Make sure you have set `preserveDrawingBuffer: true` in `webglContextAttributes` prop.
+     * @memberof Surface
+     * @instance
+     */
     capture(x?: number, y?: number, w?: number, h?: number): NDArray {
       invariant(
         this.root,
@@ -320,21 +318,21 @@ export default ({
     }
 
     /**
-   * Schedule a redraw of the Surface.
-    * @memberof Surface
-    * @instance
-    * @function
-   */
+     * Schedule a redraw of the Surface.
+     * @memberof Surface
+     * @instance
+     * @function
+     */
     redraw = (): void => {
       this._needsRedraw = true;
     };
 
     /**
-   * Force the redraw (if any) to happen now, synchronously.
-    * @memberof Surface
-    * @instance
-    * @function
-   */
+     * Force the redraw (if any) to happen now, synchronously.
+     * @memberof Surface
+     * @instance
+     * @function
+     */
     flush = (): void => {
       this._draw();
     };
@@ -472,7 +470,7 @@ export default ({
       }
     }
 
-    _onRef = (ref: GLView): void => {
+    _onRef = (ref: ?GLView): void => {
       this.glView = ref;
     };
 
@@ -579,6 +577,7 @@ export default ({
 
     _draw(): void {
       const { gl, root, glView } = this;
+      invariant(glView, "GLView is mounted");
       const visitors = this.getVisitors();
       if (!gl || !root || !this._needsRedraw) {
         visitors.forEach(v => v.onSurfaceDrawSkipped(this));

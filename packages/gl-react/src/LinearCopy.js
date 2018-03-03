@@ -11,7 +11,7 @@ type Props = {
  * copy pixel with a linear interpolation
  * @prop {any} children content to render
  */
-class LinearCopy extends Component {
+class LinearCopy extends Component<*> {
   props: Props;
   _node: ?Node;
   /**
@@ -21,7 +21,7 @@ class LinearCopy extends Component {
   getNodeRef() {
     return this._node;
   }
-  _onRef = (node: Node) => {
+  _onRef = (node: ?Node) => {
     this._node = node;
   };
   render() {
