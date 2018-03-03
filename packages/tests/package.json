@@ -22,7 +22,7 @@
     "jest-cli": "19",
     "ndarray": "^1.0.18",
     "promise-defer": "^1.0.0",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.6.1",
     "react": "^16.0.0",
     "react-test-renderer": "^16.0.0",
     "webgltexture-loader": "^0.6.0",

@@ -4,7 +4,8 @@ import makeSelect from "../../toolbox/makeSelect";
 import { LinearCopy, NearestCopy } from "gl-react";
 import { Surface } from "../../gl-react-implementation";
 
-export thumbnail from "../../images/thumbnails/colorscale.jpg";
+import thumbnail from "../../images/thumbnails/colorscale.jpg";
+export { thumbnail };
 export const title = "colorscale";
 export const description =
   "A gradient defines color mapping of the image greyscale";

@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "invariant": "^2.2.1",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.6.1",
     "raf": "^3.3.0",
     "webgltexture-loader-dom": "^0.6.0"
   },

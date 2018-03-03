@@ -1,7 +1,8 @@
+import thumbnail from "../../images/thumbnails/camera.jpg";
+export { thumbnail };
+export { toolbox } from "../colorscale/meta";
 export const title = "camera";
 export const description = "Camera stream + colorscale";
-export thumbnail from "../../images/thumbnails/camera.jpg";
-export { toolbox } from "../colorscale/meta";
 
 /*
 import React from "react";

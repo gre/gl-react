@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "invariant": "^2.2.1",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.6.1",
     "webgltexture-loader-expo": "^0.8.0"
   },
   "scripts": {

@@ -31,7 +31,7 @@
     "gl-shader": "^4.2.1",
     "invariant": "^2.2.1",
     "ndarray": "^1.0.18",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.6.1",
     "typedarray-pool": "^1.1.0",
     "webgltexture-loader": "^0.6.0",
     "webgltexture-loader-ndarray": "^0.9.0"
