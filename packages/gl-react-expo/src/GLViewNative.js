@@ -35,7 +35,7 @@ export default class GLViewNative extends Component<{
       if (name === "GLViewRef") return this.ref;
       return getExtension.call(gl, name);
     };
-    return gl;
+    this.props.onContextCreate(gl);
   };
 
   capture = (
