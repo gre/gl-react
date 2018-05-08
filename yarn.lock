@@ -10116,9 +10116,9 @@ webgltexture-loader-dom@^0.6.0:
     webgltexture-loader-dom-image-url "^0.6.0"
     webgltexture-loader-dom-video "^0.6.0"
 
-webgltexture-loader-expo@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.8.0.tgz#9d60fd64af337df88d781a15515de8c7fe6b661f"
+webgltexture-loader-expo@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.10.0.tgz#2c0fbb5b6cfe867a9873d46b3ed1bdac28c3fdce"
   dependencies:
     webgltexture-loader "^0.6.0"
 
