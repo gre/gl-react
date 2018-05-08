@@ -21,6 +21,6 @@
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "gl-react": "^3.13.0",
-    "gl-react-expo": "^3.16.1"
+    "gl-react-expo": "^3.16.3"
   }
 }

@@ -2826,9 +2826,9 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-expo@^3.16.2:
-  version "3.16.2"
-  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.16.2.tgz#6c1f82320a10d419a11203a6b1a97c3bc43f3659"
+gl-react-expo@^3.16.3:
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.16.3.tgz#fc07d0bf6391a87e337367dba457c82d4045b331"
   dependencies:
     invariant "^2.2.1"
     prop-types "^15.6.1"

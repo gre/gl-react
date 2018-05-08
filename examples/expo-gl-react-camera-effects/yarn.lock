@@ -2822,17 +2822,17 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-expo@3.16.0-beta.e4f3431c:
-  version "3.16.0-beta.e4f3431c"
-  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.16.0-beta.e4f3431c.tgz#c3a475c8807800a7e4fb2a0cffbf66cd63a35552"
+gl-react-expo@^3.16.3:
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.16.3.tgz#fc07d0bf6391a87e337367dba457c82d4045b331"
   dependencies:
     invariant "^2.2.1"
     prop-types "^15.6.1"
-    webgltexture-loader-expo "0.10.0-beta.3af8dc87"
+    webgltexture-loader-expo "^0.10.0"
 
-gl-react@3.16.0-beta.e4f3431c:
-  version "3.16.0-beta.e4f3431c"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.16.0-beta.e4f3431c.tgz#a59ad84f2330440634bc0b09df5560ca80cd64d8"
+gl-react@^3.13.0:
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.15.0.tgz#bd98e8955c61ac5fa466fffd6b146175f839da5a"
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.1"
@@ -6124,11 +6124,11 @@ weakmap-shim@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/weakmap-shim/-/weakmap-shim-1.1.1.tgz#d65afd784109b2166e00ff571c33150ec2a40b49"
 
-webgltexture-loader-expo@0.10.0-beta.3af8dc87:
-  version "0.10.0-beta.3af8dc87"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.10.0-beta.3af8dc87.tgz#178c5af58b2bf733e853647577bd9e8a938619ac"
+webgltexture-loader-expo@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.10.0.tgz#2c0fbb5b6cfe867a9873d46b3ed1bdac28c3fdce"
   dependencies:
-    webgltexture-loader "^0.10.0-beta.3af8dc87"
+    webgltexture-loader "^0.6.0"
 
 webgltexture-loader-ndarray@^0.9.0:
   version "0.9.0"
@@ -6138,10 +6138,6 @@ webgltexture-loader-ndarray@^0.9.0:
     ndarray-ops "^1.2.2"
     typedarray-pool "^1.1.0"
     webgltexture-loader "^0.6.0"
-
-webgltexture-loader@^0.10.0-beta.3af8dc87:
-  version "0.10.0-beta.3af8dc87"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.10.0-beta.3af8dc87.tgz#64346a1a768001feca436cb27be353a9c2899cfc"
 
 webgltexture-loader@^0.6.0:
   version "0.6.0"
