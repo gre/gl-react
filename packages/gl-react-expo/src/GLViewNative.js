@@ -9,12 +9,11 @@ const propTypes = {
   style: PropTypes.any
 };
 
-export default class GLViewNative extends Component {
-  props: {
-    onContextCreate: (gl: WebGLRenderingContext) => void,
-    style?: any,
-    children?: any
-  };
+export default class GLViewNative extends Component<{
+  onContextCreate: (gl: WebGLRenderingContext) => void,
+  style?: any,
+  children?: any
+}> {
   static propTypes = propTypes;
 
   afterDraw(gl: WebGLRenderingContext) {
@@ -22,6 +21,35 @@ export default class GLViewNative extends Component {
     // $FlowFixMe
     gl.endFrameEXP();
   }
+
+  ref: ?EXGLView;
+  onRef = (ref: ?EXGLView) => {
+    this.ref = ref;
+  };
+
+  onContextCreate = (gl: WebGLRenderingContext) => {
+    const { getExtension } = gl;
+    // monkey patch to get a way to access the EXGLView
+    // $FlowFixMe
+    gl.getExtension = name => {
+      if (name === "GLViewRef") return this.ref;
+      return getExtension.call(gl, name);
+    };
+    return gl;
+  };
+
+  capture = (
+    opt: *
+  ): Promise<{
+    uri: string,
+    localUri: string,
+    width: number,
+    height: number
+  }> => {
+    const { ref } = this;
+    if (!ref) return Promise.reject(new Error("glView is unmounted"));
+    return ref.takeSnapshotAsync(opt);
+  };
 
   render() {
     const { style, onContextCreate, children, ...rest } = this.props;
@@ -47,11 +75,10 @@ export default class GLViewNative extends Component {
               left: 0
             }
           ]}
-          onContextCreate={onContextCreate}
+          onContextCreate={this.onContextCreate}
+          ref={this.onRef}
         />
-        <View style={{ opacity: 0 }}>
-          {children}
-        </View>
+        <View style={{ opacity: 0 }}>{children}</View>
       </View>
     );
   }
