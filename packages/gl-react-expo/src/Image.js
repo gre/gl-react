@@ -1,4 +1,4 @@
-import { loadAsset } from "webgltexture-loader-expo/lib/ExpoTextureLoader";
+import { loadAsset } from "webgltexture-loader-expo/lib/ExpoModuleTextureLoader";
 
 export default function GLImage() {
   console.warn("Usage of gl-react-expo Image is deprecated");
