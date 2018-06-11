@@ -3,7 +3,7 @@
 ## "WebGL is a 2D API"
 
 The library is focused on composing fragment shaders for use-cases like 2D effects on images/videos/...
-**That means Vertex shader and Vertex data are currently out of scope, `gl-react` isn't for 3D use-cases yet**. We might provide soon a escape hatch to do arbitrary gl calls in a Node. Instead, directly use WebGL API (in web) or `react-native-webgl` (in React Native) with optional combination of a WebGL library like Three.js.
+**That means Vertex shader and Vertex data are currently out of scope, `gl-react` isn't for 3D use-cases yet**. We might provide soon a escape hatch to do arbitrary gl calls in a Node. Instead, directly use WebGL API (in web) or `react-native-webgl` (in React Native) with optional combination of a WebGL library like Three.js or PIXI.js.
 
 ## Framebuffers (FBOs)
 
