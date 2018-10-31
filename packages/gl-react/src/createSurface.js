@@ -538,7 +538,9 @@ export default ({
         prependGLSLName(vert, name),
         prependGLSLName(frag, name)
       );
-      shader.attributes._p.pointer();
+      for (let key in shader.attributes) {
+        shader.attributes[key].pointer();
+      }
       return shader;
     }
 
