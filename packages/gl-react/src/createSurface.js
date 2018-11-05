@@ -16,6 +16,8 @@ import type Node from "./Node";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
+const defaultBufferData = new Float32Array([-1, -1, -1, 4, 4, -1]); // see a-big-triangle
+
 const prependGLSLName = (glsl: string, name: ?string) =>
   !name ? glsl : "#define SHADER_NAME " + name + "\n" + glsl;
 
@@ -27,7 +29,8 @@ type SurfaceProps = {
   onLoadError?: (e: Error) => void,
   onContextLost?: () => void,
   onContextRestored?: () => void,
-  visitor?: VisitorLike
+  visitor?: VisitorLike,
+  attributes?: { [key: string]: any }
 };
 
 interface ISurface extends Component<SurfaceProps, *> {
@@ -129,6 +132,7 @@ export default ({
    * @prop {function} [onContextLost] - a callback called when the Surface context was lost.
    * @prop {function} [onContextRestored] - a callback called when the Surface was restored and ready.
    * @prop {Visitor} [visitor] - an internal visitor used for logs and tests.
+   * @prop {attributes} [attributes] - vertex shader attributes.
    *
    * @prop {WebGLContextAttributes} [webglContextAttributes] **(gl-react-dom only)** a optional set of attributes to init WebGL with.
    * @prop {number} [pixelRatio=window.devicePixelRatio] **(gl-react-dom only)** allows to override the pixelRatio. (default `devicePixelRatio`)
@@ -159,7 +163,7 @@ export default ({
     props: SurfaceProps;
     id: number = ++surfaceId;
     gl: ?WebGLRenderingContext;
-    buffer: WebGLBuffer;
+    buffers: { [key: string]: WebGLBuffer } = {};
     loaderResolver: ?LoaderResolver;
     glView: *;
     root: ?Node;
@@ -416,7 +420,11 @@ export default ({
           this.shaders[k].dispose();
         }
         this.shaders = {};
-        gl.deleteBuffer(this.buffer);
+        for (let key in this.buffers) {
+          const buffer = this.buffers[key];
+          gl.deleteBuffer(buffer);
+          this.buffers[key] = undefined;
+        }
         this.getVisitors().map(v => v.onSurfaceGLContextChange(this, null));
       }
     }
@@ -432,15 +440,6 @@ export default ({
       this.loaderResolver = new LoaderResolver(gl);
 
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
-
-      const buffer = gl.createBuffer();
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([-1, -1, -1, 4, 4, -1]), // see a-big-triangle
-        gl.STATIC_DRAW
-      );
-      this.buffer = buffer;
 
       const { preload } = this.props;
 
@@ -539,7 +538,13 @@ export default ({
         prependGLSLName(frag, name)
       );
       for (let key in shader.attributes) {
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        let data = this.props.attributes && this.props.attributes[key];
+        if (!data && key === '_p') data = defaultBufferData;
+        gl.attributes(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
         shader.attributes[key].pointer();
+        this.buffers[key] = buffer;
       }
       return shader;
     }
