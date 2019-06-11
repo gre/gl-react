@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import { GLView as EXGLView } from "expo";
+import { GLView as EXGLView } from "expo-gl";
 
 const propTypes = {
   onContextCreate: PropTypes.func.isRequired,

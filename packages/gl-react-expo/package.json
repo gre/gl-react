@@ -1,6 +1,6 @@
 {
   "name": "gl-react-expo",
-  "version": "3.16.3",
+  "version": "3.17.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "React Native via Expo implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -23,6 +23,7 @@
   ],
   "peerDependencies": {
     "expo": "*",
+    "expo-gl": "*",
     "gl-react": "^3.13.0",
     "react": "*",
     "react-native": "*"
