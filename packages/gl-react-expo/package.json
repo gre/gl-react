@@ -22,7 +22,6 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "expo": "*",
     "expo-gl": "*",
     "gl-react": "^3.13.0",
     "react": "*",
