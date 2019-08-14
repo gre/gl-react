@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Node from "./Node";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
+
 import type { Surface } from "./createSurface";
 import type { NDArray } from "ndarray";
 
@@ -42,9 +43,8 @@ type Props = {|
  * </Surface>
  *
  */
-export default class Bus extends Component<*, *> {
+export default class Bus extends Component<Props, *> {
   id: number = genId();
-  props: Props;
   context: {
     glParent: Surface | Node,
     glSurface: Surface

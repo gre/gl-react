@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`can be extended with addTextureLoaderClass 1`] = `
-undefined {
+Object {
   "canLoad": 1,
   "constructor": 1,
   "createTexture": 0,
@@ -12,7 +12,7 @@ undefined {
 `;
 
 exports[`can be extended with addTextureLoaderClass 2`] = `
-undefined {
+Object {
   "canLoad": 2,
   "constructor": 1,
   "createTexture": 1,
@@ -23,7 +23,7 @@ undefined {
 `;
 
 exports[`can be extended with addTextureLoaderClass 3`] = `
-undefined {
+Object {
   "canLoad": 2,
   "constructor": 1,
   "createTexture": 1,

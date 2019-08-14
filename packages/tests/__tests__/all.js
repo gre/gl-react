@@ -1,7 +1,5 @@
+/* eslint-disable react/no-string-refs */
 //@flow
-declare var jest;
-declare var test;
-declare var expect;
 
 // TODO bus example: a bus that is not used, but use another bus, still should render, and we can capture it.
 // TODO texture array is to be tested
@@ -24,14 +22,11 @@ import {
 } from "gl-react";
 import { globalRegistry } from "webgltexture-loader";
 import { Surface } from "gl-react-headless";
-import loseGL from "gl-react-headless/lib/loseGL";
 import React from "react";
-import renderer from "react-test-renderer";
 import ndarray from "ndarray";
 import invariant from "invariant";
 
 import {
-  delay,
   create,
   CountersVisitor,
   createNDArrayTexture,
@@ -41,7 +36,7 @@ import {
   yellow3x3,
   yellow3x2,
   expectToBeCloseToColorArray
-} from "./utils";
+} from "../utils";
 
 test("renders a red shader", () => {
   const shaders = Shaders.create({
@@ -249,18 +244,23 @@ test("ndarray texture", () => {
   }`
     }
   });
-  class HelloTextureStateful extends React.Component {
+  class HelloTextureStateful extends React.Component<*, { t: * }> {
     state = { t: red2x2 };
+    node = React.createRef();
     flush() {
-      this.refs.node.flush();
+      this.node.current.flush();
     }
     render() {
       return (
-        <Node ref="node" shader={shaders.helloTexture} uniforms={this.state} />
+        <Node
+          ref={this.node}
+          shader={shaders.helloTexture}
+          uniforms={this.state}
+        />
       );
     }
   }
-  let helloTexture: HelloTextureStateful;
+  let helloTexture: ?HelloTextureStateful;
   const inst = create(
     <Surface
       width={64}
@@ -304,12 +304,13 @@ test("renders a color uniform", () => {
     }
   });
 
-  class ColorSurface extends React.Component {
+  class ColorSurface extends React.Component<*> {
+    surface = React.createRef();
     render() {
       const { color } = this.props;
       return (
         <Surface
-          ref="surface"
+          ref={this.surface}
           width={1}
           height={1}
           webglContextAttributes={{ preserveDrawingBuffer: true }}
@@ -321,7 +322,7 @@ test("renders a color uniform", () => {
   }
 
   const inst = create(<ColorSurface color={[1, 0, 0, 1]} />);
-  const surface = inst.getInstance().refs.surface;
+  const surface = inst.getInstance().surface.current;
   expectToBeCloseToColorArray(
     surface.capture().data,
     new Uint8Array([255, 0, 0, 255])
@@ -424,7 +425,7 @@ test("composes color uniform with LinearCopy", () => {
     }
   });
 
-  class ColorSurface extends React.Component {
+  class ColorSurface extends React.Component<*> {
     render() {
       const { color } = this.props;
       return (
@@ -463,7 +464,7 @@ test("no needs to flush if use of sync", () => {
     }
   });
 
-  class ColorSurface extends React.Component {
+  class ColorSurface extends React.Component<*> {
     render() {
       const { color } = this.props;
       return (
@@ -626,7 +627,7 @@ test("bus example 1", () => {
   }`
     }
   });
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -661,7 +662,7 @@ test("bus example 2", () => {
   }`
     }
   });
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -701,12 +702,12 @@ test("bus example 3", () => {
   }`
     }
   });
-  class Red extends React.Component {
+  class Red extends React.Component<*> {
     render() {
       return <Node shader={shaders.red} />;
     }
   }
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -753,7 +754,7 @@ test("bus example 4", () => {
       }`
     }
   });
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -803,12 +804,12 @@ test("bus example 5", () => {
       }`
     }
   });
-  class Red extends React.Component {
+  class Red extends React.Component<*> {
     render() {
       return <Node shader={shaders.red} />;
     }
   }
-  class Root extends React.Component {
+  class Root extends React.Component<*> {
     render() {
       return (
         <Node
@@ -871,17 +872,17 @@ test("bus example 6", () => {
       `
     }
   });
-  class Red extends React.Component {
+  class Red extends React.Component<*> {
     render() {
       return <Node shader={shaders.red} />;
     }
   }
-  class Pink extends React.Component {
+  class Pink extends React.Component<*> {
     render() {
       return <Node shader={shaders.pink} />;
     }
   }
-  class Root extends React.Component {
+  class Root extends React.Component<*> {
     render() {
       const { pink } = this.props;
       return (
@@ -954,7 +955,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
       `
     }
   });
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -1058,166 +1059,6 @@ test("a node can be captured and resized", () => {
   inst.unmount();
 });
 
-test("Uniform children redraw=>el function", () => {
-  let surface, updatingTexture;
-  class UpdatingTexture extends React.Component {
-    props: {
-      redraw: Function
-    };
-    pixels = null;
-    setPixels = (pixels, w, h) => {
-      this.pixels = pixels;
-      this.refs.faketexture.width = w;
-      this.refs.faketexture.height = h;
-      this.props.redraw();
-    };
-    getPixels = () => this.pixels;
-    getRootRef = () => this.refs.faketexture;
-    render() {
-      return (
-        <faketexture
-          ref="faketexture"
-          width={0}
-          height={0}
-          getPixels={this.getPixels}
-        />
-      );
-    }
-  }
-  class Example extends React.Component {
-    render() {
-      return (
-        <Surface
-          ref={ref => (surface = ref)}
-          width={4}
-          height={4}
-          webglContextAttributes={{ preserveDrawingBuffer: true }}
-        >
-          <NearestCopy>
-            <LinearCopy>
-              {redraw => (
-                <UpdatingTexture
-                  ref={ref => (updatingTexture = ref)}
-                  redraw={redraw}
-                />
-              )}
-            </LinearCopy>
-          </NearestCopy>
-        </Surface>
-      );
-    }
-  }
-  const inst = create(<Example />);
-  invariant(surface, "surface is defined");
-  invariant(updatingTexture, "updatingTexture is defined");
-  expectToBeCloseToColorArray(
-    surface.capture(1, 1, 1, 1).data,
-    new Uint8Array([0, 0, 0, 0])
-  );
-  inst.update(<Example />);
-  surface.flush();
-  expectToBeCloseToColorArray(
-    surface.capture(1, 1, 1, 1).data,
-    new Uint8Array([0, 0, 0, 0])
-  );
-  updatingTexture.setPixels(red2x2, 2, 2);
-  surface.flush();
-  expectToBeCloseToColorArray(
-    surface.capture(1, 1, 1, 1).data,
-    new Uint8Array([255, 0, 0, 255])
-  );
-  updatingTexture.setPixels(white3x3, 3, 3);
-  surface.flush();
-  expectToBeCloseToColorArray(
-    surface.capture(1, 1, 1, 1).data,
-    new Uint8Array([255, 255, 255, 255])
-  );
-  updatingTexture.setPixels(yellow3x3, 3, 3);
-  surface.flush();
-  expectToBeCloseToColorArray(
-    surface.capture(2, 2, 1, 1).data,
-    new Uint8Array([255, 255, 0, 255])
-  );
-  inst.unmount();
-});
-
-test("Bus redraw=>el function", () => {
-  let surface, updatingTexture;
-  class UpdatingTexture extends React.Component {
-    props: {
-      redraw: Function,
-      initialPixels: any,
-      initialWidth: number,
-      initialHeight: number
-    };
-    static defaultProps = {
-      initialWidth: 2,
-      initialHeight: 2
-    };
-    pixels = this.props.initialPixels;
-    setPixels = (pixels, w, h) => {
-      this.pixels = pixels;
-      this.refs.faketexture.width = w;
-      this.refs.faketexture.height = h;
-      this.props.redraw();
-    };
-    getPixels = () => this.pixels;
-    getRootRef = () => this.refs.faketexture;
-    render() {
-      return (
-        <faketexture
-          ref="faketexture"
-          width={this.props.initialWidth}
-          height={this.props.initialHeight}
-          getPixels={this.getPixels}
-        />
-      );
-    }
-  }
-  class Example extends React.Component {
-    render() {
-      return (
-        <Surface
-          ref={ref => (surface = ref)}
-          width={4}
-          height={4}
-          visitor={new Visitor()}
-          webglContextAttributes={{ preserveDrawingBuffer: true }}
-        >
-          <Bus ref="bus">
-            {redraw => (
-              <UpdatingTexture
-                initialPixels={yellow3x3}
-                initialWidth={3}
-                initialHeight={3}
-                ref={ref => (updatingTexture = ref)}
-                redraw={redraw}
-              />
-            )}
-          </Bus>
-          <NearestCopy>
-            <LinearCopy>{() => this.refs.bus}</LinearCopy>
-          </NearestCopy>
-        </Surface>
-      );
-    }
-  }
-  const inst = create(<Example />);
-  invariant(surface, "surface is defined");
-  invariant(updatingTexture, "updatingTexture is defined");
-  expectToBeCloseToColorArray(
-    surface.capture(2, 2, 1, 1).data,
-    new Uint8Array([255, 255, 0, 255])
-  );
-  updatingTexture.setPixels(red2x2, 2, 2);
-  surface.flush();
-  expectToBeCloseToColorArray(
-    surface.capture(2, 2, 1, 1).data,
-    new Uint8Array([255, 0, 0, 255])
-  );
-  inst.unmount();
-});
-
 test("many Surface updates don't result of many redraws", () => {
   const shaders = Shaders.create({
     justBlue: {
@@ -1242,7 +1083,7 @@ test("many Surface updates don't result of many redraws", () => {
       {children}
     </Surface>
   );
-  const JustBlue = ({ blue }) => (
+  const JustBlue = ({ blue }: { blue: * }) => (
     <Node shader={shaders.justBlue} uniforms={{ blue }} />
   );
 
@@ -1294,7 +1135,7 @@ test("many Surface flush() don't result of extra redraws", () => {
       {children}
     </Surface>
   );
-  const JustBlue = ({ blue }) => (
+  const JustBlue = ({ blue }: { blue: * }) => (
     <Node shader={shaders.justBlue} uniforms={{ blue }} />
   );
 
@@ -1342,7 +1183,7 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
       <LinearCopy>{children}</LinearCopy>
     </Surface>
   );
-  class JustBlue extends React.PureComponent {
+  class JustBlue extends React.PureComponent<*> {
     render() {
       const { blue } = this.props;
       return (
@@ -1403,7 +1244,7 @@ test("nested GL Component update will re-draw the Surface", () => {
   let justBlue, justBlueNode;
   const visitor = new CountersVisitor();
 
-  class StatefulJustBlue extends React.Component {
+  class StatefulJustBlue extends React.Component<*, { blue: number }> {
     state = { blue: 0 };
     render() {
       const { blue } = this.state;
@@ -1496,7 +1337,15 @@ test("Node `clear` and discard;", () => {
   }`
     }
   });
-  class Paint extends React.Component {
+  class Paint extends React.Component<
+    *,
+    {
+      drawing: boolean,
+      color: [number, number, number, number],
+      center: [number, number],
+      brushRadius: number
+    }
+  > {
     state = {
       drawing: false,
       color: [0, 0, 0, 0],
@@ -1507,7 +1356,7 @@ test("Node `clear` and discard;", () => {
       return <Node shader={shaders.paint} clear={null} uniforms={this.state} />;
     }
   }
-  let paint: Paint;
+  let paint: ?Paint;
   const inst = create(
     <Surface
       width={10}
@@ -1710,13 +1559,13 @@ test("Node `backbuffering` with Uniform.backbufferFrom", () => {
   }`
     }
   });
-  class Darken extends React.Component {
+  class Darken extends React.Component<*> {
     render() {
       const { children: t } = this.props;
       return <Node shader={shaders.darken} uniforms={{ t, m: 0.8 }} />;
     }
   }
-  class Effect extends React.Component {
+  class Effect extends React.Component<*> {
     getMainBuffer = () => {
       const { main } = this.refs;
       return main ? Uniform.backbufferFrom(main.getNodeRef()) : null;
@@ -1796,7 +1645,7 @@ test("texture can be null", () => {
 });
 
 test("array of textures", () => {
-  class MergeChannels extends React.Component {
+  class MergeChannels extends React.Component<*> {
     render() {
       const { red, green, blue } = this.props;
       return (
@@ -2125,7 +1974,6 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
     </Surface>
   );
   const inst = create(el);
-  const surface = inst.getInstance();
   await loader.reject(new Error("simulate texture fail"));
   expect(onLoadCounter).toEqual(0);
   expect(onLoadErrorCounter).toEqual(1);
@@ -2136,7 +1984,7 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
 });
 
 test("renders a shader inline in the Node", () => {
-  class ColorSurface extends React.Component {
+  class ColorSurface extends React.Component<*> {
     render() {
       const { color } = this.props;
       return (
@@ -2197,7 +2045,7 @@ test("testing connectSize() feature", () => {
     }
   });
 
-  class Useless extends React.Component {
+  class Useless extends React.Component<*> {
     render() {
       const { width, height } = this.props;
       return (
@@ -2222,6 +2070,7 @@ test("testing connectSize() feature", () => {
     surface.capture(1, 1, 1, 1).data,
     new Uint8Array([153, 102, 0, 255])
   );
+
   inst.update(
     <Surface
       width={30}
@@ -2236,6 +2085,17 @@ test("testing connectSize() feature", () => {
     surface.capture(1, 1, 1, 1).data,
     new Uint8Array([15, 10, 0, 255])
   );
+
+  inst.update(
+    <Surface
+      width={600}
+      height={400}
+      webglContextAttributes={{ preserveDrawingBuffer: true }}
+    >
+      <ConnectedUseless width={30} />
+    </Surface>
+  );
+  surface.flush();
   inst.update(
     <Surface
       width={600}
@@ -2257,7 +2117,7 @@ test("handle context lost nicely", () => {
   let surface;
   let contextLost = 0,
     contextRestored = 0;
-  class Example extends React.Component {
+  class Example extends React.Component<*> {
     render() {
       return (
         <Surface
@@ -2334,7 +2194,7 @@ void main() {
     }
   });
 
-  class WeirdSwapping extends React.Component {
+  class WeirdSwapping extends React.Component<*> {
     render() {
       const { i } = this.props;
       return (
@@ -2429,14 +2289,14 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     log = 0,
     warn = 0,
     error = 0,
-    group = 0,
-    groupCollapsed = 0;
+    group = 0;
 
+  // eslint-disable-next-line no-global-assign
   console = {
     ...oldConsole,
     log: () => log++,
     warn: () => warn++,
-    error: e => error++,
+    error: () => error++,
     group: () => group++,
     groupCollapsed: () => group++,
     groupEnd: () => groupEnd++
@@ -2451,7 +2311,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     </Surface>
   );
 
-  class JustBlue extends React.PureComponent {
+  class JustBlue extends React.PureComponent<*> {
     render() {
       const { blue } = this.props;
       return (
@@ -2465,7 +2325,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
       );
     }
   }
-  class BadNode extends React.Component {
+  class BadNode extends React.Component<*> {
     render() {
       const { blue } = this.props;
       return (
@@ -2493,7 +2353,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     />
   );
 
-  class TreeWithZombiesDontBreak extends React.Component {
+  class TreeWithZombiesDontBreak extends React.Component<*> {
     render() {
       const { blue } = this.props;
       return (
@@ -2516,7 +2376,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     }
   }
 
-  class EmptyBusUsedByANode extends React.Component {
+  class EmptyBusUsedByANode extends React.Component<*> {
     render() {
       return (
         <Node
@@ -2714,7 +2574,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     surface.capture(1, 1).data,
     new Uint8Array([0, 0, 128, 255])
   );
-  class Ex extends React.Component {
+  class Ex extends React.Component<*> {
     render() {
       return (
         <Surface ref="surface" visitor={visitor} width={2} height={2}>
@@ -2750,5 +2610,6 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   inst.unmount();
   Visitors.remove(visitor);
   expect(group).toEqual(groupEnd);
+  // eslint-disable-next-line no-global-assign
   console = oldConsole;
 });

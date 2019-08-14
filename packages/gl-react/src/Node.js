@@ -391,8 +391,7 @@ const NodePropTypes = {
  * @example
  *  <Node shader={shaders.helloGL} />
  */
-export default class Node extends Component<*, *> {
-  props: Props;
+export default class Node extends Component<Props, *> {
   drawProps: Props = this.props;
   context: SurfaceContext;
   framebuffer: ?Framebuffer;
@@ -438,7 +437,9 @@ export default class Node extends Component<*, *> {
   }
 
   componentDidMount() {
-    const { glSurface: { gl } } = this.context;
+    const {
+      glSurface: { gl }
+    } = this.context;
     if (gl) this._prepareGLObjects(gl);
     this.context.glParent._addGLNodeChild(this);
     this.redraw();
@@ -507,7 +508,9 @@ export default class Node extends Component<*, *> {
 
   render() {
     const { children, uniforms } = this.props;
-    const { glSurface: { RenderLessElement } } = this.context;
+    const {
+      glSurface: { RenderLessElement }
+    } = this.context;
     return (
       <RenderLessElement>
         {children}
@@ -970,7 +973,9 @@ export default class Node extends Component<*, *> {
         return result
           ? "directTextureSize" in result
             ? result.directTextureSize
-            : result.glNode ? result.glNode.getGLSize() : fallback
+            : result.glNode
+            ? result.glNode.getGLSize()
+            : fallback
           : fallback;
       };
       const prepare = () => {
@@ -1050,7 +1055,9 @@ export default class Node extends Component<*, *> {
           );
         }
         const value = uniformValue.ratio
-          ? size ? size[0] / size[1] : 1
+          ? size
+            ? size[0] / size[1]
+            : 1
           : size || [0, 0];
         return {
           key,
@@ -1071,9 +1078,7 @@ export default class Node extends Component<*, *> {
           values = uniformType.map(() => null);
         } else if (v.length !== uniformType.length) {
           console.warn(
-            `${nodeName}, uniform '${key}' should be an array of exactly ${
-              uniformType.length
-            } textures (not ${v.length}).`
+            `${nodeName}, uniform '${key}' should be an array of exactly ${uniformType.length} textures (not ${v.length}).`
           );
           values = uniformType.map(() => null);
         } else {

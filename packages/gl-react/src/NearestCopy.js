@@ -11,8 +11,7 @@ type Props = {
  * copy pixel with no interpolation (nearest pixel)
  * @prop {any} children content to render
  */
-class NearestCopy extends Component<*> {
-  props: Props;
+class NearestCopy extends Component<Props> {
   _node: ?Node;
   /**
    * get a reference to the underlying Node instance

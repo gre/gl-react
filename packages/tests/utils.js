@@ -8,8 +8,9 @@ import type { Texture } from "gl-texture2d";
 import renderer from "react-test-renderer";
 import ndarray from "ndarray";
 import defer from "promise-defer";
+import drawNDArrayTexture from "webgltexture-loader-ndarray/lib/drawNDArrayTexture";
 
-export const delay = (ms: number) =>
+export const delay = (ms: number): Promise<void> =>
   new Promise(success => setTimeout(success, ms));
 
 class FakeTexture {
@@ -348,7 +349,6 @@ export function createOneTextureLoader(
   };
 }
 
-import drawNDArrayTexture from "webgltexture-loader-ndarray/lib/drawNDArrayTexture";
 export function createNDArrayTexture(gl: WebGLRenderingContext, ndarray: *) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);

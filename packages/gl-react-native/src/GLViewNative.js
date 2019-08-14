@@ -10,13 +10,12 @@ const propTypes = {
   style: PropTypes.any
 };
 
-export default class GLViewNative extends Component {
-  props: {
-    onContextCreate: (gl: WebGLRenderingContext) => void,
-    onContextFailure: (e: Error) => void,
-    style?: any,
-    children?: any
-  };
+export default class GLViewNative extends Component<{
+  onContextCreate: (gl: WebGLRenderingContext) => void,
+  onContextFailure: (e: Error) => void,
+  style?: any,
+  children?: any
+}> {
   static propTypes = propTypes;
 
   afterDraw(gl: WebGLRenderingContext) {
@@ -58,9 +57,7 @@ export default class GLViewNative extends Component {
           onContextCreate={onContextCreate}
           onContextFailure={onContextFailure}
         />
-        <View style={{ opacity: 0 }}>
-          {children}
-        </View>
+        <View style={{ opacity: 0 }}>{children}</View>
       </View>
     );
   }

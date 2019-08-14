@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\u001b[31mPlease use yarn\u001b[0m'); process.exit(1); }\"",
-    "build": "BABEL_ENV=production && lerna run build",
-    "watch": "lerna run --parallel watch",
+    "build": "./scripts/build.sh",
+    "watch": "./scripts/watch.sh",
     "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "test": "cd packages/tests && yarn test",
     "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
@@ -17,15 +17,17 @@
     "publish": "yarn && lerna run clean && lerna run build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-1": "^6.13.0",
-    "browserify": "^16.1.0",
+    "@babel/cli": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "browserify": "^16.5.0",
     "browserify-shim": "^3.8.12",
-    "documentation": "4.0.0-beta.18",
-    "flow-copy-source": "^1.2.0",
-    "lerna": "^2.9.0",
-    "prettier": "^1.11.1"
+    "documentation": "12.1.1",
+    "flow-copy-source": "^2.0.7",
+    "lerna": "^3.16.4",
+    "prettier": "^1.18.2"
   }
 }

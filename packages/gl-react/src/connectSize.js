@@ -17,13 +17,12 @@ import PropTypes from "prop-types";
  *  <FooConnected width={64} height={64} /> // If you do, you override width,height in the context as well, so <Node> is implicitly receiving the new width/height.
  */
 const connectSize = (GLComponent: *) =>
-  class extends Component<*> {
-    props: {
-      width?: number,
-      height?: number,
-      children?: any,
-      onConnectSizeComponentRef?: (ref: GLComponent) => void
-    };
+  class extends Component<{
+    width?: number,
+    height?: number,
+    children?: any,
+    onConnectSizeComponentRef?: (ref: GLComponent) => void
+  }> {
     context: {
       glSizable: { +getGLSize: () => [number, number] }
     };
@@ -41,7 +40,10 @@ const connectSize = (GLComponent: *) =>
       glSizable: PropTypes.object.isRequired
     };
     getGLSize(): [number, number] {
-      const { props: { width, height }, context: { glSizable } } = this;
+      const {
+        props: { width, height },
+        context: { glSizable }
+      } = this;
       if (width && height) return [width, height];
       const [cw, ch] = glSizable.getGLSize();
       return [width || cw, height || ch];

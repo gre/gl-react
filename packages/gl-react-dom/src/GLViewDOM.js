@@ -70,8 +70,8 @@ class ErrorDebug extends Component {
   }
 }
 
-export default class GLViewDOM extends Component {
-  props: {
+export default class GLViewDOM extends Component<
+  {
     onContextCreate: (gl: WebGLRenderingContext) => void,
     onContextFailure: (e: Error) => void,
     onContextLost: () => void,
@@ -82,10 +82,12 @@ export default class GLViewDOM extends Component {
     height: number,
     style?: any,
     debug?: number
-  };
-  state: {
+  },
+  {
     error: ?Error
-  } = {
+  }
+> {
+  state = {
     error: null
   };
   static propTypes = propTypes;
@@ -216,11 +218,10 @@ export default class GLViewDOM extends Component {
     }
     return Promise.resolve().then(
       () =>
-        new Promise(
-          (resolve, reject) =>
-            this.canvas
-              ? this.canvas.toBlob(resolve, ...args)
-              : reject(new Error("canvas is no longer available"))
+        new Promise((resolve, reject) =>
+          this.canvas
+            ? this.canvas.toBlob(resolve, ...args)
+            : reject(new Error("canvas is no longer available"))
         )
     );
   }

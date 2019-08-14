@@ -17,16 +17,12 @@
     "react": "*"
   },
   "dependencies": {
-    "gl": "^4.0.2",
-    "invariant": "^2.2.1",
-    "prop-types": "^15.6.1",
-    "raf": "^3.3.0"
+    "gl": "^4.3.3",
+    "invariant": "^2.2.4",
+    "prop-types": "^15.7.2",
+    "raf": "^3.4.1"
   },
   "devDependencies": {
     "gl-react": "^3.15.0"
-  },
-  "scripts": {
-    "build": "cd ../.. && export PATH=$(npm bin):$PATH && cd - &&rm -rf lib && babel --source-maps -d lib src && flow-copy-source -v src lib",
-    "watch": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && babel --watch --source-maps -d lib src"
   }
 }

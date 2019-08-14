@@ -31,16 +31,15 @@ const propTypes = {
   height: PropTypes.number.isRequired
 };
 
-class GLView extends Component {
-  props: {
-    onContextCreate: (gl: WebGLRenderingContext) => void,
-    onContextFailure: (e: Error) => void,
-    onContextLost: () => void,
-    onContextRestored: (gl: ?WebGLRenderingContext) => void,
-    webglContextAttributes?: WebGLContextAttributes,
-    width: number,
-    height: number
-  };
+class GLView extends Component<{
+  onContextCreate: (gl: WebGLRenderingContext) => void,
+  onContextFailure: (e: Error) => void,
+  onContextLost: () => void,
+  onContextRestored: (gl: ?WebGLRenderingContext) => void,
+  webglContextAttributes?: WebGLContextAttributes,
+  width: number,
+  height: number
+}> {
   static propTypes = propTypes;
   webglContextAttributes: WebGLContextAttributes;
   canvas: ?HTMLCanvasElement;
@@ -70,8 +69,9 @@ class GLView extends Component {
     }
   }
 
-  componentWillReceiveProps({ width, height }) {
-    if (this.props.width !== width || this.props.height !== height) {
+  componentDidUpdate(prevProps) {
+    const { width, height } = this.props;
+    if (prevProps.width !== width || prevProps.height !== height) {
       if (this.gl) {
         this.gl
           .getExtension("STACKGL_resize_drawingbuffer")

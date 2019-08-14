@@ -173,25 +173,27 @@ class UniformValue extends Component {
     if (type in primitiveTypeAlias) {
       type = primitiveTypeAlias[type];
     }
-    return Array.isArray(type)
-      ? <span className={"value-array " + classType(type)}>
-          {type.map((type, i) =>
-            <UniformValue
-              id={id + "[" + i + "]"}
-              key={i}
-              node={node}
-              value={Array.isArray(value) ? value[i] : null}
-              type={type}
-              info={info && info[i]}
-            />
-          )}
+    return Array.isArray(type) ? (
+      <span className={"value-array " + classType(type)}>
+        {type.map((type, i) => (
+          <UniformValue
+            id={id + "[" + i + "]"}
+            key={i}
+            node={node}
+            value={Array.isArray(value) ? value[i] : null}
+            type={type}
+            info={info && info[i]}
+          />
+        ))}
+      </span>
+    ) : (
+      <span className={"value " + classType(type)}>
+        <span className="val">
+          {typeof value === "number" ? formatNumber(value) : String(value)}
         </span>
-      : <span className={"value " + classType(type)}>
-          <span className="val">
-            {typeof value === "number" ? formatNumber(value) : String(value)}
-          </span>
-          {info ? <MetaInfo id={id} node={node} info={info} /> : null}
-        </span>;
+        {info ? <MetaInfo id={id} node={node} info={info} /> : null}
+      </span>
+    );
   }
 }
 
@@ -217,9 +219,9 @@ class Btn extends Component {
 }
 
 /**
-  * an anchor is the top-right Dot attached on a InspectorNode/Bus
-  * it is the start of a connection to another node
-  */
+ * an anchor is the top-right Dot attached on a InspectorNode/Bus
+ * it is the start of a connection to another node
+ */
 class Anchor extends Component {
   props: {
     id: number,
@@ -331,36 +333,38 @@ class MetaInfo extends Component {
       obj && typeof obj === "object" && obj.type === "BackbufferFrom";
     return (
       <span className="meta-info">
-        {dependency
-          ? <AnchorHook
-              id={dependency.id + "_" + node.id + "_" + id}
-              nodeId={node.id}
-              anchorId={dependency.id}
-            />
-          : isBackbuffer
-            ? <AnchorHook
-                id={"rec_" + node.id + "_" + id}
-                nodeId={node.id}
-                anchorId={node.id}
-              />
-            : isBackbufferFrom
-              ? <AnchorHook
-                  id={"bf_" + node.id + "_" + obj.node.id}
-                  nodeId={node.id}
-                  anchorId={obj.node.id}
-                />
-              : null}
-        {dependency
-          ? dependency.getGLShortName()
-          : isBackbuffer
-            ? "Backbuffer"
-            : isBackbufferFrom
-              ? "BackbufferFrom"
-              : typeof obj === "string"
-                ? <a href={obj} target="_blank">
-                    {obj}
-                  </a>
-                : formatObject(obj)}
+        {dependency ? (
+          <AnchorHook
+            id={dependency.id + "_" + node.id + "_" + id}
+            nodeId={node.id}
+            anchorId={dependency.id}
+          />
+        ) : isBackbuffer ? (
+          <AnchorHook
+            id={"rec_" + node.id + "_" + id}
+            nodeId={node.id}
+            anchorId={node.id}
+          />
+        ) : isBackbufferFrom ? (
+          <AnchorHook
+            id={"bf_" + node.id + "_" + obj.node.id}
+            nodeId={node.id}
+            anchorId={obj.node.id}
+          />
+        ) : null}
+        {dependency ? (
+          dependency.getGLShortName()
+        ) : isBackbuffer ? (
+          "Backbuffer"
+        ) : isBackbufferFrom ? (
+          "BackbufferFrom"
+        ) : typeof obj === "string" ? (
+          <a href={obj} target="_blank" rel="noopener noreferrer">
+            {obj}
+          </a>
+        ) : (
+          formatObject(obj)
+        )}
       </span>
     );
   }
@@ -449,11 +453,7 @@ class DrawCount extends PureComponent {
   };
   render() {
     const { drawCount } = this.props;
-    return (
-      <span className="drawCount">
-        {drawCount}
-      </span>
-    );
+    return <span className="drawCount">{drawCount}</span>;
   }
 }
 
@@ -552,9 +552,7 @@ class InspectorBox extends Component {
       >
         <header onMouseDown={this.onMouseDown}>
           <Anchor id={glObject.id} drawCount={drawCount} />
-          <span className="name">
-            {glObject.getGLShortName()}
-          </span>
+          <span className="name">{glObject.getGLShortName()}</span>
           <span className="redraw" onClick={this.onRedraw}>
             <DrawCount drawCount={drawCount} />
           </span>
@@ -565,9 +563,7 @@ class InspectorBox extends Component {
           <span className="dim">
             {width}⨉{height}
           </span>
-          <span className="mode">
-            {mode}
-          </span>
+          <span className="mode">{mode}</span>
         </footer>
       </div>
     );
@@ -589,7 +585,7 @@ class Uniforms extends PureComponent {
     return (
       <div className="uniforms">
         {preparedUniforms &&
-          preparedUniforms.map(u =>
+          preparedUniforms.map(u => (
             <div key={u.key} className={"uniform " + classType(u.type)}>
               <span
                 className="name"
@@ -610,7 +606,7 @@ class Uniforms extends PureComponent {
                 />
               </span>
             </div>
-          )}
+          ))}
       </div>
     );
   }
@@ -742,7 +738,9 @@ class SVGConnection extends Component {
           recursive={recursive}
           reversedHook={reversedHook}
         />
-        {draws.map(([x, y], i) => <circle key={i} cx={x} cy={y} />)}
+        {draws.map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} />
+        ))}
       </g>
     );
   }
@@ -809,46 +807,47 @@ class HookDrawer extends Component {
               className={"anchor-group" + (anchorIsGrabbed ? " grabbed" : "")}
               key={anchorId}
             >
-              {hooks.length === 0
-                ? <SVGStandaloneConnection
-                    animated={animated}
-                    anchor={anchor}
-                    anchorX={anchorPosition[0]}
-                    anchorY={anchorPosition[1]}
-                    hookX={anchorPosition[0]}
-                    hookY={anchorPosition[1] + size[1] - 22}
-                  />
-                : hooks.map(hook => {
-                    const hookId = hook.getId();
-                    const hookNodeId = hook.getNodeId();
-                    const hookIsGrabbed =
-                      grabbing && grabbing.id === hookNodeId;
-                    const hookPosition = anchorHookPositions.get(hook);
-                    if (!hookPosition) return null;
-                    return (
-                      <g
-                        className={
-                          "hook-group" + (hookIsGrabbed ? " grabbed" : "")
-                        }
-                        key={hookId}
-                      >
-                        <SVGConnection
-                          animated={animated}
-                          anchor={anchor}
-                          anchorX={anchorPosition[0]}
-                          anchorY={anchorPosition[1]}
-                          hookX={hookPosition[0]}
-                          hookY={hookPosition[1]}
-                          recursive={hookNodeId === anchorId}
-                        />
-                        <circle
-                          className="hook"
-                          cx={hookPosition[0]}
-                          cy={hookPosition[1]}
-                        />
-                      </g>
-                    );
-                  })}
+              {hooks.length === 0 ? (
+                <SVGStandaloneConnection
+                  animated={animated}
+                  anchor={anchor}
+                  anchorX={anchorPosition[0]}
+                  anchorY={anchorPosition[1]}
+                  hookX={anchorPosition[0]}
+                  hookY={anchorPosition[1] + size[1] - 22}
+                />
+              ) : (
+                hooks.map(hook => {
+                  const hookId = hook.getId();
+                  const hookNodeId = hook.getNodeId();
+                  const hookIsGrabbed = grabbing && grabbing.id === hookNodeId;
+                  const hookPosition = anchorHookPositions.get(hook);
+                  if (!hookPosition) return null;
+                  return (
+                    <g
+                      className={
+                        "hook-group" + (hookIsGrabbed ? " grabbed" : "")
+                      }
+                      key={hookId}
+                    >
+                      <SVGConnection
+                        animated={animated}
+                        anchor={anchor}
+                        anchorX={anchorPosition[0]}
+                        anchorY={anchorPosition[1]}
+                        hookX={hookPosition[0]}
+                        hookY={hookPosition[1]}
+                        recursive={hookNodeId === anchorId}
+                      />
+                      <circle
+                        className="hook"
+                        cx={hookPosition[0]}
+                        cy={hookPosition[1]}
+                      />
+                    </g>
+                  );
+                })
+              )}
               <circle
                 className="anchor"
                 cx={anchorPosition[0]}
@@ -1355,9 +1354,9 @@ export default class Inspector extends Component {
                   preparedUniforms={this.preparedUniformsMap.get(n)}
                   node={n}
                 />
-                {capture && !minimized
-                  ? <PreviewNode node={n} drawCount={drawCount} />
-                  : null}
+                {capture && !minimized ? (
+                  <PreviewNode node={n} drawCount={drawCount} />
+                ) : null}
               </InspectorBox>
             );
           } else {
@@ -1377,9 +1376,9 @@ export default class Inspector extends Component {
                 <div className="content-html">
                   {(content && content.outerHTML) || null}
                 </div>
-                {capture && !minimized
-                  ? <PreviewContent content={content} />
-                  : null}
+                {capture && !minimized ? (
+                  <PreviewContent content={content} />
+                ) : null}
               </InspectorBox>
             );
           }
@@ -1421,13 +1420,15 @@ export default class Inspector extends Component {
               physics*
             </label>
           </div>,
-          lost
-            ? <Btn key="ctx" onClick={this.restoreContext}>
-                restore GL context
-              </Btn>
-            : <Btn key="ctx" onClick={this.loseContext}>
-                lose GL context
-              </Btn>
+          lost ? (
+            <Btn key="ctx" onClick={this.restoreContext}>
+              restore GL context
+            </Btn>
+          ) : (
+            <Btn key="ctx" onClick={this.loseContext}>
+              lose GL context
+            </Btn>
+          )
         ];
         body = (
           <div ref="body" className="body">
@@ -1452,13 +1453,13 @@ export default class Inspector extends Component {
           <div className="no-surface">
             <h2>No Surface is currently inspected. Select one of these:</h2>
             <ul>
-              {listSurfaces().map(surface =>
+              {listSurfaces().map(surface => (
                 <li key={surface.id}>
                   <span onClick={() => this.setSurface(surface)}>
                     {surface.getGLName()}
                   </span>
                 </li>
-              )}
+              ))}
             </ul>
           </div>
         </div>
@@ -1481,11 +1482,11 @@ export default class Inspector extends Component {
               onChange={this.onSelectChange}
             >
               <option value="">(none)</option>
-              {listSurfaces().map(surface =>
+              {listSurfaces().map(surface => (
                 <option key={surface.id} value={surface.id}>
                   {surface.getGLName()}
                 </option>
-              )}
+              ))}
             </select>
             <label>
               <input

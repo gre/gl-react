@@ -155,8 +155,14 @@ export default ({
    *    </Blur>
    *  </Surface>
    */
-  return class Surface extends Component<*, *> {
-    props: SurfaceProps;
+  return class Surface extends Component<
+    SurfaceProps,
+    {
+      ready: boolean,
+      rebootId: number,
+      debug: boolean
+    }
+  > {
     id: number = ++surfaceId;
     gl: ?WebGLRenderingContext;
     buffer: WebGLBuffer;
@@ -166,11 +172,7 @@ export default ({
     shaders: { [key: string]: Shader } = {};
     _preparingGL: Array<*> = [];
     _needsRedraw: boolean = false;
-    state: {
-      ready: boolean,
-      rebootId: number,
-      debug: boolean
-    } = {
+    state = {
       ready: false,
       rebootId: 0,
       debug: false
@@ -212,7 +214,10 @@ export default ({
     }
 
     render() {
-      const { props, state: { ready, rebootId, debug } } = this;
+      const {
+        props,
+        state: { ready, rebootId, debug }
+      } = this;
       const { children, style } = props;
 
       // We allow to pass-in all props we don't know so you can hook to DOM events.
