@@ -2847,26 +2847,26 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-native@canary:
-  version "3.16.0-beta.e4f3431c"
-  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.16.0-beta.e4f3431c.tgz#1b5fdecc97b0377134d824906790b1e50f8585d3"
-  integrity sha1-G1/ezJewN3E02CSQZ5Cx5Q+FhdM=
+gl-react-native@3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.17.0.tgz#7012905ec2d81e3a2d40a629284be74cc8de66e7"
+  integrity sha512-N1G1ZN+YylZsWu0Ab/oKDDV89WPXtKQPgjoqwizCmzZ9O6JiO3PXETGgrZL8zOu/ZdeDNQKPUFP107Kk0asdAA==
   dependencies:
-    prop-types "^15.6.1"
+    prop-types "^15.7.2"
     webgltexture-loader-react-native "^0.6.0"
 
-gl-react@canary:
-  version "3.16.0-beta.e4f3431c"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.16.0-beta.e4f3431c.tgz#a59ad84f2330440634bc0b09df5560ca80cd64d8"
-  integrity sha1-pZrYTyMwRAY0vAsJ31VgyoDNZNg=
+gl-react@3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.0.tgz#9e4b5cc263bf518dd34ebe182938504c2a4dc90d"
+  integrity sha512-5tmVYhM8bICruhjH/N3Qos0IlM8oZ7kBpwZexi4NtRz5dTr/FXHDi2drtNLZitanbHN3Smwk14kiSJfSu9XHMw==
   dependencies:
     gl-shader "^4.2.1"
-    invariant "^2.2.1"
+    invariant "^2.2.4"
     ndarray "^1.0.18"
-    prop-types "^15.6.1"
+    prop-types "^15.7.2"
     typedarray-pool "^1.1.0"
     webgltexture-loader "^0.6.0"
-    webgltexture-loader-ndarray "^0.9.0"
+    webgltexture-loader-ndarray "^0.10.0"
 
 gl-shader@^4.2.1:
   version "4.2.1"
@@ -3179,7 +3179,7 @@ inquirer@^6.4.1:
     strip-ansi "^5.1.0"
     through "^2.3.6"
 
-invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5403,7 +5403,7 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
     prop-types "^15.6.1"
 
 "react-native-webgl@file:../../../react-native-webgl":
-  version "0.9.0-canary.fcfd2a7"
+  version "0.8.0"
   dependencies:
     prop-types "^15.5.8"
 
@@ -6717,10 +6717,10 @@ weakmap-shim@^1.1.0:
   resolved "https://registry.yarnpkg.com/weakmap-shim/-/weakmap-shim-1.1.1.tgz#d65afd784109b2166e00ff571c33150ec2a40b49"
   integrity sha1-1lr9eEEJshZuAP9XHDMVDsKkC0k=
 
-webgltexture-loader-ndarray@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.9.0.tgz#1ea839620ce9413cdd6015f4e17bfa973e973563"
-  integrity sha1-Hqg5YgzpQTzdYBX04Xv6lz6XNWM=
+webgltexture-loader-ndarray@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.10.0.tgz#3d32defba0f58cd8416b90442a9918cfe2ff3a2a"
+  integrity sha1-PTLe+6D1jNhBa5BEKpkYz+L/Oio=
   dependencies:
     ndarray "^1.0.18"
     ndarray-ops "^1.2.2"

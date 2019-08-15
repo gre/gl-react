@@ -14,7 +14,7 @@
     "test": "cd packages/tests && yarn test",
     "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
     "clean": "rm -rf node_modules packages/*/node_modules/ packages/*/lib",
-    "publish": "yarn && lerna run clean && lerna run build && lerna publish --registry=https://registry.npmjs.org/"
+    "publish": "yarn && lerna run clean && yarn build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
