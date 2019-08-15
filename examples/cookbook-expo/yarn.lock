@@ -2468,19 +2468,19 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-expo@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.17.0.tgz#6e53cb634d63efbdc2892826e87013e29a3960b2"
-  integrity sha512-v2wzK3S8X24rhbF2AcFxkv+rFy2kHfGi6CvfAwF+tvJSdaibV8HpswaKyc9sSIUC5qDj+wUzAU/fKSydXoxkGQ==
+gl-react-expo@^3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-3.17.1.tgz#cae24a2222995073f4bedf6300d3617ba0f06ed7"
+  integrity sha512-l+BxTWSFQlWJuTqkvaPG44iP6R7hdnhOIFPKKj0iIUC4vbo4HaTllPqZsSmmzq9Av2srznj/nig64lvCZKw4BQ==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"
     webgltexture-loader-expo "^0.12.1"
 
-gl-react@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.0.tgz#9e4b5cc263bf518dd34ebe182938504c2a4dc90d"
-  integrity sha512-5tmVYhM8bICruhjH/N3Qos0IlM8oZ7kBpwZexi4NtRz5dTr/FXHDi2drtNLZitanbHN3Smwk14kiSJfSu9XHMw==
+gl-react@^3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.1.tgz#dd773c75510452a554e807c4ba053c3237f6cb78"
+  integrity sha512-IbfEzi2s8Lc5fh5uiU2nRzfi9TVziuBVOkRldolUqIh99+lOlIA+AUI8nQ0oHQkbAqQfc15Cn9yZCDU8E8C30Q==
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.4"

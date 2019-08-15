@@ -9,8 +9,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "gl-react": "3.17.0",
-    "gl-react-native": "3.17.0",
+    "gl-react": "3.17.1",
+    "gl-react-native": "3.17.1",
     "gl-transitions": "^1.43.0",
     "ndarray": "^1.0.18",
     "raf": "^3.4.1",
