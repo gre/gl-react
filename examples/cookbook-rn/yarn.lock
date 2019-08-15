@@ -2847,26 +2847,26 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-native@3.17.1:
-  version "3.17.1"
-  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.17.1.tgz#01a235c2fd1973c4b25c750bc9987240b7e47797"
-  integrity sha512-MGlo/l83bSovRaNY9o75iq5XstbAHBDLxhTgT9TCsBDDVY91SvsFPgPHwp03R0MWsoVYAzEMAYRtWU8V6G3aHQ==
+gl-react-native@3.17.2:
+  version "3.17.2"
+  resolved "https://registry.yarnpkg.com/gl-react-native/-/gl-react-native-3.17.2.tgz#662de21a46a6d940e62c725a13e1fd2b9859b709"
+  integrity sha512-RyeVlio3bSgLuP3i26zz53BNN4Ku5I45y2jnLEMfVD2m2VLehAyAVRA2pNpKCCBBliLfhVyIjXfymXQ+5mtVcg==
   dependencies:
     prop-types "^15.7.2"
-    webgltexture-loader-react-native "^0.6.0"
+    webgltexture-loader-react-native "^0.12.2"
 
-gl-react@3.17.1:
-  version "3.17.1"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.1.tgz#dd773c75510452a554e807c4ba053c3237f6cb78"
-  integrity sha512-IbfEzi2s8Lc5fh5uiU2nRzfi9TVziuBVOkRldolUqIh99+lOlIA+AUI8nQ0oHQkbAqQfc15Cn9yZCDU8E8C30Q==
+gl-react@3.17.2:
+  version "3.17.2"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.2.tgz#297fc667d0db3d530f81b7220519f59e5959c2ae"
+  integrity sha512-lO582lZltx7uk2mj4+qASKM3SWLbf6CwWHM7KhIFbUlUCPjRv0cGd9LlqGul0iHEYPrfB+CyqGj3c6vL7z5syw==
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.4"
     ndarray "^1.0.18"
     prop-types "^15.7.2"
     typedarray-pool "^1.1.0"
-    webgltexture-loader "^0.6.0"
-    webgltexture-loader-ndarray "^0.10.0"
+    webgltexture-loader "^0.12.2"
+    webgltexture-loader-ndarray "^0.12.2"
 
 gl-shader@^4.2.1:
   version "4.2.1"
@@ -6717,42 +6717,42 @@ weakmap-shim@^1.1.0:
   resolved "https://registry.yarnpkg.com/weakmap-shim/-/weakmap-shim-1.1.1.tgz#d65afd784109b2166e00ff571c33150ec2a40b49"
   integrity sha1-1lr9eEEJshZuAP9XHDMVDsKkC0k=
 
-webgltexture-loader-ndarray@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.10.0.tgz#3d32defba0f58cd8416b90442a9918cfe2ff3a2a"
-  integrity sha1-PTLe+6D1jNhBa5BEKpkYz+L/Oio=
+webgltexture-loader-ndarray@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.12.2.tgz#bcc43673bc2936f2b94891e26122d50d5c95a1f2"
+  integrity sha512-DhaL1hcu+P9v7gWiP21sIC34Di1MmRNeEDnPLQNAeyFtLFemteKxrwdCz6ihm8LI8ng7NtAgoTJhcSePtO7b7w==
   dependencies:
     ndarray "^1.0.18"
     ndarray-ops "^1.2.2"
     typedarray-pool "^1.1.0"
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native-config@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-config/-/webgltexture-loader-react-native-config-0.6.0.tgz#43b291ab9252c0c26954e1bbb458a168b8eebd50"
-  integrity sha1-Q7KRq5JSwMJpVOG7tFihaLjuvVA=
+webgltexture-loader-react-native-config@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-config/-/webgltexture-loader-react-native-config-0.12.2.tgz#7bf222a67676d2cdfe0ba8fca51f17f09b2fbd30"
+  integrity sha512-DEDO14NFL4cJEoQkDZdDTvP5gqZVj8nUZNmld/3G5nvGx4CnU0Vw6VBsCBU/T7oTzGZx2pp9DzEWvFVYMuj0VA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native-imagesource@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-imagesource/-/webgltexture-loader-react-native-imagesource-0.6.0.tgz#f71763db160481beb6857f130260884fb478d994"
-  integrity sha1-9xdj2xYEgb62hX8TAmCIT7R42ZQ=
+webgltexture-loader-react-native-imagesource@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-imagesource/-/webgltexture-loader-react-native-imagesource-0.12.2.tgz#c67320c691a0d910ab92b9a251686258630d4169"
+  integrity sha512-6RueTrX0OdtGlm4KR+DozuBfYkVpJhgyU3bXFy5/TYGPJtUGxu2VOzzEMbljwtEO8ZIh92fGgiwggu+2FlcBGA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native/-/webgltexture-loader-react-native-0.6.0.tgz#7409fe9dc4e42835ed2a641aaa90aaff4f6acca1"
-  integrity sha1-dAn+ncTkKDXtKmQaqpCq/09qzKE=
+webgltexture-loader-react-native@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native/-/webgltexture-loader-react-native-0.12.2.tgz#96115c2dee4f74ef65972430b8cbdb0c39f5b340"
+  integrity sha512-bNFv6ZMTW0N0AXyTW6U+IGMcY8HP78wXBPjldE3MDuji59ZW81I6szyo+tZC3fCpyc7RQrfm5KiEOLbDY8sHZQ==
   dependencies:
-    webgltexture-loader-react-native-config "^0.6.0"
-    webgltexture-loader-react-native-imagesource "^0.6.0"
+    webgltexture-loader-react-native-config "^0.12.2"
+    webgltexture-loader-react-native-imagesource "^0.12.2"
 
-webgltexture-loader@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.6.0.tgz#95368723999dcc4c24024115375ab3ec18baf3fd"
-  integrity sha1-lTaHI5mdzEwkAkEVN1qz7Bi68/0=
+webgltexture-loader@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.12.2.tgz#8a511a4aca2c442421d0fda74dfb4929a362748f"
+  integrity sha512-8CuVBLDSKdPY62s2BV6PSrbRmnZt701Huk0NuRLribrVAs+nKiLiU+9vrWiHk3nRI+Bgmi0101wbniYXhiXtNg==
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
