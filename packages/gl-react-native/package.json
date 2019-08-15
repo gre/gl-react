@@ -35,6 +35,6 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "webgltexture-loader-react-native": "^0.6.0"
+    "webgltexture-loader-react-native": "^0.12.2"
   }
 }

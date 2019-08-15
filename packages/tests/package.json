@@ -24,7 +24,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-test-renderer": "^16.9.0",
-    "webgltexture-loader": "^0.6.0",
-    "webgltexture-loader-ndarray": "^0.10.0"
+    "webgltexture-loader": "^0.12.2",
+    "webgltexture-loader-ndarray": "^0.12.2"
   }
 }

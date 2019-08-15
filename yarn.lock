@@ -14310,79 +14310,79 @@ web-namespaces@^1.1.2:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.3.tgz#9bbf5c99ff0908d2da031f1d732492a96571a83f"
   integrity sha512-r8sAtNmgR0WKOKOxzuSgk09JsHlpKlB+uHi937qypOu3PZ17UxPrierFKDye/uNHjNTTEshu5PId8rojIPj/tA==
 
-webgltexture-loader-dom-canvas@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-0.6.0.tgz#46f24533e4ed7e78902850ea79e053608c6516fa"
-  integrity sha1-RvJFM+TtfniQKFDqeeBTYIxlFvo=
+webgltexture-loader-dom-canvas@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-0.12.2.tgz#9725c1fcb42d0d758f7ae36d9661efb91fadf156"
+  integrity sha512-AlPiCkZa6PyEKYp/5Td/htThlLnxSKfW4qg7Fg5dru75mv+RLB4+gwDbR6jSQQtwGFqpqIcSuRj2CRDOP0eY4g==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-dom-image-url@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-0.6.0.tgz#3c7faac7bf93a2e61ccfd2085b499750f603a48f"
-  integrity sha1-PH+qx7+TouYcz9IIW0mXUPYDpI8=
+webgltexture-loader-dom-image-url@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-0.12.2.tgz#9441a4463c0ea88afdabfc12cebf5de8c54cc1f7"
+  integrity sha512-p5pgNmmB4JBJSHsE/ArvDjCk1d3pT2Ahg/3m7SY4+uq2HhDPrLnJRKXxPpIvVfUkKUtl2/Jy+gD89SBnjTsaSg==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-dom-video@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-video/-/webgltexture-loader-dom-video-0.6.0.tgz#5384cd75868c50948a42c9bbaa20e20e8a923727"
-  integrity sha1-U4TNdYaMUJSKQsm7qiDiDoqSNyc=
+webgltexture-loader-dom-video@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-video/-/webgltexture-loader-dom-video-0.12.2.tgz#42b3d8adf2ecb990a7f3ec0b46381b07a9a1c4f7"
+  integrity sha512-OrF8DnoOP6NgAkr1CI1WEy5bhJx0PP+8N6caMENaOfgUGOK+Xd3e24IOrtu0hGOJxgMGETZtZ5hxjLw3wE2KlA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-dom@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom/-/webgltexture-loader-dom-0.6.0.tgz#813666bb4fbd87d4c3b2f98f197e8be00a4c8c90"
-  integrity sha1-gTZmu0+9h9TDsvmPGX6L4ApMjJA=
+webgltexture-loader-dom@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom/-/webgltexture-loader-dom-0.12.2.tgz#71054ee5c086f4458792d2c384a264c62fa16cea"
+  integrity sha512-z6RzDiRjpQD512v13kNdQEJB6Z6rwcKMQv41mon6V555mb4TqT7azmnSXjvhN7x+bhpRZ6+zKO0eNBDH8Zx+SQ==
   dependencies:
-    webgltexture-loader-dom-canvas "^0.6.0"
-    webgltexture-loader-dom-image-url "^0.6.0"
-    webgltexture-loader-dom-video "^0.6.0"
+    webgltexture-loader-dom-canvas "^0.12.2"
+    webgltexture-loader-dom-image-url "^0.12.2"
+    webgltexture-loader-dom-video "^0.12.2"
 
-webgltexture-loader-expo@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.12.1.tgz#ca37866c2e5eb65da1c7243c27d070507c66a534"
-  integrity sha512-141SuVCcGOJcPnQZO7h7NgXFa6MBJjKUk6//V2khN6VGuPu74/LTwUWoKvgjWK8+5nmsZxoEgZ5Q0L/aKYnqcg==
+webgltexture-loader-expo@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-0.12.2.tgz#b7f7c018e784fecfa584b8c3473a95dea214b7b6"
+  integrity sha512-Mde2TuLYwdT+sVoeserBB1Qo+PqCrp37mSFsSymoJN/4OlDnMCiGkqj8r6TwttwDoJsh3UhuwtjyADIGpDHlBA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-ndarray@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.10.0.tgz#3d32defba0f58cd8416b90442a9918cfe2ff3a2a"
-  integrity sha1-PTLe+6D1jNhBa5BEKpkYz+L/Oio=
+webgltexture-loader-ndarray@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.12.2.tgz#bcc43673bc2936f2b94891e26122d50d5c95a1f2"
+  integrity sha512-DhaL1hcu+P9v7gWiP21sIC34Di1MmRNeEDnPLQNAeyFtLFemteKxrwdCz6ihm8LI8ng7NtAgoTJhcSePtO7b7w==
   dependencies:
     ndarray "^1.0.18"
     ndarray-ops "^1.2.2"
     typedarray-pool "^1.1.0"
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native-config@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-config/-/webgltexture-loader-react-native-config-0.6.0.tgz#43b291ab9252c0c26954e1bbb458a168b8eebd50"
-  integrity sha1-Q7KRq5JSwMJpVOG7tFihaLjuvVA=
+webgltexture-loader-react-native-config@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-config/-/webgltexture-loader-react-native-config-0.12.2.tgz#7bf222a67676d2cdfe0ba8fca51f17f09b2fbd30"
+  integrity sha512-DEDO14NFL4cJEoQkDZdDTvP5gqZVj8nUZNmld/3G5nvGx4CnU0Vw6VBsCBU/T7oTzGZx2pp9DzEWvFVYMuj0VA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native-imagesource@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-imagesource/-/webgltexture-loader-react-native-imagesource-0.6.0.tgz#f71763db160481beb6857f130260884fb478d994"
-  integrity sha1-9xdj2xYEgb62hX8TAmCIT7R42ZQ=
+webgltexture-loader-react-native-imagesource@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native-imagesource/-/webgltexture-loader-react-native-imagesource-0.12.2.tgz#c67320c691a0d910ab92b9a251686258630d4169"
+  integrity sha512-6RueTrX0OdtGlm4KR+DozuBfYkVpJhgyU3bXFy5/TYGPJtUGxu2VOzzEMbljwtEO8ZIh92fGgiwggu+2FlcBGA==
   dependencies:
-    webgltexture-loader "^0.6.0"
+    webgltexture-loader "^0.12.2"
 
-webgltexture-loader-react-native@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native/-/webgltexture-loader-react-native-0.6.0.tgz#7409fe9dc4e42835ed2a641aaa90aaff4f6acca1"
-  integrity sha1-dAn+ncTkKDXtKmQaqpCq/09qzKE=
+webgltexture-loader-react-native@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-react-native/-/webgltexture-loader-react-native-0.12.2.tgz#96115c2dee4f74ef65972430b8cbdb0c39f5b340"
+  integrity sha512-bNFv6ZMTW0N0AXyTW6U+IGMcY8HP78wXBPjldE3MDuji59ZW81I6szyo+tZC3fCpyc7RQrfm5KiEOLbDY8sHZQ==
   dependencies:
-    webgltexture-loader-react-native-config "^0.6.0"
-    webgltexture-loader-react-native-imagesource "^0.6.0"
+    webgltexture-loader-react-native-config "^0.12.2"
+    webgltexture-loader-react-native-imagesource "^0.12.2"
 
-webgltexture-loader@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.6.0.tgz#95368723999dcc4c24024115375ab3ec18baf3fd"
-  integrity sha1-lTaHI5mdzEwkAkEVN1qz7Bi68/0=
+webgltexture-loader@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.12.2.tgz#8a511a4aca2c442421d0fda74dfb4929a362748f"
+  integrity sha512-8CuVBLDSKdPY62s2BV6PSrbRmnZt701Huk0NuRLribrVAs+nKiLiU+9vrWiHk3nRI+Bgmi0101wbniYXhiXtNg==
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
