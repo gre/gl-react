@@ -1,33 +1,30 @@
 {
   "expo": {
-    "name": "gl-react-expo-cookbook",
+    "name": "cookbook-expo",
+    "slug": "cookbook-expo",
     "privacy": "public",
-    "description": "GL React Native Cookbook",
-    "slug": "gl-react",
-    "sdkVersion": "27.0.0",
-    "version": "1.0.1",
+    "sdkVersion": "34.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon":
-      "https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png",
-    "notification": {
-      "icon":
-        "https://s3.amazonaws.com/exp-us-standard/placeholder-push-icon-blue-circle.png",
-      "color": "#000000"
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "loading": {
-      "icon":
-        "https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png",
-      "hideExponentText": false
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
-    "packagerOpts": {
-      "assetExts": ["ttf", "mp4"]
-    },
-    "android": {
-      "package": "fr.greweb.glrcookbook"
-    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "bundleIdentifier": "fr.greweb.glrcookbook"
+      "supportsTablet": true
     }
   }
 }

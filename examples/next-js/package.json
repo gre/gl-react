@@ -10,10 +10,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "gl-react": "3.14.0-beta.dab6ded6",
-    "gl-react-dom": "3.14.0-beta.dab6ded6",
-    "next": "^5.0.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "gl-react": "canary",
+    "gl-react-dom": "canary",
+    "next": "9",
+    "react": "16",
+    "react-dom": "16"
   }
 }

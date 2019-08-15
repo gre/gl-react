@@ -55,7 +55,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     ];
     mesh = new THREE.Mesh(
       new THREE.BoxGeometry(300, 300, 300, 7, 7, 7),
-      new THREE.MultiMaterial(materials)
+      materials
     );
     mesh.scale.x = -1;
     scene.add(mesh);
@@ -70,8 +70,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     }
 
     let material = new THREE.MeshBasicMaterial({
-      vertexColors: THREE.FaceColors,
-      overdraw: 0.5
+      vertexColors: THREE.FaceColors
     });
 
     cube = new THREE.Mesh(geometry, material);
@@ -86,9 +85,8 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
   }
   function loadTexture(src) {
     let texture = new THREE.Texture();
-    let material = new THREE.MeshBasicMaterial({ map: texture, overdraw: 0.5 });
     loadThreeJSTexture(gl, src, texture, renderer);
-    return material;
+    return texture;
   }
   function animate() {
     requestId = requestAnimationFrame(animate);

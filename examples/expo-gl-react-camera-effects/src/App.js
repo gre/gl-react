@@ -8,7 +8,7 @@ import {
   Dimensions,
   Text
 } from "react-native";
-import { Permissions } from "expo";
+import * as Permissions from "expo-permissions";
 import { Surface } from "gl-react-expo";
 import GLCamera from "./GLCamera";
 import Effects from "./Effects";
@@ -17,7 +17,7 @@ import Field from "./Field";
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const percentagePrint = v => (v * 100).toFixed(0) + "%";
-const radiantPrint = r => (180 * r / Math.PI).toFixed(0) + "°";
+const radiantPrint = r => ((180 * r) / Math.PI).toFixed(0) + "°";
 
 // prettier-ignore
 const fields = [

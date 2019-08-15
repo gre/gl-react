@@ -1,9 +1,29 @@
 //@flow
 import React from "react";
-import { StackNavigator } from "react-navigation";
-import routes from "./routes";
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import * as examples from "./examples";
+import * as tests from "./tests";
+import Home from "./Home";
+import About from "./About";
+import makeDemo from "./makeDemo";
 
-export default StackNavigator(routes, {
+const routes = {
+  home: { screen: Home },
+  about: { screen: About }
+};
+let keys;
+keys = Object.keys(examples);
+keys.map((k, i) => {
+  const next = keys.slice(i + 1).find(k => examples[k] && examples[k].Main);
+  routes[k] = { screen: makeDemo(examples[k], k, next) };
+});
+keys = Object.keys(tests);
+keys.map((k, i) => {
+  const next = keys.slice(i + 1).find(k => tests[k] && tests[k].Main);
+  routes[k] = { screen: makeDemo(tests[k], k, next) };
+});
+
+const root = createStackNavigator(routes, {
   navigationOptions: {
     headerStyle: {
       backgroundColor: "#e24"
@@ -11,3 +31,5 @@ export default StackNavigator(routes, {
     headerTintColor: "#fff"
   }
 });
+
+export default createAppContainer(root);

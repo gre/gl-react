@@ -22,7 +22,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "expo": "*",
+    "expo-gl": "*",
     "gl-react": "^3.13.0",
     "react": "*",
     "react-native": "*"
@@ -33,6 +33,6 @@
   "dependencies": {
     "invariant": "^2.2.4",
     "prop-types": "^15.7.2",
-    "webgltexture-loader-expo": "^0.11.0"
+    "webgltexture-loader-expo": "^0.12.1"
   }
 }

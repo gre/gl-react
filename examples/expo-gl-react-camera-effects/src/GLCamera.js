@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import { GLSL, Node, Shaders } from "gl-react";
-import { Camera } from "expo";
+import { Camera } from "expo-camera";
 
 const shaders = Shaders.create({
   YFlip: {
