@@ -16,8 +16,8 @@
     "expo-font": "^8.0.0",
     "expo-gl": "^8.0.0",
     "expo-permissions": "^8.0.0",
-    "gl-react": "canary",
-    "gl-react-native": "canary",
+    "gl-react": "4.0.0",
+    "gl-react-native": "4.0.0",
     "gl-transitions": "^1.43.0",
     "ndarray": "^1.0.18",
     "raf": "^3.4.1",
@@ -31,7 +31,7 @@
     "react-navigation-stack": "^1.10.3",
     "seedrandom": "^3.0.5",
     "three": "^0.112.1",
-    "webgltexture-loader-expo-camera": "^1.0.0-rc.3"
+    "webgltexture-loader-expo-camera": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
