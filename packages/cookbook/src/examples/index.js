@@ -53,7 +53,7 @@ names.forEach(name => {
     ...rest
   } = require("./" + name + "/meta.js");
   const source = require("./" + name + "/index.source.js");
-  examples[name] = { ...rest, Example, source };
+  examples[name] = { ...rest, Example, source, path: name };
 });
 
 export default examples;
