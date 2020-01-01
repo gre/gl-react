@@ -1,13 +1,10 @@
 //@flow
-import React, { Component } from "react";
-import { StyleSheet, ListView, Dimensions } from "react-native";
+import React, { useState, useCallback } from "react";
+import { StyleSheet, FlatList, Dimensions } from "react-native";
 import seedrandom from "seedrandom";
-const { width: viewportWidth } = Dimensions.get("window");
 import { InteractiveHeart } from "../heart";
 
-const sameColor = ([r, g, b], [R, G, B]) => r === R && g === G && b === B;
-
-const rowHasChanged = (r1, r2) => !sameColor(r1.color, r2.color);
+const { width: viewportWidth } = Dimensions.get("window");
 
 const increment = 3;
 const seed = "gl-react is awesome";
@@ -18,7 +15,7 @@ const genRows = nb => {
   for (let i = 0; i < nb; i++) {
     rows.push({
       color: [random(), random(), random()],
-      image: { uri: "https://i.imgur.com/GQo1KWq.jpg" },
+      image: { uri: "https://i.imgur.com/GQo1KWq.jpg" }
     });
   }
   return rows;
@@ -27,33 +24,27 @@ const genRows = nb => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
-  },
+    backgroundColor: "#fff"
+  }
 });
 
-export default class Example extends Component {
-  state = {
-    dataSource: new ListView.DataSource({
-      rowHasChanged,
-    }).cloneWithRows(genRows(increment)),
-  };
-  more = () => {
-    const { dataSource } = this.state;
-    console.log(increment, dataSource.getRowCount());
-    this.setState({
-      dataSource: dataSource.cloneWithRows(
-        genRows(increment + dataSource.getRowCount())
-      ),
-    });
-  };
-  render() {
-    return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        onEndReached={this.more}
-        renderRow={row => <InteractiveHeart {...row} width={viewportWidth} />}
-      />
-    );
-  }
-}
+const Example = () => {
+  const [data, setData] = useState(() => genRows(increment));
+
+  const more = useCallback(() => {
+    setData(genRows(data.length + increment));
+  }, [data]);
+
+  return (
+    <FlatList
+      style={styles.container}
+      onEndReached={more}
+      data={data}
+      renderItem={({ item }) => (
+        <InteractiveHeart {...item} width={viewportWidth} />
+      )}
+    />
+  );
+};
+
+export default Example;
