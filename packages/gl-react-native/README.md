@@ -8,7 +8,7 @@ If you are using Expo, it is recommended to use `gl-react-expo` instead.
 
 You will have to set up `react-native-unimodules` as documented here: https://github.com/unimodules/react-native-unimodules
 
-**You will need a react-native-unimodules setup**
+**You will need to setup react-native-unimodules**
 
 ```
 yarn add react-native-unimodules
@@ -17,10 +17,10 @@ yarn add react-native-unimodules
 If it's the first time you install `react-native-unimodules`, you will have to carefully follow the documentation to configure your project:
 [configure unimodules](https://github.com/unimodules/react-native-unimodules) (if not yet done)
 
-**You can then install expo-gl dependencies:**
+**You can then install gl-react dependencies:**
 
 ```
-yarn add expo-gl expo-gl-cpp
+yarn add gl-react gl-react-native
 ```
 
 ## Links
