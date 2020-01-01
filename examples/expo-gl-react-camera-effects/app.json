@@ -3,7 +3,7 @@
     "name": "gl-react camera effects",
     "slug": "expo-gl-react-camera-effects",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",

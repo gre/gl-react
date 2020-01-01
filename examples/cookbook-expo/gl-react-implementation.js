@@ -1,9 +1,12 @@
 // @flow
+import "webgltexture-loader-expo-camera";
 import { RGBAFormat, RGBFormat } from "three";
-import { Camera } from "expo";
+import { Camera } from "expo-camera";
 import { resolveAsync } from "expo-asset-utils";
+import * as Permissions from "expo-permissions";
 import { GLView } from "expo-gl";
 import { Surface } from "gl-react-expo";
+
 export const name = "gl-react-expo";
 export { Surface };
 
@@ -40,6 +43,7 @@ GLImage.prototype = {
 };
 
 export const endFrame = gl => gl.endFrameEXP();
+
 export const loadThreeJSTexture = (gl, src, texture) => {
   let image = new GLImage();
   image.onload = function() {
@@ -49,7 +53,9 @@ export const loadThreeJSTexture = (gl, src, texture) => {
   };
   image.src = src;
 };
+
 export { Camera };
+
 export const askCameraPermission = async () => {
   const permission = await Permissions.askAsync(Permissions.CAMERA);
   return permission;

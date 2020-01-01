@@ -2,6 +2,7 @@
 
 import { LinearCopy, NearestCopy, Visitor, Bus } from "gl-react";
 import { Surface } from "gl-react-headless";
+import { act } from "react-test-renderer";
 import React from "react";
 import invariant from "invariant";
 import {
@@ -45,6 +46,7 @@ test("Bus redraw=>el function", () => {
       );
     }
   }
+
   const Example = () => {
     const bus = React.createRef();
     return (
@@ -73,7 +75,10 @@ test("Bus redraw=>el function", () => {
     );
   };
 
-  const inst = create(<Example />);
+  let inst;
+  act(() => {
+    inst = create(<Example />);
+  });
   invariant(surface, "surface is defined");
   invariant(updatingTexture, "updatingTexture is defined");
   expectToBeCloseToColorArray(
@@ -86,7 +91,9 @@ test("Bus redraw=>el function", () => {
     surface.capture(2, 2, 1, 1).data,
     new Uint8Array([255, 0, 0, 255])
   );
-  inst.unmount();
+  act(() => {
+    inst.unmount();
+  });
 });
 
 test("Uniform children redraw=>el function", () => {
@@ -138,14 +145,19 @@ test("Uniform children redraw=>el function", () => {
       );
     }
   }
-  const inst = create(<Example />);
+  let inst;
+  act(() => {
+    inst = create(<Example />);
+  });
   invariant(surface, "surface is defined");
   invariant(updatingTexture, "updatingTexture is defined");
   expectToBeCloseToColorArray(
     surface.capture(1, 1, 1, 1).data,
     new Uint8Array([0, 0, 0, 0])
   );
-  inst.update(<Example />);
+  act(() => {
+    inst.update(<Example />);
+  });
   surface.flush();
   expectToBeCloseToColorArray(
     surface.capture(1, 1, 1, 1).data,
@@ -169,5 +181,7 @@ test("Uniform children redraw=>el function", () => {
     surface.capture(2, 2, 1, 1).data,
     new Uint8Array([255, 255, 0, 255])
   );
-  inst.unmount();
+  act(() => {
+    inst.unmount();
+  });
 });

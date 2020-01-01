@@ -1,6 +1,6 @@
 {
   "name": "gl-react-expo",
-  "version": "3.17.2",
+  "version": "3.18.0-rc.2+9adf916",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "React Native via Expo implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -28,11 +28,11 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "gl-react": "^3.17.2"
+    "gl-react": "^3.18.0-rc.2+9adf916"
   },
   "dependencies": {
     "invariant": "^2.2.4",
-    "prop-types": "^15.7.2",
-    "webgltexture-loader-expo": "^0.12.2"
-  }
+    "webgltexture-loader-expo": "1.0.0"
+  },
+  "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }

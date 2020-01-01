@@ -1,21 +1,13 @@
 //@flow
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 import { GLView as EXGLView } from "expo-gl";
-
-const propTypes = {
-  onContextCreate: PropTypes.func.isRequired,
-  style: PropTypes.any
-};
 
 export default class GLViewNative extends Component<{
   onContextCreate: (gl: WebGLRenderingContext) => void,
   style?: any,
   children?: any
 }> {
-  static propTypes = propTypes;
-
   afterDraw(gl: WebGLRenderingContext) {
     gl.flush();
     // $FlowFixMe

@@ -1,6 +1,7 @@
 //@flow
 import React from "react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 import * as examples from "./examples";
 import * as tests from "./tests";
 import Home from "./Home";
