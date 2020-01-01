@@ -7,7 +7,7 @@
 This universal library must be coupled with one of the concrete implementations:
 
 - [`gl-react-dom`](packages/gl-react-dom/) for React DOM (backed by WebGL).
-- [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android OpenGL, backed by [react-native-webgl](https://github.com/react-community/react-native-webgl)).
+- [`gl-react-native`](packages/gl-react-native/) for React Native (iOS/Android OpenGL, backed by [Expo implementation](https://docs.expo.io/versions/latest/sdk/gl-view.html) over unimodules).
 - [`gl-react-expo`](packages/gl-react-expo/) for React Native (iOS/Android OpenGL, backed by [Expo implementation](https://docs.expo.io/versions/latest/sdk/gl-view.html)).
 - [`gl-react-headless`](packages/gl-react-headless/) for Node.js (backed by [headless-gl](https://github.com/stackgl/headless-gl))
 
