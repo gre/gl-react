@@ -1,21 +1,27 @@
+# <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react-native
 
-<img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react-native
-========
+If you are using Expo, it is recommended to use `gl-react-expo` instead.
 
-`gl-react-native` is the [React Native](https://facebook.github.io/react-native/)  implementation of [gl-react](https://github.com/gre/gl-react). It is backed by [react-native-webgl](https://github.com/gre/react-native-webgl) which implements WebGL in React Native (If you are using Expo, it is recommended to use `gl-react-expo` instead).
+`gl-react-native` is the [React Native](https://facebook.github.io/react-native/) implementation of [gl-react](https://github.com/gre/gl-react). It is in fact backed by [unimodules](https://github.com/unimodules/react-native-unimodules) and [expo-gl](https://www.npmjs.com/package/expo-gl).
 
 ## Install
 
-To use this library, you will need install `gl-react` and `gl-react-native` which are pure JS libraries.
-For the native WebGL implementation, you also need to install `react-native-webgl`, please refer to the [README / Install](https://github.com/gre/react-native-webgl#install).
+You will have to set up `react-native-unimodules` as documented here: https://github.com/unimodules/react-native-unimodules
 
-**To summarize:**
+**You will need a react-native-unimodules setup**
 
 ```
-yarn add gl-react@next gl-react-native@next react-native-webgl
+yarn add react-native-unimodules
 ```
 
-and then, [**don't forget to see how to configure react-native-webgl**](https://github.com/gre/react-native-webgl#install).
+If it's the first time you install `react-native-unimodules`, you will have to carefully follow the documentation to configure your project:
+[configure unimodules](https://github.com/unimodules/react-native-unimodules) (if not yet done)
+
+**You can then install expo-gl dependencies:**
+
+```
+yarn add expo-gl expo-gl-cpp
+```
 
 ## Links
 

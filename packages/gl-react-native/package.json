@@ -1,6 +1,6 @@
 {
   "name": "gl-react-native",
-  "version": "3.17.2",
+  "version": "3.18.0-rc.2+9adf916",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "React Native standalone implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -21,20 +21,20 @@
     "src",
     ".flowconfig",
     "LICENSE",
-    "install-steps.png",
     "README.md"
   ],
   "peerDependencies": {
     "gl-react": "^3.13.0",
     "react": "*",
-    "react-native": "*",
-    "react-native-webgl": "*"
+    "react-native": "*"
   },
   "devDependencies": {
-    "gl-react": "^3.17.2"
+    "gl-react": "^3.18.0-rc.2+9adf916"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "webgltexture-loader-react-native": "^0.12.2"
-  }
+    "expo-gl": "^8.0.0",
+    "expo-gl-cpp": "^8.0.0",
+    "webgltexture-loader-expo": "1.0.0"
+  },
+  "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }

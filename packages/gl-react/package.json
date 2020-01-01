@@ -1,6 +1,6 @@
 {
   "name": "gl-react",
-  "version": "3.17.2",
+  "version": "3.18.0-rc.2+9adf916",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
@@ -33,10 +33,11 @@
     "ndarray": "^1.0.18",
     "prop-types": "^15.7.2",
     "typedarray-pool": "^1.1.0",
-    "webgltexture-loader": "^0.12.2",
-    "webgltexture-loader-ndarray": "^0.12.2"
+    "webgltexture-loader": "1.0.0",
+    "webgltexture-loader-ndarray": "1.0.0"
   },
   "scripts": {
     "build": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf gl-react.js && browserify lib/index.js -t [ browserify-shim ] --standalone GLReact > gl-react.js"
-  }
+  },
+  "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }

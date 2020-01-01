@@ -8,19 +8,21 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^34.0.1",
-    "expo-camera": "^6.0.0",
-    "expo-gl": "^6.0.0",
-    "expo-permissions": "~6.0.0",
-    "gl-react": "3.17.2",
-    "gl-react-expo": "3.17.2",
-    "react": "16.8.3",
-    "react-dom": "^16.8.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
-    "react-native-web": "^0.11.4"
+    "expo": "~36.0.0",
+    "expo-camera": "^8.0.0",
+    "expo-gl": "^8.0.0",
+    "expo-permissions": "^8.0.0",
+    "gl-react": "canary",
+    "gl-react-expo": "canary",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-web": "~0.11.7",
+    "webgltexture-loader-expo-camera": "canary"
   },
   "devDependencies": {
-    "babel-preset-expo": "^6.0.0"
+    "@babel/core": "^7.0.0",
+    "babel-preset-expo": "~8.0.0"
   },
   "private": true
 }

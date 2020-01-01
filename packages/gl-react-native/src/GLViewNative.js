@@ -1,37 +1,50 @@
 //@flow
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
-import { WebGLView } from "react-native-webgl";
-
-const propTypes = {
-  onContextCreate: PropTypes.func.isRequired,
-  onContextFailure: PropTypes.func.isRequired,
-  style: PropTypes.any
-};
+import { GLView as EXGLView } from "expo-gl";
 
 export default class GLViewNative extends Component<{
   onContextCreate: (gl: WebGLRenderingContext) => void,
-  onContextFailure: (e: Error) => void,
   style?: any,
   children?: any
 }> {
-  static propTypes = propTypes;
-
   afterDraw(gl: WebGLRenderingContext) {
-    const rngl = gl.getExtension("RN");
     gl.flush();
-    rngl.endFrame();
+    // $FlowFixMe
+    gl.endFrameEXP();
   }
 
+  ref: ?EXGLView;
+  onRef = (ref: ?EXGLView) => {
+    this.ref = ref;
+  };
+
+  onContextCreate = (gl: WebGLRenderingContext) => {
+    const { getExtension } = gl;
+    // monkey patch to get a way to access the EXGLView
+    // $FlowFixMe
+    gl.getExtension = name => {
+      if (name === "GLViewRef") return this.ref;
+      return getExtension.call(gl, name);
+    };
+    this.props.onContextCreate(gl);
+  };
+
+  capture = (
+    opt: *
+  ): Promise<{
+    uri: string,
+    localUri: string,
+    width: number,
+    height: number
+  }> => {
+    const { ref } = this;
+    if (!ref) return Promise.reject(new Error("glView is unmounted"));
+    return ref.takeSnapshotAsync(opt);
+  };
+
   render() {
-    const {
-      style,
-      onContextCreate,
-      onContextFailure,
-      children,
-      ...rest
-    } = this.props;
+    const { style, onContextCreate, children, ...rest } = this.props;
     if (__DEV__) {
       if ("width" in rest || "height" in rest) {
         console.warn(
@@ -44,7 +57,7 @@ export default class GLViewNative extends Component<{
         {...rest}
         style={[{ position: "relative", overflow: "hidden" }, style]}
       >
-        <WebGLView
+        <EXGLView
           style={[
             style,
             {
@@ -54,8 +67,8 @@ export default class GLViewNative extends Component<{
               left: 0
             }
           ]}
-          onContextCreate={onContextCreate}
-          onContextFailure={onContextFailure}
+          onContextCreate={this.onContextCreate}
+          ref={this.onRef}
         />
         <View style={{ opacity: 0 }}>{children}</View>
       </View>

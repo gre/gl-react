@@ -6,25 +6,25 @@
     "test": "./test.sh"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "babel-jest": "24.8.0",
-    "eslint": "^6.1.0",
-    "eslint-plugin-react": "^7.14.3",
-    "flow-copy-source": "^2.0.7"
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "24.9.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.17.0",
+    "flow-copy-source": "^2.0.9"
   },
   "version": "3.17.2",
   "dependencies": {
     "gl-react": "^3.17.2",
     "gl-react-headless": "^3.17.2",
     "gl-texture2d": "^2.0.12",
-    "jest": "24.8.0",
-    "jest-cli": "24.8.0",
+    "jest": "24.9.0",
+    "jest-cli": "24.9.0",
     "ndarray": "^1.0.18",
     "promise-defer": "^1.0.0",
     "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-test-renderer": "^16.9.0",
-    "webgltexture-loader": "^0.12.2",
-    "webgltexture-loader-ndarray": "^0.12.2"
+    "react": "^16.12.0",
+    "react-test-renderer": "^16.12.0",
+    "webgltexture-loader": "1.0.0",
+    "webgltexture-loader-ndarray": "1.0.0"
   }
 }
