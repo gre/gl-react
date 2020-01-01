@@ -28,6 +28,7 @@ golglider
 golrot
 golrotscu
 camera
+video
 mergechannels
 sdf1
 demotunnel

@@ -11,6 +11,7 @@
   "dependencies": {
     "expo": "~36.0.0",
     "expo-asset-utils": "^1.2.0",
+    "expo-av": "^8.0.0",
     "expo-camera": "^8.0.0",
     "expo-gl": "^8.0.0",
     "expo-permissions": "^8.0.0",

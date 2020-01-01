@@ -2,6 +2,9 @@ PODS:
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - EXAppLoaderProvider (8.0.0)
+  - EXAV (8.0.0):
+    - UMCore
+    - UMPermissionsInterface
   - EXCamera (8.0.0):
     - UMBarCodeScannerInterface
     - UMCore
@@ -267,6 +270,7 @@ PODS:
 DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../node_modules/expo-app-loader-provider/ios`)
+  - EXAV (from `../node_modules/expo-av/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
@@ -325,6 +329,9 @@ EXTERNAL SOURCES:
   EXAppLoaderProvider:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-app-loader-provider/ios"
+  EXAV:
+    :path: !ruby/object:Pathname
+    path: "../node_modules/expo-av/ios"
   EXCamera:
     :path: !ruby/object:Pathname
     path: "../node_modules/expo-camera/ios"
@@ -437,6 +444,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXAppLoaderProvider: ebdb6bc2632c1ccadbe49f5e4104d8d690969c49
+  EXAV: 39a3b794d690e91404774cabfc563182d4f84ac3
   EXCamera: c9765fcb15d862c2f405d5226931d8d96f03fb03
   EXConstants: 4051b16c17ef3defa03c541d42811dc92b249146
   EXFileSystem: 6e0d9bb6cc4ea404dbb8f583c1a8a2dcdf4b83b6
