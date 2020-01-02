@@ -12,10 +12,10 @@
     "eslint-plugin-react": "^7.17.0",
     "flow-copy-source": "^2.0.9"
   },
-  "version": "4.0.0",
+  "version": "4.0.1",
   "dependencies": {
-    "gl-react": "^4.0.0",
-    "gl-react-headless": "^4.0.0",
+    "gl-react": "^4.0.1",
+    "gl-react-headless": "^4.0.1",
     "gl-texture2d": "^2.0.12",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",

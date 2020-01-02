@@ -1,6 +1,6 @@
 {
   "name": "gl-react-cookbook",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "devDependencies": {
     "babel-preset-react-app": "^9.1.0",
@@ -10,8 +10,8 @@
   "dependencies": {
     "animated": "^0.2.0",
     "github-slugger": "^1.2.1",
-    "gl-react": "^4.0.0",
-    "gl-react-dom": "^4.0.0",
+    "gl-react": "^4.0.1",
+    "gl-react-dom": "^4.0.1",
     "gl-shader": "^4.2.1",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.43.0",
