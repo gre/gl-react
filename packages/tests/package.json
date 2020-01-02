@@ -14,8 +14,8 @@
   },
   "version": "4.0.0",
   "dependencies": {
-    "gl-react": "^3.17.2",
-    "gl-react-headless": "^3.17.2",
+    "gl-react": "^4.0.0",
+    "gl-react-headless": "^4.0.0",
     "gl-texture2d": "^2.0.12",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",

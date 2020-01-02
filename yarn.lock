@@ -7534,39 +7534,6 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-dom@^3.17.2:
-  version "3.17.2"
-  resolved "https://registry.yarnpkg.com/gl-react-dom/-/gl-react-dom-3.17.2.tgz#5fb93b0b85db244744017422635c147bff2123dc"
-  integrity sha512-PSeojPF/D/3i0g7KcA1qPN+sU+0thhvVOL8kP3F+PtiVTTqgwBMov4MS2z9T3OpqffLiN2gLTZkc8Zfup09NtQ==
-  dependencies:
-    invariant "^2.2.4"
-    prop-types "^15.7.2"
-    raf "^3.4.1"
-    webgltexture-loader-dom "^0.12.2"
-
-gl-react-headless@^3.17.2:
-  version "3.17.2"
-  resolved "https://registry.yarnpkg.com/gl-react-headless/-/gl-react-headless-3.17.2.tgz#d0c44e2e69ce8e6c042cfa9ebc99b72edb5f4a0c"
-  integrity sha512-+9isg01+gjylVjRf4vJI5GBT74t000GykJc2KjqubG/d1HU/BhDvpQyMcvAOLlbhi8RWFIMyCASYIk2H6ue/WQ==
-  dependencies:
-    gl "^4.3.3"
-    invariant "^2.2.4"
-    prop-types "^15.7.2"
-    raf "^3.4.1"
-
-gl-react@^3.17.2:
-  version "3.17.2"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-3.17.2.tgz#297fc667d0db3d530f81b7220519f59e5959c2ae"
-  integrity sha512-lO582lZltx7uk2mj4+qASKM3SWLbf6CwWHM7KhIFbUlUCPjRv0cGd9LlqGul0iHEYPrfB+CyqGj3c6vL7z5syw==
-  dependencies:
-    gl-shader "^4.2.1"
-    invariant "^2.2.4"
-    ndarray "^1.0.18"
-    prop-types "^15.7.2"
-    typedarray-pool "^1.1.0"
-    webgltexture-loader "^0.12.2"
-    webgltexture-loader-ndarray "^0.12.2"
-
 gl-shader@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/gl-shader/-/gl-shader-4.2.1.tgz#bc9b808e9293c51b668e88de615b0c113708dc2f"
@@ -7589,7 +7556,7 @@ gl-transitions@^1.43.0:
   resolved "https://registry.yarnpkg.com/gl-transitions/-/gl-transitions-1.43.0.tgz#790ce78f6713c75caba2b354764d7497971edcfd"
   integrity sha1-eQznj2cTx1yrorNUdk10l5ce3P0=
 
-gl@^4.3.3, gl@^4.4.0:
+gl@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/gl/-/gl-4.4.0.tgz#3d448769a9222ba809da4db80dd1f3c4b85498a0"
   integrity sha512-4FIq5tqiltTsadrLh6DGY4R9+aQwj25OM2WlXEv81N6YN1q1C0qR7ct0SKp1uUJdnBqbKhUJP3zQ1td40AVeJg==
@@ -15914,13 +15881,6 @@ web-namespaces@^1.1.2:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.3.tgz#9bbf5c99ff0908d2da031f1d732492a96571a83f"
   integrity sha512-r8sAtNmgR0WKOKOxzuSgk09JsHlpKlB+uHi937qypOu3PZ17UxPrierFKDye/uNHjNTTEshu5PId8rojIPj/tA==
 
-webgltexture-loader-dom-canvas@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-0.12.2.tgz#9725c1fcb42d0d758f7ae36d9661efb91fadf156"
-  integrity sha512-AlPiCkZa6PyEKYp/5Td/htThlLnxSKfW4qg7Fg5dru75mv+RLB4+gwDbR6jSQQtwGFqpqIcSuRj2CRDOP0eY4g==
-  dependencies:
-    webgltexture-loader "^0.12.2"
-
 webgltexture-loader-dom-canvas@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-1.0.0.tgz#fc00051950f25a1339b0ef047fefe7c72b80450a"
@@ -15928,26 +15888,12 @@ webgltexture-loader-dom-canvas@^1.0.0:
   dependencies:
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-dom-image-url@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-0.12.2.tgz#9441a4463c0ea88afdabfc12cebf5de8c54cc1f7"
-  integrity sha512-p5pgNmmB4JBJSHsE/ArvDjCk1d3pT2Ahg/3m7SY4+uq2HhDPrLnJRKXxPpIvVfUkKUtl2/Jy+gD89SBnjTsaSg==
-  dependencies:
-    webgltexture-loader "^0.12.2"
-
 webgltexture-loader-dom-image-url@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-1.0.0.tgz#f3a3889122d912c2f77e273c011823b189e68638"
   integrity sha512-KiQ16cLBTjoCQfdvfy1SQP3wMWEPW9ADqsODyhd+6nMg7qD6FmewF3OZs6chF4yfDtlVVXRYI/cDGF1K9MK5Mg==
   dependencies:
     webgltexture-loader "^1.0.0"
-
-webgltexture-loader-dom-video@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-video/-/webgltexture-loader-dom-video-0.12.2.tgz#42b3d8adf2ecb990a7f3ec0b46381b07a9a1c4f7"
-  integrity sha512-OrF8DnoOP6NgAkr1CI1WEy5bhJx0PP+8N6caMENaOfgUGOK+Xd3e24IOrtu0hGOJxgMGETZtZ5hxjLw3wE2KlA==
-  dependencies:
-    webgltexture-loader "^0.12.2"
 
 webgltexture-loader-dom-video@^1.0.0:
   version "1.0.0"
@@ -15964,15 +15910,6 @@ webgltexture-loader-dom@1.0.0:
     webgltexture-loader-dom-canvas "^1.0.0"
     webgltexture-loader-dom-image-url "^1.0.0"
     webgltexture-loader-dom-video "^1.0.0"
-
-webgltexture-loader-dom@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom/-/webgltexture-loader-dom-0.12.2.tgz#71054ee5c086f4458792d2c384a264c62fa16cea"
-  integrity sha512-z6RzDiRjpQD512v13kNdQEJB6Z6rwcKMQv41mon6V555mb4TqT7azmnSXjvhN7x+bhpRZ6+zKO0eNBDH8Zx+SQ==
-  dependencies:
-    webgltexture-loader-dom-canvas "^0.12.2"
-    webgltexture-loader-dom-image-url "^0.12.2"
-    webgltexture-loader-dom-video "^0.12.2"
 
 webgltexture-loader-expo@1.0.0:
   version "1.0.0"
@@ -15991,25 +15928,10 @@ webgltexture-loader-ndarray@1.0.0:
     typedarray-pool "^1.1.0"
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-ndarray@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-0.12.2.tgz#bcc43673bc2936f2b94891e26122d50d5c95a1f2"
-  integrity sha512-DhaL1hcu+P9v7gWiP21sIC34Di1MmRNeEDnPLQNAeyFtLFemteKxrwdCz6ihm8LI8ng7NtAgoTJhcSePtO7b7w==
-  dependencies:
-    ndarray "^1.0.18"
-    ndarray-ops "^1.2.2"
-    typedarray-pool "^1.1.0"
-    webgltexture-loader "^0.12.2"
-
 webgltexture-loader@1.0.0, webgltexture-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-1.0.0.tgz#e3d5b687d79ac85bed29222a7931f1405b69da6a"
   integrity sha512-TbQUdr0Bc3tcJ4pKIFoM9dKyLdYNf9Uxq05oZuIT+2e/vCcfaQS+WjNmW1FwYqaBrzcLr9CA/HBAmvyaS/REGw==
-
-webgltexture-loader@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-0.12.2.tgz#8a511a4aca2c442421d0fda74dfb4929a362748f"
-  integrity sha512-8CuVBLDSKdPY62s2BV6PSrbRmnZt701Huk0NuRLribrVAs+nKiLiU+9vrWiHk3nRI+Bgmi0101wbniYXhiXtNg==
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
