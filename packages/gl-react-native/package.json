@@ -24,7 +24,7 @@
     "README.md"
   ],
   "peerDependencies": {
-    "gl-react": "^3.13.0",
+    "gl-react": "^4.0.0",
     "react": "*",
     "react-native": "*"
   },
