@@ -14,3 +14,6 @@ export const orientation={ Main: orientation_E, ...orientation_m };
 import many_E from './many';
 import * as many_m from './many/meta';
 export const many={ Main: many_E, ...many_m };
+import resizing_E from './resizing';
+import * as resizing_m from './resizing/meta';
+export const resizing={ Main: resizing_E, ...resizing_m };
