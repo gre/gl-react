@@ -19,7 +19,7 @@
     "gl-texture2d": "^2.0.12",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
-    "ndarray": "^1.0.18",
+    "ndarray": "^1.0.19",
     "promise-defer": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

@@ -30,9 +30,9 @@
   "dependencies": {
     "gl-shader": "^4.2.1",
     "invariant": "^2.2.4",
-    "ndarray": "^1.0.18",
+    "ndarray": "^1.0.19",
     "prop-types": "^15.7.2",
-    "typedarray-pool": "^1.1.0",
+    "typedarray-pool": "^1.2.0",
     "webgltexture-loader": "1.0.0",
     "webgltexture-loader-ndarray": "1.0.0"
   },
