@@ -10,7 +10,7 @@ import StaticBlurMap from "../../toolbox/StaticBlurMap";
 // We must use a <Bus> if we don't want the <video> element to be duplicated
 // per Blur pass.. Also since we can dynamically change the number of passes,
 // it changes the tree level, (e.g. Blur1D>Blur1D>video becomes Blur1D>video)
-// and React always destroys and recreates the instance during reconcialition.
+// and React always destroys and recreates the instance during reconciliation.
 
 export default class Example extends Component {
   render() {
