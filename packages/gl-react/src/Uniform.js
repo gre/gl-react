@@ -30,7 +30,7 @@ const Uniform = {
    * Inject the width/height ratio of a given Texture input
    * @param {any} obj the texture input object
    */
-  textureSizeRatio: (obj: *) => ({ type: "TextureSize", obj, ratio: true })
+  textureSizeRatio: (obj: *) => ({ type: "TextureSize", obj, ratio: true }),
 };
 
 export default Uniform;

@@ -17,7 +17,7 @@ float random (vec2 uv) {
 // i
 void main() {
   gl_FragColor = vec4(vec3(step(0.5, random(uv))), 1.0);
-}`
+}`,
   },
   GameOfLife: {
     // implement Game Of Life.
@@ -40,8 +40,8 @@ void main() {
   step(0.5, texture2D(t, uv + vec2( 0.0, -1.0)*c).r);
   float next = prev==1.0 && sum >= 2.0 && sum <= 3.0 || sum == 3.0 ? 1.0 : 0.0;
   gl_FragColor = vec4(vec3(next), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 const refreshEveryTicks = 20;
@@ -52,25 +52,27 @@ export const GameOfLife = ({ tick }) => {
   // However, we can conditionally change shader/uniforms,
   // React reconciliation will preserve the same <Node> instance,
   // and our Game of Life state will get preserved!
-  return tick % refreshEveryTicks === 0
-    ? <Node
-        shader={shaders.InitGameOfLife}
-        width={size}
-        height={size}
-        backbuffering // makes Node holding 2 fbos that get swapped each draw time
-        sync // force <Node> to draw in sync each componentDidUpdate time
-      />
-    : <Node
-        shader={shaders.GameOfLife}
-        width={size}
-        height={size}
-        backbuffering
-        sync
-        uniforms={{
-          t: Uniform.Backbuffer, // Use previous frame buffer as a texture
-          size
-        }}
-      />;
+  return tick % refreshEveryTicks === 0 ? (
+    <Node
+      shader={shaders.InitGameOfLife}
+      width={size}
+      height={size}
+      backbuffering // makes Node holding 2 fbos that get swapped each draw time
+      sync // force <Node> to draw in sync each componentDidUpdate time
+    />
+  ) : (
+    <Node
+      shader={shaders.GameOfLife}
+      width={size}
+      height={size}
+      backbuffering
+      sync
+      uniforms={{
+        t: Uniform.Backbuffer, // Use previous frame buffer as a texture
+        size,
+      }}
+    />
+  );
 };
 
 const GameOfLifeLoop = timeLoop(GameOfLife, { refreshRate: 20 });

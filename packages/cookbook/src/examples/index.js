@@ -46,7 +46,7 @@ ibex`.split("\n");
 
 const examples = {};
 
-names.forEach(name => {
+names.forEach((name) => {
   const { default: Example } = require("./" + name + "/index.js");
   const {
     default: _, // eslint-disable-line

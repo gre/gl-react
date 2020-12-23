@@ -6,7 +6,7 @@ import { GLView as EXGLView } from "expo-gl";
 export default class GLViewNative extends Component<{
   onContextCreate: (gl: WebGLRenderingContext) => void,
   style?: any,
-  children?: any
+  children?: any,
 }> {
   afterDraw(gl: WebGLRenderingContext) {
     gl.flush();
@@ -23,7 +23,7 @@ export default class GLViewNative extends Component<{
     const { getExtension } = gl;
     // monkey patch to get a way to access the EXGLView
     // $FlowFixMe
-    gl.getExtension = name => {
+    gl.getExtension = (name) => {
       if (name === "GLViewRef") return this.ref;
       return getExtension.call(gl, name);
     };
@@ -36,7 +36,7 @@ export default class GLViewNative extends Component<{
     uri: string,
     localUri: string,
     width: number,
-    height: number
+    height: number,
   }> => {
     const { ref } = this;
     if (!ref) return Promise.reject(new Error("glView is unmounted"));
@@ -64,8 +64,8 @@ export default class GLViewNative extends Component<{
               flex: 1,
               position: "absolute",
               top: 0,
-              left: 0
-            }
+              left: 0,
+            },
           ]}
           onContextCreate={this.onContextCreate}
           ref={this.onRef}

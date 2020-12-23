@@ -1,7 +1,8 @@
 a {
   color: inherit;
 }
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: inherit;
 }
 .menu {
@@ -40,7 +41,7 @@ a:hover, a:focus {
 .App > header {
   height: 50px;
   display: flex;
-  flexDirection: row;
+  flexdirection: row;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #000;
@@ -68,13 +69,13 @@ a:hover, a:focus {
   white-space: nowrap;
 }
 .App > header .logo .t1 {
-  color: #E24;
+  color: #e24;
 }
 .App > header .logo .t2 {
   color: #000;
 }
 .App > header .logo .t3 {
-  color: #E24;
+  color: #e24;
 }
 .App > header .logo .v {
   font-weight: normal;
@@ -108,7 +109,8 @@ a:hover, a:focus {
 .App > header select {
   margin: 0 20px;
 }
-a.left, a.right {
+a.left,
+a.right {
   font-size: 1.6em;
   padding: 0.6em 0.4em;
   background: #fff;
@@ -118,7 +120,8 @@ a.left, a.right {
   cursor: pointer;
   user-select: none;
 }
-a.left:hover, a.right:hover {
+a.left:hover,
+a.right:hover {
   opacity: 1;
 }
 a.left {
@@ -174,7 +177,6 @@ a.right {
   padding: 10px 0;
 }
 .desc em {
-
 }
 .desc pre {
   display: inline-block;

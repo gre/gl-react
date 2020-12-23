@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Shaders, GLSL, Node } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -72,4 +72,4 @@ export default () => (
     </SplitColor>
   </Surface>
 );
-`
+`;

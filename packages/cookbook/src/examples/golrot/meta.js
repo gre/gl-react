@@ -2,11 +2,12 @@ import markdown from "../../markdown";
 export const title = "Rotating GameOfLife. 2 loops";
 export const desc = markdown`
 Compose [Game of Life][/gol] with Rotation
-\`\`\`
+
+~~~
 <RotatingLoop>
   <GameOfLifeLoop />
 </RotatingLoop>
-\`\`\`
+~~~
 `;
 export const descAfter = markdown`
 GameOfLifeLoop runs at 5fps, RotatingLoop runs at full speed (60fps).

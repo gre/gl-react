@@ -11,5 +11,5 @@ gl-react have a \`Backbuffer\` Symbol we can pass
 as texture uniform to access previously drawn frame.
 
 > gl-react hooks React lifecycle to GL draws.
-\`componentDidUpdate => gl.draw\`
+> \`componentDidUpdate => gl.draw\`
 `;

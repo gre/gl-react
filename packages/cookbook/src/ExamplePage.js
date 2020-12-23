@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import queryString from "query-string";
 
-const encodeQueryValue = value => JSON.stringify(value);
-const decodeQueryValue = value => JSON.parse(value);
-const encodeQuery = obj => {
+const encodeQueryValue = (value) => JSON.stringify(value);
+const decodeQueryValue = (value) => JSON.parse(value);
+const encodeQuery = (obj) => {
   const values = {};
   for (let k in obj) {
     if (obj.hasOwnProperty(k)) {
@@ -12,7 +12,7 @@ const encodeQuery = obj => {
   }
   return values;
 };
-const decodeQuery = query => {
+const decodeQuery = (query) => {
   query = { ...query };
   for (let k in query) {
     if (query.hasOwnProperty(k)) {
@@ -29,27 +29,29 @@ const decodeQuery = query => {
 
 export default class ExamplePage extends Component {
   setToolState = (obj: any) => {
-    const { location: { pathname, search } } = this.props;
+    const {
+      location: { pathname, search },
+    } = this.props;
     this.props.history.replace({
       pathname,
       search: queryString.stringify({
         ...queryString.parse(search),
-        ...encodeQuery(obj)
-      })
+        ...encodeQuery(obj),
+      }),
     });
   };
 
-  onChangeField = prop => value => this.setToolState({ [prop]: value });
+  onChangeField = (prop) => (value) => this.setToolState({ [prop]: value });
 
   render() {
     const {
       example: { toolbox, ToolboxFooter, Example, desc, descAfter },
-      location: { search }
+      location: { search },
     } = this.props;
     const props = {
       setToolState: this.setToolState,
       ...Example.defaultProps,
-      ...decodeQuery(queryString.parse(search))
+      ...decodeQuery(queryString.parse(search)),
     };
     return (
       <div className="example">

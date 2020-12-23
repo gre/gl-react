@@ -29,7 +29,7 @@ void main() {
   color += texture2D(t, uv - (off2 / dim)) * 0.0702702703;
   gl_FragColor = color;
 }
-    `
+    `,
   },
   game: {
     frag: GLSL`
@@ -74,7 +74,7 @@ void main() {
   )
   * mix(1.0, smoothstep(1.0, 0.0, dd), 0.6), 1.0);
 }
-    `
+    `,
   },
   glare: {
     frag: GLSL`
@@ -84,7 +84,7 @@ uniform sampler2D t;
 void main() {
   gl_FragColor = vec4(step(0.9, texture2D(t, uv).r));
 }
-    `
+    `,
   },
   laser: {
     frag: GLSL`
@@ -102,7 +102,7 @@ void main() {
   );
 }
 
-    `
+    `,
   },
   persistence: {
     frag: GLSL`
@@ -117,7 +117,7 @@ void main() {
     texture2D(t, uv).rgb,
     1.0);
 }
-`
+`,
   },
   player: {
     frag: GLSL`
@@ -208,8 +208,8 @@ void main() {
   c *= 1.0 - 1.3 * distance(uv, vec2(0.5));
   gl_FragColor = vec4(light * mix(env(), c.rgb, clamp(c.a, 0.0, 1.0)), 1.0);
 }
-`
-  }
+`,
+  },
 });
 
 const Blur1D = ({ dim, dir, children: t }) => (
@@ -234,15 +234,13 @@ export default class Example extends Component {
             k: [0, 0],
             W: 2,
             H: 2,
-            S: 0
+            S: 0,
           };
     const dim = [W, H];
 
     return (
       <div style={{ background: "black" }} ref="container">
-
         <Surface width={W} height={H} pixelRatio={1}>
-
           <Bus ref="laser">
             <Node
               shader={shaders.laser}
@@ -285,9 +283,10 @@ export default class Example extends Component {
               <Blur1D dim={dim} dir={[1, 0]}>
                 <Blur1D dim={dim} dir={[-0.5, 0.5]}>
                   <Blur1D dim={dim} dir={[0.5, 0.5]}>
-                    {() => this.refs.laser
-                    //FIXME this should be glare instead.
-                    //but i think there is a bug in gl-react!
+                    {
+                      () => this.refs.laser
+                      //FIXME this should be glare instead.
+                      //but i think there is a bug in gl-react!
                     }
                   </Blur1D>
                 </Blur1D>
@@ -301,7 +300,7 @@ export default class Example extends Component {
               backbuffering
               uniforms={{
                 t: this.refs.glareBlurred,
-                r: Uniform.Backbuffer
+                r: Uniform.Backbuffer,
               }}
             />
           </Bus>
@@ -316,7 +315,7 @@ export default class Example extends Component {
               E: () => this.refs.player,
               s,
               F,
-              k
+              k,
             }}
           />
         </Surface>
@@ -324,9 +323,7 @@ export default class Example extends Component {
         <canvas id="c" ref="gameCanvas" hidden={!showCanvas} />
 
         <div style={{ textAlign: "center", padding: 20 }}>
-          <button onClick={this.sendAsteroid}>
-            SEND ASTEROID!
-          </button>
+          <button onClick={this.sendAsteroid}>SEND ASTEROID!</button>
         </div>
       </div>
     );
@@ -345,6 +342,6 @@ export default class Example extends Component {
   sendAsteroid = () => window._behindAsteroids_send();
 
   static defaultProps = {
-    showCanvas: false
+    showCanvas: false,
   };
 }

@@ -9,13 +9,15 @@ import { HelloBlue } from "../helloblue";
 // in a requestAnimationFrame loop and provide a time and tick prop
 import timeLoop from "../../HOC/timeLoop";
 
-export default timeLoop(class Example extends Component {
-  render() {
-    const { time } = this.props;
-    return (
-      <Surface width={300} height={300}>
-        <HelloBlue blue={0.5 + 0.5 * Math.cos(time / 500)} />
-      </Surface>
-    );
+export default timeLoop(
+  class Example extends Component {
+    render() {
+      const { time } = this.props;
+      return (
+        <Surface width={300} height={300}>
+          <HelloBlue blue={0.5 + 0.5 * Math.cos(time / 500)} />
+        </Surface>
+      );
+    }
   }
-});
+);

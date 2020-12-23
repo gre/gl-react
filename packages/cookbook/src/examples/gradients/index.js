@@ -5,7 +5,8 @@ import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
 
 const shaders = Shaders.create({
-  gradients: { frag: GLSL`
+  gradients: {
+    frag: GLSL`
 precision highp float;
 varying vec2 uv;
 uniform vec4 colors[3];
@@ -23,33 +24,36 @@ void main () {
     sum.a = 1.0;
   }
   gl_FragColor = vec4(sum.a * sum.rgb, 1.0);
-}`}
+}`,
+  },
 });
 
 // Alternative syntax using React stateless function component
-const Gradients = ({ time }) =>
+const Gradients = ({ time }) => (
   <Node
     shader={shaders.gradients}
     uniforms={{
       colors: [
-        [ Math.cos(0.002*time), Math.sin(0.002*time), 0.2, 1 ],
-        [ Math.sin(0.002*time), -Math.cos(0.002*time), 0.1, 1 ],
-        [ 0.3, Math.sin(3+0.002*time), Math.cos(1+0.003*time), 1 ]
+        [Math.cos(0.002 * time), Math.sin(0.002 * time), 0.2, 1],
+        [Math.sin(0.002 * time), -Math.cos(0.002 * time), 0.1, 1],
+        [0.3, Math.sin(3 + 0.002 * time), Math.cos(1 + 0.003 * time), 1],
       ],
       particles: [
-        [ 0.3, 0.3 ],
-        [ 0.7, 0.5 ],
-        [ 0.4, 0.9 ]
-      ]
+        [0.3, 0.3],
+        [0.7, 0.5],
+        [0.4, 0.9],
+      ],
     }}
-  />;
+  />
+);
 
 const GradientsLoop = timeLoop(Gradients);
 
-export default () =>
+export default () => (
   <Surface width={300} height={300}>
     <GradientsLoop />
-  </Surface>;
+  </Surface>
+);
 
 // NB: don't abuse the uniforms array:
 // it's not meant to be used with lot of objects.

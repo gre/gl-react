@@ -27,7 +27,7 @@ type SurfaceProps = {
   onLoadError?: (e: Error) => void,
   onContextLost?: () => void,
   onContextRestored?: () => void,
-  visitor?: VisitorLike
+  visitor?: VisitorLike,
 };
 
 interface ISurface extends Component<SurfaceProps, *> {
@@ -67,7 +67,7 @@ export type Surface = ISurface;
 export type SurfaceContext = {
   glParent: Node | Surface | Bus,
   glSurface: Surface,
-  glSizable: { +getGLSize: () => [number, number] }
+  glSizable: { +getGLSize: () => [number, number] },
 };
 
 const SurfacePropTypes = {
@@ -78,7 +78,7 @@ const SurfacePropTypes = {
   onLoadError: PropTypes.func,
   onContextLost: PropTypes.func,
   onContextRestored: PropTypes.func,
-  visitor: PropTypes.object
+  visitor: PropTypes.object,
 };
 
 let surfaceId = 0;
@@ -92,7 +92,7 @@ type SurfaceOpts = {
   RenderLessElement: React$ComponentType<*>,
   mapRenderableContent?: (instance: mixed) => mixed,
   requestFrame: (f: Function) => number,
-  cancelFrame: (id: number) => void
+  cancelFrame: (id: number) => void,
 };
 
 export default ({
@@ -100,7 +100,7 @@ export default ({
   RenderLessElement,
   mapRenderableContent,
   requestFrame,
-  cancelFrame
+  cancelFrame,
 }: SurfaceOpts): Class<ISurface> => {
   /**
    * **Renders the final tree of [Node](#node) in a WebGL Canvas / OpenGLView /...**
@@ -160,7 +160,7 @@ export default ({
     {
       ready: boolean,
       rebootId: number,
-      debug: boolean
+      debug: boolean,
     }
   > {
     id: number = ++surfaceId;
@@ -175,7 +175,7 @@ export default ({
     state = {
       ready: false,
       rebootId: 0,
-      debug: false
+      debug: false,
     };
 
     RenderLessElement = RenderLessElement;
@@ -185,20 +185,20 @@ export default ({
     static childContextTypes: { [_: $Keys<SurfaceContext>]: any } = {
       glSurface: PropTypes.object.isRequired,
       glParent: PropTypes.object.isRequired,
-      glSizable: PropTypes.object.isRequired
+      glSizable: PropTypes.object.isRequired,
     };
 
     getChildContext(): SurfaceContext {
       return {
         glParent: this,
         glSurface: this,
-        glSizable: this
+        glSizable: this,
       };
     }
 
     componentDidMount() {
       _instances.push(this);
-      this.getVisitors().forEach(v => v.onSurfaceMount(this));
+      this.getVisitors().forEach((v) => v.onSurfaceMount(this));
     }
 
     componentWillUnmount() {
@@ -206,7 +206,7 @@ export default ({
       this._destroyGL();
       const i = _instances.indexOf(this);
       if (i !== -1) _instances.splice(i, 1);
-      this.getVisitors().forEach(v => v.onSurfaceUnmount(this));
+      this.getVisitors().forEach((v) => v.onSurfaceUnmount(this));
     }
 
     componentDidUpdate() {
@@ -216,13 +216,13 @@ export default ({
     render() {
       const {
         props,
-        state: { ready, rebootId, debug }
+        state: { ready, rebootId, debug },
       } = this;
       const { children, style } = props;
 
       // We allow to pass-in all props we don't know so you can hook to DOM events.
       const rest = {};
-      Object.keys(props).forEach(key => {
+      Object.keys(props).forEach((key) => {
         if (allSurfaceProps.indexOf(key) === -1) {
           rest[key] = props[key];
         }
@@ -252,7 +252,7 @@ export default ({
       this.setState(({ rebootId }) => ({
         rebootId: rebootId + 1,
         ready: false,
-        debug: true
+        debug: true,
       }));
     }
 
@@ -372,7 +372,7 @@ export default ({
       const onSuccess = () => {
         this.setState(
           {
-            ready: true
+            ready: true,
           },
           () => {
             try {
@@ -422,7 +422,7 @@ export default ({
         }
         this.shaders = {};
         gl.deleteBuffer(this.buffer);
-        this.getVisitors().map(v => v.onSurfaceGLContextChange(this, null));
+        this.getVisitors().map((v) => v.onSurfaceGLContextChange(this, null));
       }
     }
 
@@ -432,7 +432,7 @@ export default ({
       onError: (e: Error) => void
     ) {
       this.gl = gl;
-      this.getVisitors().map(v => v.onSurfaceGLContextChange(this, gl));
+      this.getVisitors().map((v) => v.onSurfaceGLContextChange(this, gl));
 
       this.loaderResolver = new LoaderResolver(gl);
 
@@ -451,7 +451,7 @@ export default ({
 
       const all: Array<Promise<*>> = [];
 
-      (preload || []).forEach(raw => {
+      (preload || []).forEach((raw) => {
         if (!raw) {
           console.warn("Can't preload value", raw);
           return;
@@ -587,17 +587,17 @@ export default ({
       invariant(glView, "GLView is mounted");
       const visitors = this.getVisitors();
       if (!gl || !root || !this._needsRedraw) {
-        visitors.forEach(v => v.onSurfaceDrawSkipped(this));
+        visitors.forEach((v) => v.onSurfaceDrawSkipped(this));
         return;
       }
       this._needsRedraw = false;
-      visitors.forEach(v => v.onSurfaceDrawStart(this));
+      visitors.forEach((v) => v.onSurfaceDrawStart(this));
       if (glView.beforeDraw) glView.beforeDraw(gl);
       try {
         root._draw();
       } catch (e) {
         let silent = false;
-        visitors.forEach(v => {
+        visitors.forEach((v) => {
           silent = v.onSurfaceDrawError(e) || silent;
         });
         if (!silent) {
@@ -615,7 +615,7 @@ export default ({
         return;
       }
       if (glView.afterDraw) glView.afterDraw(gl);
-      visitors.forEach(v => v.onSurfaceDrawEnd(this));
+      visitors.forEach((v) => v.onSurfaceDrawEnd(this));
     }
   };
 };

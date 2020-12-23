@@ -1,4 +1,4 @@
-module.exports=`import React from "react";
+module.exports = `import React from "react";
 import { LinearCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
 import GLTransition from "react-gl-transition";
@@ -28,4 +28,4 @@ export default () => (
     <Slideshow slides={images} delay={2000} duration={1500} />
   </Surface>
 );
-`
+`;

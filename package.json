@@ -17,17 +17,17 @@
     "publish": "yarn && lerna run clean && yarn build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@babel/preset-flow": "^7.8.3",
-    "@babel/preset-react": "^7.8.3",
-    "browserify": "^16.5.0",
+    "@babel/cli": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-flow": "^7.12.1",
+    "@babel/preset-react": "^7.12.10",
+    "browserify": "^17.0.0",
     "browserify-shim": "^3.8.12",
-    "documentation": "12.1.4",
+    "documentation": "13.1.0",
     "flow-copy-source": "^2.0.9",
-    "lerna": "^3.20.2",
-    "prettier": "^1.19.1"
+    "lerna": "^3.22.1",
+    "prettier": "^2.2.1"
   }
 }

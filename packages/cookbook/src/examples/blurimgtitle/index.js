@@ -30,7 +30,7 @@ void main() {
   ), 1.0);
   float isText = 1.0 - texture2D(title, uv).r;
   gl_FragColor = mix(bgColor, textColor, isText);
-}`
+}`,
   },
   TitleBlurMap: {
     frag: GLSL`
@@ -42,8 +42,8 @@ void main() {
 gl_FragColor = vec4(
   vec3(smoothstep(1.0, threshold, texture2D(t, uv).r)),
   1.0);
-}`
-  }
+}`,
+  },
 });
 
 const AveragePixels = ({ children, quality }) => (
@@ -68,7 +68,7 @@ const TitleBlurMap = ({ children: title, threshold }) => (
         <Blur factor={4} passes={4} width={200} height={200}>
           {title}
         </Blur>
-      )
+      ),
     }}
     width={64}
     height={64}
@@ -89,10 +89,10 @@ class Title extends PureComponent {
                 font: "bold 78px Didot,Georgia,serif",
                 fillStyle: "#000",
                 textBaseline: "top",
-                textAlign: "center"
+                textAlign: "center",
               },
-              ["fillText", children, width / 2, 10, 84]
-            ]
+              ["fillText", children, width / 2, 10, 84],
+            ],
           }}
         </JSON2D>
       </LinearCopy>
@@ -106,7 +106,7 @@ class ImageTitleC extends Component {
     height: PropTypes.number.isRequired,
     children: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
-    colorThreshold: PropTypes.number.isRequired
+    colorThreshold: PropTypes.number.isRequired,
   };
   render() {
     const { width, height, children: img, text, colorThreshold } = this.props;
@@ -119,10 +119,9 @@ class ImageTitleC extends Component {
           imgBlurred: () => this.refs.imgBlurred,
           title: () => this.refs.title,
           imgTone: () => this.refs.imgTone,
-          blurMap: () => this.refs.blurMap
+          blurMap: () => this.refs.blurMap,
         }}
       >
-
         <Bus ref="title">
           <Title width={width} height={height}>
             {text}
@@ -130,15 +129,11 @@ class ImageTitleC extends Component {
         </Bus>
 
         <Bus ref="blurMap">
-          <TitleBlurMap threshold={0.7}>
-            {() => this.refs.title}
-          </TitleBlurMap>
+          <TitleBlurMap threshold={0.7}>{() => this.refs.title}</TitleBlurMap>
         </Bus>
 
         <Bus ref="imgTone">
-          <AveragePixels quality={8}>
-            {img}
-          </AveragePixels>
+          <AveragePixels quality={8}>{img}</AveragePixels>
         </Bus>
 
         <Bus ref="imgBlurred">
@@ -146,7 +141,6 @@ class ImageTitleC extends Component {
             {img}
           </BlurV>
         </Bus>
-
       </Node>
     );
   }
@@ -168,6 +162,6 @@ export default class Example extends Component {
   static defaultProps = {
     title: "Hello\nSan Francisco\n☻",
     colorThreshold: 0.6,
-    image: require("./sf-6.jpg")
+    image: require("./sf-6.jpg").default,
   };
 }

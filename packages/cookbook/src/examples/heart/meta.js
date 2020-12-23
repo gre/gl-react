@@ -4,7 +4,8 @@ export const title = "Heart animation";
 
 export const desc = markdown`
 gl-react can be used with any React library.
-For instance, [react-motion](https://github.com/chenglou/react-motion)'s spring animation.`;
+For instance, [react-motion](https://github.com/chenglou/react-motion)'s spring animation.
+`;
 
 export const descAfter = markdown`
 If you click fastly on the Heart, react-motion nicely

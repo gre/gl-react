@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -16,7 +16,7 @@ void main() {
   float scale = 1.0 - 0.1 * over - 0.8 * toggle;
   vec2 offset = vec2(0.0, -0.3 - 0.1 * over - 0.7 * toggle);
   vec2 p = scale * (2.0 * uv - 1.0 + offset);
-  float a = atan(p.x, p.y) / ${Math.PI/* \\o/ */};
+  float a = atan(p.x, p.y) / ${Math.PI /* \\o/ */};
   float r = length(p);
   float h = abs(a);
   float d = (13.0*h - 22.0*h*h + 10.0*h*h*h - 0.3 * (1.0-over))/(6.0-5.0*h);
@@ -62,4 +62,4 @@ export default () =>
     color={[ 1, 0, 0 ]}
     image="https://i.imgur.com/GQo1KWq.jpg"
   />;
-`
+`;

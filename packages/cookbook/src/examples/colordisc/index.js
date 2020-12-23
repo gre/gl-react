@@ -15,7 +15,8 @@ void main() {
     vec4(0.0),
     step(1.0, d)
   );
-}` }
+}`,
+  },
 });
 
 class ColoredDisc extends Component {
@@ -23,10 +24,7 @@ class ColoredDisc extends Component {
     // fromColor/toColor must be array of 3 numbers because defined as vec3 type.
     const { fromColor, toColor } = this.props;
     return (
-      <Node
-        shader={shaders.ColoredDisc}
-        uniforms={{ fromColor, toColor }}
-      />
+      <Node shader={shaders.ColoredDisc} uniforms={{ fromColor, toColor }} />
     );
   }
 }
@@ -41,7 +39,7 @@ export default class Example extends Component {
     );
   }
   static defaultProps = {
-    fromColor: [ 1, 0, 1 ],
-    toColor: [ 1, 1, 0 ],
+    fromColor: [1, 0, 1],
+    toColor: [1, 1, 0],
   };
 }

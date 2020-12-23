@@ -6,13 +6,13 @@ import type Node from "./Node";
 import type Bus from "./Bus";
 import Visitor from "./Visitor";
 
-const aggregateInfo = info =>
+const aggregateInfo = (info) =>
   Array.isArray(info)
     ? info.reduce((acc, info) => acc.concat(aggregateInfo(info)), [])
     : [
         String(
           (info.dependency && info.dependency.getGLName()) || info.initialObj
-        )
+        ),
       ].concat(info.textureOptions ? [info.textureOptions] : []);
 
 /**
@@ -52,7 +52,9 @@ export default class VisitorLogger extends Visitor {
         " redraw _skipped_: " +
         (!node.context.glSurface.gl
           ? "no gl context available!"
-          : !node._needsRedraw ? "no need to redraw" : "")
+          : !node._needsRedraw
+          ? "no need to redraw"
+          : "")
     );
   }
   onNodeDrawStart(node: Node) {
@@ -68,13 +70,13 @@ export default class VisitorLogger extends Visitor {
       console.log(
         node.getGLName() +
           " +deps " +
-          additions.map(n => n.getGLName()).join(", ")
+          additions.map((n) => n.getGLName()).join(", ")
       );
     if (deletions.length)
       console.log(
         node.getGLName() +
           " -deps " +
-          additions.map(n => n.getGLName()).join(", ")
+          additions.map((n) => n.getGLName()).join(", ")
       );
   }
   onNodeDraw(node: Node, preparedUniforms: Array<*>) {
@@ -96,23 +98,23 @@ export default class VisitorLogger extends Visitor {
         "`"
     );
     log("_" + preparedUniforms.length + " uniforms:_");
-    preparedUniforms.forEach(obj => {
+    preparedUniforms.forEach((obj) => {
       let { key, type, value, getMetaInfo } = obj;
       type = String(type || "UNKNOWN");
       const values =
         value === undefined
           ? ""
           : Array.isArray(value)
-            ? "[" + value.map(v => "`" + String(v) + "`").join(",") + "]"
-            : "`" + String(value) + "`";
+          ? "[" + value.map((v) => "`" + String(v) + "`").join(",") + "]"
+          : "`" + String(value) + "`";
       let spaces = "";
       for (let i = type.length + key.length - 18; i < 0; i++) {
         spaces += " ";
       }
       log(
-        `${spaces}*${type === "UNKNOWN"
-          ? "[c='color:red']UNKNOWN[c]"
-          : type}* _${key}_ = ${values}`,
+        `${spaces}*${
+          type === "UNKNOWN" ? "[c='color:red']UNKNOWN[c]" : type
+        }* _${key}_ = ${values}`,
         ...(getMetaInfo ? aggregateInfo(getMetaInfo()) : [])
       );
     });

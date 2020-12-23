@@ -1,8 +1,8 @@
 //@flow
 import React, { Component } from "react";
-import {LinearCopy} from "gl-react";
+import { LinearCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
-import {BlurXY} from "../blurxy";
+import { BlurXY } from "../blurxy";
 
 export default class Example extends Component {
   render() {
@@ -15,7 +15,7 @@ export default class Example extends Component {
           </BlurXY>
         </LinearCopy>
       </Surface>
-// we have to wrap this in a <LinearCopy> so it upscales to the Surface size.
+      // we have to wrap this in a <LinearCopy> so it upscales to the Surface size.
     );
   }
   static defaultProps = {

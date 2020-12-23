@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Surface } from "gl-react-dom";
 import { Video } from "../video";
@@ -37,4 +37,4 @@ export default class Example extends Component {
     color: Object.keys(colorScales)[0],
   };
 }
-`
+`;

@@ -13,10 +13,10 @@ We also vary the intensity for each pass.
 `;
 
 export const toolbox = [
-  { prop: "factor",
-    title: "Blur",
-    Editor: makeFloatSlider(0, 8, 0.2) },
-  { prop: "passes",
-    title: passes => `Blur Passes (${passes})`,
-    Editor: makeFloatSlider(0, 8, 1) },
+  { prop: "factor", title: "Blur", Editor: makeFloatSlider(0, 8, 0.2) },
+  {
+    prop: "passes",
+    title: (passes) => `Blur Passes (${passes})`,
+    Editor: makeFloatSlider(0, 8, 1),
+  },
 ];

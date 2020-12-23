@@ -51,7 +51,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AscDA0JcudXmQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABIElEQVR42u3cMQqAQAxE0YkK3v/Ago3gEULIe43lwvLZzqn0Ob/v4/wWd5IcYTUBCAABIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIABmqfx/qbLL5QUg1Xi2fYDe8+0DIAABuAIBIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIACmsQ+wl30A7ANsPt8+AAIQgCsQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJgGvsAe9kHwD7A5vPtAyAAAbgCASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAApql8f4niBWChF2e+DTF+hz42AAAAAElFTkSuQmCC');
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4AscDA0JcudXmQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAABIElEQVR42u3cMQqAQAxE0YkK3v/Ago3gEULIe43lwvLZzqn0Ob/v4/wWd5IcYTUBCAABIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIABmqfx/qbLL5QUg1Xi2fYDe8+0DIAABuAIBIAAEgAAQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIACmsQ+wl30A7ANsPt8+AAIQgCsQAAJAAAgAASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJgGvsAe9kHwD7A5vPtAyAAAbgCASAABIAAEAACQAAIAAEgAASAABAAAkAACAABIAAEgAAQAAJAAAgAASAApql8f4niBWChF2e+DTF+hz42AAAAAElFTkSuQmCC");
   background-size: 64px 64px;
 }
 
@@ -65,12 +65,12 @@
 }
 
 .gl-react-inspector .box {
-  position: absolute;;
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 180px;
   border-radius: 2px;
-  box-shadow: 0px 0px 3px rgba(0,0,0,0);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0);
   border: 1px solid #eee;
   background: #fff;
   transition: 0.2s border-color;
@@ -156,7 +156,9 @@
 .gl-react-inspector .box.minimized .uniform .anchor-hook {
   height: 12px;
 }
-.gl-react-inspector .box.minimized .uniform:not(.type-sampler2D):not(.type-array-sampler2D) {
+.gl-react-inspector
+  .box.minimized
+  .uniform:not(.type-sampler2D):not(.type-array-sampler2D) {
   display: none;
 }
 
@@ -196,7 +198,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
 
 .gl-react-inspector .box .anchor-hook {
   position: absolute;
@@ -323,7 +324,9 @@
 }
 
 .gl-react-inspector .preview canvas {
-  background: #f3f3f3 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAARklEQVRYw+3XwQkAIAwEwYvYf8uxBcE8fMwWEAbuleruDDd6cOXzAAEBAQEBAQEBAQFf2tM/RJIyMSAgICAgICAgICDgZQeYxgVOKu5KXQAAAABJRU5ErkJggg==) repeat;
+  background: #f3f3f3
+    url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAARklEQVRYw+3XwQkAIAwEwYvYf8uxBcE8fMwWEAbuleruDDd6cOXzAAEBAQEBAQEBAQFf2tM/RJIyMSAgICAgICAgICDgZQeYxgVOKu5KXQAAAABJRU5ErkJggg==)
+    repeat;
   background-size: 20px 20px;
   border: 1px solid #666;
   max-width: 100%;

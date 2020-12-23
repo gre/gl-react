@@ -1,11 +1,12 @@
 //@flow
 import React, { Component } from "react";
-import {Shaders, Node, GLSL, connectSize} from "gl-react";
+import { Shaders, Node, GLSL, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
 
 const shaders = Shaders.create({
-  blur1D: { // blur9: from https://github.com/Jam3/glsl-fast-gaussian-blur
-   frag: GLSL`
+  blur1D: {
+    // blur9: from https://github.com/Jam3/glsl-fast-gaussian-blur
+    frag: GLSL`
 precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
@@ -23,35 +24,34 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 }
 void main() {
   gl_FragColor = blur9(t, uv, resolution, direction);
-}` }
+}`,
+  },
 });
 
 // This implements a blur on a single direction (x or y axis for instance)
 // connectSize will inject for us the width/height from context if not provided
-export const Blur1D =
-  connectSize(({ children: t, direction, width, height }) =>
+export const Blur1D = connectSize(
+  ({ children: t, direction, width, height }) => (
     <Node
       shader={shaders.blur1D}
-      uniforms={{ t, resolution: [ width, height ], direction }}
-    />);
+      uniforms={{ t, resolution: [width, height], direction }}
+    />
+  )
+);
 
 // BlurXY is a basic blur that apply Blur1D on Y and then on X
-export const BlurXY =
-  connectSize(({ factor, children }) =>
-    <Blur1D direction={[ factor, 0 ]}>
-      <Blur1D direction={[ 0, factor ]}>
-        {children}
-      </Blur1D>
-    </Blur1D>);
+export const BlurXY = connectSize(({ factor, children }) => (
+  <Blur1D direction={[factor, 0]}>
+    <Blur1D direction={[0, factor]}>{children}</Blur1D>
+  </Blur1D>
+));
 
 export default class Example extends Component {
   render() {
     const { factor } = this.props;
     return (
       <Surface width={400} height={300}>
-        <BlurXY factor={factor}>
-          https://i.imgur.com/iPKTONG.jpg
-        </BlurXY>
+        <BlurXY factor={factor}>https://i.imgur.com/iPKTONG.jpg</BlurXY>
       </Surface>
     );
   }

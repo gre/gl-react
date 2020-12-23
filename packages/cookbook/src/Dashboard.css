@@ -30,13 +30,15 @@
   flex-direction: column;
   position: relative;
 }
-.dashboard .showcode, .dashboard .showunderthehood {
+.dashboard .showcode,
+.dashboard .showunderthehood {
   opacity: 0.5;
   cursor: pointer;
   padding: 10px;
   font-size: 10px;
 }
-.dashboard .showcode:hover, .dashboard .showunderthehood:hover {
+.dashboard .showcode:hover,
+.dashboard .showunderthehood:hover {
   opacity: 1;
 }
 .dashboard .showcode {

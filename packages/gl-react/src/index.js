@@ -27,7 +27,7 @@ export {
   Uniform,
   Visitor,
   VisitorLogger,
-  Visitors
+  Visitors,
 };
 
 // DEPRECATED

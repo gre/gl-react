@@ -1,7 +1,7 @@
 import markdown from "../../markdown";
 import ToolPicker from "./ToolPicker";
 import Vec4ColorPicker from "../../toolbox/Vec4ColorPicker";
-import {tools} from ".";
+import { tools } from ".";
 
 export const title = "Pixel Editor";
 export const descAfter = markdown`

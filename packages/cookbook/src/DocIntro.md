@@ -1,6 +1,4 @@
-
-gl-react API documentation
-==========================
+# gl-react API documentation
 
 `gl-react` is a [React](https://facebook.github.io/react/) library to write and compose WebGL shaders.
 

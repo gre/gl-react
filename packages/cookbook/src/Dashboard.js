@@ -20,7 +20,7 @@ void main () {
     texture2D(backbuffer, uv),
     persistence
   ).rgb, 1.0);
-}`
+}`,
   },
   HelloGL: {
     // uniforms are variables from JS. We pipe blue uniform into blue output color
@@ -30,7 +30,7 @@ varying vec2 uv;
 uniform float red;
 void main() {
   gl_FragColor = vec4(red, uv.x, uv.y, 1.0);
-}`
+}`,
   },
   Rotate: {
     frag: GLSL`
@@ -45,8 +45,8 @@ void main() {
     p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0
     ? vec4(0.0)
     : texture2D(children, p);
-}`
-  }
+}`,
+  },
 });
 
 const MotionBlur = ({ children, persistence }) => (
@@ -60,7 +60,7 @@ const MotionBlur = ({ children, persistence }) => (
 // We can make a <HelloBlue blue={0.5} /> that will render the concrete <Node/>
 class HelloGL extends Component {
   props: {
-    red: number
+    red: number,
   };
   render() {
     const { red } = this.props;
@@ -72,7 +72,7 @@ class Rotate extends Component {
   props: {
     scale: number,
     angle: number,
-    children: any
+    children: any,
   };
   render() {
     const { angle, scale, children } = this.props;
@@ -86,7 +86,7 @@ class Ex1 extends Component {
   props: { time: number };
   state = {
     showCode: false,
-    showInspector: false
+    showInspector: false,
   };
   onShowCode = () => {
     this.setState({ showCode: true });

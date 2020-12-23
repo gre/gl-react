@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component, PureComponent } from "react";
 import {Shaders, Node, GLSL, Bus, connectSize} from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -155,4 +155,4 @@ export default class Example extends Component {
     distortion: 0.2
   };
 };
-`
+`;

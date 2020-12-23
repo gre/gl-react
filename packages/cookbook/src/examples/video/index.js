@@ -10,7 +10,7 @@ export const VideoContext: React$Context<?HTMLVideoElement> = React.createContex
 // We implement a component <Video> that is like <video>
 // but provides a onFrame hook so we can efficiently only render
 // if when it effectively changes.
-export const Video = ({ onFrame, ...rest }: { onFrame: number => void }) => {
+export const Video = ({ onFrame, ...rest }: { onFrame: (number) => void }) => {
   const video = useRef();
 
   useEffect(() => {
@@ -54,8 +54,8 @@ void main () {
     c.g * step(1.0, y) * step(y, 2.0),
     c.b * step(0.0, y) * step(y, 1.0),
     1.0);
-}`
-  }
+}`,
+  },
   //^NB perf: in fragment shader paradigm, we want to avoid code branch (if / for)
   // and prefer use of built-in functions and just giving the GPU some computating.
   // step(a,b) is an alternative to do if(): returns 1.0 if a<b, 0.0 otherwise.
@@ -70,7 +70,7 @@ const SplitColor = ({ children }) => (
 export default () => (
   <Surface width={280} height={630} pixelRatio={1}>
     <SplitColor>
-      {redraw => (
+      {(redraw) => (
         <Video onFrame={redraw} autoPlay loop>
           <source type="video/mp4" src={videoMP4} />
         </Video>

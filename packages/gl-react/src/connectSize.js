@@ -21,28 +21,28 @@ const connectSize = (GLComponent: *) =>
     width?: number,
     height?: number,
     children?: any,
-    onConnectSizeComponentRef?: (ref: GLComponent) => void
+    onConnectSizeComponentRef?: (ref: GLComponent) => void,
   }> {
     context: {
-      glSizable: { +getGLSize: () => [number, number] }
+      glSizable: { +getGLSize: () => [number, number] },
     };
-    static displayName = `connectSize(${GLComponent.displayName ||
-      GLComponent.name ||
-      "?"})`;
+    static displayName = `connectSize(${
+      GLComponent.displayName || GLComponent.name || "?"
+    })`;
     static propTypes = {
       width: PropTypes.number,
-      height: PropTypes.number
+      height: PropTypes.number,
     };
     static contextTypes = {
-      glSizable: PropTypes.object.isRequired
+      glSizable: PropTypes.object.isRequired,
     };
     static childContextTypes = {
-      glSizable: PropTypes.object.isRequired
+      glSizable: PropTypes.object.isRequired,
     };
     getGLSize(): [number, number] {
       const {
         props: { width, height },
-        context: { glSizable }
+        context: { glSizable },
       } = this;
       if (width && height) return [width, height];
       const [cw, ch] = glSizable.getGLSize();
@@ -50,7 +50,7 @@ const connectSize = (GLComponent: *) =>
     }
     getChildContext() {
       return {
-        glSizable: this
+        glSizable: this,
       };
     }
     render() {

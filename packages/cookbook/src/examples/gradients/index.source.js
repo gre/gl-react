@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -54,4 +54,4 @@ export default () =>
 // NB: don't abuse the uniforms array:
 // it's not meant to be used with lot of objects.
 // GLSL 1 also don't support variable length in loops.
-`
+`;

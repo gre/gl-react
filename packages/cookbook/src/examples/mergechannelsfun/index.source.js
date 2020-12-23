@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React from "react";
 import { Surface } from "gl-react-dom";
 import JSON2D from "react-json2d";
@@ -33,4 +33,4 @@ export default () =>
       }
     />
   </Surface>;
-`
+`;

@@ -90,15 +90,16 @@ void main() {
   vec3 diffuseLit = materialColor * (diffuse * light_color + ambient_color);
   float fogFactor = smoothstep(10.0, 50.0, totalDist);
   gl_FragColor = vec4(mix(diffuseLit, vec3(0.1), fogFactor), 1.0);
-}`
-  }
+}`,
+  },
 });
 
-const SDF1Loop = timeLoop(({ time }: *) =>
+const SDF1Loop = timeLoop(({ time }: *) => (
   <Node shader={shaders.sdf1} uniforms={{ time: 0.001 * time }} />
-);
+));
 
-export default () =>
+export default () => (
   <Surface width={384} height={384}>
     <SDF1Loop />
-  </Surface>;
+  </Surface>
+);
