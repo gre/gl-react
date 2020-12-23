@@ -16,7 +16,7 @@ export const toolbox = [
       color: "#ABB2BF",
       fontSize: 10,
       lineHeight: 1.5,
-      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace"
-    })
-  }
+      fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+    }),
+  },
 ];

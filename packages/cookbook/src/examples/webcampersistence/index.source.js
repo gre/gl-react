@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Uniform, LinearCopy, Node, Shaders, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -51,4 +51,4 @@ export default class Example extends Component {
     persistence: 0.8
   };
 }
-`
+`;

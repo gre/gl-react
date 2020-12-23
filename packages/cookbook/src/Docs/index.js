@@ -12,16 +12,19 @@ import API from "../API.json";
 import DocIntroMDBase64 from "../DocIntro.md";
 
 const mdheader = "data:text/x-markdown;base64,";
-const DocIntroMD = DocIntroMDBase64.indexOf(mdheader) === 0
-  ? atob(DocIntroMDBase64.slice(mdheader.length))
-  : "";
+const DocIntroMD =
+  DocIntroMDBase64.indexOf(mdheader) === 0
+    ? atob(DocIntroMDBase64.slice(mdheader.length))
+    : "";
 
 const paths = {
   Component: "https://facebook.github.io/react/docs/react-component.html",
-  WebGLRenderingContext: "https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14",
-  WebGLContextAttributes: "https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2"
+  WebGLRenderingContext:
+    "https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.14",
+  WebGLContextAttributes:
+    "https://www.khronos.org/registry/webgl/specs/latest/1.0/#5.2",
 };
-API.forEach(doc => {
+API.forEach((doc) => {
   paths[doc.name] = "#" + slug(doc.name);
 });
 
@@ -69,7 +72,7 @@ function visit(tree, type, visitor, reverse) {
 }
 
 function rerouteLinks(ast) {
-  visit(ast, "link", function(node) {
+  visit(ast, "link", function (node) {
     if (
       node.jsdoc &&
       !node.url.match(/^(http|https|\.)/) &&
@@ -208,7 +211,7 @@ function parameters(section, short) {
       .concat(
         section.params.map((param, i) => [
           i === 0 ? "" : ", ",
-          parameter(param, short)
+          parameter(param, short),
         ])
       )
       .concat([")"]);
@@ -232,7 +235,7 @@ function md(ast, inline) {
   ) {
     ast = {
       type: "root",
-      children: ast.children[0].children.concat(ast.children.slice(1))
+      children: ast.children[0].children.concat(ast.children.slice(1)),
     };
   }
   if (ast) ast = rerouteLinks(ast);
@@ -259,7 +262,9 @@ function signature(section) {
 }
 
 function isReactComponent(section) {
-  return section.augments && section.augments.some(a => a.name === "Component");
+  return (
+    section.augments && section.augments.some((a) => a.name === "Component")
+  );
 }
 
 function shortSignature(section) {
@@ -267,13 +272,13 @@ function shortSignature(section) {
   if (section.kind === "class") {
     if (isReactComponent(section)) {
       const props = (section.properties || [])
-        .filter(p => p.type && p.type.type !== "OptionalType")
-        .map(p => p.name);
+        .filter((p) => p.type && p.type.type !== "OptionalType")
+        .map((p) => p.name);
       const attrs = props
-        .filter(name => name !== "children")
-        .map(name => " " + name + "={..}")
+        .filter((name) => name !== "children")
+        .map((name) => " " + name + "={..}")
         .join("");
-      const hasChildren = props.some(name => name === "children");
+      const hasChildren = props.some((name) => name === "children");
       return (
         "<" +
         section.name +
@@ -301,9 +306,7 @@ class DocSectionList extends PureComponent {
         {members.map((member, i) => (
           <div key={i} className="member" id={member.namespace}>
             <div className="member-title">
-              <code>
-                .{signature(member)}
-              </code>
+              <code>.{signature(member)}</code>
             </div>
             <DocSection section={member} nested />
           </div>
@@ -321,41 +324,37 @@ class DocSection extends PureComponent {
         id={slug(section.namespace)}
         className={"section " + (nested ? "nested" : "")}
       >
-        {!nested || (section.context && section.context.github)
-          ? <div>
-              {!nested
-                ? <h3>
-                    <a href={"#" + slug(section.namespace)}>{section.name}</a>
+        {!nested || (section.context && section.context.github) ? (
+          <div>
+            {!nested ? (
+              <h3>
+                <a href={"#" + slug(section.namespace)}>{section.name}</a>
 
+                {section.augments ? (
+                  <span className="augments">
+                    &nbsp;extends&nbsp;
                     {section.augments
-                      ? <span className="augments">
-                          &nbsp;extends&nbsp;
-                          {section.augments
-                            ? section.augments.map((tag, i) => (
-                                <span key={i}>
-                                  {i === 0 ? "" : ", "}
-                                  {autolink(tag.name)}
-                                </span>
-                              ))
-                            : null}
-                        </span>
+                      ? section.augments.map((tag, i) => (
+                          <span key={i}>
+                            {i === 0 ? "" : ", "}
+                            {autolink(tag.name)}
+                          </span>
+                        ))
                       : null}
+                  </span>
+                ) : null}
 
-                    {section.context && section.context.github
-                      ? <a
-                          className="github-link"
-                          href={section.context.github}
-                        >
-                          {section.context.path}
-                        </a>
-                      : null}
-                  </h3>
-                : null}
+                {section.context && section.context.github ? (
+                  <a className="github-link" href={section.context.github}>
+                    {section.context.path}
+                  </a>
+                ) : null}
+              </h3>
+            ) : null}
 
-              {!nested ? highlight(shortSignature(section)) : null}
-
-            </div>
-          : null}
+            {!nested ? highlight(shortSignature(section)) : null}
+          </div>
+        ) : null}
 
         {md(section.description)}
 
@@ -365,67 +364,75 @@ class DocSection extends PureComponent {
         {section.copyright ? <div>Copyright: {section.copyright}</div> : null}
         {section.since ? <div>Since: {section.since}</div> : null}
 
-        {section.params
-          ? <div>
-              <h4>Parameters</h4>
-              <div>
-                {section.params.map((param, i) => (
-                  <div key={i}>
-                    <div>
-                      <strong><code>{param.name}</code></strong>&nbsp;
-                      <code className="type">
-                        ({formatType(param.type)}
-                        {param.default
-                          ? <span>(default <code>{param.default}</code>)</span>
-                          : null}
-                        )
-                      </code>
-                      {md(param.description, true)}
-                    </div>
+        {section.params ? (
+          <div>
+            <h4>Parameters</h4>
+            <div>
+              {section.params.map((param, i) => (
+                <div key={i}>
+                  <div>
+                    <strong>
+                      <code>{param.name}</code>
+                    </strong>
+                    &nbsp;
+                    <code className="type">
+                      ({formatType(param.type)}
+                      {param.default ? (
+                        <span>
+                          (default <code>{param.default}</code>)
+                        </span>
+                      ) : null}
+                      )
+                    </code>
+                    {md(param.description, true)}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          : null}
+          </div>
+        ) : null}
 
-        {section.properties
-          ? <div>
-              <h4>
-                {isReactComponent(section) ? "Props" : "Properties"}
-              </h4>
-              <ul className="props">
-                {section.properties.map((property, i) => (
-                  <li key={i} className="prop">
-                    <strong><code>{property.name}</code></strong>&nbsp;
-                    <code className="type">({formatType(property.type)})</code>
-                    {property.default
-                      ? <span>(default <code>{property.default}</code>)</span>
-                      : null}
-                    {property.description
-                      ? [": ", md(property.description, true)]
-                      : null}
-                    {property.properties
-                      ? <ul>
-                          {property.properties.map((property, i) => (
-                            <li key={i}>
-                              <code>{property.name}</code>
-                              &nbsp;
-                              {formatType(property.type)}
-                              {property.default
-                                ? <span>
-                                    (default <code>{property.default}</code>)
-                                  </span>
-                                : null}
-                              {md(property.description)}
-                            </li>
-                          ))}
-                        </ul>
-                      : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          : null}
+        {section.properties ? (
+          <div>
+            <h4>{isReactComponent(section) ? "Props" : "Properties"}</h4>
+            <ul className="props">
+              {section.properties.map((property, i) => (
+                <li key={i} className="prop">
+                  <strong>
+                    <code>{property.name}</code>
+                  </strong>
+                  &nbsp;
+                  <code className="type">({formatType(property.type)})</code>
+                  {property.default ? (
+                    <span>
+                      (default <code>{property.default}</code>)
+                    </span>
+                  ) : null}
+                  {property.description
+                    ? [": ", md(property.description, true)]
+                    : null}
+                  {property.properties ? (
+                    <ul>
+                      {property.properties.map((property, i) => (
+                        <li key={i}>
+                          <code>{property.name}</code>
+                          &nbsp;
+                          {formatType(property.type)}
+                          {property.default ? (
+                            <span>
+                              (default <code>{property.default}</code>)
+                            </span>
+                          ) : null}
+                          {md(property.description)}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
         {section.returns
           ? section.returns.map((ret, i) => (
@@ -437,59 +444,59 @@ class DocSection extends PureComponent {
             ))
           : null}
 
-        {section.throws
-          ? <div>
-              <h4>Throws</h4>
-              <ul>
-                {section.throws.map((throws, i) => (
-                  <li key={i}>
-                    {formatType(throws.type)}
-                    {": "}
-                    {md(throws.description, true)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          : null}
-
-        {section.examples
-          ? <div>
-              <h4>Example{section.examples.length > 1 ? "s" : ""}</h4>
-              {section.examples.map((example, i) => (
-                <div key={i}>
-                  {example.caption ? <p>{md(example.caption)}</p> : null}
-                  {highlight(example.description)}
-                </div>
+        {section.throws ? (
+          <div>
+            <h4>Throws</h4>
+            <ul>
+              {section.throws.map((throws, i) => (
+                <li key={i}>
+                  {formatType(throws.type)}
+                  {": "}
+                  {md(throws.description, true)}
+                </li>
               ))}
-            </div>
-          : null}
+            </ul>
+          </div>
+        ) : null}
 
-        {section.members.static && section.members.static.length
-          ? <div>
-              <h4>Static Members</h4>
-              <DocSectionList
-                members={section.members.static}
-                noun="Static Member"
-              />
-            </div>
-          : null}
+        {section.examples ? (
+          <div>
+            <h4>Example{section.examples.length > 1 ? "s" : ""}</h4>
+            {section.examples.map((example, i) => (
+              <div key={i}>
+                {example.caption ? <p>{md(example.caption)}</p> : null}
+                {highlight(example.description)}
+              </div>
+            ))}
+          </div>
+        ) : null}
 
-        {section.members.instance && section.members.instance.length
-          ? <div>
-              <h4>Instance Members</h4>
-              <DocSectionList
-                members={section.members.instance}
-                noun="Instance Member"
-              />
-            </div>
-          : null}
+        {section.members.static && section.members.static.length ? (
+          <div>
+            <h4>Static Members</h4>
+            <DocSectionList
+              members={section.members.static}
+              noun="Static Member"
+            />
+          </div>
+        ) : null}
 
-        {section.members.events && section.members.events.length
-          ? <div>
-              <h4>Events</h4>
-              <DocSectionList members={section.members.events} noun="Event" />
-            </div>
-          : null}
+        {section.members.instance && section.members.instance.length ? (
+          <div>
+            <h4>Instance Members</h4>
+            <DocSectionList
+              members={section.members.instance}
+              noun="Instance Member"
+            />
+          </div>
+        ) : null}
+
+        {section.members.events && section.members.events.length ? (
+          <div>
+            <h4>Events</h4>
+            <DocSectionList members={section.members.events} noun="Event" />
+          </div>
+        ) : null}
       </section>
     );
   }
@@ -508,9 +515,8 @@ class DocBody extends Component {
         <div className="intro" id="summary">
           <DocIntro />
         </div>
-        {API.map(
-          (s, i) =>
-            s.kind !== "note" ? <DocSection key={i} section={s} /> : null
+        {API.map((s, i) =>
+          s.kind !== "note" ? <DocSection key={i} section={s} /> : null
         )}
       </div>
     );
@@ -530,21 +536,17 @@ export class DocToc extends Component {
   render() {
     return (
       <div className="documentation-toc">
-        <a href="#summary">
-          gl-react
-        </a>
+        <a href="#summary">gl-react</a>
         <ul>
           {API.map((doc, i) => (
             <li
               key={i}
               className={[
                 "kind-" + doc.kind,
-                isReactComponent(doc) ? "react-component" : ""
+                isReactComponent(doc) ? "react-component" : "",
               ].join(" ")}
             >
-              <a href={"#" + slug(doc.namespace)}>
-                {doc.name}
-              </a>
+              <a href={"#" + slug(doc.namespace)}>{doc.name}</a>
             </li>
           ))}
         </ul>

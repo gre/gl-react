@@ -5,7 +5,8 @@ import makeFloatSlider from "../../toolbox/makeFloatSlider";
 export const title = "Dynamic Blur Image Title";
 
 export const toolbox = [
-  { prop: "title",
+  {
+    prop: "title",
     title: "Title",
     Editor: makeTextArea({
       height: 140,
@@ -15,22 +16,27 @@ export const toolbox = [
       lineHeight: "42px",
       fontWeight: "bold",
       textAlign: "center",
-    }) },
-  { prop: "colorThreshold",
+    }),
+  },
+  {
+    prop: "colorThreshold",
     title: "Color Threshold",
-    Editor: makeFloatSlider(0, 1, 0.01) }, // FIXME black <-> white
-  { prop: "image",
+    Editor: makeFloatSlider(0, 1, 0.01),
+  }, // FIXME black <-> white
+  {
+    prop: "image",
     title: "Image",
     Editor: ImagesPicker,
     style: { width: 400 },
-    imageStyle: { maxWidth: 56, maxHeight: 56, marginBottom: 16, },
+    imageStyle: { maxWidth: 56, maxHeight: 56, marginBottom: 16 },
     images: [
-      require("./sf-1.jpg"),
-      require("./sf-2.jpg"),
-      require("./sf-3.jpg"),
-      require("./sf-4.jpg"),
-      require("./sf-5.jpg"),
-      require("./sf-6.jpg"),
-      require("./sf-7.jpg"),
-    ] },
+      require("./sf-1.jpg").default,
+      require("./sf-2.jpg").default,
+      require("./sf-3.jpg").default,
+      require("./sf-4.jpg").default,
+      require("./sf-5.jpg").default,
+      require("./sf-6.jpg").default,
+      require("./sf-7.jpg").default,
+    ],
+  },
 ];

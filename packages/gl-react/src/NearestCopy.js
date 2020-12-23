@@ -4,7 +4,7 @@ import Node from "./Node";
 import copyShader from "./copyShader";
 
 type Props = {
-  children?: any
+  children?: any,
 };
 
 /**

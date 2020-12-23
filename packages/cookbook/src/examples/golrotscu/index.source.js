@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
@@ -34,4 +34,4 @@ export default class Example extends Component {
     );
   }
 }
-`
+`;

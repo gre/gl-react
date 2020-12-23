@@ -14,7 +14,7 @@ const ShaderID = "ShaderID";
  */
 type ShaderDefinition = {|
   frag: GLSLCode,
-  vert?: GLSLCode
+  vert?: GLSLCode,
 |};
 
 export type { ShaderDefinition };
@@ -24,13 +24,13 @@ export type { ShaderDefinition };
  */
 type ShaderIdentifier = {
   type: typeof ShaderID,
-  id: string
+  id: string,
 };
 
 export type { ShaderIdentifier };
 
 type ShaderIdentifierMap<T> = {
-  [key: string]: T
+  [key: string]: T,
 };
 
 /**
@@ -43,19 +43,19 @@ type ShaderIdentifierMap<T> = {
  *  }
  */
 type ShadersDefinition = {
-  [key: string]: ShaderDefinition
+  [key: string]: ShaderDefinition,
 };
 
 /**
  * An object map from a key string to a **ShaderIdentifier** that you can pass to `<Node shader>`
  */
 type ShadersSheet<S: ShadersDefinition> = {
-  [key: $Keys<S>]: ShaderIdentifier
+  [key: $Keys<S>]: ShaderIdentifier,
 };
 
 type ShaderInfo = {
   frag: GLSLCode,
-  vert: GLSLCode
+  vert: GLSLCode,
 };
 
 export type { ShaderInfo };
@@ -64,7 +64,7 @@ const shaderDefinitions: ShaderIdentifierMap<ShaderDefinition> = {};
 const shaderNames: ShaderIdentifierMap<string> = {};
 const shaderResults: ShaderIdentifierMap<ShaderInfo> = {};
 
-const genShaderId = (i => () => (++i).toString())(0);
+const genShaderId = ((i) => () => (++i).toString())(0);
 
 const staticVert = GLSL`
 attribute vec2 _p;
@@ -99,7 +99,7 @@ export function shaderDefinitionToShaderInfo(
 ): ShaderInfo {
   return {
     frag: definition.frag,
-    vert: definition.vert || staticVert // FIXME this is somewhat experimental for now, vert implement needs to expect a _p attribute
+    vert: definition.vert || staticVert, // FIXME this is somewhat experimental for now, vert implement needs to expect a _p attribute
   };
 }
 
@@ -127,7 +127,7 @@ const Shaders = (global.__glReactShaders = global.__glReactShaders || {
    */
   create<S: ShadersDefinition>(shadersDef: S): ShadersSheet<S> {
     const sheet = {};
-    Object.keys(shadersDef).forEach(k => {
+    Object.keys(shadersDef).forEach((k) => {
       const definition = ensureShaderDefinition(
         shadersDef[k],
         " in Shaders.create({ " + k + ": ... })"
@@ -158,6 +158,6 @@ const Shaders = (global.__glReactShaders = global.__glReactShaders || {
       shaderIdentifier.id
     );
     return shaderResults[shaderIdentifier.id];
-  }
+  },
 });
 export default Shaders;

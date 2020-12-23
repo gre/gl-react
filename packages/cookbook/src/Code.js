@@ -19,24 +19,22 @@ Prism.languages.insertBefore("jsx", "string", {
       "js-template-string-glsl": {
         pattern: /[^`]*/,
         inside: {
-          rest: Prism.languages.glsl
-        }
-      }
-    }
-  }
+          rest: Prism.languages.glsl,
+        },
+      },
+    },
+  },
 });
 
 export default class Code extends PureComponent {
   props: {
-    children?: any
+    children?: any,
   };
   render() {
     const { children } = this.props;
     return (
       <pre className="cookbook-code">
-        <PrismCode className="language-jsx">
-          {children}
-        </PrismCode>
+        <PrismCode className="language-jsx">{children}</PrismCode>
       </pre>
     );
   }

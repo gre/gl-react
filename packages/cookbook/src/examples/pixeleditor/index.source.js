@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { PureComponent, Component } from "react";
 import ndarray from "ndarray";
 import ops from "ndarray-ops";
@@ -260,4 +260,4 @@ export default class Example extends Component {
 }
 
 export { tools };
-`
+`;

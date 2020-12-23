@@ -1,4 +1,4 @@
-module.exports=`/**
+module.exports = `/**
  * This celullar automaton is extracted from a game I wrote in 2014 for JS13K:
  * https://github.com/gre/ibex
  *
@@ -622,4 +622,4 @@ export default class Example extends Component {
 * Source + Air
 * Source + Water
 */
-`
+`;

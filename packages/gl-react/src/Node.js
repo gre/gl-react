@@ -10,7 +10,7 @@ import Shaders, {
   isShaderIdentifier,
   ensureShaderDefinition,
   shaderDefinitionToShaderInfo,
-  shaderInfoEquals
+  shaderInfoEquals,
 } from "./Shaders";
 import invariantNoDependentsLoop from "./helpers/invariantNoDependentsLoop";
 import genId from "./genId";
@@ -34,7 +34,7 @@ const blendFuncAliases = {
   "one minus constant color": "ONE_MINUS_CONSTANT_COLOR",
   "constant alpha": "CONSTANT_ALPHA",
   "one minus constant alpha": "ONE_MINUS_CONSTANT_ALPHA",
-  "src alpha saturate": "SRC_ALPHA_SATURATE"
+  "src alpha saturate": "SRC_ALPHA_SATURATE",
 };
 
 /**
@@ -63,7 +63,7 @@ type WrapMode = "clamp to edge" | "repeat" | "mirrored repeat";
  */
 type TextureOptions = {
   interpolation: Interpolation,
-  wrap: [WrapMode, WrapMode] | WrapMode
+  wrap: [WrapMode, WrapMode] | WrapMode,
 };
 
 /**
@@ -93,7 +93,7 @@ type BlendFunc = $Keys<typeof blendFuncAliases>;
  */
 type BlendFuncSrcDst = {|
   src: BlendFunc,
-  dst: BlendFunc
+  dst: BlendFunc,
 |};
 
 /**
@@ -105,7 +105,7 @@ type Vec4 = [number, number, number, number];
  * The GL clear mode.
  */
 type Clear = {|
-  color: Vec4
+  color: Vec4,
 |};
 
 /**
@@ -149,11 +149,11 @@ type Clear = {|
  *
  */
 type Uniforms = {
-  [_: string]: mixed
+  [_: string]: mixed,
 };
 
 type UniformsOptions = {
-  [_: string]: ?$Shape<TextureOptions>
+  [_: string]: ?$Shape<TextureOptions>,
 };
 
 type Props = {|
@@ -168,7 +168,7 @@ type Props = {|
   backbuffering?: boolean,
   blendFunc: BlendFuncSrcDst,
   clear: ?Clear,
-  onDraw?: () => void
+  onDraw?: () => void,
 |};
 
 // not sure why, but we must define this for Flow to properly type check
@@ -176,7 +176,7 @@ type DefaultProps = {
   uniformsOptions: UniformsOptions,
   uniforms: Uniforms,
   blendFunc: BlendFuncSrcDst,
-  clear: ?Clear
+  clear: ?Clear,
 };
 
 type AsyncMixed = (redraw?: () => void) => mixed;
@@ -257,7 +257,7 @@ type Framebuffer = {
   color: WebGLTexture,
   bind: () => void,
   dispose: () => void,
-  syncSize: (w: number, h: number) => void
+  syncSize: (w: number, h: number) => void,
 };
 
 // minimal version of gl-fbo
@@ -321,13 +321,13 @@ const createFBO = (
     dispose: () => {
       gl.deleteFramebuffer(handle);
       gl.deleteTexture(color);
-    }
+    },
   };
 };
 
 const defaultTextureOptions: TextureOptions = {
   interpolation: "linear",
-  wrap: ["clamp to edge", "clamp to edge"]
+  wrap: ["clamp to edge", "clamp to edge"],
 };
 
 const applyTextureOptions = (
@@ -369,7 +369,7 @@ const NodePropTypes = {
   backbuffering: PropTypes.bool,
   blendFunc: PropTypes.object,
   clear: PropTypes.object,
-  onDraw: PropTypes.func
+  onDraw: PropTypes.func,
 };
 
 /**
@@ -411,34 +411,34 @@ export default class Node extends Component<Props, *> {
     blendFunc: {
       // FIXME should this actually just be null by default? opt-in?
       src: "src alpha",
-      dst: "one minus src alpha"
+      dst: "one minus src alpha",
     },
     clear: {
-      color: [0, 0, 0, 0]
-    }
+      color: [0, 0, 0, 0],
+    },
   };
 
   static contextTypes = {
     glParent: PropTypes.object.isRequired,
     glSurface: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired
+    glSizable: PropTypes.object.isRequired,
   };
 
   static childContextTypes = {
     glParent: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired
+    glSizable: PropTypes.object.isRequired,
   };
 
   getChildContext() {
     return {
       glParent: this,
-      glSizable: this
+      glSizable: this,
     };
   }
 
   componentDidMount() {
     const {
-      glSurface: { gl }
+      glSurface: { gl },
     } = this.context;
     if (gl) this._prepareGLObjects(gl);
     this.context.glParent._addGLNodeChild(this);
@@ -454,7 +454,7 @@ export default class Node extends Component<Props, *> {
     }
     this._needsRedraw = false;
     this.context.glParent._removeGLNodeChild(this);
-    this.dependencies.forEach(d => d._removeDependent(this));
+    this.dependencies.forEach((d) => d._removeDependent(this));
   }
 
   _syncNextDrawProps(nextProps: Props, nextContext: *) {
@@ -509,7 +509,7 @@ export default class Node extends Component<Props, *> {
   render() {
     const { children, uniforms } = this.props;
     const {
-      glSurface: { RenderLessElement }
+      glSurface: { RenderLessElement },
     } = this.context;
     return (
       <RenderLessElement>
@@ -575,7 +575,7 @@ export default class Node extends Component<Props, *> {
     // $FlowFixMe
     const nextProps: Props = {
       ...this.drawProps,
-      ...patch
+      ...patch,
     };
     this._syncNextDrawProps(nextProps, this.context);
     this.redraw();
@@ -609,9 +609,7 @@ export default class Node extends Component<Props, *> {
     const pixels: Uint8Array = this._captureAlloc(size);
     this._bind();
     gl.readPixels(x, y, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-    return ndarray(pixels, [h, w, 4])
-      .step(-1, 1, 1)
-      .transpose(1, 0, 2);
+    return ndarray(pixels, [h, w, 4]).step(-1, 1, 1).transpose(1, 0, 2);
   }
 
   /**
@@ -622,7 +620,7 @@ export default class Node extends Component<Props, *> {
   redraw = (): void => {
     if (!this._needsRedraw) {
       this._needsRedraw = true;
-      this.dependents.forEach(d => d.redraw());
+      this.dependents.forEach((d) => d.redraw());
     }
   };
 
@@ -681,13 +679,13 @@ export default class Node extends Component<Props, *> {
   }
 
   _onContextLost(): void {
-    this.dependencies.forEach(d => d._onContextLost());
+    this.dependencies.forEach((d) => d._onContextLost());
     this._destroyGLObjects();
   }
 
   _onContextRestored(gl: WebGLRenderingContext): void {
     this._prepareGLObjects(gl);
-    this.dependencies.forEach(d => d._onContextRestored(gl));
+    this.dependencies.forEach((d) => d._onContextRestored(gl));
     this._needsRedraw = true;
   }
 
@@ -727,10 +725,10 @@ export default class Node extends Component<Props, *> {
     newdeps: Array<Node | Bus>
   ): [Array<Bus | Node>, Array<Bus | Node>] {
     const olddeps = this.dependencies;
-    const additions = newdeps.filter(node => olddeps.indexOf(node) === -1);
-    const deletions = olddeps.filter(node => newdeps.indexOf(node) === -1);
-    additions.forEach(d => d._addDependent(this));
-    deletions.forEach(d => d._removeDependent(this));
+    const additions = newdeps.filter((node) => olddeps.indexOf(node) === -1);
+    const deletions = olddeps.filter((node) => newdeps.indexOf(node) === -1);
+    additions.forEach((d) => d._addDependent(this));
+    deletions.forEach((d) => d._removeDependent(this));
     this.dependencies = newdeps;
     return [additions, deletions];
   }
@@ -793,7 +791,7 @@ export default class Node extends Component<Props, *> {
     const visitors = glSurface.getVisitors();
     const nodeName = this.getGLName();
     if (!gl || !this._needsRedraw) {
-      visitors.forEach(v => v.onNodeDrawSkipped(this));
+      visitors.forEach((v) => v.onNodeDrawSkipped(this));
       return;
     }
 
@@ -805,7 +803,7 @@ export default class Node extends Component<Props, *> {
       blendFunc,
       clear,
       onDraw,
-      ignoreUnusedUniforms
+      ignoreUnusedUniforms,
     } = this.drawProps;
 
     //~ PREPARE phase
@@ -855,7 +853,7 @@ export default class Node extends Component<Props, *> {
           directTexture?: ?WebGLTexture,
           directTextureSize?: ?[number, number],
           glNode?: Node,
-          glNodePickBackbuffer?: boolean
+          glNodePickBackbuffer?: boolean,
         };
 
       if (typeof obj === "function") {
@@ -948,7 +946,7 @@ export default class Node extends Component<Props, *> {
             loader.update(input);
             result = {
               directTexture: t.texture,
-              directTextureSize: [t.width, t.height]
+              directTextureSize: [t.width, t.height],
             };
           } else {
             // otherwise, we will have to load it and postpone the rendering.
@@ -966,7 +964,7 @@ export default class Node extends Component<Props, *> {
         initialObj,
         obj,
         dependency,
-        textureOptions
+        textureOptions,
       });
       const getSize = (): ?[number, number] => {
         const fallback = [2, 2];
@@ -1001,11 +999,11 @@ export default class Node extends Component<Props, *> {
       return {
         getMetaInfo,
         getSize,
-        prepare
+        prepare,
       };
     };
 
-    const prepareUniform = key => {
+    const prepareUniform = (key) => {
       const uniformType = types.uniforms[key];
       if (!uniformType) {
         const ignoredWarn =
@@ -1033,13 +1031,13 @@ export default class Node extends Component<Props, *> {
           key,
           type: uniformType,
           getMetaInfo,
-          prepare
+          prepare,
         };
       } else if (uniformValue === Uniform.Resolution) {
         return {
           key,
           type: uniformType,
-          value: this.getGLSize()
+          value: this.getGLSize(),
         };
       } else if (isTextureSizeGetter(uniformValue)) {
         invariant(
@@ -1062,7 +1060,7 @@ export default class Node extends Component<Props, *> {
         return {
           key,
           type: uniformType,
-          value
+          value,
         };
       } else if (Array.isArray(uniformType) && uniformType[0] === "sampler2D") {
         let values;
@@ -1095,7 +1093,7 @@ export default class Node extends Component<Props, *> {
           type: uniformType,
           getMetaInfo: () =>
             all.reduce((acc, o) => acc.concat(o.getMetaInfo()), []),
-          prepare: () => all.map(o => o.prepare())
+          prepare: () => all.map((o) => o.prepare()),
         };
       } else {
         if (uniformValue === undefined) {
@@ -1104,7 +1102,7 @@ export default class Node extends Component<Props, *> {
         return {
           key,
           type: uniformType,
-          value: uniformValue
+          value: uniformValue,
         };
       }
     };
@@ -1114,7 +1112,7 @@ export default class Node extends Component<Props, *> {
       console.warn(
         nodeName +
           ": Missing uniforms: " +
-          usedUniforms.map(u => `'${u}'`).join(", ") +
+          usedUniforms.map((u) => `'${u}'`).join(", ") +
           "\n" +
           "all uniforms must be provided " +
           "because implementations might share and reuse a Shader Program"
@@ -1125,17 +1123,17 @@ export default class Node extends Component<Props, *> {
     if (pendingTextures.length > 0) {
       Promise.all(pendingTextures).then(this.redraw);
       // ^ FIXME "cancel" this promise if we ever come back in _draw()
-      visitors.forEach(v => v.onNodeDrawSkipped(this));
+      visitors.forEach((v) => v.onNodeDrawSkipped(this));
       return;
     }
 
     //~ the draw will happen, there is no more interruption cases.
-    visitors.forEach(v => v.onNodeDrawStart(this));
+    visitors.forEach((v) => v.onNodeDrawStart(this));
 
     const [additions, deletions] = this._syncDependencies(
       glRedrawableDependencies
     );
-    visitors.forEach(v => v.onNodeSyncDeps(this, additions, deletions));
+    visitors.forEach((v) => v.onNodeSyncDeps(this, additions, deletions));
 
     if (backbuffering) {
       // swap framebuffer and backbuffer
@@ -1147,16 +1145,16 @@ export default class Node extends Component<Props, *> {
     }
 
     //~ DRAW dependencies step
-    const drawDep = d => d._draw();
+    const drawDep = (d) => d._draw();
     this.dependencies.forEach(drawDep);
 
     //~ DRAW this node step
 
-    visitors.forEach(v => v.onNodeDraw(this, preparedUniforms));
+    visitors.forEach((v) => v.onNodeDraw(this, preparedUniforms));
 
     shader.bind();
     this._bind();
-    preparedUniforms.forEach(obj => {
+    preparedUniforms.forEach((obj) => {
       const value = obj.prepare ? obj.prepare() : obj.value;
       if (value !== undefined) {
         shader.uniforms[obj.key] = value;
@@ -1178,6 +1176,6 @@ export default class Node extends Component<Props, *> {
 
     if (onDraw) onDraw();
 
-    visitors.forEach(v => v.onNodeDrawEnd(this));
+    visitors.forEach((v) => v.onNodeDrawEnd(this));
   }
 }

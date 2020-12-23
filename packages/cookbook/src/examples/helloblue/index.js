@@ -5,14 +5,15 @@ import { Surface } from "gl-react-dom";
 
 const shaders = Shaders.create({
   helloBlue: {
- // uniforms are variables from JS. We pipe blue uniform into blue output color
+    // uniforms are variables from JS. We pipe blue uniform into blue output color
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
 uniform float blue;
 void main() {
   gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
-}` }
+}`,
+  },
 });
 
 // We can make a <HelloBlue blue={0.5} /> that will render the concrete <Node/>

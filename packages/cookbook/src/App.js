@@ -16,7 +16,8 @@ import Dashboard from "./Dashboard";
 
 const conf = {
   version: process.env.REACT_APP_GL_VERSION,
-  githubprefix: "https://github.com/gre/gl-react/tree/master/packages/cookbook/"
+  githubprefix:
+    "https://github.com/gre/gl-react/tree/master/packages/cookbook/",
 };
 
 function triggerLink(linkRef) {
@@ -28,7 +29,7 @@ const lenseSidebar = ({ location }) => {
   const { menu, inspector } = queryString.parse(location.search);
   return {
     menu,
-    inspector
+    inspector,
   };
 };
 
@@ -36,7 +37,7 @@ class MenuContext extends PureComponent<*> {
   props: {
     menu: boolean,
     inspector: boolean,
-    currentExample: ?Object
+    currentExample: ?Object,
   };
   render() {
     const { menu, inspector } = this.props;
@@ -45,12 +46,12 @@ class MenuContext extends PureComponent<*> {
       <div>
         <h3>{all.length} Examples</h3>
         <ul>
-          {all.map(key => (
+          {all.map((key) => (
             <li key={key}>
               <NavLink
                 to={{
                   pathname: "/" + key,
-                  search: queryString.stringify({ menu, inspector })
+                  search: queryString.stringify({ menu, inspector }),
                 }}
                 activeClassName="active"
                 className="example-link"
@@ -71,7 +72,7 @@ class Header extends Component<*> {
   props: {
     currentExample: ?Object,
     toToggleMenu: Object,
-    toToggleInspector: Object
+    toToggleInspector: Object,
   };
   render() {
     const { currentExample, toToggleMenu, toToggleInspector } = this.props;
@@ -115,10 +116,7 @@ class Header extends Component<*> {
 
 class App extends Component<*> {
   props: {
-    location: Object
-  };
-  static contextTypes = {
-    router: PropTypes.object.isRequired
+    location: Object,
   };
 
   componentDidMount() {
@@ -185,16 +183,16 @@ class App extends Component<*> {
               search: queryString.stringify({
                 ...query,
                 menu: !menuOpened ? true : undefined,
-                ...(!menuOpened ? { inspector: undefined } : null)
-              })
+                ...(!menuOpened ? { inspector: undefined } : null),
+              }),
             }}
             toToggleInspector={{
               pathname: location.pathname,
               search: queryString.stringify({
                 ...query,
                 inspector: !inspectorOpened ? true : undefined,
-                ...(!inspectorOpened ? { menu: undefined } : null)
-              })
+                ...(!inspectorOpened ? { menu: undefined } : null),
+              }),
             }}
           />
 
@@ -204,7 +202,7 @@ class App extends Component<*> {
               className="left"
               to={{
                 pathname: prev,
-                search: queryString.stringify({ menu, inspector })
+                search: queryString.stringify({ menu, inspector }),
               }}
             >
               ❮
@@ -217,7 +215,7 @@ class App extends Component<*> {
               className="right"
               to={{
                 pathname: next,
-                search: queryString.stringify({ menu, inspector })
+                search: queryString.stringify({ menu, inspector }),
               }}
             >
               ❯
@@ -227,12 +225,12 @@ class App extends Component<*> {
           <div className="container">
             <Switch>
               <Route path="/" exact component={Dashboard} />
-              {Object.keys(examples).map(key => (
+              {Object.keys(examples).map((key) => (
                 <Route
                   path={"/" + key}
                   key={key}
                   isExample
-                  render={props => (
+                  render={(props) => (
                     <ExamplePage example={examples[key]} {...props} />
                   )}
                 />

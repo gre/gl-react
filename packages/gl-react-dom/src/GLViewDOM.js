@@ -18,7 +18,7 @@ type WebGLContextAttributes = {
   premultipliedAlpha?: boolean,
   preserveDrawingBuffer?: boolean,
   preferLowPowerToHighPerformance?: boolean,
-  failIfMajorPerformanceCaveat?: boolean
+  failIfMajorPerformanceCaveat?: boolean,
 };
 
 const propTypes = {
@@ -30,7 +30,7 @@ const propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   style: PropTypes.object,
-  pixelRatio: PropTypes.number
+  pixelRatio: PropTypes.number,
 };
 
 class ErrorDebug extends Component {
@@ -52,14 +52,14 @@ class ErrorDebug extends Component {
       fontStyle: "normal",
       fontWeight: "normal",
       fontFamily: "monospace",
-      overflow: "auto"
+      overflow: "auto",
     };
     const titleStyle = {
       fontWeight: "bold",
-      marginBottom: "1em"
+      marginBottom: "1em",
     };
     const detailStyle = {
-      whiteSpace: "pre"
+      whiteSpace: "pre",
     };
     return (
       <div style={style}>
@@ -81,14 +81,14 @@ export default class GLViewDOM extends Component<
     width: number,
     height: number,
     style?: any,
-    debug?: number
+    debug?: number,
   },
   {
-    error: ?Error
+    error: ?Error,
   }
 > {
   state = {
-    error: null
+    error: null,
   };
   static propTypes = propTypes;
   webglContextAttributes: WebGLContextAttributes;
@@ -144,7 +144,7 @@ export default class GLViewDOM extends Component<
           display: "inline-block",
           position: "relative",
           width,
-          height
+          height,
         }}
       >
         <canvas

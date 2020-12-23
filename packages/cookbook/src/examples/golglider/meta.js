@@ -8,7 +8,7 @@ export const desc = markdown`
 `;
 export const descAfter = markdown`
 Initial image state inspired from [wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
-${<br />}
+${(<br />)}
 ${(
   <a href={gliderGun64png}>
     <img

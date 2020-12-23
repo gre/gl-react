@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React from "react";
 import { Uniform, Shaders, Node, GLSL, NearestCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -82,4 +82,4 @@ export default () => (
     </NearestCopy>
   </Surface>
 );
-`
+`;

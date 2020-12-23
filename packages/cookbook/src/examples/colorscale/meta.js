@@ -13,20 +13,28 @@ of the image greyscale.
 `;
 
 export const toolbox = [
-  { prop: "color",
+  {
+    prop: "color",
     title: "color scale",
-    Editor: makeSelect(Object.keys(colorScales).map(cs =>
-      ({ key: cs, label: cs }))) },
-  { prop: "interpolation",
+    Editor: makeSelect(
+      Object.keys(colorScales).map((cs) => ({ key: cs, label: cs }))
+    ),
+  },
+  {
+    prop: "interpolation",
     Editor: makeRadios([
       { key: "linear", label: "linear interpolation" },
       { key: "nearest", label: "nearest interpolation" },
-    ]) }
+    ]),
+  },
 ];
 
-export const ToolboxFooter = ({ color, interpolation }) =>
+export const ToolboxFooter = ({ color, interpolation }) => (
   <Surface style={{ minWidth: "100%" }} width={400} height={20}>
-  { interpolation==="linear"
-    ? <LinearCopy>{colorScales[color]}</LinearCopy>
-    : <NearestCopy>{colorScales[color]}</NearestCopy> }
-  </Surface>;
+    {interpolation === "linear" ? (
+      <LinearCopy>{colorScales[color]}</LinearCopy>
+    ) : (
+      <NearestCopy>{colorScales[color]}</NearestCopy>
+    )}
+  </Surface>
+);

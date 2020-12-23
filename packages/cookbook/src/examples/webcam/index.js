@@ -8,7 +8,7 @@ import { Colorify, colorScales } from "../colorscale";
 const WebCamSourceR = ({ videoRef }) => {
   useEffect(() => {
     navigator.mediaDevices &&
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
@@ -19,7 +19,7 @@ const WebCamSourceR = ({ videoRef }) => {
 
 export const WebCamSource = () => (
   <VideoContext.Consumer>
-    {videoRef => <WebCamSourceR videoRef={videoRef} />}
+    {(videoRef) => <WebCamSourceR videoRef={videoRef} />}
   </VideoContext.Consumer>
 );
 
@@ -29,7 +29,7 @@ export default class Example extends Component {
     return (
       <Surface width={480} height={360}>
         <Colorify colorScale={colorScales[color]} interpolation={interpolation}>
-          {redraw => (
+          {(redraw) => (
             <Video onFrame={redraw} autoPlay>
               <WebCamSource />
             </Video>
@@ -41,6 +41,6 @@ export default class Example extends Component {
 
   static defaultProps = {
     interpolation: "linear",
-    color: Object.keys(colorScales)[0]
+    color: Object.keys(colorScales)[0],
   };
 }

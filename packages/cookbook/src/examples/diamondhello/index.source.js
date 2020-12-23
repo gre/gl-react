@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Surface } from "gl-react-dom";
 import { DiamondCrop } from "../diamondcrop";
@@ -15,4 +15,4 @@ export default class Example extends Component {
     );
   }
 }
-`
+`;

@@ -10,7 +10,5 @@ We want the "offset" framebuffer to be computed once,
 we use gl-react [\`<Bus>\`](/api#bus) concept for this.
 `;
 export const toolbox = [
-  { prop: "map",
-    title: "Blur Texture Map",
-    Editor: StaticBlurMap },
+  { prop: "map", title: "Blur Texture Map", Editor: StaticBlurMap },
 ];

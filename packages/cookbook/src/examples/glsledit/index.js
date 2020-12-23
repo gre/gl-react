@@ -4,18 +4,20 @@ import { Node, Visitor, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
 
-const Preview = timeLoop(({ frag, visitor, time }) =>
+const Preview = timeLoop(({ frag, visitor, time }) => (
   <Surface width={500} height={200} visitor={visitor}>
     <Node shader={{ frag }} uniforms={{ time: time / 1000 }} />
-  </Surface>);
+  </Surface>
+));
 
 class DisplayError extends Component {
   render() {
-    const {error} = this.props;
-    if (!error) return <div className="compile success">Compilation success!</div>;
+    const { error } = this.props;
+    if (!error)
+      return <div className="compile success">Compilation success!</div>;
     let err = error.message;
     const i = err.indexOf("ERROR:");
-    if (i!==-1) err = "line "+err.slice(i + 9);
+    if (i !== -1) err = "line " + err.slice(i + 9);
     return <div className="compile error">{err}</div>;
   }
 }
@@ -30,22 +32,23 @@ export default class Example extends Component {
     };
     visitor.onSurfaceDrawEnd = () => this.setState({ error: null });
     this.state = { error: null, visitor };
-  };
+  }
 
   render() {
     const { frag } = this.props;
     const { error, visitor } = this.state;
     return (
-    <div>
-      <Preview frag={frag} visitor={visitor} />
-      <DisplayError error={error} />
-    </div>
+      <div>
+        <Preview frag={frag} visitor={visitor} />
+        <DisplayError error={error} />
+      </div>
     );
   }
 
   props: { frag: string };
   state: { error: ?Error, visitor: Visitor };
-  static defaultProps = { // adapted from http://glslsandbox.com/e#27937.0
+  static defaultProps = {
+    // adapted from http://glslsandbox.com/e#27937.0
     frag: GLSL`precision highp float;
 varying vec2 uv;
 
@@ -67,6 +70,6 @@ void main() {
   }
   gl_FragColor = cbuff;
 }
-`
+`,
   };
 }

@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -102,4 +102,4 @@ export default () =>
   <Surface width={384} height={384}>
     <SDF1Loop />
   </Surface>;
-`
+`;

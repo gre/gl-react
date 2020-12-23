@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import {Shaders, Node, GLSL, connectSize} from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -59,4 +59,4 @@ export default class Example extends Component {
     factor: 1,
   };
 }
-`
+`;

@@ -30,24 +30,26 @@ void main() {
     0.6 * uv.x + 0.2 * sin(uv.y * 30.0),
     1.0 - uv.x + 0.5 * cos(uv.y * 2.0)
   ), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 class Animated extends Component {
   render() {
     const { children: t, time } = this.props;
-    return <Node
-      shader={shaders.animated}
-      uniforms={{
-        t,
-        time,
-        freq: 20 - 14 * Math.sin(time / 7000),
-        amp: 0.05 * (1 - Math.cos(time / 4000)),
-        colorSeparation: 0.02,
-        moving: 1,
-      }}
-    />;
+    return (
+      <Node
+        shader={shaders.animated}
+        uniforms={{
+          t,
+          time,
+          freq: 20 - 14 * Math.sin(time / 7000),
+          amp: 0.05 * (1 - Math.cos(time / 4000)),
+          colorSeparation: 0.02,
+          moving: 1,
+        }}
+      />
+    );
   }
 }
 
@@ -60,26 +62,26 @@ const padding = 10;
 
 class Text extends PureComponent {
   render() {
-    const {text} = this.props;
+    const { text } = this.props;
     return (
-    // Text is a PureComponent that renders a LinearCopy
-    // that will cache the canvas content for more efficiency
-    <LinearCopy>
-      <JSON2D {...size}>
-      {{
-        background: "#000",
-        size: [ size.width, size.height ],
-        draws: [
-          {
-            textBaseline: "top",
-            fillStyle: "#fff",
-            font,
-          },
-          [ "fillText", text, padding, padding, lineHeight ],
-        ],
-      }}
-      </JSON2D>
-    </LinearCopy>
+      // Text is a PureComponent that renders a LinearCopy
+      // that will cache the canvas content for more efficiency
+      <LinearCopy>
+        <JSON2D {...size}>
+          {{
+            background: "#000",
+            size: [size.width, size.height],
+            draws: [
+              {
+                textBaseline: "top",
+                fillStyle: "#fff",
+                font,
+              },
+              ["fillText", text, padding, padding, lineHeight],
+            ],
+          }}
+        </JSON2D>
+      </LinearCopy>
     );
   }
 }
@@ -88,11 +90,11 @@ export default class Example extends Component {
   render() {
     const { text } = this.props;
     return (
-  <Surface {...size}>
-    <AnimatedLoop>
-      <Text text={text} />
-    </AnimatedLoop>
-  </Surface>
+      <Surface {...size}>
+        <AnimatedLoop>
+          <Text text={text} />
+        </AnimatedLoop>
+      </Surface>
     );
   }
 
@@ -101,4 +103,4 @@ export default class Example extends Component {
   };
 }
 
-export {size,font,lineHeight,padding};
+export { size, font, lineHeight, padding };

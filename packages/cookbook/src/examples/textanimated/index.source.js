@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { PureComponent, Component } from "react";
 import { Shaders, Node, GLSL, LinearCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -102,4 +102,4 @@ export default class Example extends Component {
 }
 
 export {size,font,lineHeight,padding};
-`
+`;

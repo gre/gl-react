@@ -13,14 +13,16 @@ const Slideshow = timeLoop(({ slides, delay, duration, time }) => {
   const transition = GLTransitions[index % GLTransitions.length];
   const total = delay + duration;
   const progress = (time - index * total - delay) / duration;
-  return progress > 0
-    ? <GLTransition
-        from={from}
-        to={to}
-        progress={progress}
-        transition={transition}
-      />
-    : <LinearCopy>{from}</LinearCopy>;
+  return progress > 0 ? (
+    <GLTransition
+      from={from}
+      to={to}
+      progress={progress}
+      transition={transition}
+    />
+  ) : (
+    <LinearCopy>{from}</LinearCopy>
+  );
 });
 
 export default () => (

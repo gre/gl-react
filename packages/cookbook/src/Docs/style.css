@@ -18,13 +18,11 @@
 .documentation-toc li {
   padding: 0;
   overflow: visible;
-
 }
 .documentation-toc li a {
   padding: 4px 20px;
   position: relative;
   display: block;
-
 }
 .documentation-toc li.react-component a {
   color: #f56;
@@ -131,7 +129,6 @@ a:hover {
 }
 
 .documentation .md {
-
 }
 
 .documentation .md blockquote {

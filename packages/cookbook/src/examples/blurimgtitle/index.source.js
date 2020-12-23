@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { PureComponent, Component } from "react";
 import PropTypes from "prop-types";
 import { Shaders, Node, GLSL, Bus, LinearCopy, connectSize } from "gl-react";
@@ -171,4 +171,4 @@ export default class Example extends Component {
     image: require("./sf-6.jpg")
   };
 }
-`
+`;

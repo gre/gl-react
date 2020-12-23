@@ -25,7 +25,7 @@ const Visitors = {
 
   get() {
     return _globalVisitors;
-  }
+  },
 };
 
 export default Visitors;

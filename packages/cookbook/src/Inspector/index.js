@@ -7,7 +7,7 @@ import {
   Node,
   Bus,
   Uniform,
-  listSurfaces
+  listSurfaces,
 } from "gl-react";
 import raf from "raf";
 import type { Surface } from "gl-react-dom";
@@ -47,10 +47,10 @@ const primitiveTypeAlias = {
   bvec4: Array(4).fill("bool"),
   mat2: Array(4).fill("float"),
   mat3: Array(9).fill("float"),
-  mat4: Array(16).fill("float")
+  mat4: Array(16).fill("float"),
 };
 
-const classType = type => {
+const classType = (type) => {
   if (Array.isArray(type)) return "type-array-" + type[0];
   return "type-" + type;
 };
@@ -99,7 +99,7 @@ class PreviewRenderer {
         1.0,
         -1.0,
         1.0,
-        1.0
+        1.0,
       ]),
       gl.STATIC_DRAW
     );
@@ -166,7 +166,7 @@ class UniformValue extends Component {
     node: Object,
     value: any,
     type: any,
-    info: any
+    info: any,
   };
   render() {
     let { id, node, value, type, info } = this.props;
@@ -200,7 +200,7 @@ class UniformValue extends Component {
 class Btn extends Component {
   props: {
     onClick: ?() => void,
-    children?: any
+    children?: any,
   };
   render() {
     const { onClick, children } = this.props;
@@ -209,7 +209,7 @@ class Btn extends Component {
         className="btn"
         onClick={onClick}
         style={{
-          opacity: onClick ? 1 : 0.5
+          opacity: onClick ? 1 : 0.5,
         }}
       >
         {children}
@@ -225,11 +225,11 @@ class Btn extends Component {
 class Anchor extends Component {
   props: {
     id: number,
-    drawCount: number
+    drawCount: number,
   };
   drawHistoryDates: Array<number> = [];
   static contextTypes = {
-    inspector: PropTypes.object.isRequired
+    inspector: PropTypes.object.isRequired,
   };
   componentDidMount() {
     this.context.inspector.addAnchor(this.props.id, this);
@@ -278,10 +278,10 @@ class AnchorHook extends Component {
   props: {
     id: string,
     nodeId: number,
-    anchorId: number
+    anchorId: number,
   };
   static contextTypes = {
-    inspector: PropTypes.object.isRequired
+    inspector: PropTypes.object.isRequired,
   };
   componentDidMount() {
     this.context.inspector.addAnchorHook(this.props.anchorId, this);
@@ -322,8 +322,8 @@ class MetaInfo extends Component {
       obj: ?Object,
       initialObj: ?Object,
       dependency: ?Object,
-      textureOptions: ?Object
-    }
+      textureOptions: ?Object,
+    },
   };
   render() {
     const { id, info, node } = this.props;
@@ -374,7 +374,7 @@ const sharedRenderer = new PreviewRenderer();
 
 class Preview extends Component {
   props: {
-    capture: Function
+    capture: Function,
   };
   interval: number;
   canvas: ?HTMLCanvasElement;
@@ -395,7 +395,7 @@ class Preview extends Component {
       sharedRenderer.copyToCanvas2D(ctx);
     }
   }, 100);
-  onCanvasRef = canvas => {
+  onCanvasRef = (canvas) => {
     if (!canvas || this.ctx) return;
     const ctx = canvas.getContext("2d");
     if ("imageSmoothingEnabled" in ctx) {
@@ -421,7 +421,7 @@ class Preview extends Component {
 
 class PreviewNode extends PureComponent {
   props: {
-    node: Object
+    node: Object,
   };
   capture = () => {
     const { node } = this.props;
@@ -436,7 +436,7 @@ class PreviewNode extends PureComponent {
 
 class PreviewContent extends Component {
   props: {
-    content: Object
+    content: Object,
   };
   capture = () => {
     const { content } = this.props;
@@ -449,7 +449,7 @@ class PreviewContent extends Component {
 
 class DrawCount extends PureComponent {
   props: {
-    drawCount: number
+    drawCount: number,
   };
   render() {
     const { drawCount } = this.props;
@@ -472,13 +472,13 @@ class InspectorBox extends Component {
     grabbed?: boolean,
     minimized: boolean,
     onGrabStart: (id: number, e: MouseEvent) => void,
-    onMinimizeChange: (id: number, minimized: boolean) => void
+    onMinimizeChange: (id: number, minimized: boolean) => void,
   };
   static contextTypes = {
-    inspector: PropTypes.object.isRequired
+    inspector: PropTypes.object.isRequired,
   };
   state = {
-    recentDraw: false
+    recentDraw: false,
   };
   lastDrawCountTime: number;
   _timeout: number;
@@ -515,11 +515,11 @@ class InspectorBox extends Component {
       });
     }
   };
-  onMouseDown = e => {
+  onMouseDown = (e) => {
     e.preventDefault();
     this.props.onGrabStart(this.props.glObject.id, e);
   };
-  onClickMinimize = e => {
+  onClickMinimize = (e) => {
     e.preventDefault();
     this.props.onMinimizeChange(this.props.glObject.id, !this.props.minimized);
   };
@@ -536,7 +536,7 @@ class InspectorBox extends Component {
       children,
       grabbed,
       cls,
-      minimized
+      minimized,
     } = this.props;
     return (
       <div
@@ -570,7 +570,7 @@ class InspectorBox extends Component {
   }
 }
 
-const formatType = t => {
+const formatType = (t) => {
   if (Array.isArray(t)) return t[0] + "[]";
   return t;
 };
@@ -578,14 +578,14 @@ const formatType = t => {
 class Uniforms extends PureComponent {
   props: {
     node: Object,
-    preparedUniforms: ?Object
+    preparedUniforms: ?Object,
   };
   render() {
     const { node, preparedUniforms } = this.props;
     return (
       <div className="uniforms">
         {preparedUniforms &&
-          preparedUniforms.map(u => (
+          preparedUniforms.map((u) => (
             <div key={u.key} className={"uniform " + classType(u.type)}>
               <span
                 className="name"
@@ -620,7 +620,7 @@ class SVGConnectionLine extends PureComponent {
     anchorY: number,
     onPathRef: Function,
     reversedHook?: boolean,
-    recursive?: boolean
+    recursive?: boolean,
   };
   render() {
     const {
@@ -630,7 +630,7 @@ class SVGConnectionLine extends PureComponent {
       hookY,
       recursive,
       onPathRef,
-      reversedHook
+      reversedHook,
     } = this.props;
     const dx = hookX - anchorX;
     const dy = hookY - anchorY;
@@ -671,10 +671,10 @@ class SVGConnection extends Component {
     solid: number,
     recursive?: boolean,
     reversedHook?: boolean,
-    animated?: boolean
+    animated?: boolean,
   };
   state = {
-    draws: []
+    draws: [],
   };
   path: any;
   _raf: any;
@@ -694,10 +694,10 @@ class SVGConnection extends Component {
       }
       const length = path.getTotalLength();
       this.setState({
-        draws: values.map(v => {
+        draws: values.map((v) => {
           const { x, y } = path.getPointAtLength(v * length);
           return [x.toFixed(1), y.toFixed(1)]; // round is too aggressive and great jump. but using full float is also more consuming
-        })
+        }),
       });
     };
     this._raf = raf(loop);
@@ -710,7 +710,7 @@ class SVGConnection extends Component {
   componentWillUnmount() {
     raf.cancel(this._raf);
   }
-  onPathRef = ref => {
+  onPathRef = (ref) => {
     this.path = ref;
   };
   render() {
@@ -722,7 +722,7 @@ class SVGConnection extends Component {
       tension,
       solid,
       recursive,
-      reversedHook
+      reversedHook,
     } = this.props;
     const { draws } = this.state;
     return (
@@ -753,7 +753,7 @@ class SVGStandaloneConnection extends Component {
     anchorX: number,
     anchorY: number,
     hookX: number,
-    hookY: number
+    hookY: number,
   };
   render() {
     const { animated, anchor, anchorX, anchorY, hookX, hookY } = this.props;
@@ -782,7 +782,7 @@ class HookDrawer extends Component {
     anchorPositions: *,
     anchorHookPositions: *,
     boxSizes: *,
-    grabbing: ?Object
+    grabbing: ?Object,
   };
   render() {
     const {
@@ -792,7 +792,7 @@ class HookDrawer extends Component {
       anchorPositions,
       anchorHookPositions,
       boxSizes,
-      grabbing
+      grabbing,
     } = this.props;
     return (
       <svg ref="svg" className="hook-drawer">
@@ -817,7 +817,7 @@ class HookDrawer extends Component {
                   hookY={anchorPosition[1] + size[1] - 22}
                 />
               ) : (
-                hooks.map(hook => {
+                hooks.map((hook) => {
                   const hookId = hook.getId();
                   const hookNodeId = hook.getNodeId();
                   const hookIsGrabbed = grabbing && grabbing.id === hookNodeId;
@@ -868,10 +868,10 @@ export default class Inspector extends Component {
     capture: false,
     animated: true,
     physics: false,
-    minimizeAll: false
+    minimizeAll: false,
   };
   static childContextTypes = {
-    inspector: PropTypes.object.isRequired
+    inspector: PropTypes.object.isRequired,
   };
   getChildContext() {
     return { inspector: this };
@@ -900,14 +900,14 @@ export default class Inspector extends Component {
   grabbing: ?{
     id: number,
     initialPos: [number, number],
-    initialEventPos: [number, number]
+    initialEventPos: [number, number],
   };
 
   componentDidMount() {
     Visitors.add(this);
     this._startupTimeout = setTimeout(() => this.detectSurface(), 0);
     let lastT;
-    const loop = t => {
+    const loop = (t) => {
       this._raf = raf(loop);
       if (!lastT) lastT = t;
       const delta = Math.min(100, t - lastT);
@@ -978,7 +978,7 @@ export default class Inspector extends Component {
 
   onNodeDrawEnd(node: Node) {
     this.nodeDrawCounts.set(node, (this.nodeDrawCounts.get(node) || 0) + 1);
-    node.dependencies.forEach(obj => {
+    node.dependencies.forEach((obj) => {
       if (obj instanceof Bus) {
         this.busDrawCounts.set(obj, (this.busDrawCounts.get(obj) || 0) + 1);
       }
@@ -1023,7 +1023,7 @@ export default class Inspector extends Component {
     const pos = [
       // FIXME TMP
       60 + 240 * ((i + 1) % 2),
-      40 + 200 * Math.floor(i / 2)
+      40 + 200 * Math.floor(i / 2),
     ];
     this.boxPos.set(id, pos);
     this.boxMinimized.set(id, this.state.minimizeAll);
@@ -1051,7 +1051,7 @@ export default class Inspector extends Component {
         anchorHooksByAnchorId,
         anchorHookPositions,
         boxesById,
-        boxSizes
+        boxSizes,
       } = this;
       // FIXME only the Anchor and AnchorHook should be allow to "sync this"
       // as soon as we make this local position, not global...
@@ -1065,8 +1065,8 @@ export default class Inspector extends Component {
           anchorPositions.set(id, [x, y]);
         }
       });
-      anchorHooksByAnchorId.forEach(anchorHooks => {
-        anchorHooks.forEach(anchorHook => {
+      anchorHooksByAnchorId.forEach((anchorHooks) => {
+        anchorHooks.forEach((anchorHook) => {
           let [x, y] = anchorHook.getXY();
           x = Math.round(x - offX);
           y = Math.round(y - offY);
@@ -1105,13 +1105,13 @@ export default class Inspector extends Component {
       anchorsById,
       anchorHooksByAnchorId,
       boxPos,
-      boxSizes
+      boxSizes,
     } = this;
     anchorsById.forEach((anchor, anchorId) => {
       const hooks = anchorHooksByAnchorId.get(anchorId) || [];
       const anchorPos = anchorPositions.get(anchorId);
       if (!anchorPos) return;
-      hooks.forEach(hook => {
+      hooks.forEach((hook) => {
         const hookId = hook.getId();
         const hookNodeId = hook.getNodeId();
         if (anchorId !== hookNodeId) {
@@ -1171,7 +1171,7 @@ export default class Inspector extends Component {
       const size = boxSizes.get(id) || [0, 0];
       v = [
         (v[0] + a[0] * timestep) * damping,
-        (v[1] + a[1] * timestep) * damping
+        (v[1] + a[1] * timestep) * damping,
       ];
       p = [p[0] + v[0] * timestep, p[1] + v[1] * timestep];
       if (bounds) {
@@ -1191,7 +1191,7 @@ export default class Inspector extends Component {
     this.spring();
     this.updateVelocityPosition(timestep);
     var energy = 0.0;
-    this.boxVel.forEach(v => {
+    this.boxVel.forEach((v) => {
       energy += v[0] * v[0] + v[1] * v[1];
     });
     if (energy > 0.00001) {
@@ -1204,7 +1204,7 @@ export default class Inspector extends Component {
     this.grabbing = {
       id,
       initialPos: boxPos,
-      initialEventPos: [e.clientX, e.clientY]
+      initialEventPos: [e.clientX, e.clientY],
     };
     this.forceUpdate();
   };
@@ -1334,7 +1334,7 @@ export default class Inspector extends Component {
             grabbed: grabbing ? grabbing.id === id : false,
             minimized,
             onMinimizeChange: this.onMinimizeChange,
-            onGrabStart: this.onGrabStart
+            onGrabStart: this.onGrabStart,
           };
           if (n instanceof Node) {
             const [width, height] = n.getGLSize();
@@ -1428,7 +1428,7 @@ export default class Inspector extends Component {
             <Btn key="ctx" onClick={this.loseContext}>
               lose GL context
             </Btn>
-          )
+          ),
         ];
         body = (
           <div ref="body" className="body">
@@ -1453,7 +1453,7 @@ export default class Inspector extends Component {
           <div className="no-surface">
             <h2>No Surface is currently inspected. Select one of these:</h2>
             <ul>
-              {listSurfaces().map(surface => (
+              {listSurfaces().map((surface) => (
                 <li key={surface.id}>
                   <span onClick={() => this.setSurface(surface)}>
                     {surface.getGLName()}
@@ -1482,7 +1482,7 @@ export default class Inspector extends Component {
               onChange={this.onSelectChange}
             >
               <option value="">(none)</option>
-              {listSurfaces().map(surface => (
+              {listSurfaces().map((surface) => (
                 <option key={surface.id} value={surface.id}>
                   {surface.getGLName()}
                 </option>

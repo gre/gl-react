@@ -1,4 +1,4 @@
-module.exports=`//@flow
+module.exports = `//@flow
 import React, { Component } from "react";
 import { Bus, Uniform, Node, Shaders, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -99,4 +99,4 @@ export default class Example extends Component {
     });
   onMouseUp = () => this.setState({ reset: false });
 }
-`
+`;

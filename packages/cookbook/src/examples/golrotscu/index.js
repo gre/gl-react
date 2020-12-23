@@ -2,11 +2,12 @@
 import React, { Component } from "react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
-import {GameOfLife} from "../gol";
-import {Rotating} from "../golrot";
+import { GameOfLife } from "../gol";
+import { Rotating } from "../golrot";
 
 class PureGameOfLife extends Component {
-  shouldComponentUpdate ({ tick }) { // only tick should trigger redraw
+  shouldComponentUpdate({ tick }) {
+    // only tick should trigger redraw
     return tick !== this.props.tick;
   }
   render() {
@@ -14,14 +15,14 @@ class PureGameOfLife extends Component {
   }
 }
 
-const RotatingGameOfLife = ({ time }) =>
+const RotatingGameOfLife = ({ time }) => (
   <Rotating
     angle={(time / 1000) % (2 * Math.PI)}
-    scale={0.6 + 0.15 * Math.cos(time / 500)}>
-
+    scale={0.6 + 0.15 * Math.cos(time / 500)}
+  >
     <PureGameOfLife tick={Math.floor(time / 200)} />
-
-  </Rotating>;
+  </Rotating>
+);
 
 export const RotatingGameOfLifeLoop = timeLoop(RotatingGameOfLife);
 
