@@ -22,8 +22,8 @@
     "expo-splash-screen": "~0.8.0",
     "expo-status-bar": "~1.0.3",
     "expo-updates": "~0.4.0",
-    "gl-react": "4.0.2-alpha.3",
-    "gl-react-native": "4.0.2-alpha.3",
+    "gl-react": "4.1.0",
+    "gl-react-native": "4.1.0",
     "gl-transitions": "^1.43.0",
     "ndarray": "^1.0.19",
     "raf": "^3.4.1",
@@ -43,7 +43,7 @@
     "webgltexture-loader-expo-camera": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
+    "@babel/core": "~7.12.10",
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1"
