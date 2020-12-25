@@ -15,13 +15,15 @@ void main() {
     1.0 * dist + pow(1.0 - distance(style.y, uv.y), 16.0),
     0.5 * dist + pow(1.0 - distance(style.y, uv.y), 32.0),
     0.2 * dist + pow(1.0 - distance(style.x, uv.x), 32.0)), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 class Cursor extends Component {
   render() {
-    const { style: { x, y } } = this.props;
+    const {
+      style: { x, y },
+    } = this.props;
     return <Node shader={shaders.cursor} uniforms={{ style: [x, y] }} />;
   }
 }
@@ -34,16 +36,16 @@ export default respondToTouchPosition(
     props: {
       touchPosition: {
         x: number,
-        y: number
-      }
+        y: number,
+      },
     };
     state = {
-      style: new Animated.ValueXY(this.props.touchPosition)
+      style: new Animated.ValueXY(this.props.touchPosition),
     };
     componentWillReceiveProps({ touchPosition }) {
       if (this.props.touchPosition !== touchPosition) {
         Animated.spring(this.state.style, {
-          toValue: touchPosition
+          toValue: touchPosition,
         }).start();
       }
     }

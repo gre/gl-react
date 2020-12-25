@@ -1,7 +1,7 @@
 import { Dimensions } from "react-native";
 import ImagesPicker from "../../toolbox/ImagesPicker";
 
-export const images = [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({
+export const images = [1, 2, 3, 4, 5, 6, 7, 8].map((i) => ({
   uri: `https://raw.githubusercontent.com/recurser/exif-orientation-examples/master/Landscape_${i}.jpg`,
 }));
 

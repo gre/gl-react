@@ -5,91 +5,78 @@ import {
   View,
   ScrollView,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-import { withNavigation } from "react-navigation";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   container: {
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   rendering: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   toolbox: {
-    flexDirection: "column"
+    flexDirection: "column",
   },
   toolboxTitle: {
     padding: 0,
-    marginVertical: 4
+    marginVertical: 4,
   },
   field: {
     flexDirection: "column",
     paddingVertical: 5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   fieldValue: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   btn: {
     flex: 1,
     padding: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   btnText: {
     color: "#fff",
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
-class NextButton extends Component {
-  props: {
-    navigation: *,
-    next: string
-  };
-  goToNext = () => {
-    this.props.navigation.replace(this.props.next);
-  };
-  render() {
-    return (
-      <TouchableOpacity style={styles.btn} onPress={this.goToNext}>
-        <Text style={styles.btnText}>NEXT</Text>
-      </TouchableOpacity>
-    );
-  }
+export function NextButton({ next }) {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity
+      style={styles.btn}
+      onPress={() => navigation.replace(next)}
+    >
+      <Text style={styles.btnText}>NEXT</Text>
+    </TouchableOpacity>
+  );
 }
 
 export default (
   { Main, title, toolbox, noScrollView, ToolboxFooter, overrideStyles = {} },
-  id,
-  nextId
+  id
 ) =>
   class extends React.Component {
     static displayName = id;
-    static navigationOptions = ({ navigation }) => ({
-      title: id,
-      headerRight: nextId ? (
-        <NextButton next={nextId} navigation={navigation} />
-      ) : null
-      // TODO: also could use renderRight to have bg modes, like in Atom image-viewer // renderRight: (route, props) => ...
-    });
     state = {
       ...Main.defaultProps,
       width: 0,
-      height: 0
+      height: 0,
     };
-    onLayout = e => {
+    onLayout = (e) => {
       const { width, height } = e.nativeEvent.layout;
       if (this.state.width !== width || this.state.height !== height) {
         this.setState({
           width,
-          height
+          height,
         });
       }
     };
@@ -97,7 +84,7 @@ export default (
       const { state } = this;
       const props = {
         setToolState: this.setState,
-        ...state
+        ...state,
       };
       const { width, height } = props;
       const renderingEl = (
@@ -125,9 +112,9 @@ export default (
                   <field.Editor
                     {...field}
                     value={props[field.prop]}
-                    onChange={value => {
+                    onChange={(value) => {
                       this.setState({
-                        [field.prop]: value
+                        [field.prop]: value,
                       });
                     }}
                   />

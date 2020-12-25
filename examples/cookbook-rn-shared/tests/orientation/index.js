@@ -7,7 +7,7 @@ import { images } from "./meta";
 
 export default class Test extends Component {
   static defaultProps = {
-    image: images[0]
+    image: images[0],
   };
   render() {
     const { width, image } = this.props;

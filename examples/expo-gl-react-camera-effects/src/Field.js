@@ -1,25 +1,26 @@
 //@flow
 import React, { Component } from "react";
-import { TouchableOpacity, View, Text, Slider, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import Slider from "@react-native-community/slider";
 
 const styles = StyleSheet.create({
   field: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   title: {
     width: 120,
     textAlign: "right",
-    fontSize: 14
+    fontSize: 14,
   },
   value: {
-    width: 80
+    width: 80,
   },
   range: {
     flex: 1,
     height: 20,
-    margin: 6
-  }
+    margin: 6,
+  },
 });
 
 export default class Field extends Component {
@@ -32,7 +33,7 @@ export default class Field extends Component {
     step?: number,
     prettyPrint: (value: number) => string,
     onChange: (value: number, id: string) => void,
-    onReset: (id: string) => void
+    onReset: (id: string) => void,
   };
   onChange = (value: number) => {
     this.props.onChange(value, this.props.id);

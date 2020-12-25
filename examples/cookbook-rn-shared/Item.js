@@ -9,24 +9,24 @@ const styles = StyleSheet.create({
     borderTopColor: "rgba(0, 0, 0, .1)",
     paddingVertical: 8,
     paddingHorizontal: 8,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   thumbnail: {
     width: 50,
     height: 50,
-    marginRight: 8
+    marginRight: 8,
   },
   title: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#222",
-    margin: 2
+    margin: 2,
   },
   description: {
     fontSize: 12,
     color: "#888",
-    margin: 2
-  }
+    margin: 2,
+  },
 });
 
 export default class Item extends React.PureComponent {
@@ -35,7 +35,7 @@ export default class Item extends React.PureComponent {
     id: string,
     title: string,
     description: ?string,
-    thumbnail: ?string
+    thumbnail: ?string,
   };
 
   onPress = () => this.props.navigation.navigate(this.props.id);
@@ -47,7 +47,7 @@ export default class Item extends React.PureComponent {
       description,
       disabled,
       thumbnail,
-      navigation
+      navigation,
     } = this.props;
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>

@@ -91,8 +91,8 @@ void main() {
   vec3 diffuseLit = materialColor * (diffuse * light_color + ambient_color);
   float fogFactor = smoothstep(10.0, 50.0, totalDist);
   gl_FragColor = vec4(mix(diffuseLit, vec3(0.1), fogFactor), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 const SDF1Loop = timeLoop(({ time }: *) => (

@@ -2,7 +2,7 @@
 import {
   Image,
   endFrame,
-  loadThreeJSTexture
+  loadThreeJSTexture,
 } from "../../gl-react-implementation";
 const THREE = require("three");
 global.THREE = THREE;
@@ -21,9 +21,9 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
       style: {},
       addEventListener: () => {},
       removeEventListener: () => {},
-      clientHeight: height
+      clientHeight: height,
     },
-    context: gl
+    context: gl,
   });
   renderer.setSize(width, height);
   renderer.setClearColor(0x000000, 1);
@@ -51,7 +51,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
       loadTexture(require("../../images/skybox/py.jpg")), // top
       loadTexture(require("../../images/skybox/ny.jpg")), // bottom
       loadTexture(require("../../images/skybox/pz.jpg")), // back
-      loadTexture(require("../../images/skybox/nz.jpg")) // front
+      loadTexture(require("../../images/skybox/nz.jpg")), // front
     ];
     mesh = new THREE.Mesh(
       new THREE.BoxGeometry(300, 300, 300, 7, 7, 7),
@@ -70,7 +70,7 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     }
 
     let material = new THREE.MeshBasicMaterial({
-      vertexColors: THREE.FaceColors
+      vertexColors: THREE.FaceColors,
     });
 
     cube = new THREE.Mesh(geometry, material);
@@ -128,6 +128,6 @@ export default (gl: WebGLRenderingContext, initialProps: *) => {
     },
     dispose() {
       cancelAnimationFrame(requestId);
-    }
+    },
   };
 };

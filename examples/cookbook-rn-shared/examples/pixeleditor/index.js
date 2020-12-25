@@ -31,7 +31,7 @@ void main() {
   else {
     discard;
   }
-}`
+}`,
   },
   initTexture: {
     frag: GLSL`
@@ -40,7 +40,7 @@ varying vec2 uv;
 uniform sampler2D t;
 void main(){
   gl_FragColor=texture2D(t,uv);
-}`
+}`,
   },
   pixelEditor: {
     frag: GLSL`
@@ -63,13 +63,13 @@ void main() {
   gl_FragColor = vec4(
     m * c.rgb,
     mix(1.0, c.a, m));
-}`
-  }
+}`,
+  },
 });
 
 class Paint extends PureComponent {
   state = {
-    initialized: false
+    initialized: false,
   };
   onDraw = () => {
     if (!this.state.initialized) {
@@ -102,14 +102,14 @@ class PixelEditor extends PureComponent {
       <Node
         shader={shaders.pixelEditor}
         uniformsOptions={{
-          t: { interpolation: "nearest" }
+          t: { interpolation: "nearest" },
         }}
         uniforms={{
           size,
           gridBorder,
           brushRadius,
           mouse,
-          color
+          color,
         }}
       >
         <Bus uniform="t">
@@ -127,7 +127,7 @@ const tools = {
   "brush-2": { brushRadius: 1.1 / 16 },
   "brush-4": { brushRadius: 2.2 / 16 },
   rubber: { brushRadius: 4 / 16, forceColor: [0, 0, 0, 0] },
-  "color-picker": { colorPick: true }
+  "color-picker": { colorPick: true },
 };
 
 const Example = respondToTouchPosition(
@@ -155,7 +155,7 @@ const Example = respondToTouchPosition(
       );
     }
 
-    onColorChange = rgb => {
+    onColorChange = (rgb) => {
       this.props.setToolState({ color: rgb.concat([1]) });
     };
 
@@ -169,7 +169,7 @@ const Example = respondToTouchPosition(
       y = Math.floor(y * size[1]);
       const ndarray = this.paintNode.capture(x, y, 1, 1);
       this.props.setToolState({
-        color: Array.from(ndarray.data).map(n => n / 255)
+        color: Array.from(ndarray.data).map((n) => n / 255),
       });
     };
   }
@@ -177,7 +177,7 @@ const Example = respondToTouchPosition(
 
 Example.defaultProps = {
   color: [1, 1, 1, 1],
-  toolKey: "brush-4"
+  toolKey: "brush-4",
 };
 
 export default Example;

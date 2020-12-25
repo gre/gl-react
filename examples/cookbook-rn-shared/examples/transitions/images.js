@@ -1,4 +1,3 @@
-
 export default [
   { uri: "https://i.imgur.com/wxqlQkh.jpg" },
   { uri: "https://i.imgur.com/G2Whuq3.jpg" },
@@ -13,5 +12,5 @@ export default [
   { uri: "https://i.imgur.com/MnOB9Le.jpg" },
   { uri: "https://i.imgur.com/YqsZKgc.jpg" },
   { uri: "https://i.imgur.com/0BJobQo.jpg" },
-  { uri: "https://i.imgur.com/Otbz312.jpg" }
+  { uri: "https://i.imgur.com/Otbz312.jpg" },
 ];

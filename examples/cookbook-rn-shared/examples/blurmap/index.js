@@ -22,8 +22,8 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 }
 void main() {
   gl_FragColor = blur9(t, uv, resolution, direction * texture2D(map, uv).rg);
-}`
-  }
+}`,
+  },
 });
 
 // Same concept than Blur1D except it takes one more prop:
@@ -40,7 +40,7 @@ export const BlurV1D = connectSize(
 // And its N-pass version
 import { directionForPass } from "../blurmulti";
 export const BlurV = connectSize(({ children, factor, map, passes }) => {
-  const rec = pass =>
+  const rec = (pass) =>
     pass <= 0 ? (
       children
     ) : (
@@ -55,7 +55,7 @@ export default class Example extends Component {
   render() {
     const { factor, passes, map, width } = this.props;
     return (
-      <Surface style={{ width, height: width * 284 / 600 }}>
+      <Surface style={{ width, height: (width * 284) / 600 }}>
         <BlurV map={map} passes={passes} factor={factor}>
           {{ uri: "https://i.imgur.com/NjbLHx2.jpg" }}
         </BlurV>
@@ -65,7 +65,7 @@ export default class Example extends Component {
   static defaultProps = {
     factor: 2,
     passes: 4,
-    map: StaticBlurMap.images[0]
+    map: StaticBlurMap.images[0],
   };
 }
 import StaticBlurMap from "../../toolbox/StaticBlurMap";

@@ -16,7 +16,7 @@ const GameOfLifeLoop = timeLoop(
       sync
       uniforms={{
         t: tick === 0 ? gliderGunImage : Uniform.Backbuffer,
-        size
+        size,
       }}
     />
   ),
@@ -31,7 +31,7 @@ export default class Example extends Component {
         style={{ width, height: width }}
         preload={[
           // preload textures before starting rendering
-          gliderGunImage
+          gliderGunImage,
         ]}
       >
         <NearestCopy>

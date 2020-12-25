@@ -2490,26 +2490,26 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-dom@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/gl-react-dom/-/gl-react-dom-4.0.0.tgz#a7bf3fdbc5a1d188fb2859d550291a4d337ee0b0"
-  integrity sha512-HpNV7dv2W8Wy32hmVrkLK4w8Y8Bkgtl0J2WfRcIz7VQa8xY7Uk34y1QWSW5gMF/M0TYwYiZXNZu6kO+E1xzOCw==
+gl-react-dom@alpha:
+  version "4.0.2-alpha.3"
+  resolved "https://registry.yarnpkg.com/gl-react-dom/-/gl-react-dom-4.0.2-alpha.3.tgz#929ba1e7ba2edeb6c1a83c90958abbca253dfbbf"
+  integrity sha512-JSO/m94gKbLNTw2+0Qs6bkp7xNl2XZfGJ384vbZaN/bGuxTWrj+nDe6aWYQlvR1d/ORxQzhbqK79FfXpS540DA==
   dependencies:
     invariant "^2.2.4"
     prop-types "^15.7.2"
     raf "^3.4.1"
     webgltexture-loader-dom "1.0.0"
 
-gl-react@4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-4.0.0.tgz#77d56d7750b38ca2a12fc6771a24204b24a696b6"
-  integrity sha512-pISgi6yUNDtJetH8FRwnF0pXaJeC/ab0BogyRm4jReDHCZ8qWECbLyzIDQHiHmiVTs+E7SqxboxQCHcAL1fBRQ==
+gl-react@alpha:
+  version "4.0.2-alpha.3"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-4.0.2-alpha.3.tgz#a014552f48382921057e6317d89d1130e8f7c95c"
+  integrity sha512-iMK0CuRAwiogJ/rT8of5jOmEYpNnHnWXC3J2/caZFDPaHV804H+ia7RcHYC+VAICk7p9BXDwcdtvRJNbq+LjmA==
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.4"
-    ndarray "^1.0.18"
+    ndarray "^1.0.19"
     prop-types "^15.7.2"
-    typedarray-pool "^1.1.0"
+    typedarray-pool "^1.2.0"
     webgltexture-loader "1.0.0"
     webgltexture-loader-ndarray "1.0.0"
 
@@ -3484,6 +3484,14 @@ ndarray@^1.0.18:
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/ndarray/-/ndarray-1.0.18.tgz#b60d3a73224ec555d0faa79711e502448fd3f793"
   integrity sha1-tg06cyJOxVXQ+qeXEeUCRI/T95M=
+  dependencies:
+    iota-array "^1.0.0"
+    is-buffer "^1.0.2"
+
+ndarray@^1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/ndarray/-/ndarray-1.0.19.tgz#6785b5f5dfa58b83e31ae5b2a058cfd1ab3f694e"
+  integrity sha512-B4JHA4vdyZU30ELBw3g7/p9bZupyew5a7tX1Y/gGeF2hafrPaQZhgrGQfsvgfYbgdFZjYwuEcnaobeM/WMW+HQ==
   dependencies:
     iota-array "^1.0.0"
     is-buffer "^1.0.2"
@@ -5281,6 +5289,14 @@ typedarray-pool@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/typedarray-pool/-/typedarray-pool-1.1.0.tgz#d114f484801489f53ecab5e8088aa23044f498d9"
   integrity sha1-0RT0hIAUifU+yrXoCIqiMET0mNk=
+  dependencies:
+    bit-twiddle "^1.0.0"
+    dup "^1.0.0"
+
+typedarray-pool@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/typedarray-pool/-/typedarray-pool-1.2.0.tgz#e7e90720144ba02b9ed660438af6f3aacfe33ac3"
+  integrity sha512-YTSQbzX43yvtpfRtIDAYygoYtgT+Rpjuxy9iOpczrjpXLgGoyG7aS5USJXV2d3nn8uHTeb9rXDvzS27zUg5KYQ==
   dependencies:
     bit-twiddle "^1.0.0"
     dup "^1.0.0"

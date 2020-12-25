@@ -12,8 +12,8 @@ varying vec2 uv;
 uniform float blue;
 void main() {
   gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
-}`
-  }
+}`,
+  },
 });
 
 // We can make a <HelloBlue blue={0.5} /> that will render the concrete <Node/>

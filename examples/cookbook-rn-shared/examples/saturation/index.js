@@ -18,8 +18,8 @@ void main() {
     vec3(0.5),
     mix(vec3(dot(brt, L)), brt, saturation),
     contrast), c.a);
-}`
-  }
+}`,
+  },
 });
 
 export const Saturate = ({ contrast, saturation, brightness, children }) => (
@@ -33,7 +33,7 @@ export default class Example extends Component {
   render() {
     const { width } = this.props;
     return (
-      <Surface style={{ width, height: width * 300 / 480 }}>
+      <Surface style={{ width, height: (width * 300) / 480 }}>
         <Saturate {...this.props}>
           {{ uri: "https://i.imgur.com/uTP9Xfr.jpg" }}
         </Saturate>
@@ -43,6 +43,6 @@ export default class Example extends Component {
   static defaultProps = {
     contrast: 1,
     saturation: 1,
-    brightness: 1
+    brightness: 1,
   };
 }

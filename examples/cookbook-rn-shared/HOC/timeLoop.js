@@ -9,7 +9,7 @@ export default (
   { refreshRate = 60 }: { refreshRate?: number } = {}
 ): ReactClass<*> => {
   class TL extends PureComponent {
-    static displayName = `timeLoop(${C.displayName||C.name||""})`;
+    static displayName = `timeLoop(${C.displayName || C.name || ""})`;
     state: { time: number };
     state = {
       time: 0,
@@ -44,23 +44,19 @@ export default (
       };
       this._r = raf(loop);
     };
-    onPausedChange = paused => {
+    onPausedChange = (paused) => {
       if (paused) {
         raf.cancel(this._r);
-      }
-      else {
+      } else {
         this.startLoop();
       }
     };
     render() {
-      return <C
-        {...this.props}
-        {...this.state}
-      />;
+      return <C {...this.props} {...this.state} />;
     }
-  };
+  }
 
   hoistNonReactStatics(TL, C);
 
   return TL;
-}
+};

@@ -3,6 +3,7 @@ coverage
 build
 .DS_Store
 .env
+.eslintcache
 npm-debug.log
 lerna-debug.log
 *.tmp

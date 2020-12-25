@@ -12,16 +12,16 @@ varying vec2 uv;
 uniform sampler2D t;
 void main(){
   gl_FragColor=texture2D(t, vec2(uv.x, 1.0 - uv.y));
-}`
-  }
+}`,
+  },
 });
 
 export default class GLCamera extends Component<*> {
   props: {
-    position: string
+    position: string,
   };
   static defaultProps = {
-    position: "front"
+    position: "front",
   };
   _raf: *;
   async componentDidMount() {
@@ -46,13 +46,13 @@ export default class GLCamera extends Component<*> {
         blendFunc={{ src: "one", dst: "one minus src alpha" }}
         shader={shaders.YFlip}
         uniforms={{
-          t: () => this.camera
+          t: () => this.camera,
         }}
       >
         <Camera
           style={{
             width: 400,
-            height: 533.33
+            height: 533.33,
           }}
           ratio="4:3"
           type={type}

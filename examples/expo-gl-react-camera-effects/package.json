@@ -1,5 +1,5 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -8,21 +8,22 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "~36.0.0",
-    "expo-camera": "^8.0.0",
-    "expo-gl": "^8.0.0",
-    "expo-permissions": "^8.0.0",
-    "gl-react": "4.0.0",
-    "gl-react-expo": "4.0.0",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-web": "~0.11.7",
+    "@react-native-community/slider": "^3.0.3",
+    "expo": "~40.0.0",
+    "expo-camera": "^9.1.1",
+    "expo-gl": "^9.2.0",
+    "expo-permissions": "^10.0.0",
+    "gl-react": "4.0.1",
+    "gl-react-expo": "4.0.1",
+    "react": "~17.0.1",
+    "react-dom": "~17.0.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.0.tar.gz",
+    "react-native-web": "~0.14.10",
     "webgltexture-loader-expo-camera": "1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babel-preset-expo": "~8.0.0"
+    "@babel/core": "^7.12.10",
+    "babel-preset-expo": "~8.3.0"
   },
   "private": true
 }

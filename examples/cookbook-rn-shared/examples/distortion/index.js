@@ -34,8 +34,8 @@ void main() {
     texture2D(t, lookup(-colorSeparation * orientation, amp2)).g,
     texture2D(t, lookup(vec2(0.0), amp2)).b),
     1.0);
-}`
-  }
+}`,
+  },
 });
 
 const Vignette = timeLoop(({ children: t, time, mouse }) => (
@@ -47,7 +47,7 @@ const Vignette = timeLoop(({ children: t, time, mouse }) => (
       mouse,
       freq: 10 + 2 * Math.sin(0.0007 * time),
       amp: 0.05 + Math.max(0, 0.03 * Math.cos(0.001 * time)),
-      moving: 0
+      moving: 0,
     }}
   />
 ));
@@ -56,9 +56,12 @@ export default respondToTouchPosition(
   class Example extends Component {
     props: { touchPosition: { x: number, y: number } };
     render() {
-      const { touchPosition: { x, y }, width } = this.props;
+      const {
+        touchPosition: { x, y },
+        width,
+      } = this.props;
       return (
-        <Surface style={{ width, height: width * 400 / 500 }}>
+        <Surface style={{ width, height: (width * 400) / 500 }}>
           <Vignette mouse={[x, y]}>
             {{ uri: "https://i.imgur.com/2VP5osy.jpg" }}
           </Vignette>

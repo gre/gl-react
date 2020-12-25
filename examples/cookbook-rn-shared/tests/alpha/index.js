@@ -15,8 +15,8 @@ void main() {
     1.0 - min(1.0, step(uv.y, 0.5) + max(0.0, (1.0-3.0*distance(uv.y, 0.5))*step(0.4, uv.x)*step(uv.x, 0.6))) *
     step(distance(uv, vec2(0.5)), 0.4)
   );
-}`
-  }
+}`,
+  },
 });
 
 export default class Test extends Component {

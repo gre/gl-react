@@ -5,7 +5,7 @@ import {
   ScrollView,
   View,
   Platform,
-  Linking
+  Linking,
 } from "react-native";
 import { Surface, name } from "./gl-react-implementation";
 import { Node, Shaders, GLSL, Uniform, LinearCopy } from "gl-react";
@@ -14,53 +14,53 @@ import timeLoop from "./HOC/timeLoop";
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   container: {
     paddingVertical: 20,
-    flexDirection: "column"
+    flexDirection: "column",
   },
   list: {
-    flex: 1
+    flex: 1,
   },
   subHeader: {
     padding: 10,
-    backgroundColor: "#f9f9f9"
+    backgroundColor: "#f9f9f9",
   },
   subHeaderText: {
     color: "#333",
     fontSize: 12,
-    fontStyle: "italic"
+    fontStyle: "italic",
   },
   title: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   titleText: {
     fontWeight: "bold",
     color: "#fff",
-    fontSize: 18
+    fontSize: 18,
   },
   ex1: {
-    flexDirection: "column"
+    flexDirection: "column",
   },
   code: {
     backgroundColor: "transparent",
     color: "#282c34",
     fontFamily: Platform.select({
       android: "monospace",
-      ios: "Courier New"
+      ios: "Courier New",
     }),
     fontSize: 9,
     padding: 8,
-    width: 250
+    width: 250,
   },
   link: {
     fontSize: 14,
-    textDecorationLine: "underline"
-  }
+    textDecorationLine: "underline",
+  },
 });
 
 const shaders = Shaders.create({
@@ -76,7 +76,7 @@ void main () {
     texture2D(backbuffer, uv),
     persistence
   ).rgb, 1.0);
-}`
+}`,
   },
   HelloGL: {
     // uniforms are variables from JS. We pipe blue uniform into blue output color
@@ -86,7 +86,7 @@ varying vec2 uv;
 uniform float red;
 void main() {
   gl_FragColor = vec4(red, uv.x, uv.y, 1.0);
-}`
+}`,
   },
   Rotate: {
     frag: GLSL`
@@ -101,8 +101,8 @@ void main() {
     p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0
     ? vec4(0.0)
     : texture2D(children, p);
-}`
-  }
+}`,
+  },
 });
 
 const MotionBlur = ({ children, persistence }: *) => (
@@ -116,7 +116,7 @@ const MotionBlur = ({ children, persistence }: *) => (
 // We can make a <HelloBlue blue={0.5} /> that will render the concrete <Node/>
 class HelloGL extends Component {
   props: {
-    red: number
+    red: number,
   };
   render() {
     const { red } = this.props;
@@ -128,7 +128,7 @@ class Rotate extends Component {
   props: {
     scale: number,
     angle: number,
-    children: any
+    children: any,
   };
   render() {
     const { angle, scale, children } = this.props;
@@ -191,11 +191,11 @@ export default class Home extends React.Component {
         <View style={styles.title}>
           <Text style={styles.titleText}>{name}</Text>
         </View>
-      )
-    }
+      ),
+    },
   };
   props: {
-    navigation: *
+    navigation: *,
   };
   render() {
     return (

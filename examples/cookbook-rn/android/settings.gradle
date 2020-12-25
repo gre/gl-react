@@ -1,5 +1,9 @@
+rootProject.name = 'cookbook-rn'
+
 apply from: '../node_modules/react-native-unimodules/gradle.groovy'
 includeUnimodulesProjects()
-rootProject.name = 'cookbook'
-apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+applyNativeModulesSettingsGradle(settings)
+
 include ':app'

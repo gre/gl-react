@@ -17,24 +17,24 @@ const imgPicker = {
     require("../../images/mergechannels-img5.png"),
     require("../../images/mergechannels-img6.png"),
     require("../../images/mergechannels-img7.png"),
-    require("../../images/mergechannels-img8.png")
-  ]
+    require("../../images/mergechannels-img8.png"),
+  ],
 };
 
 export const toolbox = [
   {
     prop: "red",
     title: "red channel",
-    ...imgPicker
+    ...imgPicker,
   },
   {
     prop: "green",
     title: "green channel",
-    ...imgPicker
+    ...imgPicker,
   },
   {
     prop: "blue",
     title: "blue channel",
-    ...imgPicker
-  }
+    ...imgPicker,
+  },
 ];

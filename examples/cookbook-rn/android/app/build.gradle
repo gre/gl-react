@@ -1,5 +1,4 @@
 apply plugin: "com.android.application"
-apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 import com.android.build.OutputFile
 
@@ -16,10 +15,12 @@ import com.android.build.OutputFile
  *   // the name of the generated asset file containing your JS bundle
  *   bundleAssetName: "index.android.bundle",
  *
- *   // the entry file for bundle generation
+ *   // the entry file for bundle generation. If none specified and
+ *   // "index.android.js" exists, it will be used. Otherwise "index.js" is
+ *   // default. Can be overridden with ENTRY_FILE environment variable.
  *   entryFile: "index.android.js",
  *
- *   // https://facebook.github.io/react-native/docs/performance#enable-the-ram-format
+ *   // https://reactnative.dev/docs/performance#enable-the-ram-format
  *   bundleCommand: "ram-bundle",
  *
  *   // whether to bundle JS and assets in debug mode
@@ -77,11 +78,13 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: false
 ]
 
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/expo-constants/scripts/get-app-config-android.gradle"
+apply from: "../../node_modules/expo-updates/scripts/create-manifest-android.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -129,11 +132,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.cookbook"
+        applicationId 'fr.greweb.glreactcookbook'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     splits {
         abi {
@@ -157,12 +160,13 @@ android {
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
-            // see https://facebook.github.io/react-native/docs/signed-apk-android.
+            // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -180,9 +184,21 @@ android {
 }
 
 dependencies {
-    addUnimodulesDependencies()
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+      exclude group:'com.facebook.fbjni'
+    }
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+        exclude group:'com.squareup.okhttp3', module:'okhttp'
+    }
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+    }
+    addUnimodulesDependencies()
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

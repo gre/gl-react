@@ -24,8 +24,8 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 }
 void main() {
   gl_FragColor = blur9(t, uv, resolution, direction);
-}`
-  }
+}`,
+  },
 });
 
 // This implements a blur on a single direction (x or y axis for instance)
@@ -50,7 +50,7 @@ export default class Example extends Component {
   render() {
     const { factor, width } = this.props;
     return (
-      <Surface style={{ width, height: width * 300 / 400 }}>
+      <Surface style={{ width, height: (width * 300) / 400 }}>
         <BlurXY factor={factor}>
           {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
         </BlurXY>
@@ -58,6 +58,6 @@ export default class Example extends Component {
     );
   }
   static defaultProps = {
-    factor: 1
+    factor: 1,
   };
 }

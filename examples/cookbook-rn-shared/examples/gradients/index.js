@@ -24,8 +24,8 @@ void main () {
     sum.a = 1.0;
   }
   gl_FragColor = vec4(sum.a * sum.rgb, 1.0);
-}`
-  }
+}`,
+  },
 });
 
 // Alternative syntax using React stateless function component
@@ -36,9 +36,13 @@ const Gradients = ({ time }) => (
       colors: [
         [Math.cos(0.002 * time), Math.sin(0.002 * time), 0.2, 1],
         [Math.sin(0.002 * time), -Math.cos(0.002 * time), 0.1, 1],
-        [0.3, Math.sin(3 + 0.002 * time), Math.cos(1 + 0.003 * time), 1]
+        [0.3, Math.sin(3 + 0.002 * time), Math.cos(1 + 0.003 * time), 1],
       ],
-      particles: [[0.3, 0.3], [0.7, 0.5], [0.4, 0.9]]
+      particles: [
+        [0.3, 0.3],
+        [0.7, 0.5],
+        [0.4, 0.9],
+      ],
     }}
   />
 );

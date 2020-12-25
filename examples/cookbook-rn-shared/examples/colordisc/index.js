@@ -15,8 +15,8 @@ void main() {
     vec4(0.0),
     step(1.0, d)
   );
-}`
-  }
+}`,
+  },
 });
 
 class ColoredDisc extends Component {
@@ -40,6 +40,6 @@ export default class Example extends Component {
   }
   static defaultProps = {
     fromColor: [1, 0, 1],
-    toColor: [1, 1, 0]
+    toColor: [1, 1, 0],
   };
 }

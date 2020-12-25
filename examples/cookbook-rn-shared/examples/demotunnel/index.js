@@ -20,8 +20,8 @@ void main() {
   vec3 col = 0.5 + 0.5*sin( 3.1416*f + vec3(0.0,0.5,1.0) );
   col = col*r;
   gl_FragColor = vec4( col, 1.0 );
-}`
-  }
+}`,
+  },
 });
 
 const SquareTunnel = ({ time }) => (

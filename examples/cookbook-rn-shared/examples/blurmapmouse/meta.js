@@ -7,6 +7,6 @@ export const toolbox = [
   {
     prop: "map",
     title: "Blur Texture Map",
-    Editor: StaticBlurMap
-  }
+    Editor: StaticBlurMap,
+  },
 ];

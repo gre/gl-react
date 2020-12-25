@@ -6,7 +6,7 @@ import {
   ScrollView,
   View,
   Dimensions,
-  Text
+  Text,
 } from "react-native";
 import * as Permissions from "expo-permissions";
 import { Surface } from "gl-react-expo";
@@ -16,8 +16,8 @@ import Field from "./Field";
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
-const percentagePrint = v => (v * 100).toFixed(0) + "%";
-const radiantPrint = r => ((180 * r) / Math.PI).toFixed(0) + "°";
+const percentagePrint = (v) => (v * 100).toFixed(0) + "%";
+const radiantPrint = (r) => ((180 * r) / Math.PI).toFixed(0) + "°";
 
 // prettier-ignore
 const fields = [
@@ -39,33 +39,33 @@ const initialEffectsState = {
   negative: 0,
   hue: 0,
   sepia: 0,
-  flyeye: 0
+  flyeye: 0,
 };
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#EEE"
+    backgroundColor: "#EEE",
   },
   surface: {
     width: windowWidth * 0.75,
     height: windowWidth,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   fields: {
     flexDirection: "column",
     flex: 1,
     paddingTop: 10,
     paddingBottom: 40,
-    backgroundColor: "#EEE"
-  }
+    backgroundColor: "#EEE",
+  },
 });
 
 export default class App extends Component<*, *> {
   state = {
     position: "front",
     effects: initialEffectsState,
-    permission: null
+    permission: null,
   };
 
   async componentDidMount() {
@@ -75,19 +75,19 @@ export default class App extends Component<*, *> {
 
   onSurfacePress = () => {
     this.setState(({ position }) => ({
-      position: position === "front" ? "back" : "front"
+      position: position === "front" ? "back" : "front",
     }));
   };
 
   onEffectChange = (value: *, id: *) => {
     this.setState(({ effects }) => ({
-      effects: { ...effects, [id]: value }
+      effects: { ...effects, [id]: value },
     }));
   };
 
   onEffectReset = (id: *) => {
     this.setState(({ effects }) => ({
-      effects: { ...effects, [id]: initialEffectsState[id] }
+      effects: { ...effects, [id]: initialEffectsState[id] },
     }));
   };
 

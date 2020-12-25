@@ -13,8 +13,8 @@ varying vec2 uv;
 uniform float red;
 void main() {
   gl_FragColor = vec4(red, uv.x, uv.y, 1.0);
-}`
-  }
+}`,
+  },
 });
 
 const HelloGLAnimated = timeLoop(({ time }) => (

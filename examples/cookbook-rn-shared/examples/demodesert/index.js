@@ -206,8 +206,8 @@ void main() {
     u = uv;
     col = min(col, 1.)*pow( 16.0*u.x*u.y*(1.0-u.x)*(1.0-u.y) , .125);
 	  gl_FragColor = vec4(sqrt(clamp(col, 0., 1.)), 1);
-}`
-  }
+}`,
+  },
 });
 
 const DesertPassage = ({ time }) => (
@@ -215,7 +215,7 @@ const DesertPassage = ({ time }) => (
     shader={shaders.desertPassage}
     uniforms={{
       iGlobalTime: time / 1000,
-      iChannel0: shadertoyTex17jpg
+      iChannel0: shadertoyTex17jpg,
     }}
   />
 );

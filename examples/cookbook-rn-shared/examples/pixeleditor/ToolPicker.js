@@ -50,7 +50,7 @@ export default class ToolPicker extends PureComponent {
     const { tools, value, onChange } = this.props;
     return (
       <View style={styles.tools}>
-        {Object.keys(tools).map(key => (
+        {Object.keys(tools).map((key) => (
           <Tool
             key={key}
             id={key}

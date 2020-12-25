@@ -7,21 +7,21 @@ import timeLoop from "../../HOC/timeLoop";
 
 const styles = StyleSheet.create({
   compileRoot: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   compile: {
     padding: 6,
     backgroundColor: "#000",
     color: "#c22",
     fontSize: 10,
-    fontFamily: "Courier New"
+    fontFamily: "Courier New",
   },
   compileError: {
-    color: "#c22"
+    color: "#c22",
   },
   compileSuccess: {
-    color: "#2c2"
-  }
+    color: "#2c2",
+  },
 });
 
 const Preview = timeLoop(({ frag, visitor, time, width, height }) => (
@@ -95,6 +95,6 @@ void main() {
   }
   gl_FragColor = cbuff;
 }
-`
+`,
   };
 }

@@ -13,23 +13,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#282c34",
     color: "#ABB2BF",
     fontSize: 10,
-    fontFamily: "Courier New"
-  }
+    fontFamily: "Courier New",
+  },
 });
 
 export const overrideStyles = StyleSheet.create({
   toolbox: {
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   field: {
     paddingVertical: 0,
-    paddingHorizontal: 0
-  }
+    paddingHorizontal: 0,
+  },
 });
 
 export const toolbox = [
   {
     prop: "frag",
-    Editor: makeTextArea(styles.editor)
-  }
+    Editor: makeTextArea(styles.editor),
+  },
 ];

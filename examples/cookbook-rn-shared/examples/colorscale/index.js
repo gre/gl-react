@@ -16,8 +16,8 @@ void main() {
   vec4 original = texture2D(children, uv);
   vec4 newcolor = texture2D(colorScale, vec2(greyscale(original.rgb), 0.5));
   gl_FragColor = vec4(newcolor.rgb, original.a * newcolor.a);
-}`
-  }
+}`,
+  },
 });
 
 export const Colorify = ({ children, colorScale, interpolation }) => (
@@ -32,7 +32,7 @@ export default class Example extends Component {
   render() {
     const { interpolation, color, width } = this.props;
     return (
-      <Surface style={{ width, height: width * 300 / 400 }}>
+      <Surface style={{ width, height: (width * 300) / 400 }}>
         <Colorify colorScale={colorScales[color]} interpolation={interpolation}>
           {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
         </Colorify>
@@ -41,6 +41,6 @@ export default class Example extends Component {
   }
   static defaultProps = {
     interpolation: "linear",
-    color: Object.keys(colorScales)[0]
+    color: Object.keys(colorScales)[0],
   };
 }

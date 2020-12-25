@@ -15,8 +15,8 @@ gl_FragColor = mix(
   vec4(0.0),
   step(0.5, abs(uv.x - 0.5) + abs(uv.y - 0.5))
 );
-}`
-  }
+}`,
+  },
 });
 
 export const DiamondCrop = ({ children: t }) => (

@@ -16,6 +16,6 @@ export default class Example extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    fov: PropTypes.number.isRequired
+    fov: PropTypes.number.isRequired,
   };
 }

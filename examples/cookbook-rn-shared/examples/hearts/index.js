@@ -9,13 +9,13 @@ const { width: viewportWidth } = Dimensions.get("window");
 const increment = 3;
 const seed = "gl-react is awesome";
 
-const genRows = nb => {
+const genRows = (nb) => {
   const rows = [];
   const random = seedrandom(seed);
   for (let i = 0; i < nb; i++) {
     rows.push({
       color: [random(), random(), random()],
-      image: { uri: "https://i.imgur.com/GQo1KWq.jpg" }
+      image: { uri: "https://i.imgur.com/GQo1KWq.jpg" },
     });
   }
   return rows;
@@ -24,8 +24,8 @@ const genRows = nb => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
 
 const Example = () => {

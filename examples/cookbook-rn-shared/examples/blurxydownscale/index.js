@@ -8,7 +8,7 @@ export default class Example extends Component {
   render() {
     const { factor, width } = this.props;
     return (
-      <Surface style={{ width, height: width * 300 / 400 }}>
+      <Surface style={{ width, height: (width * 300) / 400 }}>
         <LinearCopy>
           <BlurXY factor={factor} width={100} height={75}>
             {{ uri: "https://i.imgur.com/iPKTONG.jpg" }}
@@ -19,6 +19,6 @@ export default class Example extends Component {
     );
   }
   static defaultProps = {
-    factor: 0.5
+    factor: 0.5,
   };
 }

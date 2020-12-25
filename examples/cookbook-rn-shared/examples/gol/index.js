@@ -17,7 +17,7 @@ float random (vec2 uv) {
 // i
 void main() {
   gl_FragColor = vec4(vec3(step(0.5, random(uv))), 1.0);
-}`
+}`,
   },
   GameOfLife: {
     // implement Game Of Life.
@@ -40,8 +40,8 @@ void main() {
   step(0.5, texture2D(t, uv + vec2( 0.0, -1.0)*c).r);
   float next = prev==1.0 && sum >= 2.0 && sum <= 3.0 || sum == 3.0 ? 1.0 : 0.0;
   gl_FragColor = vec4(vec3(next), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 const refreshEveryTicks = 20;
@@ -69,7 +69,7 @@ export const GameOfLife = ({ tick }) => {
       sync
       uniforms={{
         t: Uniform.Backbuffer, // Use previous frame buffer as a texture
-        size
+        size,
       }}
     />
   );

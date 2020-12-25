@@ -40,13 +40,13 @@ GLImage.prototype = {
         if (this.onload) this.onload();
       });
     }
-  }
+  },
 };
 
-export const endFrame = gl => gl.endFrameEXP();
+export const endFrame = (gl) => gl.endFrameEXP();
 export const loadThreeJSTexture = (gl, src, texture) => {
   let image = new GLImage();
-  image.onload = function() {
+  image.onload = function () {
     texture.image = image;
     texture.format = RGBFormat;
     texture.needsUpdate = true;

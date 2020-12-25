@@ -15,8 +15,8 @@ void main () {
   gl_FragColor = vec4(vec3(
     mod(phase + atan(uv.x-0.5, uv.y-0.5)/(2.0*PI), 1.0)
   ), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 const ConicalGradiantLoop = timeLoop(({ time }) => (
@@ -28,7 +28,7 @@ export default class Example extends Component {
     const { factor, passes, width } = this.props;
     // <ConicalGradiant/> also needs to be computed once.
     return (
-      <Surface style={{ width, height: width * 284 / 600 }}>
+      <Surface style={{ width, height: (width * 284) / 600 }}>
         <Bus ref="blurMapBus">
           <ConicalGradiantLoop />
         </Bus>
@@ -40,6 +40,6 @@ export default class Example extends Component {
   }
   static defaultProps = {
     factor: 6,
-    passes: 4
+    passes: 4,
   };
 }

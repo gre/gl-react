@@ -11,7 +11,7 @@ precision highp float;
 varying vec2 uv;
 void main() {
   gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-}`
+}`,
   },
   blue: {
     frag: GLSL`
@@ -19,8 +19,8 @@ precision highp float;
 varying vec2 uv;
 void main() {
   gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
-}`
-  }
+}`,
+  },
 });
 
 export default class Test extends Component {
@@ -32,27 +32,27 @@ export default class Test extends Component {
           position: "relative",
           width,
           height: width,
-          marginTop: 10
+          marginTop: 10,
         }}
       >
         <Surface
           style={{
-            width: 2 * width / 3,
-            height: 2 * width / 3,
+            width: (2 * width) / 3,
+            height: (2 * width) / 3,
             position: "absolute",
             top: 0,
-            left: 0
+            left: 0,
           }}
         >
           <Node shader={shaders.red} />
         </Surface>
         <Surface
           style={{
-            width: 2 * width / 3,
-            height: 2 * width / 3,
+            width: (2 * width) / 3,
+            height: (2 * width) / 3,
             position: "absolute",
             top: width / 3,
-            left: width / 3
+            left: width / 3,
           }}
         >
           <Node shader={shaders.blue} />

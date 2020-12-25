@@ -26,8 +26,8 @@ void main() {
   vec3 t = texture2D(image, uv).rgb;
   vec3 c = mix(color * (1.0 + 0.6 * t), t, min(0.8 * over + toggle, 1.0));
   gl_FragColor = vec4(mix(vec3(1.0), c, f), 1.0);
-}`
-  }
+}`,
+  },
 });
 
 export class InteractiveHeart extends Component {
@@ -36,7 +36,7 @@ export class InteractiveHeart extends Component {
   onPressOut = () => this.setState({ over: 0 });
   onPress = () =>
     this.setState({
-      toggle: this.state.toggle ? 0 : 1
+      toggle: this.state.toggle ? 0 : 1,
     });
   render() {
     const { color, image, width } = this.props;
@@ -52,7 +52,7 @@ export class InteractiveHeart extends Component {
             defaultStyle={{ over, toggle }}
             style={{
               over: spring(over, [150, 15]),
-              toggle: spring(toggle, [150, 15])
+              toggle: spring(toggle, [150, 15]),
             }}
           >
             {({ over, toggle }) => (

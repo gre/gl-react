@@ -61,7 +61,7 @@ void main(){
   c += pixelColor;
   gl_FragColor = vec4(c, 1.0);
 }
-`
+`,
   },
   IBEXLogic: {
     frag: GLSL`
@@ -333,13 +333,13 @@ void main () {
     if (r == V || r == S) r = E;
   }
   gl_FragColor = vec4(float(r) / 9.0,  0.0, 0.0, 1.0);
-}`
-  }
+}`,
+  },
 });
 
 class IBEXLogic extends Component {
   state = {
-    seed: Math.random()
+    seed: Math.random(),
   };
   shouldComponentUpdate({ tick }) {
     return tick !== this.props.tick;
@@ -351,7 +351,7 @@ class IBEXLogic extends Component {
       initialState,
       forestGrowFactor,
       waterFactor,
-      fireFactor
+      fireFactor,
     } = this.props;
     const { seed } = this.state;
     let draw = false,
@@ -372,7 +372,7 @@ class IBEXLogic extends Component {
       draw = true;
       drawPosition = [
         size[0] * Math.random(),
-        size[1] * (0.8 + 0.2 * Math.random())
+        size[1] * (0.8 + 0.2 * Math.random()),
       ];
       drawRadius = 4;
       drawElement = 3;
@@ -403,7 +403,7 @@ class IBEXLogic extends Component {
           DP: drawPosition, // draw position
           DR: drawRadius, // draw radius
           DO: drawElement, // the element that is being drawn
-          forestGrowFactor
+          forestGrowFactor,
         }}
       />
     );
@@ -419,7 +419,7 @@ var colors = [
   [0.3, 0.6, 0.7], // 5: source (water spawner)
   [0.15, 0.2, 0.27], // 6: wind left
   [0.07, 0.12, 0.19], // 7: wind right
-  [0.2, 0.6, 0.2] // 8: grass (forest)
+  [0.2, 0.6, 0.2], // 8: grass (forest)
 ];
 
 const IBEXRender = ({ size, children: state }) => (
@@ -429,7 +429,7 @@ const IBEXRender = ({ size, children: state }) => (
     uniforms={{
       state,
       size,
-      CL: colors
+      CL: colors,
     }}
   />
 );
@@ -438,7 +438,7 @@ const Game = timeLoop(
   class extends Component {
     state = {
       tick: 0,
-      lastTickTime: this.props.time
+      lastTickTime: this.props.time,
     };
 
     componentWillReceiveProps({ time, speed }) {
@@ -447,7 +447,7 @@ const Game = timeLoop(
         if (time - lastTickTime > delta) {
           return {
             tick: tick + 1,
-            lastTickTime: lastTickTime + delta
+            lastTickTime: lastTickTime + delta,
           };
         }
       });
@@ -459,7 +459,7 @@ const Game = timeLoop(
         initialState,
         forestGrowFactor,
         waterFactor,
-        fireFactor
+        fireFactor,
       } = this.props;
       const { tick } = this.state;
       return (
@@ -491,7 +491,7 @@ function generate(startX: number, worldSize: [number, number]) {
     return Math.max(0, Math.min((x - a) / (b - a), 1));
   }
   function affectColor(buf, i, c) {
-    buf[i] = ~~(256 * c / 9);
+    buf[i] = ~~((256 * c) / 9);
     buf[i + 3] = 1;
   }
   function get(b, x, y) {
@@ -564,7 +564,7 @@ const size = [200, 200];
 
 export default class Example extends Component {
   state = {
-    initialState: generate(0, size)
+    initialState: generate(0, size),
   };
   render() {
     const {
@@ -572,7 +572,7 @@ export default class Example extends Component {
       fireFactor,
       waterFactor,
       speed,
-      width
+      width,
     } = this.props;
     const { initialState } = this.state;
     return (
@@ -593,7 +593,7 @@ export default class Example extends Component {
     speed: 60,
     forestGrowFactor: 1,
     fireFactor: 0,
-    waterFactor: 0
+    waterFactor: 0,
   };
 }
 

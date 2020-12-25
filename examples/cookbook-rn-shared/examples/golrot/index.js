@@ -19,8 +19,8 @@ void main() {
     p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0
     ? vec4(0.0)
     : texture2D(children, p);
-}`
-  }
+}`,
+  },
 });
 
 export const Rotating = ({ angle, scale, children }) => (
@@ -35,7 +35,7 @@ const RotatingLoop = timeLoop(({ time, children }) =>
   Rotating({
     angle: (time / 1000) % (2 * Math.PI),
     scale: 0.6 + 0.15 * Math.cos(time / 500),
-    children
+    children,
   })
 );
 

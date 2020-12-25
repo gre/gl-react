@@ -30,6 +30,6 @@ export default class Example extends Component {
   }
   static defaultProps = {
     interpolation: "linear",
-    color: Object.keys(colorScales)[0]
+    color: Object.keys(colorScales)[0],
   };
 }

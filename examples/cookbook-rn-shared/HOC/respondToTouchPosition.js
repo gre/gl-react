@@ -23,7 +23,7 @@ export default (
       onStartShouldSetPanResponderCapture: () => true,
       onMoveShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: evt => {
+      onPanResponderGrant: (evt) => {
         const { pageX, pageY } = evt.nativeEvent;
         this.initialDragPos = [pageX, pageY];
         this.refs.root.measure((x, y, w, h, initialPageX, initialPageY) => {

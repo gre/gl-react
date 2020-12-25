@@ -10,7 +10,7 @@ const ContinuousBlur = timeLoop(BlurXY);
 
 export default class Example extends Component {
   state = {
-    buffering: false
+    buffering: false,
   };
   componentWillReceiveProps({ image, refreshId }: *) {
     if (image !== this.props.image || refreshId !== this.props.refreshId) {
@@ -45,6 +45,6 @@ export default class Example extends Component {
   static defaultProps = {
     image: images[0],
     factor: 0,
-    refreshId: 0
+    refreshId: 0,
   };
 }

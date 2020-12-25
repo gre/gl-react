@@ -43,8 +43,11 @@ const Blur1D = ({ width, height, pixelRatio, direction, children: t }) => (
 const NORM = Math.sqrt(2) / 2;
 
 function directionForPass(p, factor, total) {
-  const f = factor * 2 * Math.ceil(p / 2) / total;
-  switch ((p - 1) % 4) { // alternate horizontal, vertical and 2 diagonals
+  const f = (factor * 2 * Math.ceil(p / 2)) / total;
+  switch (
+    (p - 1) %
+    4 // alternate horizontal, vertical and 2 diagonals
+  ) {
     case 0:
       return [f, 0];
     case 1:
@@ -80,17 +83,19 @@ export default connectSize(
         children,
         passes,
       } = this.props;
-      const rec = pass =>
-        (pass <= 0
-          ? children
-          : <Blur1D
-              width={width}
-              height={height}
-              pixelRatio={pixelRatio}
-              direction={directionForPass(pass, factor, passes)}
-            >
-              {rec(pass - 1)}
-            </Blur1D>);
+      const rec = (pass) =>
+        pass <= 0 ? (
+          children
+        ) : (
+          <Blur1D
+            width={width}
+            height={height}
+            pixelRatio={pixelRatio}
+            direction={directionForPass(pass, factor, passes)}
+          >
+            {rec(pass - 1)}
+          </Blur1D>
+        );
       return rec(passes);
     }
   }

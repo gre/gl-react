@@ -13,8 +13,8 @@ uniform sampler2D t;
 uniform vec2 offset;
 void main () {
   gl_FragColor = texture2D(t, uv + offset);
-}`
-  }
+}`,
+  },
 });
 
 const Offset = ({ t, offset }) => (
@@ -32,7 +32,7 @@ const Example = respondToTouchPosition(
       // computation with a Bus ref.
       // We pass to BlurV's map prop a function that resolve that ref.
       return (
-        <Surface style={{ width, height: width * 142 / 300 }}>
+        <Surface style={{ width, height: (width * 142) / 300 }}>
           <Bus ref="blurMapBus">
             <Offset
               offset={
@@ -53,7 +53,7 @@ const Example = respondToTouchPosition(
 );
 
 Example.defaultProps = {
-  map: StaticBlurMap.images[0]
+  map: StaticBlurMap.images[0],
 };
 
 export default Example;

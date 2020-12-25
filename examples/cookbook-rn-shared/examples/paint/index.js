@@ -26,8 +26,8 @@ void main() {
   else {
     discard;
   }
-} `
-  }
+} `,
+  },
 });
 
 export default respondToTouchPosition(
@@ -36,18 +36,18 @@ export default respondToTouchPosition(
       touching: boolean,
       touchPosition: { x: number, y: number },
       width: number,
-      height: number
+      height: number,
     };
 
     state = {
-      color: [1, 0, 0, 1]
+      color: [1, 0, 0, 1],
     };
 
     componentWillReceiveProps({ touching }) {
       const { touching: prevTouching } = this.props;
       if (!prevTouching && touching) {
         this.setState({
-          color: [Math.random(), Math.random(), Math.random(), 1]
+          color: [Math.random(), Math.random(), Math.random(), 1],
         });
       }
     }
@@ -68,7 +68,7 @@ export default respondToTouchPosition(
               drawing: touching,
               brushRadius,
               ratio: width / height,
-              color
+              color,
             }}
             clear={null}
           />

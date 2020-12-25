@@ -13,9 +13,9 @@ export const toolbox = [
     title: "camera type",
     Editor: makeSelect([
       { key: "front", label: "front" },
-      { key: "back", label: "back" }
-    ])
-  }
+      { key: "back", label: "back" },
+    ]),
+  },
 ];
 
 /*

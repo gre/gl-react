@@ -9,5 +9,5 @@ export const description = "Pixel Editor";
 
 export const toolbox = [
   { prop: "toolKey", Editor: ToolPicker, tools },
-  { prop: "color", Editor: Vec3ColorPicker }
+  { prop: "color", Editor: Vec3ColorPicker },
 ];

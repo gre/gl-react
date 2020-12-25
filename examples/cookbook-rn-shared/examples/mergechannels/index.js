@@ -18,8 +18,8 @@ void main() {
     monochrome(texture2D(channels[2], uv).rgb),
     1.0
   );
-}`
-  }
+}`,
+  },
 });
 
 export class MergeChannels extends Component {
@@ -29,7 +29,7 @@ export class MergeChannels extends Component {
       <Node
         shader={shaders.mergeChannels}
         uniforms={{
-          channels: [red, green, blue]
+          channels: [red, green, blue],
         }}
       />
     );
@@ -49,6 +49,6 @@ export default class Example extends Component {
   static defaultProps = {
     red: require("../../images/mergechannels-img1.png"),
     green: require("../../images/mergechannels-img2.png"),
-    blue: require("../../images/mergechannels-img3.png")
+    blue: require("../../images/mergechannels-img3.png"),
   };
 }

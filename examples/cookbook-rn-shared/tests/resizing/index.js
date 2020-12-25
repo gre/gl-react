@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 import { View, Text } from "react-native";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "../../gl-react-implementation";
-import { Slider } from "react-native";
+import Slider from "@react-native-community/slider";
 
 const shaders = Shaders.create({
   hello: {
@@ -13,8 +13,8 @@ varying vec2 uv;
 void main() {
   gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
 }
-    `
-  }
+    `,
+  },
 });
 
 const Test = ({ width }: { width: number }) => {

@@ -9,6 +9,6 @@ export const toolbox = [
   {
     prop: "distortion",
     title: "Distortion",
-    Editor: makeFloatSlider(0, 1, 0.01)
-  }
+    Editor: makeFloatSlider(0, 1, 0.01),
+  },
 ];

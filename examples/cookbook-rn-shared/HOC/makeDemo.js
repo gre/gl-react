@@ -6,7 +6,7 @@ type DemoFunction<Props> = (
   initialProps: Props
 ) => {
   onPropsChange: (props: Props) => void,
-  dispose: () => void
+  dispose: () => void,
 };
 
 export default <Props>(demoFunction: DemoFunction<Props>) =>

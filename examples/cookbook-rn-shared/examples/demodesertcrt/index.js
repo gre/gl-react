@@ -58,7 +58,7 @@ void main()
         mul_res *= dotMaskWeights;
         mul_res = pow(mul_res, vec3(1.0 / (2.0 * inputGamma - outputGamma)));
         gl_FragColor = vec4(mul_res, 1.0);
-}`
+}`,
   },
   copy: {
     frag: GLSL`
@@ -67,8 +67,8 @@ void main()
   uniform sampler2D t;
   void main(){
     gl_FragColor=texture2D(t,uv);
-  }`
-  }
+  }`,
+  },
 });
 
 class CRT extends Component {
@@ -77,7 +77,7 @@ class CRT extends Component {
     distortion: number,
     inSize: [number, number],
     outSize: [number, number],
-    texSize: [number, number]
+    texSize: [number, number],
   };
   render() {
     const { children, inSize, outSize, texSize, distortion } = this.props;
@@ -89,7 +89,7 @@ class CRT extends Component {
           rubyInputSize: inSize,
           rubyOutputSize: outSize,
           rubyTextureSize: texSize,
-          distortion
+          distortion,
         }}
       />
     );
@@ -112,13 +112,13 @@ class ShowCaptured extends PureComponent {
 export default class Example extends Component {
   state = {
     surfacePixels: null,
-    desertPixels: null
+    desertPixels: null,
   };
 
   onCapture = () =>
     this.setState({
       surfacePixels: this.refs.surface.capture(),
-      desertPixels: this.refs.desert.capture()
+      desertPixels: this.refs.desert.capture(),
     });
 
   render() {
@@ -158,6 +158,6 @@ export default class Example extends Component {
   }
 
   static defaultProps = {
-    distortion: 0.2
+    distortion: 0.2,
   };
 }
