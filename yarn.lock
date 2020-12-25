@@ -10730,7 +10730,7 @@ ndarray-ops@^1.2.2:
   dependencies:
     cwise-compiler "^1.0.0"
 
-ndarray@^1.0.15, ndarray@^1.0.18, ndarray@^1.0.19:
+ndarray@^1.0.15, ndarray@^1.0.19:
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/ndarray/-/ndarray-1.0.19.tgz#6785b5f5dfa58b83e31ae5b2a058cfd1ab3f694e"
   integrity sha512-B4JHA4vdyZU30ELBw3g7/p9bZupyew5a7tX1Y/gGeF2hafrPaQZhgrGQfsvgfYbgdFZjYwuEcnaobeM/WMW+HQ==
@@ -16291,14 +16291,14 @@ webgltexture-loader-expo@1.0.0:
   dependencies:
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-ndarray@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.0.0.tgz#844181c4cbe0cbc066750d66412c11d9205ad79a"
-  integrity sha512-ocEStCCkihBu+PyMr14ke2vv08c5wVObP5mH9AuPICcBvaS8zfxvMpoGc9dIxOxBC1reI/lzmpYxpYdoY/Ke8g==
+webgltexture-loader-ndarray@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.0.tgz#20869150e79dfb6190cbd6bedafacda262e29a5e"
+  integrity sha512-t9Q4x5do5feHjMOJLCg8UdQVx1eInnWXvgAqaL9NJJSL5pzI59Ynx3ZZSw3QqGxj15iRbYij7vK8BCIDyp5EZA==
   dependencies:
-    ndarray "^1.0.18"
+    ndarray "^1.0.19"
     ndarray-ops "^1.2.2"
-    typedarray-pool "^1.1.0"
+    typedarray-pool "^1.2.0"
     webgltexture-loader "^1.0.0"
 
 webgltexture-loader@1.0.0, webgltexture-loader@^1.0.0:
