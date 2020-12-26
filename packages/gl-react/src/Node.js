@@ -765,7 +765,8 @@ export default class Node extends Component<Props, *> {
     }
 
     const shaderInfo = shaderDefinitionToShaderInfo(
-      ensureShaderDefinition(shaderProp, " in " + nodeName)
+      ensureShaderDefinition(shaderProp, " in " + nodeName),
+      nodeName
     );
     const latestShaderInfo = this._latestShaderInfo;
     let shader = this._shader;

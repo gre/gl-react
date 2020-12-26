@@ -31,6 +31,7 @@ const propTypes = {
   height: PropTypes.number.isRequired,
   style: PropTypes.object,
   pixelRatio: PropTypes.number,
+  version: PropTypes.string,
 };
 
 class ErrorDebug extends Component {
@@ -82,6 +83,7 @@ export default class GLViewDOM extends Component<
     height: number,
     style?: any,
     debug?: number,
+    version?: string,
   },
   {
     error: ?Error,
@@ -127,7 +129,15 @@ export default class GLViewDOM extends Component<
 
   render() {
     const { error } = this.state;
-    let { width, height, pixelRatio, style, debug, ...rest } = this.props;
+    let {
+      width,
+      height,
+      pixelRatio,
+      style,
+      debug,
+      version,
+      ...rest
+    } = this.props;
     if (!pixelRatio)
       pixelRatio = Number(
         (typeof window === "object" && window.devicePixelRatio) || 1
@@ -160,12 +170,13 @@ export default class GLViewDOM extends Component<
   }
 
   _createContext() {
-    const { webglContextAttributes, debug } = this.props;
+    const { webglContextAttributes, debug, version } = this.props;
     const gl: ?WebGLRenderingContext = getContext(
       this.canvas,
       debug
         ? { ...webglContextAttributes, preserveDrawingBuffer: true }
-        : webglContextAttributes
+        : webglContextAttributes,
+      version || "webgl2"
     );
     this.webglContextAttributes = webglContextAttributes || {};
     return gl;

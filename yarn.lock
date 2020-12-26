@@ -16291,10 +16291,10 @@ webgltexture-loader-expo@1.0.0:
   dependencies:
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-ndarray@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.0.tgz#20869150e79dfb6190cbd6bedafacda262e29a5e"
-  integrity sha512-t9Q4x5do5feHjMOJLCg8UdQVx1eInnWXvgAqaL9NJJSL5pzI59Ynx3ZZSw3QqGxj15iRbYij7vK8BCIDyp5EZA==
+webgltexture-loader-ndarray@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.1.tgz#6e9bd5ac3ad4d09ea8d90aea33bd683ab709ab28"
+  integrity sha512-jz2Wa/mupBomP/JYkbzwDFqEFNIgwliw+CXzQaMSZQup1jyGVAaprbYCus+46rVWepCnb+DWiNV/WUPC/iCj2w==
   dependencies:
     ndarray "^1.0.19"
     ndarray-ops "^1.2.2"

@@ -34,7 +34,7 @@
     "prop-types": "^15.7.2",
     "typedarray-pool": "^1.2.0",
     "webgltexture-loader": "1.0.0",
-    "webgltexture-loader-ndarray": "1.1.0"
+    "webgltexture-loader-ndarray": "1.1.1"
   },
   "scripts": {
     "build": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf gl-react.js && browserify lib/index.js -t [ browserify-shim ] --standalone GLReact > gl-react.js"

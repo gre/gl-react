@@ -6,9 +6,10 @@ import timeLoop from "../../HOC/timeLoop";
 
 const shaders = Shaders.create({
   sdf1: {
-    frag: GLSL`
+    frag: GLSL`#version 300 es
 precision highp float;
-varying vec2 uv;
+in vec2 uv;
+out vec4 fragColor;
 uniform float time;
 
 float smin(float a, float b, float k) {
@@ -75,7 +76,8 @@ void main() {
   float totalDist = 0.0;
   vec2 res;
   vec3 p;
-  for(int i = 0; i < 36; i++) {
+  int limit = 40;
+  for(int i = 0; i < limit; i++) {
     p = origin + direction * totalDist;
     res = scene(p);
     totalDist += res.x;
@@ -89,7 +91,7 @@ void main() {
   vec3 ambient_color = vec3(0.2, 0.45, 0.6);
   vec3 diffuseLit = materialColor * (diffuse * light_color + ambient_color);
   float fogFactor = smoothstep(10.0, 50.0, totalDist);
-  gl_FragColor = vec4(mix(diffuseLit, vec3(0.1), fogFactor), 1.0);
+  fragColor = vec4(mix(diffuseLit, vec3(0.1), fogFactor), 1.0);
 }`,
   },
 });

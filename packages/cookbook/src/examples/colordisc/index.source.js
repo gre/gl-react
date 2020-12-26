@@ -4,6 +4,10 @@ import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 const shaders = Shaders.create({
   ColoredDisc: {
+    // NB: if you omit to define a #version, you are using WebGL1 which is using ES 1.0.
+    // In that version, things differ a bit: varying, gl_FragColor,...
+    // gl-react is retrocompatible with this version
+    // Many of our next examples are written in WebGL1 (historical reasons)
     frag: GLSL\`
 precision highp float;
 varying vec2 uv;
