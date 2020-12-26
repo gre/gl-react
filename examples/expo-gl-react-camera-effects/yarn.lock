@@ -1679,10 +1679,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-base64-js@^1.1.2, base64-js@^1.2.3:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
-  integrity sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
+base64-js@^1.1.2, base64-js@^1.2.3, base64-js@^1.3.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
+  integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
 base@^0.11.1:
   version "0.11.2"
@@ -1802,6 +1802,14 @@ buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
+
+buffer@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
+  integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
+  dependencies:
+    base64-js "^1.3.1"
+    ieee754 "^1.2.1"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -2854,18 +2862,18 @@ gl-format-compiler-error@^1.0.2:
     glsl-shader-name "^1.0.0"
     sprintf-js "^1.0.3"
 
-gl-react-expo@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-4.1.0.tgz#0f3b13fae7fe490bc72fcf59c894605293da642d"
-  integrity sha512-3Q4LOBGYsNNqpLkwUsUlRrFCNLUqjVsVPKE3c6pLABfkNxyBacbDK3mg3T8XOD7jp+Vsp/Ic9McjICMsYHANJw==
+gl-react-expo@5.0.0-alpha.4:
+  version "5.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/gl-react-expo/-/gl-react-expo-5.0.0-alpha.4.tgz#4e1805b201bc841ceaad8a384ae04b4c8266c72d"
+  integrity sha512-2HDXwt4/nGZPMG5dsUpy6kHHuE+NfJAr2hW5pAEdRBlQJ77FctxLY1TgSMnTLFuAMAW2WYSxsiVHtQUJinWaOw==
   dependencies:
     invariant "^2.2.4"
     webgltexture-loader-expo "1.0.0"
 
-gl-react@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-4.1.0.tgz#b7623555a4c3ba92a1ccbbb122c28c46231cd863"
-  integrity sha512-hTvxQHN2wxLfbA4c6mRcMdXWjA0/8UY2Sxn5eNre0DOrcauBj/+vMeAMbL2+zwE1BfVYnraE4cvKJTIzFIeBLw==
+gl-react@5.0.0-alpha.4:
+  version "5.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-5.0.0-alpha.4.tgz#41205f5f934f115965450e25658073b89ad97e79"
+  integrity sha512-x8IHYV8pmjlAv32l0Ahu2+37xt8vKibSxsbleYDpyZaFk7wNxvxyMtuZnTfcX4E/+BEtPTqWvrycYa2JFJdgEA==
   dependencies:
     gl-shader "^4.2.1"
     invariant "^2.2.4"
@@ -2873,7 +2881,7 @@ gl-react@4.1.0:
     prop-types "^15.7.2"
     typedarray-pool "^1.2.0"
     webgltexture-loader "1.0.0"
-    webgltexture-loader-ndarray "1.1.0"
+    webgltexture-loader-ndarray "1.1.1"
 
 gl-shader@^4.2.1:
   version "4.2.1"
@@ -3000,6 +3008,11 @@ iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
+
+ieee754@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
+  integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
 image-size@^0.6.0:
   version "0.6.3"
@@ -5595,10 +5608,10 @@ webgltexture-loader-expo@1.0.0:
   dependencies:
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-ndarray@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.0.tgz#20869150e79dfb6190cbd6bedafacda262e29a5e"
-  integrity sha512-t9Q4x5do5feHjMOJLCg8UdQVx1eInnWXvgAqaL9NJJSL5pzI59Ynx3ZZSw3QqGxj15iRbYij7vK8BCIDyp5EZA==
+webgltexture-loader-ndarray@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.1.tgz#6e9bd5ac3ad4d09ea8d90aea33bd683ab709ab28"
+  integrity sha512-jz2Wa/mupBomP/JYkbzwDFqEFNIgwliw+CXzQaMSZQup1jyGVAaprbYCus+46rVWepCnb+DWiNV/WUPC/iCj2w==
   dependencies:
     ndarray "^1.0.19"
     ndarray-ops "^1.2.2"

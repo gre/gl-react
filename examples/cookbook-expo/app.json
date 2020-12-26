@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cookbook-expo",
-    "slug": "cookbook-expo",
+    "name": "gl-react Expo cookbook",
+    "slug": "gl-react",
     "privacy": "public",
     "sdkVersion": "40.0.0",
     "platforms": [
