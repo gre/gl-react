@@ -150,9 +150,9 @@ export default class GLViewDOM extends Component<
     return (
       <span
         style={{
+          position: "relative",
           ...style,
           display: "inline-block",
-          position: "relative",
           width,
           height,
         }}
