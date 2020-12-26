@@ -7,11 +7,12 @@ const shaders = Shaders.create({
   helloGL: {
     // This is our first fragment shader in GLSL language (OpenGL Shading Language)
     // (GLSL code gets compiled and run on the GPU)
-    frag: GLSL`
+    frag: GLSL`#version 300 es
 precision highp float;
-varying vec2 uv;
+in vec2 uv;
+out vec4 color;
 void main() {
-  gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
+  color = vec4(uv.x, uv.y, 0.5, 1.0);
 }`,
     // the main() function is called FOR EACH PIXELS
     // the varying uv is a vec2 where x and y respectively varying from 0.0 to 1.0.

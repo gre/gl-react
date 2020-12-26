@@ -6,12 +6,16 @@ import { Surface } from "gl-react-dom";
 const shaders = Shaders.create({
   helloBlue: {
     // uniforms are variables from JS. We pipe blue uniform into blue output color
-    frag: GLSL`
+    frag: GLSL`#version 300 es
 precision highp float;
-varying vec2 uv;
-uniform float blue;
+
+in vec2 uv;
+out vec4 color;
+
+uniform float blue; // <- coming from JS
+
 void main() {
-  gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
+  color = vec4(uv.x, uv.y, blue, 1.0);
 }`,
   },
 });

@@ -66,13 +66,22 @@ const shaderResults: ShaderIdentifierMap<ShaderInfo> = {};
 
 const genShaderId = ((i) => () => (++i).toString())(0);
 
-const staticVert = GLSL`
+const staticVerts = {
+  "100": GLSL`
 attribute vec2 _p;
 varying vec2 uv;
 void main() {
 gl_Position = vec4(_p,0.0,1.0);
 uv = vec2(0.5, 0.5) * (_p+vec2(1.0, 1.0));
-}`;
+}`,
+  "300 es": GLSL`#version 300 es
+in vec2 _p;
+out vec2 uv;
+void main() {
+gl_Position = vec4(_p,0.0,1.0);
+uv = vec2(0.5, 0.5) * (_p+vec2(1.0, 1.0));
+}`,
+};
 
 export function isShaderIdentifier(shaderIdentifier: mixed): boolean {
   return (
@@ -94,12 +103,46 @@ export function ensureShaderDefinition(
   return definition;
 }
 
+const versionDef = "#version";
+function inferGLSLVersion(glsl) {
+  const i = glsl.indexOf("\n");
+  const line1 = i > -1 ? glsl.slice(0, i) : glsl;
+  if (line1.startsWith(versionDef)) {
+    return line1.slice(versionDef.length + 1);
+  }
+  return "100";
+}
+
+const addGLSLName = (glsl: string, name: ?string) =>
+  !name ? glsl : glsl + "\n#define SHADER_NAME " + name + "\n";
+
 export function shaderDefinitionToShaderInfo(
-  definition: ShaderDefinition
+  { frag, vert }: ShaderDefinition,
+  name: string
 ): ShaderInfo {
+  frag = frag.trim();
+  const version = inferGLSLVersion(frag);
+  if (vert) {
+    vert = vert.trim();
+    const vertVersion = inferGLSLVersion(vert);
+    if (version !== vertVersion) {
+      throw new Error("GLSL shader vert and frag version must match");
+    }
+  } else {
+    vert = staticVerts[version];
+    if (!vert) {
+      throw new Error(
+        "gl-react: could not find static vertex shader for GLSL version '" +
+          version +
+          "'"
+      );
+    }
+  }
+  frag = addGLSLName(frag, name);
+  vert = addGLSLName(vert, name);
   return {
-    frag: definition.frag,
-    vert: definition.vert || staticVert, // FIXME this is somewhat experimental for now, vert implement needs to expect a _p attribute
+    frag,
+    vert,
   };
 }
 
@@ -137,7 +180,7 @@ const Shaders = (global.__glReactShaders = global.__glReactShaders || {
       shaderDefinitions[id] = definition;
       shaderNames[id] = k;
       sheet[k] = shaderId;
-      const result = shaderDefinitionToShaderInfo(definition);
+      const result = shaderDefinitionToShaderInfo(definition, k);
       shaderResults[id] = result;
     });
     return sheet;
