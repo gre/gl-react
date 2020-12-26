@@ -1,6 +1,6 @@
 {
   "name": "gl-react-headless",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "headless-gl implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -23,7 +23,7 @@
     "raf": "^3.4.1"
   },
   "devDependencies": {
-    "gl-react": "^4.1.0"
+    "gl-react": "^5.0.0"
   },
   "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }
