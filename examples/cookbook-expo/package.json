@@ -13,6 +13,7 @@
     "@react-native-community/slider": "^3.0.3",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "buffer": "^6.0.3",
     "expo": "~40.0.0",
     "expo-asset-utils": "^1.2.0",
     "expo-camera": "^9.1.1",
