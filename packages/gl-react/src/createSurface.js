@@ -16,9 +16,6 @@ import type Node from "./Node";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
-const prependGLSLName = (glsl: string, name: ?string) =>
-  !name ? glsl : "#define SHADER_NAME " + name + "\n" + glsl;
-
 type SurfaceProps = {
   children?: any,
   style?: Object,
@@ -538,11 +535,7 @@ export default ({
     _makeShader({ frag, vert }: ShaderInfo, name?: string): Shader {
       const { gl } = this;
       invariant(gl, "gl is not available");
-      const shader = createShader(
-        gl,
-        prependGLSLName(vert, name),
-        prependGLSLName(frag, name)
-      );
+      const shader = createShader(gl, vert, frag);
       for (let key in shader.attributes) {
         shader.attributes[key].pointer();
       }
