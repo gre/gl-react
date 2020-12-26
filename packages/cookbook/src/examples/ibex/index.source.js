@@ -1,4 +1,4 @@
-module.exports = `/**
+module.exports=`/**
  * This celullar automaton is extracted from a game I wrote in 2014 for JS13K:
  * https://github.com/gre/ibex
  *
@@ -61,7 +61,7 @@ void main(){
   c += pixelColor;
   gl_FragColor = vec4(c, 1.0);
 }
-\`
+\`,
   },
   IBEXLogic: {
     frag: GLSL\`
@@ -333,13 +333,13 @@ void main () {
     if (r == V || r == S) r = E;
   }
   gl_FragColor = vec4(float(r) / 9.0,  0.0, 0.0, 1.0);
-}\`
-  }
+}\`,
+  },
 });
 
 class IBEXLogic extends Component {
   state = {
-    seed: Math.random()
+    seed: Math.random(),
   };
   shouldComponentUpdate({ tick }) {
     return tick !== this.props.tick;
@@ -351,12 +351,16 @@ class IBEXLogic extends Component {
       initialState,
       forestGrowFactor,
       waterFactor,
-      fireFactor
+      fireFactor,
     } = this.props;
     const { seed } = this.state;
-    let draw = false, drawPosition = [0, 0], drawRadius = 0, drawElement = 0;
+    let draw = false,
+      drawPosition = [0, 0],
+      drawRadius = 0,
+      drawElement = 0;
 
-    let w = Math.random() < waterFactor, f = Math.random() < fireFactor;
+    let w = Math.random() < waterFactor,
+      f = Math.random() < fireFactor;
     if (w && f) {
       if (Math.random() * waterFactor - Math.random() * fireFactor > 0) {
         f = false;
@@ -368,7 +372,7 @@ class IBEXLogic extends Component {
       draw = true;
       drawPosition = [
         size[0] * Math.random(),
-        size[1] * (0.8 + 0.2 * Math.random())
+        size[1] * (0.8 + 0.2 * Math.random()),
       ];
       drawRadius = 4;
       drawElement = 3;
@@ -399,7 +403,7 @@ class IBEXLogic extends Component {
           DP: drawPosition, // draw position
           DR: drawRadius, // draw radius
           DO: drawElement, // the element that is being drawn
-          forestGrowFactor
+          forestGrowFactor,
         }}
       />
     );
@@ -410,12 +414,12 @@ var colors = [
   [0.11, 0.16, 0.23], // 0: air
   [0.74, 0.66, 0.51], // 1: earth
   [0.84, 0.17, 0.08], // 2: fire
-  [0.40, 0.75, 0.90], // 3: water
-  [0.60, 0.00, 0.00], // 4: volcano (fire spawner)
-  [0.30, 0.60, 0.70], // 5: source (water spawner)
-  [0.15, 0.20, 0.27], // 6: wind left
+  [0.4, 0.75, 0.9], // 3: water
+  [0.6, 0.0, 0.0], // 4: volcano (fire spawner)
+  [0.3, 0.6, 0.7], // 5: source (water spawner)
+  [0.15, 0.2, 0.27], // 6: wind left
   [0.07, 0.12, 0.19], // 7: wind right
-  [0.20, 0.60, 0.20] // 8: grass (forest)
+  [0.2, 0.6, 0.2], // 8: grass (forest)
 ];
 
 const IBEXRender = ({ size, children: state }) => (
@@ -425,7 +429,7 @@ const IBEXRender = ({ size, children: state }) => (
     uniforms={{
       state,
       size,
-      CL: colors
+      CL: colors,
     }}
   />
 );
@@ -434,16 +438,16 @@ const Game = timeLoop(
   class extends Component {
     state = {
       tick: 0,
-      lastTickTime: this.props.time
+      lastTickTime: this.props.time,
     };
 
-    componentWillReceiveProps({ time, speed }) {
+    UNSAFE_componentWillReceiveProps({ time, speed }) {
       this.setState(({ tick, lastTickTime }) => {
         const delta = 1000 / speed;
         if (time - lastTickTime > delta) {
           return {
             tick: tick + 1,
-            lastTickTime: lastTickTime + delta
+            lastTickTime: lastTickTime + delta,
           };
         }
       });
@@ -455,7 +459,7 @@ const Game = timeLoop(
         initialState,
         forestGrowFactor,
         waterFactor,
-        fireFactor
+        fireFactor,
       } = this.props;
       const { tick } = this.state;
       return (
@@ -481,12 +485,13 @@ function generate(startX: number, worldSize: [number, number]) {
   var worldPixelBuf = new Uint8Array(worldSize[0] * worldSize[1]);
   var waterInGeneration = 0;
   var volcanoInGeneration = 0;
-  var w = worldSize[0], h = worldSize[1];
+  var w = worldSize[0],
+    h = worldSize[1];
   function step(a, b, x) {
     return Math.max(0, Math.min((x - a) / (b - a), 1));
   }
   function affectColor(buf, i, c) {
-    buf[i] = ~~(256 * c / 9);
+    buf[i] = ~~((256 * c) / 9);
     buf[i + 3] = 1;
   }
   function get(b, x, y) {
@@ -504,10 +509,11 @@ function generate(startX: number, worldSize: [number, number]) {
   var x, y, i, k, e;
   for (x = startX; x < worldSize[0]; ++x) {
     for (y = 0; y < worldSize[1]; ++y) {
-      e = +(Math.random() >
+      e = +(
+        Math.random() >
         0.22 +
-          0.3 *
-            (step(0, 20, y) + step(worldSize[1] - 20, worldSize[1] - 2, y)));
+          0.3 * (step(0, 20, y) + step(worldSize[1] - 20, worldSize[1] - 2, y))
+      );
       set(worldPixelBuf, x, y, e);
     }
   }
@@ -558,7 +564,7 @@ const size = [200, 200];
 
 export default class Example extends Component {
   state = {
-    initialState: generate(0, size)
+    initialState: generate(0, size),
   };
   render() {
     const { forestGrowFactor, fireFactor, waterFactor, speed } = this.props;
@@ -581,7 +587,7 @@ export default class Example extends Component {
     speed: 60,
     forestGrowFactor: 1,
     fireFactor: 0,
-    waterFactor: 0
+    waterFactor: 0,
   };
 }
 
@@ -622,4 +628,4 @@ export default class Example extends Component {
 * Source + Air
 * Source + Water
 */
-`;
+`

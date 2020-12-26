@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -7,7 +7,7 @@ import shadertoyTex17jpg from "./shadertoy-tex17.jpg";
 
 const shaders = Shaders.create({
   desertPassage: {
-// from https://www.shadertoy.com/view/XtyGzc
+    // from https://www.shadertoy.com/view/XtyGzc
     frag: GLSL\`
 precision mediump float;
 varying vec2 uv;
@@ -206,10 +206,11 @@ void main() {
     u = uv;
     col = min(col, 1.)*pow( 16.0*u.x*u.y*(1.0-u.x)*(1.0-u.y) , .125);
 	  gl_FragColor = vec4(sqrt(clamp(col, 0., 1.)), 1);
-}\` }
+}\`,
+  },
 });
 
-const DesertPassage = ({ time }) =>
+const DesertPassage = ({ time }) => (
   <Node
     shader={shaders.desertPassage}
     uniforms={{
@@ -217,11 +218,13 @@ const DesertPassage = ({ time }) =>
       iChannel0: shadertoyTex17jpg,
     }}
   />
+);
 
 export const DesertPassageLoop = timeLoop(DesertPassage, { frameRate: 30 });
 
-export default() =>
+export default () => (
   <Surface width={400} height={400}>
     <DesertPassageLoop />
   </Surface>
-`;
+);
+`

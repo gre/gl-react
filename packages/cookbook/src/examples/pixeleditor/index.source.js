@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { PureComponent, Component } from "react";
 import ndarray from "ndarray";
 import ops from "ndarray-ops";
@@ -181,7 +181,7 @@ export default class Example extends Component {
   }
 
   onColorChange = ({ rgb: { r, g, b, a } }: any) => {
-    const color = [r, g, b].map(n => n / 255).concat([a]);
+    const color = [r, g, b].map((n) => n / 255).concat([a]);
     this.props.setToolState({ color });
   };
 
@@ -207,7 +207,7 @@ export default class Example extends Component {
       captured
     );
     ctx.putImageData(imageData, 0, 0);
-    canvas.toBlob(blob => {
+    canvas.toBlob((blob) => {
       window.open(window.URL.createObjectURL(blob));
     });
   };
@@ -217,7 +217,7 @@ export default class Example extends Component {
     y = Math.floor(y * size[1]);
     const ndarray = this.paintNode.capture(x, y, 1, 1);
     this.props.setToolState({
-      color: Array.from(ndarray.data).map(n => n / 255),
+      color: Array.from(ndarray.data).map((n) => n / 255),
     });
   };
 
@@ -260,4 +260,4 @@ export default class Example extends Component {
 }
 
 export { tools };
-`;
+`

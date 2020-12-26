@@ -1,4 +1,4 @@
-module.exports = `import React from "react";
+module.exports=`import React from "react";
 import { LinearCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
 import GLTransition from "react-gl-transition";
@@ -13,14 +13,16 @@ const Slideshow = timeLoop(({ slides, delay, duration, time }) => {
   const transition = GLTransitions[index % GLTransitions.length];
   const total = delay + duration;
   const progress = (time - index * total - delay) / duration;
-  return progress > 0
-    ? <GLTransition
-        from={from}
-        to={to}
-        progress={progress}
-        transition={transition}
-      />
-    : <LinearCopy>{from}</LinearCopy>;
+  return progress > 0 ? (
+    <GLTransition
+      from={from}
+      to={to}
+      progress={progress}
+      transition={transition}
+    />
+  ) : (
+    <LinearCopy>{from}</LinearCopy>
+  );
 });
 
 export default () => (
@@ -28,4 +30,4 @@ export default () => (
     <Slideshow slides={images} delay={2000} duration={1500} />
   </Surface>
 );
-`;
+`

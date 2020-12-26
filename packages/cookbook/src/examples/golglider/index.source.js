@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Uniform, Node, NearestCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -16,7 +16,7 @@ const GameOfLifeLoop = timeLoop(
       sync
       uniforms={{
         t: tick === 0 ? gliderGunImage : Uniform.Backbuffer,
-        size
+        size,
       }}
     />
   ),
@@ -31,7 +31,7 @@ export default class Example extends Component {
         height={500}
         preload={[
           // preload textures before starting rendering
-          gliderGunImage
+          gliderGunImage,
         ]}
       >
         <NearestCopy>
@@ -41,4 +41,4 @@ export default class Example extends Component {
     );
   }
 }
-`;
+`

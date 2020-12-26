@@ -1,8 +1,8 @@
-module.exports = `import React, { Component } from "react";
+module.exports=`import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 
-function getPosition (e) {
+function getPosition(e) {
   const rect = e.target.getBoundingClientRect();
   return [
     (e.clientX - rect.left) / rect.width,
@@ -32,14 +32,15 @@ void main() {
   else {
     discard;
   }
-} \` }
+} \`,
+  },
 });
 
 export default class Example extends Component {
   state = {
     drawing: false,
-    color: [1,0,0,1],
-    center: [0.5,0.5],
+    color: [1, 0, 0, 1],
+    center: [0.5, 0.5],
     brushRadius: 0.04,
   };
 
@@ -53,12 +54,9 @@ export default class Example extends Component {
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         webglContextAttributes={{ preserveDrawingBuffer: true }}
-        style={{ cursor: "crosshair" }}>
-        <Node
-          shader={shaders.paint}
-          uniforms={this.state}
-          clear={null}
-        />
+        style={{ cursor: "crosshair" }}
+      >
+        <Node shader={shaders.paint} uniforms={this.state} clear={null} />
       </Surface>
     );
     // NB: We also need to explicitely use clear=null
@@ -81,7 +79,7 @@ export default class Example extends Component {
     this.setState({
       drawing: true,
       center: getPosition(e),
-      color: [ Math.random(), Math.random(), Math.random(), 1, ],
+      color: [Math.random(), Math.random(), Math.random(), 1],
     });
   };
   onMouseUp = () => {
@@ -90,4 +88,4 @@ export default class Example extends Component {
     });
   };
 }
-`;
+`

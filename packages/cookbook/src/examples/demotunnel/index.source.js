@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -6,7 +6,7 @@ import timeLoop from "../../HOC/timeLoop";
 
 const shaders = Shaders.create({
   squareTunnel: {
-// from https://en.wikipedia.org/wiki/Shadertoy
+    // from https://en.wikipedia.org/wiki/Shadertoy
     frag: GLSL\`
 precision highp float;
 varying vec2 uv;
@@ -20,19 +20,19 @@ void main() {
   vec3 col = 0.5 + 0.5*sin( 3.1416*f + vec3(0.0,0.5,1.0) );
   col = col*r;
   gl_FragColor = vec4( col, 1.0 );
-}\` }
+}\`,
+  },
 });
 
-const SquareTunnel = ({ time }) =>
-  <Node
-    shader={shaders.squareTunnel}
-    uniforms={{ iGlobalTime: time / 1000 }}
-  />
+const SquareTunnel = ({ time }) => (
+  <Node shader={shaders.squareTunnel} uniforms={{ iGlobalTime: time / 1000 }} />
+);
 
 const DesertPassageLoop = timeLoop(SquareTunnel);
 
-export default() =>
+export default () => (
   <Surface width={400} height={400}>
     <DesertPassageLoop />
   </Surface>
-`;
+);
+`

@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Uniform, LinearCopy, Node, Shaders, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -18,8 +18,8 @@ void main () {
     texture2D(back, uv+vec2(0.0, 0.005)),
     persistence
   ).rgb, 1.0);
-}\`
-  }
+}\`,
+  },
 });
 
 const Persistence = ({ children: t, persistence }) => (
@@ -37,7 +37,7 @@ export default class Example extends Component {
       <Surface width={400} height={300}>
         <LinearCopy>
           <Persistence persistence={persistence}>
-            {redraw => (
+            {(redraw) => (
               <Video onFrame={redraw} autoPlay>
                 <WebCamSource />
               </Video>
@@ -48,7 +48,7 @@ export default class Example extends Component {
     );
   }
   static defaultProps = {
-    persistence: 0.8
+    persistence: 0.8,
   };
 }
-`;
+`

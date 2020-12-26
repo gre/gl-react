@@ -1,9 +1,9 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
-import {GameOfLife} from "../gol";
+import { GameOfLife } from "../gol";
 
 const shaders = Shaders.create({
   Rotating: {
@@ -19,28 +19,33 @@ void main() {
     p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0
     ? vec4(0.0)
     : texture2D(children, p);
-}\` }
+}\`,
+  },
 });
 
-export const Rotating = ({ angle, scale, children }) =>
+export const Rotating = ({ angle, scale, children }) => (
   <Node
     shader={shaders.Rotating}
     uniformsOptions={{ children: { interpolation: "nearest" } }}
     uniforms={{ angle, scale, children }}
-  />;
+  />
+);
 
-const RotatingLoop = timeLoop(({ time, children }) => Rotating({
-  angle: (time / 1000) % (2 * Math.PI),
-  scale: 0.6 + 0.15 * Math.cos(time / 500),
-  children,
-}));
+const RotatingLoop = timeLoop(({ time, children }) =>
+  Rotating({
+    angle: (time / 1000) % (2 * Math.PI),
+    scale: 0.6 + 0.15 * Math.cos(time / 500),
+    children,
+  })
+);
 
 const GameOfLifeLoop = timeLoop(GameOfLife, { refreshRate: 5 });
 
-export default () =>
+export default () => (
   <Surface width={500} height={500}>
     <RotatingLoop>
       <GameOfLifeLoop />
     </RotatingLoop>
-  </Surface>;
-`;
+  </Surface>
+);
+`

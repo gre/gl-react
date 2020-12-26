@@ -1,4 +1,4 @@
-module.exports = `import React, { Component } from "react";
+module.exports=`import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "../../HOC/timeLoop";
@@ -33,34 +33,33 @@ void main() {
     texture2D(t, lookup(-colorSeparation * orientation, amp2)).g,
     texture2D(t, lookup(vec2(0.0), amp2)).b),
     1.0);
-}\` }
+}\`,
+  },
 });
 
-
-const Vignette = timeLoop(({ children: t, time, mouse }) =>
+const Vignette = timeLoop(({ children: t, time, mouse }) => (
   <Node
     shader={shaders.vignetteColorSeparationDistortion}
     uniforms={{
       t,
       time: time / 1000, // seconds is better for float precision
       mouse,
-      freq: 10 + 2 * Math.sin(0.0007*time),
-      amp: 0.05 + Math.max(0, 0.03*Math.cos(0.001 * time)),
+      freq: 10 + 2 * Math.sin(0.0007 * time),
+      amp: 0.05 + Math.max(0, 0.03 * Math.cos(0.001 * time)),
       moving: 0,
     }}
-  />);
+  />
+));
 
 export default class Example extends Component {
   state = {
-    mouse: [ 0.5, 0.5 ]
+    mouse: [0.5, 0.5],
   };
   render() {
     const { mouse } = this.state;
     return (
       <Surface width={500} height={400} onMouseMove={this.onMouseMove}>
-        <Vignette mouse={mouse}>
-          https://i.imgur.com/2VP5osy.jpg
-        </Vignette>
+        <Vignette mouse={mouse}>https://i.imgur.com/2VP5osy.jpg</Vignette>
       </Surface>
     );
   }
@@ -70,8 +69,8 @@ export default class Example extends Component {
       mouse: [
         (e.clientX - rect.left) / rect.width,
         (rect.bottom - e.clientY) / rect.height,
-      ]
+      ],
     });
-  }
-};
-`;
+  };
+}
+`

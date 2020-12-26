@@ -1,18 +1,19 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { NearestCopy, LinearCopy, Uniform } from "gl-react";
 import { Surface } from "gl-react-dom";
 import { BlurXY } from "../blurxy";
 import { images } from "./meta";
 import timeLoop from "../../HOC/timeLoop";
+import image from "./1.jpg";
 
 const ContinuousBlur = timeLoop(BlurXY);
 
 export default class Example extends Component {
   state = {
-    buffering: false
+    buffering: false,
   };
-  componentWillReceiveProps({ image, refreshId }: *) {
+  UNSAFE_componentWillReceiveProps({ image, refreshId }: *) {
     if (image !== this.props.image || refreshId !== this.props.refreshId) {
       this.setState({ buffering: false }); // start again with the image
     }
@@ -43,9 +44,9 @@ export default class Example extends Component {
     );
   }
   static defaultProps = {
-    image: require("./1.jpg"),
+    image,
     factor: 0,
-    refreshId: 0
+    refreshId: 0,
   };
 }
-`;
+`

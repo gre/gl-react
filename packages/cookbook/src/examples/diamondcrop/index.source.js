@@ -1,10 +1,10 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 const shaders = Shaders.create({
   DiamondCrop: {
-  frag: GLSL\`
+    frag: GLSL\`
 precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
@@ -14,21 +14,21 @@ gl_FragColor = mix(
   vec4(0.0),
   step(0.5, abs(uv.x - 0.5) + abs(uv.y - 0.5))
 );
-}\` },
+}\`,
+  },
 });
 
-export const DiamondCrop = ({ children: t }) =>
-  <Node shader={shaders.DiamondCrop} uniforms={{ t }} />;
+export const DiamondCrop = ({ children: t }) => (
+  <Node shader={shaders.DiamondCrop} uniforms={{ t }} />
+);
 
 export default class Example extends Component {
   render() {
     return (
       <Surface width={300} height={300}>
-        <DiamondCrop>
-          https://i.imgur.com/5EOyTDQ.jpg
-        </DiamondCrop>
+        <DiamondCrop>https://i.imgur.com/5EOyTDQ.jpg</DiamondCrop>
       </Surface>
     );
   }
-};
-`;
+}
+`

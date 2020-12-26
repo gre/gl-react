@@ -13,7 +13,7 @@ export default class Example extends Component {
   state = {
     buffering: false,
   };
-  componentWillReceiveProps({ image, refreshId }: *) {
+  UNSAFE_componentWillReceiveProps({ image, refreshId }: *) {
     if (image !== this.props.image || refreshId !== this.props.refreshId) {
       this.setState({ buffering: false }); // start again with the image
     }

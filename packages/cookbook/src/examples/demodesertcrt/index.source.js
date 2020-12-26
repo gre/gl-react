@@ -1,13 +1,13 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component, PureComponent } from "react";
-import {Shaders, Node, GLSL, Bus, connectSize} from "gl-react";
+import { Shaders, Node, GLSL, Bus, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
-import {DesertPassageLoop} from "../demodesert";
+import { DesertPassageLoop } from "../demodesert";
 import "./index.css";
 
 const shaders = Shaders.create({
   crt: {
-// adapted from http://bit.ly/2eR1iKi
+    // adapted from http://bit.ly/2eR1iKi
     frag: GLSL\`
 precision highp float;
 varying vec2 uv;
@@ -58,16 +58,17 @@ void main()
         mul_res *= dotMaskWeights;
         mul_res = pow(mul_res, vec3(1.0 / (2.0 * inputGamma - outputGamma)));
         gl_FragColor = vec4(mul_res, 1.0);
-}\` },
-    copy: {
-      frag: GLSL\`
+}\`,
+  },
+  copy: {
+    frag: GLSL\`
   precision highp float;
   varying vec2 uv;
   uniform sampler2D t;
   void main(){
     gl_FragColor=texture2D(t,uv);
   }\`,
-    }
+  },
 });
 
 class CRT extends Component {
@@ -80,16 +81,18 @@ class CRT extends Component {
   };
   render() {
     const { children, inSize, outSize, texSize, distortion } = this.props;
-    return <Node
-      shader={shaders.crt}
-      uniforms={{
-        rubyTexture: children,
-        rubyInputSize: inSize,
-        rubyOutputSize: outSize,
-        rubyTextureSize: texSize,
-        distortion,
-      }}
-    />;
+    return (
+      <Node
+        shader={shaders.crt}
+        uniforms={{
+          rubyTexture: children,
+          rubyInputSize: inSize,
+          rubyOutputSize: outSize,
+          rubyTextureSize: texSize,
+          distortion,
+        }}
+      />
+    );
   }
 }
 
@@ -97,10 +100,12 @@ const Desert = connectSize(DesertPassageLoop);
 
 class ShowCaptured extends PureComponent {
   render() {
-    const {t} = this.props;
-    return <Surface width={200} height={200}>
-      <Node shader={shaders.copy} uniforms={{ t }} />
-    </Surface>;
+    const { t } = this.props;
+    return (
+      <Surface width={200} height={200}>
+        <Node shader={shaders.copy} uniforms={{ t }} />
+      </Surface>
+    );
   }
 }
 
@@ -120,39 +125,41 @@ export default class Example extends Component {
     const { distortion } = this.props;
     const { surfacePixels, desertPixels } = this.state;
     return (
-<div>
-  <Surface ref="surface"
-    width={400}
-    height={400}
-    webglContextAttributes={{ preserveDrawingBuffer: true }}>
+      <div>
+        <Surface
+          ref="surface"
+          width={400}
+          height={400}
+          webglContextAttributes={{ preserveDrawingBuffer: true }}
+        >
+          <Bus ref="desert">
+            {/* we use a Bus to have a ref for capture */}
+            <Desert width={128} height={128} />
+          </Bus>
 
-    <Bus ref="desert">{/* we use a Bus to have a ref for capture */}
-      <Desert width={128} height={128} />
-    </Bus>
+          <CRT
+            distortion={distortion}
+            texSize={[128, 128]}
+            inSize={[128, 128]}
+            outSize={[400, 400]}
+          >
+            {() => this.refs.desert}
+          </CRT>
+        </Surface>
 
-    <CRT
-      distortion={distortion}
-      texSize={[ 128, 128 ]}
-      inSize={[ 128, 128 ]}
-      outSize={[ 400, 400 ]}>
-      {() => this.refs.desert}
-    </CRT>
-
-  </Surface>
-
-  <div className="buttons">
-    <button onClick={this.onCapture}>capture</button>
-  </div>
-  <div className="snaps">
-    <ShowCaptured t={surfacePixels} />
-    <ShowCaptured t={desertPixels} />
-  </div>
-</div>
+        <div className="buttons">
+          <button onClick={this.onCapture}>capture</button>
+        </div>
+        <div className="snaps">
+          <ShowCaptured t={surfacePixels} />
+          <ShowCaptured t={desertPixels} />
+        </div>
+      </div>
     );
   }
 
   static defaultProps = {
-    distortion: 0.2
+    distortion: 0.2,
   };
-};
-`;
+}
+`

@@ -1,7 +1,11 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
+
+import red from "./img1.png";
+import green from "./img2.png";
+import blue from "./img3.png";
 
 const shaders = Shaders.create({
   mergeChannels: {
@@ -18,19 +22,21 @@ void main() {
     monochrome(texture2D(channels[2], uv).rgb),
     1.0
   );
-}\`
- }
+}\`,
+  },
 });
 
 export class MergeChannels extends Component {
   render() {
     const { red, green, blue } = this.props;
-    return <Node
-      shader={shaders.mergeChannels}
-      uniforms={{
-        channels: [ red, green, blue ]
-      }}
-    />;
+    return (
+      <Node
+        shader={shaders.mergeChannels}
+        uniforms={{
+          channels: [red, green, blue],
+        }}
+      />
+    );
   }
 }
 
@@ -39,19 +45,15 @@ export default class Example extends Component {
     const { red, green, blue } = this.props;
     return (
       <Surface width={400} height={400}>
-        <MergeChannels
-          red={red}
-          green={green}
-          blue={blue}
-        />
+        <MergeChannels red={red} green={green} blue={blue} />
       </Surface>
     );
   }
 
   static defaultProps = {
-    red: require("./img1.png"),
-    green: require("./img2.png"),
-    blue: require("./img3.png"),
+    red,
+    green,
+    blue,
   };
-};
-`;
+}
+`

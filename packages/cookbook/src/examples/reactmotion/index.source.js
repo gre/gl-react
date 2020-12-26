@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -19,20 +19,20 @@ void main() {
     0.7 * dist + edgeDistY,
     0.6 * dist) * smoothstep(1.0, 0.2, distance(mouse, uv)),
     1.0);
-}\`
-  }
+}\`,
+  },
 });
 
-const Cursor = ({ mouse }) =>
+const Cursor = ({ mouse }) => (
   <Motion
     defaultStyle={mouse}
-    style={{ x: spring(mouse.x), y: spring(mouse.y) }}>
-  { ({ x, y }) =>
-    <Node
-      shader={shaders.cursor}
-      uniforms={{ mouse: [ x, y ] }}
-    /> }
-  </Motion>;
+    style={{ x: spring(mouse.x), y: spring(mouse.y) }}
+  >
+    {({ x, y }) => (
+      <Node shader={shaders.cursor} uniforms={{ mouse: [x, y] }} />
+    )}
+  </Motion>
+);
 
 export default class Example extends Component {
   state = {
@@ -53,8 +53,8 @@ export default class Example extends Component {
       mouse: {
         x: (e.clientX - rect.left) / rect.width,
         y: (rect.bottom - e.clientY) / rect.height,
-      }
+      },
     });
   };
-};
-`;
+}
+`

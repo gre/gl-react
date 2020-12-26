@@ -1,11 +1,12 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
-import {Motion, spring} from "react-motion";
+import { Motion, spring } from "react-motion";
 
 const shaders = Shaders.create({
-  Heart: { // inspired from http://glslsandbox.com/e#29521.0
+  Heart: {
+    // inspired from http://glslsandbox.com/e#29521.0
     frag: GLSL\`
 precision highp float;
 varying vec2 uv;
@@ -24,8 +25,8 @@ void main() {
   vec3 t = texture2D(image, uv).rgb;
   vec3 c = mix(color * (1.0 + 0.6 * t), t, min(0.8 * over + toggle, 1.0));
   gl_FragColor = vec4(mix(vec3(1.0), c, f), 1.0);
-}\`
-  }
+}\`,
+  },
 });
 
 class InteractiveHeart extends Component {
@@ -37,29 +38,33 @@ class InteractiveHeart extends Component {
     const { color, image } = this.props;
     const { over, toggle } = this.state;
     return (
-      <Surface width={300} height={300}
+      <Surface
+        width={300}
+        height={300}
         onClick={this.onClick}
         onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}>
+        onMouseLeave={this.onMouseLeave}
+      >
         <Motion
           defaultStyle={{ over, toggle }}
           style={{
             over: spring(over, [150, 15]),
-            toggle: spring(toggle, [150, 15])
-          }}>{ ({ over, toggle }) =>
-          <Node
-            shader={shaders.Heart}
-            uniforms={{ color, image, over, toggle }}
-          />
-        }</Motion>
+            toggle: spring(toggle, [150, 15]),
+          }}
+        >
+          {({ over, toggle }) => (
+            <Node
+              shader={shaders.Heart}
+              uniforms={{ color, image, over, toggle }}
+            />
+          )}
+        </Motion>
       </Surface>
     );
   }
 }
 
-export default () =>
-  <InteractiveHeart
-    color={[ 1, 0, 0 ]}
-    image="https://i.imgur.com/GQo1KWq.jpg"
-  />;
-`;
+export default () => (
+  <InteractiveHeart color={[1, 0, 0]} image="https://i.imgur.com/GQo1KWq.jpg" />
+);
+`

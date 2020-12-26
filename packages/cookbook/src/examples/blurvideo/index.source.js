@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Bus } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -10,7 +10,7 @@ import StaticBlurMap from "../../toolbox/StaticBlurMap";
 // We must use a <Bus> if we don't want the <video> element to be duplicated
 // per Blur pass.. Also since we can dynamically change the number of passes,
 // it changes the tree level, (e.g. Blur1D>Blur1D>video becomes Blur1D>video)
-// and React always destroys and recreates the instance during reconcialition.
+// and React always destroys and recreates the instance during reconciliation.
 
 export default class Example extends Component {
   render() {
@@ -20,7 +20,7 @@ export default class Example extends Component {
       contrast,
       saturation,
       brightness,
-      map
+      map,
     } = this.props;
     return (
       <Surface width={480} height={360} pixelRatio={1}>
@@ -30,7 +30,7 @@ export default class Example extends Component {
             saturation={saturation}
             brightness={brightness}
           >
-            {redraw => (
+            {(redraw) => (
               <Video onFrame={redraw} autoPlay loop>
                 <source type="video/mp4" src={videoMP4} />
               </Video>
@@ -38,8 +38,10 @@ export default class Example extends Component {
           </Saturate>
         </Bus>
         <BlurV map={map} passes={passes} factor={factor}>
-          {// as a texture, we give a function that resolve the video ref
-          () => this.refs.vid}
+          {
+            // as a texture, we give a function that resolve the video ref
+            () => this.refs.vid
+          }
         </BlurV>
       </Surface>
     );
@@ -51,7 +53,7 @@ export default class Example extends Component {
     brightness: 1,
     factor: 2,
     passes: 4,
-    map: StaticBlurMap.images[0]
+    map: StaticBlurMap.images[0],
   };
 }
-`;
+`

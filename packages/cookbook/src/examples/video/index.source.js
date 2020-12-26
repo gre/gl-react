@@ -1,37 +1,43 @@
-module.exports = `//@flow
-import React, { Component } from "react";
+module.exports=`// @flow
+import React, { useRef, useEffect } from "react";
 import { Shaders, GLSL, Node } from "gl-react";
 import { Surface } from "gl-react-dom";
 import raf from "raf";
 import videoMP4 from "./video.mp4";
 export { videoMP4 };
+export const VideoContext: React$Context<?HTMLVideoElement> = React.createContext();
 
 // We implement a component <Video> that is like <video>
 // but provides a onFrame hook so we can efficiently only render
 // if when it effectively changes.
-export class Video extends Component {
-  componentDidMount() {
+export const Video = ({ onFrame, ...rest }: { onFrame: (number) => void }) => {
+  const video = useRef();
+
+  useEffect(() => {
+    let handle;
+    let lastTime;
+
     const loop = () => {
-      this._raf = raf(loop);
-      const { video } = this.refs;
-      if (!video) return;
-      const currentTime = video.currentTime;
+      handle = raf(loop);
+      if (!video.current) return;
+      const currentTime = video.current.currentTime;
       // Optimization that only call onFrame if time changes
-      if (currentTime !== this.currentTime) {
-        this.currentTime = currentTime;
-        this.props.onFrame(currentTime);
+      if (currentTime !== lastTime) {
+        lastTime = currentTime;
+        onFrame(currentTime);
       }
     };
-    this._raf = raf(loop);
-  }
-  componentWillUnmount() {
-    raf.cancel(this._raf);
-  }
-  render() {
-    const { onFrame, ...rest } = this.props;
-    return <video {...rest} ref="video" />;
-  }
-}
+    handle = raf(loop);
+
+    return () => raf.cancel(handle);
+  }, [onFrame]);
+
+  return (
+    <VideoContext.Provider value={video}>
+      <video {...rest} ref={video} />
+    </VideoContext.Provider>
+  );
+};
 
 // Our example will simply split R G B channels of the video.
 const shaders = Shaders.create({
@@ -48,8 +54,8 @@ void main () {
     c.g * step(1.0, y) * step(y, 2.0),
     c.b * step(0.0, y) * step(y, 1.0),
     1.0);
-}\`
-  }
+}\`,
+  },
   //^NB perf: in fragment shader paradigm, we want to avoid code branch (if / for)
   // and prefer use of built-in functions and just giving the GPU some computating.
   // step(a,b) is an alternative to do if(): returns 1.0 if a<b, 0.0 otherwise.
@@ -64,7 +70,7 @@ const SplitColor = ({ children }) => (
 export default () => (
   <Surface width={280} height={630} pixelRatio={1}>
     <SplitColor>
-      {redraw => (
+      {(redraw) => (
         <Video onFrame={redraw} autoPlay loop>
           <source type="video/mp4" src={videoMP4} />
         </Video>
@@ -72,4 +78,4 @@ export default () => (
     </SplitColor>
   </Surface>
 );
-`;
+`

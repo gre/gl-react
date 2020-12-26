@@ -234,7 +234,7 @@ class Anchor extends Component {
   componentDidMount() {
     this.context.inspector.addAnchor(this.props.id, this);
   }
-  componentWillReceiveProps({ id, drawCount }) {
+  UNSAFE_componentWillReceiveProps({ id, drawCount }) {
     if (id !== this.props.id) {
       this.context.inspector.removeAnchor(this.props.id, this);
       this.context.inspector.addAnchor(id, this);
@@ -286,7 +286,7 @@ class AnchorHook extends Component {
   componentDidMount() {
     this.context.inspector.addAnchorHook(this.props.anchorId, this);
   }
-  componentWillReceiveProps({ anchorId }) {
+  UNSAFE_componentWillReceiveProps({ anchorId }) {
     if (anchorId !== this.props.anchorId) {
       this.context.inspector.removeAnchorHook(this.props.anchorId, this);
       this.context.inspector.addAnchorHook(anchorId, this);
@@ -379,7 +379,7 @@ class Preview extends Component {
   interval: number;
   canvas: ?HTMLCanvasElement;
   ctx: ?CanvasRenderingContext2D;
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.capture();
   }
   componentWillUnmount() {
@@ -486,7 +486,7 @@ class InspectorBox extends Component {
     this.context.inspector.addBox(this.props.glObject.id, this);
     this.onNewDraw();
   }
-  componentWillReceiveProps({ drawCount, glObject: { id } }) {
+  UNSAFE_componentWillReceiveProps({ drawCount, glObject: { id } }) {
     if (id !== this.props.glObject.id) {
       this.context.inspector.removeBox(id, this);
       this.context.inspector.addBox(id, this);
@@ -702,7 +702,7 @@ class SVGConnection extends Component {
     };
     this._raf = raf(loop);
   }
-  componentWillReceiveProps({ animated }) {
+  UNSAFE_componentWillReceiveProps({ animated }) {
     if (this.props.animated && !animated) {
       this.setState({ draws: [] });
     }

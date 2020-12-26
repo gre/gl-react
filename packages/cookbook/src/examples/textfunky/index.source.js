@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -16,9 +16,12 @@ void main() {
     0.5 + 0.5 * sin(uv.y * 20.0),
     0.7 + 0.3 * sin(uv.y * 8.0),
     1.0);
-}\` }
+}\`,
+  },
 });
-const Funky = ({children: t}) => <Node shader={shaders.funky} uniforms={{t}} />;
+const Funky = ({ children: t }) => (
+  <Node shader={shaders.funky} uniforms={{ t }} />
+);
 
 export default class Example extends Component {
   render() {
@@ -26,26 +29,28 @@ export default class Example extends Component {
       <Surface width={400} height={200}>
         <Funky>
           <JSON2D width={400} height={200}>
-          {{
-            background: "#000",
-            size: [ 400, 200 ],
-            draws: [
-              {
-                textAlign: "center",
-                fillStyle: "#fff",
-                font: "48px bold Arial",
-              },
-              [ "fillText",
-                "Hello World\\n2d canvas text\\ninjected as texture",
-                200,
-                60,
-                56 ],
-            ],
-          }}
+            {{
+              background: "#000",
+              size: [400, 200],
+              draws: [
+                {
+                  textAlign: "center",
+                  fillStyle: "#fff",
+                  font: "48px bold Arial",
+                },
+                [
+                  "fillText",
+                  "Hello World\\n2d canvas text\\ninjected as texture",
+                  200,
+                  60,
+                  56,
+                ],
+              ],
+            }}
           </JSON2D>
         </Funky>
       </Surface>
     );
   }
-};
-`;
+}
+`

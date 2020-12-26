@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -18,24 +18,23 @@ void main() {
     vec3(0.5),
     mix(vec3(dot(brt, L)), brt, saturation),
     contrast), c.a);
-}\`
-  }
+}\`,
+  },
 });
 
-export const Saturate = ({ contrast, saturation, brightness, children }) =>
+export const Saturate = ({ contrast, saturation, brightness, children }) => (
   <Node
     shader={shaders.Saturate}
     uniforms={{ contrast, saturation, brightness, t: children }}
-  />;
+  />
+);
 
 export default class Example extends Component {
   render() {
     return (
-    <Surface width={480} height={300}>
-      <Saturate {...this.props}>
-        https://i.imgur.com/uTP9Xfr.jpg
-      </Saturate>
-    </Surface>
+      <Surface width={480} height={300}>
+        <Saturate {...this.props}>https://i.imgur.com/uTP9Xfr.jpg</Saturate>
+      </Surface>
     );
   }
   static defaultProps = {
@@ -44,4 +43,4 @@ export default class Example extends Component {
     brightness: 1,
   };
 }
-`;
+`

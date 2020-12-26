@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Bus, Uniform, Node, Shaders, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -28,22 +28,23 @@ void main () {
     1.0);
   }
 }
-    \`
-  }
+    \`,
+  },
 });
 
-const Display = ({ gol, webcam }) =>
+const Display = ({ gol, webcam }) => (
   <Node
     shader={extraShaders.Display}
     uniformsOptions={{ gol: { interpolation: "nearest" } }}
     uniforms={{
       gol,
       webcam,
-      webcamRatio: Uniform.textureSizeRatio(webcam)
+      webcamRatio: Uniform.textureSizeRatio(webcam),
     }}
-  />;
+  />
+);
 
-const GameOfLife = ({ size, reset, resetTexture }) =>
+const GameOfLife = ({ size, reset, resetTexture }) => (
   <Node
     shader={shaders.GameOfLife}
     width={size}
@@ -52,12 +53,13 @@ const GameOfLife = ({ size, reset, resetTexture }) =>
     sync
     uniforms={{
       t: reset ? resetTexture : Uniform.Backbuffer,
-      size
+      size,
     }}
-  />;
+  />
+);
 
 const GameOfLifeLoop = timeLoop(GameOfLife, {
-  refreshRate: 4
+  refreshRate: 4,
 });
 
 export default class Example extends Component {
@@ -73,10 +75,11 @@ export default class Example extends Component {
         onMouseUp={this.onMouseUp}
       >
         <Bus ref="webcam">
-          {redraw =>
+          {(redraw) => (
             <Video onFrame={redraw} autoPlay>
               <WebCamSource />
-            </Video>}
+            </Video>
+          )}
         </Bus>
 
         <Display
@@ -95,8 +98,8 @@ export default class Example extends Component {
   onMouseDown = () =>
     this.setState({
       reset: true,
-      size: Math.floor(10 + 200 * Math.random() * Math.random())
+      size: Math.floor(10 + 200 * Math.random() * Math.random()),
     });
   onMouseUp = () => this.setState({ reset: false });
 }
-`;
+`

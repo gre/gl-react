@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, Bus, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -13,8 +13,8 @@ uniform sampler2D t;
 uniform vec2 offset;
 void main () {
   gl_FragColor = texture2D(t, uv + offset);
-}\`
-  }
+}\`,
+  },
 });
 
 const Offset = ({ t, offset }) => (
@@ -23,7 +23,7 @@ const Offset = ({ t, offset }) => (
 
 export default class Example extends Component {
   state = {
-    offset: [0, 0]
+    offset: [0, 0],
   };
   render() {
     const { map } = this.props;
@@ -55,13 +55,13 @@ export default class Example extends Component {
     this.setState({
       offset: [
         -(e.clientX - rect.left - rect.width / 2) / rect.width,
-        (e.clientY - rect.top - rect.height / 2) / rect.height
-      ]
+        (e.clientY - rect.top - rect.height / 2) / rect.height,
+      ],
     });
   };
   onMouseLeave = () => this.setState({ offset: [0, 0] });
   static defaultProps = {
-    map: StaticBlurMap.images[0]
+    map: StaticBlurMap.images[0],
   };
 }
-`;
+`

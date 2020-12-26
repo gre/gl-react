@@ -441,7 +441,7 @@ const Game = timeLoop(
       lastTickTime: this.props.time,
     };
 
-    componentWillReceiveProps({ time, speed }) {
+    UNSAFE_componentWillReceiveProps({ time, speed }) {
       this.setState(({ tick, lastTickTime }) => {
         const delta = 1000 / speed;
         if (time - lastTickTime > delta) {

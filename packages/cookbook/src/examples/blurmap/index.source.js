@@ -1,4 +1,4 @@
-module.exports = `//@flow
+module.exports=`//@flow
 import React, { Component } from "react";
 import { Shaders, Node, GLSL, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
@@ -24,8 +24,8 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 }
 void main() {
   gl_FragColor = blur9(t, uv, resolution, direction * texture2D(map, uv).rg);
-}\`
-  }
+}\`,
+  },
 });
 
 // Same concept than Blur1D except it takes one more prop:
@@ -41,12 +41,14 @@ export const BlurV1D = connectSize(
 
 // And its N-pass version
 export const BlurV = connectSize(({ children, factor, map, passes }) => {
-  const rec = pass =>
-    pass <= 0
-      ? children
-      : <BlurV1D map={map} direction={directionForPass(pass, factor, passes)}>
-          {rec(pass - 1)}
-        </BlurV1D>;
+  const rec = (pass) =>
+    pass <= 0 ? (
+      children
+    ) : (
+      <BlurV1D map={map} direction={directionForPass(pass, factor, passes)}>
+        {rec(pass - 1)}
+      </BlurV1D>
+    );
   return rec(passes);
 });
 
@@ -64,7 +66,7 @@ export default class Example extends Component {
   static defaultProps = {
     factor: 2,
     passes: 4,
-    map: StaticBlurMap.images[0]
+    map: StaticBlurMap.images[0],
   };
 }
-`;
+`
