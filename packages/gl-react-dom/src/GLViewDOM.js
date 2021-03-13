@@ -176,7 +176,7 @@ export default class GLViewDOM extends Component<
       debug
         ? { ...webglContextAttributes, preserveDrawingBuffer: true }
         : webglContextAttributes,
-      version || "webgl2"
+      version || "auto"
     );
     this.webglContextAttributes = webglContextAttributes || {};
     return gl;
