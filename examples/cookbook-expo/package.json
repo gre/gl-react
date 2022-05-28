@@ -9,7 +9,7 @@
     "prepare": "rm -rf ./shared/ && cp -R ../cookbook-rn-shared/ shared && cp gl-react-implementation.js shared && ./shared/examples/gen.sh > ./shared/examples/index.js"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/slider": "4.2.1",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
@@ -19,8 +19,8 @@
     "expo-camera": "~12.2.0",
     "expo-gl": "~11.3.0",
     "expo-permissions": "~13.2.0",
-    "gl-react": "^5.1.1-next.0",
-    "gl-react-expo": "^5.1.1-next.0",
+    "gl-react": "^5.2.0",
+    "gl-react-expo": "^5.2.0",
     "gl-transitions": "^1.43.0",
     "ndarray": "^1.0.19",
     "raf": "^3.4.1",
