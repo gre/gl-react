@@ -1,6 +1,6 @@
 {
   "name": "gl-react",
-  "version": "5.0.0",
+  "version": "5.1.1-next.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "Universal React library, write and compose WebGL shaders, implement complex effects using a descriptive paradigm",
