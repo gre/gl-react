@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v3
-    - run: sudo apt-get update && sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
+    - run: sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
