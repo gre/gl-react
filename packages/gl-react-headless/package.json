@@ -13,7 +13,7 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "gl-react": "^4.0.0",
+    "gl-react": "*",
     "react": "*"
   },
   "dependencies": {
