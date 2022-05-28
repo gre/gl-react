@@ -32,8 +32,8 @@
     "gl-react": "^5.0.0"
   },
   "dependencies": {
-    "expo-gl": "^9.2.0",
-    "expo-gl-cpp": "^9.2.0",
+    "expo-gl": "^11.3.0",
+    "expo-gl-cpp": "^11.3.0",
     "gl-react-expo": "^5.0.0",
     "webgltexture-loader-expo": "1.2.0"
   },
