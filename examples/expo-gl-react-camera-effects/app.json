@@ -3,7 +3,6 @@
     "name": "gl-react camera effects",
     "slug": "gl-react-camera-effects",
     "privacy": "public",
-    "sdkVersion": "40.0.0",
     "platforms": [
       "ios",
       "android",
