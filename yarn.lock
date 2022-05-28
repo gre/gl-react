@@ -16815,17 +16815,17 @@ webgltexture-loader-dom@1.0.0:
     webgltexture-loader-dom-image-url "^1.0.0"
     webgltexture-loader-dom-video "^1.0.0"
 
-webgltexture-loader-expo@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-1.0.0.tgz#e542636cdd6dbbda7c1c11eca50c8190988d773b"
-  integrity sha512-o0slPnFkZ1CfGNQKmaxfbDeA7RGJp6nvHzEM3kdnO9FgdtbMk0P8ZQueoNQrE9f6V+macLc37CE8bTZfEq+yUw==
+webgltexture-loader-expo@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-1.2.0.tgz#5bfeee5b5334e6274c94bb58b1bd61bf804bfe79"
+  integrity sha512-g+uHrXvsZ5hLWLmO3c08LGxlT8JVvR40OlGg7uWbb4bQslYXRzBjyplcVY0Y9CiS+D/YYqBKBkJzShEcylyxfw==
   dependencies:
     webgltexture-loader "^1.0.0"
 
-webgltexture-loader-ndarray@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.1.1.tgz#6e9bd5ac3ad4d09ea8d90aea33bd683ab709ab28"
-  integrity sha512-jz2Wa/mupBomP/JYkbzwDFqEFNIgwliw+CXzQaMSZQup1jyGVAaprbYCus+46rVWepCnb+DWiNV/WUPC/iCj2w==
+webgltexture-loader-ndarray@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.2.0.tgz#1eb09f21ebd26e5004ce545b61de15d88e666dfa"
+  integrity sha512-gWTIqCOYs1XK6Yp4G7XvFDhvCvr6wFjTLPRN/HGBouF4u0to2fAIh5+2cxzEs1WE7eSwsxg1y5aNi1jRXSX+zA==
   dependencies:
     ndarray "^1.0.19"
     ndarray-ops "^1.2.2"

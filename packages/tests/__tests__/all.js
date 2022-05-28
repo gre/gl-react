@@ -18,7 +18,7 @@ import {
   Uniform,
   Bus,
   VisitorLogger,
-  connectSize
+  connectSize,
 } from "gl-react";
 import { globalRegistry } from "webgltexture-loader";
 import { Surface } from "gl-react-headless";
@@ -35,7 +35,7 @@ import {
   white3x3,
   yellow3x3,
   yellow3x2,
-  expectToBeCloseToColorArray
+  expectToBeCloseToColorArray,
 } from "../utils";
 
 test("renders a red shader", () => {
@@ -46,8 +46,8 @@ test("renders a red shader", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const inst = create(
     <Surface
@@ -145,8 +145,8 @@ test("renders HelloGL", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const inst = create(
     <Surface
@@ -163,70 +163,11 @@ test("renders HelloGL", () => {
   expectToBeCloseToColorArray(
     snap.data,
     new Uint8Array([
-      32,
-      32,
-      128,
-      255,
-      96,
-      32,
-      128,
-      255,
-      159,
-      32,
-      128,
-      255,
-      223,
-      32,
-      128,
-      255,
-      32,
-      96,
-      128,
-      255,
-      96,
-      96,
-      128,
-      255,
-      159,
-      96,
-      128,
-      255,
-      223,
-      96,
-      128,
-      255,
-      32,
-      159,
-      128,
-      255,
-      96,
-      159,
-      128,
-      255,
-      159,
-      159,
-      128,
-      255,
-      223,
-      159,
-      128,
-      255,
-      32,
-      223,
-      128,
-      255,
-      96,
-      223,
-      128,
-      255,
-      159,
-      223,
-      128,
-      255,
-      223,
-      223,
-      128,
-      255
+      32, 32, 128, 255, 96, 32, 128, 255, 159, 32, 128, 255, 223, 32, 128, 255,
+      32, 96, 128, 255, 96, 96, 128, 255, 159, 96, 128, 255, 223, 96, 128, 255,
+      32, 159, 128, 255, 96, 159, 128, 255, 159, 159, 128, 255, 223, 159, 128,
+      255, 32, 223, 128, 255, 96, 223, 128, 255, 159, 223, 128, 255, 223, 223,
+      128, 255,
     ])
   );
   inst.unmount();
@@ -241,8 +182,8 @@ test("ndarray texture", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
   class HelloTextureStateful extends React.Component<*, { t: * }> {
     state = { t: red2x2 };
@@ -267,7 +208,7 @@ test("ndarray texture", () => {
       height={64}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
-      <HelloTextureStateful ref={ref => (helloTexture = ref)} />
+      <HelloTextureStateful ref={(ref) => (helloTexture = ref)} />
     </Surface>
   );
   invariant(helloTexture, "helloTexture is defined");
@@ -300,8 +241,8 @@ test("renders a color uniform", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`
-    }
+  }`,
+    },
   });
 
   class ColorSurface extends React.Component<*> {
@@ -351,7 +292,7 @@ test("use the imperative setDrawProps escape hatch", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`
+  }`,
     },
     white: {
       frag: GLSL`
@@ -359,8 +300,8 @@ test("use the imperative setDrawProps escape hatch", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0);
-  }`
-    }
+  }`,
+    },
   });
 
   let node;
@@ -371,7 +312,7 @@ test("use the imperative setDrawProps escape hatch", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       <Node
-        ref={ref => {
+        ref={(ref) => {
           node = ref;
         }}
         shader={shaders.clr}
@@ -387,8 +328,8 @@ test("use the imperative setDrawProps escape hatch", () => {
   );
   node.setDrawProps({
     uniforms: {
-      color: [1, 1, 0, 1]
-    }
+      color: [1, 1, 0, 1],
+    },
   });
   // check it's still lazy
   expectToBeCloseToColorArray(
@@ -402,7 +343,7 @@ test("use the imperative setDrawProps escape hatch", () => {
   );
   node.setDrawProps({
     shader: shaders.white,
-    uniforms: {}
+    uniforms: {},
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -421,8 +362,8 @@ test("composes color uniform with LinearCopy", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`
-    }
+  }`,
+    },
   });
 
   class ColorSurface extends React.Component<*> {
@@ -460,8 +401,8 @@ test("no needs to flush if use of sync", () => {
   uniform vec4 color;
   void main() {
     gl_FragColor = color;
-  }`
-    }
+  }`,
+    },
   });
 
   class ColorSurface extends React.Component<*> {
@@ -509,8 +450,8 @@ test("Node can have a different size and be scaled up", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const inst = create(
     <Surface
@@ -539,8 +480,8 @@ test("Surface can be resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const renderForSize = (width, height) => (
     <Surface
@@ -584,7 +525,7 @@ test("bus uniform code style", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
+  }`,
     },
     helloTexture: {
       frag: GLSL`
@@ -593,8 +534,8 @@ test("bus uniform code style", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`
-    }
+      }`,
+    },
   });
   const inst = create(
     <Surface
@@ -624,8 +565,8 @@ test("bus example 1", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   class Example extends React.Component<*> {
     render() {
@@ -659,8 +600,8 @@ test("bus example 2", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   class Example extends React.Component<*> {
     render() {
@@ -699,8 +640,8 @@ test("bus example 3", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   class Red extends React.Component<*> {
     render() {
@@ -742,7 +683,7 @@ test("bus example 4", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
+  }`,
     },
     helloTexture: {
       frag: GLSL`
@@ -751,8 +692,8 @@ test("bus example 4", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`
-    }
+      }`,
+    },
   });
   class Example extends React.Component<*> {
     render() {
@@ -766,7 +707,7 @@ test("bus example 4", () => {
           <Node
             shader={shaders.helloTexture}
             uniforms={{
-              t: () => this.refs.red
+              t: () => this.refs.red,
             }}
           >
             <Node ref="red" width={1} height={1} shader={shaders.red} />
@@ -792,7 +733,7 @@ test("bus example 5", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  }`
+  }`,
     },
     helloTexture: {
       frag: GLSL`
@@ -801,8 +742,8 @@ test("bus example 5", () => {
       uniform sampler2D t;
       void main() {
         gl_FragColor = texture2D(t, uv);
-      }`
-    }
+      }`,
+    },
   });
   class Red extends React.Component<*> {
     render() {
@@ -815,7 +756,7 @@ test("bus example 5", () => {
         <Node
           shader={shaders.helloTexture}
           uniforms={{
-            t: () => this.refs.red
+            t: () => this.refs.red,
           }}
         >
           <Bus ref="red">
@@ -851,7 +792,7 @@ test("bus example 6", () => {
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
   }
-`
+`,
     },
     pink: {
       frag: GLSL`
@@ -859,7 +800,7 @@ test("bus example 6", () => {
   void main() {
     gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
   }
-  `
+  `,
     },
     helloTexture: {
       frag: GLSL`
@@ -869,8 +810,8 @@ test("bus example 6", () => {
       void main() {
         gl_FragColor = texture2D(t, uv);
       }
-      `
-    }
+      `,
+    },
   });
   class Red extends React.Component<*> {
     render() {
@@ -889,7 +830,7 @@ test("bus example 6", () => {
         <Node
           shader={shaders.helloTexture}
           uniforms={{
-            t: () => (pink ? this.refs.pink : this.refs.red)
+            t: () => (pink ? this.refs.pink : this.refs.red),
           }}
         >
           <Bus ref="red">
@@ -942,7 +883,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(0.5, 0.2, 0.1, 0.4);
-  }`
+  }`,
     },
     add: {
       frag: GLSL`
@@ -952,8 +893,8 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
         void main() {
           gl_FragColor = texture2D(a, uv) + texture2D(b, uv);
         }
-      `
-    }
+      `,
+    },
   });
   class Example extends React.Component<*> {
     render() {
@@ -971,7 +912,7 @@ test("bus: same texture used in multiple sampler2D is fine", () => {
             shader={shaders.add}
             uniforms={{
               a: () => this.refs.bus,
-              b: () => this.refs.bus
+              b: () => this.refs.bus,
             }}
           />
         </Surface>
@@ -994,8 +935,8 @@ test("a surface can be captured and resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const render = (w, h) => (
     <Surface width={w} height={h}>
@@ -1027,8 +968,8 @@ test("a node can be captured and resized", () => {
   varying vec2 uv;
   void main() {
     gl_FragColor = vec4(uv.x, uv.y, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   let node;
   const render = (w, h) => (
@@ -1036,7 +977,7 @@ test("a node can be captured and resized", () => {
       <LinearCopy>
         <Node
           shader={shaders.helloGL}
-          ref={ref => (node = ref)}
+          ref={(ref) => (node = ref)}
           width={w}
           height={h}
         />
@@ -1068,12 +1009,12 @@ test("many Surface updates don't result of many redraws", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`
-    }
+  }`,
+    },
   });
 
   const visitor = new CountersVisitor();
-  const wrap = children => (
+  const wrap = (children) => (
     <Surface
       visitor={visitor}
       width={2}
@@ -1120,12 +1061,12 @@ test("many Surface flush() don't result of extra redraws", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`
-    }
+  }`,
+    },
   });
   const visitor = new CountersVisitor();
 
-  const wrap = children => (
+  const wrap = (children) => (
     <Surface
       visitor={visitor}
       width={2}
@@ -1166,15 +1107,15 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`
-    }
+  }`,
+    },
   });
 
   let justBlueNode;
   const visitor = new CountersVisitor();
   Visitors.add(visitor);
 
-  const wrap = children => (
+  const wrap = (children) => (
     <Surface
       width={2}
       height={2}
@@ -1188,7 +1129,7 @@ test("GL Components that implement shouldComponentUpdate shortcut Surface redraw
       const { blue } = this.props;
       return (
         <Node
-          ref={ref => {
+          ref={(ref) => {
             justBlueNode = ref;
           }}
           shader={shaders.justBlue}
@@ -1237,8 +1178,8 @@ test("nested GL Component update will re-draw the Surface", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(0.0, 0.0, blue, 1.0);
-  }`
-    }
+  }`,
+    },
   });
 
   let justBlue, justBlueNode;
@@ -1250,7 +1191,7 @@ test("nested GL Component update will re-draw the Surface", () => {
       const { blue } = this.state;
       return (
         <Node
-          ref={ref => (justBlueNode = ref)}
+          ref={(ref) => (justBlueNode = ref)}
           shader={shaders.justBlue}
           uniforms={{ blue }}
         />
@@ -1266,7 +1207,7 @@ test("nested GL Component update will re-draw the Surface", () => {
     >
       <LinearCopy>
         <LinearCopy>
-          <StatefulJustBlue ref={ref => (justBlue = ref)} />
+          <StatefulJustBlue ref={(ref) => (justBlue = ref)} />
         </LinearCopy>
       </LinearCopy>
     </Surface>
@@ -1334,8 +1275,8 @@ test("Node `clear` and discard;", () => {
     else {
       discard;
     }
-  }`
-    }
+  }`,
+    },
   });
   class Paint extends React.Component<
     *,
@@ -1343,14 +1284,14 @@ test("Node `clear` and discard;", () => {
       drawing: boolean,
       color: [number, number, number, number],
       center: [number, number],
-      brushRadius: number
+      brushRadius: number,
     }
   > {
     state = {
       drawing: false,
       color: [0, 0, 0, 0],
       center: [0, 0],
-      brushRadius: 0.2
+      brushRadius: 0.2,
     };
     render() {
       return <Node shader={shaders.paint} clear={null} uniforms={this.state} />;
@@ -1364,7 +1305,7 @@ test("Node `clear` and discard;", () => {
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
       <NearestCopy>
-        <Paint width={100} height={100} ref={ref => (paint = ref)} />
+        <Paint width={100} height={100} ref={(ref) => (paint = ref)} />
       </NearestCopy>
     </Surface>
   );
@@ -1378,7 +1319,7 @@ test("Node `clear` and discard;", () => {
     drawing: true,
     color: [1, 0, 0, 1],
     center: [0, 0],
-    brushRadius: 0.6
+    brushRadius: 0.6,
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -1393,14 +1334,14 @@ test("Node `clear` and discard;", () => {
     drawing: true,
     color: [0, 1, 0, 1],
     center: [0.1, 0.1],
-    brushRadius: 0.2
+    brushRadius: 0.2,
   });
   surface.flush();
   paint.setState({
     drawing: false, // actually not drawing here ;)
     color: [1, 0, 0, 1],
     center: [0, 0],
-    brushRadius: 0.6
+    brushRadius: 0.6,
   });
   surface.flush();
   expectToBeCloseToColorArray(
@@ -1428,10 +1369,10 @@ test("Node `backbuffering`", () => {
   void main() {
     vec4 c = texture2D(t, uv);
     gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
-  }`
-    }
+  }`,
+    },
   });
-  const render = t => (
+  const render = (t) => (
     <Surface
       width={10}
       height={10}
@@ -1489,10 +1430,10 @@ test("Node `backbuffering` in `sync`", () => {
   void main() {
     vec4 c = texture2D(t, uv);
     gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
-  }`
-    }
+  }`,
+    },
   });
-  const render = t => (
+  const render = (t) => (
     <Surface
       width={10}
       height={10}
@@ -1546,7 +1487,7 @@ test("Node `backbuffering` with Uniform.backbufferFrom", () => {
   void main() {
     vec4 c = texture2D(t, uv);
     gl_FragColor = vec4(c.b, c.r, c.g, c.a); // shifting the rgb components
-  }`
+  }`,
     },
     darken: {
       frag: GLSL`
@@ -1556,8 +1497,8 @@ test("Node `backbuffering` with Uniform.backbufferFrom", () => {
   uniform float m;
   void main() {
     gl_FragColor = m * texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
   class Darken extends React.Component<*> {
     render() {
@@ -1585,7 +1526,7 @@ test("Node `backbuffering` with Uniform.backbufferFrom", () => {
                 <Node
                   shader={shaders.colorShift}
                   uniforms={{
-                    t: !initWithImage ? this.getMainBuffer : initWithImage
+                    t: !initWithImage ? this.getMainBuffer : initWithImage,
                   }}
                 />
               </Darken>
@@ -1624,8 +1565,8 @@ test("texture can be null", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
   const inst = create(
     <Surface
@@ -1666,10 +1607,10 @@ test("array of textures", () => {
                 1.0
               );
             }
-          `
+          `,
           }}
           uniforms={{
-            channels: [red, green, blue]
+            channels: [red, green, blue],
           }}
         />
       );
@@ -1683,7 +1624,7 @@ test("array of textures", () => {
       height={1}
       webglContextAttributes={{ preserveDrawingBuffer: true }}
     >
-      <Bus ref={ref => (bus = ref)}>
+      <Bus ref={(ref) => (bus = ref)}>
         <faketexture width={3} height={3} getPixels={() => white3x3} />
       </Bus>
       <MergeChannels
@@ -1714,8 +1655,8 @@ test("Node uniformsOptions texture interpolation", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
   function render(t, tOptions) {
     return (
@@ -1735,11 +1676,10 @@ test("Node uniformsOptions texture interpolation", () => {
   }
   const inst = create(render(null));
   const surface = inst.getInstance();
-  const redToBlue = ndarray(new Uint8Array([255, 0, 0, 255, 0, 0, 255, 255]), [
-    2,
-    1,
-    4
-  ]);
+  const redToBlue = ndarray(
+    new Uint8Array([255, 0, 0, 255, 0, 0, 255, 255]),
+    [2, 1, 4]
+  );
   inst.update(render(redToBlue));
   expectToBeCloseToColorArray(
     surface.capture(0, 2, 1, 1).data,
@@ -1787,12 +1727,12 @@ test("can be extended with addTextureLoaderClass", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
 
   const loader = createOneTextureLoader(
-    gl => createNDArrayTexture(gl, red2x2),
+    (gl) => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
   globalRegistry.add(loader.Loader);
@@ -1833,14 +1773,14 @@ test("Surface `preload` prevent to draw anything", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
 
   let onLoadCounter = 0;
   const visitor = new CountersVisitor();
   const loader = createOneTextureLoader(
-    gl => createNDArrayTexture(gl, red2x2),
+    (gl) => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
   globalRegistry.add(loader.Loader);
@@ -1894,11 +1834,11 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
       step(0.0, p.x) * step(p.x, 1.0) * // returns 1.0 if x is in [0,1] otherwise 0.0
       step(0.0, p.y) * step(p.y, 1.0) * // returns 1.0 if y is in [0,1] otherwise 0.0
       texture2D(t, p);
-  }`
-    }
+  }`,
+    },
   });
   const loader = createOneTextureLoader(
-    gl => createNDArrayTexture(gl, yellow3x2),
+    (gl) => createNDArrayTexture(gl, yellow3x2),
     [3, 2]
   );
   globalRegistry.add(loader.Loader);
@@ -1912,7 +1852,7 @@ test("Uniform.textureSizeRatio allows to send the ratio of a texture in uniform"
         shader={shaders.contain}
         uniforms={{
           t: loader.textureId,
-          tRatio: Uniform.textureSizeRatio(loader.textureId)
+          tRatio: Uniform.textureSizeRatio(loader.textureId),
         }}
       />
     </Surface>
@@ -1946,14 +1886,14 @@ test("Surface `preload` that fails will trigger onLoadError", async () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
-    }
+  }`,
+    },
   });
 
   let onLoadCounter = 0;
   let onLoadErrorCounter = 0;
   const loader = createOneTextureLoader(
-    gl => createNDArrayTexture(gl, red2x2),
+    (gl) => createNDArrayTexture(gl, red2x2),
     [2, 2]
   );
   globalRegistry.add(loader.Loader);
@@ -2001,7 +1941,7 @@ precision highp float;
 varying vec2 uv;
 uniform vec4 color;
 void main() { gl_FragColor = color; }
-`
+`,
             }}
             uniforms={{ color }}
           />
@@ -2041,8 +1981,8 @@ test("testing connectSize() feature", () => {
   uniform vec2 size;
   void main() {
     gl_FragColor = vec4(size.x / 50.0, size.y / 50.0, 0.0, 1.0);
-  }`
-    }
+  }`,
+    },
   });
 
   class Useless extends React.Component<*> {
@@ -2121,7 +2061,7 @@ test("handle context lost nicely", () => {
     render() {
       return (
         <Surface
-          ref={ref => (surface = ref)}
+          ref={(ref) => (surface = ref)}
           width={20}
           height={20}
           onContextLost={() => {
@@ -2177,7 +2117,7 @@ test("Bus#uniform and Bus#index", () => {
   void main() {
     gl_FragColor = vec4(c, 1.0);
   }
-      `
+      `,
     },
     helloTexture3: {
       frag: GLSL`
@@ -2190,8 +2130,8 @@ void main() {
     0.5 * texture2D(t, uv) +
     0.3 * texture2D(t2[0], uv)+
     0.2 * texture2D(t2[1], uv);
-}`
-    }
+}`,
+    },
   });
 
   class WeirdSwapping extends React.Component<*> {
@@ -2216,7 +2156,7 @@ void main() {
     }
   }
 
-  const wrap = children => (
+  const wrap = (children) => (
     <Surface
       width={4}
       height={4}
@@ -2258,7 +2198,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform float blue;
   void main() {
     gl_FragColor = vec4(rg.x, rg.y, blue, 1.0);
-  }`
+  }`,
     },
     helloTexture: {
       frag: GLSL`
@@ -2267,7 +2207,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform sampler2D t;
   void main() {
     gl_FragColor = texture2D(t, uv);
-  }`
+  }`,
     },
     helloTexture2: {
       frag: GLSL`
@@ -2276,8 +2216,8 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   uniform sampler2D t2[2];
   void main() {
     gl_FragColor = 0.5*(texture2D(t2[0], uv)+texture2D(t2[1], uv));
-  }`
-    }
+  }`,
+    },
   });
 
   expect(Shaders.getName(shaders.justBlue)).toBeDefined();
@@ -2299,13 +2239,13 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
     error: () => error++,
     group: () => group++,
     groupCollapsed: () => group++,
-    groupEnd: () => groupEnd++
+    groupEnd: () => groupEnd++,
   };
 
   let justBlueNode;
   const visitor = new VisitorLogger();
 
-  const wrap = children => (
+  const wrap = (children) => (
     <Surface visitor={visitor} width={2} height={2}>
       <LinearCopy>{children}</LinearCopy>
     </Surface>
@@ -2316,7 +2256,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
       const { blue } = this.props;
       return (
         <Node
-          ref={ref => {
+          ref={(ref) => {
             justBlueNode = ref;
           }}
           shader={shaders.justBlue}
@@ -2330,7 +2270,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
       const { blue } = this.props;
       return (
         <Node
-          ref={ref => {
+          ref={(ref) => {
             if (ref) {
               ref._draw = () => {
                 throw new Error("_draw crash simulation");
@@ -2345,7 +2285,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   }
   const MissingOrInvalidUniforms = () => (
     <Node
-      ref={ref => {
+      ref={(ref) => {
         justBlueNode = ref;
       }}
       shader={shaders.justBlue}
@@ -2363,7 +2303,7 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
             <Node
               shader={shaders.justBlue}
               uniforms={{ blue, rg: [0, 0] }}
-              ref={ref => {
+              ref={(ref) => {
                 if (ref) {
                   ref.redraw();
                   ref.flush();
