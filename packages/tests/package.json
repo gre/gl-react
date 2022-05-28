@@ -22,8 +22,8 @@
     "ndarray": "^1.0.19",
     "promise-defer": "^1.0.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-test-renderer": "^17.0.1",
+    "react": "^18.1.0",
+    "react-test-renderer": "^18.1.0",
     "webgltexture-loader": "1.0.0",
     "webgltexture-loader-ndarray": "1.2.0"
   }
