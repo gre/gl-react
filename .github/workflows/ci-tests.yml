@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v3
-    - run: openrndr/setup-opengl@v1.1
+    - uses: openrndr/setup-opengl@v1.1
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
