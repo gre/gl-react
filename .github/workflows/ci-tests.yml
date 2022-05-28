@@ -8,13 +8,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v3
+    - run: sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 14
         cache: 'yarn'
-    - run: yarn install --frozen-lockfile
-    - run: yarn test
+    - run: yarn
+    - run: yarn build
+    - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn test
