@@ -1,7 +1,13 @@
 {
   "expo": {
-    "name": "cookbook",
-    "slug": "cookbook",
+    "name": "gl-react Expo cookbook",
+    "slug": "gl-react",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,17 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "fr.greweb.glreactcookbook"
+      "bundleIdentifier": "me.greweb.glreact.cookbook"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "fr.greweb.glreactcookbook"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "me.greweb.glreact.cookbook"
     }
   }
 }

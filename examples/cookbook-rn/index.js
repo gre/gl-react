@@ -1,3 +1,3 @@
-import { AppRegistry } from "react-native";
-import App from "./shared";
-AppRegistry.registerComponent("cookbook", () => App);
+import { registerRootComponent } from "expo";
+import App from "./App";
+registerRootComponent(App);
