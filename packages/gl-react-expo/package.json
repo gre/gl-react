@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "invariant": "^2.2.4",
-    "webgltexture-loader-expo": "1.2.0"
+    "webgltexture-loader-expo": "2.0.0"
   },
   "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }

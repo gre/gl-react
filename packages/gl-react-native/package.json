@@ -35,7 +35,7 @@
     "expo-gl": "^11.3.0",
     "expo-gl-cpp": "^11.3.0",
     "gl-react-expo": "^5.2.1",
-    "webgltexture-loader-expo": "1.2.0"
+    "webgltexture-loader-expo": "2.0.0"
   },
   "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }

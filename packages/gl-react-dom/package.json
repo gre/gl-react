@@ -36,7 +36,7 @@
     "invariant": "^2.2.4",
     "prop-types": "^15.7.2",
     "raf": "^3.4.1",
-    "webgltexture-loader-dom": "1.0.0"
+    "webgltexture-loader-dom": "2.0.0"
   },
   "scripts": {
     "build": "cd ../.. && export PATH=$(npm bin):$PATH && cd - && rm -rf gl-react-dom.js && browserify lib/index.js -t [ browserify-shim ] --standalone GLReactDOM > gl-react-dom.js"

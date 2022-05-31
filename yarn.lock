@@ -7069,6 +7069,11 @@ expect@^26.6.0, expect@^26.6.2:
     jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
+expo-asset-utils@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-3.0.0.tgz#2c7ddf71ba9efacf7b46c159c1c650114a2f14dc"
+  integrity sha512-CgIbNvTqKqQi1lrlptmwoaCMu4ZVOZf8tghmytlor23CjIOuorw6cfuOqiqWkJLz23arTt91maYEU9XLMPB23A==
+
 expo-gl-cpp@^11.3.0, expo-gl-cpp@~11.3.0:
   version "11.3.0"
   resolved "https://registry.yarnpkg.com/expo-gl-cpp/-/expo-gl-cpp-11.3.0.tgz#6bd02908b24ef4a4c02b493575afa6fd0ccb31db"
@@ -16733,57 +16738,58 @@ web-namespaces@^1.1.2:
   resolved "https://registry.yarnpkg.com/web-namespaces/-/web-namespaces-1.1.4.tgz#bc98a3de60dadd7faefc403d1076d529f5e030ec"
   integrity sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==
 
-webgltexture-loader-dom-canvas@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-1.0.0.tgz#fc00051950f25a1339b0ef047fefe7c72b80450a"
-  integrity sha512-lRDoPVE4GXFyfsl/E5+sZd7m6304RmBRky0SmgHlqJZJySFrCbQMF/hMQkWNWM5iYks84kRUGlwugW/c6OgpDw==
+webgltexture-loader-dom-canvas@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-canvas/-/webgltexture-loader-dom-canvas-2.0.0.tgz#fe4bb0d22f7b6b6ecaea0c7af909937451873219"
+  integrity sha512-6cAYL5++gWwZljVFtTDO39fP+XVete1W3aaP9kp5nJPMEtkrI/5n0jI9s4NtS+Aa1igsf8onFjYM8dMfjGAQHw==
   dependencies:
-    webgltexture-loader "^1.0.0"
+    webgltexture-loader "^2.0.0"
 
-webgltexture-loader-dom-image-url@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-1.0.0.tgz#f3a3889122d912c2f77e273c011823b189e68638"
-  integrity sha512-KiQ16cLBTjoCQfdvfy1SQP3wMWEPW9ADqsODyhd+6nMg7qD6FmewF3OZs6chF4yfDtlVVXRYI/cDGF1K9MK5Mg==
+webgltexture-loader-dom-image-url@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-image-url/-/webgltexture-loader-dom-image-url-2.0.0.tgz#db9ca7c65f48225bb0211f721dec8dbd4b3e4bed"
+  integrity sha512-jvJhDuUEL+sS+SfGQ6yEK0QjfnFClZ5Sk0bVLe84SFmNpplSAfgQknOZdulTCxzvHICQN/WXkQO8gUI5WnVYtA==
   dependencies:
-    webgltexture-loader "^1.0.0"
+    webgltexture-loader "^2.0.0"
 
-webgltexture-loader-dom-video@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-video/-/webgltexture-loader-dom-video-1.0.0.tgz#cb5d5423190ec7d6d21b154d548c7e9d2d44546f"
-  integrity sha512-o3zB2XQEMAqgHQeNavoy4q5/lwIIt1MjF6Qj+pUDju9VlovJXGJiCIZ/suv715YgS3k36/pg97847GhV3bHczQ==
+webgltexture-loader-dom-video@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom-video/-/webgltexture-loader-dom-video-2.0.0.tgz#2ca4e271f3262076b5e66a424aa5ab47357c4a18"
+  integrity sha512-HiNMWF5/T6yvmfqYRRTJl9MkzMLETTqhMmIzlPGMZrtsaStAi+YG8o7SVlRypNOAAPXQM+4tWCsxIQK0QWKRig==
   dependencies:
-    webgltexture-loader "^1.0.0"
+    webgltexture-loader "^2.0.0"
 
-webgltexture-loader-dom@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom/-/webgltexture-loader-dom-1.0.0.tgz#930bcfcc612db5bc5e648f8ad756289ab0a1fd6f"
-  integrity sha512-JavQ9Hvv3DIYx6WuqzVa76bn2YCcq1lazUdzf277VZWrmxVCln5QFjyTfWZozgYtT21lVeu6MdMOUIbY4xhjqA==
+webgltexture-loader-dom@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-dom/-/webgltexture-loader-dom-2.0.0.tgz#88c56b1d1f583b9b4866d4d0f6ad9aaed377bc12"
+  integrity sha512-f1fcuROisS+sdRft7VzITjAzf+3NNfQ3SoJa60RPf3UjjzIMiv39vcs4nr4YGdJGRQgDQlhW0bjK+TKIEqv52g==
   dependencies:
-    webgltexture-loader-dom-canvas "^1.0.0"
-    webgltexture-loader-dom-image-url "^1.0.0"
-    webgltexture-loader-dom-video "^1.0.0"
+    webgltexture-loader-dom-canvas "^2.0.0"
+    webgltexture-loader-dom-image-url "^2.0.0"
+    webgltexture-loader-dom-video "^2.0.0"
 
-webgltexture-loader-expo@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-1.2.0.tgz#5bfeee5b5334e6274c94bb58b1bd61bf804bfe79"
-  integrity sha512-g+uHrXvsZ5hLWLmO3c08LGxlT8JVvR40OlGg7uWbb4bQslYXRzBjyplcVY0Y9CiS+D/YYqBKBkJzShEcylyxfw==
+webgltexture-loader-expo@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-expo/-/webgltexture-loader-expo-2.0.0.tgz#e53f6d6c47c08712201cfe15d21a8e291914745b"
+  integrity sha512-8AjSmNAkf/7qV1H2IW2LPnOc2d9iWKvupjRtWLJv9zTgt1HqM4P1fj+Adb4uW9j34U0NFRe9y3SLEHgKyBv78A==
   dependencies:
-    webgltexture-loader "^1.0.0"
+    expo-asset-utils "^3.0.0"
+    webgltexture-loader "^2.0.0"
 
-webgltexture-loader-ndarray@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.2.0.tgz#1eb09f21ebd26e5004ce545b61de15d88e666dfa"
-  integrity sha512-gWTIqCOYs1XK6Yp4G7XvFDhvCvr6wFjTLPRN/HGBouF4u0to2fAIh5+2cxzEs1WE7eSwsxg1y5aNi1jRXSX+zA==
+webgltexture-loader-ndarray@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-2.0.0.tgz#7da7e2a2728acbd038b5f36c9d9a1894bbad1972"
+  integrity sha512-XkQxb/uF07E3pqtNRc7pqxeLQE2S3MVnNgvocoLHHuUhf5glE+B6+cTKFVMFFgHj94+j7hkHXelWyO/NJcZxVQ==
   dependencies:
     ndarray "^1.0.19"
     ndarray-ops "^1.2.2"
     typedarray-pool "^1.2.0"
-    webgltexture-loader "^1.0.0"
+    webgltexture-loader "^2.0.0"
 
-webgltexture-loader@1.0.0, webgltexture-loader@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-1.0.0.tgz#e3d5b687d79ac85bed29222a7931f1405b69da6a"
-  integrity sha512-TbQUdr0Bc3tcJ4pKIFoM9dKyLdYNf9Uxq05oZuIT+2e/vCcfaQS+WjNmW1FwYqaBrzcLr9CA/HBAmvyaS/REGw==
+webgltexture-loader@2.0.0, webgltexture-loader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-2.0.0.tgz#5b1eab9d284a3eedd108222c28abef9828935ee0"
+  integrity sha512-j29YRGJ3tAL/Df2DaXOlE1Xz6+QcZqo9Rc4sOl6kwBT7Nh34iNEMdX72iSr4XAe+bFSvC+IQcVdThFVNiRl+tw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
