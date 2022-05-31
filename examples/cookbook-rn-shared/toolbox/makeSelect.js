@@ -1,6 +1,6 @@
 //@flow
 import React, { Component } from "react";
-import { Picker } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 const styles = {
   root: {
