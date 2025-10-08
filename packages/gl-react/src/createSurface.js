@@ -13,6 +13,7 @@ import type { Shader } from "gl-shader";
 import type { VisitorLike } from "./Visitor";
 import type { WebGLTextureLoader } from "webgltexture-loader";
 import type Node from "./Node";
+import GLContext from "./GLContext";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
@@ -179,19 +180,6 @@ export default ({
     mapRenderableContent = mapRenderableContent;
 
     static propTypes = SurfacePropTypes;
-    static childContextTypes: { [_: $Keys<SurfaceContext>]: any } = {
-      glSurface: PropTypes.object.isRequired,
-      glParent: PropTypes.object.isRequired,
-      glSizable: PropTypes.object.isRequired,
-    };
-
-    getChildContext(): SurfaceContext {
-      return {
-        glParent: this,
-        glSurface: this,
-        glSizable: this,
-      };
-    }
 
     componentDidMount() {
       _instances.push(this);
@@ -226,19 +214,23 @@ export default ({
       });
 
       return (
-        <GLView
-          key={rebootId}
-          debug={debug}
-          ref={this._onRef}
-          onContextCreate={this._onContextCreate}
-          onContextFailure={this._onContextFailure}
-          onContextLost={this._onContextLost}
-          onContextRestored={this._onContextRestored}
-          style={style}
-          {...rest}
+        <GLContext.Provider
+          value={{ glParent: this, glSurface: this, glSizable: this }}
         >
-          {ready ? children : null}
-        </GLView>
+          <GLView
+            key={rebootId}
+            debug={debug}
+            ref={this._onRef}
+            onContextCreate={this._onContextCreate}
+            onContextFailure={this._onContextFailure}
+            onContextLost={this._onContextLost}
+            onContextRestored={this._onContextRestored}
+            style={style}
+            {...rest}
+          >
+            {ready ? children : null}
+          </GLView>
+        </GLContext.Provider>
       );
     }
 

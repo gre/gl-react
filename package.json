@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\u001b[31mPlease use yarn\u001b[0m'); process.exit(1); }\"",
-    "build": "./scripts/build.sh",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && ./scripts/build.sh",
     "watch": "./scripts/watch.sh",
     "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js'",
     "test": "cd packages/tests && yarn test",

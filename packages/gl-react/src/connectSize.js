@@ -1,6 +1,7 @@
 //@flow
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import GLContext from "./GLContext";
 
 /**
  * A High Order Component (HOC) function that provides
@@ -33,12 +34,8 @@ const connectSize = (GLComponent: *) =>
       width: PropTypes.number,
       height: PropTypes.number,
     };
-    static contextTypes = {
-      glSizable: PropTypes.object.isRequired,
-    };
-    static childContextTypes = {
-      glSizable: PropTypes.object.isRequired,
-    };
+    static contextType = GLContext;
+
     getGLSize(): [number, number] {
       const {
         props: { width, height },
@@ -48,21 +45,24 @@ const connectSize = (GLComponent: *) =>
       const [cw, ch] = glSizable.getGLSize();
       return [width || cw, height || ch];
     }
-    getChildContext() {
-      return {
-        glSizable: this,
-      };
-    }
     render() {
       const { onConnectSizeComponentRef } = this.props;
       const [width, height] = this.getGLSize();
       return (
-        <GLComponent
-          ref={onConnectSizeComponentRef}
-          {...this.props}
-          width={width}
-          height={height}
-        />
+        <GLContext.Provider
+          value={{
+            glSizable: this,
+            glParent: this.context.glParent,
+            glSurface: this.context.glSurface,
+          }}
+        >
+          <GLComponent
+            ref={onConnectSizeComponentRef}
+            {...this.props}
+            width={width}
+            height={height}
+          />
+        </GLContext.Provider>
       );
     }
   };

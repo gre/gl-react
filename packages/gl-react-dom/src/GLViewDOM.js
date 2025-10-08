@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
 import getContext from "./getContext";
-import loseGL from "./loseGL";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
@@ -114,7 +113,6 @@ export default class GLViewDOM extends Component<
 
   componentWillUnmount() {
     if (this.gl) {
-      loseGL(this.gl);
       this.gl = null;
     }
     const { canvas } = this;

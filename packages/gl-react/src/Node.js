@@ -18,6 +18,7 @@ import type { Shader } from "gl-shader";
 import type { NDArray } from "ndarray";
 import type { ShaderIdentifier, ShaderInfo, ShaderDefinition } from "./Shaders";
 import type { Surface, SurfaceContext } from "./createSurface";
+import GLContext from "./GLContext";
 
 const blendFuncAliases = {
   zero: "ZERO",
@@ -418,23 +419,7 @@ export default class Node extends Component<Props, *> {
     },
   };
 
-  static contextTypes = {
-    glParent: PropTypes.object.isRequired,
-    glSurface: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired,
-  };
-
-  static childContextTypes = {
-    glParent: PropTypes.object.isRequired,
-    glSizable: PropTypes.object.isRequired,
-  };
-
-  getChildContext() {
-    return {
-      glParent: this,
-      glSizable: this,
-    };
-  }
+  static contextType = GLContext;
 
   componentDidMount() {
     const {
@@ -512,10 +497,18 @@ export default class Node extends Component<Props, *> {
       glSurface: { RenderLessElement },
     } = this.context;
     return (
-      <RenderLessElement>
-        {children}
-        {Object.keys(uniforms).map(this._renderUniformElement)}
-      </RenderLessElement>
+      <GLContext.Provider
+        value={{
+          glParent: this,
+          glSurface: this.context.glSurface,
+          glSizable: this,
+        }}
+      >
+        <RenderLessElement>
+          {children}
+          {Object.keys(uniforms).map(this._renderUniformElement)}
+        </RenderLessElement>
+      </GLContext.Provider>
     );
   }
 
@@ -725,10 +718,10 @@ export default class Node extends Component<Props, *> {
     newdeps: Array<Node | Bus>
   ): [Array<Bus | Node>, Array<Bus | Node>] {
     const olddeps = this.dependencies;
-    const additions = newdeps.filter((node) => olddeps.indexOf(node) === -1);
-    const deletions = olddeps.filter((node) => newdeps.indexOf(node) === -1);
-    additions.forEach((d) => d._addDependent(this));
-    deletions.forEach((d) => d._removeDependent(this));
+    const additions = newdeps.filter(node => olddeps.indexOf(node) === -1);
+    const deletions = olddeps.filter(node => newdeps.indexOf(node) === -1);
+    olddeps.forEach(d => d._removeDependent(this));
+    newdeps.forEach(d => d._addDependent(this));
     this.dependencies = newdeps;
     return [additions, deletions];
   }

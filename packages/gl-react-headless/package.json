@@ -17,7 +17,7 @@
     "react": "*"
   },
   "dependencies": {
-    "gl": "^5.0.0",
+    "gl": "^8.1.6",
     "invariant": "^2.2.4",
     "prop-types": "^15.7.2",
     "raf": "^3.4.1"

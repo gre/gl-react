@@ -8,6 +8,7 @@ import genId from "./genId";
 
 import type { Surface } from "./createSurface";
 import type { NDArray } from "ndarray";
+import GLContext from "./GLContext";
 
 type Props = {|
   children?: React$Element<*> | ((redraw?: () => void) => React$Element<*>),
@@ -45,6 +46,8 @@ type Props = {|
  */
 export default class Bus extends Component<Props, *> {
   id: number = genId();
+  static contextType = GLContext;
+
   context: {
     glParent: Surface | Node,
     glSurface: Surface,
@@ -53,15 +56,6 @@ export default class Bus extends Component<Props, *> {
 
   static defaultProps = {
     index: 0,
-  };
-
-  static contextTypes = {
-    glParent: PropTypes.object.isRequired,
-    glSurface: PropTypes.object.isRequired,
-  };
-
-  static childContextTypes = {
-    glParent: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -101,12 +95,6 @@ export default class Bus extends Component<Props, *> {
       glParent._addUniformBus(this, uniform, index);
     }
     this.redraw();
-  }
-
-  getChildContext(): { glParent: Bus } {
-    return {
-      glParent: this,
-    };
   }
 
   glNode: ?Node = null;
@@ -204,9 +192,17 @@ export default class Bus extends Component<Props, *> {
       glSurface: { RenderLessElement, mapRenderableContent },
     } = this.context;
     return (
-      <RenderLessElement ref={mapRenderableContent ? this.onRef : undefined}>
-        {typeof children === "function" ? children(this.redraw) : children}
-      </RenderLessElement>
+      <GLContext.Provider
+        value={{
+          glParent: this,
+          glSurface: this.context.glSurface,
+          glSizable: this.context.glSizable,
+        }}
+      >
+        <RenderLessElement ref={mapRenderableContent ? this.onRef : undefined}>
+          {typeof children === "function" ? children(this.redraw) : children}
+        </RenderLessElement>
+      </GLContext.Provider>
     );
   }
 }
