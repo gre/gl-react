@@ -70,13 +70,20 @@ function GameOfLifeWebcam({
 const WebCamSource = () => {
   const videoRef = useContext(VideoContext);
   useEffect(() => {
+    let stream: MediaStream | null = null;
     if (videoRef?.current && navigator.mediaDevices) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video: true }).then((s) => {
+        stream = s;
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
-      });
+      }).catch(() => {});
     }
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
   }, [videoRef]);
   return null;
 };

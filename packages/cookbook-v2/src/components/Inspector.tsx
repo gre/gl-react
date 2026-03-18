@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
     EyeIcon,
     EyeSlashIcon,
@@ -11,7 +11,7 @@ interface InspectorProps {
     children: React.ReactNode;
     title?: string;
     showInspector?: boolean;
-    onToggleInspector?: () => void;
+    onToggleInspector?: (isOpen: boolean) => void;
 }
 
 export function Inspector({
@@ -21,9 +21,7 @@ export function Inspector({
     onToggleInspector
 }: InspectorProps) {
     const [isOpen, setIsOpen] = useState(showInspector);
-    const [uniforms, setUniforms] = useState<Record<string, any>>({});
     const [shaderInfo, setShaderInfo] = useState<any>(null);
-    const inspectorRef = useRef<HTMLDivElement>(null);
 
     const toggleInspector = () => {
         const newState = !isOpen;

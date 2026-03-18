@@ -44,7 +44,7 @@ export function useVideo(src: string) {
     video.muted = true;
     video.playsInline = true;
     videoRef.current = video;
-    video.play();
+    video.play().catch(() => {});
 
     let handle: number;
     let lastTime: number | undefined;

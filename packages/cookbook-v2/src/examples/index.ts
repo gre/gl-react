@@ -1,4 +1,4 @@
-import { lazy, ComponentType } from "react";
+import { lazy, ComponentType, LazyExoticComponent } from "react";
 import type { ControlsMap } from "../controls";
 
 export interface ExampleEntry {
@@ -6,7 +6,7 @@ export interface ExampleEntry {
   title: string;
   description: string;
   category: string;
-  Component: React.LazyExoticComponent<ComponentType<any>>;
+  Component: LazyExoticComponent<ComponentType<any>>;
   controls?: ControlsMap;
 }
 

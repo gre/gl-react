@@ -16,7 +16,7 @@ function RotatingGameOfLife({ time }: { time: number }) {
   );
 }
 
-export function RotatingGameOfLifeLoop({ size }: { size?: number }) {
+export function RotatingGameOfLifeLoop() {
   const { time } = useTimeLoop();
   return <RotatingGameOfLife time={time} />;
 }

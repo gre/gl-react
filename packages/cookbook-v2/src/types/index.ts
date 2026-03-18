@@ -1,16 +1,18 @@
+import type { ComponentType } from "react";
+
 export interface Example {
   id: string
   title: string
   description: string
   category: string
   source: string
-  component: React.ComponentType
+  component: ComponentType
 }
 
 export interface NavigationItem {
   label: string
   href: string
-  icon?: React.ComponentType<{ className?: string }>
+  icon?: ComponentType<{ className?: string }>
 }
 
 export interface GLReactContextType {
