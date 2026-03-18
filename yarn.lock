@@ -12258,7 +12258,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gl-react-headless@workspace:packages/gl-react-headless"
   dependencies:
-    gl: "npm:latest"
+    gl: "npm:^8.1.6"
     gl-react: "npm:^5.2.0"
     invariant: "npm:^2.2.4"
     prop-types: "npm:^15.7.2"
@@ -12360,7 +12360,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gl@npm:latest":
+"gl@npm:^8.1.6":
   version: 8.1.6
   resolution: "gl@npm:8.1.6"
   dependencies:
