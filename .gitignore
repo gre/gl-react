@@ -14,3 +14,7 @@ packages/tests/node_modules_to_test/
 packages/cookbook/src/API.json
 examples/*/shared/
 .yarn
+.pnp.cjs
+.pnp.loader.mjs
+test-results
+packages/cookbook-v2/test-results
