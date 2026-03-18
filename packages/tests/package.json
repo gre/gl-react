@@ -6,6 +6,12 @@
     "test": "./test.sh"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
     "babel-eslint": "^10.1.0",
     "babel-jest": "26.6.3",
     "eslint": "^7.16.0",
@@ -17,6 +23,7 @@
     "gl-react": "^5.2.0",
     "gl-react-headless": "^5.2.1",
     "gl-texture2d": "^2.0.12",
+    "invariant": "^2.2.4",
     "jest": "26.6.3",
     "jest-cli": "26.6.3",
     "ndarray": "^1.0.19",

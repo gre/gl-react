@@ -140,7 +140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.29.0":
+"@babel/core@npm:^7.13.10, @babel/core@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/core@npm:7.29.0"
   dependencies:
@@ -12289,6 +12289,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gl-react-tests@workspace:packages/tests"
   dependencies:
+    "@babel/core": "npm:^7.13.10"
+    "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
+    "@babel/plugin-proposal-object-rest-spread": "npm:^7.13.8"
+    "@babel/preset-env": "npm:^7.13.10"
+    "@babel/preset-flow": "npm:^7.12.13"
+    "@babel/preset-react": "npm:^7.12.13"
     babel-eslint: "npm:^10.1.0"
     babel-jest: "npm:26.6.3"
     eslint: "npm:^7.16.0"
@@ -12297,6 +12303,7 @@ __metadata:
     gl-react: "npm:^5.2.0"
     gl-react-headless: "npm:^5.2.1"
     gl-texture2d: "npm:^2.0.12"
+    invariant: "npm:^2.2.4"
     jest: "npm:26.6.3"
     jest-cli: "npm:26.6.3"
     ndarray: "npm:^1.0.19"
