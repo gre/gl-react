@@ -8,15 +8,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - run: sudo apt-get install -y xorg-dev mesa-utils xvfb libgl1 freeglut3-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: 14
-        cache: 'yarn'
-    - run: yarn
-    - run: yarn build
+        node-version: 18
+    - run: corepack enable
+    - run: yarn install
+    - name: Build gl-react packages
+      run: |
+        for d in packages/gl-react packages/gl-react-dom packages/gl-react-headless; do
+          yarn workspace gl-react-dev exec babel --root-mode upward --source-maps -d "$d/lib" "$d/src"
+          yarn workspace gl-react-dev exec flow-copy-source "$d/src" "$d/lib"
+        done
     - run: xvfb-run -s "-ac -screen 0 1280x1024x24" yarn test
