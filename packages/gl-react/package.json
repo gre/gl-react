@@ -12,14 +12,12 @@
     "react-component"
   ],
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "src",
     "lib",
-    "flow",
-    ".flowconfig",
     "README.md",
-    "LICENSE",
-    "gl-react.js"
+    "LICENSE"
   ],
   "browserify-shim": {
     "react": "global:React"

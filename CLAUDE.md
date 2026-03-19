@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-gl-react is a universal React library for writing and composing WebGL shaders. It uses Flow for type checking and is structured as a Yarn workspaces monorepo managed with Lerna.
+gl-react is a universal React library for writing and composing WebGL shaders. It uses TypeScript for type checking and is structured as a Yarn workspaces monorepo.
 
 ## Commands
 
@@ -12,7 +12,8 @@ gl-react is a universal React library for writing and composing WebGL shaders. I
 
 ```bash
 yarn                              # Install dependencies
-yarn build                        # Babel-compile all packages to lib/
+yarn build                        # Babel-compile all packages to lib/ + generate .d.ts
+yarn typecheck                    # Run TypeScript type checking (tsc --noEmit)
 yarn watch                        # Watch mode for development
 yarn test                         # Run Jest tests (packages/tests)
 yarn test-rewrite-snapshots       # Regenerate test snapshots
@@ -34,7 +35,7 @@ Tests run via `packages/tests/test.sh`, which executes Jest on each `__tests__/*
 
 ## Architecture
 
-**Build pipeline:** Babel compiles `src/` → `lib/` for each `gl-react*` package. `flow-copy-source` copies Flow type definitions alongside compiled output. Lerna runs per-package build steps after.
+**Build pipeline:** Babel compiles `src/` (`.ts`/`.tsx`) → `lib/` for each `gl-react*` package. `tsc --emitDeclarationOnly` generates `.d.ts` type declarations alongside compiled output.
 
 **Rendering model:** Two-phase: `redraw()` marks nodes dirty, `flush()` performs actual GL draws. Async flushing at 60fps by default; synchronous mode available via `sync` prop on Surface.
 
@@ -46,6 +47,6 @@ Tests run via `packages/tests/test.sh`, which executes Jest on each `__tests__/*
 
 ## Code Conventions
 
-- Source uses **Flow** type annotations (`// @flow`). The `packages/cookbook-v2/` is the exception (TypeScript).
+- Source uses **TypeScript** (`.ts`/`.tsx` files) across all packages.
 - Prettier config: semicolons, double quotes, trailing commas (es5), 80 char width.
 - Node 18+ required (see `.prototools`).

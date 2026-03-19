@@ -5,10 +5,10 @@
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "headless-gl implementation of gl-react, an universal React library to write and compose WebGL shaders",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "src",
     "lib",
-    ".flowconfig",
     "README.md",
     "LICENSE"
   ],

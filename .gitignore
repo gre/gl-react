@@ -18,3 +18,5 @@ examples/*/shared/
 .pnp.loader.mjs
 test-results
 packages/cookbook-v2/test-results
+packages/cookbook-v2/dist
+*.tsbuildinfo
