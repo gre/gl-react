@@ -9,27 +9,26 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\u001b[31mPlease use yarn\u001b[0m'); process.exit(1); }\"",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && ./scripts/build.sh",
+    "build": "./scripts/build.sh",
     "watch": "./scripts/watch.sh",
-    "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/*.js' 'packages/cookbook-v2/src/**/*.{ts,tsx}'",
+    "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/**/*.{ts,tsx}' 'packages/cookbook-v2/src/**/*.{ts,tsx}'",
     "cookbook-v2": "cd packages/cookbook-v2 && yarn dev",
     "test": "cd packages/tests && yarn test",
     "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
     "clean": "rm -rf node_modules packages/*/node_modules/ packages/*/lib",
-    "publish": "yarn && lerna run clean && yarn build && lerna publish --registry=https://registry.npmjs.org/"
+    "typecheck": "echo 'TODO: tsc -b (needs peerDep resolution for PnP)'",
+    "publish": "yarn && yarn build && echo 'Use yarn workspace <pkg> npm publish for each package'"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
-    "@babel/preset-env": "^7.13.10",
-    "@babel/preset-flow": "^7.12.13",
-    "@babel/preset-react": "^7.12.13",
+    "@babel/cli": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
     "browserify": "^17.0.0",
     "browserify-shim": "^3.8.12",
-    "documentation": "13.2.0",
-    "flow-copy-source": "^2.0.9",
-    "lerna": "^3.22.1",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.7.0"
   }
 }

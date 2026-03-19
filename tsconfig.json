@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "lib",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "gl-react": ["./packages/gl-react/src"],
+      "gl-react-dom": ["./packages/gl-react-dom/src"],
+      "gl-react-headless": ["./packages/gl-react-headless/src"],
+      "gl-react-expo": ["./packages/gl-react-expo/src"],
+      "gl-react-native": ["./packages/gl-react-native/src"]
+    }
+  },
+  "references": [
+    { "path": "packages/gl-react" },
+    { "path": "packages/gl-react-dom" },
+    { "path": "packages/gl-react-headless" },
+    { "path": "packages/gl-react-expo" },
+    { "path": "packages/gl-react-native" }
+  ],
+  "include": [],
+  "exclude": ["node_modules", "**/lib"]
+}
