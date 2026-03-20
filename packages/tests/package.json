@@ -10,7 +10,11 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-flow": "^7.25.0",
     "@babel/preset-react": "^7.26.0",
-    "babel-jest": "^29.7.0"
+    "babel-jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   },
   "version": "5.2.1",
   "dependencies": {
@@ -23,8 +27,8 @@
     "ndarray": "^1.0.19",
     "promise-defer": "^1.0.0",
     "prop-types": "^15.7.2",
-    "react": "^18.3.1",
-    "react-test-renderer": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "webgltexture-loader": "2.0.0",
     "webgltexture-loader-ndarray": "2.0.0"
   }
