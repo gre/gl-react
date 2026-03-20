@@ -1,0 +1,38 @@
+appId: host.exp.Exponent
+---
+# Smoke test: verify the app loads and each example renders without crash
+
+- assertVisible: "gl-react cookbook"
+
+# Hello GL (already selected by default)
+- assertVisible: "UV gradient"
+- takeScreenshot: hello-gl
+
+# Hello Blue
+- tapOn:
+    id: "tab-hello-blue"
+- assertVisible: "Animated uniform"
+- takeScreenshot: hello-blue
+
+# Color Disc
+- tapOn:
+    id: "tab-color-disc"
+- assertVisible: "Radial gradient with step()"
+- takeScreenshot: color-disc
+
+# Rotating Hello
+- tapOn:
+    id: "tab-rotating-hello"
+- assertVisible: "Shader composition"
+- takeScreenshot: rotating-hello
+
+# Motion Blur (may need scroll in tab bar)
+- scrollUntilVisible:
+    element:
+      id: "tab-motion-blur"
+    direction: RIGHT
+    timeout: 5000
+- tapOn:
+    id: "tab-motion-blur"
+- assertVisible: "Backbuffering + composition"
+- takeScreenshot: motion-blur

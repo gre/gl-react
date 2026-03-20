@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -214,14 +214,14 @@ export default function App() {
   const Example = examples[selected].component;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID="app-root">
       <StatusBar style="light" />
       <View style={styles.header}>
-        <Text style={styles.title}>gl-react cookbook</Text>
-        <Text style={styles.subtitle}>{examples[selected].description}</Text>
+        <Text style={styles.title} testID="app-title">gl-react cookbook</Text>
+        <Text style={styles.subtitle} testID="example-description">{examples[selected].description}</Text>
       </View>
 
-      <View style={styles.canvasContainer}>
+      <View style={styles.canvasContainer} testID="canvas-container">
         <Example />
       </View>
 
@@ -230,12 +230,14 @@ export default function App() {
         style={styles.tabBar}
         contentContainerStyle={styles.tabBarContent}
         showsHorizontalScrollIndicator={false}
+        testID="tab-bar"
       >
         {examples.map((ex, i) => (
           <TouchableOpacity
             key={i}
             onPress={() => setSelected(i)}
             style={[styles.tab, i === selected && styles.tabActive]}
+            testID={`tab-${ex.title.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <Text
               style={[styles.tabText, i === selected && styles.tabTextActive]}
