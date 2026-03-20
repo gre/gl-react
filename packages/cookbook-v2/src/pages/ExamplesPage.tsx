@@ -2,15 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import { examples } from "../examples";
+import { Breadcrumb } from "../components/Breadcrumb";
 
 const categories = [...new Set(examples.map((e) => e.category))];
 
 export function ExamplesPage() {
     return (
         <div className="space-y-8">
-            <div>
-                <h1 className="text-3xl font-bold text-gray-900">Examples</h1>
-            </div>
+            <Breadcrumb />
 
             {categories.map((category) => (
                 <div key={category}>

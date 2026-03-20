@@ -1,122 +1,59 @@
-import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { 
-  Bars3Icon, 
-  XMarkIcon,
-  CodeBracketIcon,
-  BeakerIcon,
-  BookOpenIcon,
-  HomeIcon
-} from '@heroicons/react/24/outline'
+import { useState, useEffect, useRef, type ReactNode } from 'react'
+import { XMarkIcon, EyeIcon } from '@heroicons/react/24/outline'
+import GLInspector from './GLInspector'
 
-interface LayoutProps {
-  children: React.ReactNode
-}
+const DEFAULT_HEIGHT = 500
 
-const navigation = [
-  { name: 'Home', href: '/', icon: HomeIcon },
-  { name: 'Examples', href: '/examples', icon: BeakerIcon },
-]
+export function Layout({ children }: { children: ReactNode }) {
+  const [open, setOpen] = useState(false)
+  const [height, setHeight] = useState(DEFAULT_HEIGHT)
+  const [hoveredCanvas, setHoveredCanvas] = useState<HTMLCanvasElement | null>(null)
+  const overlayRef = useRef<HTMLButtonElement>(null)
 
-export function Layout({ children }: LayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const location = useLocation()
+  const openInspector = () => { setHeight(DEFAULT_HEIGHT); setOpen(true) }
+
+  const onResizeStart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const startY = e.clientY, startH = height
+    const onMove = (e: MouseEvent) => {
+      const h = startH + startY - e.clientY
+      if (h < 100) { setOpen(false); cleanup() }
+      else setHeight(Math.min(window.innerHeight - 100, h))
+    }
+    const onUp = () => cleanup()
+    const cleanup = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp) }
+    document.addEventListener('mousemove', onMove)
+    document.addEventListener('mouseup', onUp)
+  }
+
+  useEffect(() => {
+    const onOver = (e: MouseEvent) => setHoveredCanvas((e.target as HTMLElement).closest('canvas') as HTMLCanvasElement | null)
+    const onOut = (e: MouseEvent) => { if (!(e.relatedTarget as HTMLElement)?.closest('canvas') && e.relatedTarget !== overlayRef.current) setHoveredCanvas(null) }
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
+    return () => { document.removeEventListener('mouseover', onOver); document.removeEventListener('mouseout', onOut) }
+  }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Mobile sidebar */}
-      <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
-        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl">
-          <div className="flex h-16 items-center justify-between px-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <CodeBracketIcon className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">GL React</span>
-            </Link>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
-          <nav className="flex-1 space-y-1 px-2 py-4">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
-                    isActive
-                      ? 'bg-primary-100 text-primary-700'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  }`}
-                >
-                  <item.icon className="mr-3 h-5 w-5 flex-shrink-0" />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      </div>
+    <div className="h-screen flex flex-col bg-gray-50">
+      <main className="flex-1 overflow-auto" style={open ? { paddingBottom: height } : undefined}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">{children}</div>
+      </main>
 
-      {/* Desktop sidebar */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-        <div className="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
-          <div className="flex items-center flex-shrink-0 px-4">
-            <Link to="/" className="flex items-center space-x-2">
-              <CodeBracketIcon className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">GL React</span>
-            </Link>
-          </div>
-          <nav className="mt-5 flex-1 px-2 space-y-1">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
-                    isActive
-                      ? 'bg-primary-100 text-primary-700'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                  }`}
-                >
-                  <item.icon className="mr-3 h-5 w-5 flex-shrink-0" />
-                  {item.name}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      </div>
+      {!open && hoveredCanvas && (() => {
+        const r = hoveredCanvas.getBoundingClientRect()
+        return <button ref={overlayRef} onClick={() => { openInspector(); setHoveredCanvas(null) }} className="fixed z-50 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 opacity-50 hover:opacity-100" style={{ top: r.top + 6, left: r.right - 34 }} title="Inspect GL"><EyeIcon className="h-4 w-4" /></button>
+      })()}
 
-      {/* Main content */}
-      <div className="lg:pl-64 flex flex-col flex-1">
-        {/* Top bar */}
-        <div className="sticky top-0 z-10 lg:hidden pl-1 pt-1 sm:pl-3 sm:pt-3 bg-gray-50">
-          <button
-            type="button"
-            className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Bars3Icon className="h-6 w-6" />
-          </button>
-        </div>
+      {!open && <button onClick={openInspector} className="fixed z-50 bottom-4 right-4 rounded-full p-3 shadow-lg bg-primary-600 hover:bg-primary-700 text-white" title="Open GL Inspector"><EyeIcon className="h-5 w-5" /></button>}
 
-        {/* Page content */}
-        <main className="flex-1">
-          <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              {children}
-            </div>
-          </div>
-        </main>
-      </div>
+      {open && (
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white flex flex-col" style={{ height }}>
+          <div onMouseDown={onResizeStart} className="cursor-ns-resize bg-gray-300 hover:bg-primary-400 transition-colors shrink-0 -mt-2" style={{ height: 3, paddingTop: 8, backgroundClip: 'content-box' }} />
+          <div className="overflow-auto flex-1"><GLInspector /></div>
+          <button onClick={() => setOpen(false)} className="absolute bottom-4 right-4 z-[60] rounded-full p-3 shadow-lg bg-gray-600 hover:bg-gray-700 text-white" title="Close GL Inspector"><XMarkIcon className="h-5 w-5" /></button>
+        </div>
+      )}
     </div>
   )
 }
-
-

@@ -40,7 +40,7 @@ export function ApiPage() {
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900">API Documentation</h1>
                     <p className="mt-1 text-gray-600">
-                        Complete reference for GL React components and APIs
+                        Complete reference for gl-react components and APIs
                     </p>
                 </div>
             </div>

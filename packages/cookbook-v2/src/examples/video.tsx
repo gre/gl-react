@@ -2,10 +2,9 @@ import React, { useRef, useEffect, useState, createContext } from "react";
 import { Shaders, GLSL, Node } from "gl-react";
 import { Surface } from "gl-react-dom";
 
-// VideoContext for webcam examples that need to attach a stream to a video element
 export const VideoContext = createContext<React.RefObject<HTMLVideoElement> | null>(null);
 
-// Legacy Video component for webcam examples (renders a hidden video element in the DOM)
+// Renders a hidden video element, calls onFrame on each new video frame
 export const Video = ({ onFrame, ...rest }: { onFrame: (t: number) => void; [key: string]: any }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -32,6 +31,7 @@ export const Video = ({ onFrame, ...rest }: { onFrame: (t: number) => void; [key
   );
 };
 
+// Creates a video element and re-renders on new frames
 export function useVideo(src: string) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [, setTick] = useState(0);

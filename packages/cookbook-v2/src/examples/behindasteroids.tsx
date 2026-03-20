@@ -3,12 +3,6 @@ import { Shaders, Node, GLSL, Bus, Uniform } from "gl-react";
 import { Surface } from "gl-react-dom";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 
-/**
- * This example reproduces the after effects made in a js13k game:
- * https://github.com/gre/behind-asteroids
- * Simplified to just the shader composition without the game logic.
- */
-
 const shaders = Shaders.create({
   blur1d: {
     frag: GLSL`
@@ -34,13 +28,8 @@ void main() {
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
-uniform sampler2D G;
-uniform sampler2D R;
-uniform sampler2D B;
-uniform sampler2D L;
-uniform sampler2D E;
-uniform float s;
-uniform float F;
+uniform sampler2D G, R, B, L, E;
+uniform float s, F;
 uniform vec2 k;
 uniform float S;
 float squircleDist (vec2 a, vec2 b) {
@@ -209,7 +198,6 @@ void main() {
 }
 `,
   },
-  // Simple demo scene that generates game-like content
   demoScene: {
     frag: GLSL`
 precision highp float;
@@ -218,12 +206,10 @@ uniform float time;
 void main() {
   float t = time;
   vec3 c = vec3(0.0);
-  // Fake laser beams
   float beam1 = smoothstep(0.01, 0.0, abs(uv.y - 0.5 - 0.3*sin(t*2.0+uv.x*10.0)));
   float beam2 = smoothstep(0.01, 0.0, abs(uv.y - 0.5 + 0.2*cos(t*3.0+uv.x*8.0)));
   c += vec3(0.0, 0.5, 1.0) * beam1;
   c += vec3(1.0, 0.3, 0.0) * beam2;
-  // Stars
   float star = step(0.99, fract(sin(dot(floor(uv*40.0), vec2(12.9898,78.233)))*43758.5453));
   c += vec3(star) * 0.5;
   gl_FragColor = vec4(c, 1.0);
@@ -255,7 +241,6 @@ export default function BehindAsteroids() {
   const H = 400;
   const dim: [number, number] = [W, H];
 
-  // Simulated game params that animate over time
   const t = time / 1000;
   const pt = t;
   const pl = 0;

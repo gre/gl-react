@@ -26,6 +26,7 @@ void main() {
   },
 });
 
+// Spring animation hook for smooth hover/click transitions
 function useSpringValue(target: number, stiffness = 150, damping = 15) {
   const ref = useRef({ value: target, velocity: 0 });
   const [value, setValue] = useState(target);

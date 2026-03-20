@@ -54,7 +54,7 @@ export default function BlurFeedback({
     if (!initialized) setInitialized(true);
   };
 
-  void tick;
+  void tick; // tick triggers re-renders for the feedback loop
 
   return (
     <Surface width={400} height={300}>
@@ -68,6 +68,7 @@ export default function BlurFeedback({
             onDraw={onDraw}
           />
         ) : (
+          // Each frame reads its own previous output via Backbuffer
           <Node
             shader={shaders.blur1D}
             uniforms={{

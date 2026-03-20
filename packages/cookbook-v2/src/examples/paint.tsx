@@ -26,7 +26,7 @@ void main() {
       gl_FragColor = color;
     }
     else {
-      discard;
+      discard; // preserve existing framebuffer content
     }
   }
   else {

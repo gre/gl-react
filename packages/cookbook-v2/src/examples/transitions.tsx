@@ -3,9 +3,6 @@ import { Shaders, Node, GLSL, LinearCopy } from "gl-react";
 import { Surface } from "gl-react-dom";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 
-// A set of built-in GL transition shaders
-// We inline a few classic transitions rather than depending on gl-transitions package
-
 const transitionShaders = Shaders.create({
   fade: {
     frag: GLSL`

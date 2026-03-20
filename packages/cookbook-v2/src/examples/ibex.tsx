@@ -3,12 +3,6 @@ import { Shaders, Node, GLSL, Uniform } from "gl-react";
 import { Surface } from "gl-react-dom";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 
-/**
- * IBEX cellular automaton - extracted from a js13k game (2014)
- * https://github.com/gre/ibex
- * Simplified version: uses a random initial state instead of the full generation algorithm.
- */
-
 const shaders = Shaders.create({
   IBEXRender: {
     frag: GLSL`
@@ -335,15 +329,15 @@ void main () {
 });
 
 const colors = [
-  [0.11, 0.16, 0.23], // 0: air
-  [0.74, 0.66, 0.51], // 1: earth
-  [0.84, 0.17, 0.08], // 2: fire
-  [0.4, 0.75, 0.9], // 3: water
-  [0.6, 0.0, 0.0], // 4: volcano
-  [0.3, 0.6, 0.7], // 5: source
-  [0.15, 0.2, 0.27], // 6: wind left
-  [0.07, 0.12, 0.19], // 7: wind right
-  [0.2, 0.6, 0.2], // 8: grass
+  [0.11, 0.16, 0.23],
+  [0.74, 0.66, 0.51],
+  [0.84, 0.17, 0.08],
+  [0.4, 0.75, 0.9],
+  [0.6, 0.0, 0.0],
+  [0.3, 0.6, 0.7],
+  [0.15, 0.2, 0.27],
+  [0.07, 0.12, 0.19],
+  [0.2, 0.6, 0.2],
 ];
 
 const worldSize: [number, number] = [200, 200];
@@ -357,22 +351,19 @@ function generateInitialState(): HTMLCanvasElement {
   const imageData = ctx.createImageData(w, h);
   const data = imageData.data;
 
-  // Simple terrain generation
   for (let x = 0; x < w; x++) {
     const groundLevel = Math.floor(
       h * 0.45 + 15 * Math.sin(x * 0.05) + 5 * Math.cos(x * 0.12)
     );
     for (let y = 0; y < h; y++) {
-      const flippedY = h - 1 - y; // flip Y
+      const flippedY = h - 1 - y;
       const idx = (flippedY * w + x) * 4;
-      let element = 0; // air
+      let element = 0;
       if (y < groundLevel) {
-        element = 1; // earth
-        // Occasional water source
+        element = 1;
         if (Math.random() < 0.001 && y > groundLevel - 10) {
           element = 5;
         }
-        // Occasional volcano
         if (Math.random() < 0.0005 && y < 10) {
           element = 4;
         }

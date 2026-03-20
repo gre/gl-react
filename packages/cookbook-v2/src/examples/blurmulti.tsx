@@ -3,6 +3,7 @@ import { connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
 import { Blur1D } from "./blurxy";
 
+// 4 directional blur passes for a smoother result
 export const BlurV = connectSize(({ children, factor }: any) => {
   const s = factor;
   return (

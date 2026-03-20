@@ -43,6 +43,7 @@ gl_FragColor = vec4(
   },
 });
 
+// Extreme downscale + blur to compute the average color of an image
 const AveragePixels = ({
   children,
   quality,
@@ -84,6 +85,7 @@ const TitleBlurMap = ({
   />
 );
 
+// Renders text to a 2D canvas, wrapped in LinearCopy for use as texture
 function Title({
   children,
   width,

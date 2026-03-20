@@ -13,7 +13,6 @@ const blurMapImages = [
   "https://i.imgur.com/wh0On3P.png",
 ];
 
-// Inner class component for Bus ref stability
 class BlurVideoInner extends Component<{
   video: HTMLVideoElement;
   factor: number;

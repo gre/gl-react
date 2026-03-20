@@ -4,6 +4,7 @@ import { useTimeLoop } from "../hooks/useTimeLoop";
 import { GameOfLife } from "./gol";
 import { Rotating } from "./golrot";
 
+// useMemo prevents GameOfLife from re-rendering on every animation frame
 function RotatingGameOfLife({ time }: { time: number }) {
   const golTick = useMemo(() => Math.floor(time / 200), [Math.floor(time / 200)]);
   return (
