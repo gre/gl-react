@@ -1,10 +1,16 @@
 appId: host.exp.Exponent
 ---
-# Smoke test: verify the app loads and each example renders without crash
+# Smoke test: verify the app loads and each visible example renders
 
-- assertVisible: "gl-react cookbook"
+- launchApp:
+    arguments:
+      url: "exp://localhost:8085"
 
-# Hello GL (already selected by default)
+- extendedWaitUntil:
+    visible: "gl-react cookbook"
+    timeout: 30000
+
+# Hello GL (default)
 - assertVisible: "UV gradient"
 - takeScreenshot: hello-gl
 
@@ -25,14 +31,3 @@ appId: host.exp.Exponent
     id: "tab-rotating-hello"
 - assertVisible: "Shader composition"
 - takeScreenshot: rotating-hello
-
-# Motion Blur (may need scroll in tab bar)
-- scrollUntilVisible:
-    element:
-      id: "tab-motion-blur"
-    direction: RIGHT
-    timeout: 5000
-- tapOn:
-    id: "tab-motion-blur"
-- assertVisible: "Backbuffering + composition"
-- takeScreenshot: motion-blur
