@@ -1,11 +1,12 @@
 //@flow
 import React from "react";
+import { createRoot } from "react-dom/client";
+import { flushSync } from "react-dom";
 import { Visitor } from "gl-react";
 import { globalRegistry, WebGLTextureLoader } from "webgltexture-loader";
 import invariant from "invariant";
 import type { Surface, Node } from "gl-react";
 import type { Texture } from "gl-texture2d";
-import renderer from "react-test-renderer";
 import ndarray from "ndarray";
 import defer from "promise-defer";
 import drawNDArrayTexture from "webgltexture-loader-ndarray/lib/drawNDArrayTexture";
@@ -23,17 +24,17 @@ class FakeTexture {
   }
 }
 
-function createNodeMock(o) {
-  switch (o.type) {
-    case "faketexture":
-      return new FakeTexture(o.props);
-    case "canvas":
-      return {
-        width: o.props.width,
-        height: o.props.height
-      };
-    default:
-      return null;
+export class FakeTextureElement extends React.Component {
+  _fakeTexture: FakeTexture;
+  constructor(props: any) {
+    super(props);
+    this._fakeTexture = new FakeTexture(props);
+  }
+  getRootRef() {
+    return this._fakeTexture;
+  }
+  render() {
+    return <span />;
   }
 }
 
@@ -53,8 +54,33 @@ export const expectToBeCloseToColorArray = (
   }
 };
 
-export const create = (el: React.Element<*>) =>
-  renderer.create(el, { createNodeMock });
+export const create = (el: React.Element<*>) => {
+  const container = document.createElement("div");
+  const root = createRoot(container);
+  let instance = null;
+
+  function render(element) {
+    flushSync(() => {
+      root.render(
+        React.cloneElement(element, {
+          ref: (r) => {
+            instance = r;
+          },
+        })
+      );
+    });
+  }
+
+  render(el);
+
+  return {
+    getInstance: () => instance,
+    update: (newEl) => render(newEl),
+    unmount: () => {
+      flushSync(() => root.unmount());
+    },
+  };
+};
 
 type SurfaceCounters = {
   onSurfaceDrawEnd: number,

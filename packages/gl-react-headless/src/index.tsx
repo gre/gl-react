@@ -89,12 +89,14 @@ class GLView extends Component<{
   captureAsBlob() {}
 
   render() {
-    const { width, height, ...rest } = this.props;
+    const { width, height, debug, children, ...rest } = this.props;
     for (let k in propTypes) {
       delete rest[k];
     }
     return (
-      <canvas ref={this.onRef} width={width} height={height} {...rest} />
+      <canvas ref={this.onRef} width={width} height={height} {...rest}>
+        {children}
+      </canvas>
     );
   }
 
@@ -120,16 +122,17 @@ class RenderLessElement extends Component<{ children?: any }> {
         {React.Children.map(children, (element: any, i: number) => {
           if (!element) return element;
           const cloneRef = (ref: any) => this.refMap.set(i, ref);
-          const originalRef = element.ref;
-          if (typeof originalRef === "string") {
-            return element;
-          }
+          const originalRef = element.props.ref;
           return React.cloneElement(element, {
             ref: !originalRef
               ? cloneRef
               : (component: any) => {
                   cloneRef(component);
-                  originalRef(component);
+                  if (typeof originalRef === "function") {
+                    originalRef(component);
+                  } else if (originalRef && typeof originalRef === "object") {
+                    originalRef.current = component;
+                  }
                 },
           });
         })}
