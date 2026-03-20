@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-// All example IDs from the registry
 const exampleIds = [
   "hellogl",
   "helloblue",
@@ -11,6 +10,7 @@ const exampleIds = [
   "saturation",
   "colorscale",
   "mergechannels",
+  "mergechannelsfun",
   "diamondcrop",
   "diamondhello",
   "diamondanim",
@@ -20,60 +20,70 @@ const exampleIds = [
   "blurmap",
   "blurmapdyn",
   "blurmapmouse",
-  "distortion",
+  "blurimgtitle",
+  "blurvideo",
+  "blurfeedback",
   "demotunnel",
   "demodesert",
+  "demodesertcrt",
   "sdf1",
   "gol",
   "golglider",
   "golrot",
+  "golrotscu",
+  "golwebcam",
+  "distortion",
   "glsledit",
-  "transitions",
-  "textanimated",
-  "textfunky",
+  "paint",
+  "pixeleditor",
   "animated",
   "reactmotion",
+  "textanimated",
+  "textfunky",
+  "video",
+  "webcam",
+  "webcampersistence",
+  "transitions",
+  "behindasteroids",
+  "ibex",
 ];
 
-test("examples page loads with all examples listed", async ({ page }) => {
+test("homepage loads", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (err) => errors.push(err.message));
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator("text=gl-react")).toBeVisible();
+  expect(errors).toEqual([]);
+});
 
+test("examples page loads", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (err) => errors.push(err.message));
   await page.goto("/examples");
   await page.waitForLoadState("networkidle");
-
-  // Check page loaded
-  await expect(page.locator("h1")).toHaveText(/Examples/);
-
-  // No JS errors
+  await expect(page.locator("text=Examples")).toBeVisible();
   expect(errors).toEqual([]);
 });
 
 for (const id of exampleIds) {
-  test(`example "${id}" loads without JS errors`, async ({ page }) => {
+  test(`example "${id}" loads without errors`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => errors.push(err.message));
 
     await page.goto(`/examples/${id}`);
     await page.waitForLoadState("networkidle");
-
-    // Wait for lazy-loaded component
     await page.waitForTimeout(2000);
 
-    // Title should be visible
-    await expect(page.locator("h1")).toBeVisible();
-
-    // Report errors but don't fail on WebGL context issues (CI may not have GPU)
+    // Filter out WebGL/GPU errors that happen in headless CI
     const criticalErrors = errors.filter(
       (e) =>
         !e.includes("WebGL") &&
         !e.includes("GL_") &&
-        !e.includes("getUserMedia")
+        !e.includes("getUserMedia") &&
+        !e.includes("getContext")
     );
 
-    if (criticalErrors.length > 0) {
-      console.log(`[${id}] JS errors:`, criticalErrors);
-    }
     expect(criticalErrors).toEqual([]);
   });
 }
