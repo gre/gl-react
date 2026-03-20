@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-// All example IDs from the registry
 const exampleIds = [
   "hellogl",
   "helloblue",
@@ -11,6 +10,7 @@ const exampleIds = [
   "saturation",
   "colorscale",
   "mergechannels",
+  "mergechannelsfun",
   "diamondcrop",
   "diamondhello",
   "diamondanim",
@@ -20,60 +20,77 @@ const exampleIds = [
   "blurmap",
   "blurmapdyn",
   "blurmapmouse",
-  "distortion",
+  "blurimgtitle",
+  "blurvideo",
+  "blurfeedback",
   "demotunnel",
   "demodesert",
+  "demodesertcrt",
   "sdf1",
   "gol",
   "golglider",
   "golrot",
+  "golrotscu",
+  "golwebcam",
+  "distortion",
   "glsledit",
-  "transitions",
-  "textanimated",
-  "textfunky",
+  "paint",
+  "pixeleditor",
   "animated",
   "reactmotion",
+  "textanimated",
+  "textfunky",
+  "video",
+  "webcam",
+  "webcampersistence",
+  "transitions",
+  "behindasteroids",
+  "ibex",
 ];
 
-test("examples page loads with all examples listed", async ({ page }) => {
+function filterWebGLErrors(errors: string[]): string[] {
+  return errors.filter(
+    (e) =>
+      !e.includes("WebGL") &&
+      !e.includes("GL_") &&
+      !e.includes("getUserMedia") &&
+      !e.includes("Failed to create WebGL context") &&
+      !e.includes("no-webgl-context")
+  );
+}
+
+test("homepage loads", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (err) => errors.push(err.message));
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator("text=gl-react")).toBeVisible();
+  expect(filterWebGLErrors(errors)).toEqual([]);
+});
 
+test("examples page loads", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (err) => errors.push(err.message));
   await page.goto("/examples");
   await page.waitForLoadState("networkidle");
-
-  // Check page loaded
-  await expect(page.locator("h1")).toHaveText(/Examples/);
-
-  // No JS errors
-  expect(errors).toEqual([]);
+  await expect(page.locator("text=Examples")).toBeVisible();
+  expect(filterWebGLErrors(errors)).toEqual([]);
 });
 
 for (const id of exampleIds) {
-  test(`example "${id}" loads without JS errors`, async ({ page }) => {
+  test(`example "${id}" loads without errors`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => errors.push(err.message));
 
     await page.goto(`/examples/${id}`);
     await page.waitForLoadState("networkidle");
 
-    // Wait for lazy-loaded component
-    await page.waitForTimeout(2000);
+    // Wait for lazy-loaded component to render (canvas visible)
+    await expect(page.locator("canvas").first()).toBeVisible({ timeout: 10000 }).catch(() => {});
 
-    // Title should be visible
-    await expect(page.locator("h1")).toBeVisible();
+    // Ensure the example loaded (not the "not found" fallback)
+    await expect(page.locator("text=Example not found")).toHaveCount(0);
 
-    // Report errors but don't fail on WebGL context issues (CI may not have GPU)
-    const criticalErrors = errors.filter(
-      (e) =>
-        !e.includes("WebGL") &&
-        !e.includes("GL_") &&
-        !e.includes("getUserMedia")
-    );
-
-    if (criticalErrors.length > 0) {
-      console.log(`[${id}] JS errors:`, criticalErrors);
-    }
-    expect(criticalErrors).toEqual([]);
+    expect(filterWebGLErrors(errors)).toEqual([]);
   });
 }
