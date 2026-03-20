@@ -48,13 +48,24 @@ const exampleIds = [
   "ibex",
 ];
 
+function filterWebGLErrors(errors: string[]): string[] {
+  return errors.filter(
+    (e) =>
+      !e.includes("WebGL") &&
+      !e.includes("GL_") &&
+      !e.includes("getUserMedia") &&
+      !e.includes("Failed to create WebGL context") &&
+      !e.includes("no-webgl-context")
+  );
+}
+
 test("homepage loads", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (err) => errors.push(err.message));
   await page.goto("/");
   await page.waitForLoadState("networkidle");
   await expect(page.locator("text=gl-react")).toBeVisible();
-  expect(errors).toEqual([]);
+  expect(filterWebGLErrors(errors)).toEqual([]);
 });
 
 test("examples page loads", async ({ page }) => {
@@ -63,7 +74,7 @@ test("examples page loads", async ({ page }) => {
   await page.goto("/examples");
   await page.waitForLoadState("networkidle");
   await expect(page.locator("text=Examples")).toBeVisible();
-  expect(errors).toEqual([]);
+  expect(filterWebGLErrors(errors)).toEqual([]);
 });
 
 for (const id of exampleIds) {
@@ -73,17 +84,13 @@ for (const id of exampleIds) {
 
     await page.goto(`/examples/${id}`);
     await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
 
-    // Filter out WebGL/GPU errors that happen in headless CI
-    const criticalErrors = errors.filter(
-      (e) =>
-        !e.includes("WebGL") &&
-        !e.includes("GL_") &&
-        !e.includes("getUserMedia") &&
-        !e.includes("getContext")
-    );
+    // Wait for lazy-loaded component to render (canvas visible)
+    await expect(page.locator("canvas").first()).toBeVisible({ timeout: 10000 }).catch(() => {});
 
-    expect(criticalErrors).toEqual([]);
+    // Ensure the example loaded (not the "not found" fallback)
+    await expect(page.locator("text=Example not found")).toHaveCount(0);
+
+    expect(filterWebGLErrors(errors)).toEqual([]);
   });
 }

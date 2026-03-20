@@ -36,6 +36,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report
+          name: cookbook-v2-test-results
           path: packages/cookbook-v2/test-results/
           retention-days: 7
