@@ -12,6 +12,7 @@ float greyscale (vec3 c) { return 0.2125 * c.r + 0.7154 * c.g + 0.0721 * c.b; }
 void main() {
   vec4 original = texture2D(children, uv);
   float grey = greyscale(original.rgb);
+  // Grayscale value indexes into the color scale gradient (1D LUT)
   gl_FragColor = vec4(texture2D(colorScale, vec2(grey, 0.5)).rgb, 1.0);
 }`,
   },

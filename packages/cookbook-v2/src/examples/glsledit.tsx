@@ -28,6 +28,7 @@ function Preview({ frag, visitor }: { frag: string; visitor: Visitor }) {
   const { time } = useTimeLoop();
   return (
     <Surface width={500} height={200} visitor={visitor}>
+      {/* Passing { frag } directly triggers dynamic shader compilation */}
       <Node shader={{ frag }} uniforms={{ time: time / 1000 }} />
     </Surface>
   );
@@ -36,11 +37,12 @@ function Preview({ frag, visitor }: { frag: string; visitor: Visitor }) {
 export default function GLSLEdit() {
   const [frag, setFrag] = useState(defaultFrag);
   const [error, setError] = useState<string | null>(null);
+  // Visitor catches shader compilation errors and reports success
   const [visitor] = useState(() => {
     const v = new Visitor();
     v.onSurfaceDrawError = (err: Error) => {
       setError(err.message);
-      return true;
+      return true; // suppress error, keep last valid frame
     };
     v.onSurfaceDrawEnd = () => setError(null);
     return v;

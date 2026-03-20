@@ -4,6 +4,7 @@ import { Surface } from "gl-react-dom";
 
 const NORM = Math.sqrt(2) / 2;
 
+// Cycles through H, V, and diagonal directions with increasing radius
 const directionForPass = (
   p: number,
   factor: number,
@@ -41,6 +42,7 @@ vec4 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
   return color;
 }
 void main() {
+  // Direction scaled by map value makes blur strength vary per-pixel
   gl_FragColor = blur9(t, uv, resolution, direction * texture2D(map, uv).rg);
 }`,
   },
@@ -67,6 +69,7 @@ export const BlurV1D = connectSize(
   )
 );
 
+// Recursively nests BlurV1D passes for multi-directional blur
 export const BlurV = connectSize(
   ({
     children,

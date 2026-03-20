@@ -24,6 +24,7 @@ uniform sampler2D t;
 void main() {
   float prev = step(0.5, texture2D(t, uv).r);
   float c = 1.0 / size;
+  // Count the 8 neighbors (Moore neighborhood)
   float sum =
   step(0.5, texture2D(t, uv + vec2(-1.0, -1.0)*c).r) +
   step(0.5, texture2D(t, uv + vec2(-1.0,  0.0)*c).r) +
@@ -41,6 +42,7 @@ void main() {
 
 const refreshEveryTicks = 20;
 
+// Re-initializes with a larger grid every refreshEveryTicks ticks
 export const GameOfLife = ({ tick }: { tick: number }) => {
   const size = 16 * (1 + Math.floor(tick / refreshEveryTicks));
   return tick % refreshEveryTicks === 0 ? (

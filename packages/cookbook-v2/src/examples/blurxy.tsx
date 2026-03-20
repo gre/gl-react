@@ -26,6 +26,7 @@ void main() {
   },
 });
 
+// connectSize injects width/height for correct texel offset calculation
 export const Blur1D = connectSize(
   ({ children: t, direction, width, height }: any) => (
     <Node
@@ -35,6 +36,7 @@ export const Blur1D = connectSize(
   )
 );
 
+// Two Blur1D passes (horizontal + vertical) = separable 2D Gaussian blur
 export const BlurXY = connectSize(({ factor, children }: any) => (
   <Blur1D direction={[factor, 0]}>
     <Blur1D direction={[0, factor]}>{children}</Blur1D>

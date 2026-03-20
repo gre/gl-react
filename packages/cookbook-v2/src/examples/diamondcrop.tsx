@@ -9,6 +9,7 @@ precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
 void main() {
+  // Manhattan distance from center defines the diamond shape
   gl_FragColor = mix(
     texture2D(t, uv),
     vec4(0.0),
@@ -18,6 +19,7 @@ void main() {
   },
 });
 
+// gl-react maps children to the t uniform automatically
 export const DiamondCrop = ({ children: t }: { children: any }) => (
   <Node shader={shaders.DiamondCrop} uniforms={{ t }} />
 );

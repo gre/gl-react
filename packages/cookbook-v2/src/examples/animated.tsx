@@ -16,7 +16,7 @@ void main() {
   },
 });
 
-// Simple spring physics for smooth cursor following
+// Spring physics for smooth cursor following
 function useSpring(target: { x: number; y: number }) {
   const [pos, setPos] = useState(target);
   const velRef = useRef({ x: 0, y: 0 });
@@ -34,7 +34,6 @@ function useSpring(target: { x: number; y: number }) {
       const t = targetRef.current;
       const v = velRef.current;
 
-      // Spring force
       const ax = stiffness * (t.x - pos.x) - damping * v.x;
       const ay = stiffness * (t.y - pos.y) - damping * v.y;
 
@@ -57,6 +56,7 @@ export default function Animated() {
   const [target, setTarget] = useState({ x: 0.5, y: 0.5 });
   const pos = useSpring(target);
 
+  // Convert DOM mouse position to UV coordinates (Y-flipped for GL)
   const onMouseMove = useCallback((e: React.MouseEvent) => {
     const canvas = (e.currentTarget as HTMLElement).querySelector("canvas");
     if (!canvas) return;

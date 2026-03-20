@@ -9,7 +9,7 @@ precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
 uniform float contrast, saturation, brightness;
-const vec3 L = vec3(0.2125, 0.7154, 0.0721);
+const vec3 L = vec3(0.2125, 0.7154, 0.0721); // BT.709 luminance weights
 void main() {
   vec4 c = texture2D(t, uv);
   vec3 brt = c.rgb * brightness;

@@ -8,13 +8,14 @@ const shaders = Shaders.create({
 precision highp float;
 in vec2 uv;
 out vec4 color;
-uniform float blue;
+uniform float blue; // a uniform: a value sent from JS (React props) to the GPU
 void main() {
-  color = vec4(uv.x, uv.y, blue, 1.0);
+  color = vec4(uv.x, uv.y, blue, 1.0); // uv.x->red, uv.y->green, blue uniform->blue
 }`,
   },
 });
 
+// uniforms maps JS values to GLSL uniform variables by name
 export const HelloBlue = ({ blue }: { blue: number }) => (
   <Node shader={shaders.helloBlue} uniforms={{ blue }} />
 );

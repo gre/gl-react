@@ -98,7 +98,6 @@ function rgbaToCSS(c: number[]) {
   return `rgba(${Math.round(c[0] * 255)},${Math.round(c[1] * 255)},${Math.round(c[2] * 255)},${c[3]})`;
 }
 
-// Preload mario as dataURL so it's available synchronously for the init texture
 function useMarioDataURL() {
   const [dataURL, setDataURL] = useState<string | null>(null);
   useEffect(() => {

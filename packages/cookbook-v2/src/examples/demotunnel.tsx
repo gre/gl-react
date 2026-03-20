@@ -12,6 +12,7 @@ uniform float iGlobalTime;
 void main() {
   vec2 p = 2.0 * uv - vec2(1.0);
   float a = atan(p.y,p.x);
+  // Superellipse distance (Lp norm p=8) creates a square tunnel shape
   float r = pow( pow(p.x*p.x,4.0) + pow(p.y*p.y,4.0), 1.0/8.0 );
   vec2 uv = vec2( 1.0/r + 0.2*iGlobalTime, a );
   float f = cos(12.0*uv.x)*cos(6.0*uv.y);

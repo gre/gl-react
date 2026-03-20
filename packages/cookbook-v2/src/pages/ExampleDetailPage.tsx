@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useCallback, useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
-import { ArrowLeftIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import Prism from "prismjs";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
@@ -9,6 +9,7 @@ import "prismjs/components/prism-tsx";
 import "prismjs/themes/prism-tomorrow.css";
 import { examples } from "../examples";
 import { ControlsPanel, getDefaults } from "../controls";
+import { Breadcrumb } from "../components/Breadcrumb";
 
 const sources = import.meta.glob("../examples/*.tsx", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
 
@@ -19,6 +20,7 @@ function getSource(id: string): string | null {
 
 export function ExampleDetailPage() {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const exampleIndex = examples.findIndex((e) => e.id === id);
     const example = exampleIndex >= 0 ? examples[exampleIndex] : undefined;
     const prev = exampleIndex > 0 ? examples[exampleIndex - 1] : null;
@@ -51,55 +53,30 @@ export function ExampleDetailPage() {
     );
 
     return (
-        <div className="space-y-4">
-            {/* Nav */}
-            <div className="flex items-center justify-between">
-                <Link
-                    to="/examples"
-                    className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
-                >
-                    <ArrowLeftIcon className="h-4 w-4 mr-1" />
-                    Back
-                </Link>
-                <div className="flex items-center gap-2">
-                    {prev ? (
-                        <Link
-                            to={`/examples/${prev.id}`}
-                            className="inline-flex items-center px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 border border-gray-200 rounded-md hover:bg-gray-50"
-                            title={prev.title}
-                        >
-                            <ChevronLeftIcon className="h-4 w-4 mr-1" />
-                            prev
-                        </Link>
-                    ) : (
-                        <span className="inline-flex items-center px-3 py-1.5 text-sm text-gray-300 border border-gray-100 rounded-md">
-                            <ChevronLeftIcon className="h-4 w-4 mr-1" />
-                            prev
-                        </span>
-                    )}
-                    {next ? (
-                        <Link
-                            to={`/examples/${next.id}`}
-                            className="inline-flex items-center px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 border border-gray-200 rounded-md hover:bg-gray-50"
-                            title={next.title}
-                        >
-                            next
-                            <ChevronRightIcon className="h-4 w-4 ml-1" />
-                        </Link>
-                    ) : (
-                        <span className="inline-flex items-center px-3 py-1.5 text-sm text-gray-300 border border-gray-100 rounded-md">
-                            next
-                            <ChevronRightIcon className="h-4 w-4 ml-1" />
-                        </span>
-                    )}
-                </div>
-            </div>
+        <div className="space-y-4 relative">
+            <Breadcrumb exampleId={example.id} />
 
-            {/* Title */}
-            <div>
-                <h1 className="text-2xl font-bold text-gray-900">{example.title}</h1>
-                <p className="mt-1 text-gray-600">{example.description}</p>
-            </div>
+            <p className="text-gray-600">{example.description}</p>
+
+            {/* Prev/Next arrows */}
+            {prev && (
+                <button
+                    onClick={() => navigate(`/examples/${prev.id}`)}
+                    className="fixed left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow border border-gray-200 transition-colors hidden xl:block"
+                    title={prev.title}
+                >
+                    <ChevronLeftIcon className="h-5 w-5" />
+                </button>
+            )}
+            {next && (
+                <button
+                    onClick={() => navigate(`/examples/${next.id}`)}
+                    className="fixed right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow border border-gray-200 transition-colors hidden xl:block"
+                    title={next.title}
+                >
+                    <ChevronRightIcon className="h-5 w-5" />
+                </button>
+            )}
 
             {/* Main layout: side-by-side on wide screens */}
             <div className="flex flex-col xl:flex-row gap-6">

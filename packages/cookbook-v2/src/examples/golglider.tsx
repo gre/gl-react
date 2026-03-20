@@ -4,8 +4,7 @@ import { Surface } from "gl-react-dom";
 import { golShaders } from "./gol";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 
-// Gosper glider gun 64x64 pattern encoded as a data URL
-// We generate it on-the-fly via a canvas
+// Gosper glider gun 64x64 pattern drawn on a canvas
 function createGliderGunTexture(): HTMLCanvasElement {
   const size = 64;
   const canvas = document.createElement("canvas");
@@ -16,7 +15,6 @@ function createGliderGunTexture(): HTMLCanvasElement {
   ctx.fillRect(0, 0, size, size);
   ctx.fillStyle = "#fff";
 
-  // Gosper glider gun cells (x, y) - standard pattern
   const cells = [
     [1, 5], [1, 6], [2, 5], [2, 6],
     [11, 5], [11, 6], [11, 7],
@@ -58,6 +56,7 @@ function GameOfLifeGlider({ tick, size }: { tick: number; size: number }) {
       backbuffering
       sync
       uniforms={{
+        // tick 0: initialize from canvas, then read from backbuffer
         t: tick === 0 ? getGliderGunTexture() : Uniform.Backbuffer,
         size,
       }}

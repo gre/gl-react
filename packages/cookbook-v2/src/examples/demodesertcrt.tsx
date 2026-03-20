@@ -192,9 +192,9 @@ void main() {
   },
 });
 
+// CRT effect shader adapted from http://bit.ly/2eR1iKi
 const crtShaders = Shaders.create({
   crt: {
-    // adapted from http://bit.ly/2eR1iKi
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
