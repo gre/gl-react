@@ -20,3 +20,4 @@ test-results
 packages/cookbook-v2/test-results
 packages/cookbook-v2/dist
 *.tsbuildinfo
+packages/cookbook-expo/node_modules
