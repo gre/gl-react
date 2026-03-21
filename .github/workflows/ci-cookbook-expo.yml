@@ -41,20 +41,11 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
-      # Force all pods with Swift 6 back to Swift 5 + disable strict concurrency
-      - name: Patch Swift concurrency in pod xcconfigs
+      # Patch: downgrade all Swift 6 sources to Swift 5 language mode in pbxproj
+      - name: Patch Swift version in Pods project
         working-directory: packages/cookbook-expo/ios
         run: |
-          find Pods/Target\ Support\ Files -name "*.xcconfig" | while read f; do
-            if grep -q "SWIFT_VERSION = 6" "$f"; then
-              echo "Patching $f"
-              sed -i '' 's/SWIFT_VERSION = 6[.0-9]*/SWIFT_VERSION = 5/' "$f"
-            fi
-            # Add concurrency flags to all Swift configs
-            if grep -q "OTHER_SWIFT_FLAGS" "$f"; then
-              sed -i '' 's/OTHER_SWIFT_FLAGS = \(.*\)/OTHER_SWIFT_FLAGS = \1 -Xfrontend -strict-concurrency=minimal/' "$f"
-            fi
-          done
+          sed -i '' 's/SWIFT_VERSION = 6\.0/SWIFT_VERSION = 5.0/g' Pods/Pods.xcodeproj/project.pbxproj
 
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
@@ -67,6 +58,7 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
+            OTHER_SWIFT_FLAGS='$(inherited) -swift-version 5' \
             -quiet
 
       - name: Boot iOS Simulator
