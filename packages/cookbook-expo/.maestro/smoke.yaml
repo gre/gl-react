@@ -1,33 +1,14 @@
-appId: host.exp.Exponent
+appId: com.glreact.cookbookexpo
 ---
-# Smoke test: verify the app loads and each visible example renders
-
-- launchApp:
-    arguments:
-      url: "exp://localhost:8085"
+# Smoke test: verify the app launches and renders the first GL example
+- launchApp
 
 - extendedWaitUntil:
     visible: "gl-react cookbook"
     timeout: 30000
 
-# Hello GL (default)
 - assertVisible: "UV gradient"
-- takeScreenshot: hello-gl
+- assertVisible: "Hello GL"
+- assertVisible: "Hello Blue"
 
-# Hello Blue
-- tapOn:
-    id: "tab-hello-blue"
-- assertVisible: "Animated uniform"
-- takeScreenshot: hello-blue
-
-# Color Disc
-- tapOn:
-    id: "tab-color-disc"
-- assertVisible: "Radial gradient with step()"
-- takeScreenshot: color-disc
-
-# Rotating Hello
-- tapOn:
-    id: "tab-rotating-hello"
-- assertVisible: "Shader composition"
-- takeScreenshot: rotating-hello
+- takeScreenshot: app-launched

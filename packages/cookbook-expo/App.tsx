@@ -5,7 +5,7 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   SafeAreaView,
 } from "react-native";
 import { Shaders, Node, GLSL, Uniform, LinearCopy } from "gl-react";
@@ -225,28 +225,24 @@ export default function App() {
         <Example />
       </View>
 
-      <ScrollView
-        horizontal
-        style={styles.tabBar}
-        contentContainerStyle={styles.tabBarContent}
-        showsHorizontalScrollIndicator={false}
-        testID="tab-bar"
-      >
+      <View style={styles.tabBar} testID="tab-bar">
         {examples.map((ex, i) => (
-          <TouchableOpacity
+          <Pressable
             key={i}
             onPress={() => setSelected(i)}
             style={[styles.tab, i === selected && styles.tabActive]}
             testID={`tab-${ex.title.toLowerCase().replace(/\s+/g, "-")}`}
+            accessibilityLabel={ex.title}
+            accessibilityRole="button"
           >
             <Text
               style={[styles.tabText, i === selected && styles.tabTextActive]}
             >
               {ex.title}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -282,14 +278,12 @@ const styles = StyleSheet.create({
     height: 300,
   },
   tabBar: {
-    maxHeight: 56,
+    flexDirection: "row",
+    paddingHorizontal: 12,
+    paddingBottom: 8,
+    gap: 8,
     borderTopWidth: 1,
     borderTopColor: "#222",
-  },
-  tabBarContent: {
-    paddingHorizontal: 12,
-    alignItems: "center",
-    gap: 8,
   },
   tab: {
     paddingHorizontal: 16,

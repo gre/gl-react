@@ -1,0 +1,103 @@
+name: CI cookbook-expo
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  e2e-ios:
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: corepack enable
+
+      - name: Install monorepo dependencies
+        run: yarn install
+
+      - name: Install cookbook-expo dependencies
+        working-directory: packages/cookbook-expo
+        run: yarn install
+
+      - name: Build gl-react packages
+        run: |
+          for d in packages/gl-react packages/gl-react-expo; do
+            yarn workspace gl-react-dev exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+          done
+
+      - name: Expo prebuild
+        working-directory: packages/cookbook-expo
+        run: npx expo prebuild --platform ios --no-install
+
+      - name: Pod install
+        working-directory: packages/cookbook-expo/ios
+        run: pod install
+
+      - name: Build iOS app for simulator
+        working-directory: packages/cookbook-expo
+        run: |
+          xcodebuild \
+            -workspace ios/cookbookexpo.xcworkspace \
+            -scheme cookbookexpo \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet
+
+      - name: Boot iOS Simulator
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available -j | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          for runtime, devices in data['devices'].items():
+            for d in devices:
+              if 'iPhone 16' in d['name'] and d['isAvailable'] and 'Pro' not in d['name']:
+                print(d['udid'])
+                sys.exit(0)
+          sys.exit(1)
+          ")
+          xcrun simctl boot "$DEVICE_ID" || true
+          echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
+
+      - name: Install app on simulator
+        run: |
+          APP_PATH=$(find packages/cookbook-expo/build -name "*.app" -path "*/Debug-iphonesimulator/*" | head -1)
+          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
+
+      - name: Start Metro bundler
+        working-directory: packages/cookbook-expo
+        run: |
+          npx expo start --dev-client --port 8081 &
+          for i in $(seq 1 60); do
+            if curl -s http://localhost:8081/status 2>/dev/null | grep -q "packager-status:running"; then
+              echo "Metro is ready"
+              break
+            fi
+            sleep 2
+          done
+
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+
+      - name: Run Maestro smoke test
+        working-directory: packages/cookbook-expo
+        run: ~/.maestro/bin/maestro test .maestro/smoke.yaml
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: maestro-screenshots
+          path: ~/.maestro/tests/
+          retention-days: 7
