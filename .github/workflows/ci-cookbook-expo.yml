@@ -88,12 +88,13 @@ jobs:
       - name: Start Metro bundler
         working-directory: packages/cookbook-expo
         run: |
-          npx expo start --dev-client --port 8081 &
-          for i in $(seq 1 60); do
+          npx react-native start --port 8081 &
+          for i in $(seq 1 90); do
             if curl -s http://localhost:8081/status 2>/dev/null | grep -q "packager-status:running"; then
               echo "Metro is ready"
               break
             fi
+            echo "Waiting for Metro... ($i)"
             sleep 2
           done
 

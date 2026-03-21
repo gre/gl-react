@@ -5,7 +5,7 @@ appId: com.glreact.cookbookexpo
 
 - extendedWaitUntil:
     visible: "gl-react cookbook"
-    timeout: 30000
+    timeout: 60000
 
 - assertVisible: "UV gradient"
 - assertVisible: "Hello GL"
