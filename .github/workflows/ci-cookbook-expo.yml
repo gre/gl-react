@@ -50,7 +50,7 @@ jobs:
             -scheme cookbookexpo \
             -sdk iphonesimulator \
             -configuration Debug \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             -quiet
@@ -62,7 +62,7 @@ jobs:
           data = json.load(sys.stdin)
           for runtime, devices in data['devices'].items():
             for d in devices:
-              if 'iPhone 16' in d['name'] and d['isAvailable'] and 'Pro' not in d['name']:
+              if 'iPhone' in d['name'] and d['isAvailable']:
                 print(d['udid'])
                 sys.exit(0)
           sys.exit(1)
