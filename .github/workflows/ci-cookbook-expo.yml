@@ -41,13 +41,19 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
-      # Force all pods with Swift 6 back to Swift 5 language mode in their xcconfig files
-      - name: Patch Swift 6 to Swift 5 in pod xcconfigs
+      # Force all pods with Swift 6 back to Swift 5 + disable strict concurrency
+      - name: Patch Swift concurrency in pod xcconfigs
         working-directory: packages/cookbook-expo/ios
         run: |
-          find Pods/Target\ Support\ Files -name "*.xcconfig" -exec grep -l "SWIFT_VERSION = 6" {} \; | while read f; do
-            echo "Patching $f"
-            sed -i '' 's/SWIFT_VERSION = 6[.0-9]*/SWIFT_VERSION = 5/' "$f"
+          find Pods/Target\ Support\ Files -name "*.xcconfig" | while read f; do
+            if grep -q "SWIFT_VERSION = 6" "$f"; then
+              echo "Patching $f"
+              sed -i '' 's/SWIFT_VERSION = 6[.0-9]*/SWIFT_VERSION = 5/' "$f"
+            fi
+            # Add concurrency flags to all Swift configs
+            if grep -q "OTHER_SWIFT_FLAGS" "$f"; then
+              sed -i '' 's/OTHER_SWIFT_FLAGS = \(.*\)/OTHER_SWIFT_FLAGS = \1 -Xfrontend -strict-concurrency=minimal/' "$f"
+            fi
           done
 
       - name: Build iOS app for simulator
