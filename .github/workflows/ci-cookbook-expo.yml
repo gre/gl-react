@@ -42,11 +42,35 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
-      # Patch storyboard toolsVersion for Xcode 16.0 compat
-      - name: Patch storyboard toolsVersion
+      # Replace storyboard with Xcode 16 compatible version
+      - name: Patch storyboard for Xcode 16
         working-directory: packages/cookbook-expo/ios
         run: |
-          find . -name "*.storyboard" -exec sed -i '' 's/toolsVersion="[0-9]*\.[0-9]*\.[0-9]*"/toolsVersion="22505"/g' {} \;
+          find . -name "*.storyboard" -exec sh -c '
+            cat > "$1" << '\''STORYBOARD'\''
+          <?xml version="1.0" encoding="UTF-8"?>
+          <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+              <device id="retina6_12" orientation="portrait" appearance="light"/>
+              <dependencies>
+                  <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+              </dependencies>
+              <scenes>
+                  <scene sceneID="EHf-IW-A2E">
+                      <objects>
+                          <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                              <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                                  <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                  <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                  <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                              </view>
+                          </viewController>
+                          <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                      </objects>
+                  </scene>
+              </scenes>
+          </document>
+          STORYBOARD
+          ' sh {} \;
 
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
