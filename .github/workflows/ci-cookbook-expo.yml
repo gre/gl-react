@@ -18,7 +18,6 @@ jobs:
         with:
           node-version: 24
 
-      # Use Xcode 16.2 — expo-modules-core has Swift 6 issues on 16.4
       - run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
       - run: corepack enable
@@ -38,28 +37,18 @@ jobs:
         working-directory: packages/cookbook-expo
         run: npx expo prebuild --platform ios --no-install
 
-      # Patch Podfile: inject Swift strict concurrency fix into existing post_install
-      - name: Patch Podfile for Swift 6
-        working-directory: packages/cookbook-expo/ios
-        run: |
-          ruby -e '
-            podfile = File.read("Podfile")
-            patch = <<~RUBY
-              installer.pods_project.targets.each do |target|
-                target.build_configurations.each do |config|
-                  if config.build_settings["SWIFT_VERSION"].to_s.start_with?("6")
-                    config.build_settings["SWIFT_VERSION"] = "5.10"
-                  end
-                end
-              end
-            RUBY
-            podfile.sub!("post_install do |installer|", "post_install do |installer|\n#{patch}")
-            File.write("Podfile", podfile)
-          '
-
       - name: Pod install
         working-directory: packages/cookbook-expo/ios
         run: pod install
+
+      # Force all pods with Swift 6 back to Swift 5 language mode in their xcconfig files
+      - name: Patch Swift 6 to Swift 5 in pod xcconfigs
+        working-directory: packages/cookbook-expo/ios
+        run: |
+          find Pods/Target\ Support\ Files -name "*.xcconfig" -exec grep -l "SWIFT_VERSION = 6" {} \; | while read f; do
+            echo "Patching $f"
+            sed -i '' 's/SWIFT_VERSION = 6[.0-9]*/SWIFT_VERSION = 5/' "$f"
+          done
 
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
