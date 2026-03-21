@@ -42,6 +42,13 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
+      # Patch storyboard to target iOS 17.5 (Xcode 16.0 doesn't have iOS 18 SDK)
+      - name: Patch iOS deployment target
+        working-directory: packages/cookbook-expo/ios
+        run: |
+          find . -name "*.storyboard" -exec sed -i '' 's/targetRuntime="AppleSDK" version="18.0"/targetRuntime="AppleSDK" version="17.5"/g' {} \;
+          find . -name "*.storyboard" -exec sed -i '' 's/systemVersion="36"/systemVersion="35"/g' {} \;
+
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
         run: |
