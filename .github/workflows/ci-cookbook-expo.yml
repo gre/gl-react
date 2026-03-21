@@ -18,8 +18,9 @@ jobs:
         with:
           node-version: 24
 
-      # Expo SDK 53 needs Xcode 16. Use 16.0 (Swift 5.10) to avoid Swift 6 issues
-      - run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+      # Use default Xcode (16.4) — has matching simulator runtimes
+      # Expo SDK 53 Swift 6 issues handled by patching pbxproj after pod install
+
 
       - run: corepack enable
 
@@ -42,35 +43,14 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
-      # Replace storyboard with Xcode 16 compatible version
-      - name: Patch storyboard for Xcode 16
-        working-directory: packages/cookbook-expo/ios
+      # Patch expo-modules-core Swift sources to compile on Swift 6 (Xcode 16.4)
+      - name: Patch expo-modules-core for Swift 6
         run: |
-          find . -name "*.storyboard" -exec sh -c '
-            cat > "$1" << '\''STORYBOARD'\''
-          <?xml version="1.0" encoding="UTF-8"?>
-          <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-              <device id="retina6_12" orientation="portrait" appearance="light"/>
-              <dependencies>
-                  <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-              </dependencies>
-              <scenes>
-                  <scene sceneID="EHf-IW-A2E">
-                      <objects>
-                          <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                              <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                                  <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                  <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                  <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                              </view>
-                          </viewController>
-                          <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                      </objects>
-                  </scene>
-              </scenes>
-          </document>
-          STORYBOARD
-          ' sh {} \;
+          # Add @preconcurrency import where needed
+          find packages/cookbook-expo/node_modules/expo-modules-core/ios -name "*.swift" | xargs sed -i '' 's/^import UIKit/@preconcurrency import UIKit/; s/^import Foundation/@preconcurrency import Foundation/' 2>/dev/null || true
+          # Suppress sendable warnings by adding nonisolated(unsafe) or @unchecked Sendable
+          # The simplest approach: set SWIFT_STRICT_CONCURRENCY=minimal in Pods pbxproj
+          sed -i '' 's/SWIFT_VERSION = 6\.0;/SWIFT_VERSION = 6.0; SWIFT_STRICT_CONCURRENCY = minimal;/g' packages/cookbook-expo/ios/Pods/Pods.xcodeproj/project.pbxproj 2>/dev/null || true
 
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
