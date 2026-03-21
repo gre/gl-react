@@ -38,6 +38,12 @@ jobs:
         working-directory: packages/cookbook-expo
         run: npx expo prebuild --platform ios --no-install
 
+      # Patch Podfile: inject Swift strict concurrency fix into existing post_install
+      - name: Patch Podfile for Swift 6
+        working-directory: packages/cookbook-expo/ios
+        run: |
+          sed -i '' 's/post_install do |installer|/post_install do |installer|\n    installer.pods_project.targets.each do |target|\n      target.build_configurations.each do |config|\n        config.build_settings["SWIFT_STRICT_CONCURRENCY"] = "minimal"\n      end\n    end/' Podfile
+
       - name: Pod install
         working-directory: packages/cookbook-expo/ios
         run: pod install
