@@ -8,7 +8,7 @@ on:
 
 jobs:
   e2e-ios:
-    runs-on: macos-15
+    runs-on: macos-14
     timeout-minutes: 45
 
     steps:
@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 24
 
-      # Xcode 16.0 has Swift 5.10 — avoids Swift 6 concurrency errors in expo-modules-core
-      - run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+      # Expo SDK 52 + RN 0.76 targets Xcode 15.x
+      - run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
 
       - run: corepack enable
 
