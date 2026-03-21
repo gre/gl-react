@@ -51,6 +51,7 @@ jobs:
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             SWIFT_STRICT_CONCURRENCY=minimal \
+            SWIFT_VERSION=5.0 \
             -quiet
 
       - name: Boot iOS Simulator
