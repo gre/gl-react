@@ -20,17 +20,15 @@ jobs:
 
       - run: corepack enable
 
-      - name: Install monorepo dependencies
-        run: yarn install
-
-      - name: Install cookbook-expo dependencies
-        working-directory: packages/cookbook-expo
-        run: yarn install
+      - name: Install dependencies
+        run: |
+          yarn install
+          cd packages/cookbook-expo && yarn install
 
       - name: Build gl-react packages
         run: |
           for d in packages/gl-react packages/gl-react-expo; do
-            yarn workspace gl-react-dev exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+            npx babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
           done
 
       - name: Expo prebuild
