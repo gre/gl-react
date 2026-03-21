@@ -8,7 +8,7 @@ on:
 
 jobs:
   e2e-ios:
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
 
     steps:
@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 24
 
-      # Expo SDK 52 + RN 0.76 targets Xcode 15.x
-      - run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+      # Expo SDK 53 needs Xcode 16. Use 16.0 (Swift 5.10) to avoid Swift 6 issues
+      - run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
 
       - run: corepack enable
 
