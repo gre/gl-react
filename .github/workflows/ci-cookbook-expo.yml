@@ -19,7 +19,7 @@ jobs:
           node-version: 24
 
       # Use Xcode 16.2 — expo-modules-core has Swift 6 issues on 16.4
-      - run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+      - run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
 
       - run: corepack enable
 
