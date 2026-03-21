@@ -10,14 +10,14 @@
     "e2e": "maestro test .maestro/"
   },
   "dependencies": {
-    "expo": "~52.0.49",
-    "expo-gl": "~14.0.2",
-    "expo-status-bar": "~2.0.1",
+    "expo": "~53.0.4",
+    "expo-gl": "~15.1.7",
+    "expo-status-bar": "~2.2.1",
     "gl-react": "^5.2.0",
     "gl-react-expo": "^5.2.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.9"
+    "react-native": "0.79.5"
   },
   "devDependencies": {
     "@types/react": "~18.3.12",
