@@ -18,7 +18,8 @@ jobs:
         with:
           node-version: 24
 
-      - run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
+      # Xcode 16.0 has Swift 5.10 — avoids Swift 6 concurrency errors in expo-modules-core
+      - run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
 
       - run: corepack enable
 
@@ -41,12 +42,6 @@ jobs:
         working-directory: packages/cookbook-expo/ios
         run: pod install
 
-      # Patch: downgrade all Swift 6 sources to Swift 5 language mode in pbxproj
-      - name: Patch Swift version in Pods project
-        working-directory: packages/cookbook-expo/ios
-        run: |
-          sed -i '' 's/SWIFT_VERSION = 6\.0/SWIFT_VERSION = 5.0/g' Pods/Pods.xcodeproj/project.pbxproj
-
       - name: Build iOS app for simulator
         working-directory: packages/cookbook-expo
         run: |
@@ -58,7 +53,6 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            OTHER_SWIFT_FLAGS='$(inherited) -swift-version 5' \
             -quiet
 
       - name: Boot iOS Simulator
