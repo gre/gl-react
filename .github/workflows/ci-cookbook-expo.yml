@@ -42,7 +42,20 @@ jobs:
       - name: Patch Podfile for Swift 6
         working-directory: packages/cookbook-expo/ios
         run: |
-          sed -i '' 's/post_install do |installer|/post_install do |installer|\n    installer.pods_project.targets.each do |target|\n      target.build_configurations.each do |config|\n        config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -Xfrontend -strict-concurrency=minimal"\n      end\n    end/' Podfile
+          ruby -e '
+            podfile = File.read("Podfile")
+            patch = <<~RUBY
+              installer.pods_project.targets.each do |target|
+                target.build_configurations.each do |config|
+                  if config.build_settings["SWIFT_VERSION"].to_s.start_with?("6")
+                    config.build_settings["SWIFT_VERSION"] = "5.10"
+                  end
+                end
+              end
+            RUBY
+            podfile.sub!("post_install do |installer|", "post_install do |installer|\n#{patch}")
+            File.write("Podfile", podfile)
+          '
 
       - name: Pod install
         working-directory: packages/cookbook-expo/ios
