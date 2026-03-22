@@ -88,6 +88,8 @@ jobs:
       # Bundle JS offline so Metro isn't needed at runtime
       - name: Bundle JS
         working-directory: packages/cookbook-expo
+        env:
+          NODE_PATH: ${{ github.workspace }}/packages/cookbook-expo/node_modules
         run: |
           node node_modules/expo/bin/cli export:embed \
             --platform ios \
