@@ -32,7 +32,7 @@ jobs:
       - name: Build gl-react packages
         run: |
           for d in packages/gl-react packages/gl-react-expo; do
-            npx babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+            yarn babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
           done
 
       - name: Expo prebuild

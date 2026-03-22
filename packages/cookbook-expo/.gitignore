@@ -40,4 +40,3 @@ yarn-error.*
 /ios
 /android
 /build
-*.png

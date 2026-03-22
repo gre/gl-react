@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Pressable,
   SafeAreaView,
 } from "react-native";
@@ -93,17 +92,16 @@ function HelloGL({
   surfaceRef,
   onDraw,
 }: {
-  surfaceRef?: React.RefObject<any>;
   onDraw?: () => void;
 }) {
   return (
-    <Surface ref={surfaceRef} style={styles.surface}>
+    <Surface style={styles.surface}>
       <Node shader={shaders.helloGL} onDraw={onDraw} />
     </Surface>
   );
 }
 
-function HelloBlue({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
+function HelloBlue({ onDraw }: { onDraw?: () => void }) {
   const [blue, setBlue] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -119,7 +117,7 @@ function HelloBlue({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; 
   );
 }
 
-function ColorDisc({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
+function ColorDisc({ onDraw }: { onDraw?: () => void }) {
   return (
     <Surface style={styles.surface}>
       <Node
@@ -133,7 +131,7 @@ function ColorDisc({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; 
   );
 }
 
-function RotatingHello({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
+function RotatingHello({ onDraw }: { onDraw?: () => void }) {
   const [angle, setAngle] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -157,7 +155,7 @@ function RotatingHello({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<an
   );
 }
 
-function MotionBlurDemo({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
+function MotionBlurDemo({ onDraw }: { onDraw?: () => void }) {
   const [t, setT] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -229,7 +227,6 @@ const examples = [
 export default function App() {
   const [selected, setSelected] = useState(0);
   const Example = examples[selected].component;
-  const surfaceRef = useRef<any>(null);
   const { status: glStatus, onDraw } = useGLRenderCheck();
 
   return (
@@ -241,7 +238,7 @@ export default function App() {
       </View>
 
       <View style={styles.canvasContainer} testID="canvas-container">
-        <Example surfaceRef={surfaceRef} onDraw={onDraw} />
+        <Example onDraw={onDraw} />
       </View>
       <Text testID="gl-status" style={styles.glStatus}>
         gl:{glStatus}
