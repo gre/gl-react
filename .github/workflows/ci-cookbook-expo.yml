@@ -85,18 +85,22 @@ jobs:
           APP_PATH=$(find packages/cookbook-expo/build -name "*.app" -path "*/Debug-iphonesimulator/*" | head -1)
           xcrun simctl install "$DEVICE_ID" "$APP_PATH"
 
-      - name: Start Metro bundler
+      # Bundle JS offline so Metro isn't needed at runtime
+      - name: Bundle JS
         working-directory: packages/cookbook-expo
         run: |
-          node node_modules/react-native/cli.js start --port 8081 &
-          for i in $(seq 1 90); do
-            if curl -s http://localhost:8081/status 2>/dev/null | grep -q "packager-status:running"; then
-              echo "Metro is ready"
-              break
-            fi
-            echo "Waiting for Metro... ($i)"
-            sleep 2
-          done
+          node node_modules/react-native/cli.js bundle \
+            --platform ios \
+            --dev false \
+            --entry-file index.ts \
+            --bundle-output ios/main.jsbundle \
+            --assets-dest ios
+
+      - name: Reinstall app with bundle
+        run: |
+          APP_PATH=$(find packages/cookbook-expo/build -name "*.app" -path "*/Debug-iphonesimulator/*" | head -1)
+          cp packages/cookbook-expo/ios/main.jsbundle "$APP_PATH/main.jsbundle"
+          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
 
       - name: Install Maestro
         run: |
@@ -105,6 +109,8 @@ jobs:
 
       - name: Run Maestro smoke test
         working-directory: packages/cookbook-expo
+        env:
+          MAESTRO_DRIVER_STARTUP_TIMEOUT: 120000
         run: ~/.maestro/bin/maestro test .maestro/smoke.yaml
 
       - uses: actions/upload-artifact@v4
