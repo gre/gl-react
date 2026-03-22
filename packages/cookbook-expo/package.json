@@ -1,0 +1,28 @@
+{
+  "name": "gl-react-cookbook-expo",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "e2e": "maestro test .maestro/"
+  },
+  "dependencies": {
+    "expo": "~53.0.4",
+    "expo-gl": "~15.1.7",
+    "expo-status-bar": "~2.2.1",
+    "gl-react": "^5.2.0",
+    "gl-react-expo": "^5.2.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native": "0.79.5"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "^18.0.0",
+    "@types/react": "~19.0.0",
+    "typescript": "~5.3.3"
+  },
+  "private": true
+}

@@ -1,0 +1,19 @@
+appId: com.glreact.cookbookexpo
+---
+# Smoke test: verify the app launches and renders GL content
+- launchApp
+
+- extendedWaitUntil:
+    visible: "gl-react cookbook"
+    timeout: 60000
+
+- assertVisible: "UV gradient"
+- assertVisible: "Hello GL"
+- assertVisible: "Hello Blue"
+
+# Verify the GL surface rendered non-black pixels
+- extendedWaitUntil:
+    visible: "gl:rendered"
+    timeout: 10000
+
+- takeScreenshot: app-launched
