@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -76,17 +76,53 @@ void main () {
   },
 });
 
+// -- GL render check: reads pixels from the Surface to verify non-black output --
+
+function useGLRenderCheck(surfaceRef: React.RefObject<any>) {
+  const [status, setStatus] = useState("pending");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        const surface = surfaceRef.current;
+        if (!surface || !surface.gl) {
+          setStatus("no-gl");
+          return;
+        }
+        const gl: WebGLRenderingContext = surface.gl;
+        const pixels = new Uint8Array(4 * 4 * 4); // sample 4x4 center
+        const w = gl.drawingBufferWidth;
+        const h = gl.drawingBufferHeight;
+        const x = Math.floor(w / 2) - 2;
+        const y = Math.floor(h / 2) - 2;
+        gl.readPixels(x, y, 4, 4, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+        let nonBlack = false;
+        for (let i = 0; i < pixels.length; i += 4) {
+          if (pixels[i] > 5 || pixels[i + 1] > 5 || pixels[i + 2] > 5) {
+            nonBlack = true;
+            break;
+          }
+        }
+        setStatus(nonBlack ? "rendered" : "black");
+      } catch {
+        setStatus("error");
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [surfaceRef]);
+  return status;
+}
+
 // -- Components --
 
-function HelloGL() {
+function HelloGL({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   return (
-    <Surface style={styles.surface}>
+    <Surface ref={surfaceRef} style={styles.surface}>
       <Node shader={shaders.helloGL} />
     </Surface>
   );
 }
 
-function HelloBlue() {
+function HelloBlue({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   const [blue, setBlue] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -102,7 +138,7 @@ function HelloBlue() {
   );
 }
 
-function ColorDisc() {
+function ColorDisc({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   return (
     <Surface style={styles.surface}>
       <Node
@@ -116,7 +152,7 @@ function ColorDisc() {
   );
 }
 
-function RotatingHello() {
+function RotatingHello({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   const [angle, setAngle] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -140,7 +176,7 @@ function RotatingHello() {
   );
 }
 
-function MotionBlurDemo() {
+function MotionBlurDemo({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   const [t, setT] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -212,6 +248,8 @@ const examples = [
 export default function App() {
   const [selected, setSelected] = useState(0);
   const Example = examples[selected].component;
+  const surfaceRef = useRef<any>(null);
+  const glStatus = useGLRenderCheck(surfaceRef);
 
   return (
     <SafeAreaView style={styles.container} testID="app-root">
@@ -222,8 +260,11 @@ export default function App() {
       </View>
 
       <View style={styles.canvasContainer} testID="canvas-container">
-        <Example />
+        <Example surfaceRef={surfaceRef} />
       </View>
+      <Text testID="gl-status" style={styles.glStatus}>
+        gl:{glStatus}
+      </Text>
 
       <View style={styles.tabBar} testID="tab-bar">
         {examples.map((ex, i) => (
@@ -300,5 +341,11 @@ const styles = StyleSheet.create({
   },
   tabTextActive: {
     color: "#fff",
+  },
+  glStatus: {
+    color: "#444",
+    fontSize: 10,
+    textAlign: "center",
+    paddingBottom: 4,
   },
 });
