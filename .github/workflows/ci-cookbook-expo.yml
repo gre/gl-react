@@ -94,7 +94,8 @@ jobs:
             --dev false \
             --entry-file index.ts \
             --bundle-output ios/main.jsbundle \
-            --assets-dest ios
+            --assets-dest ios \
+            --config metro.config.js
 
       - name: Reinstall app with bundle
         run: |
