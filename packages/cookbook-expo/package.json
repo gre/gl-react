@@ -15,13 +15,13 @@
     "expo-status-bar": "~2.2.1",
     "gl-react": "^5.2.0",
     "gl-react-expo": "^5.2.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-native": "0.79.5"
   },
   "devDependencies": {
     "@react-native-community/cli": "^18.0.0",
-    "@types/react": "~18.3.12",
+    "@types/react": "~19.0.0",
     "typescript": "~5.3.3"
   },
   "private": true
