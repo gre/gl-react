@@ -76,53 +76,59 @@ void main () {
   },
 });
 
-// -- GL render check: reads pixels from the Surface to verify non-black output --
+// -- GL render check: reads pixels inside the Node's onDraw callback
+// (after gl.drawArrays but before endFrameEXP buffer swap) --
 
 function useGLRenderCheck(surfaceRef: React.RefObject<any>) {
   const [status, setStatus] = useState("pending");
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      try {
-        const surface = surfaceRef.current;
-        if (!surface || !surface.gl) {
-          setStatus("no-gl");
-          return;
-        }
-        const gl: WebGLRenderingContext = surface.gl;
-        const pixels = new Uint8Array(4 * 4 * 4); // sample 4x4 center
-        const w = gl.drawingBufferWidth;
-        const h = gl.drawingBufferHeight;
-        const x = Math.floor(w / 2) - 2;
-        const y = Math.floor(h / 2) - 2;
-        gl.readPixels(x, y, 4, 4, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
-        let nonBlack = false;
-        for (let i = 0; i < pixels.length; i += 4) {
-          if (pixels[i] > 5 || pixels[i + 1] > 5 || pixels[i + 2] > 5) {
-            nonBlack = true;
-            break;
-          }
-        }
-        setStatus(nonBlack ? "rendered" : "black");
-      } catch {
-        setStatus("error");
+  const checked = useRef(false);
+  const onDraw = useCallback(() => {
+    if (checked.current) return;
+    const surface = surfaceRef.current;
+    if (!surface?.gl) return;
+    checked.current = true;
+    const gl: WebGLRenderingContext = surface.gl;
+    const pixels = new Uint8Array(4 * 4 * 4);
+    const w = gl.drawingBufferWidth;
+    const h = gl.drawingBufferHeight;
+    gl.readPixels(
+      Math.floor(w / 2) - 2,
+      Math.floor(h / 2) - 2,
+      4,
+      4,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      pixels,
+    );
+    let nonBlack = false;
+    for (let i = 0; i < pixels.length; i += 4) {
+      if (pixels[i] > 5 || pixels[i + 1] > 5 || pixels[i + 2] > 5) {
+        nonBlack = true;
+        break;
       }
-    }, 500);
-    return () => clearTimeout(timer);
+    }
+    setStatus(nonBlack ? "rendered" : "black");
   }, [surfaceRef]);
-  return status;
+  return { status, onDraw };
 }
 
 // -- Components --
 
-function HelloGL({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
+function HelloGL({
+  surfaceRef,
+  onDraw,
+}: {
+  surfaceRef?: React.RefObject<any>;
+  onDraw?: () => void;
+}) {
   return (
     <Surface ref={surfaceRef} style={styles.surface}>
-      <Node shader={shaders.helloGL} />
+      <Node shader={shaders.helloGL} onDraw={onDraw} />
     </Surface>
   );
 }
 
-function HelloBlue({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
+function HelloBlue({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
   const [blue, setBlue] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -138,7 +144,7 @@ function HelloBlue({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   );
 }
 
-function ColorDisc({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
+function ColorDisc({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
   return (
     <Surface style={styles.surface}>
       <Node
@@ -152,7 +158,7 @@ function ColorDisc({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   );
 }
 
-function RotatingHello({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
+function RotatingHello({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
   const [angle, setAngle] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -176,7 +182,7 @@ function RotatingHello({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
   );
 }
 
-function MotionBlurDemo({ surfaceRef }: { surfaceRef?: React.RefObject<any> }) {
+function MotionBlurDemo({ surfaceRef, onDraw }: { surfaceRef?: React.RefObject<any>; onDraw?: () => void }) {
   const [t, setT] = useState(0);
   useEffect(() => {
     const start = Date.now();
@@ -249,7 +255,7 @@ export default function App() {
   const [selected, setSelected] = useState(0);
   const Example = examples[selected].component;
   const surfaceRef = useRef<any>(null);
-  const glStatus = useGLRenderCheck(surfaceRef);
+  const { status: glStatus, onDraw } = useGLRenderCheck(surfaceRef);
 
   return (
     <SafeAreaView style={styles.container} testID="app-root">
@@ -260,7 +266,7 @@ export default function App() {
       </View>
 
       <View style={styles.canvasContainer} testID="canvas-container">
-        <Example surfaceRef={surfaceRef} />
+        <Example surfaceRef={surfaceRef} onDraw={onDraw} />
       </View>
       <Text testID="gl-status" style={styles.glStatus}>
         gl:{glStatus}
