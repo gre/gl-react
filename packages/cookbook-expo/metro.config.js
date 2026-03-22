@@ -16,6 +16,15 @@ config.resolver.nodeModulesPaths = [
 // Stub out Node.js-only packages that gl-react imports unconditionally
 // but are not needed (and crash Hermes) in React Native.
 const emptyModule = require.resolve("./empty-module");
+
+// Force single copies of react/react-native from cookbook-expo's node_modules
+// to prevent monorepo root copies from being bundled alongside.
+const singletonPkgs = ["react", "react-dom", "react-native"];
+const singletonMap = {};
+for (const pkg of singletonPkgs) {
+  singletonMap[pkg] = path.resolve(projectRoot, "node_modules", pkg);
+}
+
 const originalResolveRequest = config.resolver.resolveRequest;
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   if (
@@ -25,6 +34,14 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
     moduleName === "typedarray-pool"
   ) {
     return { type: "sourceFile", filePath: emptyModule };
+  }
+  // Redirect singleton packages to cookbook-expo's copies
+  if (singletonMap[moduleName]) {
+    return context.resolveRequest(
+      { ...context, nodeModulesPaths: [path.resolve(projectRoot, "node_modules")] },
+      moduleName,
+      platform,
+    );
   }
   if (originalResolveRequest) {
     return originalResolveRequest(context, moduleName, platform);
