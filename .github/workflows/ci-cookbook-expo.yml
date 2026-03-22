@@ -89,7 +89,7 @@ jobs:
       - name: Bundle JS
         working-directory: packages/cookbook-expo
         run: |
-          npx expo export:embed \
+          node node_modules/expo/bin/cli export:embed \
             --platform ios \
             --entry-file index.ts \
             --bundle-output ios/main.jsbundle \
