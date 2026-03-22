@@ -13124,8 +13124,8 @@ __metadata:
     expo-status-bar: "npm:~2.2.1"
     gl-react: "npm:^5.2.0"
     gl-react-expo: "npm:^5.2.1"
-    react: "npm:^19.0.0"
-    react-dom: "npm:^19.0.0"
+    react: "npm:19.0.0"
+    react-dom: "npm:19.0.0"
     react-native: "npm:0.79.5"
     typescript: "npm:~5.3.3"
   languageName: unknown
@@ -21546,6 +21546,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:19.0.0":
+  version: 19.0.0
+  resolution: "react-dom@npm:19.0.0"
+  dependencies:
+    scheduler: "npm:^0.25.0"
+  peerDependencies:
+    react: ^19.0.0
+  checksum: 10c0/a36ce7ab507b237ae2759c984cdaad4af4096d8199fb65b3815c16825e5cfeb7293da790a3fc2184b52bfba7ba3ff31c058c01947aff6fd1a3701632aabaa6a9
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.1.0":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -21882,6 +21893,13 @@ __metadata:
     react: ">=16.4.2"
     react-dom: ">=16.4.2"
   checksum: 10c0/21649d3aa1efda673e1f89cbae60ea2e877bbc001da43f3a22dfcf702e8fa4f24cfa5112e49eae9946521cbd8d48cd311179257186f85b45f97c2a4c0022d80b
+  languageName: node
+  linkType: hard
+
+"react@npm:19.0.0":
+  version: 19.0.0
+  resolution: "react@npm:19.0.0"
+  checksum: 10c0/9cad8f103e8e3a16d15cb18a0d8115d8bd9f9e1ce3420310aea381eb42aa0a4f812cf047bb5441349257a05fba8a291515691e3cb51267279b2d2c3253f38471
   languageName: node
   linkType: hard
 
@@ -23187,7 +23205,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:0.25.0":
+"scheduler@npm:0.25.0, scheduler@npm:^0.25.0":
   version: 0.25.0
   resolution: "scheduler@npm:0.25.0"
   checksum: 10c0/a4bb1da406b613ce72c1299db43759526058fdcc413999c3c3e0db8956df7633acf395cb20eb2303b6a65d658d66b6585d344460abaee8080b4aa931f10eaafe
