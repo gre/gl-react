@@ -89,13 +89,12 @@ jobs:
       - name: Bundle JS
         working-directory: packages/cookbook-expo
         run: |
-          node node_modules/react-native/cli.js bundle \
+          npx expo export:embed \
             --platform ios \
-            --dev false \
             --entry-file index.ts \
             --bundle-output ios/main.jsbundle \
             --assets-dest ios \
-            --config metro.config.js
+            --dev false
 
       - name: Reinstall app with bundle
         run: |
