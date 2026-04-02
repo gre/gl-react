@@ -18,7 +18,7 @@
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.43.0",
     "hoist-non-react-statics": "^3.3.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "ndarray": "^1.0.19",
     "ndarray-ops": "^1.2.2",
     "prism-theme-one-dark": "^1.0.0",
