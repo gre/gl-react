@@ -1,7 +1,7 @@
 import React from "react";
 import remark from "remark";
 import remarkReactRenderer from "remark-react";
-const MD = remark().use(remarkReactRenderer);
+const MD = remark().use(remarkReactRenderer, { sanitize: true });
 function markdown(strings: Array<string>, ...values: Array<string>) {
   let contents = [];
   for (let i = 0; i < strings.length; i++) {
