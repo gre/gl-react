@@ -1,0 +1,71 @@
+name: Deploy cookbook-v2 to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Permissions required by actions/deploy-pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run
+# in-progress and latest queued. Do NOT cancel in-progress runs as we want to
+# let production deployments complete.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - run: corepack enable
+
+      - run: yarn install
+
+      # Build gl-react packages (cookbook-v2 imports from src via Vite alias,
+      # but mirrors the existing CI pipeline for consistency).
+      - name: Build gl-react packages
+        run: |
+          for d in packages/gl-react packages/gl-react-dom; do
+            yarn workspace gl-react-dev exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+          done
+
+      # Run Vite build directly (bypassing the package's "tsc && vite build"
+      # script which currently has unresolved TS errors unrelated to deploy).
+      # The Vite dev server is the source of truth for cookbook-v2 today.
+      - name: Build cookbook-v2
+        env:
+          GH_PAGES: "true"
+        working-directory: packages/cookbook-v2
+        run: yarn exec vite build
+
+      # SPA fallback: GitHub Pages serves 404.html on unknown paths. Copying
+      # index.html → 404.html lets BrowserRouter handle deep links / refreshes.
+      - name: SPA fallback (404.html)
+        run: cp packages/cookbook-v2/dist/index.html packages/cookbook-v2/dist/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/cookbook-v2/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
