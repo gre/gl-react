@@ -378,7 +378,10 @@ export function createOneTextureLoader(
 export function createNDArrayTexture(gl: WebGLRenderingContext, ndarray: *) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
-  drawNDArrayTexture(gl, texture, ndarray);
+  // webgltexture-loader-ndarray@2.1.x signature: (gl, ndarray, floatSupported).
+  // The function operates on the currently-bound texture; we just bound `texture`.
+  const floatSupported = !!gl.getExtension("OES_texture_float_linear");
+  drawNDArrayTexture(gl, ndarray, floatSupported);
   return texture;
 }
 class FakeTextureLoader extends WebGLTextureLoader<FakeTexture> {
