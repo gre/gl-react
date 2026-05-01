@@ -14189,7 +14189,7 @@ __metadata:
     lodash: "npm:^4.17.23"
     ndarray: "npm:^1.0.19"
     ndarray-ops: "npm:^1.2.2"
-    postcss: "npm:^8.5.8"
+    postcss: "npm:^8.5.10"
     prism-theme-one-dark: "npm:^1.0.0"
     prismjs: "npm:^1.30.0"
     prop-types: "npm:^15.8.1"
@@ -22556,7 +22556,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.3, postcss@npm:^8.5.8":
+"postcss@npm:^8.5.10":
+  version: 8.5.13
+  resolution: "postcss@npm:8.5.13"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/3aa7c8cbdfbfd99b34406a433cef56d164dd135fc9cb9e63d487cc363291f877a55ec7b8ff6ec15348c17c2d98a43be46bfad671e6340403041a3e79f70c2f2f
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.3":
   version: 8.5.8
   resolution: "postcss@npm:8.5.8"
   dependencies:
