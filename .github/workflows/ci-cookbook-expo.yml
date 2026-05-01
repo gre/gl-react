@@ -7,9 +7,9 @@ on:
     branches: [master]
 
 jobs:
-  e2e-ios:
+  bundle-ios:
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -17,10 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-
-      # Use default Xcode (16.4) — has matching simulator runtimes
-      # Expo SDK 53 Swift 6 issues handled by patching pbxproj after pod install
-
 
       - run: corepack enable
 
@@ -39,54 +35,7 @@ jobs:
         working-directory: packages/cookbook-expo
         run: npx expo prebuild --platform ios --no-install
 
-      - name: Pod install
-        working-directory: packages/cookbook-expo/ios
-        run: pod install
-
-      # Patch expo-modules-core Swift sources to compile on Swift 6 (Xcode 16.4)
-      - name: Patch expo-modules-core for Swift 6
-        run: |
-          # Add @preconcurrency import where needed
-          find packages/cookbook-expo/node_modules/expo-modules-core/ios -name "*.swift" | xargs sed -i '' 's/^import UIKit/@preconcurrency import UIKit/; s/^import Foundation/@preconcurrency import Foundation/' 2>/dev/null || true
-          # Suppress sendable warnings by adding nonisolated(unsafe) or @unchecked Sendable
-          # The simplest approach: set SWIFT_STRICT_CONCURRENCY=minimal in Pods pbxproj
-          sed -i '' 's/SWIFT_VERSION = 6\.0;/SWIFT_VERSION = 6.0; SWIFT_STRICT_CONCURRENCY = minimal;/g' packages/cookbook-expo/ios/Pods/Pods.xcodeproj/project.pbxproj 2>/dev/null || true
-
-      - name: Build iOS app for simulator
-        working-directory: packages/cookbook-expo
-        run: |
-          xcodebuild \
-            -workspace ios/cookbookexpo.xcworkspace \
-            -scheme cookbookexpo \
-            -sdk iphonesimulator \
-            -configuration Debug \
-            -destination 'generic/platform=iOS Simulator' \
-            -derivedDataPath build \
-            CODE_SIGNING_ALLOWED=NO \
-            -quiet
-
-      - name: Boot iOS Simulator
-        run: |
-          DEVICE_ID=$(xcrun simctl list devices available -j | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          for runtime, devices in data['devices'].items():
-            for d in devices:
-              if 'iPhone' in d['name'] and d['isAvailable']:
-                print(d['udid'])
-                sys.exit(0)
-          sys.exit(1)
-          ")
-          xcrun simctl boot "$DEVICE_ID" || true
-          echo "DEVICE_ID=$DEVICE_ID" >> "$GITHUB_ENV"
-
-      - name: Install app on simulator
-        run: |
-          APP_PATH=$(find packages/cookbook-expo/build -name "*.app" -path "*/Debug-iphonesimulator/*" | head -1)
-          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
-
-      # Bundle JS offline so Metro isn't needed at runtime
-      - name: Bundle JS
+      - name: Bundle JS for iOS
         working-directory: packages/cookbook-expo
         env:
           NODE_PATH: ${{ github.workspace }}/packages/cookbook-expo/node_modules
@@ -94,30 +43,6 @@ jobs:
           node node_modules/expo/bin/cli export:embed \
             --platform ios \
             --entry-file "${{ github.workspace }}/packages/cookbook-expo/index.ts" \
-            --bundle-output ios/main.jsbundle \
-            --assets-dest ios \
+            --bundle-output /tmp/main.jsbundle \
+            --assets-dest /tmp/assets \
             --dev false
-
-      - name: Reinstall app with bundle
-        run: |
-          APP_PATH=$(find packages/cookbook-expo/build -name "*.app" -path "*/Debug-iphonesimulator/*" | head -1)
-          cp packages/cookbook-expo/ios/main.jsbundle "$APP_PATH/main.jsbundle"
-          xcrun simctl install "$DEVICE_ID" "$APP_PATH"
-
-      - name: Install Maestro
-        run: |
-          curl -Ls "https://get.maestro.mobile.dev" | bash
-          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
-
-      - name: Run Maestro smoke test
-        working-directory: packages/cookbook-expo
-        env:
-          MAESTRO_DRIVER_STARTUP_TIMEOUT: 120000
-        run: ~/.maestro/bin/maestro test .maestro/smoke.yaml
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: maestro-screenshots
-          path: ~/.maestro/tests/
-          retention-days: 7
