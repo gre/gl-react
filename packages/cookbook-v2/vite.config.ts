@@ -19,7 +19,7 @@ const glReactGlobalShim = () => ({
 // When deploying to GitHub Pages under https://gre.github.io/gl-react/
 // the assets and routes must be served from the /gl-react/ subpath.
 // Set GH_PAGES=true in the deploy workflow to switch the base.
-const base = process.env.GH_PAGES ? '/gl-react/' : '/'
+const base = process.env.GH_PAGES === 'true' ? '/gl-react/' : '/'
 
 export default defineConfig({
   base,
