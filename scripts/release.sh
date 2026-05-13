@@ -8,7 +8,12 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")/.."
+
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  echo "Error: working tree has uncommitted changes. Please commit or stash them first."
+  exit 1
+fi
 
 PACKAGES="packages/gl-react packages/gl-react-dom packages/gl-react-expo packages/gl-react-headless packages/gl-react-native"
 
@@ -18,10 +23,12 @@ for pkg in $PACKAGES; do
     const p = '$pkg/package.json';
     const d = JSON.parse(fs.readFileSync(p, 'utf8'));
     d.version = '$VERSION';
-    if (d.dependencies) {
-      if (d.dependencies['gl-react']) d.dependencies['gl-react'] = '^$VERSION';
-      if (d.dependencies['gl-react-expo']) d.dependencies['gl-react-expo'] = '^$VERSION';
-    }
+    ['dependencies', 'devDependencies'].forEach(section => {
+      if (d[section]) {
+        if (d[section]['gl-react']) d[section]['gl-react'] = '^$VERSION';
+        if (d[section]['gl-react-expo']) d[section]['gl-react-expo'] = '^$VERSION';
+      }
+    });
     fs.writeFileSync(p, JSON.stringify(d, null, 2) + '\n');
   "
   echo "Bumped $pkg to $VERSION"
