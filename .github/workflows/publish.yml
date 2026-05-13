@@ -8,12 +8,15 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: 'https://registry.npmjs.org'
 
       - run: corepack enable
       - run: yarn install
@@ -22,7 +25,5 @@ jobs:
       - name: Publish packages
         run: |
           for pkg in gl-react gl-react-dom gl-react-expo gl-react-headless gl-react-native; do
-            yarn workspace $pkg npm publish
+            cd packages/$pkg && npm publish --provenance && cd ../..
           done
-        env:
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
