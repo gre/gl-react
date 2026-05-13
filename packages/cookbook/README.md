@@ -1,4 +1,4 @@
-# GL React Cookbook v2
+# GL React Cookbook
 
 A modern, TypeScript-first cookbook for building stunning WebGL experiences with React.
 
@@ -30,13 +30,13 @@ From the root of the monorepo:
 yarn install
 
 # Start the development server
-yarn cookbook-v2
+yarn cookbook
 ```
 
 Or directly from this package:
 
 ```bash
-cd packages/cookbook-v2
+cd packages/cookbook
 yarn dev
 ```
 

@@ -18,7 +18,7 @@ yarn watch                        # Watch mode for development
 yarn test                         # Run Jest tests (packages/tests)
 yarn test-rewrite-snapshots       # Regenerate test snapshots
 yarn prettier                     # Format source files
-yarn cookbook-v2                   # Start modern cookbook dev server (Vite)
+yarn cookbook                      # Start modern cookbook dev server (Vite)
 ```
 
 Tests run via `packages/tests/test.sh`, which executes Jest on each `__tests__/*.js` file individually. On CI (Linux), tests require `xvfb-run` for headless OpenGL.
@@ -31,7 +31,7 @@ Tests run via `packages/tests/test.sh`, which executes Jest on each `__tests__/*
 - **`packages/gl-react-expo/`** — React Native via Expo GLView.
 - **`packages/gl-react-headless/`** — Node.js implementation using headless-gl.
 - **`packages/tests/`** — Shared Jest test suite using `gl-react-headless` + `react-test-renderer`.
-- **`packages/cookbook-v2/`** — Modern examples (Vite + TypeScript + Tailwind).
+- **`packages/cookbook/`** — Modern examples (Vite + TypeScript + Tailwind).
 
 ## Architecture
 
