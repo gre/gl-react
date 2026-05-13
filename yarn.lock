@@ -7685,6 +7685,7 @@ __metadata:
   resolution: "gl-react-dev@workspace:."
   dependencies:
     "@babel/cli": "npm:^7.26.0"
+    "@babel/core": "npm:^7.26.0"
     "@babel/preset-env": "npm:^7.26.0"
     "@babel/preset-react": "npm:^7.26.0"
     "@babel/preset-typescript": "npm:^7.26.0"
