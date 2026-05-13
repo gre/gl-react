@@ -48,7 +48,7 @@ export interface ExampleEntry {
   Component: ComponentType<any>;
 }
 
-// Mirrors packages/cookbook-v2/src/examples/index.ts. Examples that depend
+// Mirrors packages/cookbook/src/examples/index.ts. Examples that depend
 // on DOM-only APIs (live GLSL editor textarea, video files, custom canvas
 // text rendering) are listed in the README's "TODO/unported" section
 // instead of this registry.

@@ -43,7 +43,7 @@ Finally, please check that all examples of the cookbook are working correctly.
 **Run it**
 
 ```sh
-yarn cookbook-v2
+yarn cookbook
 ```
 
 ## License

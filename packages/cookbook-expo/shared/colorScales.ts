@@ -1,4 +1,4 @@
-// Bundled local 1x256 PNG gradients. Matches cookbook-v2.
+// Bundled local 1x256 PNG gradients. Matches cookbook.
 export const colorScales: Record<string, number> = {
   spectral: require("../assets/colorscales/colorscale-spectral.png"),
   OrRd: require("../assets/colorscales/colorscale-OrRd.png"),

@@ -7631,9 +7631,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"gl-react-cookbook-v2@workspace:packages/cookbook-v2":
+"gl-react-cookbook@workspace:packages/cookbook":
   version: 0.0.0-use.local
-  resolution: "gl-react-cookbook-v2@workspace:packages/cookbook-v2"
+  resolution: "gl-react-cookbook@workspace:packages/cookbook"
   dependencies:
     "@babel/core": "npm:^7.29.0"
     "@babel/preset-react": "npm:^7.28.5"

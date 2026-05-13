@@ -1,4 +1,4 @@
-name: CI cookbook-v2
+name: CI cookbook
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       - run: corepack enable
       - run: yarn install
 
-      # Build gl-react packages (needed by cookbook-v2)
+      # Build gl-react packages (needed by cookbook)
       - name: Build gl-react packages
         run: |
           for d in packages/gl-react packages/gl-react-dom; do
@@ -26,16 +26,16 @@ jobs:
 
       # Install Playwright browsers
       - name: Install Playwright
-        run: yarn workspace gl-react-cookbook-v2 e2e:install
+        run: yarn workspace gl-react-cookbook e2e:install
 
       # Run Playwright tests
       - name: Run Playwright tests
-        run: yarn workspace gl-react-cookbook-v2 e2e
+        run: yarn workspace gl-react-cookbook e2e
 
       # Upload test results on failure
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cookbook-v2-test-results
-          path: packages/cookbook-v2/test-results/
+          name: cookbook-test-results
+          path: packages/cookbook/test-results/
           retention-days: 7

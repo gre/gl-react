@@ -1,4 +1,4 @@
-name: Deploy cookbook-v2 to GitHub Pages
+name: Deploy cookbook to GitHub Pages
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
 
       - run: yarn install
 
-      # Build gl-react packages (cookbook-v2 imports from src via Vite alias,
+      # Build gl-react packages (cookbook imports from src via Vite alias,
       # but mirrors the existing CI pipeline for consistency).
       - name: Build gl-react packages
         run: |
@@ -42,23 +42,23 @@ jobs:
 
       # Run Vite build directly (bypassing the package's "tsc && vite build"
       # script which currently has unresolved TS errors unrelated to deploy).
-      # The Vite dev server is the source of truth for cookbook-v2 today.
-      - name: Build cookbook-v2
+      # The Vite dev server is the source of truth for cookbook today.
+      - name: Build cookbook
         env:
           GH_PAGES: "true"
-        working-directory: packages/cookbook-v2
+        working-directory: packages/cookbook
         run: yarn exec vite build
 
       # SPA fallback: GitHub Pages serves 404.html on unknown paths. Copying
       # index.html → 404.html lets BrowserRouter handle deep links / refreshes.
       - name: SPA fallback (404.html)
-        run: cp packages/cookbook-v2/dist/index.html packages/cookbook-v2/dist/404.html
+        run: cp packages/cookbook/dist/index.html packages/cookbook/dist/404.html
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/cookbook-v2/dist
+          path: packages/cookbook/dist
 
   deploy:
     needs: build

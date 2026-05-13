@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-// Drop-in replacement for cookbook-v2's useTimeLoop, RAF-based.
+// Drop-in replacement for cookbook's useTimeLoop, RAF-based.
 export function useTimeLoop(refreshRate = 60) {
   const [state, setState] = useState({ time: 0, tick: 0 });
   const rafRef = useRef<number | null>(null);
