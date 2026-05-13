@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "cookbook-expo",
+    "name": "gl-react cookbook",
     "slug": "cookbook-expo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.glreact.cookbookexpo"
+      "bundleIdentifier": "com.glreact.cookbookexpo",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to apply real-time GL shader effects."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -22,10 +25,19 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["android.permission.CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "This app uses the camera to apply real-time GL shader effects."
+        }
+      ]
+    ]
   }
 }

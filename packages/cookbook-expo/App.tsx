@@ -1,329 +1,176 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
   View,
   Pressable,
-  SafeAreaView,
+  FlatList,
+  ScrollView,
 } from "react-native";
-import { Shaders, Node, GLSL, Uniform, LinearCopy } from "gl-react";
-import { Surface } from "gl-react-expo";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { examples, ExampleEntry } from "./examples";
 
-// -- Shaders --
+type CategoryGroup = { category: string; items: ExampleEntry[] };
 
-const shaders = Shaders.create({
-  helloGL: {
-    frag: GLSL`
-precision highp float;
-varying vec2 uv;
-void main() {
-  gl_FragColor = vec4(uv.x, uv.y, 0.5, 1.0);
-}`,
-  },
-  helloBlue: {
-    frag: GLSL`
-precision highp float;
-varying vec2 uv;
-uniform float blue;
-void main() {
-  gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
-}`,
-  },
-  colorDisc: {
-    frag: GLSL`
-precision highp float;
-varying vec2 uv;
-uniform vec3 fromColor, toColor;
-void main() {
-  float d = distance(uv, vec2(0.5));
-  gl_FragColor = mix(
-    vec4(mix(fromColor, toColor, d), 1.0),
-    vec4(0.0),
-    step(0.5, d)
-  );
-}`,
-  },
-  rotate: {
-    frag: GLSL`
-precision highp float;
-varying vec2 uv;
-uniform float angle, scale;
-uniform sampler2D children;
-void main() {
-  mat2 rotation = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-  vec2 p = (uv - vec2(0.5)) * rotation / scale + vec2(0.5);
-  gl_FragColor =
-    p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0
-    ? vec4(0.0)
-    : texture2D(children, p);
-}`,
-  },
-  motionBlur: {
-    frag: GLSL`
-precision highp float;
-varying vec2 uv;
-uniform sampler2D children, backbuffer;
-uniform float persistence;
-void main () {
-  gl_FragColor = vec4(mix(
-    texture2D(children, uv),
-    texture2D(backbuffer, uv),
-    persistence
-  ).rgb, 1.0);
-}`,
-  },
-});
-
-// -- GL render check: onDraw fires after gl.drawArrays() succeeds,
-// proving the shader compiled and produced output. --
-
-function useGLRenderCheck() {
-  const [status, setStatus] = useState("pending");
-  const onDraw = useCallback(() => {
-    setStatus("rendered");
-  }, []);
-  return { status, onDraw };
+function groupByCategory(list: ExampleEntry[]): CategoryGroup[] {
+  const map = new Map<string, ExampleEntry[]>();
+  for (const ex of list) {
+    if (!map.has(ex.category)) map.set(ex.category, []);
+    map.get(ex.category)!.push(ex);
+  }
+  return Array.from(map.entries()).map(([category, items]) => ({
+    category,
+    items,
+  }));
 }
-
-// -- Components --
-
-function HelloGL({
-  surfaceRef,
-  onDraw,
-}: {
-  onDraw?: () => void;
-}) {
-  return (
-    <Surface style={styles.surface}>
-      <Node shader={shaders.helloGL} onDraw={onDraw} />
-    </Surface>
-  );
-}
-
-function HelloBlue({ onDraw }: { onDraw?: () => void }) {
-  const [blue, setBlue] = useState(0);
-  useEffect(() => {
-    const start = Date.now();
-    const id = setInterval(() => {
-      setBlue(0.5 + 0.5 * Math.cos((Date.now() - start) / 1000));
-    }, 16);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <Surface style={styles.surface}>
-      <Node shader={shaders.helloBlue} uniforms={{ blue }} />
-    </Surface>
-  );
-}
-
-function ColorDisc({ onDraw }: { onDraw?: () => void }) {
-  return (
-    <Surface style={styles.surface}>
-      <Node
-        shader={shaders.colorDisc}
-        uniforms={{
-          fromColor: [1, 0, 0.5],
-          toColor: [0.5, 0, 1],
-        }}
-      />
-    </Surface>
-  );
-}
-
-function RotatingHello({ onDraw }: { onDraw?: () => void }) {
-  const [angle, setAngle] = useState(0);
-  useEffect(() => {
-    const start = Date.now();
-    const id = setInterval(() => {
-      const t = (Date.now() - start) / 1000;
-      setAngle(2 * Math.PI * (0.5 + 0.5 * Math.cos(t)));
-    }, 16);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <Surface style={styles.surface}>
-      <Node
-        shader={shaders.rotate}
-        uniforms={{
-          angle,
-          scale: 0.8,
-          children: <Node shader={shaders.helloGL} />,
-        }}
-      />
-    </Surface>
-  );
-}
-
-function MotionBlurDemo({ onDraw }: { onDraw?: () => void }) {
-  const [t, setT] = useState(0);
-  useEffect(() => {
-    const start = Date.now();
-    const id = setInterval(() => {
-      setT((Date.now() - start) / 1000);
-    }, 16);
-    return () => clearInterval(id);
-  }, []);
-  const persistence = 0.75 - 0.2 * Math.cos(0.5 * t);
-  const red = 0.6 + 0.4 * Math.cos(4 * t);
-  const scale = 0.7 + 0.4 * Math.cos(t);
-  const angle = 2 * Math.PI * (0.5 + 0.5 * Math.cos(t));
-  return (
-    <Surface style={styles.surface}>
-      <LinearCopy>
-        <Node
-          shader={shaders.motionBlur}
-          backbuffering
-          uniforms={{
-            children: (
-              <Node
-                shader={shaders.rotate}
-                uniforms={{
-                  angle,
-                  scale,
-                  children: (
-                    <Node shader={shaders.helloBlue} uniforms={{ blue: red }} />
-                  ),
-                }}
-              />
-            ),
-            backbuffer: Uniform.Backbuffer,
-            persistence,
-          }}
-        />
-      </LinearCopy>
-    </Surface>
-  );
-}
-
-// -- Example registry --
-
-const examples = [
-  { title: "Hello GL", description: "UV gradient", component: HelloGL },
-  {
-    title: "Hello Blue",
-    description: "Animated uniform",
-    component: HelloBlue,
-  },
-  {
-    title: "Color Disc",
-    description: "Radial gradient with step()",
-    component: ColorDisc,
-  },
-  {
-    title: "Rotating Hello",
-    description: "Shader composition",
-    component: RotatingHello,
-  },
-  {
-    title: "Motion Blur",
-    description: "Backbuffering + composition",
-    component: MotionBlurDemo,
-  },
-];
-
-// -- App --
 
 export default function App() {
-  const [selected, setSelected] = useState(0);
-  const Example = examples[selected].component;
-  const { status: glStatus, onDraw } = useGLRenderCheck();
+  return (
+    <SafeAreaProvider>
+      <AppInner />
+    </SafeAreaProvider>
+  );
+}
+
+function AppInner() {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const groups = useMemo(() => groupByCategory(examples), []);
+  const selected = selectedId
+    ? examples.find((e) => e.id === selectedId)
+    : null;
 
   return (
-    <SafeAreaView style={styles.container} testID="app-root">
-      <StatusBar style="light" />
-      <View style={styles.header}>
-        <Text style={styles.title} testID="app-title">gl-react cookbook</Text>
-        <Text style={styles.subtitle} testID="example-description">{examples[selected].description}</Text>
-      </View>
-
-      <View style={styles.canvasContainer} testID="canvas-container">
-        <Example onDraw={onDraw} />
-      </View>
-      <Text testID="gl-status" style={styles.glStatus}>
-        gl:{glStatus}
-      </Text>
-
-      <View style={styles.tabBar} testID="tab-bar">
-        {examples.map((ex, i) => (
-          <Pressable
-            key={i}
-            onPress={() => setSelected(i)}
-            style={[styles.tab, i === selected && styles.tabActive]}
-            testID={`tab-${ex.title.toLowerCase().replace(/\s+/g, "-")}`}
-            accessibilityLabel={ex.title}
-            accessibilityRole="button"
-          >
-            <Text
-              style={[styles.tabText, i === selected && styles.tabTextActive]}
-            >
-              {ex.title}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
+    <SafeAreaView style={styles.root} edges={["top", "bottom"]}>
+      <StatusBar style="dark" />
+      {selected ? (
+        <ExampleDetail
+          example={selected}
+          onBack={() => setSelectedId(null)}
+        />
+      ) : (
+        <ExamplesList groups={groups} onSelect={setSelectedId} />
+      )}
     </SafeAreaView>
   );
 }
 
+function ExamplesList({
+  groups,
+  onSelect,
+}: {
+  groups: CategoryGroup[];
+  onSelect: (id: string) => void;
+}) {
+  return (
+    <View style={styles.flex}>
+      <View style={styles.header}>
+        <Text style={styles.title}>gl-react cookbook</Text>
+        <Text style={styles.subtitle}>
+          {examples.length} examples on Expo SDK 54
+        </Text>
+      </View>
+      <FlatList
+        data={groups}
+        keyExtractor={(g) => g.category}
+        renderItem={({ item: group }) => (
+          <View>
+            <Text style={styles.sectionHeader}>{group.category}</Text>
+            {group.items.map((ex) => (
+              <Pressable
+                key={ex.id}
+                onPress={() => onSelect(ex.id)}
+                style={({ pressed }) => [
+                  styles.row,
+                  pressed && styles.rowPressed,
+                ]}
+              >
+                <Text style={styles.rowTitle}>{ex.title}</Text>
+                <Text style={styles.rowDesc} numberOfLines={2}>
+                  {ex.description}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+        )}
+      />
+    </View>
+  );
+}
+
+function ExampleDetail({
+  example,
+  onBack,
+}: {
+  example: ExampleEntry;
+  onBack: () => void;
+}) {
+  const Component = example.Component;
+  return (
+    <View style={styles.flex}>
+      <View style={styles.detailHeader}>
+        <Pressable onPress={onBack} style={styles.backButton}>
+          <Text style={styles.backText}>‹ Back</Text>
+        </Pressable>
+        <View style={styles.detailTitleBlock}>
+          <Text style={styles.detailTitle}>{example.title}</Text>
+          <Text style={styles.detailDesc}>{example.description}</Text>
+        </View>
+      </View>
+      <ScrollView
+        contentContainerStyle={styles.detailContent}
+        bounces={false}
+      >
+        <Component />
+      </ScrollView>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#111",
-  },
+  root: { flex: 1, backgroundColor: "#fafafa" },
+  flex: { flex: 1 },
   header: {
     paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  title: { fontSize: 22, fontWeight: "700", color: "#111" },
+  subtitle: { fontSize: 12, color: "#666", marginTop: 2 },
+  sectionHeader: {
+    paddingHorizontal: 20,
     paddingTop: 16,
-    paddingBottom: 8,
-  },
-  title: {
-    color: "#fff",
-    fontSize: 22,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    color: "#888",
-    fontSize: 14,
-    marginTop: 4,
-  },
-  canvasContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  surface: {
-    width: 300,
-    height: 300,
-  },
-  tabBar: {
-    flexDirection: "row",
-    paddingHorizontal: 12,
-    paddingBottom: 8,
-    gap: 8,
-    borderTopWidth: 1,
-    borderTopColor: "#222",
-  },
-  tab: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 8,
-  },
-  tabActive: {
-    backgroundColor: "#333",
-  },
-  tabText: {
-    color: "#888",
-    fontSize: 13,
-    fontWeight: "500",
-  },
-  tabTextActive: {
-    color: "#fff",
-  },
-  glStatus: {
-    color: "#444",
-    fontSize: 10,
-    textAlign: "center",
     paddingBottom: 4,
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#888",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
+  row: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#eee",
+  },
+  rowPressed: { backgroundColor: "#eef" },
+  rowTitle: { fontSize: 15, color: "#111", fontWeight: "500" },
+  rowDesc: { fontSize: 12, color: "#666", marginTop: 2 },
+  detailHeader: {
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  backButton: { paddingVertical: 4, paddingRight: 12 },
+  backText: { fontSize: 16, color: "#4f46e5" },
+  detailTitleBlock: { flex: 1 },
+  detailTitle: { fontSize: 17, fontWeight: "700", color: "#111" },
+  detailDesc: { fontSize: 12, color: "#666", marginTop: 2 },
+  detailContent: { padding: 16, alignItems: "center", flexGrow: 1 },
 });
