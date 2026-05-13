@@ -36,15 +36,14 @@ if you need to regenerate the snapshots:
 yarn run test-rewrite-snapshots
 ```
 
-Finally, Please check that ALL examples of the cookbook are working correctly.
+Finally, please check that all examples of the cookbook are working correctly.
 
 ## Cookbook
 
 **Run it**
 
 ```sh
-cd packages/cookbook
-yarn start
+yarn cookbook-v2
 ```
 
 ## License
