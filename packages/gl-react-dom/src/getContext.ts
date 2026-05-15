@@ -1,23 +1,20 @@
+export type GLContextVersion = "webgl" | "webgl2" | "auto";
+
 const getContext = (
   canvas: HTMLCanvasElement,
   opts: any,
-  version: "webgl" | "webgl2" | "auto"
-) => {
-  let gl: WebGLRenderingContext | null = null;
+  version: GLContextVersion
+): WebGLRenderingContext | WebGL2RenderingContext | null => {
+  let gl: WebGLRenderingContext | WebGL2RenderingContext | null = null;
   if (version === "webgl2" || version === "auto") {
-    gl = canvas.getContext("webgl2", opts) as unknown as WebGLRenderingContext | null;
+    gl = canvas.getContext("webgl2", opts) as WebGL2RenderingContext | null;
   }
   if (!gl && (version === "webgl" || version === "auto")) {
     gl =
-      (canvas.getContext("webgl", opts) as unknown as WebGLRenderingContext | null) ||
-      (canvas.getContext(
-        "webgl-experimental" as any,
-        opts
-      ) as unknown as WebGLRenderingContext | null) ||
-      (canvas.getContext(
-        "experimental-webgl" as any,
-        opts
-      ) as unknown as WebGLRenderingContext | null);
+      (canvas.getContext("webgl", opts) as WebGLRenderingContext | null) ||
+      // non-standard context IDs require going through unknown since TypeScript's catch-all overload returns RenderingContext
+      (canvas.getContext("webgl-experimental" as any, opts) as unknown as WebGLRenderingContext | null) ||
+      (canvas.getContext("experimental-webgl" as any, opts) as unknown as WebGLRenderingContext | null);
   }
   return gl;
 };
