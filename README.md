@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/gre/gl-react.svg?branch=master)](https://travis-ci.org/gre/gl-react) [![npm](https://img.shields.io/npm/v/gl-react.svg)](https://www.npmjs.com/package/gl-react)
 
-# <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react (v4)
+# <img width="32" alt="icon" src="https://cloud.githubusercontent.com/assets/211411/9813786/eacfcc24-5888-11e5-8f9b-5a907a2cbb21.png"> gl-react (v6)
 
 `gl-react` is a [React](https://facebook.github.io/react/) library to write and compose WebGL shaders. _Implement complex effects by composing React components._
 
@@ -78,6 +78,19 @@ and this code...
 ...renders:
 
 ![](https://cloud.githubusercontent.com/assets/211411/9386550/432492c6-475c-11e5-9328-f3d5187298c1.jpg)
+
+## Usage with Vite
+
+`gl-react` uses `typedarray-pool` which references Node.js's `global`. Add this to your `vite.config.js`:
+
+```js
+export default defineConfig({
+  // ...
+  define: {
+    global: "globalThis",
+  },
+});
+```
 
 ## Features
 
