@@ -7758,22 +7758,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"gl-react-headless@npm:^5.2.1":
-  version: 5.2.1
-  resolution: "gl-react-headless@npm:5.2.1"
-  dependencies:
-    gl: "npm:^5.0.0"
-    invariant: "npm:^2.2.4"
-    prop-types: "npm:^15.7.2"
-    raf: "npm:^3.4.1"
-  peerDependencies:
-    gl-react: "*"
-    react: "*"
-  checksum: 10c0/61922e9378acc15d5e76fd38a2c57d0f8b443410fcd4672750a17b571391b880fbf5a09ea28a85ca53204db8a8ba96d65332b90bd9054116bc156691205038d8
-  languageName: node
-  linkType: hard
-
-"gl-react-headless@workspace:packages/gl-react-headless":
+"gl-react-headless@npm:^6.0.0, gl-react-headless@workspace:packages/gl-react-headless":
   version: 0.0.0-use.local
   resolution: "gl-react-headless@workspace:packages/gl-react-headless"
   dependencies:
@@ -7813,8 +7798,8 @@ __metadata:
     "@babel/preset-flow": "npm:^7.25.0"
     "@babel/preset-react": "npm:^7.26.0"
     babel-jest: "npm:^29.7.0"
-    gl-react: "npm:^5.2.0"
-    gl-react-headless: "npm:^5.2.1"
+    gl-react: "npm:^6.0.0"
+    gl-react-headless: "npm:^6.0.0"
     gl-texture2d: "npm:^2.0.12"
     invariant: "npm:^2.2.4"
     jest: "npm:^29.7.0"
