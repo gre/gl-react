@@ -145,7 +145,7 @@ export default class GLViewDOM extends Component<
       );
     for (let k in propTypes) {
       if (rest.hasOwnProperty(k)) {
-        delete rest[k];
+        delete (rest as any)[k];
       }
     }
     return (
@@ -177,7 +177,7 @@ export default class GLViewDOM extends Component<
       debug
         ? { ...webglContextAttributes, preserveDrawingBuffer: true }
         : webglContextAttributes,
-      version || "auto"
+      (version || "auto") as "webgl" | "webgl2" | "auto"
     );
     this.webglContextAttributes = webglContextAttributes || {};
     return gl;

@@ -13,7 +13,7 @@ const connectSize = (GLComponent: any) =>
     children?: any;
     onConnectSizeComponentRef?: (ref: any) => void;
   }> {
-    context!: {
+    declare context: {
       glSizable: { getGLSize: () => [number, number] };
       glParent: any;
       glSurface: any;

@@ -55,6 +55,7 @@ export default class GLViewNative extends Component<{
         style={[{ position: "relative", overflow: "hidden" }, style]}
       >
         <EXGLView
+          {...({} as any)}
           style={[
             style,
             {
