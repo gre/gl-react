@@ -24,7 +24,8 @@
     "fast-uri": "^3.1.2",
     "follow-redirects": "^1.16.0",
     "ip-address": "^10.2.0",
-    "@xmldom/xmldom": "^0.8.13"
+    "@xmldom/xmldom": "^0.8.13",
+    "gl": "9.0.0-rc.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.0",

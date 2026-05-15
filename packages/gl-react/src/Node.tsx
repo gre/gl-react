@@ -286,7 +286,7 @@ const NodePropTypes = {
  */
 export default class Node extends Component<Props, any> {
   drawProps: Props = this.props;
-  context!: SurfaceContext;
+  declare context: SurfaceContext;
   framebuffer?: Framebuffer;
   backbuffer?: Framebuffer;
   _needsRedraw: boolean = false;

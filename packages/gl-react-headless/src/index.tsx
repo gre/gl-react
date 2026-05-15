@@ -91,7 +91,7 @@ class GLView extends Component<{
   render() {
     const { width, height, debug, children, ...rest } = this.props;
     for (let k in propTypes) {
-      delete rest[k];
+      delete (rest as any)[k];
     }
     return (
       <canvas ref={this.onRef} width={width} height={height} {...rest}>

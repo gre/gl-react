@@ -14,7 +14,7 @@
     "outDir": "lib",
     "rootDir": "src",
     "composite": true,
-    "typeRoots": ["./src/types"]
+    "typeRoots": ["./src/types", "../../node_modules/@types"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["lib", "node_modules"]

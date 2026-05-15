@@ -22,7 +22,7 @@ export default class Bus extends Component<Props, any> {
   id: number = genId();
   static contextType = GLContext;
 
-  context!: {
+  declare context: {
     glParent: any;
     glSurface: any;
     glSizable: any;
