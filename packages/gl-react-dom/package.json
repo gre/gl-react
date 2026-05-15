@@ -1,6 +1,6 @@
 {
   "name": "gl-react-dom",
-  "version": "5.2.1",
+  "version": "6.0.0",
   "license": "MIT",
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "description": "DOM implementation of gl-react, an universal React library to write and compose WebGL shaders",
@@ -29,7 +29,7 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "gl-react": "^5.2.0"
+    "gl-react": "^6.0.0"
   },
   "dependencies": {
     "invariant": "^2.2.4",
