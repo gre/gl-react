@@ -13,6 +13,10 @@
     "expo",
     "react-component"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gre/gl-react"
+  },
   "main": "lib/index.js",
   "files": [
     "src",
