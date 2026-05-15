@@ -34,7 +34,8 @@ for pkg in $PACKAGES; do
   echo "Bumped $pkg to $VERSION"
 done
 
-git add packages/gl-react/package.json packages/gl-react-dom/package.json packages/gl-react-expo/package.json packages/gl-react-headless/package.json packages/gl-react-native/package.json
+yarn install
+git add packages/gl-react/package.json packages/gl-react-dom/package.json packages/gl-react-expo/package.json packages/gl-react-headless/package.json packages/gl-react-native/package.json yarn.lock
 git commit -m "chore: release $VERSION"
 git tag "v$VERSION"
 
