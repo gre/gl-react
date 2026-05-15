@@ -19,7 +19,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - run: corepack enable
-      - run: yarn install --no-immutable
+      - run: yarn install --no-immutable --ignore-scripts
       - run: yarn build
 
       - name: Publish packages
