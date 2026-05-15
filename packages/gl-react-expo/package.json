@@ -24,7 +24,7 @@
   "peerDependencies": {
     "expo-gl": "*",
     "gl-react": "*",
-    "react": "*",
+    "react": ">=18",
     "react-native": "*"
   },
   "devDependencies": {

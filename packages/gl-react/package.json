@@ -23,7 +23,7 @@
     "react": "global:React"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": ">=18"
   },
   "dependencies": {
     "gl-shader": "^4.3.1",

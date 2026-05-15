@@ -26,7 +26,7 @@
   },
   "peerDependencies": {
     "gl-react": "*",
-    "react": "*"
+    "react": ">=18"
   },
   "devDependencies": {
     "gl-react": "^5.2.0"
