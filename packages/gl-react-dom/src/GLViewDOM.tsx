@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import invariant from "invariant";
-import getContext from "./getContext";
+import getContext, { GLContextVersion } from "./getContext";
 
 const __DEV__ = process.env.NODE_ENV === "development";
 
@@ -26,7 +26,7 @@ const propTypes: { [key: string]: any } = {
   height: PropTypes.number.isRequired,
   style: PropTypes.object,
   pixelRatio: PropTypes.number,
-  version: PropTypes.string,
+  version: PropTypes.oneOf(["webgl", "webgl2", "auto"]),
 };
 
 class ErrorDebug extends Component<{ error: any }> {
@@ -78,7 +78,7 @@ export default class GLViewDOM extends Component<
     height: number;
     style?: any;
     debug?: number;
-    version?: string;
+    version?: GLContextVersion;
     [key: string]: any;
   },
   {
@@ -177,8 +177,8 @@ export default class GLViewDOM extends Component<
       debug
         ? { ...webglContextAttributes, preserveDrawingBuffer: true }
         : webglContextAttributes,
-      (version || "auto") as "webgl" | "webgl2" | "auto"
-    );
+      version || "auto"
+    ) as WebGLRenderingContext | null;
     this.webglContextAttributes = webglContextAttributes || {};
     return gl;
   }
