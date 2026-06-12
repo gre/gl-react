@@ -1,0 +1,37 @@
+{
+  "name": "gl-react-image",
+  "version": "6.0.0",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "Universal gl-react image that implements various resizeMode in OpenGL (cover, contain, free, stretch)",
+  "keywords": [
+    "gl-react",
+    "image",
+    "resizeMode",
+    "crop",
+    "gl",
+    "opengl",
+    "react",
+    "react-component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gre/gl-react",
+    "directory": "packages/gl-react-image"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "gl-react": "*",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "gl-react": "workspace:^"
+  }
+}

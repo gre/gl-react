@@ -29,6 +29,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       'gl-react': resolve(__dirname, '../gl-react/src'),
       'gl-react-dom': resolve(__dirname, '../gl-react-dom/src'),
+      'gl-react-image': resolve(__dirname, '../gl-react-image/src'),
       buffer: resolve(__dirname, './src/shims/buffer.ts'),
     },
   },

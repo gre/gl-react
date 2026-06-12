@@ -66,6 +66,9 @@ importers:
       gl-react-dom:
         specifier: workspace:^
         version: link:../gl-react-dom
+      gl-react-image:
+        specifier: workspace:^
+        version: link:../gl-react-image
       gl-shader:
         specifier: ^4.2.1
         version: 4.3.1
@@ -388,6 +391,16 @@ importers:
         specifier: workspace:^
         version: link:../gl-react
 
+  packages/gl-react-image:
+    dependencies:
+      react:
+        specifier: '>=18'
+        version: 19.1.0
+    devDependencies:
+      gl-react:
+        specifier: workspace:^
+        version: link:../gl-react
+
   packages/gl-react-native:
     dependencies:
       expo-gl:
@@ -421,6 +434,9 @@ importers:
       gl-react-headless:
         specifier: workspace:^
         version: link:../gl-react-headless
+      gl-react-image:
+        specifier: workspace:^
+        version: link:../gl-react-image
       gl-texture2d:
         specifier: ^2.0.12
         version: 2.1.0

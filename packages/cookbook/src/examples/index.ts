@@ -139,6 +139,42 @@ export const examples: ExampleEntry[] = [
     category: "Composition",
     Component: lazy(() => import("./diamondanim")),
   },
+  {
+    id: "imageresizemodes",
+    title: "Image Resize Modes",
+    description: "gl-react-image: cover, free, contain and stretch resizeMode implemented in OpenGL",
+    category: "Composition",
+    Component: lazy(() => import("./imageresizemodes")),
+    controls: {
+      resizeMode: {
+        type: "select",
+        label: "Resize Mode",
+        options: [
+          { key: "cover", label: "cover" },
+          { key: "free", label: "free" },
+          { key: "contain", label: "contain" },
+          { key: "stretch", label: "stretch" },
+        ],
+        default: "cover",
+      },
+      zoom: { type: "float", label: "Zoom", min: 0.05, max: 1, step: 0.01, default: 1 },
+      centerX: { type: "float", label: "Center X", min: 0, max: 1, step: 0.01, default: 0.5 },
+      centerY: { type: "float", label: "Center Y", min: 0, max: 1, step: 0.01, default: 0.5 },
+    },
+  },
+  {
+    id: "imageeffects",
+    title: "Image + Effects",
+    description: "GLImage cover-crop composed with a color effect: a Node like any other",
+    category: "Composition",
+    Component: lazy(() => import("./imageeffects")),
+    controls: {
+      saturation: { type: "float", label: "Saturation", min: 0, max: 2, step: 0.01, default: 1 },
+      zoom: { type: "float", label: "Zoom", min: 0.05, max: 1, step: 0.01, default: 0.6 },
+      centerX: { type: "float", label: "Center X", min: 0, max: 1, step: 0.01, default: 0.5 },
+      centerY: { type: "float", label: "Center Y", min: 0, max: 1, step: 0.01, default: 0.5 },
+    },
+  },
 
   // === Blur ===
   {
