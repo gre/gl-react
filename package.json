@@ -25,7 +25,9 @@
     "follow-redirects": "^1.16.0",
     "ip-address": "^10.2.0",
     "@xmldom/xmldom": "^0.8.13",
-    "gl": "9.0.0-rc.9"
+    "gl": "9.0.0-rc.9",
+    "qs": "^6.15.2",
+    "postcss": "^8.5.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.0",
