@@ -2577,3 +2577,34 @@ test("gl-react-image GLImage resizeMode", async () => {
   });
   expectToBeCloseToColorArray(free.topLeft, transparent);
 });
+
+test("gl-react-blur Blur", () => {
+  const { Blur } = require("gl-react-blur");
+  const shaders = Shaders.create({
+    red: {
+      frag: GLSL`
+precision highp float;
+varying vec2 uv;
+void main() { gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); }`,
+    },
+  });
+  // blurring a constant color is a no-op: the gaussian weights sum to 1
+  const inst = create(
+    <Surface
+      width={16}
+      height={16}
+      webglContextAttributes={{ preserveDrawingBuffer: true }}
+    >
+      <Blur factor={2} passes={4}>
+        <Node shader={shaders.red} />
+      </Blur>
+    </Surface>
+  );
+  const surface = inst.getInstance();
+  surface.flush();
+  expectToBeCloseToColorArray(
+    surface.capture(8, 8, 1, 1).data,
+    new Uint8Array([255, 0, 0, 255])
+  );
+  inst.unmount();
+});

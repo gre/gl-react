@@ -1,7 +1,7 @@
 import React, { Component, createRef } from "react";
 import { Bus } from "gl-react";
 import { Surface } from "gl-react-dom";
-import { BlurV } from "./blurmap";
+import { BlurV } from "gl-react-blur";
 import { Saturate } from "./saturation";
 import { useVideo } from "./video";
 

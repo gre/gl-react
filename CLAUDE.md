@@ -36,6 +36,7 @@ Releases are managed by [changesets](https://github.com/changesets/changesets). 
 - **`packages/gl-react-expo/`** — React Native via Expo GLView.
 - **`packages/gl-react-headless/`** — Node.js implementation using headless-gl.
 - **`packages/gl-react-image/`** — `GLImage` component implementing `resizeMode` (cover/contain/free/stretch) in OpenGL.
+- **`packages/gl-react-blur/`** — multi-pass gaussian `Blur`/`BlurV` effects (variable blur via map texture).
 - **`packages/tests/`** — Shared Jest test suite using `gl-react-headless` + `react-test-renderer`.
 - **`packages/cookbook/`** — Modern examples (Vite + TypeScript + Tailwind).
 

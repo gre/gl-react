@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Shaders, Node, Bus, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
-import { BlurV } from "./blurmap";
+import { BlurV } from "gl-react-blur";
 
 const blurMapImages = [
   "https://i.imgur.com/SzbbUvX.png",

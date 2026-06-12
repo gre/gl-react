@@ -200,21 +200,23 @@ export const examples: ExampleEntry[] = [
   {
     id: "blurmulti",
     title: "Multi-pass Blur",
-    description: "4-pass blur: horizontal, vertical, and two diagonals",
+    description: "gl-react-blur: multi-pass gaussian Blur cycling horizontal, vertical and diagonal directions",
     category: "Blur",
     Component: lazy(() => import("./blurmulti")),
     controls: {
       factor: { type: "float", label: "Blur Factor", min: 0, max: 6, step: 0.1, default: 2 },
+      passes: { type: "float", label: "Passes", min: 1, max: 8, step: 1, default: 4 },
     },
   },
   {
     id: "blurmap",
     title: "Blur Map",
-    description: "Variable blur intensity controlled by a blur map texture",
+    description: "gl-react-blur's BlurV: variable blur intensity controlled by a blur map texture",
     category: "Blur",
     Component: lazy(() => import("./blurmap")),
     controls: {
       factor: { type: "float", label: "Blur Factor", min: 0, max: 6, step: 0.1, default: 2 },
+      passes: { type: "float", label: "Passes", min: 1, max: 8, step: 1, default: 4 },
     },
   },
   {

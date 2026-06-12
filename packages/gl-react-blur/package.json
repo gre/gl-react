@@ -1,0 +1,37 @@
+{
+  "name": "gl-react-blur",
+  "version": "6.0.0",
+  "license": "MIT",
+  "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
+  "description": "Universal gl-react multi-pass gaussian Blur effect with configurable intensity, also supporting variable blur with a map",
+  "keywords": [
+    "gl-react",
+    "blur",
+    "gaussian",
+    "effect",
+    "gl",
+    "opengl",
+    "react",
+    "react-component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gre/gl-react",
+    "directory": "packages/gl-react-blur"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "gl-react": "*",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "gl-react": "workspace:^"
+  }
+}

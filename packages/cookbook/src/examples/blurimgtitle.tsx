@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { Shaders, Node, GLSL, Bus, LinearCopy, connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
-import { Blur1D } from "./blurxy";
-import { BlurV as BlurMulti } from "./blurmulti";
-import { BlurV } from "./blurmap";
+import { Blur, Blur1D, BlurV } from "gl-react-blur";
 
 const shaders = Shaders.create({
   ImageTitle: {
@@ -51,13 +49,8 @@ const AveragePixels = ({
   children: any;
   quality: number;
 }) => (
-  <Blur1D width={1} height={1} resolution={[1, 1]} direction={[0, 0.1]}>
-    <Blur1D
-      width={1}
-      height={quality}
-      resolution={[1, quality]}
-      direction={[0.1, 0]}
-    >
+  <Blur1D width={1} height={1} direction={[0, 0.1]}>
+    <Blur1D width={1} height={quality} direction={[0.1, 0]}>
       {children}
     </Blur1D>
   </Blur1D>
@@ -75,9 +68,9 @@ const TitleBlurMap = ({
     uniforms={{
       threshold,
       t: (
-        <BlurMulti factor={4} width={200} height={200}>
+        <Blur factor={4} passes={4} width={200} height={200}>
           {title}
-        </BlurMulti>
+        </Blur>
       ),
     }}
     width={64}
