@@ -17,6 +17,7 @@
     "paths": {
       "gl-react": ["./packages/gl-react/src"],
       "gl-react-dom": ["./packages/gl-react-dom/src"],
+      "gl-react-blur": ["./packages/gl-react-blur/src"],
       "gl-react-image": ["./packages/gl-react-image/src"],
       "gl-react-headless": ["./packages/gl-react-headless/src"],
       "gl-react-expo": ["./packages/gl-react-expo/src"],
@@ -26,6 +27,7 @@
   "references": [
     { "path": "packages/gl-react" },
     { "path": "packages/gl-react-dom" },
+    { "path": "packages/gl-react-blur" },
     { "path": "packages/gl-react-image" },
     { "path": "packages/gl-react-headless" },
     { "path": "packages/gl-react-expo" },

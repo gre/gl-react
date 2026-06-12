@@ -19,6 +19,7 @@
   "version": "5.2.1",
   "dependencies": {
     "gl-react": "workspace:^",
+    "gl-react-blur": "workspace:^",
     "gl-react-headless": "workspace:^",
     "gl-react-image": "workspace:^",
     "gl-texture2d": "^2.0.12",

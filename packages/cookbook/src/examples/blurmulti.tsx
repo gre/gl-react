@@ -1,28 +1,21 @@
 import React from "react";
-import { connectSize } from "gl-react";
 import { Surface } from "gl-react-dom";
-import { Blur1D } from "./blurxy";
+import { Blur } from "gl-react-blur";
 
-// 4 directional blur passes for a smoother result
-export const BlurV = connectSize(({ children, factor }: any) => {
-  const s = factor;
-  return (
-    <Blur1D direction={[s, 0]}>
-      <Blur1D direction={[0, s]}>
-        <Blur1D direction={[s / Math.SQRT2, s / Math.SQRT2]}>
-          <Blur1D direction={[-s / Math.SQRT2, s / Math.SQRT2]}>
-            {children}
-          </Blur1D>
-        </Blur1D>
-      </Blur1D>
-    </Blur1D>
-  );
-});
-
-export default function BlurMultiExample({ factor = 2 }: { factor?: number }) {
+// gl-react-blur's Blur recursively chains Blur1D passes, cycling
+// horizontal, vertical and diagonal directions with increasing radius
+export default function BlurMultiExample({
+  factor = 2,
+  passes = 4,
+}: {
+  factor?: number;
+  passes?: number;
+}) {
   return (
     <Surface width={400} height={300}>
-      <BlurV factor={factor}>{"https://i.imgur.com/iPKTONG.jpg"}</BlurV>
+      <Blur factor={factor} passes={passes}>
+        {"https://i.imgur.com/iPKTONG.jpg"}
+      </Blur>
     </Surface>
   );
 }

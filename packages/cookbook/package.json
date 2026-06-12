@@ -16,6 +16,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "gl-react": "workspace:^",
+    "gl-react-blur": "workspace:^",
     "gl-react-dom": "workspace:^",
     "gl-react-image": "workspace:^",
     "gl-shader": "^4.2.1",

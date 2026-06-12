@@ -63,6 +63,9 @@ importers:
       gl-react:
         specifier: workspace:^
         version: link:../gl-react
+      gl-react-blur:
+        specifier: workspace:^
+        version: link:../gl-react-blur
       gl-react-dom:
         specifier: workspace:^
         version: link:../gl-react-dom
@@ -325,6 +328,16 @@ importers:
         specifier: 2.1.2
         version: 2.1.2
 
+  packages/gl-react-blur:
+    dependencies:
+      react:
+        specifier: '>=18'
+        version: 19.1.0
+    devDependencies:
+      gl-react:
+        specifier: workspace:^
+        version: link:../gl-react
+
   packages/gl-react-dom:
     dependencies:
       invariant:
@@ -431,6 +444,9 @@ importers:
       gl-react:
         specifier: workspace:^
         version: link:../gl-react
+      gl-react-blur:
+        specifier: workspace:^
+        version: link:../gl-react-blur
       gl-react-headless:
         specifier: workspace:^
         version: link:../gl-react-headless

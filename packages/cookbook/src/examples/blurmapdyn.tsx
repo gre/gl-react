@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Shaders, Node, Bus, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
-import { BlurV } from "./blurmap";
+import { BlurV } from "gl-react-blur";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 
 const shaders = Shaders.create({
