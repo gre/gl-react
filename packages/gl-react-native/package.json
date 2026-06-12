@@ -33,12 +33,12 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "gl-react": "^6.0.0"
+    "gl-react": "workspace:^"
   },
   "dependencies": {
     "expo-gl": "^11.3.0",
     "expo-gl-cpp": "^11.3.0",
-    "gl-react-expo": "^6.0.0",
+    "gl-react-expo": "workspace:^",
     "webgltexture-loader-expo": "2.1.2"
   },
   "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"

@@ -1,33 +1,33 @@
 {
   "name": "gl-react-dev",
   "version": "0.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
   "private": true,
-  "packageManager": "yarn@4.10.3",
+  "packageManager": "pnpm@10.34.3",
   "license": "MIT",
   "scripts": {
-    "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('yarn') === -1) { console.log('\u001b[31mPlease use yarn\u001b[0m'); process.exit(1); }\"",
+    "preinstall": "node -e \"if (process.env.npm_execpath.indexOf('pnpm') === -1) { console.log('\u001b[31mPlease use pnpm\u001b[0m'); process.exit(1); }\"",
     "build": "./scripts/build.sh",
     "watch": "./scripts/watch.sh",
     "prettier": "prettier --write 'packages/{gl-react,gl-react-dom,gl-react-expo,gl-react-headless,gl-react-native}/src/**/*.{ts,tsx}' 'packages/cookbook/src/**/*.{ts,tsx}'",
-    "cookbook": "cd packages/cookbook && yarn dev",
-    "test": "cd packages/tests && yarn test",
-    "test-rewrite-snapshots": "cd packages/tests && yarn test -- -u",
+    "cookbook": "pnpm --filter gl-react-cookbook dev",
+    "test": "pnpm --filter gl-react-tests test",
+    "test-rewrite-snapshots": "pnpm --filter gl-react-tests test -u",
     "clean": "rm -rf node_modules packages/*/node_modules/ packages/*/lib",
     "typecheck": "echo 'TODO: tsc -b (needs peerDep resolution for PnP)'",
-    "publish": "yarn && yarn build && echo 'Use yarn workspace <pkg> npm publish for each package'"
+    "changeset": "changeset",
+    "release": "pnpm build && changeset publish"
   },
-  "resolutions": {
-    "@babel/plugin-transform-modules-systemjs": "^7.29.4",
-    "fast-uri": "^3.1.2",
-    "follow-redirects": "^1.16.0",
-    "ip-address": "^10.2.0",
-    "@xmldom/xmldom": "^0.8.13",
-    "gl": "9.0.0-rc.9",
-    "qs": "^6.15.2",
-    "postcss": "^8.5.10"
+  "pnpm": {
+    "overrides": {
+      "@babel/plugin-transform-modules-systemjs": "^7.29.4",
+      "fast-uri": "^3.1.2",
+      "follow-redirects": "^1.16.0",
+      "ip-address": "^10.2.0",
+      "@xmldom/xmldom": "^0.8.13",
+      "gl": "9.0.0-rc.9",
+      "qs": "^6.15.2",
+      "postcss": "^8.5.10"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.26.0",
@@ -35,6 +35,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
+    "@changesets/cli": "^2.29.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "browserify": "^17.0.0",
