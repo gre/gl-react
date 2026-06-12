@@ -33,7 +33,7 @@
     "react": ">=18"
   },
   "devDependencies": {
-    "gl-react": "^6.0.0"
+    "gl-react": "workspace:^"
   },
   "dependencies": {
     "invariant": "^2.2.4",

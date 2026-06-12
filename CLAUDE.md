@@ -4,24 +4,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-gl-react is a universal React library for writing and composing WebGL shaders. It uses TypeScript for type checking and is structured as a Yarn workspaces monorepo.
+gl-react is a universal React library for writing and composing WebGL shaders. It uses TypeScript for type checking and is structured as a pnpm workspaces monorepo.
 
 ## Commands
 
-**Must use Yarn** (npm is blocked by a preinstall check).
+**Must use pnpm** (other package managers are blocked by a preinstall check).
 
 ```bash
-yarn                              # Install dependencies
-yarn build                        # Babel-compile all packages to lib/ + generate .d.ts
-yarn typecheck                    # Run TypeScript type checking (tsc --noEmit)
-yarn watch                        # Watch mode for development
-yarn test                         # Run Jest tests (packages/tests)
-yarn test-rewrite-snapshots       # Regenerate test snapshots
-yarn prettier                     # Format source files
-yarn cookbook                      # Start modern cookbook dev server (Vite)
+pnpm install                      # Install dependencies
+pnpm build                        # Babel-compile all packages to lib/ + generate .d.ts
+pnpm typecheck                    # Run TypeScript type checking (tsc --noEmit)
+pnpm watch                        # Watch mode for development
+pnpm test                         # Run Jest tests (packages/tests)
+pnpm test-rewrite-snapshots       # Regenerate test snapshots
+pnpm prettier                     # Format source files
+pnpm cookbook                     # Start modern cookbook dev server (Vite)
+pnpm changeset                    # Record a changeset for release notes
 ```
 
 Tests run via `packages/tests/test.sh`, which executes Jest on each `__tests__/*.js` file individually. On CI (Linux), tests require `xvfb-run` for headless OpenGL.
+
+## Releases
+
+Releases are managed by [changesets](https://github.com/changesets/changesets). Every user-facing change to a publishable package should include a changeset (`pnpm changeset`). On push to master, the Release workflow (`.github/workflows/publish.yml`) opens/updates a "Version Packages" PR; merging that PR publishes to npm via trusted publishing (OIDC — the npm-side config is bound to the `publish.yml` filename, do not rename it). Internal workspace deps use the `workspace:^` protocol, replaced with real versions at publish time.
 
 ## Monorepo Package Structure
 

@@ -24,20 +24,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: pnpm
 
-      - run: corepack enable
-
-      - run: yarn install
+      - run: pnpm install --frozen-lockfile
 
       # Build gl-react packages (cookbook imports from src via Vite alias,
       # but mirrors the existing CI pipeline for consistency).
       - name: Build gl-react packages
         run: |
           for d in packages/gl-react packages/gl-react-dom; do
-            yarn workspace gl-react-dev exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+            pnpm exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
           done
 
       # Run Vite build directly (bypassing the package's "tsc && vite build"
@@ -47,7 +48,7 @@ jobs:
         env:
           GH_PAGES: "true"
         working-directory: packages/cookbook
-        run: yarn exec vite build
+        run: pnpm exec vite build
 
       # SPA fallback: GitHub Pages serves 404.html on unknown paths. Copying
       # index.html → 404.html lets BrowserRouter handle deep links / refreshes.

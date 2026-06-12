@@ -8,7 +8,7 @@ export default defineConfig({
     headless: true,
   },
   webServer: {
-    command: "yarn dev --port 3001",
+    command: "pnpm dev --port 3001",
     port: 3001,
     reuseExistingServer: true,
     timeout: 15000,

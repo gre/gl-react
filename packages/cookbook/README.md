@@ -27,17 +27,17 @@ From the root of the monorepo:
 
 ```bash
 # Install dependencies
-yarn install
+pnpm install
 
 # Start the development server
-yarn cookbook
+pnpm cookbook
 ```
 
 Or directly from this package:
 
 ```bash
 cd packages/cookbook
-yarn dev
+pnpm dev
 ```
 
 The cookbook will be available at http://localhost:3001
@@ -87,12 +87,12 @@ The WebGL Inspector provides:
 
 ### Scripts
 
-- `yarn dev` - Start development server
-- `yarn build` - Build for production
-- `yarn preview` - Preview production build
-- `yarn type-check` - Run TypeScript checks
-- `yarn lint` - Run ESLint
-- `yarn lint:fix` - Fix ESLint issues
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview production build
+- `pnpm type-check` - Run TypeScript checks
+- `pnpm lint` - Run ESLint
+- `pnpm lint:fix` - Fix ESLint issues
 
 ### Code Style
 

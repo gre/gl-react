@@ -27,7 +27,7 @@
     "raf": "^3.4.1"
   },
   "devDependencies": {
-    "gl-react": "^6.0.0"
+    "gl-react": "workspace:^"
   },
   "gitHead": "9adf91601b95aec6dcd350179fdbd139a97bed5e"
 }
