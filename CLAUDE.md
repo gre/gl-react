@@ -35,6 +35,7 @@ Releases are managed by [changesets](https://github.com/changesets/changesets). 
 - **`packages/gl-react-native/`** — React Native standalone implementation.
 - **`packages/gl-react-expo/`** — React Native via Expo GLView.
 - **`packages/gl-react-headless/`** — Node.js implementation using headless-gl.
+- **`packages/gl-react-image/`** — `GLImage` component implementing `resizeMode` (cover/contain/free/stretch) in OpenGL.
 - **`packages/tests/`** — Shared Jest test suite using `gl-react-headless` + `react-test-renderer`.
 - **`packages/cookbook/`** — Modern examples (Vite + TypeScript + Tailwind).
 

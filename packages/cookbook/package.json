@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.2.0",
     "gl-react": "workspace:^",
     "gl-react-dom": "workspace:^",
+    "gl-react-image": "workspace:^",
     "gl-shader": "^4.2.1",
     "gl-texture2d": "^2.1.0",
     "gl-transitions": "^1.43.0",

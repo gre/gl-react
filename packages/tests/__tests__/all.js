@@ -2512,3 +2512,68 @@ test("VisitorLogger + bunch of funky extreme tests", () => {
   // eslint-disable-next-line no-global-assign
   console = oldConsole;
 });
+
+test("gl-react-image GLImage resizeMode", async () => {
+  const GLImage = require("gl-react-image").default;
+  // yellow3x2 has a 1.5 ratio; on a square surface:
+  // - cover crops horizontally and fills everything in yellow
+  // - contain letterboxes vertically: transparent bands at top/bottom
+  // - stretch distorts and fills everything in yellow
+  const renderWithResizeMode = async (props) => {
+    const loader = createOneTextureLoader(
+      (gl) => createNDArrayTexture(gl, yellow3x2),
+      [3, 2]
+    );
+    globalRegistry.add(loader.Loader);
+    const inst = create(
+      <Surface
+        width={64}
+        height={64}
+        webglContextAttributes={{ preserveDrawingBuffer: true }}
+      >
+        <GLImage source={loader.textureId} {...props} />
+      </Surface>
+    );
+    const surface = inst.getInstance();
+    await loader.resolve();
+    surface.flush();
+    // copy the capture data: Node.capture() reuses a pooled buffer,
+    // so each capture call overwrites the previously returned array
+    const capture = (x, y) => new Uint8Array(surface.capture(x, y, 1, 1).data);
+    const result = {
+      center: capture(32, 32),
+      bottomLeft: capture(0, 0),
+      topLeft: capture(0, 63),
+    };
+    inst.unmount();
+    globalRegistry.remove(loader.Loader);
+    return result;
+  };
+
+  const yellow = new Uint8Array([255, 255, 0, 255]);
+  const transparent = new Uint8Array([0, 0, 0, 0]);
+
+  const cover = await renderWithResizeMode({});
+  expectToBeCloseToColorArray(cover.center, yellow);
+  expectToBeCloseToColorArray(cover.bottomLeft, yellow);
+  expectToBeCloseToColorArray(cover.topLeft, yellow);
+
+  const contain = await renderWithResizeMode({ resizeMode: "contain" });
+  expectToBeCloseToColorArray(contain.center, yellow);
+  expectToBeCloseToColorArray(contain.bottomLeft, transparent);
+  expectToBeCloseToColorArray(contain.topLeft, transparent);
+
+  const stretch = await renderWithResizeMode({ resizeMode: "stretch" });
+  expectToBeCloseToColorArray(stretch.center, yellow);
+  expectToBeCloseToColorArray(stretch.bottomLeft, yellow);
+  expectToBeCloseToColorArray(stretch.topLeft, yellow);
+
+  // free mode with a small zoom centered in a corner: part of the square
+  // escapes the image edges and stays transparent
+  const free = await renderWithResizeMode({
+    resizeMode: "free",
+    zoom: 0.5,
+    center: [0, 0],
+  });
+  expectToBeCloseToColorArray(free.topLeft, transparent);
+});

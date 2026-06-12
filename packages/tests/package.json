@@ -20,6 +20,7 @@
   "dependencies": {
     "gl-react": "workspace:^",
     "gl-react-headless": "workspace:^",
+    "gl-react-image": "workspace:^",
     "gl-texture2d": "^2.0.12",
     "invariant": "^2.2.4",
     "jest": "^29.7.0",
