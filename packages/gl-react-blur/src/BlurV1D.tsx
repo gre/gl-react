@@ -45,6 +45,6 @@ const BlurV1D = connectSize(
       uniforms={{ t, map, resolution: [width, height], direction }}
     />
   )
-) as React.ComponentType<BlurV1DProps>;
+) as unknown as React.ComponentType<BlurV1DProps>;
 
 export default BlurV1D;

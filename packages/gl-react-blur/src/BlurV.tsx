@@ -39,6 +39,6 @@ const BlurV = connectSize(
       );
     return rec(passes);
   }
-) as React.ComponentType<BlurVProps>;
+) as unknown as React.ComponentType<BlurVProps>;
 
 export default BlurV;

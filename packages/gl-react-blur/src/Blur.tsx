@@ -36,6 +36,6 @@ const Blur = connectSize(
       );
     return rec(passes);
   }
-) as React.ComponentType<BlurProps>;
+) as unknown as React.ComponentType<BlurProps>;
 
 export default Blur;
