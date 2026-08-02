@@ -8,8 +8,8 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
-    "@react-native-community/slider": "^5.0.1",
-    "expo": "~54.0.0",
+    "@react-native-community/slider": "^5.2.0",
+    "expo": "~54.0.36",
     "expo-camera": "~17.0.10",
     "expo-gl": "~16.0.10",
     "expo-status-bar": "~3.0.9",
@@ -18,15 +18,15 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
-    "react-native-safe-area-context": "^5.7.0",
+    "react-native-safe-area-context": "^5.8.0",
     "webgltexture-loader": "2.1.2",
     "webgltexture-loader-expo": "2.1.2",
     "webgltexture-loader-expo-camera": "2.1.2"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^19.0.0",
-    "@types/react": "~19.1.0",
-    "typescript": "~5.9.2"
+    "@react-native-community/cli": "^19.1.2",
+    "@types/react": "~19.1.17",
+    "typescript": "~5.9.3"
   },
   "private": true,
   "installConfig": {
