@@ -38,7 +38,7 @@
     "react-gl-transition": "^1.19.2",
     "react-json2d": "^0.3.0",
     "react-motion": "^0.5.2",
-    "react-router-dom": "^6.30.4"
+    "react-router-dom": "^6.30.6"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
