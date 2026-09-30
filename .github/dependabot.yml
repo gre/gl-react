@@ -1,0 +1,72 @@
+# Dependabot version updates.
+# Security updates are configured separately in the repo settings and are not
+# affected by the grouping / ignore rules below (except where noted by GitHub).
+version: 2
+updates:
+  # Main pnpm workspace (root + packages/*). Dependabot reads pnpm-lock.yaml.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 10
+    versioning-strategy: "increase-if-necessary"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      # One PR for every in-range minor/patch bump (mirrors `pnpm update -r`).
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "expo"
+          - "expo-*"
+          - "react-native"
+          - "@react-native/*"
+          - "@react-native-community/*"
+    ignore:
+      # Expo SDK / React Native versions must move together
+      # (`npx expo install --fix`) and need device testing: upgrade manually.
+      - dependency-name: "expo"
+        update-types:
+          ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "expo-*"
+        update-types:
+          ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "react-native"
+        update-types:
+          ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "@react-native/*"
+        update-types:
+          ["version-update:semver-major", "version-update:semver-minor"]
+
+  # examples/next-js lives outside the pnpm workspace and has its own yarn.lock.
+  - package-ecosystem: "npm"
+    directory: "/examples/next-js"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      next-js-example:
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "ci"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
