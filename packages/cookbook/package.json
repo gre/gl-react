@@ -35,7 +35,7 @@
     "react": "^19.2.8",
     "react-color": "^2.19.3",
     "react-dom": "^19.2.8",
-    "react-gl-transition": "^1.19.2",
+    "react-gl-transition": "^2.0.0",
     "react-json2d": "^0.3.0",
     "react-motion": "^0.5.2",
     "react-router-dom": "^6.30.6"
