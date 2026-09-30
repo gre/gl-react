@@ -48,6 +48,5 @@ jobs:
       - name: Create release PR or publish to npm
         uses: changesets/action@v2
         with:
-          publish: pnpm changeset publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish-script: pnpm changeset publish
+          github-token: ${{ secrets.GITHUB_TOKEN }}
