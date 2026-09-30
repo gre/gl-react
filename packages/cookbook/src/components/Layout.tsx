@@ -51,7 +51,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white flex flex-col" style={{ height }}>
           <div onMouseDown={onResizeStart} className="cursor-ns-resize bg-gray-300 hover:bg-primary-400 transition-colors shrink-0 -mt-2" style={{ height: 3, paddingTop: 8, backgroundClip: 'content-box' }} />
           <div className="overflow-auto flex-1"><GLInspector /></div>
-          <button onClick={() => setOpen(false)} className="absolute bottom-4 right-4 z-[60] rounded-full p-3 shadow-lg bg-gray-600 hover:bg-gray-700 text-white" title="Close GL Inspector"><XMarkIcon className="h-5 w-5" /></button>
+          <button onClick={() => setOpen(false)} className="absolute bottom-4 right-4 z-60 rounded-full p-3 shadow-lg bg-gray-600 hover:bg-gray-700 text-white" title="Close GL Inspector"><XMarkIcon className="h-5 w-5" /></button>
         </div>
       )}
     </div>

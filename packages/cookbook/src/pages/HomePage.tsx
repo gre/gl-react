@@ -121,8 +121,8 @@ function HeroDemo() {
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
       <div className="relative shrink-0">
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary-600 to-purple-600 rounded-lg blur opacity-25" />
-        <div className="relative rounded-lg shadow-lg overflow-hidden leading-[0]" style={{ backgroundColor: "#111827" }}>
+        <div className="absolute -inset-1 bg-linear-to-r from-primary-600 to-purple-600 rounded-lg blur-sm opacity-25" />
+        <div className="relative rounded-lg shadow-lg overflow-hidden leading-0" style={{ backgroundColor: "#111827" }}>
           <Surface width={200} height={200}>
             <LinearCopy>
               <MotionBlur persistence={persistence}>
