@@ -296,20 +296,20 @@ gl-react-dom@5.2.0:
     raf "^3.4.1"
     webgltexture-loader-dom "1.0.0"
 
-gl-react@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-5.2.0.tgz#877aa3fdb3168bcde1d69da9a8a5a0b0937e859c"
-  integrity sha512-A/FxG65e8Zx2RYi9+kYpeAwfFb7qQN0T6BCRXcUiwevUC//i3cH53w0AQRGj1mm96NVvD412mYJatl52qlDuxw==
+gl-react@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/gl-react/-/gl-react-6.0.0.tgz#89fd83ae362eb723a504eed21732d1bcf2205f8d"
+  integrity sha512-7uC+nVPr4D23gpu4hPJO/0sA8PR2Nl9Ndsecu6tnI4NEvW3Ot69m9w5+NNTrJveqoNTrxmLuveVYoQWVNnf3bg==
   dependencies:
-    gl-shader "^4.2.1"
+    gl-shader "^4.3.1"
     invariant "^2.2.4"
     ndarray "^1.0.19"
     prop-types "^15.7.2"
     typedarray-pool "^1.2.0"
-    webgltexture-loader "1.0.0"
-    webgltexture-loader-ndarray "1.2.0"
+    webgltexture-loader "2.1.2"
+    webgltexture-loader-ndarray "2.1.2"
 
-gl-shader@^4.2.1:
+gl-shader@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/gl-shader/-/gl-shader-4.3.1.tgz#56094cf3c06e802ac6c286b3b2166abce901d882"
   integrity sha512-xLoN6XtRLlg97SEqtuzfKc+pVWpVkQ3YjDI1kuCale8tF7+zMhiKlMfmG4IMQPMdKJZQbIc/Ny8ZusEpfh5U+w==
@@ -624,17 +624,22 @@ webgltexture-loader-dom@1.0.0:
     webgltexture-loader-dom-image-url "^1.0.0"
     webgltexture-loader-dom-video "^1.0.0"
 
-webgltexture-loader-ndarray@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-1.2.0.tgz#1eb09f21ebd26e5004ce545b61de15d88e666dfa"
-  integrity sha512-gWTIqCOYs1XK6Yp4G7XvFDhvCvr6wFjTLPRN/HGBouF4u0to2fAIh5+2cxzEs1WE7eSwsxg1y5aNi1jRXSX+zA==
+webgltexture-loader-ndarray@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader-ndarray/-/webgltexture-loader-ndarray-2.1.2.tgz#eee4357d0466a567c58d7ad737a26fc19ad73f9a"
+  integrity sha512-/+6DRQfjd/4JQfx8FbZvPNMAaZ6cmEb95uZ6//9qNireJh8wZxDQUxzsMOy22AzW3ZglblIK1TaTaRNpQ5GTkQ==
   dependencies:
     ndarray "^1.0.19"
     ndarray-ops "^1.2.2"
     typedarray-pool "^1.2.0"
-    webgltexture-loader "^1.0.0"
+    webgltexture-loader "^2.1.2"
 
-webgltexture-loader@1.0.0, webgltexture-loader@^1.0.0:
+webgltexture-loader@2.1.2, webgltexture-loader@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-2.1.2.tgz#b3907c3b98e47edda419e727090d41a7d569c89c"
+  integrity sha512-maQ8zr/5PjZ7QPiuhlk+lEUc6gw/7I86Y1zV/mnLj65XGuFazUJahJO3Bm1YIUgFQj+4pHgpt9+xCT9hPlP0pA==
+
+webgltexture-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/webgltexture-loader/-/webgltexture-loader-1.0.0.tgz#e3d5b687d79ac85bed29222a7931f1405b69da6a"
   integrity sha512-TbQUdr0Bc3tcJ4pKIFoM9dKyLdYNf9Uxq05oZuIT+2e/vCcfaQS+WjNmW1FwYqaBrzcLr9CA/HBAmvyaS/REGw==
