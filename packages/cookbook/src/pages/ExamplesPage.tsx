@@ -21,10 +21,10 @@ export function ExamplesPage() {
                                 <Link
                                     key={example.id}
                                     to={`/examples/${example.id}`}
-                                    className="group relative rounded-lg border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
+                                    className="group relative rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:shadow-md transition-shadow duration-200"
                                 >
                                     <div className="flex items-center space-x-3">
-                                        <BeakerIcon className="h-5 w-5 text-primary-600 flex-shrink-0" />
+                                        <BeakerIcon className="h-5 w-5 text-primary-600 shrink-0" />
                                         <h3 className="text-sm font-medium text-gray-900 group-hover:text-primary-600">
                                             {example.title}
                                         </h3>

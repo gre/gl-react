@@ -63,7 +63,7 @@ export function ExampleDetailPage() {
             {prev && (
                 <button
                     onClick={() => navigate(`/examples/${prev.id}`)}
-                    className="fixed left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow border border-gray-200 transition-colors hidden xl:block"
+                    className="fixed left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow-sm border border-gray-200 transition-colors hidden xl:block"
                     title={prev.title}
                 >
                     <ChevronLeftIcon className="h-5 w-5" />
@@ -72,7 +72,7 @@ export function ExampleDetailPage() {
             {next && (
                 <button
                     onClick={() => navigate(`/examples/${next.id}`)}
-                    className="fixed right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow border border-gray-200 transition-colors hidden xl:block"
+                    className="fixed right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/80 hover:bg-white text-gray-400 hover:text-gray-700 shadow-sm border border-gray-200 transition-colors hidden xl:block"
                     title={next.title}
                 >
                     <ChevronRightIcon className="h-5 w-5" />
@@ -82,8 +82,8 @@ export function ExampleDetailPage() {
             {/* Main layout: side-by-side on wide screens */}
             <div className="flex flex-col xl:flex-row gap-6">
                 {/* Left: canvas + controls */}
-                <div className="flex-shrink-0 space-y-4">
-                    <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                <div className="shrink-0 space-y-4">
+                    <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-xs">
                         <Suspense
                             fallback={
                                 <div className="flex items-center justify-center h-64 text-gray-400">
@@ -96,7 +96,7 @@ export function ExampleDetailPage() {
                     </div>
 
                     {hasControls && (
-                        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+                        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-xs">
                             <h3 className="text-sm font-semibold text-gray-900 mb-3">Controls</h3>
                             <ControlsPanel
                                 controls={example.controls!}
@@ -111,7 +111,7 @@ export function ExampleDetailPage() {
                 {highlightedSource && (
                     <div className="flex-1 min-w-0">
                         <div className="bg-[#2d2d2d] rounded-lg p-4 overflow-x-auto h-full max-h-[80vh] overflow-y-auto">
-                            <pre className="text-xs font-mono leading-relaxed !bg-transparent !m-0 !p-0">
+                            <pre className="text-xs font-mono leading-relaxed bg-transparent! m-0! p-0!">
                                 <code
                                     className="language-tsx"
                                     dangerouslySetInnerHTML={{ __html: highlightedSource }}

@@ -88,7 +88,7 @@ export function Inspector({
                             </div>
                             <button
                                 onClick={toggleInspector}
-                                className="p-1 hover:bg-gray-100 rounded"
+                                className="p-1 hover:bg-gray-100 rounded-sm"
                             >
                                 <XMarkIcon className="h-5 w-5 text-gray-500" />
                             </button>
@@ -105,7 +105,7 @@ export function Inspector({
                                             <div key={name} className="bg-gray-50 rounded-lg p-3">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="text-sm font-medium text-gray-900">{name}</span>
-                                                    <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded">
+                                                    <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-sm">
                                                         {uniform.type}
                                                     </span>
                                                 </div>

@@ -28,7 +28,7 @@ export function Breadcrumb({ exampleId }: { exampleId?: string }) {
           <select
             value={current.id}
             onChange={(e) => navigate(`/examples/${e.target.value}`)}
-            className="bg-transparent text-gray-900 font-medium border-none outline-none cursor-pointer hover:text-primary-600 pr-5 -mr-2"
+            className="bg-transparent text-gray-900 font-medium border-none outline-hidden cursor-pointer hover:text-primary-600 pr-5 -mr-2"
           >
             {grouped.map((group) => (
               <optgroup key={group.label} label={group.label}>

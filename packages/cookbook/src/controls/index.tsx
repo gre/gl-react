@@ -128,7 +128,7 @@ function ColorPicker({
     <div className="flex items-center gap-3">
       <input
         type="color"
-        className="w-10 h-8 rounded cursor-pointer border border-gray-300"
+        className="w-10 h-8 rounded-sm cursor-pointer border border-gray-300"
         value={vec3ToHex(value)}
         onChange={(e) => onChange(hexToVec3(e.target.value))}
       />

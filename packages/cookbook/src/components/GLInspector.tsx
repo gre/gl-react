@@ -1543,14 +1543,14 @@ export default function GLInspector() {
         <>
           <button
             onClick={() => setCapture((v) => !v)}
-            className={`p-1.5 rounded transition-colors ${capture ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
+            className={`p-1.5 rounded-sm transition-colors ${capture ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
             title={capture ? "Disable capture" : "Enable capture"}
           >
             <CameraIcon className="h-4 w-4" />
           </button>
           <button
             onClick={() => setAnimated((v) => !v)}
-            className={`p-1.5 rounded transition-colors ${animated ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
+            className={`p-1.5 rounded-sm transition-colors ${animated ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
             title={animated ? "Pause animation" : "Resume animation"}
           >
             {animated ? <PlayIcon className="h-4 w-4" /> : <PauseIcon className="h-4 w-4" />}
@@ -1561,25 +1561,25 @@ export default function GLInspector() {
               setMinimizeAll(next);
               mgr.boxPos.forEach((_, id) => mgr.boxMinimized.set(id, next));
             }}
-            className={`p-1.5 rounded transition-colors ${minimizeAll ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
+            className={`p-1.5 rounded-sm transition-colors ${minimizeAll ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
             title={minimizeAll ? "Expand all" : "Minimize all"}
           >
             {minimizeAll ? <ArrowsPointingOutIcon className="h-4 w-4" /> : <ArrowsPointingInIcon className="h-4 w-4" />}
           </button>
           <button
             onClick={() => setPhysics((v) => !v)}
-            className={`p-1.5 rounded transition-colors ${physics ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
+            className={`p-1.5 rounded-sm transition-colors ${physics ? 'bg-gray-400/30 text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}
             title={physics ? "Disable physics" : "Enable physics"}
           >
             {physics ? <BoltIcon className="h-4 w-4" /> : <BoltSlashIcon className="h-4 w-4" />}
           </button>
           <div className="w-px h-4 bg-gray-300 mx-1" />
           {lost ? (
-            <button onClick={restoreContext} className="p-1.5 rounded text-green-600 hover:text-green-700 transition-colors" title="Restore GL context">
+            <button onClick={restoreContext} className="p-1.5 rounded-sm text-green-600 hover:text-green-700 transition-colors" title="Restore GL context">
               <ArrowPathIcon className="h-4 w-4" />
             </button>
           ) : (
-            <button onClick={loseContext} className="p-1.5 rounded text-gray-400 hover:text-red-500 transition-colors" title="Lose GL context">
+            <button onClick={loseContext} className="p-1.5 rounded-sm text-gray-400 hover:text-red-500 transition-colors" title="Lose GL context">
               <TrashIcon className="h-4 w-4" />
             </button>
           )}
@@ -1656,7 +1656,7 @@ export default function GLInspector() {
           <select
             value={surface ? surface.id : ""}
             onChange={onSelectChange}
-            className="bg-white text-gray-900 text-sm rounded px-2 py-1 border border-gray-300 outline-none"
+            className="bg-white text-gray-900 text-sm rounded-sm px-2 py-1 border border-gray-300 outline-hidden"
           >
             <option value="">(none)</option>
             {listSurfaces().map((s) => (

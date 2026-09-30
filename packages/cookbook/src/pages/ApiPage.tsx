@@ -76,7 +76,7 @@ export function ApiPage() {
                                                 {prop.name}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <code className="bg-gray-100 px-2 py-1 rounded text-xs">
+                                                <code className="bg-gray-100 px-2 py-1 rounded-sm text-xs">
                                                     {prop.type}
                                                 </code>
                                             </td>
