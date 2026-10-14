@@ -24,7 +24,7 @@
     "webgltexture-loader-expo-camera": "2.1.2"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^19.1.2",
+    "@react-native-community/cli": "^20.2.0",
     "@types/react": "~19.3.0",
     "typescript": "~5.9.3"
   },
