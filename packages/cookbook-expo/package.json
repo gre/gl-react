@@ -18,7 +18,7 @@
     "gl-react-expo": "workspace:^",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-native": "0.81.5",
+    "react-native": "0.81.6",
     "react-native-safe-area-context": "^5.8.0",
     "webgltexture-loader": "2.1.2",
     "webgltexture-loader-expo": "2.1.2",
