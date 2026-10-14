@@ -8,7 +8,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@babel/preset-env": "^7.29.7",
-    "@babel/preset-flow": "^7.29.7",
+    "@babel/preset-flow": "^8.0.1",
     "@babel/preset-react": "^7.29.7",
     "babel-jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2"
