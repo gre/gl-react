@@ -21,7 +21,7 @@
     "gl-react-image": "workspace:^",
     "gl-shader": "^4.3.1",
     "gl-texture2d": "^2.1.0",
-    "gl-transitions": "^1.71.0",
+    "gl-transitions": "^2.0.0",
     "hoist-non-react-statics": "^3.3.2",
     "invariant": "^2.2.4",
     "lodash": "^4.18.1",

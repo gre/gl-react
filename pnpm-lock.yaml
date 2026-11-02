@@ -81,8 +81,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       gl-transitions:
-        specifier: ^1.71.0
-        version: 1.76.1
+        specifier: ^2.0.0
+        version: 2.0.0
       hoist-non-react-statics:
         specifier: ^3.3.2
         version: 3.3.2
@@ -3863,8 +3863,8 @@ packages:
   gl-texture2d@2.1.0:
     resolution: {integrity: sha512-W0tzEjtlGSsCKq5FFwFVhH+fONFUTUeqM4HhA/BleygKaX39IwNTVOiqkwfu9szQZ4dQEq8ZDl7w1ud/eKLaZA==}
 
-  gl-transitions@1.76.1:
-    resolution: {integrity: sha512-KNoIuI+f8io3ofYX6F9S1brsZNifoYOfDk+oFNtwuO1HA++9XyiR8Z2Kg/kjJoxKKun9Tg3deqHSp2cv54yLkA==}
+  gl-transitions@2.0.0:
+    resolution: {integrity: sha512-VpGHhiWGeiq+/cTHvhqYFtYt5WZF+3wJPupFRtKY8UdZXfLTPoT7PZPVP71mmdjOXbaM+/V2+IokICs1EXjTHQ==}
 
   gl@9.0.0-rc.9:
     resolution: {integrity: sha512-rR9PHdCXwB+/KPkWVz13GHdRU9JzC5k1GSG+sLrfXPcWGvlYcqg9LuKDo74ZagirbL8/PPzar36pEn/pJjCQPA==}
@@ -10963,7 +10963,7 @@ snapshots:
       ndarray-ops: 1.2.2
       typedarray-pool: 1.2.0
 
-  gl-transitions@1.76.1: {}
+  gl-transitions@2.0.0: {}
 
   gl@9.0.0-rc.9:
     dependencies:
