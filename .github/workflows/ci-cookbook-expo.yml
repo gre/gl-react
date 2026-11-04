@@ -10,6 +10,10 @@ jobs:
   bundle-ios:
     runs-on: macos-15
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [cookbook-expo, cookbook-expo-camera]
 
     steps:
       - uses: actions/checkout@v7
@@ -31,15 +35,18 @@ jobs:
           done
 
       - name: Expo prebuild
-        working-directory: packages/cookbook-expo
+        working-directory: packages/${{ matrix.app }}
         run: pnpm exec expo prebuild --platform ios --no-install
 
       - name: Bundle JS for iOS
-        working-directory: packages/cookbook-expo
+        working-directory: packages/${{ matrix.app }}
         run: |
           pnpm exec expo export:embed \
             --platform ios \
-            --entry-file "${{ github.workspace }}/packages/cookbook-expo/index.ts" \
+            --entry-file "${{ github.workspace }}/packages/${{ matrix.app }}/index.ts" \
             --bundle-output /tmp/main.jsbundle \
             --assets-dest /tmp/assets \
             --dev false
+
+      - name: Check the bundle for startup crashes
+        run: node .github/scripts/check-expo-bundle.mjs "packages/${{ matrix.app }}" /tmp/main.jsbundle

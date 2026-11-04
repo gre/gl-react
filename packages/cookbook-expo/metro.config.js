@@ -19,7 +19,7 @@ const emptyModule = require.resolve("./empty-module");
 
 // Force single copies of react/react-native from this package's node_modules
 // to prevent monorepo root copies from being bundled alongside.
-const singletonPkgs = ["react", "react-dom", "react-native"];
+const singletonPkgs = ["react", "react-dom", "react-native", "expo-gl"];
 
 const originalResolveRequest = config.resolver.resolveRequest;
 config.resolver.resolveRequest = (context, moduleName, platform) => {
