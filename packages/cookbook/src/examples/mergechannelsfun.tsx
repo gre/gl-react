@@ -5,6 +5,7 @@ import { useVideo } from "./video";
 import { useTimeLoop } from "../hooks/useTimeLoop";
 import { Rotating } from "./golrot";
 import { GameOfLife } from "./gol";
+import { assetUrl } from "../utils/assetUrl";
 
 function RotatingGameOfLifeInner() {
   const { time } = useTimeLoop();
@@ -42,7 +43,7 @@ function useTextCanvas() {
 
 export default function MergeChannelsFun() {
   const textDataURL = useTextCanvas();
-  const video = useVideo("/assets/video.mp4");
+  const video = useVideo(assetUrl("video.mp4"));
 
   return (
     <Surface width={400} height={400}>

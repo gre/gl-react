@@ -1,6 +1,7 @@
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
+import { assetUrl } from "../utils/assetUrl";
 
 const shaders = Shaders.create({
   mergeChannels: {
@@ -40,9 +41,9 @@ export const MergeChannels = ({
 );
 
 export default function MergeChannelsExample({
-  red = "/assets/img1.png",
-  green = "/assets/img2.png",
-  blue = "/assets/img3.png",
+  red = assetUrl("img1.png"),
+  green = assetUrl("img2.png"),
+  blue = assetUrl("img3.png"),
 }: {
   red?: string;
   green?: string;

@@ -33,6 +33,10 @@ jobs:
       - name: Run Playwright tests
         run: pnpm --filter gl-react-cookbook e2e
 
+      # Same tests on the production build, under the GitHub Pages base path
+      - name: Run Playwright tests on the production build
+        run: pnpm --filter gl-react-cookbook e2e:prod
+
       # Upload test results on failure
       - uses: actions/upload-artifact@v7
         if: failure()

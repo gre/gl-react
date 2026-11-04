@@ -1,6 +1,7 @@
 import React from "react";
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
+import { assetUrl } from "../utils/assetUrl";
 
 const shaders = Shaders.create({
   colorify: {
@@ -19,17 +20,17 @@ void main() {
 });
 
 export const colorScales: Record<string, string> = {
-  spectral: "/assets/colorscale-spectral.png",
-  OrRd: "/assets/colorscale-OrRd.png",
-  PuBu: "/assets/colorscale-PuBu.png",
-  Oranges: "/assets/colorscale-Oranges.png",
-  Reds: "/assets/colorscale-Reds.png",
-  Blues: "/assets/colorscale-Blues.png",
-  Greens: "/assets/colorscale-Greens.png",
-  Greys: "/assets/colorscale-Greys.png",
-  YlOrBr: "/assets/colorscale-YlOrBr.png",
-  BuGn: "/assets/colorscale-BuGn.png",
-  RdYlGn: "/assets/colorscale-RdYlGn.png",
+  spectral: assetUrl("colorscale-spectral.png"),
+  OrRd: assetUrl("colorscale-OrRd.png"),
+  PuBu: assetUrl("colorscale-PuBu.png"),
+  Oranges: assetUrl("colorscale-Oranges.png"),
+  Reds: assetUrl("colorscale-Reds.png"),
+  Blues: assetUrl("colorscale-Blues.png"),
+  Greens: assetUrl("colorscale-Greens.png"),
+  Greys: assetUrl("colorscale-Greys.png"),
+  YlOrBr: assetUrl("colorscale-YlOrBr.png"),
+  BuGn: assetUrl("colorscale-BuGn.png"),
+  RdYlGn: assetUrl("colorscale-RdYlGn.png"),
 };
 
 export const Colorify = ({

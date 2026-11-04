@@ -4,6 +4,7 @@ import { Surface } from "gl-react-dom";
 import { BlurV } from "gl-react-blur";
 import { Saturate } from "./saturation";
 import { useVideo } from "./video";
+import { assetUrl } from "../utils/assetUrl";
 
 const blurMapImages = [
   "https://i.imgur.com/SzbbUvX.png",
@@ -55,7 +56,7 @@ export default function BlurVideo({
   brightness?: number;
   map?: string;
 }) {
-  const video = useVideo("/assets/video.mp4");
+  const video = useVideo(assetUrl("video.mp4"));
   if (!video) return null;
   return (
     <BlurVideoInner
