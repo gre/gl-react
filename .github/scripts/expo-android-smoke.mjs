@@ -46,7 +46,8 @@ function scenarios() {
     { name: "home", flow: "home.yaml", required: true },
     ...ids.map((id) => ({
       name: id,
-      flow: crashWhenLeaving.has(id) ? "open-example.yaml" : "example.yaml",
+      flow: "open-example.yaml",
+      leaveFlow: crashWhenLeaving.has(id) ? undefined : "leave-example.yaml",
       env: { EXAMPLE_ID: id },
     })),
   ];
@@ -74,41 +75,39 @@ function findProblems(logcat) {
   return problems;
 }
 
+function runMaestro(scenario, flow) {
+  const envArgs = Object.entries(scenario.env ?? {}).flatMap(([k, v]) => ["-e", `${k}=${v}`]);
+  const debugDir = join(outDir, "maestro", scenario.name);
+  const result = spawnSync("maestro", ["test", ...envArgs, "--debug-output", debugDir, join(flows, flow)], {
+    encoding: "utf8",
+    timeout: SCENARIO_TIMEOUT_MS,
+    maxBuffer: 1 << 26,
+  });
+  const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
+  writeFileSync(join(outDir, `${scenario.name}.maestro.txt`), `${output}\n`, { flag: "a" });
+  if (result.status === 0) return null;
+  const reasons = output.split("\n").filter((l) => /FAILED|Exception/.test(l)).slice(0, 3);
+  return `maestro failed on ${flow} (${result.error?.code ?? result.status}): ${reasons.join(" | ")}`;
+}
+
 function run(scenario) {
   const started = Date.now();
   adb("logcat", "-c");
 
-  const envArgs = Object.entries(scenario.env ?? {}).flatMap(([k, v]) => ["-e", `${k}=${v}`]);
-  const debugDir = join(outDir, "maestro", scenario.name);
-  const maestro = spawnSync(
-    "maestro",
-    ["test", ...envArgs, "--debug-output", debugDir, join(flows, scenario.flow)],
-    {
-      encoding: "utf8",
-      cwd: outDir, // takeScreenshot writes to the current directory
-      timeout: SCENARIO_TIMEOUT_MS,
-      maxBuffer: 1 << 26,
-    }
-  );
+  const maestroError = runMaestro(scenario, scenario.flow);
+  // Taken here, not by Maestro: its screenshot call fails while a heavy shader
+  // keeps the emulator's software GPU busy, which says nothing about the app.
+  writeFileSync(join(outDir, `${scenario.name}.png`), adb("exec-out", "screencap", "-p").stdout);
+  const leaveError = !maestroError && scenario.leaveFlow && runMaestro(scenario, scenario.leaveFlow);
 
   const logcat = adb("logcat", "-d", "-v", "threadtime").stdout.toString();
   writeFileSync(join(outDir, `${scenario.name}.logcat.txt`), logcat);
-  writeFileSync(
-    join(outDir, `${scenario.name}.maestro.txt`),
-    `${maestro.stdout ?? ""}\n${maestro.stderr ?? ""}`
-  );
-  writeFileSync(join(outDir, `${scenario.name}.end.png`), adb("exec-out", "screencap", "-p").stdout);
 
   const ignored = knownIssues[scenario.name] ?? [];
   const errors = findProblems(logcat).filter(
     (line) => !ignored.some(({ pattern }) => pattern.test(line))
   );
-  if (maestro.status !== 0) {
-    const failedSteps = `${maestro.stdout ?? ""}`.split("\n").filter((l) => /FAILED/.test(l));
-    errors.unshift(
-      `maestro failed (${maestro.error?.code ?? maestro.status}): ${failedSteps.join(" | ")}`
-    );
-  }
+  if (maestroError || leaveError) errors.unshift(maestroError || leaveError);
   return { ...scenario, errors, seconds: Math.round((Date.now() - started) / 1000) };
 }
 

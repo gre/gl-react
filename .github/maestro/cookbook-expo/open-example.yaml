@@ -22,4 +22,3 @@ appId: com.glreact.cookbookexpo
     optional: true
 - assertVisible:
     id: example-back
-- takeScreenshot: ${EXAMPLE_ID}

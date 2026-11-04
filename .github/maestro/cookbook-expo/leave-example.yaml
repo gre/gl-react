@@ -1,7 +1,6 @@
-# Opens one example, then leaves it. Usage: -e EXAMPLE_ID=hellogl
+# Leaves the open example and goes back to the list, to exercise its unmount.
 appId: com.glreact.cookbookexpo
 ---
-- runFlow: open-example.yaml
 - tapOn:
     id: example-back
 - extendedWaitUntil:
