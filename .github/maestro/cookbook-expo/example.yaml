@@ -1,28 +1,7 @@
-# Opens one example, lets it render, then leaves it. Usage: -e EXAMPLE_ID=hellogl
+# Opens one example, then leaves it. Usage: -e EXAMPLE_ID=hellogl
 appId: com.glreact.cookbookexpo
 ---
-- runFlow: home.yaml
-- scrollUntilVisible:
-    element:
-      id: example-row-${EXAMPLE_ID}
-    direction: DOWN
-    timeout: 60000
-    centerElement: true
-- tapOn:
-    id: example-row-${EXAMPLE_ID}
-- extendedWaitUntil:
-    visible:
-      id: example-back
-    timeout: 30000
-# Nothing has this id: it only gives the example time to render and animate.
-- extendedWaitUntil:
-    visible:
-      id: smoke-settle-delay
-    timeout: 6000
-    optional: true
-- assertVisible:
-    id: example-back
-- takeScreenshot: ${EXAMPLE_ID}
+- runFlow: open-example.yaml
 - tapOn:
     id: example-back
 - extendedWaitUntil:

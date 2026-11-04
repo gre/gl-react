@@ -25,6 +25,11 @@ const appPackage = JSON.parse(readFileSync(join(appDir, "app.json"), "utf8")).ex
 // reason, and only applies to that example: never loosen the patterns below.
 const knownIssues = {};
 
+// Leaving these examples crashes the app: expo-gl 16 hits a NullPointerException
+// in GLCameraObject (SurfaceTexture.updateTexImage) once the camera is destroyed.
+// Open them without leaving, and remove this list once that is fixed.
+const crashWhenLeaving = new Set(["webcam", "webcampersistence", "golwebcam"]);
+
 const SCENARIO_TIMEOUT_MS = 5 * 60 * 1000;
 
 function scenarios() {
@@ -39,7 +44,11 @@ function scenarios() {
   if (!ids.length) throw new Error("no examples found in examples/index.ts");
   return [
     { name: "home", flow: "home.yaml", required: true },
-    ...ids.map((id) => ({ name: id, flow: "example.yaml", env: { EXAMPLE_ID: id } })),
+    ...ids.map((id) => ({
+      name: id,
+      flow: crashWhenLeaving.has(id) ? "open-example.yaml" : "example.yaml",
+      env: { EXAMPLE_ID: id },
+    })),
   ];
 }
 
@@ -56,6 +65,7 @@ function findProblems(logcat) {
       /JavascriptException/.test(line) ||
       /possible unhandled promise rejection/i.test(line) ||
       (/ F libc\s*: Fatal signal/.test(line) && own(line)) ||
+      (/ANR in /.test(line) && own(line)) ||
       (/FATAL EXCEPTION/.test(line) && lines.slice(i, i + 3).some(own))
     ) {
       problems.push(line.trim());
@@ -94,13 +104,19 @@ function run(scenario) {
     (line) => !ignored.some(({ pattern }) => pattern.test(line))
   );
   if (maestro.status !== 0) {
-    const tail = `${maestro.stdout ?? ""}`.trim().split("\n").slice(-3).join(" | ");
-    errors.unshift(`maestro failed (${maestro.error?.code ?? maestro.status}): ${tail}`);
+    const failedSteps = `${maestro.stdout ?? ""}`.split("\n").filter((l) => /FAILED/.test(l));
+    errors.unshift(
+      `maestro failed (${maestro.error?.code ?? maestro.status}): ${failedSteps.join(" | ")}`
+    );
   }
   return { ...scenario, errors, seconds: Math.round((Date.now() - started) / 1000) };
 }
 
 mkdirSync(outDir, { recursive: true });
+
+// A slow system app's "isn't responding" dialog would cover the app under test.
+// The app's own crashes and ANRs are still detected from logcat.
+adb("shell", "settings", "put", "global", "hide_error_dialogs", "1");
 
 const install = adb("install", "-r", "-g", apk);
 if (install.status !== 0) {
