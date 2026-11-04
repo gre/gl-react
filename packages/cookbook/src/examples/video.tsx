@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, createContext } from "react";
 import { Shaders, GLSL, Node } from "gl-react";
 import { Surface } from "gl-react-dom";
+import { assetUrl } from "../utils/assetUrl";
 
 export const VideoContext = createContext<React.RefObject<HTMLVideoElement> | null>(null);
 
@@ -91,7 +92,7 @@ const SplitColor = ({ children }: { children: any }) => (
 );
 
 export default function VideoExample() {
-  const video = useVideo("/assets/video.mp4");
+  const video = useVideo(assetUrl("video.mp4"));
   if (!video) return null;
   return (
     <Surface width={280} height={630} pixelRatio={1}>

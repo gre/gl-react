@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { Shaders, Node, GLSL, Bus } from "gl-react";
 import { Surface } from "gl-react-dom";
+import { assetUrl } from "../utils/assetUrl";
 
 type Vec2 = [number, number];
 
@@ -113,7 +114,7 @@ function useMarioDataURL() {
         setDataURL(c.toDataURL());
       }
     };
-    img.src = "/assets/mario.png";
+    img.src = assetUrl("mario.png");
   }, []);
   return dataURL;
 }
