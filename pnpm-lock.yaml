@@ -197,7 +197,7 @@ importers:
     dependencies:
       '@react-native-community/slider':
         specifier: ^5.2.0
-        version: 5.2.1
+        version: 5.2.2
       expo:
         specifier: ~54.0.36
         version: 54.0.37(@babel/core@7.29.7)(react-native@0.81.6(@babel/core@7.29.7)(@react-native-community/cli@20.2.0(typescript@5.9.3))(@types/react@19.3.0)(react@19.3.1))(react@19.3.1)(typescript@5.9.3)
@@ -252,7 +252,7 @@ importers:
     dependencies:
       '@react-native-community/slider':
         specifier: ^5.2.0
-        version: 5.2.1
+        version: 5.2.2
       expo:
         specifier: ~54.0.36
         version: 54.0.37(@babel/core@7.29.7)(react-native@0.81.6(@babel/core@7.29.7)(@react-native-community/cli@20.2.0(typescript@5.9.3))(@types/react@19.3.0)(react@19.3.1))(react@19.3.1)(typescript@5.9.3)
@@ -1915,8 +1915,8 @@ packages:
     engines: {node: '>=20.19.4'}
     hasBin: true
 
-  '@react-native-community/slider@5.2.1':
-    resolution: {integrity: sha512-HBDPRFRIN47hRtd5tdDWZp3kkVN1z98jGbK9wHOfUfVO+PbBDZzD7xjiiyBqNpg6Rom2QPFOpBZzsB2bHy4yAQ==}
+  '@react-native-community/slider@5.2.2':
+    resolution: {integrity: sha512-KdWURcFqHZ/nvQwt9S7P2PHBREl83GZeflWZU1VpR/qJ+lF/mdiOBZshJQztE2hBDgW5iBIrRb3RY9uAie5k/w==}
 
   '@react-native/assets-registry@0.81.6':
     resolution: {integrity: sha512-nNlJ7mdXFoq/7LMG3eJIncqjgXkpDJak3xO8Lb4yQmFI3XVI1nupPRjlYRY0ham1gLE0F/AWvKFChsKUfF5lOQ==}
@@ -8725,7 +8725,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@react-native-community/slider@5.2.1': {}
+  '@react-native-community/slider@5.2.2': {}
 
   '@react-native/assets-registry@0.81.6': {}
 
