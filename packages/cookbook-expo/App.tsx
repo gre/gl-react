@@ -71,6 +71,7 @@ function ExamplesList({
         </Text>
       </View>
       <FlatList
+        testID="example-list"
         data={groups}
         keyExtractor={(g) => g.category}
         renderItem={({ item: group }) => (
@@ -79,6 +80,7 @@ function ExamplesList({
             {group.items.map((ex) => (
               <Pressable
                 key={ex.id}
+                testID={`example-row-${ex.id}`}
                 onPress={() => onSelect(ex.id)}
                 style={({ pressed }) => [
                   styles.row,
@@ -109,7 +111,11 @@ function ExampleDetail({
   return (
     <View style={styles.flex}>
       <View style={styles.detailHeader}>
-        <Pressable onPress={onBack} style={styles.backButton}>
+        <Pressable
+          testID="example-back"
+          onPress={onBack}
+          style={styles.backButton}
+        >
           <Text style={styles.backText}>‹ Back</Text>
         </Pressable>
         <View style={styles.detailTitleBlock}>
