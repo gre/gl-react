@@ -7,10 +7,22 @@ const port = prod ? 3002 : 3001;
 
 export default defineConfig({
   testDir: "./e2e",
-  timeout: 30000,
+  timeout: 60000,
   use: {
     baseURL: `http://localhost:${port}${prod ? "/gl-react/" : "/"}`,
     headless: true,
+    permissions: ["camera"],
+    launchOptions: {
+      // Software WebGL, so that shaders really run on machines without a GPU, and
+      // a fake camera for the webcam examples.
+      args: [
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--ignore-gpu-blocklist",
+        "--use-fake-device-for-media-stream",
+        "--use-fake-ui-for-media-stream",
+      ],
+    },
   },
   webServer: {
     command: prod
