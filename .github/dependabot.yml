@@ -43,6 +43,11 @@ updates:
       - dependency-name: "@react-native/*"
         update-types:
           ["version-update:semver-major", "version-update:semver-minor"]
+      # react-native's renderer crashes at startup unless react is the exact
+      # version it was built for, so the Expo apps' react must move with it. This
+      # also stops bumps for the web packages: this entry covers the whole workspace.
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
 
   # examples/next-js lives outside the pnpm workspace and has its own yarn.lock.
   - package-ecosystem: "npm"
