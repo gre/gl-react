@@ -19,6 +19,9 @@ on:
     - cron: "0 4 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   ANDROID_API_LEVEL: 34
   MAESTRO_VERSION: 2.12.1
