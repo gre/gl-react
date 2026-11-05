@@ -1,0 +1,10 @@
+appId: com.glreact.cookbookexpo
+---
+- launchApp:
+    stopApp: true
+    permissions:
+      all: allow
+- extendedWaitUntil:
+    visible:
+      id: example-list
+    timeout: 120000

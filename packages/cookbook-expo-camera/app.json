@@ -25,6 +25,7 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "package": "com.glreact.cookbookexpocamera",
       "permissions": ["android.permission.CAMERA"]
     },
     "plugins": [

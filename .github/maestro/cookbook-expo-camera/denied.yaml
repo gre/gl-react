@@ -1,0 +1,11 @@
+appId: com.glreact.cookbookexpocamera
+---
+- launchApp:
+    stopApp: true
+    clearState: true
+    permissions:
+      all: deny
+- extendedWaitUntil:
+    visible: Camera permission is required
+    timeout: 120000
+- assertVisible: Blur

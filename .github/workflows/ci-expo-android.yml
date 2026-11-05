@@ -1,0 +1,125 @@
+name: CI expo android
+
+# Runs the release APK of each Expo app on an emulator and opens its screens, to
+# catch what bundling can't: crashes and JS errors at runtime. It is slow, so it
+# only runs when these apps can be affected, plus once a night.
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "packages/cookbook-expo/**"
+      - "packages/cookbook-expo-camera/**"
+      - "packages/gl-react/**"
+      - "packages/gl-react-expo/**"
+      - "pnpm-lock.yaml"
+      - ".github/maestro/**"
+      - ".github/scripts/expo-android-smoke.mjs"
+      - ".github/workflows/ci-expo-android.yml"
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  ANDROID_API_LEVEL: 34
+  MAESTRO_VERSION: 2.12.1
+  MAESTRO_CLI_NO_ANALYTICS: 1
+  MAESTRO_DRIVER_STARTUP_TIMEOUT: 180000
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [cookbook-expo, cookbook-expo-camera]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build gl-react packages
+        run: |
+          for d in packages/gl-react packages/gl-react-expo; do
+            pnpm exec babel --root-mode upward --source-maps --extensions '.ts,.tsx' -d "$d/lib" "$d/src"
+          done
+
+      - name: Expo prebuild
+        working-directory: packages/${{ matrix.app }}
+        run: pnpm exec expo prebuild --platform android --no-install
+
+      - name: Build the release APK
+        working-directory: packages/${{ matrix.app }}/android
+        run: ./gradlew :app:assembleRelease -PreactNativeArchitectures=x86_64 --no-daemon
+
+      - name: Install Maestro
+        run: |
+          curl -fsSL "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Restore the emulator snapshot
+        uses: actions/cache@v6
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ runner.os }}-${{ env.ANDROID_API_LEVEL }}-x86_64-v1
+
+      - name: Create the emulator snapshot
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          target: google_apis
+          arch: x86_64
+          profile: pixel_3a
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated -camera-front emulated
+          disable-animations: false
+          script: echo "Created the emulator snapshot"
+
+      - name: Run the smoke test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          target: google_apis
+          arch: x86_64
+          profile: pixel_3a
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back emulated -camera-front emulated
+          disable-animations: true
+          script: node .github/scripts/expo-android-smoke.mjs "${{ matrix.app }}" "packages/${{ matrix.app }}/android/app/build/outputs/apk/release/app-release.apk" "$RUNNER_TEMP/smoke"
+
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: expo-android-smoke-${{ matrix.app }}
+          path: ${{ runner.temp }}/smoke/
+          retention-days: 7
+          if-no-files-found: ignore

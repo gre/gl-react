@@ -1,0 +1,9 @@
+# Leaves the open example and goes back to the list, to exercise its unmount.
+appId: com.glreact.cookbookexpo
+---
+- tapOn:
+    id: example-back
+- extendedWaitUntil:
+    visible:
+      id: example-list
+    timeout: 30000
