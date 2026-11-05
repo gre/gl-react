@@ -1,0 +1,42 @@
+name: CI next-js example
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      # Only for Playwright: the example installs gl-react from npm
+      - run: pnpm install --frozen-lockfile --filter gl-react-cookbook...
+      - name: Install Playwright
+        run: pnpm --filter gl-react-cookbook e2e:install
+
+      - name: Install the example's dependencies
+        working-directory: examples/next-js
+        env:
+          COREPACK_ENABLE_STRICT: "0"
+        run: corepack yarn@1.22.22 install --frozen-lockfile
+
+      - name: Build the example and test its page
+        run: pnpm --filter gl-react-cookbook e2e:next
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: next-js-test-results
+          path: packages/cookbook/test-results/
+          retention-days: 7

@@ -1,109 +1,85 @@
-import { test, expect, type Page } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { test, expect } from "@playwright/test";
+import {
+  drawOnCanvas,
+  expectCanvasRendered,
+  stubRemoteImages,
+  trackProblems,
+} from "./helpers";
 
+const stubImage = fileURLToPath(
+  new URL("../public/assets/mario.png", import.meta.url)
+);
+
+// Read from the examples index, so that a new example can't be left out.
 const exampleIds = [
-  "hellogl",
-  "helloblue",
-  "helloblueanim",
-  "colordisc",
-  "gradients",
-  "heart",
-  "saturation",
-  "colorscale",
-  "mergechannels",
-  "mergechannelsfun",
-  "diamondcrop",
-  "diamondhello",
-  "diamondanim",
-  "blurxy",
-  "blurxydownscale",
-  "blurmulti",
-  "blurmap",
-  "blurmapdyn",
-  "blurmapmouse",
-  "blurimgtitle",
-  "blurvideo",
-  "blurfeedback",
-  "demotunnel",
-  "demodesert",
-  "demodesertcrt",
-  "sdf1",
-  "gol",
-  "golglider",
-  "golrot",
-  "golrotscu",
-  "golwebcam",
-  "distortion",
-  "glsledit",
-  "paint",
-  "pixeleditor",
-  "animated",
-  "reactmotion",
-  "textanimated",
-  "textfunky",
-  "video",
-  "webcam",
-  "webcampersistence",
-  "transitions",
-  "behindasteroids",
-  "ibex",
-  "imageeffects",
-  "imageresizemodes",
-];
+  ...readFileSync(
+    new URL("../src/examples/index.ts", import.meta.url),
+    "utf8"
+  ).matchAll(/\bid: "([^"]+)"/g),
+].map((match) => match[1]);
 
-function filterWebGLErrors(errors: string[]): string[] {
-  return errors.filter(
-    (e) =>
-      !e.includes("WebGL") &&
-      !e.includes("GL_") &&
-      !e.includes("getUserMedia") &&
-      !e.includes("Failed to create WebGL context") &&
-      !e.includes("no-webgl-context")
-  );
-}
+test.beforeEach(async ({ page }) => {
+  await stubRemoteImages(page, stubImage);
+});
 
-// Collects uncaught errors and same-origin HTTP failures (e.g. a missing asset).
-// Remote images are left out so that a third-party outage can't fail the suite.
-function trackProblems(page: Page, baseURL: string | undefined): string[] {
-  const problems: string[] = [];
-  const origin = new URL(baseURL!).origin;
-  page.on("pageerror", (err) => problems.push(err.message));
-  page.on("response", (res) => {
-    if (res.status() >= 400 && new URL(res.url()).origin === origin) {
-      problems.push(`${res.status()} ${res.url()}`);
-    }
-  });
-  return problems;
-}
+test("the index lists the examples", () => {
+  expect(exampleIds.length).toBeGreaterThan(40);
+});
 
 test("homepage loads", async ({ page, baseURL }) => {
   const problems = trackProblems(page, baseURL);
   await page.goto("./");
   await page.waitForLoadState("networkidle");
-  await expect(page.locator("text=gl-react")).toBeVisible();
-  expect(filterWebGLErrors(problems)).toEqual([]);
+  await expect(page.locator("text=gl-react").first()).toBeVisible();
+  expect(problems).toEqual([]);
 });
 
 test("examples page loads", async ({ page, baseURL }) => {
   const problems = trackProblems(page, baseURL);
   await page.goto("examples");
   await page.waitForLoadState("networkidle");
-  await expect(page.locator("text=Examples")).toBeVisible();
-  expect(filterWebGLErrors(problems)).toEqual([]);
+  await expect(page.locator("text=Examples").first()).toBeVisible();
+  expect(problems).toEqual([]);
+});
+
+test("links navigate without reloading the page", async ({ page, baseURL }) => {
+  const problems = trackProblems(page, baseURL);
+  await page.goto("./");
+  await page.evaluate(() => {
+    (window as any).__noReload = true;
+  });
+
+  await page.getByRole("link", { name: "Explore Examples" }).click();
+  await expect(page).toHaveURL(/\/examples$/);
+
+  await page.locator('a[href$="/examples/hellogl"]').first().click();
+  await expect(page).toHaveURL(/\/examples\/hellogl$/);
+  await expectCanvasRendered(page);
+
+  await page.goBack();
+  await expect(page).toHaveURL(/\/examples$/);
+
+  // This one also loads a local asset, whose URL depends on the base path.
+  await page.locator('a[href$="/examples/colorscale"]').first().click();
+  await expect(page).toHaveURL(/\/examples\/colorscale$/);
+  await expectCanvasRendered(page);
+
+  expect(await page.evaluate(() => (window as any).__noReload)).toBe(true);
+  expect(problems).toEqual([]);
 });
 
 for (const id of exampleIds) {
-  test(`example "${id}" loads without errors`, async ({ page, baseURL }) => {
+  test(`example "${id}" renders without errors`, async ({ page, baseURL }) => {
     const problems = trackProblems(page, baseURL);
 
     await page.goto(`examples/${id}`);
-    await page.waitForLoadState("networkidle");
-
-    // Wait for lazy-loaded component to render (canvas visible)
-    await expect(page.locator("canvas").first()).toBeVisible({ timeout: 10000 }).catch(() => {});
-
-    // Ensure the example loaded (not the "not found" fallback)
     await expect(page.locator("text=Example not found")).toHaveCount(0);
 
-    expect(filterWebGLErrors(problems)).toEqual([]);
+    if (id === "paint") await drawOnCanvas(page);
+    await expectCanvasRendered(page);
+
+    expect(problems).toEqual([]);
   });
 }

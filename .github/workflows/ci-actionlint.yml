@@ -1,0 +1,21 @@
+name: CI actionlint
+
+# Some workflows only run on master, so a PR can break them without any red check.
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - ".github/workflows/**"
+      - ".github/actionlint.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
